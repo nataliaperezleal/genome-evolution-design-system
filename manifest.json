@@ -1,0 +1,70 @@
+{
+  "system": "Genome Evolution Design System",
+  "version": "1.0.0",
+  "figma_file": "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution",
+  "last_updated": "2026-04-27",
+  "colors": {
+    "brand_primary": "Evergreen (green)",
+    "brand_secondary": "Indigo (purple)",
+    "neutral": "Default"
+  },
+  "typography": {
+    "family_body": "Open Sans",
+    "family_display": "display font",
+    "family_mono": "monospace"
+  },
+  "components": [
+    { "name": "Accordion", "file": "components/accordion.md", "type": "Navigation / Content", "status": "Production", "figma_node": "2016:2350", "variants": { "Color": ["Default","Evergreen","Indigo"], "Behavior": ["Expanded","Collapsed"], "Size": ["MD","SM"], "State": ["Default","Disable","Hovered","Pressed","Focused","Loading"] } },
+    { "name": "Avatar", "file": "components/avatar.md", "type": "Identity", "status": "Production", "figma_node": "2040:247", "variants": { "Type": ["Icon","Person","Print"], "Color": ["Default","Evergreen","Indigo"], "Size": [16,24,32,40,48], "Show state": [true,false] } },
+    { "name": "Backdrop", "file": "components/backdrop.md", "type": "Overlay", "status": "Production", "figma_node": "2041:81", "variants": { "Color": ["Black","White"] } },
+    { "name": "Badge", "file": "components/badge.md", "type": "Indicator", "status": "Production", "figma_node": "2046:82", "variants": { "Type": ["Filled","Line"], "Color": ["Default","Evergreen","Indigo","Inverse","Information","Warning","Error","Success"] } },
+    { "name": "Breadcrumb", "file": "components/breadcrumb.md", "type": "Navigation", "status": "Production", "figma_node": "2081:1160" },
+    { "name": "Button", "file": "components/button.md", "type": "Action", "status": "Draft", "figma_node": "392:861", "variants": { "Type": ["Primary","Secondary","Tertiary","Danger","Information","Success","Warning"], "Color": ["Evergreen","Indigo","Default"], "State": ["Default","Hovered","Pressed","Focused","Disabled"], "Corner": ["Default","Rounded"], "Size": ["SM","MD"] } },
+    { "name": "Clear Button", "file": "components/clear-button.md", "type": "Action", "status": "Production", "figma_node": "2103:36" },
+    { "name": "Checkbox", "file": "components/checkbox.md", "type": "Form / Selection", "status": "Production", "figma_node": "2085:1201", "variants": { "Color": ["Evergreen","Default","Indigo","Disabled"], "State": ["Default","Hovered","Pressed","Focused","Disable"], "Type": ["Default","Check","Mixted"], "Show Label": [true,false] } },
+    { "name": "Color Picker", "file": "components/color-picker.md", "type": "Form / Input", "status": "Production", "figma_node": "2113:1894" },
+    { "name": "Cursor", "file": "components/cursor.md", "type": "Interaction", "status": "Production", "figma_node": "2204:2358" },
+    { "name": "Datepicker", "file": "components/datepicker.md", "type": "Form / Input", "status": "Production", "figma_node": "2115:2296" },
+    { "name": "Duo Button", "file": "components/duo-button.md", "type": "Action", "status": "Production", "figma_node": "2135:676" },
+    { "name": "Dropdown", "file": "components/dropdown.md", "type": "Form / Selection", "status": "Production", "figma_node": "2406:20570" },
+    { "name": "Group", "file": "components/group.md", "type": "Layout / Container", "status": "Production", "figma_node": "2203:2517" },
+    { "name": "Header", "file": "components/header.md", "type": "Navigation", "status": "Production", "figma_node": "2184:1376" },
+    { "name": "Icon Button", "file": "components/icon-button.md", "type": "Action", "status": "Production", "figma_node": "2182:3348" },
+    { "name": "Inline Alert", "file": "components/inline-alert.md", "type": "Feedback", "status": "Production", "figma_node": "2181:3058" },
+    { "name": "Input", "file": "components/input.md", "type": "Form / Input", "status": "Production", "figma_node": "2171:2467" },
+    { "name": "Link", "file": "components/link.md", "type": "Navigation", "status": "Production", "figma_node": "2185:571" },
+    { "name": "List", "file": "components/list.md", "type": "Content / Display", "status": "Production", "figma_node": "2184:2403" },
+    { "name": "Modal", "file": "components/modal.md", "type": "Overlay / Feedback", "status": "Production", "figma_node": "2184:2533" },
+    { "name": "Paginator", "file": "components/paginator.md", "type": "Navigation", "status": "Production", "figma_node": "2185:1106" },
+    { "name": "Progress Bar", "file": "components/progress-bar.md", "type": "Feedback / Status", "status": "Production", "figma_node": "2190:1888" },
+    { "name": "Radio Button", "file": "components/radio-button.md", "type": "Form / Selection", "status": "Production", "figma_node": "2190:2043" },
+    { "name": "Scoreboard", "file": "components/scoreboard.md", "type": "Data Display", "status": "Production", "figma_node": "2191:2125" },
+    { "name": "Scroll", "file": "components/scroll.md", "type": "Navigation / Layout", "status": "Production", "figma_node": "2191:2146" },
+    { "name": "Segmented Button", "file": "components/segmented-button.md", "type": "Action / Selection", "status": "Production", "figma_node": "2194:2674" },
+    { "name": "Split Button", "file": "components/split-button.md", "type": "Action", "status": "Production", "figma_node": "2339:3772" },
+    { "name": "Snackbar", "file": "components/snackbar.md", "type": "Feedback", "status": "Production", "figma_node": "2255:980" },
+    { "name": "Stepper", "file": "components/stepper.md", "type": "Navigation / Form", "status": "Production", "figma_node": "2339:4361" },
+    { "name": "Switch", "file": "components/switch.md", "type": "Form / Selection", "status": "Production", "figma_node": "2184:3286" },
+    { "name": "Tab", "file": "components/tab.md", "type": "Navigation", "status": "Production", "figma_node": "2189:5340" },
+    { "name": "Table", "file": "components/table.md", "type": "Data Display", "status": "Production", "figma_node": "2192:2382" },
+    { "name": "Tag", "file": "components/tag.md", "type": "Content / Label", "status": "Production", "figma_node": "2192:1314" },
+    { "name": "Text Area", "file": "components/text-area.md", "type": "Form / Input", "status": "Production", "figma_node": "2258:793" },
+    { "name": "Tooltip", "file": "components/tooltip.md", "type": "Feedback / Info", "status": "Production", "figma_node": "2192:478" }
+  ],
+  "foundations": [
+    { "name": "Typography", "file": "foundations/typography.md" },
+    { "name": "Color", "file": "foundations/color.md" },
+    { "name": "Spacing", "file": "foundations/spacing.md" },
+    { "name": "Layout", "file": "foundations/layout.md" },
+    { "name": "Elevation", "file": "foundations/elevation.md" },
+    { "name": "Border", "file": "foundations/border.md" },
+    { "name": "Tokens", "file": "foundations/tokens.json" }
+  ],
+  "ai_rules": [
+    { "name": "Component Selection Rules", "file": "ai/component-selection-rules.md" },
+    { "name": "Invalid Combinations", "file": "ai/invalid-combinations.md" },
+    { "name": "Token Usage Rules", "file": "ai/token-usage-rules.md" },
+    { "name": "Prompt Template", "file": "ai/prompt-template.md" },
+    { "name": "Evaluation Checklist", "file": "ai/evaluation-checklist.md" }
+  ]
+}
