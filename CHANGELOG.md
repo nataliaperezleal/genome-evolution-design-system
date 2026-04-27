@@ -14,3 +14,16 @@
 - Completar documentación de los 30 componentes desde frames "Texto para el md" en Figma.
 - `foundations/tokens.json` con todos los tokens exportados.
 - `patterns/` con patrones de uso.
+
+## [1.1.0] — 2026-04-27 (Update)
+
+### Added / Updated
+Documentación completa extraída directamente de Figma para 16 componentes:
+- Accordion, Avatar, Backdrop, Badge, Breadcrumb, Button, Checkbox
+- Clear Button, Header, Icon Button, Inline Alert, Input
+- Modal, Tag, Text Area, Tooltip
+
+### Pending (20 componentes con stub)
+Color Picker, Cursor, Datepicker, Dropdown, Duo Button, Group, Link, List,
+Paginator, Progress Bar, Radio Button, Scoreboard, Scroll, Segmented Button,
+Snackbar, Split Button, Stepper, Switch, Tab, Table
