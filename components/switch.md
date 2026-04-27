@@ -1,37 +1,62 @@
 ---
 component: "Switch"
-system: "Genome Plus Design System"
+system: "Genome Evolution DS"
 type: "Form / Selection"
 status: "Production"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-3286"
-last_updated: "2026-04-27"
-tags: [switch]
+last_updated: "2026-04-21"
+tags: [switch, toggle, on-off, control, form, settings, binary]
 ---
 
-# Switch — Genome Plus Design System
+# Switch — Genome Evolution DS
 
-> 📋 **Nota:** Este archivo está pendiente de completar con el contenido del frame "Texto para el md" de Figma.
-> Nodo Figma: `2184:3286`
+Control de activación/desactivación binaria. Track oval con thumb deslizante y label opcional. 2 Size, 5 State, 3 Color, 2 Behavior.
 
 ## Quick Reference (AI-optimized)
 
-_Contenido pendiente de extraer desde Figma._
+**Propiedades:**
+- `Behavior` [`Off` | `On`] — default: `Off`
+- `Color` [`Default` | `Evergreen` | `Indigo`] — default: `Default`
+- `State` [`Default` | `Hover` | `Pressed` | `Focused` | `Disabled`] — default: `Default`
+- `Size` [`Small` | `Medium`] — default: `Medium`
+- `label` [`true` | `false`] — muestra texto "Label". Default: `true`
 
-## When to Use / When NOT to Use
+**Restricciones críticas Color ↔ Behavior:**
 
-_Pendiente._
+| Color | Behavior=Off | Behavior=On |
+|---|---|---|
+| Default | ✅ Todos los states | ✅ Solo Disabled |
+| Evergreen | ❌ No existe | ✅ Default/Hover/Pressed/Focused |
+| Indigo | ❌ No existe | ✅ Default/Hover/Pressed/Focused |
 
-## Variants
+**Tokens del track por State:**
 
-_Pendiente._
+| Behavior+Color | State | Background | Border | Width |
+|---|---|---|---|---|
+| Off Default | Default | `background/canvas` | `border/default` #c3cbc5 | 1px |
+| Off Default | Hover | `background/interactive/hovered` | `border/interactive/hovered` #adb8b0 | 1px |
+| Off Default | Focused | `background/canvas` | `border/focus` #339947 | **2px** |
+| On Evergreen | Default | `background/canvas` | `border/evergreen` #297a39 | 1px |
+| On Indigo | Default | `background/canvas` | `border/indigo` #6b1b99 | 1px |
+| Focused (todos) | — | `background/canvas` | `border/focus` #339947 | **2px** |
+| Disabled | — | `background/disabled` | `border/disabled` #c3cbc5 | 1px |
 
-## Token Mapping
+> Focused siempre usa `border/focus` 2px, independientemente del Color.
 
-_Pendiente._
+## Variants — Size
+
+| Size | Componente total | Track | Thumb | Radius |
+|---|---|---|---|---|
+| Small | 68×16px | 29×16px | 12×12px | `semantic/md` 8px |
+| Medium | 91×24px | 42×24px | 20×20px | `semantic/lg` 12px |
+
+- Thumb Off: `left: 2px`. Thumb On: `right: 2px`.
+- Label: `Text/Body/MD` 16/20 regular. `text/primary` / `text/disabled`.
 
 ## Accessibility
-
-_Pendiente._
+- `<button role="switch">` + `aria-checked="true/false"`.
+- `aria-disabled="true"` + `disabled` en Disabled.
+- Focus ring (`border/focus` #339947 2px) siempre visible.
 
 ## Changelog
-- `2026-04-27` — Archivo creado. Pendiente de documentación completa desde Figma.
+- `2026-04-21` — 28 variantes de track (2 Behavior × 14 Color/State × 2 Size).

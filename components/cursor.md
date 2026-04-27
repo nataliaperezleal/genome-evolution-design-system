@@ -1,37 +1,71 @@
 ---
 component: "Cursor"
-system: "Genome Plus Design System"
+system: "Genome Evolution DS"
 type: "Interaction"
 status: "Production"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2204-2358"
-last_updated: "2026-04-27"
-tags: [cursor]
+last_updated: "2026-04-16"
+tags: [cursor, pointer, interaction, mouse, ux, prototype]
 ---
 
-# Cursor — Genome Plus Design System
+# Cursor — Genome Evolution DS
 
-> 📋 **Nota:** Este archivo está pendiente de completar con el contenido del frame "Texto para el md" de Figma.
-> Nodo Figma: `2204:2358`
+Biblioteca de 39 cursores del sistema organizados en 7 categorías. Útil en prototipos interactivos y documentación de patrones de interacción. Referencia para CSS `cursor`.
 
 ## Quick Reference (AI-optimized)
 
-_Contenido pendiente de extraer desde Figma._
+**Propiedad única:** `Type` — 39 valores. Default: `Pointer 👆`
 
-## When to Use / When NOT to Use
+**Dimensiones:**
+- Estándar: 24×24px
+- Arrow con badge (➕ ⌛️ 🚫 ❌): 28×40px
+- Screenshot 📷, Select Area ✛: 28×28px
 
-_Pendiente._
+**Equivalencias CSS principales:**
 
-## Variants
+| Type Figma | CSS cursor |
+|---|---|
+| Arrow ↖︎ | `default` |
+| Pointer 👆 | `pointer` |
+| Input \| | `text` |
+| Grab 🖐 | `grab` |
+| Grabbed ✊ | `grabbing` |
+| Move | `move` |
+| Resize ↔︎ | `ew-resize` |
+| Resize ↕︎ | `ns-resize` |
+| Zoom ➕ | `zoom-in` |
+| Zoom ➖ | `zoom-out` |
+| Help ？ | `help` |
+| Arrow 🚫 | `not-allowed` |
+| Cross ✛ | `crosshair` |
 
-_Pendiente._
+## Grupos y valores de Type
 
-## Token Mapping
+**1. Puntero Base (4):** Arrow ↖︎ · Pointer 👆 · Grab 🖐 · Grabbed ✊
 
-_Pendiente._
+**2. Arrow con Badge (4):** Arrow ➕ · Arrow ⌛️ · Arrow 🚫 · Arrow ❌
 
-## Accessibility
+**3. Herramientas (7):** Move · Zoom ➕ · Zoom ➖ · Clone ↖︎ · Alias ⤤ · Screenshot 📷 · Select Area ✛
 
-_Pendiente._
+**4. Texto y Edición (6):** Input | · ⌶-Horizontal · ⌶-Vertical · Cell ✚ · Cross ✛ · Help ？
+
+**5. Resize (6):** ← → ↑ ↓ ↔︎ ↕︎
+
+**6. Direction (12):** ← → ↑ ↓ ↖︎ ↗︎ ↘︎ ↙︎ ↔︎ ↕︎ ⤡ ⤢
+
+## Semántica clave
+
+- **Grab 🖐** = disponible para arrastrar · **Grabbed ✊** = arrastre en curso.
+- **Resize** = cambio de tamaño · **Direction** = movimiento/navegación (semánticas distintas).
+- **Arrow 🚫** = acción no permitida (acompañar con `aria-disabled`).
+
+## Combinaciones inválidas
+- Direction cuando se necesita Resize.
+- Grab y Grabbed indistintamente.
+- Arrow con badge sin significado funcional real.
+
+## Token confirmado
+- `Input |`: fill `icon/primary` #5f6d62 con `mask-image`.
 
 ## Changelog
-- `2026-04-27` — Archivo creado. Pendiente de documentación completa desde Figma.
+- `2026-04-16` — 39 variantes en 7 grupos.
