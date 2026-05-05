@@ -1,0 +1,26 @@
+{
+  "name": "@genome-evolution/tokens",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./all-tokens.json": "./dist/all-tokens.json",
+    "./metadata.json": "./dist/metadata.json",
+    "./tokens.json": "./dist/tokens.json",
+    "./themes/light.json": "./dist/themes/light.json",
+    "./themes/dark.json": "./dist/themes/dark.json",
+    "./variables.css": "./dist/variables.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "node ./scripts/build.mjs"
+  }
+}

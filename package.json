@@ -1,0 +1,31 @@
+{
+  "name": "genome-evolution-design-system",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "build:tokens": "npm run build --workspace @genome-evolution/tokens",
+    "build:react": "npm run build --workspace @genome-evolution/react",
+    "docs": "npm run dev --workspace @genome-evolution/docs",
+    "build:docs": "npm run build --workspace @genome-evolution/docs",
+    "dev": "storybook dev -p 6006",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@storybook/addon-essentials": "8.6.18",
+    "@storybook/addon-interactions": "8.6.18",
+    "@storybook/react-vite": "8.6.18",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "storybook": "8.6.18",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.3"
+  }
+}
