@@ -7,12 +7,15 @@
     "apps/*"
   ],
   "scripts": {
+    "predocs": "npm run build:tokens",
     "build": "npm run build --workspaces",
     "build:tokens": "npm run build --workspace @genome-evolution/tokens",
     "build:react": "npm run build --workspace @genome-evolution/react",
     "docs": "npm run dev --workspace @genome-evolution/docs",
     "build:docs": "npm run build --workspace @genome-evolution/docs",
+    "predev": "npm run build:tokens",
     "dev": "storybook dev -p 6006",
+    "prestorybook": "npm run build:tokens",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit"

@@ -2,3 +2,11 @@ node_modules
 dist
 storybook-static
 .sb-home
+.DS_Store
+.claude
+.env
+.env.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*

@@ -3,23 +3,24 @@ component: "Button"
 system: "Genome Evolution DS"
 type: "Component"
 status: "[Pendiente de confirmar]"
-version: "0.1.0"
-figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=392-861"
-last_updated: "2026-04-128"
+version: "[Pendiente de confirmar]"
+owner: "[Pendiente de confirmar]"
+figma_node: "392:861"
+last_updated: "2026-04-28"
 tags: [button, action, cta, primary, secondary, tertiary, danger, semantic, interactive]
 ---
-
+ 
 # Button — Genome Evolution DS
-
+ 
 Botón del sistema para disparar acciones inmediatas. Es el componente de acción más versátil: 7 tipos (3 de prioridad + 4 semánticos), 3 colores de marca, 5 estados interactivos, 2 esquinas y 2 tamaños. Íconos leading y trailing opcionales.
 > Optimizado para consistencia visual, accesibilidad y correcta interpretación semántica por IA.
-
+ 
 ---
-
+ 
 ## Quick Reference (AI-optimized)
-
+ 
 **Qué es:** Elemento interactivo `<button>` con fondo, borde y texto variables según Type, Color y State. Dos familias visuales: botones de marca (Primary/Secondary/Tertiary — usan colores de marca) y botones semánticos (Danger/Information/Success/Warning — usan colores de estado).
-
+ 
 **Propiedades:**
 - Type [Primary | Secondary | Tertiary | Danger | Information | Success | Warning] — default: Primary
 - Color [Evergreen | Indigo | Default] — default: Evergreen (Primary/Secondary), Default (resto)
@@ -29,18 +30,17 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 - label — Default: "Button"
 - leadingIcon [true | false] — Default: false
 - trailingIcon [true | false] — Default: false
-
 **Restricciones críticas:**
-
+ 
 | Type | Color disponible | State=Disabled |
 |------|-----------------|---------------|
 | Primary | Evergreen, Indigo | Solo Color=Default |
 | Secondary | Evergreen, Indigo | Solo Color=Default |
 | Tertiary | Solo Default | ❌ No tiene Disabled |
 | Danger / Information / Success / Warning | Solo Default | ❌ No tienen Disabled |
-
+ 
 **Tokens Default state — todos los Type:**
-
+ 
 | Type | Color | Fondo | Borde | Texto |
 |------|-------|-------|-------|-------|
 | Primary | Evergreen | `surface/evergreen/bold` #297a39 | ninguno | `text/inverse` #f7f8f7 |
@@ -53,40 +53,38 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 | Success | Default | `surface/success/subtle` #bfffda | `border/success` #00885c 1px | `text/success` #00885c |
 | Warning | Default | `surface/warning/subtle` #fff0c2 | `border/warning` #8c7500 1px | `text/warning` #8c7500 |
 | Primary/Secondary | Default | `background/disabled` #f4f6f4 | `border/disabled` #c3cbc5 1px | `text/disabled` #849588 |
-
+ 
 ---
-
+ 
 ## Purpose / Intent
-
+ 
 **Qué resuelve:** Disparar acciones inmediatas con jerarquía visual clara. El Type comunica la prioridad (Primary = acción más importante) y la semántica (Danger = destructivo, Success = confirmación positiva).
-
+ 
 **Contexto típico:** CTAs de formularios (Guardar, Continuar), acciones destructivas (Eliminar, Cancelar), confirmaciones modales, acciones contextuales en tablas y listas.
-
+ 
 ---
-
+ 
 ## When to Use / When NOT to Use
-
+ 
 ### ✅ Usar cuando
 - Se necesita iniciar una acción, confirmar una decisión o ejecutar una operación.
 - La acción tiene consecuencias inmediatas.
 - El usuario necesita feedback visual de la interacción.
-
 ### ❌ Evitar cuando
 - Se necesita navegación entre páginas (usar `<a>` o Link).
 - Es selección múltiple de opciones (usar Checkbox o Tag).
 - Es un estado informativo sin acción asociada (usar Badge o Inline Alert).
 - El texto es parte de contenido corrido (usar Link).
-
 ---
-
+ 
 ## Structure (Anatomy)
-
+ 
 ```
 [leading icon 16px] [Label — semibold 14px(MD)/12px(SM)] [trailing icon 16px]
 ←── padding H: 16px(MD)/12px(SM) ───────────────────────────────────────────→
 ←── height: 32px(MD) / 24px(SM) ────────────────────────────────────────────→
 ```
-
+ 
 **Contenedor:**
 - Flow: fila, `gap/sm` (8px), items-center, justify-center
 - MD: 32px alto — padding H `size/16` (16px), V `space/8` (8px)
@@ -94,63 +92,55 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 - Corner=Default: `semantic/sm` (4px)
 - Corner=Rounded: `semantic/pill` (32px — píldora completa)
 - Fondo y borde según Type × Color × State
-
 **Íconos:**
 - MD: 16×16px — leading: `check` / trailing: `close` (por defecto)
 - SM: 12×12px
 - Color hereda del texto del botón
-
 **Texto (label):**
 - MD: `Text/Button/MD` — 14/16, semibold (600)
 - SM: `Text/Button/SM` — 12/16, semibold (600)
 - `whitespace-nowrap`
-
 ---
-
+ 
 ## Variants (Properties)
-
+ 
 ### Type — jerarquía visual
-
+ 
 **Botones de marca (requieren Color):**
 - **Primary** — Acción más importante de la vista. Fondo sólido del color de marca. Solo debe haber uno por pantalla.
 - **Secondary** — Acción secundaria. Fondo claro con borde de color de marca.
 - **Tertiary** — Acción discreta. Fondo claro con borde neutro (`border/strong`). Solo Color=Default.
-
 **Botones semánticos (Color=Default siempre):**
 - **Danger** — Acción destructiva o irreversible (eliminar, revocar).
 - **Information** — Acción informativa o de ayuda.
 - **Success** — Confirmación positiva, guardar, completar.
 - **Warning** — Acción de precaución — efecto que debe revisarse.
-
 ### Color
 - **Evergreen** — Color de marca verde primario. Para Primary y Secondary en contextos estándar.
 - **Indigo** — Color de marca índigo. Para Primary y Secondary en features de IA o apps secundarias.
 - **Default** — Neutro. Para Tertiary (siempre), semánticos (siempre) y Disabled.
-
 ### State
 - **Default** — Reposo.
 - **Hovered** — Mouse encima. Primary: fondo más oscuro. Secondary/Tertiary/semánticos: `background/interactive/hovered`.
 - **Pressed** — Click activo. Primary: fondo aún más oscuro. Resto: `background/interactive/pressed`.
 - **Focused** — Foco teclado. Outline `border/focus` (#339947) 2px (`focus/width`).
 - **Disabled** — No interactivo. Solo Primary y Secondary con Color=Default.
-
 ### Corner
 - **Default** — `semantic/sm` (4px)
 - **Rounded** — `semantic/pill` (32px — píldora completa)
-
 ### Size
-
+ 
 | Size | Alto | Padding H | Padding V | Tipografía | Íconos |
 |------|------|-----------|-----------|-----------|--------|
 | MD | 32px | `size/16` 16px | `space/8` 8px | `Text/Button/MD` 14px | 16px |
 | SM | 24px | `size/12` 12px | `space/4` 4px | `Text/Button/SM` 12px | 12px |
-
+ 
 ---
-
+ 
 ## Token Mapping
-
+ 
 ### Default state — fondo y borde
-
+ 
 | Type | Color | Fondo token | Hex | Borde token | Hex |
 |------|-------|------------|-----|------------|-----|
 | Primary | Evergreen | `surface/evergreen/bold` | #297a39 | ninguno | — |
@@ -163,9 +153,9 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 | Success | Default | `surface/success/subtle` | #bfffda | `border/success` | #00885c |
 | Warning | Default | `surface/warning/subtle` | #fff0c2 | `border/warning` | #8c7500 |
 | Primary/Secondary | Default (Disabled) | `background/disabled` | #f4f6f4 | `border/disabled` | #c3cbc5 |
-
+ 
 ### Default state — texto
-
+ 
 | Type | Color | Texto token | Hex |
 |------|-------|------------|-----|
 | Primary | Evergreen / Indigo | `text/inverse` | #f7f8f7 |
@@ -177,9 +167,9 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 | Success | Default | `text/success` | #00885c |
 | Warning | Default | `text/warning` | #8c7500 |
 | Primary/Secondary | Default (Disabled) | `text/disabled` | #849588 |
-
+ 
 ### Hovered — fondo
-
+ 
 | Type | Color | Fondo Hovered |
 |------|-------|--------------|
 | Primary | Evergreen | `surface/evergreen/bold/hovered` #1f5c2b |
@@ -191,9 +181,9 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 | Information | Default | `surface/info/subtle/hovered` #cee5ff |
 | Success | Default | `surface/success/subtle/hovered` #7dfabe |
 | Warning | Default | `surface/warning/subtle/hovered` #ffe16d |
-
+ 
 ### Pressed — fondo
-
+ 
 | Type | Color | Fondo Pressed |
 |------|-------|--------------|
 | Primary | Evergreen | `surface/evergreen/bold/pressed` #174520 |
@@ -205,29 +195,28 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 | Information | Default | `surface/info/subtle/pressed` #96ccff |
 | Success | Default | `surface/success/subtle/pressed` #5fdda4 |
 | Warning | Default | `surface/warning/subtle/pressed` #e9c400 |
-
+ 
 > En Secondary y Tertiary el borde de color se mantiene en Hovered y Pressed — solo cambia el fondo.
-
+ 
 ### Focused
-
+ 
 | Propiedad | Token | Valor |
 |-----------|-------|-------|
 | Outline | `border/focus` | #339947 |
 | Ancho | `focus/width` | 2px |
-
+ 
 ---
-
+ 
 ## Interaction & Motion
-
+ 
 - **Hover:** Fondo oscurece progresivamente. Primary usa tokens `bold/hovered`. Secundarios usan `bg/interactive/hovered`.
 - **Pressed:** Fondo más oscuro aún. Primary usa `bold/pressed`. Secundarios usan `bg/interactive/pressed`.
 - **Focused:** Outline `border/focus` #339947 2px visible alrededor del botón.
 - **Disabled:** No interactivo — sin hover, sin pressed, sin focus. Cursor `not-allowed`.
-
 ---
-
+ 
 ## Accessibility Guidelines
-
+ 
 - Implementar con `<button type="button">` (o `type="submit"` en formularios).
 - State=Disabled: `disabled` attribute — excluye del tab order automáticamente.
 - Focus ring (`border/focus` #339947 2px) siempre visible — no suprimir con `outline: none`.
@@ -240,20 +229,18 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
   - `text/evergreen (#297a39)` sobre `background/canvas (#ffffff)` — cumple 4.5:1.
   - `text/danger (#ba1a1a)` sobre `surface/danger/subtle (#ffe9e5)` — cumple 4.5:1.
   - `text/disabled (#849588)` sobre `background/disabled (#f4f6f4)` — [pendiente verificar].
-
 ---
-
+ 
 ## Content Guidelines
-
+ 
 - Labels: verbos de acción directa — "Guardar", "Confirmar", "Eliminar", "Enviar".
 - Evitar ambigüedad: no "Sí"/"No" — usar "Confirmar eliminación"/"Cancelar".
 - Mantener conciso — máx. 3 palabras. `whitespace-nowrap` limita el ancho.
 - Type=Danger: el label debe comunicar la acción destructiva claramente.
-
 ---
-
+ 
 ## Examples
-
+ 
 ### Do ✅
 - Un solo Primary por pantalla — es la acción más importante.
 - Primary Evergreen para apps de marca verde (Modeler, Automation).
@@ -261,7 +248,6 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 - Secondary como acción complementaria junto al Primary.
 - Tertiary para acciones de menor prioridad ("Ver detalles", "Cancelar").
 - Corner=Rounded en contextos más modernos o pills de acción.
-
 ### Don't ❌
 - No usar más de un Primary por vista.
 - No usar Primary con Color=Default (salvo Disabled).
@@ -269,11 +255,10 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 - No usar Danger/Information/Success/Warning con Color≠Default.
 - No usar Tertiary o semánticos con State=Disabled.
 - No suprimir el focus ring en implementación.
-
 ---
-
+ 
 ## QA Checklist
-
+ 
 - [ ] Primary Evergreen: surface/evergreen/bold #297a39, sin borde, text/inverse.
 - [ ] Primary Indigo: surface/indigo/bold #6b1b99, sin borde, text/inverse.
 - [ ] Secondary Evergreen: background/canvas + border/evergreen #297a39, text/evergreen.
@@ -299,9 +284,4 @@ Botón del sistema para disparar acciones inmediatas. Es el componente de acció
 - [ ] focus ring visible — no suprimido.
 - [ ] Disabled: `disabled` attribute.
 - [ ] Tertiary y semánticos sin State=Disabled.
-
 ---
-
-## Notes / Changelog
-
-- 2026-04-28 — Documentación inicial generada desde MCP de Figma (node 392:861). Todos los tokens extraídos directamente de variables. Notas clave: (1) Primary usa fondo sólido sin borde — es el único Type sin borde en Default state. (2) Los tokens `bold/hovered` y `bold/pressed` son exclusivos de Primary — los demás tipos usan `background/interactive/hovered/pressed`. (3) Tertiary y todos los semánticos no tienen State=Disabled — solo Primary y Secondary lo tienen (con Color=Default). (4) Corner=Rounded usa `semantic/pill` (32px) — genera una píldora perfecta con el alto del botón (32px MD / 24px SM). (5) El foco usa siempre `border/focus` (#339947) — verde, independientemente del Color del botón.

@@ -2,6 +2,8 @@ import type { ReactNode } from "react";
 
 import type { Language } from "./i18n";
 
+import { Accordion as AccordionComponent } from "@genome-evolution/react";
+
 export type LocalizedString = string | { en: string; es: string };
 
 export function l(en: string, es: string): LocalizedString {
@@ -49,6 +51,8 @@ export interface SpecSection {
   title?: LocalizedString;
   body?: LocalizedString[];
   bullets?: LocalizedString[];
+  preview?: ReactNode;
+  layout?: "split" | "stack";
 }
 
 export interface TokenCard {
@@ -151,6 +155,20 @@ export const componentSpecs: Record<string, ComponentSpec> = {
           ]
         },
         {
+          title: l("Label & icon guidance", "Guía de label e íconos"),
+          bullets: [
+            l(
+              "Labels describe the outcome of the action (verb-first), not the UI element.",
+              "Los labels describen el resultado de la acción (verbo primero), no el elemento UI."
+            ),
+            l("Keep labels short and scannable (1–3 words).", "Mantén los labels cortos y escaneables (1–3 palabras)."),
+            l(
+              "If you need an icon-only control, use Icon Button (not Button with an empty label).",
+              "Si necesitas un control solo con ícono, usa Icon Button (no Button sin label)."
+            )
+          ]
+        },
+        {
           title: l("Size", "Tamaño"),
           bullets: [
             l(
@@ -181,6 +199,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
       rules: [
         {
           bullets: [
+            l("Each screen should have a single primary action to establish hierarchy.", "Cada pantalla debe tener una sola acción primary para establecer jerarquía."),
             l(
               "Primary and Secondary cannot use `Color=Default` unless the state is disabled.",
               "Primary y Secondary no pueden usar `Color=Default` a menos que el estado sea disabled."
@@ -191,8 +210,16 @@ export const componentSpecs: Record<string, ComponentSpec> = {
               "Danger, Information, Success y Warning solo funcionan con `Color=Default`."
             ),
             l(
+              "Secondary is strongest when paired with a primary action and typically represents the negative/escape action (Cancel, Back). Avoid using secondary as the only positive action.",
+              "Secondary funciona mejor cuando se usa en pareja con un primary y típicamente representa la acción negativa/de escape (Cancelar, Atrás). Evita usar secondary como única acción positiva."
+            ),
+            l(
               "Tertiary and semantic variants do not currently define a disabled state in the source document.",
               "Tertiary y las variantes semánticas no definen actualmente un estado disabled en el documento fuente."
+            ),
+            l(
+              "Do not use Button for navigation. Use Link when the action is to move to another page.",
+              "No uses Button para navegación. Usa Link cuando la acción sea ir a otra página."
             )
           ]
         }
@@ -202,6 +229,14 @@ export const componentSpecs: Record<string, ComponentSpec> = {
           title: l("Do", "Haz"),
           bullets: [
             l("Keep one clear primary action per area.", "Mantén una acción primaria clara por área."),
+            l(
+              "Group related actions and keep the set small (2–3 actions).",
+              "Agrupa acciones relacionadas y mantén el set pequeño (2–3 acciones)."
+            ),
+            l(
+              "Keep buttons in the same group the same size and, when possible, the same width.",
+              "Mantén los botones del mismo grupo con el mismo tamaño y, cuando sea posible, el mismo ancho."
+            ),
             l(
               "Use semantic variants for risk or confirmation when meaning matters.",
               "Usa variantes semánticas para riesgo o confirmación cuando el significado importa."
@@ -217,6 +252,11 @@ export const componentSpecs: Record<string, ComponentSpec> = {
               "No uses Button cuando un Link de texto es el control semántico correcto."
             ),
             l("Do not stack multiple primary buttons with equal weight.", "No apiles múltiples botones primary con el mismo peso."),
+            l(
+              "Do not use more than three standalone buttons for the same target; use an overflow/menu pattern instead.",
+              "No uses más de tres botones sueltos para el mismo objetivo; usa un patrón de overflow/menú."
+            ),
+            l("Do not mix button sizes inside the same group.", "No mezcles tamaños de botón dentro del mismo grupo."),
             l("Do not rely on color alone to explain urgency or intent.", "No dependas solo del color para explicar urgencia o intención.")
           ]
         }
@@ -854,35 +894,288 @@ export const componentSpecs: Record<string, ComponentSpec> = {
     tokenCards: [{ label: "Row hover", token: "color.role.background.interactive.hovered", value: "#F8F8F7" }]
   },
   Accordion: {
-    subtitle: "Progressively reveal and hide related content within a compact container.",
+    subtitle: l(
+      "A compact disclosure control that progressively reveals content without leaving the current context.",
+      "Un control compacto que revela contenido progresivamente sin sacar al usuario de su contexto."
+    ),
     tabs: {
       overview: [
         {
           body: [
-            "Accordions group secondary content behind a disclosure control. They help keep pages scannable while still providing access to details when needed."
+            l(
+              "The accordion component is a great way to showcase lots of information without taking up too much space. It uses a simple header title to give users a quick peek at the content, helping them choose which sections they want to dive into.",
+              "El componente Accordion es ideal para mostrar mucha información sin ocupar demasiado espacio. Usa un encabezado simple para dar un vistazo rápido al contenido y permitir que las personas elijan qué secciones quieren explorar."
+            ),
+            l(
+              "Accordions can also improve discoverability by chunking related content, but avoid hiding critical information that users must see to complete a task.",
+              "Los accordions también mejoran la exploración al dividir contenido relacionado, pero evita ocultar información crítica que el usuario necesita para completar una tarea."
+            )
           ]
         }
       ],
       "when-to-use": [
-        { bullets: ["Use for optional details, FAQs or secondary explanations.", "Use when content can be meaningfully chunked by headings."] }
+        {
+          bullets: [
+            l("Content has a clear hierarchy between header and detail.", "El contenido tiene jerarquía clara entre encabezado y detalle."),
+            l("You need to access information selectively (not all at once).", "Se necesita acceder a información de forma selectiva (no todo al mismo tiempo)."),
+            l("Vertical space is limited and secondary information needs to be prioritized.", "El espacio vertical es limitado y hay que priorizar información secundaria."),
+            l("The interface benefits from grouping related sections.", "La interfaz se beneficia de agrupar secciones relacionadas.")
+          ]
+        }
       ],
       "when-not-to-use": [
-        { bullets: ["Do not hide critical information required to complete a task.", "Avoid for very short content—plain text may be clearer."] }
+        {
+          bullets: [
+            l("Content must always be visible to perform a task (critical/required info).", "El contenido debe estar siempre visible para ejecutar una tarea (info crítica)."),
+            l("The content is too short and doesn't justify collapsing.", "El contenido es muy corto y no justifica colapsar."),
+            l("Users need to compare multiple sections at the same time.", "El usuario necesita comparar varias secciones al mismo tiempo."),
+            l("This is a step-by-step flow (wizard) where information must remain accessible.", "Es un flujo paso a paso (wizard) donde la info debe permanecer accesible.")
+          ]
+        }
       ],
-      anatomy: [{ bullets: ["Trigger row (title + chevron).", "Panel region (collapsible).", "Content area (padding)."] }],
-      states: [{ bullets: ["Collapsed", "Expanded", "Hover", "Focus visible", "Disabled (optional)"] }],
-      rules: [{ bullets: ["Keep titles short and descriptive.", "Don’t nest complex interactive content unless necessary."] }],
-      tokens: [{ body: ["Uses border and interactive background tokens for hover/focus and subtle separation."] }],
+      anatomy: [
+        {
+          title: l("Properties", "Propiedades"),
+          layout: "split",
+          preview: (
+            <div className="accordion-props-mock" aria-label="Accordion properties mock">
+              <div className="accordion-props-mock__title">Accordion</div>
+              <div className="accordion-props-mock__row">
+                <span>Color</span>
+                <span className="accordion-props-mock__pill">Default</span>
+              </div>
+              <div className="accordion-props-mock__row">
+                <span>Behavior</span>
+                <span className="accordion-props-mock__pill">Collapsed</span>
+              </div>
+              <div className="accordion-props-mock__row">
+                <span>Size</span>
+                <span className="accordion-props-mock__pill">MD</span>
+              </div>
+              <div className="accordion-props-mock__row">
+                <span>Text</span>
+                <span className="accordion-props-mock__pill">Placeholder</span>
+              </div>
+              <div className="accordion-props-mock__row">
+                <span>Show left icon</span>
+                <span className="accordion-props-mock__toggle" aria-hidden="true" />
+              </div>
+              <div className="accordion-props-mock__row">
+                <span>Show badge</span>
+                <span className="accordion-props-mock__toggle" aria-hidden="true" />
+              </div>
+              <div className="accordion-props-mock__row">
+                <span>Content</span>
+                <span className="accordion-props-mock__pill">…</span>
+              </div>
+            </div>
+          ),
+          bullets: [
+            l("Color: choose between default and brand tones.", "Color: cambia entre default y tonos de marca."),
+            l("Behavior: collapsed or expanded.", "Behavior: colapsado o expandido."),
+            l("Size: controls density and padding.", "Size: controla densidad y padding."),
+            l("Text: update the title string.", "Text: cambia el texto del título."),
+            l("Icons & badges: optional leading icon and metadata badge.", "Íconos y badge: ícono opcional y badge de metadatos."),
+            l("Content: the panel body.", "Content: el cuerpo del panel.")
+          ]
+        },
+        {
+          title: l("Anatomy", "Anatomía"),
+          layout: "split",
+          preview: (
+            <div className="accordion-anatomy" aria-label="Accordion anatomy diagram">
+              <div className="accordion-anatomy__surface">
+                <div className="accordion-anatomy__title">Placeholder</div>
+                <div className="accordion-anatomy__chevron" aria-hidden="true" />
+                <div className="accordion-anatomy__divider" aria-hidden="true" />
+                <div className="accordion-anatomy__panel">Placeholder</div>
+                <span className="accordion-anatomy__dot accordion-anatomy__dot--title">1</span>
+                <span className="accordion-anatomy__dot accordion-anatomy__dot--chev">2</span>
+                <span className="accordion-anatomy__dot accordion-anatomy__dot--div">3</span>
+                <span className="accordion-anatomy__dot accordion-anatomy__dot--panel">4</span>
+              </div>
+            </div>
+          ),
+          bullets: [
+            l("1 — Title: describes the content inside the accordion.", "1 — Title: describe el contenido dentro del accordion."),
+            l("2 — Chevron icon: indicates collapsed/expanded state.", "2 — Chevron: indica el estado (colapsado/expandido)."),
+            l("3 — Divider: separates the title from the panel content.", "3 — Divider: separa el título del contenido."),
+            l("4 — Panel: the container that holds the content.", "4 — Panel: contenedor que agrupa el contenido.")
+          ]
+        }
+      ],
+      states: [
+        {
+          title: l("Behavior", "Comportamiento"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview-stack">
+              <div className="accordion-preview" data-state="collapsed">
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+              </div>
+              <div className="accordion-preview" data-state="expanded">
+                <AccordionComponent title="Placeholder" defaultOpen>
+                  Placeholder
+                </AccordionComponent>
+              </div>
+            </div>
+          ),
+          body: [
+            l("Collapsed hides the content to keep the surface compact.", "Collapsed se usa para ocultar el contenido y mantener compacto el layout."),
+            l("Expanded reveals the content for reading or action.", "Expanded se usa para mostrar el contenido cuando se necesita.")
+          ]
+        },
+        {
+          title: l("Default", "Default"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview" data-state="default">
+              <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+            </div>
+          ),
+          body: [l("Base state when the accordion can be used.", "Estado base cuando el accordion está habilitado.")]
+        },
+        {
+          title: l("Disabled", "Disabled"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview" data-state="disabled">
+              <AccordionComponent title="Placeholder" disabled>
+                Placeholder
+              </AccordionComponent>
+            </div>
+          ),
+          body: [l("Used when there is no interaction.", "Se usa cuando no debe haber interacción.")]
+        },
+        {
+          title: l("Hovered", "Hovered"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview" data-state="hover">
+              <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+            </div>
+          ),
+          body: [l("Used when the pointer is over the trigger.", "Cuando el puntero está sobre el trigger.")]
+        },
+        {
+          title: l("Pressed", "Pressed"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview" data-state="pressed">
+              <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+            </div>
+          ),
+          body: [l("Used during the click/tap interaction.", "Durante la interacción de click/tap.")]
+        },
+        {
+          title: l("Focused", "Focused"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview" data-state="focus">
+              <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+            </div>
+          ),
+          body: [l("Used when navigating by keyboard focus.", "Cuando se navega con el teclado (focus).")]
+        },
+        {
+          title: l("Loading", "Loading"),
+          layout: "split",
+          preview: (
+            <div className="accordion-preview" data-state="loading">
+              <div className="accordion-skeleton">
+                <div className="accordion-skeleton__row" />
+                <div className="accordion-skeleton__row accordion-skeleton__row--short" />
+              </div>
+            </div>
+          ),
+          body: [l("Used when the content is loading.", "Se usa cuando el contenido está cargando.")]
+        }
+      ],
+      rules: [
+        {
+          bullets: [
+            l("Keep titles short, specific and scannable.", "Mantén títulos cortos, específicos y escaneables."),
+            l("Prefer one idea per accordion item.", "Prefiere una idea por ítem."),
+            l("Avoid nesting complex interactive experiences unless necessary.", "Evita anidar experiencias interactivas complejas salvo que sea necesario.")
+          ]
+        }
+      ],
+      tokens: [
+        {
+          body: [
+            l(
+              "Uses border tokens for separation, interactive background tokens for hover/pressed, and focus tokens for keyboard focus indication.",
+              "Usa tokens de borde para separación, background interactivo para hover/pressed y tokens de foco para indicar foco por teclado."
+            )
+          ]
+        }
+      ],
       accessibility: [
-        { bullets: ["Trigger is a button with `aria-expanded`.", "Panel is a labelled region tied to the trigger."] }
+        {
+          bullets: [
+            l("Trigger is a `button` with `aria-expanded`.", "El trigger es un `button` con `aria-expanded`."),
+            l("Panel is a labelled region tied to the trigger via `aria-controls` and `aria-labelledby`.", "El panel es una región etiquetada ligada al trigger."),
+            l("Keep focus styles visible and consistent across themes.", "Mantén el foco visible y consistente en ambos temas.")
+          ]
+        }
       ],
-      implementation: [{ body: ["Use `defaultOpen` for uncontrolled expansion or `open` + `onOpenChange` for controlled state."] }]
+      "do-dont": [
+        {
+          title: l("Do", "Haz"),
+          layout: "split",
+          preview: (
+            <div className="accordion-guideline accordion-guideline--do">
+              <div className="accordion-guideline__preview">
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+              </div>
+              <div className="accordion-guideline__bar">DO</div>
+            </div>
+          ),
+          bullets: [
+            l("Align items consistently inside a group.", "Alinea los ítems consistentemente dentro del grupo."),
+            l("Use concise titles that describe the hidden content.", "Usa títulos concisos que describan el contenido."),
+            l("Prefer grouping related content into a small set of items.", "Agrupa contenido relacionado en un set pequeño de ítems.")
+          ]
+        },
+        {
+          title: l("Don't", "No hagas"),
+          layout: "split",
+          preview: (
+            <div className="accordion-guideline accordion-guideline--dont">
+              <div className="accordion-guideline__preview">
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+                <AccordionComponent title="Placeholder">Placeholder</AccordionComponent>
+              </div>
+              <div className="accordion-guideline__bar">DON'T</div>
+            </div>
+          ),
+          bullets: [
+            l("Don’t center-align titles inside the accordion group.", "No centres el texto dentro del grupo de accordions."),
+            l("Don’t change the icon meaning across items.", "No cambies el significado del ícono entre ítems."),
+            l("Don’t hide critical information required to complete a task.", "No ocultes información crítica para completar una tarea.")
+          ]
+        }
+      ],
+      implementation: [
+        {
+          body: [
+            l(
+              "Use `defaultOpen` for uncontrolled expansion or `open` + `onOpenChange` for controlled state.",
+              "Usa `defaultOpen` para expansión no controlada o `open` + `onOpenChange` para estado controlado."
+            )
+          ]
+        }
+      ]
     },
     props: [
       { name: "title", type: "string", defaultValue: "required", description: "Accordion trigger label." },
       { name: "children", type: "ReactNode", defaultValue: "required", description: "Panel content." },
       { name: "size", type: `"sm" | "md"`, defaultValue: `"md"`, description: "Controls padding and density." },
       { name: "tone", type: `"default" | "evergreen" | "indigo"`, defaultValue: `"default"`, description: "Optional subtle emphasis tone." },
+      { name: "disabled", type: "boolean", defaultValue: "false", description: l("Disables the trigger interaction.", "Deshabilita la interacción del trigger.") },
       { name: "defaultOpen", type: "boolean", defaultValue: "false", description: "Initial state (uncontrolled)." },
       { name: "open", type: "boolean", defaultValue: "—", description: "Controlled open state." },
       { name: "onOpenChange", type: "(open: boolean) => void", defaultValue: "—", description: "Controlled state handler." }

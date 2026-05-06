@@ -8,6 +8,7 @@ export interface AccordionProps {
   children: React.ReactNode;
   size?: AccordionSize;
   tone?: AccordionTone;
+  disabled?: boolean;
   defaultOpen?: boolean;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -18,6 +19,7 @@ export function Accordion({
   children,
   size = "md",
   tone = "default",
+  disabled = false,
   defaultOpen = false,
   open,
   onOpenChange
@@ -29,11 +31,15 @@ export function Accordion({
   const resolvedOpen = isControlled ? open : uncontrolledOpen;
 
   const classes = useMemo(
-    () => ["ge-accordion", `ge-accordion--${size}`, `ge-accordion--${tone}`, resolvedOpen ? "is-open" : ""].filter(Boolean).join(" "),
-    [resolvedOpen, size, tone]
+    () =>
+      ["ge-accordion", `ge-accordion--${size}`, `ge-accordion--${tone}`, resolvedOpen ? "is-open" : "", disabled ? "is-disabled" : ""]
+        .filter(Boolean)
+        .join(" "),
+    [resolvedOpen, size, tone, disabled]
   );
 
   const toggle = () => {
+    if (disabled) return;
     const next = !resolvedOpen;
     if (!isControlled) setUncontrolledOpen(next);
     onOpenChange?.(next);
@@ -48,6 +54,7 @@ export function Accordion({
         aria-expanded={resolvedOpen}
         aria-controls={panelId}
         onClick={toggle}
+        disabled={disabled}
       >
         <span className="ge-accordion__title">{title}</span>
         <span className="ge-accordion__chevron" aria-hidden="true">
@@ -74,4 +81,3 @@ export function Accordion({
     </div>
   );
 }
-

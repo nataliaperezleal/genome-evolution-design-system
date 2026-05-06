@@ -6,6 +6,32 @@ Sistema de diseño de Bizagi / Genome Plus. Documentación pública de component
 
 ---
 
+## Ejecutar localmente
+
+Requisitos: Node.js 20+ y npm.
+
+```bash
+npm ci
+```
+
+- Storybook (UI components): `npm run storybook` (http://localhost:6006)
+- Docs (sitio Vite): `npm run docs` (http://127.0.0.1:6011)
+- Build: `npm run build`
+- Typecheck: `npm run typecheck`
+
+---
+
+## Verlo “en cualquier lugar” (GitHub Pages)
+
+Este repo incluye workflow para publicar `apps/docs` en GitHub Pages cuando haces push a `main`.
+
+1) En GitHub: Settings → Pages → Build and deployment → Source: **GitHub Actions**  
+2) Luego de un push a `main`, tu sitio queda en:
+
+`https://<tu-usuario>.github.io/<nombre-del-repo>/`
+
+---
+
 ## Estructura del repositorio
 
 ```

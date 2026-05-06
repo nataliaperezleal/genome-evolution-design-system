@@ -110,6 +110,15 @@ function getItemMeta(id: string) {
   return { kind: "component" as const, doc: componentDocsBySlug[id] };
 }
 
+const homeFeaturedComponentIds = [
+  "components-button",
+  "components-input",
+  "components-modal",
+  "components-inline-alert",
+  "components-table",
+  "components-dropdown"
+];
+
 function ComponentPreview({ componentName }: { componentName: string }) {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [demoPage, setDemoPage] = useState(1);
@@ -121,13 +130,8 @@ function ComponentPreview({ componentName }: { componentName: string }) {
   if (componentName === "Button") {
     return (
       <div className="preview-stack">
-        <Button>Primary action</Button>
-        <Button variant="secondary" tone="indigo">
-          Secondary action
-        </Button>
-        <Button variant="tertiary" tone="neutral" leadingIcon={<ArrowIcon />}>
-          Tertiary with icon
-        </Button>
+        <Button>Button</Button>
+        <Button variant="secondary">Button</Button>
       </div>
     );
   }
@@ -833,6 +837,125 @@ function HomeShowcase() {
   );
 }
 
+function ButtonStatesPreview() {
+  const states = [
+    { id: "default", label: "Default" },
+    { id: "hover", label: "Hovered" },
+    { id: "pressed", label: "Pressed" },
+    { id: "focus", label: "Focused" },
+    { id: "disabled", label: "Disabled" }
+  ] as const;
+
+  const [size, setSize] = useState<"md" | "sm">("md");
+  const [corner, setCorner] = useState<"default" | "rounded">("default");
+
+  const columns = [
+    { key: "primary-evergreen", label: "Primary / Evergreen", props: { variant: "primary" as const, tone: "evergreen" as const } },
+    { key: "primary-indigo", label: "Primary / Indigo", props: { variant: "primary" as const, tone: "indigo" as const } },
+    { key: "secondary-evergreen", label: "Secondary / Evergreen", props: { variant: "secondary" as const, tone: "evergreen" as const } },
+    { key: "secondary-indigo", label: "Secondary / Indigo", props: { variant: "secondary" as const, tone: "indigo" as const } },
+    { key: "tertiary-default", label: "Tertiary / Default", props: { variant: "tertiary" as const, tone: "neutral" as const } },
+    { key: "danger-default", label: "Danger / Default", props: { variant: "primary" as const, tone: "danger" as const } },
+    { key: "info-default", label: "Information / Default", props: { variant: "primary" as const, tone: "information" as const } },
+    { key: "success-default", label: "Success / Default", props: { variant: "primary" as const, tone: "success" as const } },
+    { key: "warning-default", label: "Warning / Default", props: { variant: "primary" as const, tone: "warning" as const } }
+  ] as const;
+
+  function isCellValid(stateId: (typeof states)[number]["id"], colKey: (typeof columns)[number]["key"]) {
+    if (stateId !== "disabled") return true;
+    return colKey.startsWith("primary-") || colKey.startsWith("secondary-");
+  }
+
+  return (
+    <section className="button-states">
+      <p className="eyebrow">States</p>
+      <h4>Type × Color × State</h4>
+
+      <div className="button-states__controls" aria-label="Button states controls">
+        <div className="button-states__control">
+          <span className="button-states__control-label">Size</span>
+          <div className="button-states__segmented" role="group" aria-label="Size">
+            <button type="button" className={size === "md" ? "is-selected" : undefined} onClick={() => setSize("md")}>
+              MD
+            </button>
+            <button type="button" className={size === "sm" ? "is-selected" : undefined} onClick={() => setSize("sm")}>
+              SM
+            </button>
+          </div>
+        </div>
+
+        <div className="button-states__control">
+          <span className="button-states__control-label">Corner</span>
+          <div className="button-states__segmented" role="group" aria-label="Corner">
+            <button
+              type="button"
+              className={corner === "default" ? "is-selected" : undefined}
+              onClick={() => setCorner("default")}
+            >
+              Default
+            </button>
+            <button
+              type="button"
+              className={corner === "rounded" ? "is-selected" : undefined}
+              onClick={() => setCorner("rounded")}
+            >
+              Rounded
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="button-states__scroll" role="region" aria-label="Button states table">
+        <div
+          className="button-states__grid"
+          role="table"
+          aria-label="Button states"
+          style={{ ["--button-states-cols" as never]: String(columns.length + 1) }}
+        >
+          <div className="button-states__header" role="row">
+            <div role="columnheader">State</div>
+            {columns.map((col) => (
+              <div key={col.key} role="columnheader">
+                {col.label}
+              </div>
+            ))}
+          </div>
+
+          {states.map((state) => (
+            <div key={state.id} className="button-states__row" role="row">
+              <div className="button-states__state" role="rowheader">
+                {state.label}
+              </div>
+
+              {columns.map((col) => {
+                const valid = isCellValid(state.id, col.key);
+                if (!valid) {
+                  return (
+                    <div key={col.key} role="cell" className="button-states__na">
+                      —
+                    </div>
+                  );
+                }
+
+                const isDisabled = state.id === "disabled";
+                const sim = state.id === "default" || isDisabled ? undefined : state.id;
+
+                return (
+                  <div key={col.key} role="cell">
+                    <Button {...col.props} size={size} corner={corner} disabled={isDisabled} data-sim={sim}>
+                      Button
+                    </Button>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ComponentDocumentation({ componentName, language }: { componentName: string; language: Language }) {
   const spec = componentSpecs[componentName];
   const tabOrder: ComponentTabId[] = [
@@ -889,6 +1012,7 @@ function ComponentDocumentation({ componentName, language }: { componentName: st
 
       <div className="component-layout">
         <section className="component-content">
+          {componentName === "Button" && activeTab === "states" ? <ButtonStatesPreview /> : null}
           {activeTab === "tokens" ? (
             <div className="token-grid">
               {spec.tokenCards.map((card) => (
@@ -956,37 +1080,27 @@ function ComponentDocumentation({ componentName, language }: { componentName: st
             <div className="section-stack">
               {sections.map((section, index) => (
                 <article key={`${activeTab}-${index}`} className="doc-section-card">
-                  {section.title ? (
-                    <h4>{tr(section.title, language)}</h4>
-                  ) : null}
-                  {section.body?.map((paragraph) => (
-                    <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
-                  ))}
-                  {section.bullets ? (
-                    <ul>
-                      {section.bullets.map((bullet) => (
-                        <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
+                  <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
+                    {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
+                    <div>
+                      {section.title ? <h4>{tr(section.title, language)}</h4> : null}
+                      {section.body?.map((paragraph) => (
+                        <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
                       ))}
-                    </ul>
-                  ) : null}
+                      {section.bullets ? (
+                        <ul>
+                          {section.bullets.map((bullet) => (
+                            <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
+                          ))}
+                        </ul>
+                      ) : null}
+                    </div>
+                  </div>
                 </article>
               ))}
             </div>
           )}
         </section>
-
-        <aside className="component-rail">
-          <section>
-            <p className="eyebrow">{tr("Live preview", language)}</p>
-            <h4>{tr("Current package output", language)}</h4>
-            <ComponentPreview componentName={componentName} />
-          </section>
-          <section>
-            <p className="eyebrow">{tr("Status", language)}</p>
-            <h4>{tr("Spec maturity", language)}</h4>
-            <p>{tr(manifest.components.find((entry) => entry.name === componentName)?.status ?? "Unknown", language)}</p>
-          </section>
-        </aside>
       </div>
     </div>
   );
@@ -1031,6 +1145,17 @@ export function App() {
   const isLayoutFoundation = activeId === "foundations-layout";
   const isOpacityFoundation = activeId === "foundations-opacity";
   const isElevationFoundation = activeId === "foundations-elevation";
+
+  const featuredComponents = useMemo(() => {
+    return homeFeaturedComponentIds
+      .map((id) => {
+        const label = navItems.find((item) => item.id === id)?.label;
+        if (!label) return null;
+        const spec = componentSpecs[label];
+        return { id, label, subtitle: spec ? tr(spec.subtitle, language) : "" };
+      })
+      .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
+  }, [language]);
 
   return (
     <div className="docs-shell">
@@ -1118,6 +1243,19 @@ export function App() {
                   <p className="eyebrow">{t("overview.hero.eyebrow", language)}</p>
                   <h3>{t("overview.hero.title", language)}</h3>
                   <p>{t("overview.hero.body", language)}</p>
+
+                  <div className="hero-stage__search">
+                    <label className="hero-search" aria-label={t("overview.hero.search.label", language)}>
+                      <SearchIcon />
+                      <input
+                        value={query}
+                        onChange={(event) => setQuery(event.target.value)}
+                        placeholder={t("search.placeholder", language)}
+                      />
+                    </label>
+                    <p className="hero-search-hint">{t("overview.hero.search.hint", language)}</p>
+                  </div>
+
                   <div className="hero-stage__actions">
                     <Button
                       onClick={() => {
@@ -1142,77 +1280,118 @@ export function App() {
                 <HomeShowcase />
               </section>
 
-            <section className="signal-grid">
-              <article className="signal-panel">
-                <p className="eyebrow">{t("overview.signal.scale", language)}</p>
-                <h3>{manifest.components.length} documented components</h3>
-                <p>{t("overview.signal.scale.body", language)}</p>
-              </article>
-              <article className="signal-panel">
-                <p className="eyebrow">{t("overview.signal.foundations", language)}</p>
-                <h3>{manifest.foundations.length} foundation references</h3>
-                <p>{t("overview.signal.foundations.body", language)}</p>
-              </article>
-              <article className="signal-panel">
-                <p className="eyebrow">{t("overview.signal.impl", language)}</p>
-                <h3>React + tokens + docs</h3>
-                <p>{t("overview.signal.impl.body", language)}</p>
-              </article>
-            </section>
+              <section className="signal-grid">
+                <article className="signal-panel">
+                  <p className="eyebrow">{t("overview.signal.scale", language)}</p>
+                  <h3>{manifest.components.length} documented components</h3>
+                  <p>{t("overview.signal.scale.body", language)}</p>
+                </article>
+                <article className="signal-panel">
+                  <p className="eyebrow">{t("overview.signal.foundations", language)}</p>
+                  <h3>{manifest.foundations.length} foundation references</h3>
+                  <p>{t("overview.signal.foundations.body", language)}</p>
+                </article>
+                <article className="signal-panel">
+                  <p className="eyebrow">{t("overview.signal.impl", language)}</p>
+                  <h3>React + tokens + docs</h3>
+                  <p>{t("overview.signal.impl.body", language)}</p>
+                </article>
+              </section>
 
-            <section className="overview-grid overview-grid--home">
-              <article className="feature-panel feature-panel--wide">
-                <p className="eyebrow">Start here</p>
-                <h3>{t("overview.start.title", language)}</h3>
-                <p>{t("overview.start.body", language)}</p>
-                <div className="quick-links">
-                  <a href="#components-button" onClick={() => setActiveId("components-button")}>
-                    Button
+              <section className="portal-band">
+                <div className="portal-band__copy">
+                  <p className="eyebrow">{t("overview.portal.title", language)}</p>
+                  <h3>{t("overview.portal.headline", language)}</h3>
+                  <p>{t("overview.portal.body", language)}</p>
+                </div>
+                <div className="portal-grid">
+                  <a className="portal-card" href="#foundations-color" onClick={() => setActiveId("foundations-color")}>
+                    <p className="eyebrow">{t("overview.portal.foundations.title", language)}</p>
+                    <h4>{t("overview.portal.foundations.title", language)}</h4>
+                    <p>{t("overview.portal.foundations.body", language)}</p>
                   </a>
-                  <a href="#components-input" onClick={() => setActiveId("components-input")}>
-                    Input
+                  <a className="portal-card" href="#components-button" onClick={() => setActiveId("components-button")}>
+                    <p className="eyebrow">{t("overview.portal.components.title", language)}</p>
+                    <h4>{t("overview.portal.components.title", language)}</h4>
+                    <p>{t("overview.portal.components.body", language)}</p>
                   </a>
-                  <a href="#components-icon-button" onClick={() => setActiveId("components-icon-button")}>
-                    Icon Button
+                  <a className="portal-card" href="#foundations-tokens.json" onClick={() => setActiveId("foundations-tokens.json")}>
+                    <p className="eyebrow">{t("overview.portal.tokens.title", language)}</p>
+                    <h4>{t("overview.portal.tokens.title", language)}</h4>
+                    <p>{t("overview.portal.tokens.body", language)}</p>
                   </a>
                 </div>
-              </article>
+              </section>
 
-              <article className="feature-panel">
-                <p className="eyebrow">Principle</p>
-                <h3>{t("overview.principle.title", language)}</h3>
-                <p>{t("overview.principle.body", language)}</p>
-              </article>
+              <section className="overview-grid overview-grid--home overview-grid--featured">
+                <article className="feature-panel feature-panel--wide">
+                  <p className="eyebrow">{t("overview.featured.title", language)}</p>
+                  <h3>{t("overview.featured.title", language)}</h3>
+                  <p>{t("overview.featured.body", language)}</p>
+                  <div className="featured-grid">
+                    {featuredComponents.map((entry) => (
+                      <a key={entry.id} className="featured-card" href={`#${entry.id}`} onClick={() => setActiveId(entry.id)}>
+                        <h4>{entry.label}</h4>
+                        {entry.subtitle ? <p>{entry.subtitle}</p> : null}
+                      </a>
+                    ))}
+                  </div>
+                </article>
+              </section>
 
-              <article className="feature-panel">
-                <p className="eyebrow">Tokens</p>
-                <h3>{t("overview.tokens.title", language)}</h3>
-                <p>{t("overview.tokens.body", language)}</p>
-              </article>
-            </section>
+              <section className="overview-grid overview-grid--home">
+                <article className="feature-panel feature-panel--wide">
+                  <p className="eyebrow">Start here</p>
+                  <h3>{t("overview.start.title", language)}</h3>
+                  <p>{t("overview.start.body", language)}</p>
+                  <div className="quick-links">
+                    <a href="#components-button" onClick={() => setActiveId("components-button")}>
+                      Button
+                    </a>
+                    <a href="#components-input" onClick={() => setActiveId("components-input")}>
+                      Input
+                    </a>
+                    <a href="#components-icon-button" onClick={() => setActiveId("components-icon-button")}>
+                      Icon Button
+                    </a>
+                  </div>
+                </article>
 
-            <section className="foundation-band">
-              <div className="foundation-band__copy">
-                <p className="eyebrow">Foundation system</p>
-                <h3>The visual language is already codified across color, typography and spacing.</h3>
-                <p>
-                  The next layer of growth is less about inventing new style and more about turning the existing source
-                  of truth into more complete component behavior.
-                </p>
-              </div>
-              <div className="foundation-band__links">
-                {[
-                  { id: "foundations-color", label: "Color" },
-                  { id: "foundations-typography", label: "Typography" },
-                  { id: "foundations-spacing", label: "Spacing" },
-                  { id: "foundations-layout", label: "Layout" }
-                ].map((item) => (
-                  <a key={item.id} href={`#${item.id}`} onClick={() => setActiveId(item.id)}>
-                    {item.label}
-                  </a>
-                ))}
-              </div>
-            </section>
+                <article className="feature-panel">
+                  <p className="eyebrow">Principle</p>
+                  <h3>{t("overview.principle.title", language)}</h3>
+                  <p>{t("overview.principle.body", language)}</p>
+                </article>
+
+                <article className="feature-panel">
+                  <p className="eyebrow">Tokens</p>
+                  <h3>{t("overview.tokens.title", language)}</h3>
+                  <p>{t("overview.tokens.body", language)}</p>
+                </article>
+              </section>
+
+              <section className="foundation-band">
+                <div className="foundation-band__copy">
+                  <p className="eyebrow">Foundation system</p>
+                  <h3>The visual language is already codified across color, typography and spacing.</h3>
+                  <p>
+                    The next layer of growth is less about inventing new style and more about turning the existing source
+                    of truth into more complete component behavior.
+                  </p>
+                </div>
+                <div className="foundation-band__links">
+                  {[
+                    { id: "foundations-color", label: "Color" },
+                    { id: "foundations-typography", label: "Typography" },
+                    { id: "foundations-spacing", label: "Spacing" },
+                    { id: "foundations-layout", label: "Layout" }
+                  ].map((item) => (
+                    <a key={item.id} href={`#${item.id}`} onClick={() => setActiveId(item.id)}>
+                      {item.label}
+                    </a>
+                  ))}
+                </div>
+              </section>
             </>
           ) : isTypographyFoundation ? (
             <TypographyFoundation language={language} />
@@ -1242,30 +1421,6 @@ export function App() {
                 </div>
                 <div className="markdown-body">{renderMarkdown(active.doc.body)}</div>
               </section>
-
-              <aside className="detail-rail">
-                <section>
-                  <p className="eyebrow">Live preview</p>
-                  <h3>Implementation snapshot</h3>
-                  <ComponentPreview componentName={activeLabel} />
-                </section>
-
-                {componentManifest ? (
-                  <section>
-                    <p className="eyebrow">Metadata</p>
-                    <dl className="meta-list">
-                      <div>
-                        <dt>Status</dt>
-                        <dd>{componentManifest.status ?? "Unknown"}</dd>
-                      </div>
-                      <div>
-                        <dt>Type</dt>
-                        <dd>{componentManifest.type ?? "Not specified"}</dd>
-                      </div>
-                    </dl>
-                  </section>
-                ) : null}
-              </aside>
             </div>
           )}
         </div>
