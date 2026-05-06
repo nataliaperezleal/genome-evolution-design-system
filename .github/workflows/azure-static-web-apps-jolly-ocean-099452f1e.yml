@@ -30,7 +30,7 @@ jobs:
           # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
           app_location: "/"
           api_location: ""
-          output_location: "site/dist"
+          output_location: "apps/docs/dist"
           app_build_command: "npm run build:tokens && npm run build:docs"
           ###### End of Repository/Build Configurations ######
 
