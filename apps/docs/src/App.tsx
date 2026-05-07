@@ -53,6 +53,28 @@ import { OpacityFoundation } from "./foundations/OpacityFoundation";
 import { ElevationFoundation } from "./foundations/ElevationFoundation";
 import { detectInitialLanguage, t, type Language } from "./i18n";
 
+function BrandLogo() {
+  return (
+    <svg
+      width="40"
+      height="40"
+      viewBox="0 0 128 128"
+      role="img"
+      aria-label="Genome Evolution"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M25.44 119.7L91.84 81.8002C93.18 81.0402 94 79.6202 94 78.0802V38.7402L24.16 78.6002C22.82 79.3602 22 80.7802 22 82.3202V117.7C22 119.46 23.9 120.58 25.44 119.7Z"
+        fill="#00A346"
+      />
+      <path
+        d="M50.14 55.4802L40.12 49.6402C38.8 48.8802 38 47.4602 38 45.9402V10.3002C38 8.52016 39.92 7.42016 41.46 8.30016L86.8 34.5402L50.14 55.4602V55.4802Z"
+        fill="#00CC57"
+      />
+    </svg>
+  );
+}
+
 function ArrowIcon() {
   return (
     <svg viewBox="0 0 16 16" width="16" height="16" fill="none">
@@ -378,7 +400,7 @@ function ComponentPreview({ componentName }: { componentName: string }) {
           eyebrow="Workspace"
           title="Genome Evolution"
           subtitle="Design system reference"
-          leading={<Avatar initials="GE" size="md" tone="green" />}
+          leading={<BrandLogo />}
           actions={
             <>
               <ClearButton tone="default">Docs</ClearButton>
@@ -1161,7 +1183,9 @@ export function App() {
     <div className="docs-shell">
       <aside className="docs-sidebar">
         <div className="brand-lockup">
-          <div className="brand-mark">GE</div>
+          <div className="brand-mark">
+            <BrandLogo />
+          </div>
           <div>
             <p className="eyebrow">Design system</p>
             <h1>Genome Evolution</h1>

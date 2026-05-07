@@ -4,8 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
-const repoRoot = path.resolve(packageRoot, "..", "..");
-const sourceFile = path.join(repoRoot, "foundations", "tokens.json");
+const sourceFile = path.join(packageRoot, "source", "tokens.json");
 const distDir = path.join(packageRoot, "dist");
 const themesDir = path.join(distDir, "themes");
 
@@ -27,6 +26,17 @@ const publicPrefixes = [
   "spacing.",
   "typography.role."
 ];
+
+function normalizeTokenSegment(segment) {
+  return String(segment)
+    .trim()
+    .toLowerCase()
+    .replace(/\s*\/\s*/g, ".")
+    .replace(/\s+/g, ".")
+    .replace(/[^a-z0-9._-]+/g, "-")
+    .replace(/\.{2,}/g, ".")
+    .replace(/^\.+|\.+$/g, "");
+}
 
 function isTokenLeaf(value) {
   return value && typeof value === "object" && "$value" in value;
@@ -52,7 +62,7 @@ function collectTokenEntries(node, trail = [], all = new Map()) {
     if (key.startsWith("$")) {
       continue;
     }
-    collectTokenEntries(value, [...trail, key], all);
+    collectTokenEntries(value, [...trail, normalizeTokenSegment(key)], all);
   }
 
   return all;
@@ -136,8 +146,16 @@ function toCssVariable(token) {
   return `--ge-${token.replace(/\./g, "-")}`;
 }
 
-function toCssBlock(selector, tokenMap) {
-  const lines = Object.entries(tokenMap).map(([token, value]) => `  ${toCssVariable(token)}: ${value};`);
+function toCssBlock(selector, tokenMap, theme = null) {
+  const lines = Object.entries(tokenMap).map(([token, value]) => {
+    const themedVar = toCssVariable(token);
+    const aliasVar = theme ? toCssVariable(token.replace(`${theme}.`, '')) : null;
+    
+    if (aliasVar && aliasVar !== themedVar) {
+      return `  ${themedVar}: ${value};\n  ${aliasVar}: var(${themedVar});`;
+    }
+    return `  ${themedVar}: ${value};`;
+  });
   return `${selector} {\n${lines.join("\n")}\n}\n`;
 }
 
@@ -156,7 +174,7 @@ const publicMetadata = {
   system: source.$metadata?.name ?? "Genome Evolution Design System",
   version: source.$metadata?.version ?? "0.0.0",
   generatedAt: source.$metadata?.generatedAt ?? null,
-  source: "foundations/tokens.json",
+  source: "packages/tokens/source/tokens.json",
   publicPrefixes,
   themes
 };
@@ -207,7 +225,7 @@ await writeFile(path.join(themesDir, "dark.json"), `${JSON.stringify(darkPublic,
 await writeFile(path.join(distDir, "metadata.json"), `${JSON.stringify(publicMetadata, null, 2)}\n`);
 await writeFile(
   path.join(distDir, "variables.css"),
-  `${toCssBlock(":root, [data-theme=\"light\"]", lightPublic)}\n${toCssBlock("[data-theme=\"dark\"]", darkOverrides)}`
+  `${toCssBlock(":root, [data-theme=\"light\"]", lightPublic, "light")}\n${toCssBlock("[data-theme=\"dark\"]", darkOverrides, "dark")}`
 );
 await writeFile(path.join(distDir, "index.js"), indexJs);
 await writeFile(path.join(distDir, "index.d.ts"), indexDts);

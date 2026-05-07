@@ -70,10 +70,14 @@ input {
   display: grid;
   place-items: center;
   border-radius: 12px;
-  background: var(--ge-color-role-surface-evergreen-bold);
+  background: transparent;
   color: var(--ge-color-role-text-inverse);
   font-weight: 700;
   letter-spacing: 0;
+}
+.brand-mark svg {
+  width: 32px;
+  height: 32px;
 }
 
 .brand-lockup h1,
@@ -83,6 +87,10 @@ input {
 .detail-header h3,
 .detail-rail h3 {
   margin: 0;
+}
+
+.brand-lockup h1 {
+  line-height: 1;
 }
 
 .eyebrow {
@@ -97,26 +105,45 @@ input {
   display: flex;
   align-items: center;
   gap: 10px;
-  min-height: 44px;
+  height: 46px;
   padding: 0 14px;
   border: 1px solid var(--ge-color-role-border-default);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--ge-color-role-background-canvas) 94%, white);
+  background: var(--ge-color-role-background-canvas);
   transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+  cursor: text;
+}
+
+.search-box svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ge-color-role-text-secondary);
 }
 
 .search-box input {
   flex: 1;
+  min-width: 0;
   border: 0;
   outline: none;
   background: transparent;
   color: var(--ge-color-role-text-primary);
+  font-size: 0.95rem;
+  line-height: 1.2;
+  padding: 10px 0;
+}
+
+.search-box input::placeholder {
+  color: var(--ge-color-role-text-tertiary);
 }
 
 .search-box:focus-within {
   border-color: var(--ge-color-role-border-evergreen);
-  box-shadow: 0 0 0 4px color-mix(in srgb, var(--ge-color-role-surface-evergreen-subtle) 55%, transparent);
-  background: var(--ge-color-role-background-canvas);
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--ge-color-role-surface-evergreen-subtle) 75%, transparent);
+  background: color-mix(in srgb, var(--ge-color-role-background-canvas) 95%, white);
+}
+
+.search-box:focus-within svg {
+  color: var(--ge-color-role-text-primary);
 }
 
 .nav-groups {
