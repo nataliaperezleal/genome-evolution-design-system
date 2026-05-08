@@ -18,12 +18,15 @@ npm ci
 - Docs (sitio Vite): `npm run docs` (http://127.0.0.1:6011)
 - Build: `npm run build`
 - Typecheck: `npm run typecheck`
+- Smoke check (tokens + docs + storybook): `npm run smoke`
 
 ---
 
 ## Verlo “en cualquier lugar” (GitHub Pages)
 
-Este repo incluye workflow para publicar `apps/docs` en GitHub Pages cuando haces push a `main`.
+Este repo incluye workflow para publicar `apps/docs` en GitHub Pages cuando haces push a `main` (requiere `BASE_PATH` para servir bajo `/<repo>/`).
+
+- Workflow: `.github/workflows/docs-gh-pages.yml`
 
 1) En GitHub: Settings → Pages → Build and deployment → Source: **GitHub Actions**  
 2) Luego de un push a `main`, tu sitio queda en:
@@ -31,6 +34,13 @@ Este repo incluye workflow para publicar `apps/docs` en GitHub Pages cuando hace
 `https://<tu-usuario>.github.io/<nombre-del-repo>/`
 
 ---
+
+## Validaciones rápidas
+
+Para evitar errores silenciosos (por ejemplo variables CSS faltantes o valores numéricos sin unidad que rompen `padding`, `border-radius`, `z-index`, etc.):
+
+- Validador de CSS vars: `npm run validate:css-vars` (script: `scripts/validate-css-vars.mjs`)
+- Recomendado antes de publicar: `npm run smoke`
 
 ## Estructura del repositorio
 
