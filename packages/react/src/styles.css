@@ -322,8 +322,8 @@ body {
 }
 
 .ge-icon-button--filled.ge-icon-button--neutral {
-  background: var(--ge-color-role-surface-neutral-bold);
-  color: var(--ge-color-role-icon-inverse);
+  background: var(--ge-color-role-surface-raised);
+  color: var(--ge-color-role-icon-primary);
 }
 
 .ge-icon-button--outline {

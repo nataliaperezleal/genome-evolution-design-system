@@ -13,6 +13,8 @@
     "build:react": "npm run build --workspace @genome-evolution/react",
     "docs": "npm run dev --workspace @genome-evolution/docs",
     "build:docs": "npm run build --workspace @genome-evolution/docs",
+    "validate:css-vars": "node scripts/validate-css-vars.mjs",
+    "smoke": "npm run build:tokens && npm run validate:css-vars && npm run build:docs && npm run build-storybook",
     "predev": "npm run build:tokens",
     "dev": "storybook dev -p 6006",
     "prestorybook": "npm run build:tokens",

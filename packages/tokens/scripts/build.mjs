@@ -14,16 +14,17 @@ const fallbackReferences = {
 };
 const themes = ["light", "dark"];
 const publicPrefixes = [
-  "border.width.",
-  "border.focus.width",
+  "border.base.width.",
+  "border.base.focus.width",
   "color.role.",
   "focus.",
-  "layer.z-index.",
+  "layer.base.z-index.",
   "layout.",
   "motion.",
   "opacity.state.",
-  "radius.semantic.",
+  "radius.base.",
   "spacing.",
+  "typography.primitive.",
   "typography.role."
 ];
 
@@ -33,6 +34,7 @@ function normalizeTokenSegment(segment) {
     .toLowerCase()
     .replace(/\s*\/\s*/g, ".")
     .replace(/\s+/g, ".")
+    .replace(/\.-\./g, "-")
     .replace(/[^a-z0-9._-]+/g, "-")
     .replace(/\.{2,}/g, ".")
     .replace(/^\.+|\.+$/g, "");
@@ -146,15 +148,63 @@ function toCssVariable(token) {
   return `--ge-${token.replace(/\./g, "-")}`;
 }
 
+function aliasTokensFor(token, theme = null) {
+  const aliases = new Set();
+
+  if (theme && token.includes(`${theme}.`)) {
+    aliases.add(token.replace(`${theme}.`, ""));
+  }
+
+  if (token.includes(".base.")) {
+    aliases.add(token.replace(".base.", "."));
+  }
+
+  // If both rules apply, also emit the combined alias (e.g. remove theme then base).
+  for (const alias of [...aliases]) {
+    if (alias.includes(".base.")) {
+      aliases.add(alias.replace(".base.", "."));
+    }
+  }
+
+  aliases.delete(token);
+  return [...aliases];
+}
+
+function shouldAppendPx(token) {
+  if (token.startsWith("spacing.")) return true;
+  if (token.startsWith("radius.")) return true;
+  if (token.startsWith("border.")) return true;
+  if (token.startsWith("elevation.")) return true;
+
+  if (token.startsWith("focus.") && /\.(width|offset|inner-width|outer-width)$/.test(token)) return true;
+
+  if (token.startsWith("layout.") && /(breakpoint|gutter|margin)/.test(token)) return true;
+
+  if (token.startsWith("typography.role.") && /\.(size|line-height|tracking)$/.test(token)) return true;
+
+  return false;
+}
+
+function formatCssValue(token, value) {
+  if (shouldAppendPx(token)) {
+    if (typeof value === "number") return `${value}px`;
+    if (typeof value === "string" && /^-?\d+(\.\d+)?$/.test(value.trim())) return `${value.trim()}px`;
+  }
+  return String(value);
+}
+
 function toCssBlock(selector, tokenMap, theme = null) {
   const lines = Object.entries(tokenMap).map(([token, value]) => {
     const themedVar = toCssVariable(token);
-    const aliasVar = theme ? toCssVariable(token.replace(`${theme}.`, '')) : null;
-    
-    if (aliasVar && aliasVar !== themedVar) {
-      return `  ${themedVar}: ${value};\n  ${aliasVar}: var(${themedVar});`;
-    }
-    return `  ${themedVar}: ${value};`;
+    const aliasVars = aliasTokensFor(token, theme).map((aliasToken) => toCssVariable(aliasToken));
+
+    const aliasLines = aliasVars
+      .filter((aliasVar) => aliasVar !== themedVar)
+      .map((aliasVar) => `  ${aliasVar}: var(${themedVar});`)
+      .join("\n");
+
+    const cssValue = formatCssValue(token, value);
+    return aliasLines ? `  ${themedVar}: ${cssValue};\n${aliasLines}` : `  ${themedVar}: ${cssValue};`;
   });
   return `${selector} {\n${lines.join("\n")}\n}\n`;
 }
