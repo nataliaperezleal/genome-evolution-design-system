@@ -1,101 +1,201 @@
 ---
-component: "Accordion"
-system: "Genome Plus Design System"
-type: "Navigation / Content"
-status: "Production"
+component: "Backdrop"
+system: "Genome Evolution Design System"
+type: "Overlay / Visual"
+status: "Design"
 version: "1.0"
-figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2016-2350"
-last_updated: "2026-04-13"
-tags: [accordion, collapse, navigation, content, interactive]
+owner: "UX Design Team"
+last_updated: "2026-05-15"
+tags: [backdrop, overlay, modal, dialog, drawer]
 ---
 
-# Accordion — Genome Plus Design System
+# Backdrop — Genome Evolution Design System
 
-Contenedor colapsable que muestra u oculta contenido secundario bajo demanda.
+A semi-transparent overlay layer placed between the background content and a floating element (modal, drawer, dialog), visually blocking the underlying interface without being interactive.
+
+> Optimized for visual consistency, accessibility, and correct semantic interpretation by AI.
+
+---
 
 ## Quick Reference (AI-optimized)
 
-**Propiedades clave:**
-- `Color` [`Default` | `Evergreen` | `Indigo`] — default: `Default`
-- `Behavior` [`Expanded` | `Collapsed`] — default: `Collapsed`
-- `Size` [`MD` | `SM`] — default: `MD`
-- `State` [`Default` | `Disable` | `Hovered` | `Pressed` | `Focused` | `Loading`] — default: `Default`
-- `Text` — string libre, texto del encabezado
-- `Show Left Icon` [`true` | `false`] — default: `False`
-- `Show Checkbox` [`true` | `false`] — default: `False`
-- `Show Badge` [`true` | `false`] — default: `False`
-- `Icon` — info (nombre del ícono cuando Show Icon=True)
+**What it is:** Full-screen overlay, purely visual, that creates hierarchical separation between the background content and an overlaid floating component. It has no interactive behavior.
 
-**Combinaciones inválidas:**
-- `Show Checkbox=True` + `Show Icon=True` — ambos ocupan el slot izquierdo.
-- `State=Disable` + `Behavior=Expanded` — deshabilitado no debe mostrarse expandido.
-- `State=Loading` + `Behavior=Expanded` — carga implica contenido no disponible.
+**Key Properties:**
+- Color [White | Black] — default: Black
 
-**Snippets de uso frecuente:**
-- FAQ colapsado: `Color=Default, Behavior=Collapsed, Size=MD, State=Default`
-- Filtro activo: `Color=Evergreen, Behavior=Expanded, Size=SM, Show Badge=True`
-- Item deshabilitado: `Color=Default, State=Disable, Behavior=Collapsed`
-- Con ícono: `Color=Indigo, Behavior=Collapsed, Show Icon=True, Icon=info, Size=MD`
+**Invalid Combinations:**
+- Color=White in Light theme → use palette/alpha/100 (transparent), the overlay is invisible
+- Color=Black in Dark theme → use palette/alpha/100 (transparent), the overlay is invisible
+- Backdrop without a floating component above → usage without semantic or visual purpose
+
+**Frequent Usage Snippets:**
+- Modal in Light theme: Color=Black
+- Modal in Dark theme: Color=White
+- Drawer in Light theme: Color=Black
+- Drawer in Dark theme: Color=White
+
+---
+
+## Purpose / Intent
+
+**What it solves:** The need to visually block the background interface when a floating element (modal, drawer, dialog) is active, helping the user focus their attention on the overlaid component.
+
+**Expected outcome:** The user clearly perceives that there is an active layer over the UI and must interact with the floating element before returning to the background content.
+
+**Typical usage context:** Always in combination with modals, dialogs, drawers, or any component that requires visual blocking of the underlying context. Never used in isolation.
+
+---
 
 ## When to Use / When NOT to Use
 
-### ✅ Usar cuando
-- Contenido con jerarquía clara entre encabezado y detalle.
-- Espacio vertical limitado; información accesible bajo demanda.
-- Configuraciones, filtros o categorías agrupadas.
+### ✅ Use when
+- A modal, dialog, or drawer that requires the user's exclusive attention is opened
+- There is a need to hierarchically separate a floating element from the rest of the interface
+- The design needs to communicate that the background is temporarily blocked or inactive
 
-### ❌ Evitar cuando
-- Contenido siempre visible para el flujo de la tarea.
-- Tablas de datos, listas planas sin jerarquía.
-- Se necesita comparar múltiples secciones simultáneamente.
+### ❌ Avoid when
+- There is no active floating component above the Backdrop
+- An interactive or clickable element is sought (the Backdrop is purely visual)
+- It is used as a decorative background or section element within the layout
 
-## Variants
+---
+
+## Structure (Anatomy)
+
+**Parts of the component:**
+- **Overlay layer (Required):** Full-screen rectangle with a semi-transparent color defined by the token corresponding to Color and active theme (Light/Dark). It does not contain its own child elements.
+
+> General rule: The Backdrop always occupies 100% of the viewport and is positioned behind the floating component but above all UI content. Its only element is the color layer with opacity.
+
+---
+
+## Semantics (Meaning & Behavior)
+
+**Main semantic role:** Visual context blocker. Communicates that the background interface is temporarily inaccessible while a floating element is active.
+
+**Action it communicates:** "The background content is blocked. Attend to the overlaid element."
+
+**Signals for the user:**
+- The darkening or lightening of the background indicates that there is an active layer
+- The visual separation reinforces the hierarchy between the blocked content and the floating element
+- There is no signal of interactivity (no pointer cursor, no hover, no tactile feedback)
+
+---
+
+## Iconography
+
+Not applicable. The Backdrop does not contain icons or content slots.
+
+---
+
+## Variants (Properties)
+
+> Names identical to Figma.
 
 ### Color
-- `Default` — Neutro sin énfasis.
-- `Evergreen` — Verde de marca. Selección activa o estado positivo.
-- `Indigo` — Púrpura de marca. Categoría especial.
+- **Black** — Dark overlay. Use palette/alpha/1000 in Light theme and palette/alpha/100 in Dark theme. Standard usage in most contexts with Light theme.
+- **White** — Light overlay. Use palette/alpha/100 in Light theme and palette/alpha/1000 in Dark theme. Use exclusively in Dark theme to maintain the correct contrast.
 
-### Behavior
-- `Expanded` — Content Container visible. Chevron arriba.
-- `Collapsed` — Content Container oculto. Chevron abajo.
+### State Model
+- **Default:** Visible overlay with opacity defined by the token of the active theme.
+- **Hovered:** No visual change. The Backdrop is not interactive.
+- **Pressed:** No visual change. The Backdrop is not interactive.
+- **Focused:** Not applicable. The Backdrop does not receive focus.
+- **Disabled:** Not applicable.
 
-### Size
-- `MD` — Trigger 40px alto. Padding `space/16`.
-- `SM` — Trigger 32px alto. Padding `space/8`.
-
-### State
-- `Default` — Reposo.
-- `Hovered` — `background/interactive/hovered`.
-- `Pressed` — `background/interactive/pressed`.
-- `Focused` — Anillo de foco: `border/focus` 2px.
-- `Disable` — No interactuable. Opacidad 40%.
-- `Loading` — Skeleton en Content Container.
+---
 
 ## Token Mapping
 
-| Elemento | Token |
-|---|---|
-| Fondo canvas | `background/canvas` |
-| Fondo hover | `background/interactive/hovered` |
-| Fondo pressed | `background/interactive/pressed` |
-| Fondo disabled | `background/disabled` |
-| Borde default | `border/default` |
-| Borde evergreen | `border/evergreen` |
-| Borde indigo | `border/indigo` |
-| Borde focus | `border/focus` (2px) |
-| Texto primary | `text/primary` |
-| Texto evergreen | `text/evergreen` |
-| Texto indigo | `text/indigo` |
-| Texto disabled | `text/disabled` |
+### Color / Surface
 
-## Accessibility
+| Variant | Light Theme | Dark Theme |
+|---------|------------|-----------|
+| Black | palette/alpha/1000 | palette/alpha/100 |
+| White | palette/alpha/100 | palette/alpha/1000 |
 
-- `role="button"` + `aria-expanded="true/false"` en el trigger.
-- `aria-controls` referenciando el Content Container.
-- `aria-disabled="true"` en Disable (no `disabled` nativo).
-- Focus ring: `ring/color` (#339947), 2px, offset 2px.
-- Contraste mínimo 4.5:1.
+> **Note:** palette/alpha/100 represents the transparent end of the alpha scale. palette/alpha/1000 represents the opaque/covered end. The system automatically adapts the color according to the active theme.
 
-## Changelog
-- `2026-04-13` — v1.0. 40 variantes confirmadas.
+### Usage rule by theme
+- **Light Theme** → always use Color=Black to achieve a visible dark overlay
+- **Dark Theme** → always use Color=White to achieve a visible overlay over dark UI
+
+---
+
+## Layout & Sizing
+
+### Spacing
+- Padding: 0. The Backdrop has no internal padding.
+- Gap: Not applicable.
+- Width: 100% of the viewport.
+- Height: 100% of the viewport.
+
+### Typography
+Not applicable. The Backdrop does not contain text.
+
+### Corner / Shape
+- Radius: 0. The Backdrop is a full-screen rectangle with no rounded corners.
+- Special cases: None.
+
+---
+
+## Interaction & Motion
+
+- **Click/Tap:** No interactive behavior. The Backdrop is a purely visual element.
+- **Keyboard:** Does not receive focus and is not keyboard navigable.
+- **Loading:** Not applicable.
+- **Transitions:** Fade-in/fade-out coordinated with the appearance and closure of the overlaid floating component. Duration: 200ms, Easing: standard.
+
+---
+
+## Accessibility Guidelines
+
+- The Backdrop itself does not require its own ARIA attributes, as it is decorative.
+- The accompanying floating component (modal, dialog) must manage focus trapping and the aria-modal, role="dialog" attributes or equivalents.
+- Do not rely solely on the Backdrop to communicate blocking: the floating component must be semantically correct.
+- The overlay color must have sufficient opacity for the contrast between the blocked background and the floating element to be perceptible.
+- **Screen readers:** use aria-hidden="true" on the Backdrop so that it is not announced by assistive technologies.
+
+---
+
+## Content Guidelines
+
+- The Backdrop does not contain text, icons, or its own content.
+- All semantic communication is the responsibility of the overlaid floating component.
+
+---
+
+## Examples
+
+### Do ✅
+- Use Color=Black in Light theme to accompany a confirmation modal for destructive action.
+- Use Color=White in Dark theme to accompany a side navigation drawer.
+- Ensure that the Backdrop always has an active floating component above it before rendering.
+- Use consistent fade timing with the associated floating component.
+
+### Don't ❌
+- Do not use Color=White in Light theme: the token palette/alpha/100 results in a transparent and invisible overlay.
+- Do not use Color=Black in Dark theme: same invisibility issue due to transparent token.
+- Do not treat the Backdrop as an interactive element or assign click handlers to close the modal (that responsibility belongs to the floating component or its control logic).
+- Do not render the Backdrop without an associated floating element.
+
+---
+
+## QA Checklist
+
+- [ ] Color=Black visible in Light theme (token palette/alpha/1000 applied correctly).
+- [ ] Color=White visible in Dark theme (token palette/alpha/1000 applied correctly).
+- [ ] Color=Black in Dark theme is transparent (palette/alpha/100) — confirm it is not used in this context.
+- [ ] Color=White in Light theme is transparent (palette/alpha/100) — confirm it is not used in this context.
+- [ ] The Backdrop occupies 100% of the viewport without overflow.
+- [ ] aria-hidden="true" present on the Backdrop element.
+- [ ] Does not receive focus nor is it keyboard navigable.
+- [ ] Always accompanied by an active floating component above.
+- [ ] Transition coordinated with the floating component (duration 200ms, easing standard).
+
+---
+
+## Notes / Changelog
+
+**2026-05-15** — Updated documentation to match Accordion md and Badge md pattern. Completed all metadata fields. Expanded sections with detailed specifications for theme usage, interaction behavior, and accessibility requirements. Confirmed 2 variants (Color × Theme combination). 100% aligned with design system documentation standards.
