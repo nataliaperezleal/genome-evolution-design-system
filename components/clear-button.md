@@ -27,23 +27,23 @@ tags: [button, action, clear, ghost, tertiary, navigation, icon-button, minimal]
 | State | Default, Hovered, Pressed, Focused, Disabled |
 | Corner | Default (4px radius), Rounded (full pill) |
 | Text | Editable label text |
-| Show left icon | true, false |
-| Left icon | Any icon component (default: arrow-left) |
-| Show right icon | true, false |
-| Right icon | Any icon component (default: arrow-right) |
+| Show leading icon | true, false |
+| Leading icon | Any icon component (default: arrow-left) |
+| Show trailing icon | true, false |
+| Trailing icon | Any icon component (default: arrow-right) |
  
 **Invalid Combinations:**
 - Color + Type semantic both active with non-Default values (Type semantic overrides Color)
 - Type != Default + Color != Default simultaneously (use only one color system at a time)
-- State=Disabled + Show left/right icon=true without proper opacity reduction
+- State=Disabled + Show leading/trailing icon=true without proper opacity reduction
 - Corner=Rounded in narrow layouts (pill shape may distort)
-**Total Variants:** 300+ (3 Colors × 5 Types × 5 States × 2 Corners × (8 icon configs))
+**Total Variants:** 150+ (3 Colors × 5 Types × 5 States × 2 Corners × (3 icon configs))
  
 ## Purpose
  
 The Clear button is a lightweight, borderless action button with minimal visual weight. It follows a ghost/clear style pattern, rendering text without background fill or border in default state. This component serves as secondary or tertiary action, perfect for navigation, supplementary actions, and icon-based interactions where a filled or outlined button would dominate the visual hierarchy.
  
-Clear buttons support semantic types (Information, Success, Danger, Warning) to communicate action intent, and flexible icon slots for directional, informational, or status-based icon combinations. The component prioritizes content readability by letting action text and icons speak for themselves without visual containers. Typography uses Open Sans SemiBold 12px to maintain legibility while keeping visual weight minimal.
+Clear buttons support semantic types (Information, Success, Danger, Warning) to communicate action intent, and flexible icon slots (leading and trailing) for directional, informational, or status-based icon combinations. The component prioritizes content readability by letting action text and icons speak for themselves without visual containers.
  
 ## When to Use
  
@@ -57,7 +57,6 @@ Clear buttons support semantic types (Information, Success, Danger, Warning) to 
 - Mobile interfaces where button density requires minimal spacing and visual footprint
 - Tertiary calls-to-action in cards, modals, or dense layouts
 - Dismissible elements or "learn more" links that blend into content flow
-- Text-light interfaces where maintaining focus on content is critical
 ## When NOT to Use
  
 - Primary action on a screen (use Button filled for main call-to-action)
@@ -68,22 +67,21 @@ Clear buttons support semantic types (Information, Success, Danger, Warning) to 
 - Accessibility-critical interfaces where icon-only buttons lack sufficient context
 - Users unfamiliar with interface conventions who might miss text-only actions
 - Print media or exported documents (no interactivity context)
-- When both Color and Type semantic are needed simultaneously at different values
 ## Anatomy
  
 **Parts of the component:**
-- **Text Label** (Required): Descriptive action text. Communicates button purpose. 12px Open Sans SemiBold typography. Editable via Text property. Typically 2-4 words.
-- **Left Icon Slot** (Conditional): Optional icon positioned left of text. Controlled by Show left icon (boolean) and Left icon (component swap). Default is arrow-left. Can be hidden or swapped to any system icon. Icon size typically 16x16px.
-- **Right Icon Slot** (Conditional): Optional icon positioned right of text. Controlled by Show right icon (boolean) and Right icon (component swap). Default is arrow-right. Can be hidden or swapped to any system icon. Icon size typically 16x16px.
-- **Button Container** (Implicit): Transparent background element that defines click target and state styling. No visible fill or stroke in Default state. Horizontal layout with center-center alignment.
-- **Focus Ring** (Conditional): Subtle focus indicator appears on State=Focused. Supports keyboard navigation and accessibility. Color depends on Color property (Default, Evergreen, or Indigo).
-- **State Background** (Conditional): Background fill or color change appears on State=Hovered or State=Pressed. Subtle enough to maintain ghost appearance. Disappears in Default state.
+- **Text Label** (Required): Descriptive action text. Communicates button purpose. Typically 12px Open Sans SemiBold typography. Editable via Text property.
+- **Leading Icon Slot** (Conditional): Optional icon positioned left/start of text. Controlled by Show leading icon (boolean) and Leading icon (component swap). Default is arrow-left. Can be hidden or swapped to any system icon.
+- **Trailing Icon Slot** (Conditional): Optional icon positioned right/end of text. Controlled by Show trailing icon (boolean) and Trailing icon (component swap). Default is arrow-right. Can be hidden or swapped to any system icon.
+- **Button Container** (Implicit): Transparent background element that defines click target and state styling. No visible fill or stroke in Default state.
+- **Focus Ring** (Conditional): Subtle focus indicator appears on State=Focused. Supports keyboard navigation and accessibility. Color depends on Color property.
+- **State Background** (Conditional): Background fill appears on State=Hovered or State=Pressed. Subtle color change to indicate interactivity feedback. Disappears in Default state.
 **Dimensions:**
-- Text label: 12px font size, 16px line height
+- Text label: 12px font size, 16px line height, SemiBold weight
 - Icon size: 16x16px (typical)
 - Padding horizontal: 8px
 - Padding vertical: 4px
-- Gap between elements: 8px (left icon → text → right icon)
+- Gap between elements: 8px (leading icon → text → trailing icon)
 - Corner Default: 4px border radius
 - Corner Rounded: 100% (full pill shape)
 - Minimum touch target: 44x44px recommended
@@ -93,7 +91,7 @@ Clear buttons support semantic types (Information, Success, Danger, Warning) to 
 ### Color (3 variants)
 Color defines brand identity and primary visual emphasis. Used for branding, consistency, and visual hierarchy.
  
-- **Default:** Neutral text color for standard actions. Uses primary text color (#000000 or system text color). Best for generic, non-branded actions. No brand affiliation.
+- **Default:** Neutral text color for standard actions. Uses primary text color. Best for generic, non-branded actions. Typical color: #000000 (or system text color).
 - **Evergreen:** Brand-aligned green color. Communicates positive, affirmative, or success-oriented actions. Aligns with the Evergreen brand color (approx. #339947 or brand primary). Used for confirmations, subscriptions, or positive outcomes.
 - **Indigo:** Brand-aligned secondary color. Communicates emphasis, highlighting, or secondary brand identity. Uses Indigo/secondary brand color (approx. #5856D6 or brand secondary). Used for featured, spotlighted, or branded actions.
 **Note:** When Type is set to a semantic value (Information, Success, Danger, Warning), the Color property should typically remain Default or be harmonized with the semantic color. Mixing distinct Color and Type semantic meanings is discouraged.
@@ -101,7 +99,7 @@ Color defines brand identity and primary visual emphasis. Used for branding, con
 ### Type (5 variants)
 Type communicates semantic intent and action consequence. Overrides or works in harmony with Color.
  
-- **Default:** No semantic overlay. Text inherits from Color property (Default, Evergreen, or Indigo). Generic actions without special meaning or consequence. Typical color: neutral/primary.
+- **Default:** No semantic overlay. Text inherits from Color property (Default, Evergreen, or Indigo). Generic actions without special meaning or consequence.
 - **Information:** Communicates informational or help-related action. Text color shifts to information color (typically blue). Used for "Learn more", help links, or educational actions.
 - **Success:** Communicates successful, positive, or confirmatory action. Text color shifts to success color (typically green). Used for confirmations, completions, or affirmative actions.
 - **Danger:** Communicates destructive, risky, or negative action. Text color shifts to danger/error color (typically red). Used for delete, cancel, or warning-level actions.
@@ -110,14 +108,14 @@ Type communicates semantic intent and action consequence. Overrides or works in 
 State communicates interaction feedback and accessibility focus.
  
 - **Default:** Base state. No background fill or stroke. Text only. No hover effects applied. Ready for interaction.
-- **Hovered:** Mouse hovers over button. Subtle background color or opacity change appears (typically 5-10% tint of text color or theme color). Indicates affordance and interactivity. Border may appear faintly or background subtly appears.
-- **Pressed:** Mouse/touch actively clicks button. Background color deepens or changes to indicate active press state. Visual feedback confirms interaction is being registered. More prominent than Hovered.
-- **Focused:** Keyboard focus via Tab key. Focus ring appears around button or subtle outline indicates focus. Communicates which element is keyboard-active. Essential for accessibility and keyboard navigation.
+- **Hovered:** Mouse hovers over button. Subtle background color appears (typically 5-10% tint of text color or theme color). Indicates affordance and interactivity. Border may appear faintly.
+- **Pressed:** Mouse/touch actively clicks button. Background color deepens or changes to indicate active press state. Visual feedback confirms interaction is being registered.
+- **Focused:** Keyboard focus via Tab key. Focus ring appears around button. Communicates which element is keyboard-active. Essential for accessibility and keyboard navigation.
 - **Disabled:** Button is not interactive. Text color fades (typically 50% opacity or disabled text color). Background never appears even on hover. Pointer events are disabled. Communicates unavailability.
 ### Corner (2 variants)
 Corner defines border radius and shape of the button.
  
-- **Default:** 4px border radius. Standard, slightly rounded rectangle shape. Professional, neutral appearance. Suitable for most contexts and layouts. Matches typical UI corner radius system.
+- **Default:** 4px border radius. Standard, slightly rounded rectangle shape. Professional, neutral appearance. Suitable for most contexts and layouts.
 - **Rounded:** 100% border radius (full pill shape). Fully rounded pill-shaped button. Modern, softer appearance. Best for standalone or emphasized buttons. May cause distortion in very narrow layouts.
 ## Token Mapping
  
@@ -166,32 +164,24 @@ Corner defines border radius and shape of the button.
 | Opacity | — | 50% or lower | Reduced prominence |
 | Background | — | transparent | Never appears |
  
-### Interactive States (Default Color)
- 
-| Property | Token | Value | Notes |
-|----------|-------|-------|-------|
-| Hovered Background | — | subtle tint/5-10% | Light background overlay |
-| Focused Ring | color/focus/ring | varies by Color | Keyboard focus indicator |
-| Pressed Background | — | darker than hovered | Deeper feedback |
- 
 ## Semantics
  
 - **Tertiary Priority:** Clear buttons represent tertiary actions. Primary buttons should use filled styles. Secondary actions may use outlined. Clear buttons should never overshadow primary calls-to-action.
 - **Ghost/Borderless Pattern:** The clear button follows the "ghost" or "outlined-minimal" pattern. No background fill or visible border in default state preserves content primacy.
 - **Color vs. Type Precedence:** When both Color and Type are set to non-Default values, Type semantic meaning should take visual priority. Type communicates intent; Color communicates brand affiliation.
-- **Icon as Clarification:** Left and right icons serve as visual clarifications or directional indicators, not as standalone meaning. Text should remain primary; icons supplement.
+- **Icon as Clarification:** Leading and trailing icons serve as visual clarifications or directional indicators, not as standalone meaning. Text should remain primary; icons supplement.
 - **State as Feedback:** State communicates interaction feedback (hover, press, focus), not selection state. Clear buttons are not "selected" or "active" in the UI state sense; they communicate action readiness.
-- **Accessibility Primacy:** In icon-only configurations (Show left/right icons only, no text), aria-label or equivalent accessible text must provide full action description.
-- **Typography Emphasis:** Open Sans SemiBold gives the text subtle emphasis without requiring background fill, supporting the minimal ghost aesthetic while maintaining legibility.
+- **Accessibility Primacy:** In icon-only configurations (Show leading/trailing icons only, no text), aria-label or equivalent accessible text must provide full action description.
+- **Leading/Trailing Positioning:** Icons use semantic positioning terminology: "leading" (left/start) and "trailing" (right/end) to support both LTR and RTL layouts.
 ## Interaction
  
 - **Click/Tap:** Clicking the button triggers its associated action. No visual state change persists after release (unlike toggle buttons).
-- **Hover:** Mouse hovers over button. Subtle background color or text color shift appears (5-10% tint). Text and icon maintain their base colors. Communicates affordance.
+- **Hover:** Mouse hovers over button. Subtle background color appears (5-10% tint). Text and icon maintain their base colors. Communicates affordance.
 - **Press:** Mouse/touch held down. Background color deepens or shifts. Provides immediate feedback that action is being registered.
 - **Focus (Keyboard):** Tab key navigates to button. Focus ring appears around button. Ready for Space or Enter key activation.
 - **Space Key:** When focused, Space bar triggers the button action (activates click).
 - **Enter Key:** When focused, Enter key may trigger the button action (browser/framework dependent; Space is more standard for buttons).
-- **Icon Swap:** Left icon and Right icon properties support component swaps. Changing the icon instance does not affect button behavior; icons are visual only.
+- **Icon Swap:** Leading icon and Trailing icon properties support component swaps. Changing the icon instance does not affect button behavior; icons are visual only.
 - **Text Edit:** Text property allows dynamic label changes. Label updates immediately without state reset.
 - **State Transitions:** Default → Hovered (mouse over) → Pressed (mouse down) → Default (mouse up/click completes).
 - **Disabled Interaction:** Disabled buttons do not respond to any interaction. Pointer events are blocked. Keyboard navigation may skip disabled buttons depending on implementation.
@@ -211,10 +201,10 @@ Corner defines border radius and shape of the button.
 - Do not use arrow keys for single buttons (reserve for button groups)
 - Button should be reachable via Tab without excessive tab stops
 **Screen Reader:**
-- Button announces its label text: "Clear button, button" or specific action: "Delete item, button"
+- Button announces its label text and action: "Clear button, button" or specific action: "Delete item, button"
 - Icon-only buttons must announce fully: "Go back, button" (via aria-label)
 - Type semantic should be conveyed if not obvious from text: "Delete item, button" (text itself indicates danger)
-- Disabled state announces: "Clear button, button, disabled"
+- Disabled state should announce: "Clear button, button, disabled"
 - Focused state should be indicated by focus ring and screen reader focus announcements
 **Contrast:**
 - Text and icon must have 4.5:1 contrast ratio against background
@@ -241,44 +231,41 @@ Corner defines border radius and shape of the button.
 - Ensure semantic Type language is clear: Danger buttons should say "Delete" not "Proceed"; Success buttons should say "Confirm" or "Done"
 - For help/info buttons, use "Learn more" or "Help" rather than generic "More"
 - Always provide accessible text for icon-only buttons via aria-label or visible label
-- Avoid truncation: ensure button text fits without line break (SemiBold 12px is compact)
+- Use "leading" and "trailing" terminology when describing icon positions in documentation
 ## Examples
  
-**Back navigation button:**
-Color=Default, Type=Default, State=Default, Corner=Default, Text="Back", Show left icon=true, Left icon=arrow-left, Show right icon=false
+**Back navigation button with leading icon:**
+Color=Default, Type=Default, State=Default, Corner=Default, Text="Back", Show leading icon=true, Leading icon=arrow-left, Show trailing icon=false
  
 **Brand-colored action:**
-Color=Indigo, Type=Default, State=Default, Corner=Default, Text="Discover", Show left icon=false, Show right icon=false
+Color=Indigo, Type=Default, State=Default, Corner=Default, Text="Discover", Show leading icon=false, Show trailing icon=false
  
-**Forward navigation with right arrow:**
-Color=Default, Type=Default, State=Default, Corner=Default, Text="Next", Show left icon=false, Show right icon=true, Right icon=arrow-right
+**Forward navigation with trailing arrow:**
+Color=Default, Type=Default, State=Default, Corner=Default, Text="Next", Show leading icon=false, Show trailing icon=true, Trailing icon=arrow-right
  
 **Pill-shaped green button:**
-Color=Evergreen, Type=Default, State=Default, Corner=Rounded, Text="Subscribe", Show left icon=false, Show right icon=false
+Color=Evergreen, Type=Default, State=Default, Corner=Rounded, Text="Subscribe", Show leading icon=false, Show trailing icon=false
  
 **Delete action with danger semantic:**
-Color=Default, Type=Danger, State=Default, Corner=Default, Text="Delete", Show left icon=false, Show right icon=false
+Color=Default, Type=Danger, State=Default, Corner=Default, Text="Delete", Show leading icon=false, Show trailing icon=false
  
-**Help/information link:**
-Color=Default, Type=Information, State=Default, Corner=Default, Text="Learn more", Show left icon=true, Left icon=info, Show right icon=false
+**Help/information link with leading icon:**
+Color=Default, Type=Information, State=Default, Corner=Default, Text="Learn more", Show leading icon=true, Leading icon=info, Show trailing icon=false
  
-**Success confirmation:**
-Color=Default, Type=Success, State=Default, Corner=Default, Text="Confirmed", Show left icon=true, Left icon=check, Show right icon=false
+**Success confirmation with trailing icon:**
+Color=Default, Type=Success, State=Default, Corner=Default, Text="Confirmed", Show leading icon=false, Show trailing icon=true, Trailing icon=check
  
-**Warning/alert action:**
-Color=Default, Type=Warning, State=Default, Corner=Default, Text="Review", Show left icon=false, Show right icon=true, Right icon=alert-circle
+**Warning/alert action with trailing icon:**
+Color=Default, Type=Warning, State=Default, Corner=Default, Text="Review", Show leading icon=false, Show trailing icon=true, Trailing icon=alert-circle
  
 **Icon-only button (close/dismiss):**
-Color=Default, Type=Default, State=Default, Corner=Default, Text="", Show left icon=false, Show right icon=true, Right icon=close, aria-label="Close dialog"
+Color=Default, Type=Default, State=Default, Corner=Default, Text="", Show leading icon=false, Show trailing icon=true, Trailing icon=close, aria-label="Close dialog"
  
 **Disabled tertiary action:**
-Color=Default, Type=Default, State=Disabled, Corner=Default, Text="Save", Show left icon=false, Show right icon=false
+Color=Default, Type=Default, State=Disabled, Corner=Default, Text="Save", Show leading icon=false, Show trailing icon=false
  
 **Hovered brand button:**
-Color=Indigo, Type=Default, State=Hovered, Corner=Default, Text="Learn more", Show left icon=false, Show right icon=true, Right icon=arrow-right
+Color=Indigo, Type=Default, State=Hovered, Corner=Default, Text="Learn more", Show leading icon=false, Show trailing icon=true, Trailing icon=arrow-right
  
 **Focused keyboard navigation:**
-Color=Default, Type=Default, State=Focused, Corner=Default, Text="Continue", Show left icon=false, Show right icon=false
- 
-**Left icon only (back button):**
-Color=Default, Type=Default, State=Default, Corner=Default, Text="", Show left icon=true, Left icon=arrow-left, Show right icon=false, aria-label="Go to previous page"
+Color=Default, Type=Default, State=Focused, Corner=Default, Text="Continue", Show leading icon=false, Show trailing icon=false
