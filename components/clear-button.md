@@ -5,7 +5,7 @@ type: "Button / Action"
 status: "Design"
 version: "1.0"
 owner: "UX Design Team"
-last_updated: "2026-05-19"
+last_updated: "2026-05-20"
 tags: [button, action, clear, ghost, tertiary, navigation, icon-button, minimal]
 ---
  
@@ -16,13 +16,13 @@ tags: [button, action, clear, ghost, tertiary, navigation, icon-button, minimal]
 **Status:** Design  
 **Version:** 1.0  
 **Owner:** UX Design Team  
-**Last Updated:** 2026-05-19
+**Last Updated:** 2026-05-20
  
 ## Quick Reference
  
 | Property | Values |
 |----------|--------|
-| Color | Indigo, Default, Evergreen |
+| Color | Default, Evergreen, Indigo |
 | Type | Default, Information, Success, Danger, Warning |
 | State | Default, Hovered, Pressed, Focused, Disabled |
 | Corner | Default (4px radius), Rounded (full pill) |
@@ -37,13 +37,13 @@ tags: [button, action, clear, ghost, tertiary, navigation, icon-button, minimal]
 - Type != Default + Color != Default simultaneously (use only one color system at a time)
 - State=Disabled + Show left/right icon=true without proper opacity reduction
 - Corner=Rounded in narrow layouts (pill shape may distort)
-**Total Variants:** 150+ (3 Colors × 5 Types × 5 States × 2 Corners × (3 icon configs))
+**Total Variants:** 300+ (3 Colors × 5 Types × 5 States × 2 Corners × (8 icon configs))
  
 ## Purpose
  
 The Clear button is a lightweight, borderless action button with minimal visual weight. It follows a ghost/clear style pattern, rendering text without background fill or border in default state. This component serves as secondary or tertiary action, perfect for navigation, supplementary actions, and icon-based interactions where a filled or outlined button would dominate the visual hierarchy.
  
-Clear buttons support semantic types (Information, Success, Danger, Warning) to communicate action intent, and flexible icon slots for directional, informational, or status-based icon combinations. The component prioritizes content readability by letting action text and icons speak for themselves without visual containers.
+Clear buttons support semantic types (Information, Success, Danger, Warning) to communicate action intent, and flexible icon slots for directional, informational, or status-based icon combinations. The component prioritizes content readability by letting action text and icons speak for themselves without visual containers. Typography uses Open Sans SemiBold 12px to maintain legibility while keeping visual weight minimal.
  
 ## When to Use
  
@@ -57,6 +57,7 @@ Clear buttons support semantic types (Information, Success, Danger, Warning) to 
 - Mobile interfaces where button density requires minimal spacing and visual footprint
 - Tertiary calls-to-action in cards, modals, or dense layouts
 - Dismissible elements or "learn more" links that blend into content flow
+- Text-light interfaces where maintaining focus on content is critical
 ## When NOT to Use
  
 - Primary action on a screen (use Button filled for main call-to-action)
@@ -67,15 +68,16 @@ Clear buttons support semantic types (Information, Success, Danger, Warning) to 
 - Accessibility-critical interfaces where icon-only buttons lack sufficient context
 - Users unfamiliar with interface conventions who might miss text-only actions
 - Print media or exported documents (no interactivity context)
+- When both Color and Type semantic are needed simultaneously at different values
 ## Anatomy
  
 **Parts of the component:**
-- **Text Label** (Required): Descriptive action text. Communicates button purpose. Typically 12px Body XS Strong typography. Editable via Text property.
-- **Left Icon Slot** (Conditional): Optional icon positioned left of text. Controlled by Show left icon (boolean) and Left icon (component swap). Default is arrow-left. Can be hidden or swapped to any system icon.
-- **Right Icon Slot** (Conditional): Optional icon positioned right of text. Controlled by Show right icon (boolean) and Right icon (component swap). Default is arrow-right. Can be hidden or swapped to any system icon.
-- **Button Container** (Implicit): Transparent background element that defines click target and state styling. No visible fill or stroke in Default state.
-- **Focus Ring** (Conditional): Subtle focus indicator appears on State=Focused. Supports keyboard navigation and accessibility. Color depends on Color property.
-- **State Background** (Conditional): Background fill appears on State=Hovered or State=Pressed. Subtle color change to indicate interactivity feedback. Disappears in Default state.
+- **Text Label** (Required): Descriptive action text. Communicates button purpose. 12px Open Sans SemiBold typography. Editable via Text property. Typically 2-4 words.
+- **Left Icon Slot** (Conditional): Optional icon positioned left of text. Controlled by Show left icon (boolean) and Left icon (component swap). Default is arrow-left. Can be hidden or swapped to any system icon. Icon size typically 16x16px.
+- **Right Icon Slot** (Conditional): Optional icon positioned right of text. Controlled by Show right icon (boolean) and Right icon (component swap). Default is arrow-right. Can be hidden or swapped to any system icon. Icon size typically 16x16px.
+- **Button Container** (Implicit): Transparent background element that defines click target and state styling. No visible fill or stroke in Default state. Horizontal layout with center-center alignment.
+- **Focus Ring** (Conditional): Subtle focus indicator appears on State=Focused. Supports keyboard navigation and accessibility. Color depends on Color property (Default, Evergreen, or Indigo).
+- **State Background** (Conditional): Background fill or color change appears on State=Hovered or State=Pressed. Subtle enough to maintain ghost appearance. Disappears in Default state.
 **Dimensions:**
 - Text label: 12px font size, 16px line height
 - Icon size: 16x16px (typical)
@@ -91,7 +93,7 @@ Clear buttons support semantic types (Information, Success, Danger, Warning) to 
 ### Color (3 variants)
 Color defines brand identity and primary visual emphasis. Used for branding, consistency, and visual hierarchy.
  
-- **Default:** Neutral text color for standard actions. Uses primary text color. Best for generic, non-branded actions. Typical color: #000000 (or system text color).
+- **Default:** Neutral text color for standard actions. Uses primary text color (#000000 or system text color). Best for generic, non-branded actions. No brand affiliation.
 - **Evergreen:** Brand-aligned green color. Communicates positive, affirmative, or success-oriented actions. Aligns with the Evergreen brand color (approx. #339947 or brand primary). Used for confirmations, subscriptions, or positive outcomes.
 - **Indigo:** Brand-aligned secondary color. Communicates emphasis, highlighting, or secondary brand identity. Uses Indigo/secondary brand color (approx. #5856D6 or brand secondary). Used for featured, spotlighted, or branded actions.
 **Note:** When Type is set to a semantic value (Information, Success, Danger, Warning), the Color property should typically remain Default or be harmonized with the semantic color. Mixing distinct Color and Type semantic meanings is discouraged.
@@ -99,7 +101,7 @@ Color defines brand identity and primary visual emphasis. Used for branding, con
 ### Type (5 variants)
 Type communicates semantic intent and action consequence. Overrides or works in harmony with Color.
  
-- **Default:** No semantic overlay. Text inherits from Color property (Default, Evergreen, or Indigo). Generic actions without special meaning or consequence.
+- **Default:** No semantic overlay. Text inherits from Color property (Default, Evergreen, or Indigo). Generic actions without special meaning or consequence. Typical color: neutral/primary.
 - **Information:** Communicates informational or help-related action. Text color shifts to information color (typically blue). Used for "Learn more", help links, or educational actions.
 - **Success:** Communicates successful, positive, or confirmatory action. Text color shifts to success color (typically green). Used for confirmations, completions, or affirmative actions.
 - **Danger:** Communicates destructive, risky, or negative action. Text color shifts to danger/error color (typically red). Used for delete, cancel, or warning-level actions.
@@ -108,14 +110,14 @@ Type communicates semantic intent and action consequence. Overrides or works in 
 State communicates interaction feedback and accessibility focus.
  
 - **Default:** Base state. No background fill or stroke. Text only. No hover effects applied. Ready for interaction.
-- **Hovered:** Mouse hovers over button. Subtle background color appears (typically 5-10% tint of text color or theme color). Indicates affordance and interactivity. Border may appear faintly.
-- **Pressed:** Mouse/touch actively clicks button. Background color deepens or changes to indicate active press state. Visual feedback confirms interaction is being registered.
-- **Focused:** Keyboard focus via Tab key. Focus ring appears around button. Communicates which element is keyboard-active. Essential for accessibility and keyboard navigation.
+- **Hovered:** Mouse hovers over button. Subtle background color or opacity change appears (typically 5-10% tint of text color or theme color). Indicates affordance and interactivity. Border may appear faintly or background subtly appears.
+- **Pressed:** Mouse/touch actively clicks button. Background color deepens or changes to indicate active press state. Visual feedback confirms interaction is being registered. More prominent than Hovered.
+- **Focused:** Keyboard focus via Tab key. Focus ring appears around button or subtle outline indicates focus. Communicates which element is keyboard-active. Essential for accessibility and keyboard navigation.
 - **Disabled:** Button is not interactive. Text color fades (typically 50% opacity or disabled text color). Background never appears even on hover. Pointer events are disabled. Communicates unavailability.
 ### Corner (2 variants)
 Corner defines border radius and shape of the button.
  
-- **Default:** 4px border radius. Standard, slightly rounded rectangle shape. Professional, neutral appearance. Suitable for most contexts and layouts.
+- **Default:** 4px border radius. Standard, slightly rounded rectangle shape. Professional, neutral appearance. Suitable for most contexts and layouts. Matches typical UI corner radius system.
 - **Rounded:** 100% border radius (full pill shape). Fully rounded pill-shaped button. Modern, softer appearance. Best for standalone or emphasized buttons. May cause distortion in very narrow layouts.
 ## Token Mapping
  
@@ -164,6 +166,14 @@ Corner defines border radius and shape of the button.
 | Opacity | — | 50% or lower | Reduced prominence |
 | Background | — | transparent | Never appears |
  
+### Interactive States (Default Color)
+ 
+| Property | Token | Value | Notes |
+|----------|-------|-------|-------|
+| Hovered Background | — | subtle tint/5-10% | Light background overlay |
+| Focused Ring | color/focus/ring | varies by Color | Keyboard focus indicator |
+| Pressed Background | — | darker than hovered | Deeper feedback |
+ 
 ## Semantics
  
 - **Tertiary Priority:** Clear buttons represent tertiary actions. Primary buttons should use filled styles. Secondary actions may use outlined. Clear buttons should never overshadow primary calls-to-action.
@@ -172,10 +182,11 @@ Corner defines border radius and shape of the button.
 - **Icon as Clarification:** Left and right icons serve as visual clarifications or directional indicators, not as standalone meaning. Text should remain primary; icons supplement.
 - **State as Feedback:** State communicates interaction feedback (hover, press, focus), not selection state. Clear buttons are not "selected" or "active" in the UI state sense; they communicate action readiness.
 - **Accessibility Primacy:** In icon-only configurations (Show left/right icons only, no text), aria-label or equivalent accessible text must provide full action description.
+- **Typography Emphasis:** Open Sans SemiBold gives the text subtle emphasis without requiring background fill, supporting the minimal ghost aesthetic while maintaining legibility.
 ## Interaction
  
 - **Click/Tap:** Clicking the button triggers its associated action. No visual state change persists after release (unlike toggle buttons).
-- **Hover:** Mouse hovers over button. Subtle background color appears (5-10% tint). Text and icon maintain their base colors. Communicates affordance.
+- **Hover:** Mouse hovers over button. Subtle background color or text color shift appears (5-10% tint). Text and icon maintain their base colors. Communicates affordance.
 - **Press:** Mouse/touch held down. Background color deepens or shifts. Provides immediate feedback that action is being registered.
 - **Focus (Keyboard):** Tab key navigates to button. Focus ring appears around button. Ready for Space or Enter key activation.
 - **Space Key:** When focused, Space bar triggers the button action (activates click).
@@ -230,6 +241,7 @@ Corner defines border radius and shape of the button.
 - Ensure semantic Type language is clear: Danger buttons should say "Delete" not "Proceed"; Success buttons should say "Confirm" or "Done"
 - For help/info buttons, use "Learn more" or "Help" rather than generic "More"
 - Always provide accessible text for icon-only buttons via aria-label or visible label
+- Avoid truncation: ensure button text fits without line break (SemiBold 12px is compact)
 ## Examples
  
 **Back navigation button:**
@@ -267,3 +279,6 @@ Color=Indigo, Type=Default, State=Hovered, Corner=Default, Text="Learn more", Sh
  
 **Focused keyboard navigation:**
 Color=Default, Type=Default, State=Focused, Corner=Default, Text="Continue", Show left icon=false, Show right icon=false
+ 
+**Left icon only (back button):**
+Color=Default, Type=Default, State=Default, Corner=Default, Text="", Show left icon=true, Left icon=arrow-left, Show right icon=false, aria-label="Go to previous page"
