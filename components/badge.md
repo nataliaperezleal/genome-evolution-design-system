@@ -1,243 +1,253 @@
 ---
 component: "Badge"
 system: "Genome Evolution Design System"
-type: "Data Visualization / Counter"
+type: "Status / Indicator"
 status: "Design"
-version: "1.0"
+version: "1.1"
 owner: "UX Design Team"
-last_updated: "2026-05-15"
-tags: [badge, counter, notification, indicator, status]
+last_updated: "2026-05-21"
+tags: [badge, counter, notification, indicator, numeric, status, semantic]
 ---
-
+ 
 # Badge — Genome Evolution Design System
-
-A compact numeric counter indicator that displays notification counts, message badges, or state counters. Shows a number in a pill-shaped container with semantic color variants for urgency levels.
-
-> Optimized for visual consistency, accessibility, and correct semantic interpretation by AI.
-
----
-
-## Quick Reference (AI-optimized)
-
-**What it is:** A small numeric counter component displayed as a pill-shaped badge. Always shows a number (default: 0). Available in two visual styles (Filled and Line) and eight semantic color variants.
-
-**Key Properties:**
-- Type [Filled | Line] — default: Filled
-- Color [Default | Evergreen | Indigo | Inverse | Information | Warning | Error | Success] — default: Default
-- Value [numeric] — default: 0
-
-**Invalid Combinations:**
-- Badge with empty value → must always display a number; use 0 as default
-- Type=Line + Color=Inverse → insufficient contrast in most contexts
-- Badge without associated UI element → badges must accompany a specific interface element
-
-**Frequent Usage Snippets:**
-- Notification counter: Type=Filled, Color=Error, Value="5"
-- Unread messages: Type=Filled, Color=Default, Value="23"
-- Success count: Type=Filled, Color=Success, Value="12"
-- Secondary badge: Type=Line, Color=Evergreen, Value="3"
-- Warning alert: Type=Filled, Color=Warning, Value="1"
-
----
-
-## Purpose / Intent
-
-**What it solves:** Need to visually communicate a numeric count or quantity associated with an interface element, with support for semantic urgency levels through color coding.
-
-**Expected outcome:** User immediately perceives that there are pending items, notifications, or events associated with the element the badge accompanies, without reading additional text.
-
-**Typical usage context:** Navigation icons (notifications, messages), action buttons with pending count, dashboard metrics, list item counters, header sections with accumulated actions.
-
----
-
-## When to Use / When NOT to Use
-
-### ✅ Use when
-- A numeric counter needs to be associated with a UI element (notifications, messages, pending items)
-- Communicating urgency or semantic state with a numeric value (Error for critical, Success for completed, Warning for pending)
-- The element requires immediate visual differentiation by quantity
-- Distinguishing elements in a navigation or list by their associated count
-
-### ❌ Avoid when
-- A generic text label without numeric value is needed (use Tag or Label instead)
-- Available space cannot accommodate readable number size (minimum XS/11px)
-- Communicating state without a related quantity (use State Indicator or semantic Icon)
-- The number changes so frequently that animation becomes distracting
-
----
-
-## Structure (Anatomy)
-
+ 
+**Component Type:** Status / Indicator  
+**Status:** Design  
+**Version:** 1.1  
+**Owner:** UX Design Team  
+**Last Updated:** 2026-05-21
+ 
+## Quick Reference
+ 
+| Property | Values | Default |
+|----------|--------|---------|
+| Type | Filled, Line | Line |
+| Color | Default, Evergreen, Indigo, Inverse, Information, Warning, Error, Success | Default |
+| Label | Numeric text (editable) | "0" |
+ 
+**Typography:**
+- Font: Open Sans, body/sm (11px SemiBold)
+- Line height: 16px
+**Total Variants:** 16 (2 Types × 8 Colors)
+ 
+## Purpose
+ 
+The Badge component is a compact visual indicator that displays numeric values (counters) on or beside interface elements. It communicates quantity-based information such as notification counts, unread messages, pending items, or state-based counters. The component is purely visual and non-interactive, serving as a read-only indicator of quantity or status.
+ 
+With 2 style types (Filled for prominence, Line for subtlety) and 8 semantic color options, the Badge supports both neutral information display and semantic communication of intent (errors, warnings, success, information). It is designed for high legibility in compact spaces and works effectively when paired with icons or text labels.
+ 
+## When to Use
+ 
+- Displaying notification or message counts on navigation icons (bell icon + badge)
+- Showing quantity of pending items, tasks, or items requiring attention
+- Communicating unread email or message counts
+- Indicating number of items in a cart or shopping bag
+- Status indicators with numeric values (errors: 5, warnings: 2)
+- Associated counters with navigation items or controls
+- Displaying approval count, vote count, or similar metrics
+- Communicating state-based numeric information (items selected, completed, failed)
+## When NOT to Use
+ 
+- For generic text labels or tags (use Tag or Label component)
+- Communicating state without a numeric value (use Status or Icon)
+- In contexts where space doesn't allow number legibility (text would be unreadable)
+- As an interactive element or button (Badge is read-only, visual-only)
+- For decorative purposes without meaningful numeric information
+- Displaying text longer than 2-3 characters (use a different container)
+- Communicating progress or percentage (use Progress component)
+- For user-selected status indicators (use Checkbox, Radio Button, or Toggle)
+## Anatomy
+ 
 **Parts of the component:**
-- **Container (Required):** Pill-shaped rectangle with solid background (Filled) or border (Line). Corner radius: 5px. Size adapts to content width.
-- **Numeric Text (Required):** Always present. Displays numeric value. Default: 0. Typography: text/label/xs.
-
-> General rule: Badge always contains a visible numeric value. No variant exists without a number. Container width adapts to number width while maintaining consistent padding and height.
-
----
-
-## Semantics (Meaning & Behavior)
-
-**Main semantic role:** Numeric counter or quantity indicator associated with an interface element.
-
-**Action it communicates:** "There are [N] items pending / notifications / events of this type."
-
-**Signals for the user:**
-- Color immediately communicates urgency level or semantic category (Error = critical, Warning = attention needed, Success = completed, Information = informational)
-- Filled type communicates higher visual weight and urgency compared to Line type
-- The numeric value itself communicates the exact quantity of associated items
-
-**Color Semantics:**
-- Default — Neutral, general-purpose counters without specific semantic meaning
-- Evergreen — Positive, active, approved states with quantity
-- Indigo — Secondary emphasis, special category, editorial highlight
-- Inverse — High contrast for use on dark/colored backgrounds
-- Information — Informational, help-related, or new item counts
-- Warning — Caution, pending attention, awaiting action. **EXCEPTION: uses text/primary for contrast**
-- Error — Critical, blocked, or failure counts
-- Success — Completion, approved, or successful action counts
-
----
-
-## Variants (Properties)
-
-> Names identical to Figma.
-
-### Type
-- **Filled** — Solid background with contrasting text. Higher visual weight. Standard use for notifications and alerts.
-- **Line** — Subtle background with semantic color border. Lower visual weight. Use when Filled would be too prominent.
-
-### Color
-- **Default** — Neutral gray tone. General counters without semantic urgency.
-- **Evergreen** — Primary brand green. Use for active, approved, positive counts.
-- **Indigo** — Secondary brand purple. Use for special categories or editorial emphasis.
-- **Inverse** — Inverse tone for use on dark backgrounds. Adapts to theme.
-- **Information** — Semantic blue. Use for informational or new item counts.
-- **Warning** — Semantic amber/yellow. **EXCEPTION: text always uses text/primary, not semantic text token.**
-- **Error** — Semantic red. Use for critical, blocked, or error counts.
-- **Success** — Semantic green. Use for completion or success counts.
-
----
-
+- **Container** (Required): A compact horizontal container holding the numeric text. Background may be solid (Filled type) or transparent with border (Line type). Padding is minimal (space/0 top/bottom, space/4 left/right) to keep the component compact.
+- **Numeric Text** (Required): The counter value (number or text like "99+"). Font: body/sm (Open Sans 11px SemiBold). Always centered vertically and horizontally within the container. Text color depends on Type and Color properties.
+**Dimensions:**
+- Container height: ~16px (derived from text line height: body/sm)
+- Container width: Adaptive (expands based on text width)
+- Padding horizontal: space/4 (4px)
+- Padding vertical: space/0 (0px)
+- Text size: body/sm (11px)
+- Line height: 16px
+- Compact and minimal design
+- Corner radius: radius/4 or similar
+**Visual Properties:**
+- Type=Filled: Solid background color with high visual weight
+- Type=Line: Transparent background with 1px border and colored text
+- No shadows, decorative elements, or additional visual treatments
+- Consistent corner radius (typically radius/4)
+## Variants
+ 
+### Type (2 variants)
+Type determines the visual style and prominence of the badge.
+ 
+- **Filled:** Solid background color with contrasting text color. High visual prominence. Used for critical, high-priority, or urgent counters (notifications, errors, critical counts). Background is opaque and colored, text is inverse (white/light) or semantic color-appropriate. Token: surface/[semantic]/subtle or surface/[color]/bold.
+- **Line:** Outlined border with colored text and transparent background. Subtle emphasis. Used for secondary, supporting, or less critical counters (secondary counts, optional indicators). Background is transparent, border is 1px in the semantic color, text color matches border. Token: border/[semantic] + text/[semantic].
+### Color (8 variants)
+Color communicates semantic intent and visual emphasis of the counter.
+ 
+- **Default:** Neutral text and border color. Standard counter display for non-semantic information. Uses text/primary (#2d342f or similar). Best for generic, non-prioritized counters.
+- **Evergreen:** Brand-aligned green color (color/brand/primary/500 #339947). Communicates positive, affirmative, or success-oriented counts. Used for approved items, positive status, confirmations.
+- **Indigo:** Brand-aligned secondary color (color/brand/secondary/500 #6b1b99). Communicates emphasis, highlighting, or featured status. Used for prominent or special counters.
+- **Inverse:** Inverse text color (light on dark). Used on dark backgrounds or within colored containers. Works in any background context.
+- **Information:** Informational blue color (color/information/500 #0066CC). Communicates educational, helpful, or informational counters. Used for help tips, info counts, learning-related metrics.
+- **Warning:** Caution/warning color (orange/amber, color/warning/500 #FFC107). Communicates caution-level attention or alerts. Used for pending items, warnings, items needing review.
+- **Error:** Error/critical red color (color/danger/500 #BA1A1A). Communicates error, failed, or critical status. Used for error counts, failed items, critical issues.
+- **Success:** Success green color (color/success/500 #28A745). Communicates successful, completed, or positive outcomes. Used for success counts, completed items, positive results.
+### Label (Editable Text)
+The numeric value displayed in the badge. Can be any numeric or short text value.
+ 
+- **Default Value:** "0" (zero unread, zero pending, etc.)
+- **Typical Values:** "1", "5", "12", "99", "99+" (cap indicator), "N/A" (not applicable)
+- **Text Constraint:** 1-3 characters recommended for optimal legibility and compact sizing
+- **Examples:** "0", "5", "12", "99+", "New", "N/A"
 ## Token Mapping
-
-### Type=Filled Color Variants
-
-| Color | Background | Text |
-|-------|-----------|------|
-| Default | surface/default/bold | text/inverse |
-| Evergreen | surface/evergreen/bold | text/inverse |
-| Indigo | surface/indigo/bold | text/inverse |
-| Inverse | surface/raised | text/inverse |
-| Information | surface/information/bold | text/inverse |
-| Warning | surface/warning/bold | text/primary ⚠️ |
-| Error | surface/error/bold | text/inverse |
-| Success | surface/success/bold | text/inverse |
-
-### Type=Line Color Variants
-
-| Color | Background | Border | Text |
-|-------|-----------|--------|------|
-| Default | surface/default/subtle | border/default | text/primary |
-| Evergreen | surface/evergreen/subtle | border/evergreen | text/evergreen |
-| Indigo | surface/indigo/subtle | border/indigo | text/indigo |
-| Inverse | surface/raised | border/strong | text/inverse |
-| Information | surface/information/subtle | border/information | text/information |
-| Warning | surface/warning/subtle | border/warning | text/primary ⚠️ |
-| Error | surface/error/subtle | border/error | text/error |
-| Success | surface/success/subtle | border/success | text/success |
-
-> ⚠️ **Warning Exception:** Text always uses text/primary (not semantic color token) for sufficient contrast on both Filled and Line types.
-
----
-
-## Layout & Sizing
-
-### Spacing
-- Height: 24px (size/24) — consistent height across all variants
-- Width: Auto, sized to fit numeric content with minimal padding
-- Minimum width: Sufficient for single digit plus padding
-
-### Typography
-- Style: text/label/xs
-- Size: 11px
-- Weight: 500 (medium)
-- Line-height: 16px
-- Letter-spacing: wide (+1px)
-- Font family: body (system font)
-
-### Corner / Shape
-- Radius: 5px
-- Always pill-shaped. No square corners.
-
----
-
-## Interaction & Motion
-
-- **Click/Tap:** No interactive behavior. Badge itself is not clickable; interaction occurs on parent element.
-- **Keyboard:** Does not receive focus and is not keyboard navigable.
-- **Loading:** Not applicable. Badges do not have loading states.
-- **Transitions:** Recommended: fade or scale transition when value changes (200ms, standard easing).
-- **Numeric Overflow:** When value exceeds 99, display as "99+" (implementation confirmed).
-
----
-
-## Accessibility Guidelines
-
-- **Contrast:** Minimum 4.5:1 between numeric text and background (WCAG 2.1 AA). Warning is the exception: uses text/primary for compliance.
-- **ARIA:** Badge must have descriptive aria-label in context, e.g., aria-label="23 unread messages". Number alone is insufficient for screen readers.
-- **Color not sole indicator:** Badge color must be supplemented by context or icon to communicate meaning; do not rely on color only.
-- **Screen readers:** Badge content should be read as part of parent context. If standalone, wrap with descriptive container.
-- **Focus:** If parent element is interactive, focus ring applies to parent, not badge. Badge itself does not receive focus.
-
----
-
+ 
+### Filled Type — Default Color
+ 
+| Property | Token | Value | Notes |
+|----------|-------|-------|-------|
+| Background | background/default | [neutral bg] | Neutral background |
+| Text Color | text/primary | #2d342f | Primary text |
+| Border | — | none | No border in Filled |
+| Padding H | space/4 | 4px | Left/right padding |
+| Padding V | space/0 | 0px | Top/bottom padding |
+| Typography | body/sm | 11px SemiBold | Label font |
+| Corner | radius/4 | 4px | Border radius |
+ 
+### Filled Type — Semantic Colors
+ 
+| Color | Background Token | Text Token | Notes |
+|-------|-----------------|-----------|-------|
+| Evergreen | surface/evergreen/bold | text/inverse | #339947 bg, white text |
+| Indigo | surface/indigo/bold | text/inverse | #6b1b99 bg, white text |
+| Inverse | surface/inverse | text/on-inverse | Inverse bg, inverse text |
+| Information | surface/info/subtle | text/info | #e8f2ff bg, #0066CC text |
+| Warning | surface/warning/subtle | text/primary | #fff0c2 bg, primary text |
+| Error | surface/error/subtle | text/danger | #ffe9e5 bg, #BA1A1A text |
+| Success | surface/success/subtle | text/success | #bfffda bg, #00885c text |
+ 
+### Line Type — Default Color
+ 
+| Property | Token | Value | Notes |
+|----------|-------|-------|-------|
+| Background | — | transparent | No fill |
+| Text Color | text/primary | #2d342f | Primary text |
+| Border | border/default | #5f6d62 | 1px border |
+| Padding H | space/4 | 4px | Left/right padding |
+| Padding V | space/0 | 0px | Top/bottom padding |
+| Typography | body/sm | 11px SemiBold | Label font |
+| Corner | radius/4 | 4px | Border radius |
+ 
+### Line Type — Semantic Colors
+ 
+| Color | Text Token | Border Token | Notes |
+|-------|-----------|--------------|-------|
+| Evergreen | text/evergreen | border/evergreen | #339947 text/border |
+| Indigo | text/indigo | border/indigo | #6b1b99 text/border |
+| Inverse | text/inverse | border/inverse | Light text/border |
+| Information | text/info | border/info | #0066CC text/border |
+| Warning | text/primary | border/warning | Primary text, #FFC107 border |
+| Error | text/danger | border/danger | #BA1A1A text/border |
+| Success | text/success | border/success | #00885c text/border |
+ 
+## Semantics
+ 
+- **Numeric Indicator:** Badge communicates quantity. The primary semantic is "there are X of these items."
+- **Status Communication:** Through color, Badge adds semantic layer. Danger/Error badge: "there are X errors." Success badge: "there are X completed items."
+- **Visual Hierarchy:** Type (Filled vs. Line) establishes visual prominence. Filled badges are high-priority, Line badges are secondary.
+- **Non-Interactive Indicator:** Badge is visual-only. It does not capture interaction or represent selectable state. It informs, not invites interaction.
+- **Countable Concept:** Badge implies countable, discrete items. It is not used for continuous metrics or percentages.
+- **Color Meaning:** Color selection should align with the semantic content. Error badge for error counts, Success badge for completed counts, etc.
+## Interaction
+ 
+- **Non-Interactive:** Badge does not respond to clicks, hovers, or keyboard input. It is a visual indicator only.
+- **No State Changes:** Badge does not have hover, pressed, or focused states. It displays static information.
+- **Associated with Parent Element:** Badge is typically positioned on or near a parent element (icon, button, label). Clicking the parent element may affect what the badge displays (e.g., clicking a bell icon opens notifications, dismissing the badge).
+- **Dynamic Value Updates:** The Label property may be updated programmatically as the counter changes (e.g., new message arrives, badge updates from "5" to "6").
+- **No Keyboard Access:** Badge is not a tab stop and has no keyboard interaction.
+- **Screen Reader Visibility:** Badge content (the number) should be announced by screen readers as associated with its parent element.
+## Accessibility
+ 
+**HTML Structure:**
+- Badge is typically a `<span>` or `<div>` with numeric or status text content
+- Badge should be associated with a parent interactive element (icon, button, link)
+- Badge text should be visible (not hidden/display:none)
+- Use `aria-label` or `aria-describedby` to provide context if Badge number is not immediately clear
+**Example HTML Structure:**
+```html
+<!-- Badge on icon -->
+<button class="icon-button">
+  <span class="icon">bell</span>
+  <span class="badge badge--filled badge--error" aria-label="5 unread notifications">5</span>
+</button>
+ 
+<!-- Badge with text -->
+<div class="cart">
+  <span class="label">Shopping Cart</span>
+  <span class="badge badge--filled badge--default" aria-label="3 items">3</span>
+</div>
+```
+ 
+**Keyboard:**
+- Badge is not a keyboard-interactive element
+- Badge should not be a tab stop
+- Focus belongs to parent element (icon, button, etc.), not the badge
+**Screen Reader:**
+- Badge text should be announced: "5" (numeric value)
+- Context should be provided by parent element label: "bell icon, 5 unread notifications"
+- Use aria-label or aria-describedby to provide full context if needed
+- Example: `aria-label="5 unread notifications"` on the badge or parent
+- Badge should not interfere with parent element's screen reader announcement
+**Contrast:**
+- Text must have 4.5:1 contrast ratio against background (Filled type)
+- Border and text must have 3:1 contrast ratio against background (Line type)
+- Inverse color should provide adequate contrast on intended background colors
+- Semantic colors (Error, Warning, Success, Information) should be distinguishable from each other and from Default
 ## Content Guidelines
-
-- Always display a number. Default value is 0.
-- Numeric limits: Define overflow behavior (e.g., display "99+" when value exceeds 99).
-- No alphabetic text: Badge is exclusively numeric. No letters or symbols.
-- Real, updated values: Number must reflect actual count in production; avoid static placeholders.
-- Numeric format: Use simple digits. Avoid commas or currency symbols.
-
----
-
+ 
+- Keep badge content numeric or very short (1-3 characters)
+- Use "0" for zero counts (not empty or hidden)
+- Use "99+" or similar notation for large numbers that exceed space
+- Avoid long text labels (badge is for quick scanning)
+- Badge content should be accurate and up-to-date
+- Update badge content dynamically as the counter changes
+- Provide context in parent element label or aria-label
+- Do not include punctuation or special formatting in badge
+- Use consistent formatting across all badges (e.g., always "99+", never "99 or more")
 ## Examples
-
-### Do ✅
-- Use Type=Filled, Color=Error to display critical error count on an alert icon.
-- Use Type=Line, Color=Warning when the badge competes visually with other elements.
-- Use Color=Success to indicate the number of completed or approved items.
-- Pair badges with action buttons showing pending count.
-- Use Color=Information for "New" or "Featured" item counts.
-
-### Don't ❌
-- Do not display empty or zero badges without context (show 0 if relevant; hide if not).
-- Do not use Type=Line + Color=Inverse without testing contrast against actual background.
-- Do not expect Warning color text to use semantic color token; text/primary ensures contrast.
-- Do not use badges on elements without clear association or context.
-- Do not change badge value so frequently that animation becomes distracting.
-- Do not use non-numeric content in badges.
-
----
-
-## QA Checklist
-
-- [ ] Type=Filled tested with all 8 color variants for visual appearance.
-- [ ] Type=Line tested with all 8 color variants for contrast and readability.
-- [ ] Warning (both Filled and Line) confirmed using text/primary, not semantic text token.
-- [ ] Type=Line confirmed using surface/[color]/subtle background with border/[color].
-- [ ] Type=Filled confirmed using surface/[color]/bold background.
-- [ ] Typography text/label/xs applied (11px/16px, weight/medium, tracking/wide).
-- [ ] Corner radius: 5px confirmed on all variants.
-- [ ] Contrast ratio minimum 4.5:1 validated across all color combinations.
-- [ ] Numeric overflow behavior defined and documented (e.g., "99+").
-- [ ] aria-label descriptive text implemented in context of use.
-- [ ] Badge always displays numeric value (no empty variants).
-- [ ] Height consistent: 24px across all variants.
-
----
-
-## Notes / Changelog
-
-**2026-05-15** — Updated documentation to match Accordion md and Backdrop md pattern. Completed all metadata fields. Expanded sections with 16 color variants (Type × Color combinations). Added comprehensive token mapping for both Filled and Line types. Confirmed unique Warning exception (text/primary). Added numeric overflow guidance ("99+"). Detailed accessibility requirements and ARIA labeling. 100% aligned with design system documentation standards.
+ 
+**Notification count on bell icon (Filled, Error):**
+Type=Filled, Color=Error, Label="5", positioned on top-right of bell icon, Background: surface/error/subtle, Text: text/danger, Padding: space/4 H
+ 
+**Unread messages (Filled, Default):**
+Type=Filled, Color=Default, Label="12", positioned next to "Messages" label, Padding: space/4 H, Typography: body/sm
+ 
+**Pending items (Filled, Warning):**
+Type=Filled, Color=Warning, Label="3", positioned next to "Tasks" in sidebar, Background: surface/warning/subtle, Text: text/primary, Padding: space/4 H
+ 
+**Success indicator (Filled, Success):**
+Type=Filled, Color=Success, Label="10", indicating 10 completed items, Background: surface/success/subtle, Text: text/success, Padding: space/4 H
+ 
+**Secondary count with border (Line, Evergreen):**
+Type=Line, Color=Evergreen, Label="2", subtle emphasis for secondary info, Border: border/evergreen, Text: text/evergreen, Padding: space/4 H
+ 
+**Warning alert (Line, Warning):**
+Type=Line, Color=Warning, Label="1", positioned next to alert icon, Border: border/warning, Text: text/primary, Padding: space/4 H
+ 
+**Information counter (Filled, Information):**
+Type=Filled, Color=Information, Label="8", help-related counter, Background: surface/info/subtle, Text: text/info, Padding: space/4 H
+ 
+**Neutral secondary indicator (Line, Default):**
+Type=Line, Color=Default, Label="0", generic counter without semantic weight, Border: border/default, Text: text/primary, Padding: space/4 H
+ 
+**Error count display (Filled, Error):**
+Type=Filled, Color=Error, Label="99+", indicating many errors (capped display), Background: surface/error/subtle, Text: text/danger, Padding: space/4 H
+ 
+**Success on card (Filled, Success):**
+Type=Filled, Color=Success, Label="4", indicating 4 successful operations, Background: surface/success/subtle, Text: text/success, Padding: space/4 H
+ 
+**Inverse badge on dark background (Filled, Inverse):**
+Type=Filled, Color=Inverse, Label="6", on dark background or colored container, Background: surface/inverse, Text: text/on-inverse, Padding: space/4 H
+ 
+**Indigo emphasis badge (Filled, Indigo):**
+Type=Filled, Color=Indigo, Label="New", highlighted/featured badge, Background: surface/indigo/bold, Text: text/inverse, Padding: space/4 H
