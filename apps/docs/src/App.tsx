@@ -39,7 +39,7 @@ import {
   TextArea
 } from "@genome-evolution/react";
 
-import { componentDocsBySlug, foundationDocsBySlug, manifest } from "./data";
+import { componentDocsBySlug, foundationDocsBySlug, manifest, tokenStats } from "./data";
 import { componentSpecs, componentTabLabels, tr, type ComponentTabId } from "./component-specs";
 import { renderMarkdown } from "./markdown";
 import type { NavItem } from "./types";
@@ -824,35 +824,123 @@ function ComponentPreview({ componentName }: { componentName: string }) {
   );
 }
 
-function HomeShowcase() {
+type HomeShowcaseProps = {
+  componentCount: number;
+  foundationCount: number;
+  cssVarCount: number;
+  darkOverrideCount: number;
+  theme: "light" | "dark";
+  version: string;
+  lastUpdated: string;
+  language: Language;
+};
+
+function HomeShowcase({
+  componentCount,
+  foundationCount,
+  cssVarCount,
+  darkOverrideCount,
+  theme,
+  version,
+  lastUpdated,
+  language
+}: HomeShowcaseProps) {
+  const [activeTab, setActiveTab] = useState<"system" | "overview" | "guidelines">("overview");
+  const tokenSyncLabel =
+    cssVarCount > 0 ? t("overview.panel.tokenSync.ready", language) : t("overview.panel.tokenSync.pending", language);
+  const tokenSyncTone = cssVarCount > 0 ? "success" : "warning";
+
   return (
     <div className="home-showcase">
-      <section className="showcase-plane showcase-plane--primary">
-        <div className="showcase-row">
-          <span className="showcase-kicker">Action system</span>
-          <Button>Primary action</Button>
-          <Button variant="secondary" tone="indigo">
-            Secondary
-          </Button>
-          <IconButton label="Search" icon={<SearchIcon />} />
+      <section className="feature-box" aria-label="Feature box">
+        <div className="action-tabs" role="tablist" aria-label="Overview tabs">
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === "system"}
+            className={activeTab === "system" ? "is-active" : undefined}
+            onClick={() => setActiveTab("system")}
+          >
+            {t("overview.panel.tabs.system", language)}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === "overview"}
+            className={activeTab === "overview" ? "is-active" : undefined}
+            onClick={() => setActiveTab("overview")}
+          >
+            {t("overview.panel.tabs.overview", language)}
+          </button>
+          <button
+            type="button"
+            role="tab"
+            aria-selected={activeTab === "guidelines"}
+            className={activeTab === "guidelines" ? "is-active" : undefined}
+            onClick={() => setActiveTab("guidelines")}
+          >
+            {t("overview.panel.tabs.guidelines", language)}
+          </button>
         </div>
-        <div className="showcase-row showcase-row--field">
-          <Input label="Workspace name" placeholder="Genome Evolution" helperText="Token-driven primitives in context." />
-        </div>
-      </section>
 
-      <section className="showcase-plane showcase-plane--secondary">
-        <div className="mini-stat">
-          <span>36</span>
-          <p>documented components</p>
-        </div>
-        <div className="mini-stat">
-          <span>170</span>
-          <p>public light tokens</p>
-        </div>
-        <div className="mini-stat">
-          <span>83</span>
-          <p>dark theme overrides</p>
+        <div className="feature-content" role="tabpanel">
+          <p className="feature-eyebrow">
+            {activeTab === "system"
+              ? t("overview.panel.eyebrow.system", language)
+              : activeTab === "overview"
+                ? t("overview.panel.eyebrow.workspace", language)
+                : t("overview.panel.eyebrow.guidelines", language)}
+          </p>
+          <h4 className="feature-title">Genome Evolution</h4>
+          <p className="feature-subtitle">
+            {activeTab === "system"
+              ? t("overview.panel.subtitle.system", language)
+              : activeTab === "overview"
+                ? t("overview.panel.subtitle.overview", language)
+                : t("overview.panel.subtitle.guidelines", language)}
+          </p>
+
+          <div className="feature-meta" aria-label="System metadata">
+            <div className="feature-meta__row">
+              <span className="feature-meta__label">{t("overview.panel.meta.lastUpdated", language)}</span>
+              <span className="feature-meta__value">{lastUpdated}</span>
+            </div>
+            <div className="feature-meta__row">
+              <span className="feature-meta__label">{t("overview.panel.meta.version", language)}</span>
+              <span className="feature-meta__value">{version}</span>
+            </div>
+            <div className="feature-meta__row">
+              <span className="feature-meta__label">{t("overview.panel.meta.themeActive", language)}</span>
+              <span className="feature-meta__value">
+                {theme === "dark" ? t("theme.dark", language) : t("theme.light", language)}
+              </span>
+            </div>
+            <div className="feature-meta__row">
+              <span className="feature-meta__label">{t("overview.panel.meta.tokenSyncStatus", language)}</span>
+              <span className={`feature-pill feature-pill--${tokenSyncTone}`}>{tokenSyncLabel}</span>
+            </div>
+          </div>
+
+          <div className="feature-checklist" aria-label="System readiness">
+            <div className="feature-check">
+              <span className="feature-count" aria-hidden="true">
+                {cssVarCount}
+              </span>
+              <p>{t("overview.panel.checks.tokens", language)}</p>
+            </div>
+            <div className="feature-check">
+              <span className="feature-count" aria-hidden="true">
+                {componentCount}
+              </span>
+              <p>{t("overview.panel.checks.components", language)}</p>
+            </div>
+            <div className="feature-check">
+              <span className="feature-count" aria-hidden="true">
+                {foundationCount}
+              </span>
+              <p>{t("overview.panel.checks.guidelines", language)}</p>
+            </div>
+          </div>
         </div>
       </section>
     </div>
@@ -1264,10 +1352,8 @@ export function App() {
             <>
               <section className="hero-stage">
                 <div className="hero-stage__copy">
-                  <p className="eyebrow">{t("overview.hero.eyebrow", language)}</p>
                   <h3>{t("overview.hero.title", language)}</h3>
                   <p>{t("overview.hero.body", language)}</p>
-
                   <div className="hero-stage__search">
                     <label className="hero-search" aria-label={t("overview.hero.search.label", language)}>
                       <SearchIcon />
@@ -1301,23 +1387,36 @@ export function App() {
                     </Button>
                   </div>
                 </div>
-                <HomeShowcase />
+                <HomeShowcase
+                  componentCount={manifest.components.length}
+                  foundationCount={manifest.foundations.length}
+                  cssVarCount={tokenStats.cssVarCount}
+                  darkOverrideCount={tokenStats.darkOverrideCount}
+                  theme={theme}
+                  version={manifest.version}
+                  lastUpdated={manifest.last_updated}
+                  language={language}
+                />
               </section>
 
               <section className="signal-grid">
                 <article className="signal-panel">
                   <p className="eyebrow">{t("overview.signal.scale", language)}</p>
-                  <h3>{manifest.components.length} documented components</h3>
+                  <h3>
+                    {manifest.components.length} {t("overview.signal.scale.valueSuffix", language)}
+                  </h3>
                   <p>{t("overview.signal.scale.body", language)}</p>
                 </article>
                 <article className="signal-panel">
                   <p className="eyebrow">{t("overview.signal.foundations", language)}</p>
-                  <h3>{manifest.foundations.length} foundation references</h3>
+                  <h3>
+                    {manifest.foundations.length} {t("overview.signal.foundations.valueSuffix", language)}
+                  </h3>
                   <p>{t("overview.signal.foundations.body", language)}</p>
                 </article>
                 <article className="signal-panel">
                   <p className="eyebrow">{t("overview.signal.impl", language)}</p>
-                  <h3>React + tokens + docs</h3>
+                  <h3>{t("overview.signal.impl.value", language)}</h3>
                   <p>{t("overview.signal.impl.body", language)}</p>
                 </article>
               </section>
@@ -1365,7 +1464,7 @@ export function App() {
 
               <section className="overview-grid overview-grid--home">
                 <article className="feature-panel feature-panel--wide">
-                  <p className="eyebrow">Start here</p>
+                  <p className="eyebrow">{t("overview.start.eyebrow", language)}</p>
                   <h3>{t("overview.start.title", language)}</h3>
                   <p>{t("overview.start.body", language)}</p>
                   <div className="quick-links">
@@ -1382,13 +1481,13 @@ export function App() {
                 </article>
 
                 <article className="feature-panel">
-                  <p className="eyebrow">Principle</p>
+                  <p className="eyebrow">{t("overview.principle.eyebrow", language)}</p>
                   <h3>{t("overview.principle.title", language)}</h3>
                   <p>{t("overview.principle.body", language)}</p>
                 </article>
 
                 <article className="feature-panel">
-                  <p className="eyebrow">Tokens</p>
+                  <p className="eyebrow">{t("overview.tokens.eyebrow", language)}</p>
                   <h3>{t("overview.tokens.title", language)}</h3>
                   <p>{t("overview.tokens.body", language)}</p>
                 </article>
@@ -1396,19 +1495,16 @@ export function App() {
 
               <section className="foundation-band">
                 <div className="foundation-band__copy">
-                  <p className="eyebrow">Foundation system</p>
-                  <h3>The visual language is already codified across color, typography and spacing.</h3>
-                  <p>
-                    The next layer of growth is less about inventing new style and more about turning the existing source
-                    of truth into more complete component behavior.
-                  </p>
+                  <p className="eyebrow">{t("overview.foundation.eyebrow", language)}</p>
+                  <h3>{t("overview.foundation.title", language)}</h3>
+                  <p>{t("overview.foundation.body", language)}</p>
                 </div>
                 <div className="foundation-band__links">
                   {[
-                    { id: "foundations-color", label: "Color" },
-                    { id: "foundations-typography", label: "Typography" },
-                    { id: "foundations-spacing", label: "Spacing" },
-                    { id: "foundations-layout", label: "Layout" }
+                    { id: "foundations-color", label: t("overview.foundation.links.color", language) },
+                    { id: "foundations-typography", label: t("overview.foundation.links.typography", language) },
+                    { id: "foundations-spacing", label: t("overview.foundation.links.spacing", language) },
+                    { id: "foundations-layout", label: t("overview.foundation.links.layout", language) }
                   ].map((item) => (
                     <a key={item.id} href={`#${item.id}`} onClick={() => setActiveId(item.id)}>
                       {item.label}

@@ -7,7 +7,7 @@ export const dict: Dict = {
   "nav.foundations": { en: "Foundations", es: "Foundations" },
   "nav.components": { en: "Components", es: "Components" },
 
-  "search.placeholder": { en: "Search foundations and components", es: "Busca foundations y components" },
+  "search.placeholder": { en: "Search components, tokens or foundations", es: "Busca componentes, tokens o foundations" },
 
   "topbar.eyebrow": { en: "Design system docs", es: "Documentación del sistema" },
   "theme.light": { en: "Light", es: "Claro" },
@@ -17,15 +17,15 @@ export const dict: Dict = {
 
   "overview.hero.eyebrow": { en: "Genome Evolution Design System", es: "Genome Evolution Design System" },
   "overview.hero.title": {
-    en: "Build calmer interfaces with sharper decisions, stronger tokens and a more usable component language.",
-    es: "Construye interfaces más calmadas con mejores decisiones, tokens sólidos y un lenguaje de componentes usable."
+    en: "A design language built to scale across teams and AI workflows.",
+    es: "Un lenguaje de diseño preparado para escalar entre personas y AI workflows."
   },
   "overview.hero.body": {
-    en: "This is the editorial face of the system: foundations, guidance, tokens and implementation patterns gathered into one place, with Storybook still available as the technical playground.",
-    es: "Esta es la cara editorial del sistema: foundations, guías, tokens y patrones de implementación en un solo lugar, con Storybook como playground técnico."
+    en: "Centralized documentation for foundations, components, tokens and implementation patterns.",
+    es: "Documentación centralizada para foundations, componentes, tokens y patrones de implementación."
   },
-  "overview.hero.cta.primary": { en: "Explore Button", es: "Explorar Button" },
-  "overview.hero.cta.secondary": { en: "Browse Foundations", es: "Ver Foundations" },
+  "overview.hero.cta.primary": { en: "Explore components", es: "Explorar componentes" },
+  "overview.hero.cta.secondary": { en: "View foundations", es: "Ver Foundations" },
 
   "overview.signal.scale": { en: "Scale", es: "Escala" },
   "overview.signal.foundations": { en: "Foundations", es: "Foundations" },
@@ -34,10 +34,13 @@ export const dict: Dict = {
     en: "From actions and form controls to overlays, navigation and data display.",
     es: "Desde acciones y formularios hasta overlays, navegación y data display."
   },
+  "overview.signal.scale.valueSuffix": { en: "documented components", es: "componentes documentados" },
   "overview.signal.foundations.body": {
     en: "Color, typography, spacing, layout, border, elevation and token exports aligned in code.",
     es: "Color, tipografía, spacing, layout, border, elevation y exports de tokens alineados en código."
   },
+  "overview.signal.foundations.valueSuffix": { en: "foundation references", es: "referencias de foundations" },
+  "overview.signal.impl.value": { en: "React + tokens + docs", es: "React + tokens + docs" },
   "overview.signal.impl.body": {
     en: "A working package layer sits underneath the documentation surface and feeds the live previews.",
     es: "Una capa de paquetes vive debajo de la documentación y alimenta los previews en vivo."
@@ -51,6 +54,9 @@ export const dict: Dict = {
     en: "Button, Input and Icon Button now include editorial guidance, live previews, implementation props, token mapping and code snippets.",
     es: "Button, Input e Icon Button incluyen guía editorial, previews en vivo, props de implementación, mapeo a tokens y snippets."
   },
+  "overview.start.eyebrow": { en: "Start here", es: "Empieza aquí" },
+  "overview.principle.eyebrow": { en: "Principle", es: "Principio" },
+  "overview.tokens.eyebrow": { en: "Tokens", es: "Tokens" },
   "overview.principle.title": { en: "Use docs for judgment, Storybook for mechanics.", es: "Docs para criterio, Storybook para mecánica." },
   "overview.principle.body": { en: "The site is shaped to answer why and when, not only what renders.", es: "El sitio responde por qué y cuándo, no solo qué renderiza." },
   "overview.tokens.title": { en: "Public semantic exports, not raw primitives by default.", es: "Exports semánticos públicos, no primitivos raw." },
@@ -58,6 +64,50 @@ export const dict: Dict = {
 
   "overview.hero.search.label": { en: "Jump to a page", es: "Ir a una página" },
   "overview.hero.search.hint": { en: "Type to filter the sidebar list.", es: "Escribe para filtrar la lista del sidebar." },
+
+  "overview.panel.tabs.system": { en: "System", es: "Sistema" },
+  "overview.panel.tabs.overview": { en: "Overview", es: "Overview" },
+  "overview.panel.tabs.guidelines": { en: "Guidelines", es: "Guías" },
+
+  "overview.panel.eyebrow.system": { en: "SYSTEM", es: "SISTEMA" },
+  "overview.panel.eyebrow.workspace": { en: "WORKSPACE", es: "ESPACIO DE TRABAJO" },
+  "overview.panel.eyebrow.guidelines": { en: "GUIDELINES", es: "GUÍAS" },
+
+  "overview.panel.subtitle.system": {
+    en: "Foundations, components, tokens and docs shipped as one source of truth.",
+    es: "Foundations, componentes, tokens y docs como un solo source of truth."
+  },
+  "overview.panel.subtitle.overview": { en: "Token-driven primitives in context.", es: "Primitivas guiadas por tokens en contexto." },
+  "overview.panel.subtitle.guidelines": {
+    en: "Editorial guidance for calmer, clearer interfaces.",
+    es: "Guía editorial para interfaces más calmadas y claras."
+  },
+
+  "overview.panel.meta.lastUpdated": { en: "Last updated", es: "Última actualización" },
+  "overview.panel.meta.version": { en: "Version", es: "Versión" },
+  "overview.panel.meta.themeActive": { en: "Theme active", es: "Tema activo" },
+  "overview.panel.meta.tokenSyncStatus": { en: "Token sync status", es: "Estado de sync de tokens" },
+
+  "overview.panel.tokenSync.ready": { en: "AI Context Ready", es: "Contexto AI listo" },
+  "overview.panel.tokenSync.pending": { en: "Token sync pending", es: "Sync de tokens pendiente" },
+
+  "overview.panel.checks.tokens": { en: "Tokens documented", es: "Tokens documentados" },
+  "overview.panel.checks.components": { en: "Components described", es: "Componentes descritos" },
+  "overview.panel.checks.guidelines": { en: "Usage guidelines connected", es: "Guías de uso conectadas" },
+
+  "overview.foundation.eyebrow": { en: "Foundation system", es: "Sistema de foundations" },
+  "overview.foundation.title": {
+    en: "The visual language is already codified across color, typography and spacing.",
+    es: "El lenguaje visual ya está codificado en color, tipografía y espaciado."
+  },
+  "overview.foundation.body": {
+    en: "The next layer of growth is less about inventing new style and more about turning the existing source of truth into more complete component behavior.",
+    es: "El siguiente paso es menos inventar estilo y más convertir el source of truth actual en comportamiento de componentes más completo."
+  },
+  "overview.foundation.links.color": { en: "Color", es: "Color" },
+  "overview.foundation.links.typography": { en: "Typography", es: "Tipografía" },
+  "overview.foundation.links.spacing": { en: "Spacing", es: "Espaciado" },
+  "overview.foundation.links.layout": { en: "Layout", es: "Layout" },
 
   "overview.portal.title": { en: "Explore the system", es: "Explora el sistema" },
   "overview.portal.headline": { en: "A practical map for design and engineering.", es: "Un mapa práctico para diseño e ingeniería." },
