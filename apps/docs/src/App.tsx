@@ -120,11 +120,19 @@ const componentItems: NavItem[] = manifest.components
   }))
   .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
 
-const navItems: NavItem[] = [{ id: "overview", label: "Overview", group: "overview" }, ...foundationItems, ...componentItems];
+const navItems: NavItem[] = [
+  { id: "overview", label: "Overview", group: "overview" },
+  { id: "getting-started", label: "Getting Started", group: "overview" },
+  ...foundationItems,
+  ...componentItems
+];
 
 function getItemMeta(id: string) {
   if (id === "overview") {
     return { kind: "overview" as const };
+  }
+  if (id === "getting-started") {
+    return { kind: "getting-started" as const };
   }
   if (foundationDocsBySlug[id]) {
     return { kind: "foundation" as const, doc: foundationDocsBySlug[id] };
@@ -859,6 +867,83 @@ function HomeShowcase() {
   );
 }
 
+const gettingStartedSections = [
+  {
+    title: "Foundations",
+    body: "You will find the definitions, guidelines, and foundations for building the system. It includes tokens, colors, typography, spacing, and more."
+  },
+  {
+    title: "Components",
+    body: "You find the elements with which you build the interfaces; these are the bricks and parts used to create the designs. They must be updated and created according to the needs of our product."
+  },
+  {
+    title: "Patterns and anti patterns",
+    body: "You will find examples of how to use the components and design patterns that our products have, as well as the anti-patterns or design patterns that should not be used in our designs."
+  },
+  {
+    title: "Content guidelines",
+    body: "You will find the voice and tone manual, the words, and the language guidelines we use in our products, aligned with user needs."
+  },
+  {
+    title: "Accesibility",
+    body: "You will find recommendations to ensure that our products are usable by as many people as possible, regardless of their abilities."
+  },
+  {
+    title: "Ready for IA",
+    body: "You find the guidelines for the AI to understand our design system so that it can translate our definitions effectively."
+  },
+  {
+    title: "Resources",
+    body: "You can find the links and repositories for our design system."
+  }
+];
+
+function GettingStartedPage() {
+  return (
+    <article className="getting-started-page">
+      <header className="getting-started-hero">
+        <div className="getting-started-breadcrumb">
+          <BrandLogo />
+          <span>Documentation</span>
+          <span aria-hidden="true">/</span>
+          <span>Getting started</span>
+        </div>
+        <p className="getting-started-kicker">Genome</p>
+        <h3>Genome Evolution</h3>
+        <p className="getting-started-summary">
+          Explore the design system, its advantages, and our core values and principles.
+        </p>
+      </header>
+
+      <section className="getting-started-content">
+        <div className="getting-started-intro">
+          <h4>What is Genome Evolution?</h4>
+          <p>
+            It is the Design System for Bizagi products, which contains guidelines, elements, and definitions for designers
+            with code so that developers can use it. It includes UX rules for designing interfaces that work very well for
+            our users.
+          </p>
+        </div>
+
+        <div className="getting-started-parts">
+          <h4>Parts of the design system</h4>
+          <div className="getting-started-list">
+            {gettingStartedSections.map((section) => (
+              <section className="getting-started-card" key={section.title}>
+                <div className="getting-started-card__media" aria-hidden="true" />
+                <div className="getting-started-card__copy">
+                  <h5>{section.title}</h5>
+                  <p>{section.body}</p>
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      </section>
+    </article>
+  );
+}
+
 function ButtonStatesPreview() {
   const states = [
     { id: "default", label: "Default" },
@@ -1417,6 +1502,8 @@ export function App() {
                 </div>
               </section>
             </>
+          ) : active.kind === "getting-started" ? (
+            <GettingStartedPage />
           ) : isTypographyFoundation ? (
             <TypographyFoundation language={language} />
           ) : isColorsFoundation ? (
