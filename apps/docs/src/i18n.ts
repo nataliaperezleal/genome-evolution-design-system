@@ -4,6 +4,7 @@ type Dict = Record<string, { en: string; es: string }>;
 
 export const dict: Dict = {
   "nav.overview": { en: "Overview", es: "Inicio" },
+  "nav.gettingStarted": { en: "Getting Started", es: "Primeros pasos" },
   "nav.foundations": { en: "Foundations", es: "Foundations" },
   "nav.components": { en: "Components", es: "Components" },
 
@@ -135,6 +136,54 @@ export const dict: Dict = {
   "overview.featured.body": {
     en: "A small set of pages to calibrate hierarchy, forms, overlays and feedback.",
     es: "Un set pequeño para calibrar jerarquía, formularios, overlays y feedback."
+  },
+
+  "gettingStarted.eyebrow": { en: "Genome", es: "Genome" },
+  "gettingStarted.title": { en: "Genome Evolution", es: "Genome Evolution" },
+  "gettingStarted.summary": {
+    en: "Explore the design system, its advantages, and our core values and principles.",
+    es: "Explora el sistema de diseño, sus ventajas y nuestros valores y principios fundamentales."
+  },
+  "gettingStarted.what.title": { en: "What is Genome Evolution?", es: "¿Qué es Genome Evolution?" },
+  "gettingStarted.what.body": {
+    en: "It is the Design System for Bizagi products, which contains guidelines, elements, and definitions for designers with code so that developers can use it. It includes UX rules for designing interfaces that work very well for our users.",
+    es: "Es el sistema de diseño para los productos de Bizagi, que contiene guías, elementos y definiciones para diseñadores con código para que los desarrolladores puedan usarlo. Incluye reglas de UX para diseñar interfaces que funcionen muy bien para nuestros usuarios."
+  },
+  "gettingStarted.parts.title": { en: "Parts of the design system", es: "Partes del sistema de diseño" },
+  "gettingStarted.sections.foundations.title": { en: "Foundations", es: "Foundations" },
+  "gettingStarted.sections.foundations.body": {
+    en: "You will find the definitions, guidelines, and foundations for building the system. It includes tokens, colors, typography, spacing, and more.",
+    es: "Encontrarás las definiciones, guías y fundamentos para construir el sistema. Incluye tokens, colores, tipografía, espaciado y más."
+  },
+  "gettingStarted.sections.components.title": { en: "Components", es: "Components" },
+  "gettingStarted.sections.components.body": {
+    en: "You find the elements with which you build the interfaces; these are the bricks and parts used to create the designs. They must be updated and created according to the needs of our product.",
+    es: "Encontrarás los elementos con los que se construyen las interfaces; son las piezas y partes usadas para crear los diseños. Deben actualizarse y crearse según las necesidades de nuestro producto."
+  },
+  "gettingStarted.sections.patterns.title": { en: "Patterns and anti patterns", es: "Patrones y antipatrones" },
+  "gettingStarted.sections.patterns.body": {
+    en: "You will find examples of how to use the components and design patterns that our products have, as well as the anti-patterns or design patterns that should not be used in our designs.",
+    es: "Encontrarás ejemplos de cómo usar los componentes y patrones de diseño que tienen nuestros productos, así como los antipatrones o patrones de diseño que no deberían usarse en nuestros diseños."
+  },
+  "gettingStarted.sections.content.title": { en: "Content guidelines", es: "Guías de contenido" },
+  "gettingStarted.sections.content.body": {
+    en: "You will find the voice and tone manual, the words, and the language guidelines we use in our products, aligned with user needs.",
+    es: "Encontrarás el manual de voz y tono, las palabras y las guías de lenguaje que usamos en nuestros productos, alineadas con las necesidades de los usuarios."
+  },
+  "gettingStarted.sections.accessibility.title": { en: "Accesibility", es: "Accesibilidad" },
+  "gettingStarted.sections.accessibility.body": {
+    en: "You will find recommendations to ensure that our products are usable by as many people as possible, regardless of their abilities.",
+    es: "Encontrarás recomendaciones para asegurar que nuestros productos sean usables por la mayor cantidad posible de personas, sin importar sus habilidades."
+  },
+  "gettingStarted.sections.ready.title": { en: "Ready for IA", es: "Listo para IA" },
+  "gettingStarted.sections.ready.body": {
+    en: "You find the guidelines for the AI to understand our design system so that it can translate our definitions effectively.",
+    es: "Encontrarás las guías para que la IA entienda nuestro sistema de diseño y pueda traducir nuestras definiciones de forma efectiva."
+  },
+  "gettingStarted.sections.resources.title": { en: "Resources", es: "Recursos" },
+  "gettingStarted.sections.resources.body": {
+    en: "You can find the links and repositories for our design system.",
+    es: "Puedes encontrar los enlaces y repositorios de nuestro sistema de diseño."
   }
 };
 
