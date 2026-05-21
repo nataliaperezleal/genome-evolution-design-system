@@ -1,5 +1,7 @@
 import manifestJson from "../../../manifest.json";
 import type { DocRecord, ManifestData } from "./types";
+import tokenVarsCss from "../../../packages/tokens/dist/variables.css?raw";
+import darkTheme from "../../../packages/tokens/dist/themes/dark.json";
 
 const foundationDocs = import.meta.glob("../../../foundations/*.md", {
   query: "?raw",
@@ -16,6 +18,16 @@ const componentDocs = import.meta.glob("../../../components/*.md", {
 const allDocs = { ...foundationDocs, ...componentDocs };
 
 export const manifest = manifestJson as ManifestData;
+
+function countUniqueCssVars(css: string) {
+  const matches = css.match(/--ge-[a-z0-9-]+(?=:)/gi) ?? [];
+  return new Set(matches.map((value) => value.toLowerCase())).size;
+}
+
+export const tokenStats = {
+  cssVarCount: countUniqueCssVars(tokenVarsCss),
+  darkOverrideCount: Object.keys(darkTheme as Record<string, unknown>).length
+};
 
 function normalizeTitle(markdown: string, fallback: string) {
   const heading = markdown.match(/^#\s+(.+)$/m)?.[1];
