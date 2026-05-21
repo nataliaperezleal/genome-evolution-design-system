@@ -946,6 +946,139 @@ input {
   align-content: start;
 }
 
+.getting-started-page {
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 72%, transparent);
+  border-radius: 26px;
+  background: var(--ge-color-role-background-canvas);
+  box-shadow: 0 16px 60px rgba(22, 40, 28, 0.06);
+}
+
+.getting-started-hero {
+  position: relative;
+  padding: 46px 64px 48px;
+  border-bottom: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 78%, transparent);
+  background: color-mix(in srgb, var(--ge-color-role-surface-subtlest) 42%, var(--ge-color-role-background-canvas));
+}
+
+.getting-started-hero::before,
+.getting-started-hero::after {
+  content: "";
+  position: absolute;
+  left: 64px;
+  width: 1px;
+  height: 34px;
+  background: color-mix(in srgb, var(--ge-color-role-border-default) 90%, transparent);
+}
+
+.getting-started-hero::before {
+  top: 0;
+}
+
+.getting-started-hero::after {
+  bottom: 0;
+}
+
+.getting-started-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--ge-color-role-text-secondary);
+  font-size: 21px;
+  font-weight: 700;
+}
+
+.getting-started-breadcrumb svg {
+  width: 28px;
+  height: 28px;
+}
+
+.getting-started-kicker {
+  margin: 40px 0 0;
+  color: var(--ge-color-role-text-primary);
+  font-style: italic;
+}
+
+.getting-started-hero h3 {
+  margin: 0;
+  max-width: 920px;
+  color: var(--ge-color-role-text-primary);
+  font-size: 72px;
+  line-height: 0.98;
+  letter-spacing: 0;
+}
+
+.getting-started-summary {
+  margin: 28px 0 0;
+  color: var(--ge-color-role-text-secondary);
+  font-size: 17px;
+}
+
+.getting-started-content {
+  padding: 72px 64px 86px;
+}
+
+.getting-started-intro h4,
+.getting-started-parts h4 {
+  margin: 0;
+  color: var(--ge-color-role-text-primary);
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.getting-started-intro p {
+  margin: 26px 0 0;
+  max-width: 1120px;
+  color: var(--ge-color-role-text-secondary);
+  font-size: 17px;
+  line-height: 1.55;
+}
+
+.getting-started-parts {
+  margin-top: 34px;
+}
+
+.getting-started-list {
+  display: grid;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.getting-started-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.62fr) minmax(0, 1fr);
+  min-height: 132px;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 72%, transparent);
+  border-radius: 14px;
+  background: var(--ge-color-role-background-canvas);
+}
+
+.getting-started-card__media {
+  background: color-mix(in srgb, var(--ge-color-role-surface-subtlest) 78%, var(--ge-color-role-background-canvas));
+}
+
+.getting-started-card__copy {
+  display: grid;
+  align-content: center;
+  padding: 28px 30px;
+}
+
+.getting-started-card h5 {
+  margin: 0;
+  color: var(--ge-color-role-text-primary);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.getting-started-card p {
+  margin: 16px 0 0;
+  max-width: 680px;
+  color: var(--ge-color-role-text-secondary);
+  font-size: 16px;
+  line-height: 1.42;
+}
+
 .hero-band {
   display: grid;
   grid-template-columns: minmax(0, 1.5fr) minmax(260px, 0.9fr);
@@ -2463,6 +2596,7 @@ input {
   .signal-grid,
   .foundation-band,
   .hero-band,
+  .getting-started-card,
   .overview-grid {
     grid-template-columns: 1fr;
   }
@@ -2526,6 +2660,25 @@ input {
   .foundation-table__row--layout {
     grid-template-columns: 1fr;
   }
+
+  .getting-started-hero,
+  .getting-started-content {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+
+  .getting-started-hero::before,
+  .getting-started-hero::after {
+    left: 32px;
+  }
+
+  .getting-started-hero h3 {
+    font-size: 56px;
+  }
+
+  .getting-started-card__media {
+    min-height: 96px;
+  }
 }
 
 @media (max-width: 720px) {
@@ -2540,6 +2693,47 @@ input {
 
   .hero-metrics {
     grid-template-columns: 1fr;
+  }
+
+  .getting-started-page {
+    border-radius: 18px;
+  }
+
+  .getting-started-hero {
+    padding: 34px 22px 36px;
+  }
+
+  .getting-started-hero::before,
+  .getting-started-hero::after {
+    left: 22px;
+    height: 24px;
+  }
+
+  .getting-started-breadcrumb {
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  .getting-started-kicker {
+    margin-top: 32px;
+  }
+
+  .getting-started-hero h3 {
+    font-size: 42px;
+  }
+
+  .getting-started-content {
+    padding: 44px 22px 54px;
+  }
+
+  .getting-started-intro h4,
+  .getting-started-parts h4 {
+    font-size: 24px;
+  }
+
+  .getting-started-card__copy {
+    padding: 24px;
   }
 }
 
