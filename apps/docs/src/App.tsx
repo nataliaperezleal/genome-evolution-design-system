@@ -900,16 +900,10 @@ const gettingStartedSections = [
 
 function GettingStartedPage() {
   return (
-    <article className="getting-started-page">
-      <header className="getting-started-hero">
-        <div className="getting-started-breadcrumb">
-          <BrandLogo />
-          <span>Documentation</span>
-          <span aria-hidden="true">/</span>
-          <span>Getting started</span>
-        </div>
-        <p className="getting-started-kicker">Genome</p>
-        <h3>Genome Evolution</h3>
+    <article className="foundation-page getting-started-page">
+      <header className="foundation-hero getting-started-hero">
+        <p className="eyebrow">Genome</p>
+        <h1>Genome Evolution</h1>
         <p className="getting-started-summary">
           Explore the design system, its advantages, and our core values and principles.
         </p>
