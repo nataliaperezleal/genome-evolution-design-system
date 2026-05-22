@@ -1197,17 +1197,90 @@ export const componentSpecs: Record<string, ComponentSpec> = {
     ]
   },
   Backdrop: {
-    subtitle: "Overlay layer that dims the UI beneath modals, drawers and popovers.",
+    subtitle: l(
+      "Theme-aware overlay layer that dims the UI beneath modals, drawers, and dialogs.",
+      "Capa overlay (según tema) que atenúa la UI detrás de modales, drawers y diálogos."
+    ),
     tabs: {
-      overview: [{ body: ["Backdrop is used to de-emphasize background content and block interaction behind overlays."] }],
-      "when-to-use": [{ bullets: ["Use behind modal dialogs and blocking overlays.", "Use when background interaction must be prevented."] }],
-      "when-not-to-use": [{ bullets: ["Do not use for inline popovers that don’t block the page.", "Avoid stacking multiple backdrops."] }],
-      anatomy: [{ bullets: ["Full-viewport overlay layer.", "Optional blur effect (depends on platform)."] }],
-      states: [{ bullets: ["Visible", "Hidden"] }],
-      rules: [{ bullets: ["Keep opacity low to preserve context.", "Ensure it sits below the overlay surface."] }],
-      tokens: [{ body: ["Uses overlay role tokens and z-index tokens for layering."] }],
-      accessibility: [{ bullets: ["Backdrop itself is non-interactive; overlay surface handles focus trapping and dismissal."] }],
-      implementation: [{ body: ["Render conditionally via `open`. Use `tone` to choose black/white overlay when required."] }]
+      overview: [
+        {
+          body: [
+            l(
+              "Backdrop is a semitransparent overlay used with a floating surface (modal, drawer, dialog) to separate context and focus attention.",
+              "Backdrop es una capa semitransparente que acompaña una superficie flotante (modal, drawer, diálogo) para separar contexto y enfocar la atención."
+            ),
+            l(
+              "It is non-interactive by default; optionally it can capture clicks to dismiss the overlay surface.",
+              "No es interactivo por defecto; opcionalmente puede capturar clicks para cerrar la superficie flotante."
+            )
+          ]
+        }
+      ],
+      "when-to-use": [
+        {
+          bullets: [
+            l("Behind modals and dialogs that must block background interaction.", "Detrás de modales y diálogos que deben bloquear el fondo."),
+            l("Behind drawers/side panels that overlay the main content.", "Detrás de drawers/paneles laterales que se superponen al contenido."),
+            l("To isolate focus for critical flows (confirmations, destructive actions).", "Para aislar foco en flujos críticos (confirmaciones, acciones destructivas).")
+          ]
+        }
+      ],
+      "when-not-to-use": [
+        {
+          bullets: [
+            l("As an interactive UI element (it should not be actionable).", "Como elemento interactivo (no debe ser accionable)."),
+            l("As a decorative tint for sections (use backgrounds instead).", "Como tinte decorativo de secciones (usa fondos)."),
+            l("Without a floating component above it.", "Sin un componente flotante encima."),
+            l("For tooltips or lightweight popovers that don’t block the page.", "Para tooltips o popovers livianos que no bloquean la página.")
+          ]
+        }
+      ],
+      anatomy: [
+        {
+          bullets: [
+            l("Overlay layer: full-viewport rectangle with color + opacity.", "Capa overlay: rectángulo full-viewport con color + opacidad."),
+            l("No text, icons, or controls; sits below the floating surface.", "Sin texto, íconos ni controles; se ubica debajo de la superficie flotante.")
+          ]
+        }
+      ],
+      states: [{ bullets: [l("Visible (open=true)", "Visible (open=true)"), l("Hidden (open=false)", "Oculto (open=false)")] }],
+      rules: [
+        {
+          bullets: [
+            l("Do not place content on the backdrop.", "No coloques contenido en el backdrop."),
+            l("Ensure it sits below the overlay surface in the z-index stack.", "Asegura que quede debajo de la superficie flotante en el z-index."),
+            l("Avoid invalid tone/theme combinations that make it invisible.", "Evita combinaciones inválidas de tono/tema que lo vuelvan invisible.")
+          ]
+        }
+      ],
+      tokens: [
+        {
+          body: [
+            l(
+              "Uses overlay role tokens for black/white tones and opacity tokens for consistent dimming.",
+              "Usa tokens de overlay (negro/blanco) y opacidad para un dimming consistente."
+            )
+          ]
+        }
+      ],
+      accessibility: [
+        {
+          bullets: [
+            l("Backdrop should not receive focus and should be hidden from screen readers.", "No debe recibir foco y debe ocultarse a lectores de pantalla."),
+            l("Dismissal and focus management belongs to the modal/drawer surface.", "El cierre y manejo de foco pertenece a la superficie del modal/drawer.")
+          ]
+        }
+      ],
+      implementation: [
+        {
+          body: [
+            l(
+              "Render conditionally via `open`. Use `tone` (black/white) according to the current theme to ensure visibility.",
+              "Renderiza condicionalmente con `open`. Usa `tone` (black/white) según el tema actual para asegurar visibilidad."
+            )
+          ]
+        }
+      ]
     },
     props: [
       { name: "open", type: "boolean", defaultValue: "true", description: "Whether the backdrop is rendered." },
@@ -1223,8 +1296,18 @@ export const componentSpecs: Record<string, ComponentSpec> = {
       }
     ],
     tokenCards: [
-      { label: "Overlay black", token: "color.role.overlay.black", value: "var(--ge-color-role-overlay-black)" },
-      { label: "Overlay white", token: "color.role.overlay.white", value: "var(--ge-color-role-overlay-white)" }
+      {
+        label: "Overlay black",
+        token: "color.role.overlay.black",
+        value: "var(--ge-color-role-overlay-black)",
+        swatch: "var(--ge-color-role-overlay-black)"
+      },
+      {
+        label: "Overlay white",
+        token: "color.role.overlay.white",
+        value: "var(--ge-color-role-overlay-white)",
+        swatch: "var(--ge-color-role-overlay-white)"
+      }
     ]
   },
   Breadcrumb: {

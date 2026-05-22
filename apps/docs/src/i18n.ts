@@ -6,7 +6,7 @@ export const dict: Dict = {
   "nav.overview": { en: "Overview", es: "Inicio" },
   "nav.gettingStarted": { en: "Getting Started", es: "Primeros pasos" },
   "nav.foundations": { en: "Foundations", es: "Foundations" },
-  "nav.components": { en: "Components", es: "Components" },
+  "nav.components": { en: "Components", es: "Componentes" },
 
   "search.placeholder": { en: "Search components, tokens or foundations", es: "Busca componentes, tokens o foundations" },
 

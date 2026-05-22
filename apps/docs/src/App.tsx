@@ -39,10 +39,10 @@ import {
   TextArea
 } from "@genome-evolution/react";
 
-import { componentDocsBySlug, foundationDocsBySlug, manifest, tokenStats } from "./data";
+import { componentDocsBySlug, componentDocsBySlugEs, foundationDocsBySlug, foundationDocsBySlugEs, manifest, tokenStats } from "./data";
 import { componentSpecs, componentTabLabels, tr, type ComponentTabId } from "./component-specs";
 import { renderMarkdown } from "./markdown";
-import type { NavItem } from "./types";
+import type { DocRecord, NavItem } from "./types";
 import { BorderFoundation } from "./foundations/BorderFoundation";
 import { ColorsFoundation } from "./foundations/ColorsFoundation";
 import { PaletteFoundation } from "./foundations/PaletteFoundation";
@@ -127,17 +127,23 @@ const navItems: NavItem[] = [
   ...componentItems
 ];
 
-function getItemMeta(id: string) {
+function getItemMeta(id: string, language: Language) {
   if (id === "overview") {
     return { kind: "overview" as const };
   }
   if (id === "getting-started") {
     return { kind: "getting-started" as const };
   }
-  if (foundationDocsBySlug[id]) {
-    return { kind: "foundation" as const, doc: foundationDocsBySlug[id] };
+  const foundationDocs = language === "es" ? foundationDocsBySlugEs : foundationDocsBySlug;
+  const componentDocs = language === "es" ? componentDocsBySlugEs : componentDocsBySlug;
+
+  if (foundationDocs[id]) {
+    return { kind: "foundation" as const, doc: foundationDocs[id] };
   }
-  return { kind: "component" as const, doc: componentDocsBySlug[id] };
+  if (componentDocs[id]) {
+    return { kind: "component" as const, doc: componentDocs[id] };
+  }
+  return { kind: "overview" as const };
 }
 
 const homeFeaturedComponentIds = [
@@ -148,6 +154,423 @@ const homeFeaturedComponentIds = [
   "components-table",
   "components-dropdown"
 ];
+
+function normalizeHeading(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+function headingToTabId(heading: string): ComponentTabId | null {
+  const normalized = normalizeHeading(heading);
+
+  if (normalized === "overview" || normalized === "resumen" || normalized === "vision general") return "overview";
+  if (normalized === "purpose" || normalized === "proposito" || normalized === "objetivo") return "overview";
+
+  if (normalized.includes("when to use") || normalized.includes("cuando usar")) return "when-to-use";
+  if (
+    normalized.includes("when not to use") ||
+    normalized.includes("when to not use") ||
+    normalized.includes("cuando no usar")
+  )
+    return "when-not-to-use";
+
+  if (normalized === "anatomy" || normalized === "anatomia") return "anatomy";
+  if (normalized === "states" || normalized === "estados") return "states";
+  if (normalized === "rules" || normalized === "reglas") return "rules";
+  if (normalized.includes("do") && normalized.includes("dont")) return "do-dont";
+  if (normalized === "accessibility" || normalized === "accesibilidad") return "accessibility";
+  if (normalized === "implementation" || normalized === "implementacion") return "implementation";
+  if (normalized === "tokens" || normalized === "token") return "tokens";
+
+  return null;
+}
+
+function stripFrontmatter(markdown: string) {
+  return markdown.replace(/^---[\s\S]*?---\n/, "");
+}
+
+function splitMarkdownByH2(markdown: string) {
+  const body = stripFrontmatter(markdown);
+  const lines = body.split("\n");
+  const intro: string[] = [];
+  const sections: Array<{ heading: string; content: string[] }> = [];
+  let current: { heading: string; content: string[] } | null = null;
+
+  for (const line of lines) {
+    const match = line.match(/^##\s+(.+)\s*$/);
+    if (match) {
+      if (current) sections.push(current);
+      current = { heading: match[1], content: [] };
+      continue;
+    }
+    if (!current) intro.push(line);
+    else current.content.push(line);
+  }
+  if (current) sections.push(current);
+
+  return { intro: intro.join("\n").trim(), sections };
+}
+
+function buildComponentMarkdownTabs(markdown: string) {
+  const { intro, sections } = splitMarkdownByH2(markdown);
+
+  const mdByTab: Partial<Record<ComponentTabId, string>> = {};
+  const leftovers: string[] = [];
+
+  for (const section of sections) {
+    const tabId = headingToTabId(section.heading);
+    const sectionMarkdown = `## ${section.heading}\n${section.content.join("\n")}`.trim();
+    if (!tabId) {
+      leftovers.push(sectionMarkdown);
+      continue;
+    }
+    mdByTab[tabId] = [mdByTab[tabId], sectionMarkdown].filter(Boolean).join("\n\n");
+  }
+
+  const overviewParts = [intro, mdByTab.overview, ...leftovers].filter((part) => Boolean(part?.trim()));
+  if (overviewParts.length) mdByTab.overview = overviewParts.join("\n\n");
+
+  return mdByTab;
+}
+
+function splitMarkdownByH3(markdown: string) {
+  const lines = markdown.split("\n");
+  const cards: Array<{ title?: string; body: string[] }> = [];
+  let current: { title?: string; body: string[] } | null = null;
+
+  for (const line of lines) {
+    const match = line.match(/^###\s+(.+)\s*$/);
+    if (match) {
+      if (current) cards.push(current);
+      current = { title: match[1], body: [] };
+      continue;
+    }
+    if (!current) current = { title: undefined, body: [] };
+    current.body.push(line);
+  }
+  if (current) cards.push(current);
+
+  return cards
+    .map((card) => ({ title: card.title, body: card.body.join("\n").trim() }))
+    .filter((card) => Boolean(card.title) || Boolean(card.body));
+}
+
+function splitMarkdownByStrongLabels(markdown: string) {
+  const lines = markdown.split("\n");
+  const cards: Array<{ title?: string; body: string[] }> = [];
+  let current: { title?: string; body: string[] } | null = null;
+
+  const flush = () => {
+    if (!current) return;
+    const body = current.body.join("\n").trim();
+    if (current.title || body) cards.push({ title: current.title, body: body ? body.split("\n") : [] });
+    current = null;
+  };
+
+  for (const rawLine of lines) {
+    const line = rawLine.trimEnd();
+    // Supports both `**Label:**` and `**Label**:` styles.
+    const match =
+      line.match(/^\*\*([^*]+?):\*\*\s*$/) ??
+      line.match(/^\*\*([^*]+)\*\*:\s*$/);
+    if (match) {
+      flush();
+      current = { title: match[1], body: [] };
+      continue;
+    }
+    if (!current) current = { title: undefined, body: [] };
+    current.body.push(rawLine);
+  }
+  flush();
+
+  return cards
+    .map((card) => ({ title: card.title, body: card.body.join("\n").trim() }))
+    .filter((card) => Boolean(card.title) || Boolean(card.body));
+}
+
+function splitMarkdownByH2Cards(markdown: string) {
+  const lines = markdown.split("\n");
+  const cards: Array<{ title?: string; body: string[] }> = [];
+  let current: { title?: string; body: string[] } | null = null;
+
+  const flush = () => {
+    if (!current) return;
+    const body = current.body.join("\n").trim();
+    if (current.title || body) cards.push({ title: current.title, body: body ? body.split("\n") : [] });
+    current = null;
+  };
+
+  for (const rawLine of lines) {
+    const match = rawLine.match(/^##\s+(.+)\s*$/);
+    if (match) {
+      flush();
+      current = { title: match[1], body: [] };
+      continue;
+    }
+    if (!current) current = { title: undefined, body: [] };
+    current.body.push(rawLine);
+  }
+  flush();
+
+  return cards
+    .map((card) => ({ title: card.title, body: card.body.join("\n").trim() }))
+    .filter((card) => Boolean(card.title) || Boolean(card.body));
+}
+
+function markdownToDocCards(markdown: string, language: Language) {
+  const h3Cards = splitMarkdownByH3(markdown);
+  const expanded: Array<{ title?: string; body: string }> = [];
+
+  for (const card of h3Cards) {
+    if (!card.title) {
+      expanded.push(card);
+      continue;
+    }
+
+    const strongCards = splitMarkdownByStrongLabels(card.body);
+    if (strongCards.length <= 1) {
+      expanded.push(card);
+      continue;
+    }
+
+    for (const strongCard of strongCards) {
+      expanded.push({
+        title: strongCard.title ? `${card.title} · ${strongCard.title}` : card.title,
+        body: strongCard.body
+      });
+    }
+  }
+
+  if (!expanded.length) return [];
+
+  // If there are no H3 headings (single untitled card), try splitting by H2 sections first,
+  // then by strong-label blocks to avoid long "walls of text".
+  if (expanded.length === 1 && !expanded[0].title) {
+    const h2Cards = splitMarkdownByH2Cards(expanded[0].body);
+    if (h2Cards.length > 1) {
+      const normalized = h2Cards.map((card) => {
+        const strongCards = splitMarkdownByStrongLabels(card.body);
+        if (strongCards.length > 1) {
+          return strongCards
+            .filter((entry) => Boolean(entry.title) || Boolean(entry.body?.trim()))
+            .map((entry) => ({
+              title: entry.title ? `${card.title} · ${entry.title}` : card.title,
+              body: entry.body
+            }));
+        }
+        return [{ title: card.title, body: card.body }];
+      });
+      return normalized.flat().filter((card) => Boolean(card.title) || Boolean(card.body?.trim()));
+    }
+
+    const strongCards = splitMarkdownByStrongLabels(expanded[0].body);
+    if (strongCards.length > 1) {
+      const firstUntitled = strongCards[0] && !strongCards[0].title ? strongCards[0] : null;
+      const rest = firstUntitled ? strongCards.slice(1) : strongCards;
+      const cards = rest.map((entry) => ({ title: entry.title, body: entry.body }));
+      if (firstUntitled && firstUntitled.body.trim()) {
+        cards.unshift({
+          title: language === "es" ? "Resumen" : "Overview",
+          body: firstUntitled.body
+        });
+      }
+      return cards;
+    }
+  }
+
+  // Ensure any leading untitled content becomes a real card so everything is grouped.
+  if (expanded[0] && !expanded[0].title && expanded[0].body.trim()) {
+    expanded[0] = { ...expanded[0], title: language === "es" ? "Resumen" : "Overview" };
+  }
+
+  return expanded;
+}
+
+function slugify(value: string) {
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function mapComponentTypeToCategory(type: string | undefined, language: Language) {
+  const normalized = (type ?? "").toLowerCase();
+  const cat = (en: string, es: string) => ({ id: slugify(en), label: language === "es" ? es : en });
+
+  // Matches the reference categories (Material/Polaris-like).
+  if (normalized.includes("content") || normalized.includes("display") || normalized.includes("data display"))
+    return cat("Content", "Contenido");
+  if (normalized.includes("layout") || normalized.includes("container")) return cat("Layout and organization", "Layout y organización");
+  if (normalized.includes("action")) return cat("Menus and actions", "Menús y acciones");
+  if (normalized.includes("navigation") || normalized.includes("search")) return cat("Navigation and search", "Navegación y búsqueda");
+  if (normalized.includes("presentation") || normalized.includes("identity")) return cat("Presentation", "Presentación");
+  if (normalized.includes("form") || normalized.includes("input") || normalized.includes("selection"))
+    return cat("Selection and input", "Selección e input");
+  if (normalized.includes("status") || normalized.includes("feedback") || normalized.includes("indicator"))
+    return cat("Status", "Estado");
+  if (normalized.includes("overlay") || normalized.includes("interaction")) return cat("System experiences", "Experiencias del sistema");
+
+  return cat("Other", "Otros");
+}
+
+function CategoryIcon({ id }: { id: string }) {
+  // Minimal icon set to make the grid feel like a system reference.
+  const common = { width: 44, height: 44, viewBox: "0 0 24 24", fill: "none" as const };
+  if (id.includes("content")) {
+    return (
+      <svg {...common}>
+        <path d="M7 7h10M7 12h10M7 17h7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path
+          d="M6 3.8h12A2.2 2.2 0 0 1 20.2 6v12A2.2 2.2 0 0 1 18 20.2H6A2.2 2.2 0 0 1 3.8 18V6A2.2 2.2 0 0 1 6 3.8Z"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
+      </svg>
+    );
+  }
+  if (id.includes("layout")) {
+    return (
+      <svg {...common}>
+        <path
+          d="M5 6.5h14M9 6.5V18M5 18h14"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+        <path
+          d="M6.2 4.2h11.6A2 2 0 0 1 19.8 6.2v11.6a2 2 0 0 1-2 2H6.2a2 2 0 0 1-2-2V6.2a2 2 0 0 1 2-2Z"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
+      </svg>
+    );
+  }
+  if (id.includes("menus") || id.includes("actions")) {
+    return (
+      <svg {...common}>
+        <path d="M7 8h10M7 12h6M7 16h10" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path
+          d="M5.8 4.2h12.4A1.8 1.8 0 0 1 20 6v12a1.8 1.8 0 0 1-1.8 1.8H5.8A1.8 1.8 0 0 1 4 18V6a1.8 1.8 0 0 1 1.8-1.8Z"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
+      </svg>
+    );
+  }
+  if (id.includes("navigation")) {
+    return (
+      <svg {...common}>
+        <path
+          d="M10.3 10.3a3.6 3.6 0 1 0 0 7.2 3.6 3.6 0 0 0 0-7.2Z"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        />
+        <path d="M16.7 17.2 20 20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path
+          d="M4.2 6.2h9.6"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+      </svg>
+    );
+  }
+  if (id.includes("presentation")) {
+    return (
+      <svg {...common}>
+        <path d="M7 8.2h10v7.2H7V8.2Z" stroke="currentColor" strokeWidth="1.6" />
+        <path d="M8.5 17.5h7" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M12 15.4V20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (id.includes("selection")) {
+    return (
+      <svg {...common}>
+        <path
+          d="M6.2 6.2h11.6a2 2 0 0 1 2 2v7.6a2 2 0 0 1-2 2H6.2a2 2 0 0 1-2-2V8.2a2 2 0 0 1 2-2Z"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
+        <path d="M7.4 12h6.2" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+        <path d="M16.2 10.8v2.4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (id.includes("status")) {
+    return (
+      <svg {...common}>
+        <path
+          d="M12 4.4a7.6 7.6 0 1 0 0 15.2 7.6 7.6 0 0 0 0-15.2Z"
+          stroke="currentColor"
+          strokeWidth="1.4"
+        />
+        <path d="M8.6 12.1l2.2 2.2 4.8-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...common}>
+      <path
+        d="M12 4.3a7.7 7.7 0 1 0 0 15.4 7.7 7.7 0 0 0 0-15.4Z"
+        stroke="currentColor"
+        strokeWidth="1.4"
+      />
+      <path d="M12 7.8v4.6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M12 16.6h.01" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function NavGroupIcon({ group }: { group: NavItem["group"] }) {
+  const common = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none" as const };
+
+  if (group === "overview") {
+    return (
+      <svg {...common}>
+        <path
+          d="M4 11.2 12 4l8 7.2V20a1.8 1.8 0 0 1-1.8 1.8H5.8A1.8 1.8 0 0 1 4 20v-8.8Z"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinejoin="round"
+        />
+        <path d="M9.2 21.8v-7h5.6v7" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (group === "foundations") {
+    return (
+      <svg {...common}>
+        <path
+          d="M12 3.8 20 8.4v7.2l-8 4.6-8-4.6V8.4l8-4.6Z"
+          stroke="currentColor"
+          strokeWidth="1.6"
+          strokeLinejoin="round"
+        />
+        <path d="M12 3.8v16.4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+        <path d="M4 8.4l8 4.6 8-4.6" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common}>
+      <path
+        d="M5.2 6.2h6.6v6.6H5.2V6.2Zm7 0h6.6v6.6h-6.6V6.2ZM5.2 13.2h6.6v6.6H5.2v-6.6Zm7 0h6.6v6.6h-6.6v-6.6Z"
+        stroke="currentColor"
+        strokeWidth="1.6"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 function ComponentPreview({ componentName }: { componentName: string }) {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
@@ -1139,8 +1562,17 @@ function ButtonStatesPreview() {
   );
 }
 
-function ComponentDocumentation({ componentName, language }: { componentName: string; language: Language }) {
+function ComponentDocumentation({
+  componentName,
+  language,
+  doc
+}: {
+  componentName: string;
+  language: Language;
+  doc: DocRecord;
+}) {
   const spec = componentSpecs[componentName];
+  const mdTabs = useMemo(() => buildComponentMarkdownTabs(doc.body), [doc.body]);
   const tabOrder: ComponentTabId[] = [
     "overview",
     "when-to-use",
@@ -1153,18 +1585,28 @@ function ComponentDocumentation({ componentName, language }: { componentName: st
     "accessibility",
     "implementation"
   ];
-  const availableTabs = useMemo(
-    () => tabOrder.filter((tab) => (spec.tabs[tab] ?? []).length > 0),
-    [componentName]
-  );
+
+  const availableTabs = useMemo(() => {
+    return tabOrder.filter((tab) => {
+      if (tab === "tokens") return Boolean(spec?.tokenCards?.length);
+      if (tab === "implementation") return Boolean(spec?.props?.length || spec?.code?.length);
+      const hasSpec = Boolean((spec?.tabs?.[tab] ?? []).length);
+      const hasMarkdown = Boolean(mdTabs[tab]?.trim());
+      return hasMarkdown || hasSpec;
+    });
+  }, [mdTabs, spec]);
+
   const defaultTab = availableTabs[0] ?? "overview";
   const [activeTab, setActiveTab] = useState<ComponentTabId>(defaultTab);
 
   useEffect(() => {
     setActiveTab(defaultTab);
-  }, [componentName, defaultTab]);
+  }, [defaultTab, componentName]);
 
-  const sections = spec.tabs[activeTab] ?? [];
+  const sections = spec?.tabs?.[activeTab] ?? [];
+  const mdCards = useMemo(() => markdownToDocCards(mdTabs[activeTab] ?? "", language), [mdTabs, activeTab, language]);
+  const isBackdropAccessibility = componentName === "Backdrop" && activeTab === "accessibility";
+  const isBackdropOverview = componentName === "Backdrop" && activeTab === "overview";
 
   return (
     <div className="component-docs">
@@ -1172,7 +1614,8 @@ function ComponentDocumentation({ componentName, language }: { componentName: st
         <div>
           <p className="eyebrow">{tr("Component guidance", language)}</p>
           <h3>{componentName}</h3>
-          <p className="component-subtitle">{tr(spec.subtitle, language)}</p>
+          {spec?.subtitle ? <p className="component-subtitle">{tr(spec.subtitle, language)}</p> : null}
+          <p className="path-chip">{doc.path}</p>
         </div>
         <div className="component-hero-preview">
           <ComponentPreview componentName={componentName} />
@@ -1196,7 +1639,8 @@ function ComponentDocumentation({ componentName, language }: { componentName: st
       <div className="component-layout">
         <section className="component-content">
           {componentName === "Button" && activeTab === "states" ? <ButtonStatesPreview /> : null}
-          {activeTab === "tokens" ? (
+
+          {activeTab === "tokens" && spec?.tokenCards?.length ? (
             <div className="token-grid">
               {spec.tokenCards.map((card) => (
                 <article key={card.token} className="token-card">
@@ -1209,80 +1653,218 @@ function ComponentDocumentation({ componentName, language }: { componentName: st
                 </article>
               ))}
             </div>
-          ) : activeTab === "implementation" ? (
+          ) : activeTab === "implementation" && (spec?.props?.length || spec?.code?.length) ? (
             <div className="implementation-grid">
-              <section className="props-table-wrap">
-                <div className="section-head">
-                  <p className="eyebrow">{tr("Props", language)}</p>
-                  <h4>{tr("Implementation contract", language)}</h4>
-                </div>
-                <table className="props-table">
-                  <thead>
-                    <tr>
-                      <th>Prop</th>
-                      <th>Type</th>
-                      <th>Default</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {spec.props.map((prop) => (
-                      <tr key={prop.name}>
-                        <td>
-                          <code>{prop.name}</code>
-                        </td>
-                        <td>
-                          <code>{prop.type}</code>
-                        </td>
-                        <td>
-                          <code>{prop.defaultValue}</code>
-                        </td>
-                        <td>{tr(prop.description, language)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </section>
-
-              <section className="snippet-list">
-                <div className="section-head">
-                  <p className="eyebrow">{tr("Code", language)}</p>
-                  <h4>{tr("Snippets", language)}</h4>
-                </div>
-                {spec.code.map((snippet) => (
-                  <article key={typeof snippet.title === "string" ? snippet.title : snippet.title.en} className="snippet-card">
-                    <h5>{tr(snippet.title, language)}</h5>
-                    <pre>
-                      <code>{snippet.code}</code>
-                    </pre>
-                  </article>
-                ))}
-              </section>
-            </div>
-          ) : (
-            <div className="section-stack">
-              {sections.map((section, index) => (
-                <article key={`${activeTab}-${index}`} className="doc-section-card">
-                  <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
-                    {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
-                    <div>
-                      {section.title ? <h4>{tr(section.title, language)}</h4> : null}
-                      {section.body?.map((paragraph) => (
-                        <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
-                      ))}
-                      {section.bullets ? (
-                        <ul>
-                          {section.bullets.map((bullet) => (
-                            <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
-                          ))}
-                        </ul>
-                      ) : null}
-                    </div>
+              {spec?.props?.length ? (
+                <section className="props-table-wrap">
+                  <div className="section-head">
+                    <p className="eyebrow">{tr("Props", language)}</p>
+                    <h4>{tr("Implementation contract", language)}</h4>
                   </div>
-                </article>
-              ))}
+                  <table className="props-table">
+                    <thead>
+                      <tr>
+                        <th>Prop</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {spec.props.map((prop) => (
+                        <tr key={prop.name}>
+                          <td>
+                            <code>{prop.name}</code>
+                          </td>
+                          <td>
+                            <code>{prop.type}</code>
+                          </td>
+                          <td>
+                            <code>{prop.defaultValue}</code>
+                          </td>
+                          <td>{tr(prop.description, language)}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </section>
+              ) : null}
+
+              {spec?.code?.length ? (
+                <section className="snippet-list">
+                  <div className="section-head">
+                    <p className="eyebrow">{tr("Code", language)}</p>
+                    <h4>{tr("Snippets", language)}</h4>
+                  </div>
+                  {spec.code.map((snippet) => (
+                    <article
+                      key={typeof snippet.title === "string" ? snippet.title : snippet.title.en}
+                      className="snippet-card"
+                    >
+                      <h5>{tr(snippet.title, language)}</h5>
+                      <pre>
+                        <code>{snippet.code}</code>
+                      </pre>
+                    </article>
+                  ))}
+                </section>
+	              ) : null}
+	            </div>
+	          ) : isBackdropAccessibility ? (
+	            <div className="accessibility-split">
+	              <article className="doc-section-card accessibility-split__media">
+	                <h4>{language === "es" ? "Accesibilidad (ejemplo)" : "Accessibility (example)"}</h4>
+	                <figure className="doc-image">
+	                  <img
+	                    src="/images/backdrop/accessibility.png"
+	                    alt={language === "es" ? "Ejemplo de accesibilidad para Backdrop" : "Backdrop accessibility example"}
+	                    loading="lazy"
+	                  />
+	                  <figcaption>
+	                    {language === "es"
+	                      ? "Referencia visual de cómo debe comportarse el Backdrop en contextos accesibles."
+	                      : "Visual reference for Backdrop behavior in accessible contexts."}
+	                  </figcaption>
+	                </figure>
+	              </article>
+
+	              <div className="accessibility-split__content">
+	                {mdCards.length ? (
+	                  <div className="section-stack">
+	                    {mdCards.map((card, index) => (
+	                      <article key={`${activeTab}-md-${index}`} className="doc-section-card">
+	                        {card.title ? <h4>{card.title}</h4> : null}
+	                        <div className="markdown-body">{renderMarkdown(card.body)}</div>
+	                      </article>
+	                    ))}
+	                  </div>
+	                ) : sections.length ? (
+	                  <div className="section-stack">
+	                    {sections.map((section, index) => (
+	                      <article key={`${activeTab}-${index}`} className="doc-section-card">
+	                        <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
+	                          {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
+	                          <div>
+	                            {section.title ? <h4>{tr(section.title, language)}</h4> : null}
+	                            {section.body?.map((paragraph) => (
+	                              <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
+	                            ))}
+	                            {section.bullets ? (
+	                              <ul>
+	                                {section.bullets.map((bullet) => (
+	                                  <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
+	                                ))}
+	                              </ul>
+	                            ) : null}
+	                          </div>
+	                        </div>
+	                      </article>
+	                    ))}
+	                  </div>
+	                ) : (
+	                  <div className="markdown-body">{renderMarkdown(mdTabs[activeTab] ?? doc.body)}</div>
+	                )}
+	              </div>
+	            </div>
+          ) : isBackdropOverview ? (
+            <div className="section-stack">
+              {(() => {
+                const exampleCard = (
+                  <article className="doc-section-card" id="backdrop-example-image">
+                    <h4>{language === "es" ? "Ejemplo (imagen)" : "Example (image)"}</h4>
+                    <figure className="doc-image">
+                      <img
+                        src="/images/backdrop/example.png"
+                        alt={language === "es" ? "Ejemplo de Backdrop detrás de un modal" : "Backdrop usage example behind a modal"}
+                        loading="lazy"
+                      />
+                      <figcaption>
+                        {language === "es"
+                          ? "Backdrop usado para bloquear el fondo detrás de un modal."
+                          : "Backdrop used to block the UI behind a modal."}
+                      </figcaption>
+                    </figure>
+                  </article>
+                );
+
+                const renderedMdCards = mdCards.map((card, index) => (
+                  <article key={`${activeTab}-md-${index}`} className="doc-section-card">
+                    {card.title ? <h4>{card.title}</h4> : null}
+                    <div className="markdown-body">{renderMarkdown(card.body)}</div>
+                  </article>
+                ));
+
+                if (renderedMdCards.length) return [...renderedMdCards, exampleCard];
+
+                if (sections.length) {
+                  return [
+                    ...sections.map((section, index) => (
+                      <article key={`${activeTab}-${index}`} className="doc-section-card">
+                        <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
+                          {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
+                          <div>
+                            {section.title ? <h4>{tr(section.title, language)}</h4> : null}
+                            {section.body?.map((paragraph) => (
+                              <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
+                            ))}
+                            {section.bullets ? (
+                              <ul>
+                                {section.bullets.map((bullet) => (
+                                  <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
+                                ))}
+                              </ul>
+                            ) : null}
+                          </div>
+                        </div>
+                      </article>
+                    )),
+                    exampleCard
+                  ];
+                }
+
+                return [
+                  <div key="overview-fallback" className="markdown-body">
+                    {renderMarkdown(mdTabs[activeTab] ?? doc.body)}
+                  </div>,
+                  exampleCard
+                ];
+              })()}
             </div>
-          )}
+          ) : mdCards.length ? (
+	            <div className="section-stack">
+	              {mdCards.map((card, index) => (
+	                <article key={`${activeTab}-md-${index}`} className="doc-section-card">
+	                  {card.title ? <h4>{card.title}</h4> : null}
+	                  <div className="markdown-body">{renderMarkdown(card.body)}</div>
+	                </article>
+	              ))}
+	            </div>
+	          ) : sections.length ? (
+	            <div className="section-stack">
+	              {sections.map((section, index) => (
+	                <article key={`${activeTab}-${index}`} className="doc-section-card">
+	                  <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
+	                    {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
+	                    <div>
+	                      {section.title ? <h4>{tr(section.title, language)}</h4> : null}
+	                      {section.body?.map((paragraph) => (
+	                        <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
+	                      ))}
+	                      {section.bullets ? (
+	                        <ul>
+	                          {section.bullets.map((bullet) => (
+	                            <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
+	                          ))}
+	                        </ul>
+	                      ) : null}
+	                    </div>
+	                  </div>
+	                </article>
+	              ))}
+	            </div>
+	          ) : (
+	            <div className="markdown-body">{renderMarkdown(mdTabs[activeTab] ?? doc.body)}</div>
+	          )}
         </section>
       </div>
     </div>
@@ -1294,6 +1876,32 @@ export function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [language, setLanguage] = useState<Language>(() => detectInitialLanguage());
   const [activeId, setActiveId] = useState(() => window.location.hash.replace(/^#/, "") || "overview");
+  const [navExpanded, setNavExpanded] = useState<Record<NavItem["group"], boolean>>(() => {
+    if (typeof window === "undefined") return { overview: true, foundations: false, components: false };
+    try {
+      const raw = window.localStorage.getItem("ge-docs-nav-expanded");
+      if (!raw) return { overview: true, foundations: false, components: false };
+      const parsed = JSON.parse(raw) as Partial<Record<NavItem["group"], boolean>>;
+      return {
+        overview: parsed.overview ?? true,
+        foundations: parsed.foundations ?? false,
+        components: parsed.components ?? false
+      };
+    } catch {
+      return { overview: true, foundations: false, components: false };
+    }
+  });
+  const [componentCatsExpanded, setComponentCatsExpanded] = useState<Record<string, boolean>>(() => {
+    if (typeof window === "undefined") return {};
+    try {
+      const raw = window.localStorage.getItem("ge-docs-components-cats");
+      if (!raw) return {};
+      const parsed = JSON.parse(raw) as Record<string, boolean>;
+      return parsed && typeof parsed === "object" ? parsed : {};
+    } catch {
+      return {};
+    }
+  });
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -1303,6 +1911,14 @@ export function App() {
     document.documentElement.setAttribute("lang", language);
     window.localStorage.setItem("ge-docs-lang", language);
   }, [language]);
+
+  useEffect(() => {
+    window.localStorage.setItem("ge-docs-nav-expanded", JSON.stringify(navExpanded));
+  }, [navExpanded]);
+
+  useEffect(() => {
+    window.localStorage.setItem("ge-docs-components-cats", JSON.stringify(componentCatsExpanded));
+  }, [componentCatsExpanded]);
 
   useEffect(() => {
     const onHashChange = () => setActiveId(window.location.hash.replace(/^#/, "") || "overview");
@@ -1324,7 +1940,7 @@ export function App() {
     });
   }, [language, query]);
 
-  const active = getItemMeta(activeId);
+  const active = getItemMeta(activeId, language);
   const activeLabel = navItems.find((item) => item.id === activeId)?.label ?? "Overview";
   const activeLabelDisplay =
     activeId === "overview"
@@ -1333,6 +1949,51 @@ export function App() {
         ? t("nav.gettingStarted", language)
         : activeLabel;
   const componentManifest = manifest.components.find((entry) => entry.name === activeLabel);
+
+  const activeGroup: NavItem["group"] = navItems.find((item) => item.id === activeId)?.group ?? "overview";
+  const queryActive = query.trim().length > 0;
+  const componentCategories = useMemo(() => {
+    const filterValue = query.toLowerCase().trim();
+    const grouped = new Map<
+      string,
+      { id: string; label: string; items: Array<{ id: string; label: string; status?: string }> }
+    >();
+
+    for (const entry of manifest.components) {
+      const componentId = entry.file.replace(/\.md$/, "").replace(/\//g, "-");
+      const visible = !filterValue || entry.name.toLowerCase().includes(filterValue);
+      if (!visible) continue;
+
+      const category = mapComponentTypeToCategory(entry.type, language);
+      if (!grouped.has(category.id)) grouped.set(category.id, { ...category, items: [] });
+      grouped.get(category.id)!.items.push({ id: componentId, label: entry.name, status: entry.status });
+    }
+
+    return Array.from(grouped.values())
+      .map((cat) => ({ ...cat, items: cat.items.sort((a, b) => a.label.localeCompare(b.label)) }))
+      .sort((a, b) => a.label.localeCompare(b.label, undefined, { sensitivity: "base" }));
+  }, [language, query]);
+
+  const activeComponentCategoryId = useMemo(() => {
+    const entry = manifest.components.find((item) => item.file.replace(/\.md$/, "").replace(/\//g, "-") === activeId);
+    if (!entry) return null;
+    return mapComponentTypeToCategory(entry.type, language).id;
+  }, [activeId, language]);
+
+  useEffect(() => {
+    setNavExpanded((prev) => {
+      if (prev[activeGroup]) return prev;
+      return { ...prev, [activeGroup]: true };
+    });
+  }, [activeGroup]);
+
+  useEffect(() => {
+    if (!activeComponentCategoryId) return;
+    setComponentCatsExpanded((prev) => {
+      if (prev[activeComponentCategoryId]) return prev;
+      return { ...prev, [activeComponentCategoryId]: true };
+    });
+  }, [activeComponentCategoryId]);
 
   const isBorderFoundation = activeId === "foundations-border";
   const isColorsFoundation = activeId === "foundations-color";
@@ -1357,7 +2018,14 @@ export function App() {
   return (
     <div className="docs-shell">
       <aside className="docs-sidebar">
-        <div className="brand-lockup">
+        <button
+          type="button"
+          className="brand-lockup brand-lockup--link"
+          onClick={() => {
+            window.location.hash = "#overview";
+            setActiveId("overview");
+          }}
+        >
           <div className="brand-mark">
             <BrandLogo />
           </div>
@@ -1365,7 +2033,7 @@ export function App() {
             <p className="eyebrow">Design system</p>
             <h1>Genome Evolution</h1>
           </div>
-        </div>
+        </button>
 
         <label className="search-box">
           <SearchIcon />
@@ -1380,32 +2048,101 @@ export function App() {
           {["overview", "foundations", "components"].map((group) => {
             const items = filtered.filter((item) => item.group === group);
             if (!items.length) return null;
+
+            const groupKey = group as NavItem["group"];
+            const isExpanded = queryActive ? true : navExpanded[groupKey];
+            const sectionId = `nav-group-${groupKey}`;
+
             return (
               <section key={group}>
-                <p className="nav-label">
-                  {group === "overview"
-                    ? t("nav.overview", language)
-                    : group === "foundations"
-                      ? t("nav.foundations", language)
-                      : t("nav.components", language)}
-                </p>
-                <ul>
-                  {items.map((item) => (
-                    <li key={item.id}>
-                      <a
-                        className={item.id === activeId ? "is-active" : undefined}
-                        href={`#${item.id}`}
-                        onClick={() => setActiveId(item.id)}
-                      >
-                        {item.id === "overview"
-                          ? t("nav.overview", language)
-                          : item.id === "getting-started"
-                            ? t("nav.gettingStarted", language)
-                            : item.label}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
+                <button
+                  type="button"
+                  className="nav-group-toggle"
+                  aria-expanded={isExpanded}
+                  aria-controls={sectionId}
+                  onClick={() => {
+                    setNavExpanded((prev) => ({ ...prev, [groupKey]: !prev[groupKey] }));
+                  }}
+                >
+                  <span className="nav-tree-chevron" aria-hidden="true" />
+                  <span className="nav-group-icon" aria-hidden="true">
+                    <NavGroupIcon group={groupKey} />
+                  </span>
+                  <span className="nav-label">
+                    {group === "overview"
+                      ? t("nav.overview", language)
+                      : group === "foundations"
+                        ? t("nav.foundations", language)
+                        : t("nav.components", language)}
+                  </span>
+                </button>
+
+                {isExpanded ? (
+                  groupKey === "components" ? (
+                    <div id={sectionId} className="nav-components">
+                      <div className="nav-components-cats">
+                        {componentCategories.map((cat) => {
+                          const catExpanded = queryActive ? true : componentCatsExpanded[cat.id] ?? false;
+                          return (
+                            <div key={cat.id} className="nav-components-cat">
+                              <button
+                                type="button"
+                                className="nav-components-cat__toggle"
+                                aria-expanded={catExpanded}
+                                aria-controls={`nav-components-cat-${cat.id}`}
+                                onClick={() => {
+                                  setComponentCatsExpanded((prev) => ({ ...prev, [cat.id]: !(prev[cat.id] ?? false) }));
+                                }}
+                              >
+                                <span className="nav-tree-chevron" aria-hidden="true" />
+                                <span className="nav-components-cat__label">{cat.label}</span>
+                                <span className="components-index__count" aria-label={`${cat.items.length}`}>
+                                  {cat.items.length}
+                                </span>
+                              </button>
+
+                              {catExpanded ? (
+                                <ul id={`nav-components-cat-${cat.id}`} className="nav-components-cat__list">
+                                  {cat.items.map((item) => (
+                                    <li key={item.id}>
+                                      <a
+                                        className={item.id === activeId ? "is-active" : undefined}
+                                        href={`#${item.id}`}
+                                        onClick={() => setActiveId(item.id)}
+                                      >
+                                        {item.label}
+                                      </a>
+                                    </li>
+                                  ))}
+                                </ul>
+                              ) : null}
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  ) : (
+                    <ul id={sectionId} className={`nav-group-list nav-group-list--${groupKey}`}>
+                      {items.map((item) => (
+                        <li key={item.id}>
+                          <a
+                            className={item.id === activeId ? "is-active" : undefined}
+                            href={`#${item.id}`}
+                            onClick={() => setActiveId(item.id)}
+                          >
+                            {item.id === "overview"
+                              ? t("nav.overview", language)
+                              : item.id === "getting-started"
+                                ? t("nav.gettingStarted", language)
+                                : item.id === "components"
+                                  ? t("nav.components", language)
+                                  : item.label}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  )
+                ) : null}
               </section>
             );
           })}
@@ -1622,8 +2359,8 @@ export function App() {
             <BorderFoundation theme={theme} language={language} />
           ) : isTokensFoundation ? (
             <TokensFoundation language={language} />
-          ) : active.kind === "component" && componentSpecs[activeLabel] ? (
-            <ComponentDocumentation componentName={activeLabel} language={language} />
+          ) : active.kind === "component" ? (
+            <ComponentDocumentation componentName={activeLabel} language={language} doc={active.doc} />
           ) : (
             <div className="detail-layout">
               <section className="detail-body">
