@@ -1,201 +1,208 @@
 ---
-component: "Backdrop"
-system: "Genome Evolution Design System"
-type: "Overlay / Visual"
-status: "Design"
-version: "1.0"
-owner: "UX Design Team"
-last_updated: "2026-05-15"
-tags: [backdrop, overlay, modal, dialog, drawer]
+component: Accordion
+system: Genome Evolution Design System
+type: Component
+status: Design
+version: 1.0
+owner: UX Design Team
+last_updated: 2026-06-02
+tags: [expandable, collapsible, content, disclosure]
 ---
 
-# Backdrop — Genome Evolution Design System
+# Accordion
 
-A semi-transparent overlay layer placed between the background content and a floating element (modal, drawer, dialog), visually blocking the underlying interface without being interactive.
+## Purpose
 
-> Optimized for visual consistency, accessibility, and correct semantic interpretation by AI.
+Allows users to toggle visibility of content sections to manage information density and improve interface scannability. Accordion components group related content into collapsible sections, reducing cognitive load by hiding secondary information while maintaining access to details when needed.
 
----
+## Quick Reference
 
-## Quick Reference (AI-optimized)
+| Property | Values | Default |
+|----------|--------|---------|
+| Behavior | Collapsed, Expanded | Collapsed |
+| Color | Default, Evergreen, Indigo | Default |
+| Size | SM, MD | MD |
+| State | Default, Disabled, Hovered, Pressed, Focused, Loading | Default |
+| Show Badge | true, false | false |
+| Show Checkbox | true, false | false |
+| Show Left Icon | true, false | false |
+| Text | String | Placeholder |
 
-**What it is:** Full-screen overlay, purely visual, that creates hierarchical separation between the background content and an overlaid floating component. It has no interactive behavior.
+## When to Use
 
-**Key Properties:**
-- Color [White | Black] — default: Black
+- Group related content into collapsible sections
+- Reduce cognitive load by hiding secondary information
+- Organize hierarchical information (FAQs, settings, filters)
+- Create compact layouts with expandable details
+- Organize content in forms with optional sections
+- Manage space in dense information layouts
+- Support progressive disclosure patterns
 
-**Invalid Combinations:**
-- Color=White in Light theme → use palette/alpha/100 (transparent), the overlay is invisible
-- Color=Black in Dark theme → use palette/alpha/100 (transparent), the overlay is invisible
-- Backdrop without a floating component above → usage without semantic or visual purpose
+## When NOT to Use
 
-**Frequent Usage Snippets:**
-- Modal in Light theme: Color=Black
-- Modal in Dark theme: Color=White
-- Drawer in Light theme: Color=Black
-- Drawer in Dark theme: Color=White
+- For critical information that must always be visible
+- When content is frequently toggled (prefer always-visible layout)
+- For single items (use disclosure instead)
+- When content relationships require constant visibility
+- For primary navigation structures
+- When all sections are typically expanded
 
----
+## Anatomy
 
-## Purpose / Intent
+| Part | Required | Description | Condition |
+|------|----------|-------------|-----------|
+| Header | Yes | Clickable container with text and controls | Always present |
+| Text | Yes | Header label text describing content | Always present |
+| Chevron Icon | Yes | Rotating icon indicating expand/collapse state | Always present |
+| Content Container | Conditional | Container for expandable content | Only when Behavior=Expanded |
+| Checkbox | Conditional | Selection control for header | Only when Show Checkbox=true |
+| Badge | Conditional | Indicator badge showing count/status | Only when Show Badge=true |
+| Left Icon | Conditional | Icon appearing left of text | Only when Show Left Icon=true |
+| Border | Conditional | Bottom border distinguishing sections | Visible in expanded and certain states |
 
-**What it solves:** The need to visually block the background interface when a floating element (modal, drawer, dialog) is active, helping the user focus their attention on the overlaid component.
+## Properties
 
-**Expected outcome:** The user clearly perceives that there is an active layer over the UI and must interact with the floating element before returning to the background content.
+| Property | Type | Default | Values | Applies To | Description |
+|----------|------|---------|--------|------------|-------------|
+| Behavior | Enum | Collapsed | Collapsed, Expanded | All | Controls whether content is visible. Collapsed shows header only; Expanded shows header and content area |
+| Color | Enum | Default | Default, Evergreen, Indigo | All | Applies semantic color theming. Affects text color, borders, and background in interactive states |
+| Size | Enum | MD | SM, MD | All | Controls padding and spacing. SM=compact, MD=standard |
+| State | Enum | Default | Default, Disabled, Hovered, Pressed, Focused, Loading | All | Visual state affecting background color, borders, and interactivity |
+| Show Badge | Boolean | false | true, false | All | Shows/hides badge indicator in header |
+| Show Checkbox | Boolean | false | true, false | All | Shows/hides checkbox control before text |
+| Show Left Icon | Boolean | false | true, false | All | Shows/hides icon left of text content |
+| Text | String | Placeholder | Any string | All | Header label text |
 
-**Typical usage context:** Always in combination with modals, dialogs, drawers, or any component that requires visual blocking of the underlying context. Never used in isolation.
+## States
 
----
+| State | Description | Visual Changes |
+|-------|-------------|-----------------|
+| Default | Standard accordion state | Canvas background; default border |
+| Hovered | Mouse hover state | Interactive/hovered background color |
+| Pressed | Active click/press state | Interactive/pressed background color; darker background |
+| Focused | Keyboard focus state | Green focus border (2px border/focus) |
+| Disabled | Non-interactive state | Disabled background; disabled text color; disabled cursor |
+| Loading | Content loading state | Placeholder animation; loading skeleton elements |
 
-## When to Use / When NOT to Use
+## Sizes
 
-### ✅ Use when
-- A modal, dialog, or drawer that requires the user's exclusive attention is opened
-- There is a need to hierarchically separate a floating element from the rest of the interface
-- The design needs to communicate that the background is temporarily blocked or inactive
-
-### ❌ Avoid when
-- There is no active floating component above the Backdrop
-- An interactive or clickable element is sought (the Backdrop is purely visual)
-- It is used as a decorative background or section element within the layout
-
----
-
-## Structure (Anatomy)
-
-**Parts of the component:**
-- **Overlay layer (Required):** Full-screen rectangle with a semi-transparent color defined by the token corresponding to Color and active theme (Light/Dark). It does not contain its own child elements.
-
-> General rule: The Backdrop always occupies 100% of the viewport and is positioned behind the floating component but above all UI content. Its only element is the color layer with opacity.
-
----
-
-## Semantics (Meaning & Behavior)
-
-**Main semantic role:** Visual context blocker. Communicates that the background interface is temporarily inaccessible while a floating element is active.
-
-**Action it communicates:** "The background content is blocked. Attend to the overlaid element."
-
-**Signals for the user:**
-- The darkening or lightening of the background indicates that there is an active layer
-- The visual separation reinforces the hierarchy between the blocked content and the floating element
-- There is no signal of interactivity (no pointer cursor, no hover, no tactile feedback)
-
----
-
-## Iconography
-
-Not applicable. The Backdrop does not contain icons or content slots.
-
----
-
-## Variants (Properties)
-
-> Names identical to Figma.
-
-### Color
-- **Black** — Dark overlay. Use palette/alpha/1000 in Light theme and palette/alpha/100 in Dark theme. Standard usage in most contexts with Light theme.
-- **White** — Light overlay. Use palette/alpha/100 in Light theme and palette/alpha/1000 in Dark theme. Use exclusively in Dark theme to maintain the correct contrast.
-
-### State Model
-- **Default:** Visible overlay with opacity defined by the token of the active theme.
-- **Hovered:** No visual change. The Backdrop is not interactive.
-- **Pressed:** No visual change. The Backdrop is not interactive.
-- **Focused:** Not applicable. The Backdrop does not receive focus.
-- **Disabled:** Not applicable.
-
----
+| Size | Padding | Height (Collapsed) | Text Size | Badge Size | Spacing | Notes |
+|------|---------|-------------------|-----------|------------|---------|-------|
+| SM | 8px horizontal, 2px vertical | 24px | 14px (Text/Body/SM) | 10px | 8px gap | Compact layout; reduced spacing |
+| MD | 16px horizontal, 8px vertical | 36px | 14px (Text/Body/SM) | 10px | 8px gap | Standard; recommended |
 
 ## Token Mapping
 
-### Color / Surface
+### Background
 
-| Variant | Light Theme | Dark Theme |
-|---------|------------|-----------|
-| Black | palette/alpha/1000 | palette/alpha/100 |
-| White | palette/alpha/100 | palette/alpha/1000 |
+- **State=Default**: background/canvas
+- **State=Hovered**: background/interactive/hovered
+- **State=Pressed**: background/interactive/pressed
+- **State=Disabled**: background/disabled
+- **State=Loading**: background/canvas
+- **Content area**: background/canvas
 
-> **Note:** palette/alpha/100 represents the transparent end of the alpha scale. palette/alpha/1000 represents the opaque/covered end. The system automatically adapts the color according to the active theme.
+### Text
 
-### Usage rule by theme
-- **Light Theme** → always use Color=Black to achieve a visible dark overlay
-- **Dark Theme** → always use Color=White to achieve a visible overlay over dark UI
+- **Color=Default, State=Default**: text/primary
+- **Color=Default, State=Disabled**: text/disabled
+- **Color=Evergreen**: text/evergreen
+- **Color=Indigo**: text/indigo
 
----
+### Border
 
-## Layout & Sizing
+- **Behavior=Collapsed, State=Default**: border/default (bottom)
+- **Behavior=Expanded**: border/strong (Color=Default), border/evergreen (Color=Evergreen), border/indigo (Color=Indigo) (bottom)
+- **State=Focused**: border/focus (2px, all sides)
+- **State=Disabled**: border/disabled
 
-### Spacing
-- Padding: 0. The Backdrop has no internal padding.
-- Gap: Not applicable.
-- Width: 100% of the viewport.
-- Height: 100% of the viewport.
+### Icon
+
+- **Chevron down**: Vector icon (12px)
+- **Chevron up**: Vector icon (12px)
+- **Left Icon**: 16px
 
 ### Typography
-Not applicable. The Backdrop does not contain text.
 
-### Corner / Shape
-- Radius: 0. The Backdrop is a full-screen rectangle with no rounded corners.
-- Special cases: None.
+- **Text**: Text/Body/SM (family/body, weight/regular, size/14, lineHeight/20)
+- **Badge**: 10px semibold
 
----
+### Spacing
 
-## Interaction & Motion
+- **SM Header padding**: space/8 horizontal, space/2 vertical
+- **MD Header padding**: space/16 horizontal, space/8 vertical
+- **Content padding**: space/16 (MD), space/8 (SM)
+- **Gap between elements**: gap/sm (8px)
+- **Content height**: 100px
 
-- **Click/Tap:** No interactive behavior. The Backdrop is a purely visual element.
-- **Keyboard:** Does not receive focus and is not keyboard navigable.
-- **Loading:** Not applicable.
-- **Transitions:** Fade-in/fade-out coordinated with the appearance and closure of the overlaid floating component. Duration: 200ms, Easing: standard.
+### Radius
 
----
+- **Content area**: radius/4
 
-## Accessibility Guidelines
+### Shadow
 
-- The Backdrop itself does not require its own ARIA attributes, as it is decorative.
-- The accompanying floating component (modal, dialog) must manage focus trapping and the aria-modal, role="dialog" attributes or equivalents.
-- Do not rely solely on the Backdrop to communicate blocking: the floating component must be semantically correct.
-- The overlay color must have sufficient opacity for the contrast between the blocked background and the floating element to be perceptible.
-- **Screen readers:** use aria-hidden="true" on the Backdrop so that it is not announced by assistive technologies.
+[Pending confirmation]
 
----
+## Content Containers
 
-## Content Guidelines
+The accordion supports different content areas based on size and color combinations:
 
-- The Backdrop does not contain text, icons, or its own content.
-- All semantic communication is the responsibility of the overlaid floating component.
+| Content Type | Applies To | Purpose |
+|--------------|-----------|---------|
+| Content SM Default | Size=SM, Color=Default, Behavior=Expanded | Compact content area for default color theme |
+| Content SM Evergreen | Size=SM, Color=Evergreen, Behavior=Expanded | Compact content area for evergreen theme |
+| Content SM Indigo | Size=SM, Color=Indigo, Behavior=Expanded | Compact content area for indigo theme |
+| Content MD Default | Size=MD, Color=Default, Behavior=Expanded | Standard content area for default color theme |
+| Content MD Evergreen | Size=MD, Color=Evergreen, Behavior=Expanded | Standard content area for evergreen theme |
+| Content MD Indigo | Size=MD, Color=Indigo, Behavior=Expanded | Standard content area for indigo theme |
 
----
+## Accessibility
+
+| Property | Value |
+|----------|-------|
+| Focus state | Visible green 2px border (border/focus) |
+| Keyboard interaction | Space/Enter toggles expanded state; focus management required |
+| ARIA attributes | [Pending confirmation] |
+| State indication | Visual color and border changes; icon rotation |
+| Disabled state | Visually disabled; cursor not-allowed |
 
 ## Examples
 
-### Do ✅
-- Use Color=Black in Light theme to accompany a confirmation modal for destructive action.
-- Use Color=White in Dark theme to accompany a side navigation drawer.
-- Ensure that the Backdrop always has an active floating component above it before rendering.
-- Use consistent fade timing with the associated floating component.
+| Example | Description | Configuration |
+|---------|-------------|----------------|
+| FAQ Section | Basic accordion for frequently asked questions | Behavior=Collapsed, Color=Default, Size=MD, Show Checkbox=false |
+| Filter Panel | Accordion with multiple filter options | Behavior=Collapsed, Color=Default, Size=MD, Show Checkbox=true |
+| Settings Group | Grouped settings with badge counter | Behavior=Collapsed, Color=Evergreen, Size=MD, Show Badge=true |
+| Compact Form | Space-saving form with optional sections | Behavior=Collapsed, Color=Indigo, Size=SM |
+| Active Section | Currently expanded accordion | Behavior=Expanded, State=Default |
+| Disabled Accordion | Non-interactive accordion | State=Disabled |
+| Loading State | Content loading | State=Loading |
 
-### Don't ❌
-- Do not use Color=White in Light theme: the token palette/alpha/100 results in a transparent and invisible overlay.
-- Do not use Color=Black in Dark theme: same invisibility issue due to transparent token.
-- Do not treat the Backdrop as an interactive element or assign click handlers to close the modal (that responsibility belongs to the floating component or its control logic).
-- Do not render the Backdrop without an associated floating element.
+## Invalid Combinations
 
----
+[Pending confirmation - no explicit invalid combinations documented in source material]
 
-## QA Checklist
+## Interaction Guidelines
 
-- [ ] Color=Black visible in Light theme (token palette/alpha/1000 applied correctly).
-- [ ] Color=White visible in Dark theme (token palette/alpha/1000 applied correctly).
-- [ ] Color=Black in Dark theme is transparent (palette/alpha/100) — confirm it is not used in this context.
-- [ ] Color=White in Light theme is transparent (palette/alpha/100) — confirm it is not used in this context.
-- [ ] The Backdrop occupies 100% of the viewport without overflow.
-- [ ] aria-hidden="true" present on the Backdrop element.
-- [ ] Does not receive focus nor is it keyboard navigable.
-- [ ] Always accompanied by an active floating component above.
-- [ ] Transition coordinated with the floating component (duration 200ms, easing standard).
+- Clicking the header toggles between Collapsed and Expanded states
+- In Expanded state, chevron icon points upward; in Collapsed state, points downward
+- Focus state applies a green border for keyboard accessibility
+- Disabled state prevents all interactions
+- Loading state displays skeleton placeholders in content area
+- Checkbox can be used independently of expand/collapse behavior
+- Badge updates should reflect current state (e.g., count of items)
 
----
+## Usage Guidelines
 
-## Notes / Changelog
+- Use accordions to reduce visual density while keeping related content discoverable
+- Keep header labels concise so users can scan sections quickly
+- Prefer the default size for most layouts and use SM only when space is tight
+- Pair badges and checkboxes only when they add clear value to the section
+- Avoid deep nesting that makes scanning and keyboard navigation harder
 
-**2026-05-15** — Updated documentation to match Accordion md and Badge md pattern. Completed all metadata fields. Expanded sections with detailed specifications for theme usage, interaction behavior, and accessibility requirements. Confirmed 2 variants (Color × Theme combination). 100% aligned with design system documentation standards.
+## Implementation Notes
+
+- Preserve the header-first structure so the expanded content remains clearly associated
+- Keep focus styling visible for keyboard users, especially in dense lists
+- Treat loading as a content placeholder state rather than a separate layout pattern
+- Keep the expanded content area consistent across color variants

@@ -1,287 +1,199 @@
 ---
-component: "Checkbox"
-system: "Genome Evolution Design System"
-type: "Form / Selection"
-status: "Design"
-version: "1.2"
-owner: "UX Design Team"
-last_updated: "2026-05-21"
-tags: [form, selection, checkbox, input, binary-state, indeterminate-state, icon-control]
+component: Checkbox
+system: Genome Evolution Design System
+type: Component
+status: Design
+version: 1.0
+owner: UX Design Team
+last_updated: 2026-06-02
+tags: [form, selection, input, control]
 ---
- 
-# Checkbox — Genome Evolution Design System
- 
-**Component Type:** Form / Selection
-**Status:** Design
-**Version:** 1.2
-**Owner:** UX Design Team
-**Last Updated:** 2026-05-21
- 
+
+# Checkbox
+
+## Purpose
+
+Checkbox is a binary or indeterminate selection form control. It allows users to select, deselect, or indicate a mixed/indeterminate state within forms, lists, or tables. The component displays a 20×20px interactive checkbox control, with optional trailing icon (BizagiLines, 16×16px) and optional text label.
+
 ## Quick Reference
- 
+
 | Property | Values | Default |
 |----------|--------|---------|
-| Color | Default, Evergreen, Indigo, Disabled | Default |
-| State | Default, Hovered, Pressed, Focused, Disabled | Disabled |
-| Type | Default (unchecked), Check (checked), Mixed (indeterminate) | Default |
-| Show Label | true, false | true |
-| Label | Text content (editable) | "Label" |
-| Show icon | true, false | true |
- 
-**Critical Restrictions:**
-- Color=Disabled + State=Disabled only (never mix with active states)
-- Color=Indigo + State ≠ Disabled (Indigo active color incompatible with Disabled)
-- Show Label=false + Show icon=false invalid (at least one required for accessibility)
-- Type=Mixed should only be used for partial/grouped selections
-**Total Variants:** 180+ (4 Colors × 5 States × 3 Types × 2 Label toggles × 2 Icon toggles = 240 max combinations)
- 
-## Purpose
- 
-The Checkbox component is a binary or indeterminate selection control that enables users to independently select one or multiple options from a set. It supports three selection states: unchecked (Default), checked (Check), and indeterminate/partially checked (Mixed). This component is fundamental for forms, filters, bulk actions, and preference settings where multiple independent selections are required.
- 
-The component provides visual feedback through four distinct colors (Default, Evergreen, Indigo, Disabled) and five interactive states (Default, Hovered, Pressed, Focused, Disabled) to communicate availability, interactivity, and accessibility. A flexible Show icon property allows designers to control icon visibility independently of the label, enabling icon-only, label-only, or combined configurations. A decorative "bizagi-lines" icon always appears on the right side as a visual separator.
- 
+| color | Default, Evergreen, Indigo | Default |
+| type | Default, Check, Mixed | Default |
+| state | Default, Hovered, Pressed, Disabled, Focused | Disabled |
+| showIcon | true, false | true |
+| showLabel | true, false | true |
+| label | string | "Label" |
+
+**Invalid Combinations:**
+- type=Default is only documented for color=Default. color=Evergreen and color=Indigo are not documented with type=Default.
+- state=Disabled is only documented for color=Default.
+- state=Hovered and state=Pressed with color=Default and type=Default are not documented.
+- color=Evergreen and color=Indigo are only documented for type=Check and type=Mixed.
+
 ## When to Use
- 
-- Selecting multiple options from a list where all selections are independent
-- Accepting terms, conditions, or privacy policies in forms
-- Filtering content or search results by multiple criteria
-- Bulk selection or deselection of items in tables, lists, or card grids
-- Configuration preferences or feature toggles where multiple items can be enabled simultaneously
-- Indicating partial selection or "select all" scenarios with the Mixed (indeterminate) state
-- Forms requiring multiple checkboxes as part of a checkbox group
-- Confirming agreement to multiple independent statements or conditions
-- Data table row selection with visual icon feedback
-- Dense UI layouts where icon-only checkboxes optimize space
+
+- For selecting one or multiple options in a form or list.
+- For bulk selection in tables, using type=Mixed to represent an indeterminate state (some but not all items selected).
+- For toggling preferences, settings, or configuration options that require explicit user confirmation.
+- When multiple non-exclusive options can be selected simultaneously.
+
 ## When NOT to Use
- 
-- Mutually exclusive options: Use Radio Button instead (only one option can be selected at a time)
-- Real-time activation or deactivation of features: Use Toggle/Switch instead (implies immediate action)
-- Navigation between different views or pages: Use Tabs or navigation links instead
-- Boolean toggles that control system behavior: Use Toggle/Switch for clearer intent
-- Single confirmation choice: Consider a confirmation dialog or Radio Button
-- Dependent selections (where selecting one option disables others): Use a different selection pattern or add logic validation
-- Visual-only indicators: If no user interaction is needed, use an icon or status indicator instead
-- When the checkbox meaning would be unclear without both label and icon (maintain at least one visible)
+
+- Do not use for mutually exclusive options — use a Radio Button instead.
+- Do not use for immediate on/off toggling of a live setting — use a Toggle or Switch instead.
+- Do not use as a navigation control or action trigger.
+
 ## Anatomy
- 
-**Parts of the component:**
-- **Checkbox Box** (Required): The interactive container that displays the checkbox state. 16x16px (or 20x20px depending on variant). Contains the check/mixed icon when selected. Responds to all user interactions (hover, press, focus). Rounded rectangle shape with border and optional background. Border radius: radius/4.
-- **Check Icon** (Conditional): Appears when Type=Check and Show icon=true. Uses the "check" icon from the Genome icon system (typically a checkmark ✓). Communicates selected/checked state.
-- **Mixed Icon** (Conditional): Appears when Type=Mixed and Show icon=true. Uses the "remove" (dash/minus) icon from the Genome icon system (—). Indicates indeterminate/partial selection.
-- **Label** (Conditional): Optional text label positioned to the right of the checkbox box. Controlled by Show Label property. Communicates the option being selected. Font: body/sm (Open Sans, 10px, Regular).
-- **Decorative Icon** (Always Visible): A "bizagi-lines" instance appears on the right side of the component (after label if present). Serves as visual separator or design motif. Always present in all variants.
-- **Focus Ring** (Conditional): A subtle elliptical focus indicator that appears when State=Focused. Supports keyboard navigation and accessibility. 32px ellipse overlay on checkbox area. Color: focus/ring.
-- **State Background** (Conditional): A background ellipse appears on State=Hovered, Pressed, or Focused. 32x32px rounded background layer that provides visual feedback.
-**Dimensions:**
-- Checkbox box width: 16px - 20px
-- Checkbox box height: 16px - 20px
-- Label gap: gap/s (8px) (spacing between checkbox box and label text)
-- Total component width: Variable (depends on label length and icon visibility)
-- Total component height: space/20 - space/24 (checkbox + vertical alignment)
-- Label font: body/sm (Open Sans, 10px, Regular)
-- Label line height: 14px
-- Decorative icon: bizagi-lines (right side)
-- State ellipse: 32x32px (visible on Hovered/Pressed/Focused)
-- Focus ellipse: 32x32px (visible on Focused)
-- Padding: space/0 (no padding on checkbox container; elements are directly positioned)
-- Gap between checkbox and label: gap/s (8px)
-- Corner radius: radius/4
-## Variants
- 
-### Color (4 variants)
-Color controls the visual emphasis and semantic meaning of the checkbox within its context. Each color has specific valid state pairings.
- 
-- **Default:** Standard checkbox appearance. Used for regular form inputs and most selection scenarios. Indicates a neutral, available, and interactive element. Valid with all States (Default, Hovered, Pressed, Focused, Disabled—though Disabled should use Color=Disabled).
-- **Evergreen:** A branded color variant emphasizing selected or affirmative states. Commonly used for confirmed selections, positive actions, or successful checks in bulk operations. Uses color/brand/primary/500. Valid with States: Default, Hovered, Pressed, Focused. NOT valid with State=Disabled.
-- **Indigo:** A distinctive color variant for highlighted or emphasized selections. Use when the checkbox needs visual prominence or differentiation from other form elements. Uses color/brand/secondary/500. Valid with States: Default, Hovered, Pressed, Focused. NOT valid with State=Disabled.
-- **Disabled:** Visual indication that the checkbox cannot be interacted with. ONLY valid when State=Disabled. Communicates unavailability due to permissions, prerequisites, or system constraints. Text and icon appear in disabled/muted color. Never pair with active states (Hovered, Pressed, Focused).
-### State (5 variants)
-State communicates the interactive feedback and accessibility focus of the checkbox. Each state has specific visual appearance and valid color pairings.
- 
-- **Default:** Base state. The checkbox is available and ready for interaction. No special visual feedback is applied. Focus ring is absent. State background ellipse is not visible. Valid with Colors: Default, Evergreen, Indigo.
-- **Hovered:** Visual feedback when the mouse hovers over the checkbox. Provides affordance that the element is interactive. A subtle state background ellipse (32x32px) appears behind the checkbox. Color intensity may increase slightly. Valid with Colors: Default, Evergreen, Indigo. NOT valid with Color=Disabled.
-- **Pressed:** Visual feedback when the checkbox is actively clicked/pressed. Indicates immediate user input recognition. State background ellipse appears and may darken further than hovered state. Valid with Colors: Default, Evergreen, Indigo. NOT valid with Color=Disabled.
-- **Focused:** Visual feedback when the checkbox receives keyboard focus (via Tab key). Shows a focus ellipse (32x32px) around the checkbox box. Indicates the element is ready for keyboard interaction. Essential for keyboard navigation accessibility. Focus color: focus/ring. Valid with Colors: Default, Evergreen, Indigo. NOT valid with Color=Disabled.
-- **Disabled:** Communicates that the checkbox is not interactive. MUST be paired with Color=Disabled. The element is visually muted and unresponsive to user input. Text and icons fade (reduced opacity or muted color). Hover/press states do not apply. No state ellipse appears. Pointer and keyboard events are blocked. Valid with Color: Disabled only.
-### Type (3 variants)
-Type represents the selection state of the checkbox from a data/semantic perspective. Type controls what icon (if any) appears inside the checkbox box.
- 
-- **Default:** Unchecked state. The option is not selected. No icon appears inside the checkbox box (icon space is empty, even when Show icon=true). Checkbox box shows only border and background (if applicable).
-- **Check:** Checked state. The option is selected. A checkmark icon appears inside the checkbox box (when Show icon=true). The check icon uses the "check" symbol from the design system.
-- **Mixed:** Indeterminate or partially checked state. Used when representing a group selection where some (but not all) sub-items are checked (select all patterns, hierarchical trees). A dash/minus icon appears inside the checkbox box (when Show icon=true). The remove icon uses the "remove" or "dash" symbol.
+
+| Part | Required | Description | Condition |
+|------|----------|-------------|-----------|
+| Check Control | Yes | 20×20px interactive area. Contains the 16×16px checkbox box with rounded corners (2px). Shows check mark, dash, or empty state depending on type. | Always |
+| Check Icon (inner) | Conditional | 12×12px icon inside the checkbox box. Check mark icon for type=Check. Dash/remove icon for type=Mixed. Hidden for type=Default. | When type=Check or type=Mixed |
+| State Layer | Conditional | 32×32px circular ripple/state overlay behind the checkbox control. Visible on Hovered, Pressed, and Focused states. | When state=Hovered, Pressed, or Focused |
+| BizagiLines Icon | No | 16×16px branded icon displayed to the right of the checkbox control. | When showIcon=true and state ≠ Disabled (for non-Default color), or showIcon=true for all documented states |
+| Label | No | Text label displayed to the right of the icon. Uses `Text/Body/XXS` typography (10px, regular). | When showLabel=true |
+
+## Properties
+
+| Property | Type | Default | Values | Applies To | Description |
+|----------|------|---------|--------|------------|-------------|
+| color | Enum | Default | Default, Evergreen, Indigo | All | Controls the fill color of the checkbox when checked or mixed. Default uses `icon/primary`. Evergreen uses `icon/evergreen`. Indigo uses `icon/indigo`. |
+| type | Enum | Default | Default, Check, Mixed | All | Defines the selection state represented visually. Default = unchecked. Check = checked with checkmark. Mixed = indeterminate with dash. |
+| state | Enum | Disabled | Default, Hovered, Pressed, Disabled, Focused | All | Represents the current interactive state of the component. |
+| showIcon | Boolean | true | true, false | All | Shows or hides the BizagiLines icon slot to the right of the checkbox. |
+| showLabel | Boolean | true | true, false | All | Shows or hides the text label to the right of the icon. |
+| label | String | "Label" | Any string | All | The visible text label of the component. |
+
+## States
+
+| State | Description | Visual Changes |
+|-------|-------------|----------------|
+| Default | Resting state, no interaction active. | type=Default: empty box with `icon/primary` border on `background/canvas`. type=Check or Mixed: filled box with `icon/primary`, `icon/evergreen`, or `icon/indigo` depending on color. |
+| Hovered | Cursor is over the component. | 32×32px state layer (Hovered style) appears behind checkbox. Checkbox box fills with the corresponding color token. |
+| Pressed | Component is being clicked or tapped. | 32×32px state layer (Pressed style) appears. Checkbox box fills with the corresponding color token. |
+| Focused | Component receives keyboard or programmatic focus. | 32×32px focus ring layer appears. Box fills for type=Check and type=Mixed. For type=Default (color=Default), a focus ring renders around the empty box. |
+| Disabled | Component is non-interactive. Only documented for color=Default. | type=Default: box with `background/disabled` fill and `border/disabled` border. type=Check or Mixed: box with `background/disabled` and `border/disabled`, with dimmed check/dash icon. Label uses `text/disabled`. |
+
+## Sizes
+
+Checkbox has a single fixed size. No size property is exposed.
+
+| Element | Size | Notes |
+|---------|------|-------|
+| Check Control (outer hit area) | 20×20px | Interactive target area |
+| Checkbox Box | 16×16px | Visible checkbox with 2px border-radius |
+| Inner icon (check or dash) | 12×12px | Clipped within the checkbox box |
+| State Layer | 32×32px | Circular overlay for Hovered/Pressed/Focused |
+| BizagiLines Icon | 16×16px | Trailing branded icon |
+
 ## Token Mapping
- 
-### Color States (State=Default, Type=Default)
- 
-| Property | Token | Value | Notes |
-|----------|-------|-------|-------|
-| Box Background | — | transparent | No fill in default |
-| Box Border | border/default | #CCCCCC | 1-2px border |
-| Text Color | text/primary | #000000 | Primary text |
-| Icon Color | text/primary | #000000 | Primary icon |
-| Corner Radius | radius/4 | 4px | Rounded corners |
- 
-### Evergreen Color States (State=Default)
- 
-| Property | Token | Value | Notes |
-|----------|-------|-------|-------|
-| Box Background (Type=Check) | color/brand/primary/500 | #339947 | Evergreen primary |
-| Text Color | color/brand/primary/500 | #339947 | Matches brand |
-| Icon Color (Check) | text/inverse | #FFFFFF | Check icon on colored bg |
-| Box Border | color/brand/primary/500 | #339947 | Matches background |
-| Corner Radius | radius/4 | 4px | Rounded corners |
- 
-### Indigo Color States (State=Default)
- 
-| Property | Token | Value | Notes |
-|----------|-------|-------|-------|
-| Box Background (Type=Check) | color/brand/secondary/500 | #6b1b99 | Indigo/secondary brand |
-| Text Color | color/brand/secondary/500 | #6b1b99 | Matches brand |
-| Icon Color (Check) | text/inverse | #FFFFFF | Check icon contrast |
-| Box Border | color/brand/secondary/500 | #6b1b99 | Matches background |
-| Corner Radius | radius/4 | 4px | Rounded corners |
- 
-### Disabled Color States (State=Disabled only)
- 
-| Property | Token | Value | Notes |
-|----------|-------|-------|-------|
-| Box Background | color/background/disabled | #F5F5F5 | Neutral disabled bg |
-| Box Border | border/disabled | #DDDDDD | Subtle border |
-| Text Color | text/disabled | #999999 | Muted text |
-| Icon Color | text/disabled | #999999 | Muted icon |
-| Corner Radius | radius/4 | 4px | Rounded corners |
- 
-### Interactive States (Default Color)
- 
-| State | Visual Effect | Token | Notes |
-|-------|--------------|-------|-------|
-| Hovered | State ellipse bg appears (32x32px) | background/hover | Soft background layer |
-| Pressed | State ellipse darkens/intensifies | background/pressed | Deeper visual feedback |
-| Focused | Focus ellipse appears (32x32px) | focus/ring | Keyboard indicator |
-| Disabled | Muted colors, opacity reduced | — | No state effects apply |
- 
-### Spacing Tokens
- 
-| Element | Token | Value | Notes |
-|---------|-------|-------|-------|
-| Label gap | gap/s | 8px | Between checkbox and label |
-| Padding container | space/0 | 0px | No padding |
-| Total height | space/20-24 | 20-24px | Checkbox + padding |
- 
-## Semantics
- 
-- **Selection Independence:** Each checkbox represents an independent, binary choice. Selecting one checkbox does not affect others (unless explicitly configured in parent logic).
-- **Ternary Logic:** The Mixed (indeterminate) type extends binary semantics to include partial or grouped selections, commonly used in "select all" patterns or multi-level trees. Should only be used when actually representing partial selection.
-- **Color as Affordance:** Color choice signals semantic intent: Default (neutral), Evergreen (affirmative/positive), Indigo (emphasis/highlight), Disabled (unavailable/locked).
-- **State as Feedback:** State communicates interactivity feedback (hover, press, focus), not the selection state itself. Type communicates the actual selection state.
-- **State vs Color Validity:** Disabled state ONLY pairs with Disabled color. Active colors (Default, Evergreen, Indigo) NEVER pair with Disabled state.
-- **Label Association:** The optional label is semantically linked to the checkbox and should describe the option being selected. When Show Label=false, a tooltip or aria-label must provide accessible text.
-- **Icon Visibility Control:** Show icon property allows flexible presentation: when false, no icon slot is rendered inside checkbox box, reducing visual complexity. Label alone can communicate selection state in certain contexts.
-- **Decorative Icon:** The bizagi-lines icon on the right is purely decorative and visual. It appears in all variants and should not be considered in accessibility labels.
-- **Form Integration:** Checkboxes typically appear as groups in forms. Each checkbox contributes an independent value to a multi-select form field.
-## Interaction
- 
-- **Click/Tap:** Clicking the checkbox or its label toggles the selection state: Default ↔ Check, or cycles through Default → Check → Default (or Default → Check → Mixed → Default if mixed state is used).
-- **Hover:** Visual feedback via state ellipse (32x32px) appearing behind the checkbox. Indicates interactivity. The ellipse color matches the checkbox color (Default, Evergreen, or Indigo).
-- **Press:** Immediate visual feedback when the checkbox is being clicked/pressed down. State ellipse appears/darkens.
-- **Focus (Keyboard):** When Tab key navigates to the checkbox, a focus ellipse (32x32px) appears. Indicates the element is ready for keyboard interaction.
-- **Space Bar:** When focused via keyboard, pressing Space toggles the checkbox state.
-- **Label Click:** Clicking the label also toggles the checkbox state (the label should be wrapped in an associated `<label>` element).
-- **Icon Visibility:** The Show icon property controls whether the icon slot is visible. When false, no icon space is rendered; label text or decorative icon directly follows the checkbox box.
-- **Disabled Interaction:** Disabled checkboxes do not respond to any interaction. Pointer events are not triggered; keyboard navigation skips over disabled checkboxes.
-- **State Transitions (Active):** Default → Hovered (on hover) → Pressed (on click) → Default/Checked (after release, based on toggled state).
-- **State Transitions (Keyboard):** Default → Focused (on Tab) → [Selection toggles on Space] → Default/Checked.
+
+### Background / Fill (Checkbox Box)
+
+| color / type / state | Token | Value |
+|---|---|---|
+| Any color, type=Default, state=Default | `background/canvas` | white |
+| color=Default, type=Check or Mixed, state=Default or Focused | `icon/primary` | #5f6d62 |
+| color=Evergreen, type=Check or Mixed, state=Default/Hovered/Pressed/Focused | `icon/evergreen` | #297a39 |
+| color=Indigo, type=Check or Mixed, state=Default/Hovered/Pressed/Focused | `icon/indigo` | #6b1b99 |
+| color=Default, type=Check or Mixed, state=Hovered or Pressed | `icon/primary` | #5f6d62 |
+| Any, state=Disabled | `background/disabled` | #f4f6f4 |
+
+### Border (Checkbox Box)
+
+| state | Token | Notes |
+|-------|-------|-------|
+| Default, type=Default | `icon/primary` | 1px border, `width/1` |
+| Disabled | `border/disabled` | 1px border, `width/1` |
+| Focused (Default color, Default type) | Pending confirmation | Focus ring visible on empty box |
+
+### Text (Label)
+
+| state | Token | Value |
+|-------|-------|-------|
+| Default, Hovered, Pressed, Focused | `text/primary` | #2d342f |
+| Disabled | `text/disabled` | #849588 |
+
+### Typography (Label)
+
+| Token | Size | Line-height | Weight | Family |
+|-------|------|-------------|--------|--------|
+| `Text/Body/XXS` | 10px (`size/10`) | 14px (`line-height/14`) | regular (`weight/regular`) | `family/body` (Open Sans) |
+
+Letter spacing: `letter-spacing/normal` (0px)
+
+### Spacing
+
+| Token | Value | Applied To |
+|-------|-------|------------|
+| `gap/sm` | 8px | Gap between Check Control, BizagiLines icon, and label |
+
+### Radius
+
+| Element | Value | Notes |
+|---------|-------|-------|
+| Checkbox Box | 2px | Applied to the 16×16px inner box |
+
+### Shadow
+
+Pending confirmation.
+
 ## Accessibility
- 
-**HTML Structure:**
-- Wrap each checkbox in a `<label>` element for implicit label association
-- Use `<input type="checkbox" />` as the semantic form control
-- Use `aria-label` or `aria-labelledby` if label text is not visible (Show Label=false)
-- Use `aria-describedby` to associate error messages or additional context with the checkbox
-- For indeterminate state, set `aria-checked="mixed"` on the input element
-- Use `aria-disabled="true"` and `disabled` attribute together for disabled checkboxes
-**Keyboard:**
-- Tab key navigates to and from the checkbox
-- Space bar toggles the checkbox state when focused
-- Enter key may submit a form but should not toggle the checkbox
-- Shift+Tab navigates backward through form elements
-- Arrow keys should not be used for individual checkboxes; reserve for checkbox groups with arrow key navigation
-- Checkbox groups should implement focus management: first checkbox receives focus; arrow keys move between checkboxes
-**Screen Reader:**
-- Checkbox should announce its label text and state: "Option name, checkbox, checked/unchecked"
-- Mixed (indeterminate) state should announce as "partially checked" or "mixed"
-- Disabled state should announce: "Option name, checkbox, disabled"
-- When Show Label=false, the aria-label text should fully describe the option
-- When Show icon=false, screen reader announcement should not reference icon (only label)
-- Decorative bizagi-lines icon should be hidden from screen readers (aria-hidden="true")
-- Checkbox groups should be wrapped in a `<fieldset>` with a `<legend>` describing the group purpose
-**Contrast:**
-- Checkbox border must have 4.5:1 contrast ratio against the background
-- Checked icon must have 4.5:1 contrast ratio against the checkbox background
-- Label text must have 4.5:1 contrast ratio against the background for normal text
-- Focus ellipse must have 3:1 contrast ratio against the background
-- Disabled state must still maintain 3:1 contrast for the box outline and icon
-## Content Guidelines
- 
-- Keep label text concise and descriptive, typically 2-5 words
-- Use sentence case for labels, not all caps
-- Begin with the option being selected: "Subscribe to updates" instead of "Updates"
-- Avoid technical jargon; use language familiar to the target user
-- Ensure labels are scannable and unambiguous
-- For grouped checkboxes, use a fieldset legend to describe the group's purpose
-- Avoid double negatives in labels: prefer "Enable notifications" over "Do not disable notifications"
-- When labels are hidden (Show Label=false), provide a tooltip or aria-label with full descriptive text
-- Use consistent terminology across all checkboxes in a group or form
-- For error states, pair the checkbox with error message text near the checkbox or in the label
-- Keep labels at the same hierarchy level; avoid mixing imperative and declarative language
-- Provide additional context or help text below a checkbox group if the selection criteria are complex
-- When Show icon=false, ensure the checkbox box itself remains clearly visible and distinct from the label
-- Use icons consistently: if showing icon in one checkbox, show it in all related checkboxes for visual consistency
-- For Mixed state, clarify the partial selection concept in surrounding text or group label
+
+| Property | Value |
+|----------|-------|
+| Focus indicator | 32×32px focus ring layer — confirmed visually in Focused state |
+| Disabled visual | `background/disabled` fill + `border/disabled` border + `text/disabled` label |
+| Keyboard interaction | Pending confirmation |
+| ARIA roles | Pending confirmation |
+| Screen reader behavior | Pending confirmation |
+| WCAG compliance | Pending confirmation |
+
 ## Examples
- 
-**Basic form acceptance with icon and label:**
-Color=Default, Type=Check, State=Default, Show Label=true, Show icon=true, Label="I accept the terms and conditions", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Unchecked option in form:**
-Color=Default, Type=Default, State=Default, Show Label=true, Show icon=true, Label="Subscribe to newsletter", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Disabled checked option (already subscribed, cannot unsubscribe):**
-Color=Disabled, Type=Check, State=Disabled, Show Label=true, Show icon=true, Label="Current subscription active", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Partial selection in table (select all scenario):**
-Color=Evergreen, Type=Mixed, State=Default, Show Label=false, Show icon=true, Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Emphasized selection with color variant:**
-Color=Indigo, Type=Check, State=Default, Show Label=true, Show icon=true, Label="Priority task", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Hovered state for interaction affordance:**
-Color=Default, Type=Check, State=Hovered, Show Label=true, Show icon=true, Label="Mark as favorite", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Keyboard-focused checkbox:**
-Color=Default, Type=Check, State=Focused, Show Label=true, Show icon=true, Label="Agree to data processing", Focus Color: focus/ring, Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Bulk action: disabled until items selected:**
-Color=Disabled, Type=Default, State=Disabled, Show Label=false, Show icon=true, Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Label-only checkbox (icon hidden):**
-Color=Default, Type=Check, State=Default, Show Label=true, Show icon=false, Label="Confirm selection", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Icon-only checkbox in dense layout (aria-label required):**
-Color=Default, Type=Default, State=Default, Show Label=false, Show icon=true, aria-label="Include in report", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Mixed state with Evergreen color for grouped selection:**
-Color=Evergreen, Type=Mixed, State=Default, Show Label=true, Show icon=true, Label="Select all items", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Warning-style checkbox (Indigo color for emphasis):**
-Color=Indigo, Type=Check, State=Default, Show Label=true, Show icon=true, Label="I understand the risks", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Hovered Evergreen checked:**
-Color=Evergreen, Type=Check, State=Hovered, Show Label=true, Show icon=true, Label="Approved option", Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Focused Indigo mixed:**
-Color=Indigo, Type=Mixed, State=Focused, Show Label=false, Show icon=true, Focus Color: focus/ring, Padding: space/0, Gap: gap/s, Radius: radius/4
- 
-**Pressed Default unchecked:**
-Color=Default, Type=Default, State=Pressed, Show Label=true, Show icon=true, Label="Toggle option", Padding: space/0, Gap: gap/s, Radius: radius/4
+
+| Example | Description | Configuration |
+|---------|-------------|---------------|
+| Unchecked — Default | Empty, unselected checkbox | color=Default, type=Default, state=Default, showIcon=true, showLabel=true |
+| Checked — Default | Checked with neutral color | color=Default, type=Check, state=Default, showIcon=true, showLabel=true |
+| Checked — Evergreen | Checked with Evergreen brand color | color=Evergreen, type=Check, state=Default, showIcon=true, showLabel=true |
+| Checked — Indigo | Checked with Indigo brand color | color=Indigo, type=Check, state=Default, showIcon=true, showLabel=true |
+| Mixed — Default | Indeterminate state, neutral color | color=Default, type=Mixed, state=Default, showIcon=true, showLabel=true |
+| Mixed — Evergreen | Indeterminate state, Evergreen | color=Evergreen, type=Mixed, state=Default, showIcon=true, showLabel=true |
+| Mixed — Indigo | Indeterminate state, Indigo | color=Indigo, type=Mixed, state=Default, showIcon=true, showLabel=true |
+| Disabled — Unchecked | Non-interactive, empty | color=Default, type=Default, state=Disabled, showIcon=true, showLabel=true |
+| Disabled — Checked | Non-interactive, checked | color=Default, type=Check, state=Disabled, showIcon=true, showLabel=true |
+| Disabled — Mixed | Non-interactive, indeterminate | color=Default, type=Mixed, state=Disabled, showIcon=true, showLabel=true |
+| Focused — Checked | Keyboard focus on checked | color=Default, type=Check, state=Focused, showIcon=true, showLabel=true |
+| Focused — Unchecked | Keyboard focus on empty | color=Default, type=Default, state=Focused, showIcon=true, showLabel=true |
+| Hovered — Checked | Hover on checked | color=Default, type=Check, state=Hovered, showIcon=true, showLabel=true |
+| Pressed — Checked | Press on checked | color=Default, type=Check, state=Pressed, showIcon=true, showLabel=true |
+| Without icon and label | Control only | color=Default, type=Check, state=Default, showIcon=false, showLabel=false |
+| Without label | Control with icon only | color=Default, type=Check, state=Default, showIcon=true, showLabel=false |
+
+## Pending Clarification
+
+- type=Default is not documented for color=Evergreen or color=Indigo. Behavior in those combinations is unknown.
+- state=Hovered and state=Pressed are not documented for color=Default with type=Default.
+- state=Disabled is not documented for color=Evergreen or color=Indigo.
+- The focus ring border token for type=Default state=Focused (empty box) is not explicitly identified in the source material.
+- Shadow tokens are not documented.
+- ARIA roles, keyboard interaction, and screen reader behavior are not documented in the source material.
+- The role and meaning of the BizagiLines icon is not described in the source material.
+- The default state value in Figma is set to Disabled — confirm if this is intentional.
+
+## Usage Guidelines
+
+- Use checkboxes when users can make one or more independent selections
+- Use the mixed state only when some child items are selected but not all
+- Keep labels short so the control stays easy to scan in dense forms
+- Hide the trailing icon when it does not add useful context
+- Use the default size and spacing for most form rows
+
+## Implementation Notes
+
+- Keep the hit area large enough for comfortable pointer and touch interaction
+- Preserve the visual distinction between empty, checked, and mixed states
+- Ensure disabled styling remains legible even when the icon is shown
+- Maintain consistent spacing between the control, icon, and label

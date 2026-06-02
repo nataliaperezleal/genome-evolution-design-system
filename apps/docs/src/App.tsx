@@ -103,6 +103,20 @@ function SearchIcon() {
   );
 }
 
+function DownloadIcon() {
+  return (
+    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" aria-hidden="true">
+      <path
+        d="M8 2.667v6.666m0 0L5.333 6.667M8 9.333l2.667-2.666M3.333 11.333v1.334c0 .736.597 1.333 1.334 1.333h6.666c.737 0 1.334-.597 1.334-1.333v-1.334"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 const foundationItems: NavItem[] = manifest.foundations
   .filter((entry) => entry.name !== "Spacing")
   .map((entry) => ({
@@ -193,6 +207,35 @@ function stripFrontmatter(markdown: string) {
   return markdown.replace(/^---[\s\S]*?---\n/, "");
 }
 
+function parseFrontmatter(markdown: string) {
+  const match = markdown.match(/^---\n([\s\S]*?)\n---\n/);
+  if (!match) return null;
+  const raw = match[1];
+  const data: Record<string, string> = {};
+
+  for (const line of raw.split("\n")) {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith("#")) continue;
+    const kv = trimmed.match(/^([a-zA-Z0-9_]+)\s*:\s*(.+)\s*$/);
+    if (!kv) continue;
+    const key = kv[1];
+    let value = kv[2].trim();
+    value = value.replace(/^"(.+)"$/, "$1").replace(/^'(.+)'$/, "$1");
+    data[key] = value;
+  }
+  return data;
+}
+
+function stripInlineMarkdown(value: string) {
+  return value
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/^\s*>\s?/g, "")
+    .trim();
+}
+
 function splitMarkdownByH2(markdown: string) {
   const body = stripFrontmatter(markdown);
   const lines = body.split("\n");
@@ -213,6 +256,85 @@ function splitMarkdownByH2(markdown: string) {
   if (current) sections.push(current);
 
   return { intro: intro.join("\n").trim(), sections };
+}
+
+function extractPurposeFromMarkdown(markdown: string) {
+  const { sections } = splitMarkdownByH2(markdown);
+  const purposeSection = sections.find((section) => {
+    const normalized = normalizeHeading(section.heading);
+    return normalized === "purpose" || normalized === "purpose intent" || normalized === "proposito" || normalized === "objetivo";
+  });
+  const content = purposeSection?.content ?? [];
+
+  const paragraphs: string[] = [];
+  let current: string[] = [];
+
+  const flush = () => {
+    const joined = current.join(" ").replace(/\s+/g, " ").trim();
+    if (joined) paragraphs.push(stripInlineMarkdown(joined));
+    current = [];
+  };
+
+  for (const rawLine of content) {
+    const line = rawLine.trimEnd();
+    if (!line.trim()) {
+      flush();
+      continue;
+    }
+    if (line.trim() === "---") continue;
+    if (line.trim().startsWith(">") && !current.length && !paragraphs.length) continue;
+    current.push(line);
+  }
+  flush();
+
+  if (!paragraphs.length) return null;
+  // Prefer a substantive paragraph (avoid title-like lines such as "Avatar — Component").
+  const substantive = paragraphs.find((p) => p.length >= 60 && !/—\s*component$/i.test(p));
+  return substantive ?? paragraphs.reduce((best, next) => (next.length > best.length ? next : best), paragraphs[0]) ?? null;
+}
+
+function markdownToPlainText(markdown: string) {
+  const withoutFrontmatter = stripFrontmatter(markdown);
+  return withoutFrontmatter
+    .replace(/^#{1,6}\s+/gm, "")
+    .replace(/^\s*>\s?/gm, "")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/\*([^*]+)\*/g, "$1")
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/^\s*[-*+]\s+/gm, "• ")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function downloadFromString(filename: string, content: string, mime = "text/plain") {
+  const blob = new Blob([content], { type: `${mime};charset=utf-8` });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  anchor.href = url;
+  anchor.download = filename;
+  document.body.appendChild(anchor);
+  anchor.click();
+  anchor.remove();
+  URL.revokeObjectURL(url);
+}
+
+function trimMarkdownFromQuickReference(markdown: string) {
+  const lines = markdown.split("\n");
+  const isQuickReference = (heading: string) => {
+    const normalized = normalizeHeading(heading);
+    return normalized.includes("quick reference") || normalized.includes("referencia rapida") || normalized.includes("referencia rápida");
+  };
+
+  for (let index = 0; index < lines.length; index += 1) {
+    const match = lines[index]?.match(/^##\s+(.+)\s*$/);
+    if (!match) continue;
+    if (isQuickReference(match[1])) {
+      return lines.slice(index).join("\n").trim();
+    }
+  }
+  return markdown;
 }
 
 function buildComponentMarkdownTabs(markdown: string) {
@@ -322,6 +444,20 @@ function splitMarkdownByH2Cards(markdown: string) {
 }
 
 function markdownToDocCards(markdown: string, language: Language) {
+  // Prefer H2-driven cards when the document has multiple H2 sections.
+  // This keeps each card aligned to the markdown section structure.
+  const h2FirstPass = splitMarkdownByH2Cards(markdown);
+  const h2Titled = h2FirstPass.filter((card) => Boolean(card.title));
+  if (h2Titled.length > 1) {
+    return h2FirstPass
+      .map((card) => ({ title: card.title, body: card.body }))
+      .filter((card) => Boolean(card.title) || Boolean(card.body?.trim()));
+  }
+
+  // If we only have one (or zero) titled H2, avoid fabricating an "Overview" title.
+  // Untitled cards render fine without a header, and this prevents repeated "Overview" headings.
+  const allowSyntheticOverviewTitle = false;
+
   const h3Cards = splitMarkdownByH3(markdown);
   const expanded: Array<{ title?: string; body: string }> = [];
 
@@ -352,19 +488,9 @@ function markdownToDocCards(markdown: string, language: Language) {
   if (expanded.length === 1 && !expanded[0].title) {
     const h2Cards = splitMarkdownByH2Cards(expanded[0].body);
     if (h2Cards.length > 1) {
-      const normalized = h2Cards.map((card) => {
-        const strongCards = splitMarkdownByStrongLabels(card.body);
-        if (strongCards.length > 1) {
-          return strongCards
-            .filter((entry) => Boolean(entry.title) || Boolean(entry.body?.trim()))
-            .map((entry) => ({
-              title: entry.title ? `${card.title} · ${entry.title}` : card.title,
-              body: entry.body
-            }));
-        }
-        return [{ title: card.title, body: card.body }];
-      });
-      return normalized.flat().filter((card) => Boolean(card.title) || Boolean(card.body?.trim()));
+      return h2Cards
+        .map((card) => ({ title: card.title, body: card.body }))
+        .filter((card) => Boolean(card.title) || Boolean(card.body?.trim()));
     }
 
     const strongCards = splitMarkdownByStrongLabels(expanded[0].body);
@@ -374,7 +500,7 @@ function markdownToDocCards(markdown: string, language: Language) {
       const cards = rest.map((entry) => ({ title: entry.title, body: entry.body }));
       if (firstUntitled && firstUntitled.body.trim()) {
         cards.unshift({
-          title: language === "es" ? "Resumen" : "Overview",
+          title: undefined,
           body: firstUntitled.body
         });
       }
@@ -383,7 +509,8 @@ function markdownToDocCards(markdown: string, language: Language) {
   }
 
   // Ensure any leading untitled content becomes a real card so everything is grouped.
-  if (expanded[0] && !expanded[0].title && expanded[0].body.trim()) {
+  // Do not force a synthetic title; it creates repetitive "Overview" headings in some docs.
+  if (allowSyntheticOverviewTitle && expanded[0] && !expanded[0].title && expanded[0].body.trim()) {
     expanded[0] = { ...expanded[0], title: language === "es" ? "Resumen" : "Overview" };
   }
 
@@ -572,7 +699,15 @@ function NavGroupIcon({ group }: { group: NavItem["group"] }) {
   );
 }
 
-function ComponentPreview({ componentName }: { componentName: string }) {
+function ComponentPreview({
+  componentName,
+  docBody,
+  language
+}: {
+  componentName: string;
+  docBody?: string;
+  language?: Language;
+}) {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
   const [demoPage, setDemoPage] = useState(1);
   const [demoSegment, setDemoSegment] = useState("light");
@@ -1211,15 +1346,17 @@ function ComponentPreview({ componentName }: { componentName: string }) {
 
   if (componentName === "Backdrop") {
     return (
-      <div className="preview-stack" style={{ flexDirection: "column" }}>
-        <div className="preview-row">
-          <span className="table-muted">Backdrop is an overlay. Preview shows swatches instead.</span>
+      <div className="preview-stack backdrop-preview">
+        <div className="backdrop-preview-main">
+          <div className="preview-row">
+            <span className="table-muted">Backdrop is an overlay. Preview shows swatches instead.</span>
+          </div>
+          <div className="preview-row">
+            <div className="backdrop-swatch backdrop-swatch--black" aria-hidden="true" />
+            <div className="backdrop-swatch backdrop-swatch--white" aria-hidden="true" />
+          </div>
+          <Backdrop open={false} />
         </div>
-        <div className="preview-row">
-          <div className="backdrop-swatch backdrop-swatch--black" aria-hidden="true" />
-          <div className="backdrop-swatch backdrop-swatch--white" aria-hidden="true" />
-        </div>
-        <Backdrop open={false} />
       </div>
     );
   }
@@ -1573,6 +1710,8 @@ function ComponentDocumentation({
 }) {
   const spec = componentSpecs[componentName];
   const mdTabs = useMemo(() => buildComponentMarkdownTabs(doc.body), [doc.body]);
+  const frontmatter = useMemo(() => parseFrontmatter(doc.body), [doc.body]);
+  const purpose = useMemo(() => extractPurposeFromMarkdown(doc.body), [doc.body]);
   const tabOrder: ComponentTabId[] = [
     "overview",
     "when-to-use",
@@ -1604,9 +1743,17 @@ function ComponentDocumentation({
   }, [defaultTab, componentName]);
 
   const sections = spec?.tabs?.[activeTab] ?? [];
-  const mdCards = useMemo(() => markdownToDocCards(mdTabs[activeTab] ?? "", language), [mdTabs, activeTab, language]);
+  const mdForCards = useMemo(() => {
+    const md = mdTabs[activeTab] ?? "";
+    if (activeTab === "overview") {
+      return trimMarkdownFromQuickReference(md);
+    }
+    return md;
+  }, [mdTabs, activeTab]);
+  const mdCards = useMemo(() => markdownToDocCards(mdForCards, language), [mdForCards, language]);
   const isBackdropAccessibility = componentName === "Backdrop" && activeTab === "accessibility";
   const isBackdropOverview = componentName === "Backdrop" && activeTab === "overview";
+  const downloadFileName = useMemo(() => doc.path.split("/").pop() ?? `${componentName}.md`, [doc.path, componentName]);
 
   return (
     <div className="component-docs">
@@ -1614,11 +1761,65 @@ function ComponentDocumentation({
         <div>
           <p className="eyebrow">{tr("Component guidance", language)}</p>
           <h3>{componentName}</h3>
-          {spec?.subtitle ? <p className="component-subtitle">{tr(spec.subtitle, language)}</p> : null}
-          <p className="path-chip">{doc.path}</p>
+          {purpose ? <p className="component-subtitle">{purpose}</p> : spec?.subtitle ? (
+            <p className="component-subtitle">{tr(spec.subtitle, language)}</p>
+          ) : null}
+
+          {frontmatter ? (
+            <div className="meta-pills" aria-label={language === "es" ? "Metadatos del componente" : "Component metadata"}>
+              {frontmatter.type ? (
+                <span className="meta-pill">
+                  <span className="meta-pill__k">{language === "es" ? "Tipo" : "Type"}</span>
+                  <span className="meta-pill__v">{frontmatter.type}</span>
+                </span>
+              ) : null}
+              {frontmatter.status ? (
+                <span className="meta-pill">
+                  <span className="meta-pill__k">{language === "es" ? "Estado" : "Status"}</span>
+                  <span className="meta-pill__v">{frontmatter.status}</span>
+                </span>
+              ) : null}
+              {frontmatter.version ? (
+                <span className="meta-pill">
+                  <span className="meta-pill__k">{language === "es" ? "Versión" : "Version"}</span>
+                  <span className="meta-pill__v">{frontmatter.version}</span>
+                </span>
+              ) : null}
+              {frontmatter.owner ? (
+                <span className="meta-pill">
+                  <span className="meta-pill__k">{language === "es" ? "Owner" : "Owner"}</span>
+                  <span className="meta-pill__v">{frontmatter.owner}</span>
+                </span>
+              ) : null}
+              {frontmatter.last_updated ? (
+                <span className="meta-pill">
+                  <span className="meta-pill__k">{language === "es" ? "Actualizado" : "Last Updated"}</span>
+                  <span className="meta-pill__v">{frontmatter.last_updated}</span>
+                </span>
+              ) : null}
+            </div>
+          ) : null}
         </div>
         <div className="component-hero-preview">
-          <ComponentPreview componentName={componentName} />
+          <ComponentPreview componentName={componentName} docBody={doc.body} language={language} />
+          <div className="component-hero-download">
+            <Tooltip
+              content={
+                language === "es"
+                  ? "Incluye mapeo a tokens, ejemplos de uso y guía de accesibilidad."
+                  : "Includes token mapping, usage examples, and accessibility guidance."
+              }
+              side="top"
+            >
+              <button
+                type="button"
+                className="subtle-download-link"
+                onClick={() => downloadFromString(downloadFileName, doc.body, "text/markdown")}
+              >
+                <DownloadIcon /> {language === "es" ? "Descargar .md" : "Download .md"}
+              </button>
+            </Tooltip>
+          </div>
         </div>
       </section>
 
