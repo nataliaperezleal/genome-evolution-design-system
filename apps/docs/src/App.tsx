@@ -38,6 +38,7 @@ import {
   Tooltip,
   TextArea
 } from "@genome-evolution/react";
+import ColorPickerDemo from "./ColorPickerDemo";
 
 import { componentDocsBySlug, componentDocsBySlugEs, foundationDocsBySlug, foundationDocsBySlugEs, manifest, tokenStats } from "./data";
 import { componentSpecs, componentTabLabels, tr, type ComponentTabId } from "./component-specs";
@@ -117,9 +118,7 @@ function DownloadIcon() {
   );
 }
 
-const foundationItems: NavItem[] = manifest.foundations
-  .filter((entry) => entry.name !== "Spacing")
-  .map((entry) => ({
+const foundationItems: NavItem[] = manifest.foundations.map((entry) => ({
     id: entry.file.replace(/\.md$/, "").replace(/\//g, "-"),
     label: entry.name,
     group: "foundations"
@@ -709,6 +708,7 @@ function ComponentPreview({
   language?: Language;
 }) {
   const [demoModalOpen, setDemoModalOpen] = useState(false);
+  const [demoPopoverRect, setDemoPopoverRect] = useState<DOMRect | null>(null);
   const [demoPage, setDemoPage] = useState(1);
   const [demoSegment, setDemoSegment] = useState("light");
   const [demoSnackOpen, setDemoSnackOpen] = useState(false);
@@ -1167,8 +1167,7 @@ function ComponentPreview({
   if (componentName === "Color Picker") {
     return (
       <div className="preview-stack" style={{ flexDirection: "column" }}>
-        <ColorPicker label="Brand color" defaultValue="#297A39" />
-        <ColorPicker label="Secondary" defaultValue="#6B1B99" />
+        <ColorPickerDemo width={320} />
       </div>
     );
   }
@@ -1727,11 +1726,14 @@ function ComponentDocumentation({
 
   const availableTabs = useMemo(() => {
     return tabOrder.filter((tab) => {
+      const hasMarkdown = Boolean(mdTabs[tab]?.trim());
+      // Prefer Markdown: if the heading exists in the MD, show the tab.
+      if (hasMarkdown) return true;
+      // If there's no Markdown for this tab, allow a fallback from the spec
+      // only for tokens and implementation (props/code/tokenCards).
       if (tab === "tokens") return Boolean(spec?.tokenCards?.length);
       if (tab === "implementation") return Boolean(spec?.props?.length || spec?.code?.length);
-      const hasSpec = Boolean((spec?.tabs?.[tab] ?? []).length);
-      const hasMarkdown = Boolean(mdTabs[tab]?.trim());
-      return hasMarkdown || hasSpec;
+      return false;
     });
   }, [mdTabs, spec]);
 
@@ -1841,7 +1843,93 @@ function ComponentDocumentation({
         <section className="component-content">
           {componentName === "Button" && activeTab === "states" ? <ButtonStatesPreview /> : null}
 
-          {activeTab === "tokens" && spec?.tokenCards?.length ? (
+          {activeTab === "anatomy" ? (
+            <div className={`anatomy-two-column ${mdCards.length ? "anatomy--paired" : ""}`}>
+              {mdCards.length ? (
+                <div className="anatomy-paired-rows">
+                  {(() => {
+                    const cardsToRender = componentName === "Color Picker" ? mdCards.slice(1) : mdCards;
+                    return cardsToRender.map((card, idx) => {
+                      const index = idx;
+                    const title = card.title ?? "";
+                    const lower = title.toLowerCase();
+                    let imageName: string | null = null;
+                    if (componentName === "Color Picker") {
+                      if (/compartida|shared/i.test(title)) imageName = "anatomy.png";
+                      else if (/gradient/i.test(lower)) imageName = "gradient.png";
+                      else if (/solid/i.test(lower) || /solo modo solid/i.test(lower)) imageName = "solid.png";
+                    }
+
+                      return (
+                        <div key={`pair-${index}`} className="anatomy-paired-row">
+                          <div className="anatomy-image-placeholder" aria-hidden={card.title ? undefined : "true"}>
+                            {imageName ? <img src={`/dist/images/color-picker/${imageName}`} alt={title} /> : null}
+                          </div>
+                          <article className="doc-section-card">
+                            {card.title ? <h4>{card.title}</h4> : null}
+                            <div className="markdown-body">{renderMarkdown(card.body)}</div>
+                          </article>
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              ) : (
+                <>
+                  <div className="anatomy-two-column__media">
+                    <div className="anatomy-image-list">
+                      <div className="anatomy-image-item">
+                        <div className="anatomy-image-placeholder" aria-hidden="true" />
+                      </div>
+                      <div className="anatomy-image-item">
+                        <div className="anatomy-image-placeholder" aria-hidden="true" />
+                      </div>
+                      <div className="anatomy-image-item">
+                        <div className="anatomy-image-placeholder" aria-hidden="true" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="anatomy-two-column__content">
+                    {sections.length ? (
+                      <div className="section-stack">
+                        {sections.map((section, index) => (
+                          <article key={`${activeTab}-${index}`} className="doc-section-card">
+                            <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
+                              {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
+                              <div>
+                                {section.title ? <h4>{tr(section.title, language)}</h4> : null}
+                                {section.body?.map((paragraph) => (
+                                  <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
+                                ))}
+                                {section.bullets ? (
+                                  <ul>
+                                    {section.bullets.map((bullet) => (
+                                      <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
+                                    ))}
+                                  </ul>
+                                ) : null}
+                              </div>
+                            </div>
+                          </article>
+                        ))}
+                      </div>
+                    ) : (
+                      <div className="markdown-body">{renderMarkdown(mdTabs[activeTab] ?? doc.body)}</div>
+                    )}
+                  </div>
+                </>
+              )}
+            </div>
+          ) : activeTab === "tokens" && mdCards.length ? (
+            <div className="section-stack">
+              {mdCards.map((card, index) => (
+                <article key={`${activeTab}-md-${index}`} className="doc-section-card">
+                  {card.title ? <h4>{card.title}</h4> : null}
+                  <div className="markdown-body">{renderMarkdown(card.body)}</div>
+                </article>
+              ))}
+            </div>
+          ) : activeTab === "tokens" && spec?.tokenCards?.length ? (
             <div className="token-grid">
               {spec.tokenCards.map((card) => (
                 <article key={card.token} className="token-card">
@@ -1851,6 +1939,15 @@ function ComponentDocumentation({
                   <code>{card.token}</code>
                   {card.value ? <p className="token-value">{card.value}</p> : null}
                   {card.note ? <p>{tr(card.note, language)}</p> : null}
+                </article>
+              ))}
+            </div>
+          ) : activeTab === "implementation" && mdCards.length ? (
+            <div className="section-stack">
+              {mdCards.map((card, index) => (
+                <article key={`${activeTab}-md-${index}`} className="doc-section-card">
+                  {card.title ? <h4>{card.title}</h4> : null}
+                  <div className="markdown-body">{renderMarkdown(card.body)}</div>
                 </article>
               ))}
             </div>
