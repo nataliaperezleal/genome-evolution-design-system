@@ -14,10 +14,10 @@ export function OpacityFoundation({ language }: { language: Language }) {
   const rows = useMemo<Row[]>(() => {
     const stateKeys = ["disabled", "ghost", "overlay", "loading", "readonly", "selected"] as const;
     return stateKeys.map((key) => {
-      const token = `opacity.state.${key}`;
+      const token = `opacity.base.state.${key}`;
       const raw = allTokens[token];
       const percent = typeof raw === "number" ? raw : Number(raw);
-      const primitive = percent === 100 ? "opacity.primitive.100" : `opacity.primitive.${percent}`;
+      const primitive = `opacity.base.primitive.${percent}`;
       return {
         token,
         value: primitive,
@@ -67,13 +67,13 @@ export function OpacityFoundation({ language }: { language: Language }) {
 
         <p className="foundation-footnote">
           {language === "es" ? "Valores primitivos disponibles:" : "Available primitive values:"}{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.0")}</span>,{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.10")}</span>,{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.20")}</span>,{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.40")}</span>,{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.60")}</span>,{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.80")}</span>,{" "}
-          <span className="token-value-mono">{tokenValue("opacity.primitive.100")}</span>.
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.0")}</span>,{" "}
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.10")}</span>,{" "}
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.20")}</span>,{" "}
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.40")}</span>,{" "}
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.60")}</span>,{" "}
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.80")}</span>,{" "}
+          <span className="token-value-mono">{tokenValue("opacity.base.primitive.100")}</span>.
         </p>
       </section>
     </div>

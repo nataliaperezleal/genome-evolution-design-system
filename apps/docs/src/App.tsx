@@ -147,6 +147,8 @@ function localizedFoundationLabel(item: NavItem, language: Language) {
     "foundations-color": "nav.foundation.color",
     "foundations-elevation": "nav.foundation.elevation",
     "foundations-layout": "nav.foundation.layout",
+    "foundations-opacity": "nav.foundation.opacity",
+    "foundations-palette": "nav.foundation.palette",
     "foundations-spacing": "nav.foundation.spacing",
     "foundations-tokens.json": "nav.foundation.tokens",
     "foundations-typography": "nav.foundation.typography"

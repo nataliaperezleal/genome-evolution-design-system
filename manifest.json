@@ -54,8 +54,10 @@
   "foundations": [
     { "name": "Typography", "file": "foundations/typography.md" },
     { "name": "Color", "file": "foundations/color.md" },
+    { "name": "Palette", "file": "foundations/palette.md" },
     { "name": "Spacing", "file": "foundations/spacing.md" },
     { "name": "Layout", "file": "foundations/layout.md" },
+    { "name": "Opacity", "file": "foundations/opacity.md" },
     { "name": "Elevation", "file": "foundations/elevation.md" },
     { "name": "Border", "file": "foundations/border.md" },
     { "name": "Tokens", "file": "foundations/tokens.json" }
