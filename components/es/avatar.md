@@ -2,7 +2,7 @@
 component: "Avatar"
 system: "Genome Evolution"
 type: "Avatar display component"
-status: "Done"
+status: "Production"
 version: "1.2"
 owner: "UX Design"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2040-247"
@@ -166,7 +166,7 @@ El significado del indicador de estado (por ejemplo, qué estados representa) no
 | Valor | Descripción |
 |--------|--------|
 | Default | Apariencia base. |
-| Focused | Añade un borde de foco con focus/width (2px) y border/focus. |
+| Focused | Añade un borde de foco con `border.base.focus.width` (2px) y `border/focus`. |
 
 ### Show State
 
@@ -186,7 +186,7 @@ Propiedad de texto. Valor por defecto: B. Solo las variantes Type=Print tienen c
 | Estado | Descripción | Cambios visuales |
 |--------|--------|--------|
 | Default | Apariencia base de cada Type y Color. | Print + Default: borde de 1px border/strong. Print + Evergreen / Indigo: sin borde. Icon y Person: sin borde. |
-| Focused | Apariencia de foco (variante State=Focused). | Print: borde de 2px (focus/width) border/focus en el contenedor, que reemplaza border/strong en Color=Default. Person: borde de 2px border/focus en la capa de imagen. Icon: anillo de foco dibujado en el vector, que sobresale 2px de los límites del componente. |
+| Focused | Apariencia de foco (variante State=Focused). | Print: borde de 2px (`border.base.focus.width`) `border/focus` en el contenedor, que reemplaza border/strong en Color=Default. Person: borde de 2px `border/focus` en la capa de imagen. Icon: anillo de foco dibujado en el vector, que sobresale 2px de los límites del componente. |
 
 ---
 
@@ -214,7 +214,7 @@ Propiedad de texto. Valor por defecto: B. Solo las variantes Type=Print tienen c
 |--------|--------|--------|
 | border/strong | Borde del contenedor | Type=Print, Color=Default, State=Default. Grosor de 1px, sin token. |
 | border/focus | Color del borde de foco | State=Focused, todos los valores de Type |
-| focus/width | Grosor del borde de foco (2) | State=Focused, todos los valores de Type |
+| border.base.focus.width | Grosor del borde de foco (2) | State=Focused, todos los valores de Type |
 
 ### Icono
 

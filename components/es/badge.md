@@ -2,7 +2,7 @@
 component: "Badge"
 system: "Genome Evolution Design System"
 type: "Indicator/label component"
-status: "Done"
+status: "Production"
 version: "1.2"
 owner: "UX Design"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2046-82"

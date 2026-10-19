@@ -2,7 +2,7 @@
 component: "Breadcrumb"
 system: "Genome Evolution Design System"
 type: "Componente de navegación/jerarquía"
-status: "Design"
+status: "Production"
 version: "1.0"
 owner: "UX Design Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2081-1144"
@@ -373,7 +373,7 @@ Compacto: Overflow + Level 1 + Current para jerarquías profundas (fuente: descr
 - El mismo borrador dice que el color del chevron coincide con el texto actual. En el componente, el chevron de Overflow es gris en todos los valores de Color. Confirmar.
 - Color: el borrador dice que solo afecta al ítem actual. Los chevrons de Level también cambian. Confirmar.
 - Tokens del chevron: cuál de icon/primary, icon/secondary, icon/evergreen, icon/indigo aplica a cada chevron.
-- El grosor del borde de foco (2px) no tiene token en .BreadcrumbItem (no se encontró la variable focus/width).
+- El grosor del borde de foco (2px) usa el token `border.base.focus.width` (`--ge-border-focus-width`).
 - Los estados solo existen en .BreadcrumbItem. ¿Cómo establecen los consumidores el estado de un ítem desde Breadcrumb?
 - Los ítems Current tienen variantes Hovered, Pressed y Focused. ¿La página actual es interactiva?
 - Comportamiento del ítem Overflow al activarse, y comportamiento responsivo/de truncado.

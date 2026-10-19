@@ -2,7 +2,7 @@
 component: "Modal"
 system: "Genome Plus Design System"
 type: "Overlay / Feedback"
-status: "Draft"
+status: "Production"
 version: "0.1.0"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-2533"
 last_updated: "2026-04-17"

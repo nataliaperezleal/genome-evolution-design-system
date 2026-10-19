@@ -2,7 +2,7 @@
 component: Checkbox
 system: Genome Evolution Design System
 type: Component
-status: Design
+status: "Production"
 version: 1.0
 owner: UX Design Team
 last_updated: 2026-06-02

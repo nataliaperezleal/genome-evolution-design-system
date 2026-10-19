@@ -2,7 +2,7 @@
 component: ClearButton
 system: Genome Evolution Design System
 type: Component
-status: Design
+status: "Production"
 version: 1.0
 owner: UX Design Team
 last_updated: 2026-06-02
@@ -76,7 +76,7 @@ ClearButton is a minimal, inline-style interactive button with no solid backgrou
 | Default | Resting state. No background visible. | No background. Text and icon color from `color` or `type` token. |
 | Hovered | Cursor is over the component. | Background: `background/interactive/hovered`. Text and icon color unchanged. |
 | Pressed | Component is being clicked or tapped. | Background: `background/interactive/pressed`. Text and icon color unchanged. |
-| Focused | Component receives keyboard or programmatic focus. | Border of `border/focus` at `focus/width` (2px). No background change. |
+| Focused | Component receives keyboard or programmatic focus. | Border of `border/focus` at `border.base.focus.width` (2px). No background change. |
 | Disabled | Component is non-interactive. | Text and icon color: `text/disabled`. No background. Only documented for color=Default. |
 
 ## Sizes
@@ -116,7 +116,7 @@ ClearButton has a single size. No size property is exposed.
 
 | State | Token | Notes |
 |-------|-------|-------|
-| Focused | `border/focus` | Width: `focus/width` (2px) — applies to all color and type values |
+| Focused | `border/focus` | Width: `border.base.focus.width` (2px) — applies to all color and type values |
 
 ### Icon
 
@@ -153,7 +153,7 @@ Pending confirmation.
 
 | Property | Value |
 |----------|-------|
-| Focus indicator | `border/focus` at `focus/width` (2px) — confirmed in Focused state for all color and type values |
+| Focus indicator | `border/focus` at `border.base.focus.width` (2px) — confirmed in Focused state for all color and type values |
 | Disabled visual | `text/disabled` applied to label and icons |
 | Keyboard interaction | Pending confirmation |
 | ARIA roles | Pending confirmation |

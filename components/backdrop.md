@@ -2,7 +2,7 @@
 component: "Backdrop"
 system: "Genome Evolution Design System"
 type: "Visual overlay/underlay element"
-status: "Done"
+status: "Production"
 version: "1.2"
 owner: "UX Design"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2041-81"

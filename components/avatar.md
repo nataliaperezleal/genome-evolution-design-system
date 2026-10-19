@@ -2,7 +2,7 @@
 component: "Avatar"
 system: "Genome Evolution"
 type: "Avatar display component"
-status: "Done"
+status: "Production"
 version: "1.2"
 owner: "UX Design"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2040-247"
@@ -166,7 +166,7 @@ The meaning of the status indicator (e.g., which statuses it represents) is not 
 | Value | Description |
 |--------|--------|
 | Default | Base appearance. |
-| Focused | Adds a focus border using focus/width (2px) and border/focus. |
+| Focused | Adds a focus border using `border.base.focus.width` (2px) and `border/focus`. |
 
 ### Show State
 
@@ -186,7 +186,7 @@ Text property. Default value: B. Only Type=Print variants contain a text layer; 
 | State | Description | Visual Changes |
 |--------|--------|--------|
 | Default | Base appearance of each Type and Color. | Print + Default: 1px border/strong border. Print + Evergreen / Indigo: no border. Icon and Person: no border. |
-| Focused | Focus appearance (State=Focused variant). | Print: 2px (focus/width) border/focus border on the container, replacing border/strong for Color=Default. Person: 2px border/focus border on the image layer. Icon: focus ring drawn in the vector, extending 2px beyond the component bounds. |
+| Focused | Focus appearance (State=Focused variant). | Print: 2px (`border.base.focus.width`) `border/focus` border on the container, replacing border/strong for Color=Default. Person: 2px `border/focus` border on the image layer. Icon: focus ring drawn in the vector, extending 2px beyond the component bounds. |
 
 ---
 
@@ -214,7 +214,7 @@ Text property. Default value: B. Only Type=Print variants contain a text layer; 
 |--------|--------|--------|
 | border/strong | Container border | Type=Print, Color=Default, State=Default. 1px width, not tokenized. |
 | border/focus | Focus border color | State=Focused, all Type values |
-| focus/width | Focus border width (2) | State=Focused, all Type values |
+| border.base.focus.width | Focus border width (2) | State=Focused, all Type values |
 
 ### Icon
 
