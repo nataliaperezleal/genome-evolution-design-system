@@ -17,10 +17,9 @@ export function OpacityFoundation({ language }: { language: Language }) {
       const token = `opacity.base.state.${key}`;
       const raw = allTokens[token];
       const percent = typeof raw === "number" ? raw : Number(raw);
-      const primitive = `opacity.base.primitive.${percent}`;
       return {
         token,
-        value: primitive,
+        value: `${percent}%`,
         percent: Number.isFinite(percent) ? percent : 0
       };
     });

@@ -1,122 +1,222 @@
 ---
-component: Backdrop
-system: Genome Evolution Design System
-type: Component
-status: Design
-version: 1.0
-owner: UX Design Team
-last_updated: 2026-06-02
-tags: [superposicion, modal, fondo, enfoque]
+component: "Backdrop"
+system: "Genome Evolution Design System"
+type: "Visual overlay/underlay element"
+status: "Done"
+version: "1.2"
+owner: "UX Design"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2041-81"
+last_updated: "2026-10-19"
+tags:
+  - "backdrop"
+  - "overlay"
+  - "capas"
 ---
 
-# Backdrop
+# Backdrop — Genome Evolution Design System
 
-## Propósito
+Capa semitransparente que oscurece o aclara el contenido de fondo, usada junto con modales, dropdowns y otras superposiciones para establecer jerarquía visual y foco.
 
-Proporciona una capa de superposición semi-transparente que oscurece o aclara el contenido de fondo, comúnmente utilizada con diálogos modales, menús desplegables y otras superposiciones para establecer jerarquía visual y enfoque. El backdrop crea un efecto scrim que reduce la complejidad visual del fondo y dirige la atención del usuario al contenido primario.
+## Referencia rápida
 
-## Referencia Rápida
+### Qué es
 
-| Propiedad | Valores | Predeterminado |
-|-----------|---------|----------------|
-| Color | White, Black | Black |
+Elemento visual de superposición/subcapa (fuente: descripción del componente en Figma).
+
+### Propiedades clave
+
+- Color [White | Black] — default: Black
+
+### Configuración por defecto
+
+Color=Black
+
+### Uso típico
+
+- Diálogo modal: Color=Black
+- Overlay para tema claro: Color=White
+- Fondo de dropdown: Color=Black
+
+---
+
+## Propósito / Intención
+
+### Problema que resuelve
+
+Establece jerarquía visual y foco separando capas (fuente: descripción del componente en Figma).
+
+### Resultado esperado
+
+Mejor contraste del contenido flotante (fuente: descripción del componente en Figma).
+
+### Contexto típico
+
+Se usa junto con modales, dropdowns, popovers y tooltips (fuente: descripción del componente en Figma).
+
+---
 
 ## Cuándo usar
 
-- Oscurecer fondo al mostrar diálogos modales
-- Crear enfoque en contenido de superposición (menús desplegables, popovers, tooltips)
-- Reducir desorden visual desaturando el fondo
-- Establecer separación visual entre capas
-- Mejorar contraste para contenido flotante
-- Desactivar interacción de fondo durante interacción modal
-- Crear jerarquía visual en capas
+- Para oscurecer el fondo al mostrar diálogos modales
+- Para crear foco en contenido superpuesto (dropdowns, popovers, tooltips)
+- Para establecer separación visual entre capas y mejorar el contraste del contenido flotante
+
+---
 
 ## Cuándo NO usar
 
-- Para fondos de página permanentes
+- Como fondo permanente de página
+- Sin un componente de superposición que lo acompañe
+- Para estados hover simples sin modal
 - Cuando se requiere interacción total con el fondo
-- Sin componente de superposición acompañante
-- Para estados de hover simples sin modal
-- Cuando la accesibilidad requiere visibilidad de contenido de fondo
-- Como elemento decorativo sin propósito funcional
+- Cuando la accesibilidad exige que el contenido de fondo siga visible
 
-## Anatomía
+---
 
-| Parte | Requerida | Descripción | Condición |
-|-------|-----------|-------------|-----------|
-| Contenedor de superposición | Sí | Capa de fondo semi-transparente | Siempre presente |
-| Efecto de desenfoque | Sí | Desenfoque de backdrop aplicado al contenido detrás | Siempre presente |
+## Estructura (Anatomía)
 
-## Propiedades
+### Partes del componente
 
-| Propiedad | Tipo | Predeterminado | Valores | Descripción |
-|-----------|------|----------------|---------|-------------|
-| Color | Enum | Black | White, Black | Controla color de superposición. Black crea superposición oscura; White crea superposición clara |
+| Parte | Requerido | Descripción |
+|--------|--------|--------|
+| Capa | Requerido | Un único rectángulo semitransparente con desenfoque de fondo. Sin capas hijas ni texto. |
 
-## Especificaciones visuales
+### Layout
 
-| Atributo | Valor |
-|----------|-------|
-| Ancho | 182px |
-| Altura | 131px |
-| Desenfoque de backdrop | 8px |
-| Opacidad | 60% (0.6) |
-| Desbordamiento | clip |
+| Propiedad | Valor |
+|-----------|-----------|
+| Alto | 131 (en ambas variantes; puede ser un tamaño de muestra) |
+| Ancho | 182 (en ambas variantes; puede ser un tamaño de muestra) |
+| Padding | Ninguno |
+| Gap | Ninguno |
+| Radio | [Pending confirmation] (radius/0 está presente en las variables) |
+
+---
+
+## Iconografía
+
+El componente no contiene iconos.
+
+### Slots de icono
+
+| Slot | Descripción |
+|--------|--------|
+| Leading | No aplica. |
+| Trailing | No aplica. |
+
+
+## Variantes (Propiedades)
+
+### Color
+
+| Valor | Descripción |
+|--------|--------|
+| White | Capa clara semitransparente (overlay/white). Uso típico: overlay para tema claro. |
+| Black | Capa oscura semitransparente (overlay/black). Uso típico: diálogo modal, fondo de dropdown. |
+
+---
 
 ## Estados
 
-[Solo existe un estado visual; sin estados interactivos]
+El component set no tiene una propiedad de estado.
 
-## Colores
-
-| Color | Valor de superposición | Hex (Referencia) | Caso de uso |
-|-------|----------------------|------------------|------------|
-| Black | overlay/black | rgba(76,87,78,0.6) | Tinte oscuro; modales, superposiciones estándar |
-| White | overlay/white | rgba(247,248,247,0.6) | Tinte claro; superposiciones tema claro, fondos sutiles |
+---
 
 ## Mapeo de tokens
 
 ### Fondo
 
-- **Color=Black**: overlay/black (rgba(76,87,78,0.6))
-- **Color=White**: overlay/white (rgba(247,248,247,0.6))
+| Token | Uso | Notas |
+|--------|--------|--------|
+| overlay/black | Relleno de la capa | Color=Black |
+| overlay/white | Relleno de la capa | Color=White |
 
-### Efectos
+### Radio
 
-- **Blur**: backdrop-blur-8px
-- **Desbordamiento**: clip (previene artefactos de desenfoque en bordes)
+| Token | Uso | Notas |
+|--------|--------|--------|
+| radius/0 | Presente en las variables | Capa no verificada |
 
-## Accesibilidad
+### Sombra
 
-| Propiedad | Valor |
-|-----------|-------|
-| Contraste de color | Superposiciones semi-transparentes; verificar contraste con contenido subyacente |
-| Opacidad | 60% mantiene algo de visibilidad de fondo; suficiente para contexto modal |
-| Gestión de enfoque | Backdrop no recibe enfoque; el enfoque debe estar en contenido modal |
-| Navegación de teclado | Backdrop típicamente no interactivo; modal subyacente maneja interacciones |
+Sin token: desenfoque de fondo de 8px.
+
+---
+
+| Tema | Información |
+|--------|--------|
+| Requisito de accesibilidad | La descripción de Figma indica no usarlo cuando la accesibilidad exige que el contenido de fondo siga visible. |
+| Soporte visible de estado | [Pending confirmation] |
+| Notas | No hay documentación de roles, manejo de foco ni valores de contraste. |
+
+---
 
 ## Ejemplos
 
-| Ejemplo | Descripción | Configuración |
-|---------|-------------|----------------|
-| Diálogo modal | Superposición oscura estándar para modal | Color=Black |
-| Modal tema claro | Superposición sutil para interfaces claras | Color=White |
-| Scrim de menú desplegable | Oscurecimiento de fondo para menús desplegables | Color=Black |
-| Fondo de popover | Superposición establecedora de enfoque para popovers | Color=Black |
-| Fondo de notificación | Fondo semi-transparente para notificaciones toast | Color=Black |
+### Ejemplo 1
 
-## Guías de uso
+Configuración:
 
-- Siempre emparejar backdrop con componente modal, desplegable u otra superposición
-- Asegurarse de que backdrop cubra toda la ventana gráfica o área prevista
-- Black se recomienda para la mayoría de casos de uso
-- White debe usarse en interfaces con tema claro
-- El efecto de desenfoque de backdrop mantiene cierta visibilidad del contenido de fondo
-- Considerar backdrop como capa no interactiva; manejar interacciones en componente de superposición arriba
+```text
+Color=Black
+```
 
-## Notas de implementación
+Descripción:
 
-- Backdrop debe posicionarse absolutamente o fijo detrás del contenido de superposición
-- Z-index debe ser menor que componente de superposición pero mayor que contenido de página principal
-- El efecto de desenfoque puede afectar el rendimiento en dispositivos de gama baja; considerar optimización
-- Nivel de opacidad (60%) balancea enfoque con visibilidad de fondo
+Diálogo modal (fuente: descripción del componente en Figma).
+
+### Ejemplo 2
+
+Configuración:
+
+```text
+Color=White
+```
+
+Descripción:
+
+Overlay para tema claro (fuente: descripción del componente en Figma).
+
+### Ejemplo 3
+
+Configuración:
+
+```text
+Color=Black
+```
+
+Descripción:
+
+Fondo de dropdown (fuente: descripción del componente en Figma).
+
+---
+
+## Checklist de QA
+
+- Propiedades documentadas.
+- Los nombres de propiedades coinciden exactamente con Figma.
+- Los valores de variantes coinciden exactamente con Figma.
+- Valores por defecto documentados.
+- Combinaciones inválidas documentadas.
+- Tokens verificados.
+- No se añadió comportamiento no documentado.
+- No se añadió comportamiento de accesibilidad no documentado.
+- Conteo de variantes verificado (2).
+
+---
+
+## Aclaraciones pendientes
+
+- Combinaciones inválidas (no documentadas en Figma).
+- Dimensiones: ¿182×131 son las medidas reales o un tamaño de muestra? Comportamiento al redimensionar.
+- Desenfoque: los 8px no tienen token. ¿Existe uno?
+- Radio: capa donde se usa radius/0.
+- Interacción: si el Backdrop cierra la superposición al hacer clic y su orden de capas respecto al componente superpuesto.
+- Accesibilidad: manejo de foco y requisitos de contraste.
+- Status, versión y owner.
+
+---
+
+## Notas / Changelog
+
+Generado a partir del material fuente disponible el 2026-10-19.

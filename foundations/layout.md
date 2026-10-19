@@ -1,31 +1,31 @@
 # Layout — Genome Evolution Design System
 
 ## Breakpoints
-| Token | Valor | Uso |
+| Token | Value | Use |
 |---|---|---|
-| `layout/breakpoint/mobile` | 360px | Viewport mínimo soportado |
-| `layout/breakpoint/tablet` | 1024px | Cambio de grid móvil a tablet |
-| `layout/breakpoint/computer` | 1440px | Cambio de grid tablet a desktop |
+| `layout.base.breakpoint.mobile` | 360px | Minimum supported viewport |
+| `layout.base.breakpoint.tablet` | 1024px | Switch from mobile to tablet grid |
+| `layout.base.breakpoint.computer` | 1440px | Switch from tablet to desktop grid |
 
-## Grid por breakpoint
-| Breakpoint | Columnas | Gutter | Margin |
+## Grid by breakpoint
+| Breakpoint | Columns | Gutter | Margin |
 |---|---|---|---|
-| Mobile | `layout/columns/mobile` = 4 | `layout/gutter/mobile` = 16px | `layout/margin/mobile` = 16px |
-| Tablet | `layout/columns/tablet` = 8 | `layout/gutter/tablet` = 16px | `layout/margin/tablet` = 32px |
-| Computer | `layout/columns/computer` = 12 | `layout/gutter/computer` = 16px | `layout/margin/computer` = 32px |
+| Mobile | `layout.base.columns.mobile` = 4 | `layout.base.gutter.mobile` = 16px | `layout.base.margin.mobile` = 16px |
+| Tablet | `layout.base.columns.tablet` = 8 | `layout.base.gutter.tablet` = 16px | `layout.base.margin.tablet` = 32px |
+| Desktop (at `computer`) | `layout.base.columns.desktop` = 12 | `layout.base.gutter.desktop` = 16px | `layout.base.margin.desktop` = 32px |
 
-## Reglas de uso
-- `layout/*` aplica solo al contenedor macro de página, no al spacing interno de componentes.
-- `margin/*` define el padding lateral del layout principal.
-- `gutter/*` define el espacio entre columnas del grid.
-- `columns/*` se usa para calcular spans, no para fijar anchos de componentes aislados.
+## Usage rules
+- `layout.base.*` applies to the page-level grid, not the internal spacing of components.
+- `margin.*` defines the horizontal inset of the main layout.
+- `gutter.*` defines the space between grid columns.
+- `columns.*` is used to calculate spans, not to set widths for isolated components.
 
-## Ejemplos de composición
-- Formulario simple en mobile: span 4/4 con `margin/mobile`.
-- Panel + tabla en tablet: spans 3/8 y 5/8 con `gutter/tablet`.
-- Dashboard en desktop: sidebar 3/12, contenido 9/12 con `margin/computer`.
+## Composition examples
+- Simple mobile form: span 4/4 with `layout.base.margin.mobile`.
+- Tablet panel and table: spans 3/8 and 5/8 with `layout.base.gutter.tablet`.
+- Desktop dashboard: sidebar 3/12, content 9/12 with `layout.base.margin.desktop`.
 
-## Antipatrones
-- No usar `layout/margin/*` como padding interno de cards, modales o inputs.
-- No saltarse breakpoints: diseñar y revisar en 360, 1024 y 1440.
-- No usar grids de 12 columnas en mobile.
+## Anti-patterns
+- Do not use `layout.base.margin.*` as internal padding for cards, modals, or inputs.
+- Do not skip breakpoints: design and review at 360, 1024, and 1440.
+- Do not use 12-column grids on mobile.

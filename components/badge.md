@@ -1,187 +1,308 @@
 ---
-component: Badge
-system: Genome Evolution Design System
-type: Component
-status: Design
-version: 1.0
-owner: UX Design Team
-last_updated: 2026-06-02
-tags: [indicator, label, status, tag]
+component: "Badge"
+system: "Genome Evolution Design System"
+type: "Indicator/label component"
+status: "Done"
+version: "1.2"
+owner: "UX Design"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2046-82"
+last_updated: "2026-10-19"
+tags:
+  - "badge"
+  - "status"
+  - "label"
 ---
 
-# Badge
+# Badge — Genome Evolution Design System
 
-## Purpose
-
-Displays count, status, or category labels in a compact, visually distinct format. Badges provide quick visual feedback and labeling across UI elements, communicating status, counts, and semantic meaning at a glance.
+Shows a count, status or category in a compact, visually distinctive format to give quick visual feedback.
 
 ## Quick Reference
 
-| Property | Values | Default |
-|----------|--------|---------|
-| Type | Filled, Line | Line |
-| Color | Default, Evergreen, Indigo, Inverse, Information, Warning, Error, Success | Default |
-| Label | Text/numeric | 0 |
+### What it is
+
+Indicator/label component (source: Figma component description).
+
+### Key Properties
+
+- Type [Filled | Line] — default: Line
+- Color [Default | Evergreen | Indigo | Inverse | Information | Warning | Error | Success] — default: Default
+- Label — text content (default: 0)
+
+### Default Configuration
+
+Type=Line, Color=Default, Label=0
+
+### Typical Usage
+
+- Notification count: Type=Filled, Color=Default, Label=5
+- Warning label: Type=Line, Color=Warning, Label=Warning
+- Error state: Type=Filled, Color=Error, Label=!
+
+---
+
+## Purpose / Intent
+
+### Problem Solved
+
+Gives quick visual feedback about a count, status or category in a compact format (source: Figma component description).
+
+### Typical Context
+
+Notification counts, status indicators, category tags and semantic markers such as warnings and alerts (source: Figma component description).
+
+---
 
 ## When to Use
 
-- Display notification count or status indicators
-- Show category tags or labels
-- Indicate status (new, updated, error, success)
-- Mark items with semantic meaning (warnings, alerts)
-- Highlight actionable status changes
-- Group related labels in compact space
-- Provide quick visual feedback without disrupting layout
+- To show notification counts or status indicators
+- To show category labels or tags
+- To indicate status (new, updated, error, success) or mark items with semantic meaning (warnings, alerts)
+
+---
 
 ## When NOT to Use
 
-- For long descriptive text (max ~2-3 characters)
+- For long descriptive text
 - When detailed information is needed
-- As primary action element
-- For loading states (use dedicated spinner)
-- When accessibility requires longer form text
-- For interactive content (badges are read-only)
+- As a primary action element
+- For loading states (use a dedicated spinner)
+- When accessibility requires longer-form text
 
-## Anatomy
+---
 
-| Part | Required | Description | Condition |
-|------|----------|-------------|-----------|
-| Container | Yes | Rounded pill-shaped container | Always present |
-| Background | Yes | Colored background (filled) or transparent (line) | Always present |
-| Border | Conditional | Colored border | Only for Type=Line |
-| Text Label | Yes | Badge text content | Always present |
+## Structure (Anatomy)
 
-## Properties
+### Component Parts
 
-| Property | Type | Default | Values | Description |
-|----------|------|---------|--------|-------------|
-| Type | Enum | Line | Filled, Line | Style variant. Filled=solid background; Line=outlined with border |
-| Color | Enum | Default | Default, Evergreen, Indigo, Inverse, Information, Warning, Error, Success | Semantic color indicating status or meaning |
-| Label | String | 0 | Any text (0-3 chars recommended) | Badge content text |
+| Part | Required | Description |
+|--------|--------|--------|
+| Container | Required | Pill-shaped frame (semantic/full radius) with horizontal padding. Fill and border depend on Type and Color. |
+| Label | Required | Centered text. Default: 0. |
 
-## Color Palette
+### Layout
 
-| Color | Background | Border | Text | Use Case |
-|-------|-----------|--------|------|----------|
-| Default | surface/raised | border/default | text/inverse (Filled), text/primary (Line) | Neutral status; default badges |
-| Evergreen | surface/evergreen/bold | icon/evergreen | text/inverse (Filled), text/evergreen (Line) | Success, positive, active status |
-| Indigo | surface/indigo/bold | border/indigo | text/inverse (Filled), text/indigo (Line) | Primary, branded, important status |
-| Inverse | background/canvas | icon/inverse | text/secondary | Inverted/light backgrounds |
-| Information | surface/info/bold | icon/info | text/inverse (Filled), text/info (Line) | Information, helpful, informational |
-| Warning | surface/warning/bold | border/warning | text/inverse (Filled), text/warning (Line) | Caution, warning, attention needed |
-| Error | surface/danger/bold | icon/danger | text/inverse (Filled), text/danger (Line) | Error, danger, critical status |
-| Success | surface/success/bold | icon/success | text/inverse (Filled), text/success (Line) | Success, confirmed, positive |
+| Property | Value |
+|-----------|-----------|
+| Height | 14 (minimum observed; equals line-height/14, no vertical padding) |
+| Width | 14 in variants with the default Label "0". Resizing rule: [Pending confirmation] |
+| Padding | space/4 horizontal, space/0 vertical |
+| Gap | gap/none |
+| Radius | semantic/full |
 
-## Type Styles
+---
 
-| Type | Background | Border | Text Color |
-|------|-----------|--------|-----------|
-| Filled | Semantic color (bold) | None | text/inverse |
-| Line | surface/subtlest (Default) or semantic subtle | semantic color | Matching semantic text color |
+## Semantics
+
+According to the Figma description, Badge communicates a count, a status or a category. The Color values Information, Warning, Error and Success are named after semantic meanings. Meaning of Default, Evergreen, Indigo and Inverse: Used for need.
+
+---
+
+## Iconography
+
+The component contains no icons.
+
+### Icon Slots
+
+| Slot | Description |
+|--------|--------|
+| Leading | Not applicable. |
+| Trailing | Not applicable. |
+
+---
+
+## Variants (Properties)
+
+### Type
+
+| Value | Description |
+|--------|--------|
+| Filled | Solid background fill. Text color is text/inverse, except Color=Inverse. |
+| Line | Border outline. Fill depends on Color (see Token Mapping). |
+
+### Color
+
+| Value | Description |
+|--------|--------|
+| Default | Neutral. Line: surface/subtlest fill, border/default border. Filled: surface/raised fill. |
+| Evergreen | Evergreen. Line: border/evergreen border, no fill. Filled: surface/evergreen/bold fill. |
+| Indigo | Indigo. Line: border/indigo border, no fill. Filled: surface/indigo/bold fill. |
+| Inverse | For dark backgrounds. Line: border/inverse border, text/inverse text, no fill. Filled: background/canvas fill, text/secondary text. |
+| Information | Information. Line: surface/info/subtle fill, border/info border. Filled: surface/info/bold fill. |
+| Warning | Warning. Line: surface/warning/subtle fill, border/warning border. Filled: surface/warning/bold fill. |
+| Error | Error. Line: surface/danger/subtle fill, border/danger border. Filled: surface/danger/bold fill. |
+| Success | Success. Line: surface/evergreen/subtle fill, border/success border. Filled: surface/success/bold fill. |
+
+### Label
+
+Text content. Default value: 0. 
+
+---
+
+## States
+
+No state property exists in the component set.
+
+---
 
 ## Token Mapping
 
 ### Background
 
-- **Type=Filled, Color=Default**: surface/raised
-- **Type=Filled, Color=Evergreen**: surface/evergreen/bold
-- **Type=Filled, Color=Indigo**: surface/indigo/bold
-- **Type=Filled, Color=Information**: surface/info/bold
-- **Type=Filled, Color=Warning**: surface/warning/bold
-- **Type=Filled, Color=Error**: surface/danger/bold
-- **Type=Filled, Color=Success**: surface/success/bold
-- **Type=Filled, Color=Inverse**: background/canvas
-- **Type=Line, Color=Default**: surface/subtlest
-- **Type=Line, Color=Evergreen**: surface/evergreen/subtle
-- **Type=Line, Color=Information**: surface/info/subtle
-- **Type=Line, Color=Warning**: surface/warning/subtle
-- **Type=Line, Color=Error**: surface/danger/subtle
-- **Type=Line, Color=Success**: surface/evergreen/subtle
+| Token | Usage | Notes |
+|--------|--------|--------|
+| surface/subtlest | Fill | Type=Line, Color=Default |
+| surface/raised | Fill | Type=Filled, Color=Default |
+| surface/evergreen/bold | Fill | Type=Filled, Color=Evergreen |
+| surface/indigo/bold | Fill | Type=Filled, Color=Indigo |
+| background/canvas | Fill | Type=Filled, Color=Inverse |
+| surface/info/subtle | Fill | Type=Line, Color=Information |
+| surface/info/bold | Fill | Type=Filled, Color=Information |
+| surface/warning/subtle | Fill | Type=Line, Color=Warning |
+| surface/warning/bold | Fill | Type=Filled, Color=Warning |
+| surface/danger/subtle | Fill | Type=Line, Color=Error |
+| surface/danger/bold | Fill | Type=Filled, Color=Error |
+| surface/evergreen/subtle | Fill | Type=Line, Color=Success (not a success token) |
+| surface/success/bold | Fill | Type=Filled, Color=Success |
 
 ### Text
 
-- **Type=Filled**: text/inverse
-- **Type=Line, Color=Default**: text/primary
-- **Type=Line, Color=Evergreen**: text/evergreen
-- **Type=Line, Color=Indigo**: text/indigo
-- **Type=Line, Color=Inverse**: text/inverse
-- **Type=Line, Color=Information**: text/info
-- **Type=Line, Color=Warning**: text/warning
-- **Type=Line, Color=Error**: text/danger
-- **Type=Line, Color=Success**: text/success
+| Token | Usage | Notes |
+|--------|--------|--------|
+| text/secondary | Label | Type=Line, Color=Default; Type=Filled, Color=Inverse |
+| text/inverse | Label | All Type=Filled except Color=Inverse; Type=Line, Color=Inverse |
+| text/evergreen | Label | Type=Line, Color=Evergreen |
+| text/indigo | Label | Type=Line, Color=Indigo |
+| text/info | Label | Type=Line, Color=Information |
+| text/warning | Label | Type=Line, Color=Warning |
+| text/danger | Label | Type=Line, Color=Error |
+| text/success | Label | Type=Line, Color=Success |
 
 ### Border
 
-- **Type=Line, Color=Default**: border/default
-- **Type=Line, Color=Evergreen**: icon/evergreen
-- **Type=Line, Color=Indigo**: border/indigo
-- **Type=Line, Color=Inverse**: icon/inverse
-- **Type=Line, Color=Information**: icon/info
-- **Type=Line, Color=Warning**: border/warning
-- **Type=Line, Color=Error**: icon/danger
-- **Type=Line, Color=Success**: icon/success
+| Token | Usage | Notes |
+|--------|--------|--------|
+| border/default | 1px border | Type=Line, Color=Default |
+| border/evergreen | 1px border | Type=Line, Color=Evergreen |
+| border/indigo | 1px border | Type=Line, Color=Indigo |
+| border/inverse | 1px border | Type=Line, Color=Inverse |
+| border/info | 1px border | Type=Line, Color=Information |
+| border/warning | 1px border | Type=Line, Color=Warning |
+| border/danger | 1px border | Type=Line, Color=Error |
+| border/success | 1px border | Type=Line, Color=Success |
+
+Filled variants have no border. The 1px border width is not tokenized.
 
 ### Typography
 
-- **Label**: Text/Label/XS (family/body, weight/semibold, size/11, lineHeight/16, letterSpacing/wide)
+| Token | Usage | Notes |
+|--------|--------|--------|
+| Text/Body/XXS Strong | Label | size/10, line-height/14, letter-spacing/normal, weight/semibold, family/body |
 
 ### Spacing
 
-- **Horizontal padding**: space/4 (4px)
-- **Vertical padding**: space/0 (0px)
-- **Border radius**: 350px (fully rounded pill shape)
+| Token | Usage | Notes |
+|--------|--------|--------|
+| space/4 | Horizontal padding | |
+| space/0 | Vertical padding | |
+| gap/none | Gap | |
 
-## States
+### Radius
 
-[No interactive states; badges are read-only elements]
+| Token | Usage | Notes |
+|--------|--------|--------|
+| semantic/full | Container radius (999) | Confirmed in Figma variables; not cross-checked against the token files |
 
-## Sizes
-
-| Dimension | Value |
-|-----------|-------|
-| Height | Auto (fitted to text) |
-| Width | Auto (fitted to text + padding) |
-| Min Width | ~20px |
-| Border Radius | 350px (pill shape) |
-| Font Size | 11px |
-| Line Height | 16px |
+---
 
 ## Accessibility
 
-| Property | Value |
-|----------|-------|
-| Text contrast | High contrast text on background; verify WCAG AA |
-| Semantic color | Do not rely on color alone; label text must convey meaning |
-| Disabled state | No disabled state; use opacity reduction if needed |
-| Focus state | Badges are not focusable; no keyboard interaction |
+| Topic | Information |
+|--------|--------|
+| Accessibility Requirement | The Figma description advises against use when accessibility requires longer-form text. |
+| Visible State Support | [Pending confirmation] |
+| Notes | No roles, announcements or contrast values are documented. |
+
+---
+
+## Content Guidelines
+
+- Label: text content (default: 0). The Figma description gives examples of a count (5), a word (Warning) and a symbol (!).
+
+---
 
 ## Examples
 
-| Example | Description | Configuration |
-|---------|-------------|----------------|
-| Notification count | Unread message count | Type=Filled, Color=Default, Label="5" |
-| Success indicator | Confirmed action | Type=Filled, Color=Success, Label="✓" |
-| Warning tag | Alert/caution status | Type=Line, Color=Warning, Label="!" |
-| Info label | New feature indicator | Type=Line, Color=Information, Label="New" |
-| Error state | Error condition | Type=Filled, Color=Error, Label="!" |
-| Active tag | Active status | Type=Line, Color=Evergreen, Label="Active" |
-| Draft status | Work in progress | Type=Line, Color=Default, Label="Draft" |
-| Important badge | Branded/primary status | Type=Filled, Color=Indigo, Label="Important" |
+### Example 1
 
-## Usage Guidelines
+Configuration:
 
-- Keep labels short (0-3 characters recommended; max 5 characters)
-- Use semantic colors to convey meaning
-- Pair color with icon or text for clarity (don't rely on color alone)
-- Combine badges with other UI elements (buttons, lists, cards)
-- Use Filled for prominent status; Line for secondary
-- Ensure sufficient contrast between text and background
-- Position badges near relevant content
-- Use consistent styling within feature areas
+```text
+Type=Filled, Color=Default, Label=5
+```
 
-## Implementation Notes
+Description:
 
-- Badge does not receive keyboard focus
-- Badge is not interactive; place within interactive element if action needed
-- Consider responsive behavior for small screens
-- Text truncation not recommended; use shorter labels
+Notification count (source: Figma component description).
+
+### Example 2
+
+Configuration:
+
+```text
+Type=Line, Color=Warning, Label=Warning
+```
+
+Description:
+
+Warning label (source: Figma component description).
+
+### Example 3
+
+Configuration:
+
+```text
+Type=Filled, Color=Error, Label=!
+```
+
+Description:
+
+Error state (source: Figma component description).
+
+---
+
+All 16 Type × Color combinations exist in the component set.
+
+---
+
+## QA Checklist
+
+- Properties documented.
+- Property names match Figma exactly.
+- Variant values match Figma exactly.
+- Defaults documented.
+- Invalid combinations documented.
+- Tokens verified.
+- No undocumented behavior added.
+- No undocumented accessibility behavior added.
+- Variant count verified (16).
+- semantic/full verified against token files.
+
+---
+
+## Pending Clarification
+
+- Invalid combinations (not documented in Figma).
+- Type=Line, Color=Success uses surface/evergreen/subtle as fill. Is this intentional?
+- Type=Line, Color=Evergreen / Indigo have no fill, unlike the other Line variants.
+- Width: does the badge hug its Label? Maximum length and overflow behavior.
+- Meaning of Color=Default, Evergreen, Indigo and Inverse.
+- Whether the Badge embedded in Accordion should use this component; it uses different values (#9e9e9e, #272727).
+- Accessibility: announcement of counts and status, contrast requirements.
+- Status, version and owner.
+
+---
+
+## Notes / Changelog
+
+Generated from available source material on 2026-10-19.

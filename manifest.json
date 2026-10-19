@@ -10,8 +10,8 @@
   },
   "typography": {
     "family_body": "Open Sans",
-    "family_display": "display font",
-    "family_mono": "monospace"
+    "family_display": "Poppins",
+    "family_mono": "Roboto Mono"
   },
   "components": [
     { "name": "Accordion", "file": "components/accordion.md", "type": "Navigation / Content", "status": "Production", "figma_node": "2016:2350", "variants": { "Color": ["Default","Evergreen","Indigo"], "Behavior": ["Expanded","Collapsed"], "Size": ["MD","SM"], "State": ["Default","Disable","Hovered","Pressed","Focused","Loading"] } },

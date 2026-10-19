@@ -7,7 +7,8 @@ Los roles tipográficos se publican con la estructura `typography.role.base.<rol
 | Token de rol | Valor | Uso |
 |---|---|---|
 | `typography.role.base.body.md.family` | Open Sans | Texto general de la interfaz |
-| `typography.role.base.display.md.family` | Open Sans | Texto de exhibición |
+| `typography.role.base.heading.md.family` | Poppins | Encabezados |
+| `typography.role.base.display.md.family` | Poppins | Texto de exhibición |
 | `typography.role.base.code.md.family` | Roboto Mono | Código y valores técnicos |
 
 ## Ejemplos de roles

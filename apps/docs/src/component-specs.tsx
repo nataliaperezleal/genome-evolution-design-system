@@ -768,8 +768,8 @@ export const componentSpecs: Record<string, ComponentSpec> = {
       }
     ],
     tokenCards: [
-      { label: "Default border", token: "color.role.border.default", value: "rgba(0,0,0,0.08)" },
-      { label: "Info subtle surface", token: "color.role.surface.info.subtle", value: "#EFF4FF" }
+      { label: "Default border", token: "color.role.border.default", value: "#c3cbc5" },
+      { label: "Info subtle surface", token: "color.role.surface.info.subtle", value: "#f7f9ff" }
     ]
   },
   "Inline Alert": {
@@ -870,7 +870,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 `
       }
     ],
-    tokenCards: [{ label: "Border", token: "color.role.border.default", value: "rgba(0,0,0,0.08)" }]
+    tokenCards: [{ label: "Border", token: "color.role.border.default", value: "#c3cbc5" }]
   },
   Table: {
     subtitle: "Data table styling with subtle row hover and editorial header typography.",
@@ -891,7 +891,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 `
       }
     ],
-    tokenCards: [{ label: "Row hover", token: "color.role.background.interactive.hovered", value: "#F8F8F7" }]
+    tokenCards: [{ label: "Row hover", token: "color.role.background.interactive.hovered", value: "#f7f8f7" }]
   },
   Accordion: {
     subtitle: l(

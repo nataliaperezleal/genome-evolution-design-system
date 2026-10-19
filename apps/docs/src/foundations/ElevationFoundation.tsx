@@ -4,7 +4,7 @@ import { allTokens } from "@genome-evolution/tokens";
 import type { Language } from "../i18n";
 
 type Row = {
-  token: string;
+  level: string;
   positionX: number;
   positionY: number;
   blur: string;
@@ -49,7 +49,7 @@ export function ElevationFoundation({ language }: { language: Language }) {
       const color = level.id === "none" ? "transparent" : alphaValue;
       const boxShadow = `${positionX}px ${positionY}px ${blur}px 0 ${color}`;
       return {
-        token: `color.role.light.elevation.${level.id}`,
+        level: level.id,
         positionX,
         positionY,
         blur: `${blur}px`,
@@ -75,19 +75,19 @@ export function ElevationFoundation({ language }: { language: Language }) {
         <h2>{language === "es" ? "Sombras" : "Shadows"}</h2>
         <p>
           {language === "es"
-            ? "Cada nivel combina posición y desenfoque. El color proviene de la paleta con transparencia para mantener un efecto sutil."
-            : "Levels combine position and blur. Color comes from the alpha palette to stay subtle."}
+            ? "Estas sombras son ejemplos visuales compuestos con tokens base de posición, desenfoque y color. Los nombres de nivel son etiquetas ilustrativas, no tokens de rol publicados."
+            : "These shadows are visual examples composed from base position, blur, and color tokens. The level names are illustrative labels, not published role tokens."}
         </p>
         <div className="foundation-table">
           <div className="foundation-table__head">
-            <div>Token</div>
+            <div>{language === "es" ? "Nivel ilustrativo" : "Illustrative level"}</div>
             <div>{language === "es" ? "Valor" : "Value"}</div>
             <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
           </div>
           {rows.map((row) => (
-            <div className="foundation-table__row" key={row.token}>
+            <div className="foundation-table__row" key={row.level}>
               <div>
-                <span className="token-pill">{row.token}</span>
+                <span className="token-pill">{row.level}</span>
               </div>
               <div className="elevation-meta">
                 <div>

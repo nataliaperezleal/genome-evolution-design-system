@@ -1,165 +1,363 @@
 ---
-component: Avatar
-system: Genome Evolution Design System
-type: Component
-status: Design
-version: 1.0
-owner: UX Design Team
-last_updated: 2026-06-02
-tags: [identidad-usuario, perfil, presencia, estado]
+component: "Avatar"
+system: "Genome Evolution"
+type: "Avatar display component"
+status: "Done"
+version: "1.2"
+owner: "UX Design"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2040-247"
+last_updated: "2026-10-19"
+tags:
+  - "avatar"
+  - "identity"
+  - "status-indicator"
 ---
 
-# Avatar
+# Avatar — Genome Evolution Design System
 
-## Propósito
+Representa visualmente a una persona o entidad mediante una inicial de texto, un icono genérico o una imagen real, con soporte opcional para indicador de estado.
 
-Representa visualmente a una persona o entidad mediante una inicial, ícono genérico o imagen real con soporte opcional para indicador de estado. Los avatares muestran la identidad del usuario en listas, tablas, perfiles, comentarios, asignaciones y menciones.
+## Referencia rápida
 
-## Referencia Rápida
+### Qué es
 
-| Propiedad | Valores | Predeterminado |
-|-----------|---------|----------------|
-| Type | Icon, Person, Print | Icon |
-| Color | Default, Evergreen, Indigo | Default |
-| Size | 16, 24, 32, 40, 48 | 32 |
-| Show State | true, false | true |
-| Label | Texto/Carácter | B |
+Componente de visualización que representa la identidad de una persona o entidad (fuente: descripción del componente en Figma).
+
+### Propiedades clave
+
+- Type [Icon | Person | Print] — default: Print
+- Color [Default | Evergreen | Indigo] — default: Default
+- Size [16 | 24 | 32 | 40 | 48] — default: 16
+- State [Default | Focused] — default: Default
+- Show State [true | false] — default: false
+- Label — Carácter o inicial de texto; solo aplica a Type=Print (default: B)
+
+### Configuración por defecto
+
+Type=Print, Color=Default, Size=16, State=Default, Show State=false, Label=B (variante por defecto del component set).
+
+La descripción actual en Figma indica "Type: Print, Color: Default, Size: 32, State: Default" como configuración por defecto.
+
+### Combinaciones inválidas
+
+- Type=Icon + Color=Evergreen (la variante no existe)
+- Type=Icon + Color=Indigo (la variante no existe)
+- Type=Person + Color=Evergreen (la variante no existe)
+- Type=Person + Color=Indigo (la variante no existe)
+- Label con Type=Icon o Type=Person (estas variantes no tienen capa de texto)
+- Size=16 + Show State=true (indicado en la descripción de Figma) [Pending confirmation]
+
+### Uso típico
+
+- Lista de usuarios activos: Type=Icon, Color=Default, Size=32, Show State=true
+- Perfil con foto: Type=Person, Color=Default, Size=40, Show State=false
+- Avatar con inicial: Type=Print, Color=Indigo, Size=40, Label=B, Show State=true
+- Asignación en tarjeta: Type=Print, Color=Default, Size=24, Show State=false
+
+---
+
+## Propósito / Intención
+
+### Problema que resuelve
+
+Representa la identidad de una persona o entidad en la interfaz mediante una inicial, un icono genérico o una imagen (fuente: descripción del componente en Figma).
+
+### Contexto típico
+
+Listas, tablas, perfiles, comentarios, asignaciones y menciones (fuente: descripción del componente en Figma).
+
+---
 
 ## Cuándo usar
 
-- Mostrar la identidad del usuario en listas, tablas o perfiles
-- Indicar presencia o disponibilidad con indicador de estado
-- Representar personas en comentarios, asignaciones o menciones
-- Mostrar selección de usuario o filtrado en diseños compactos
+- Para mostrar la identidad del usuario en listas, tablas o perfiles
+- Para indicar presencia o disponibilidad con el indicador de estado
+- Para representar personas en comentarios, asignaciones o menciones
+
+---
 
 ## Cuándo NO usar
 
 - Como botón de acción principal
 - Cuando el espacio disponible es menor a 16px
-- Para representar entidades no personales (usar ícono específico en su lugar)
-- Como elemento decorativo sin propósito contextual
+- Para representar entidades no personales (usar un icono específico)
 
-## Anatomía
+---
 
-| Parte | Requerida | Descripción | Condición |
-|-------|-----------|-------------|-----------|
-| Contenedor | Sí | Fondo cuadrado redondeado | Siempre presente |
-| Contenido | Sí | Ícono, foto o inicial | Depende de Type |
-| Indicador de estado | No | Punto pequeño coloreado | Solo cuando Show State=true |
-| Fondo | Sí | Relleno de color sutil | Visible para tipo Print |
-| Borde | Condicional | Borde de enfoque/predeterminado | Visible en estado Focused |
+## Estructura (Anatomía)
 
-## Propiedades
+### Partes del componente
 
-| Propiedad | Tipo | Predeterminado | Valores | Se aplica a | Descripción |
-|-----------|------|----------------|---------|------------|-------------|
-| Type | Enum | Icon | Icon, Person, Print | Todos | Define el contenido mostrado: Icon (avatar genérico), Person (foto de usuario), Print (inicial/letra) |
-| Color | Enum | Default | Default, Evergreen, Indigo | Todos | Aplica tema de color al fondo y texto. Default usa fondo canvas; Evergreen usa superficie evergreen; Indigo usa superficie indigo |
-| Size | Enum | 32 | 16, 24, 32, 40, 48 | Todos | Tamaño en píxeles. Afecta dimensiones del contenedor, tipografía y tamaño del indicador de estado |
-| Show State | Boolean | true | true, false | Todos | Controla la visibilidad del punto indicador de estado en la esquina superior izquierda |
-| Label | String | B | Cualquier carácter simple | Solo Print | Inicial o carácter a mostrar cuando Type=Print |
+| Parte | Requerido | Descripción |
+|--------|--------|--------|
+| Contenedor | Requerido | Marco cuadrado con esquinas radius/24. El relleno y el borde varían según Type, Color y State. Contenido centrado vertical y horizontalmente. |
+| Label (capa de texto "B") | Opcional — solo Type=Print | Inicial de texto centrada. La tipografía cambia según Size. |
+| Imagen (capa "unsplash:LWkFHEGpleE") | Opcional — solo Type=Person | Relleno de imagen recortado con radio de esquina de 360px. |
+| Icono (capa "Vector") | Opcional — solo Type=Icon | Vector de silueta genérica de persona que ocupa todo el Size. |
+| Indicador de estado (capa Ellipse) | Opcional | Círculo en la esquina inferior derecha, oculto por defecto y controlado por Show State. Presente en todos los valores de Type. |
+
+### Layout
+
+| Propiedad | Valor |
+|-----------|-----------|
+| Alto | 16 / 24 / 32 / 40 / 48 px (igual a Size) |
+| Ancho | 16 / 24 / 32 / 40 / 48 px (igual a Size) |
+| Padding | Sin padding definido en Figma (contenido centrado) |
+| Gap | Sin gap definido en Figma |
+| Radio | radius/24 (contenedor); 360px en la capa de imagen de Person (sin token) |
+
+---
+
+## Semántica
+
+Según la descripción del componente en Figma, Avatar representa visualmente a una persona o entidad. Cada valor de Type es una representación visual distinta: Print (inicial), Icon (silueta genérica) y Person (imagen).
+
+El significado del indicador de estado (por ejemplo, qué estados representa) no está documentado.
+
+---
+
+## Iconografía
+
+### Slots de icono
+
+| Slot | Descripción |
+|--------|--------|
+| Leading | No aplica — el componente no tiene slot de icono inicial. |
+| Trailing | No aplica — el componente no tiene slot de icono final. |
+
+### Reglas
+
+- Type=Icon muestra un vector de silueta genérica de persona (capa "Vector") que ocupa todo el tamaño del avatar.
+- El icono está vinculado al token icon/secondary.
+- No se encontró una propiedad de intercambio de instancia para el icono. [Pending confirmation]
+
+---
+
+## Variantes (Propiedades)
+
+### Type
+
+| Valor | Descripción |
+|--------|--------|
+| Print | Muestra la inicial de Label centrada en el contenedor. Disponible con Color=Default, Evergreen e Indigo. |
+| Icon | Muestra un vector de silueta genérica de persona. Disponible solo con Color=Default. |
+| Person | Muestra una imagen recortada en círculo. Disponible solo con Color=Default. |
+
+### Color
+
+| Valor | Descripción |
+|--------|--------|
+| Default | Type=Print: relleno background/canvas, borde de 1px border/strong, texto text/secondary. Único valor disponible para Type=Icon y Type=Person. |
+| Evergreen | Solo Type=Print: relleno surface/evergreen/subtle, texto text/evergreen, sin borde. |
+| Indigo | Solo Type=Print: relleno surface/indigo/subtle, texto text/indigo, sin borde. |
+
+### Size
+
+| Valor | Descripción |
+|--------|--------|
+| 16 | 16×16 px. Label: Text/Label/XS. Indicador de estado: 6×6 px. |
+| 24 | 24×24 px. Label: Text/Body/XS Strong. Indicador de estado: 8×8 px. |
+| 32 | 32×32 px. Label: Text/Body/SM Strong. Indicador de estado: 10×10 px. |
+| 40 | 40×40 px. Label: Text/Body/MD Strong. Indicador de estado: 12×12 px. |
+| 48 | 48×48 px. Label: Text/Body/MD Strong. Indicador de estado: 12×12 px. |
+
+### State
+
+| Valor | Descripción |
+|--------|--------|
+| Default | Apariencia base. |
+| Focused | Añade un borde de foco con focus/width (2px) y border/focus. |
+
+### Show State
+
+| Valor | Descripción |
+|--------|--------|
+| true | Muestra el indicador de estado (elipse) en la esquina inferior derecha. |
+| false | El indicador de estado está oculto. |
+
+### Label
+
+Propiedad de texto. Valor por defecto: B. Solo las variantes Type=Print tienen capa de texto; no tiene efecto visible en Type=Icon ni en Type=Person.
+
+---
 
 ## Estados
 
 | Estado | Descripción | Cambios visuales |
-|--------|-------------|------------------|
-| Default | Apariencia estándar del avatar | Sin modificaciones de borde; opacidad regular |
-| Focused | Estado de enfoque interactivo | Borde de enfoque verde (color border/focus); indicador de estado permanece visible |
+|--------|--------|--------|
+| Default | Apariencia base de cada Type y Color. | Print + Default: borde de 1px border/strong. Print + Evergreen / Indigo: sin borde. Icon y Person: sin borde. |
+| Focused | Apariencia de foco (variante State=Focused). | Print: borde de 2px (focus/width) border/focus en el contenedor, que reemplaza border/strong en Color=Default. Person: borde de 2px border/focus en la capa de imagen. Icon: anillo de foco dibujado en el vector, que sobresale 2px de los límites del componente. |
 
-## Tamaños
-
-| Tamaño | Dimensiones | Tipografía | Tamaño estado | Notas |
-|--------|------------|-----------|--------------|-------|
-| 16 | 16x16px | Text/Label/XS (11px) | 6x6px | Tamaño mínimo; indicador de estado puede estar apretado |
-| 24 | 24x24px | Text/Body/XS Strong (12px) | 8x8px | Tamaño de diseño compacto |
-| 32 | 32x32px | Text/Body/SM Strong (14px) | 10x10px | Tamaño predeterminado y recomendado |
-| 40 | 40x40px | Text/Body/MD Strong (16px) | 12x12px | Tamaño de diseño grande |
-| 48 | 48x48px | Text/Body/MD Strong (16px) | 12x12px | Tamaño extra grande para visualización prominente |
+---
 
 ## Mapeo de tokens
 
 ### Fondo
 
-- **Type=Print, Color=Default**: background/canvas
-- **Type=Print, Color=Evergreen**: surface/evergreen/subtle
-- **Type=Print, Color=Indigo**: surface/indigo/subtle
-- **Type=Person**: transparente (basado en imagen)
-- **Type=Icon**: transparente
+| Token | Uso | Notas |
+|--------|--------|--------|
+| background/canvas | Relleno del contenedor | Type=Print, Color=Default |
+| surface/evergreen/subtle | Relleno del contenedor | Type=Print, Color=Evergreen |
+| surface/indigo/subtle | Relleno del contenedor | Type=Print, Color=Indigo |
 
 ### Texto
 
-- **Type=Print, Color=Default**: text/secondary
-- **Type=Print, Color=Evergreen**: text/evergreen
-- **Type=Print, Color=Indigo**: text/indigo
+| Token | Uso | Notas |
+|--------|--------|--------|
+| text/secondary | Color del Label | Type=Print, Color=Default |
+| text/evergreen | Color del Label | Type=Print, Color=Evergreen |
+| text/indigo | Color del Label | Type=Print, Color=Indigo |
 
 ### Borde
 
-- **Estado predeterminado (Type=Print, Size=24+)**: border/strong
-- **Estado Focused**: border/focus (ancho: 2px)
+| Token | Uso | Notas |
+|--------|--------|--------|
+| border/strong | Borde del contenedor | Type=Print, Color=Default, State=Default. Grosor de 1px, sin token. |
+| border/focus | Color del borde de foco | State=Focused, todos los valores de Type |
+| focus/width | Grosor del borde de foco (2) | State=Focused, todos los valores de Type |
 
-### Ícono
+### Icono
 
-- **Type=Icon, todos los tamaños**: Silueta genérica de persona (varía según tamaño)
+| Token | Uso | Notas |
+|--------|--------|--------|
+| icon/secondary | Color de la silueta | Type=Icon |
 
 ### Tipografía
 
-- **Size=16**: Text/Label/XS (family/body, weight/semibold, size/11, lineHeight/16, letterSpacing/wide)
-- **Size=24**: Text/Body/XS Strong (family/body, weight/semibold, size/12, lineHeight/16, letterSpacing/normal)
-- **Size=32**: Text/Body/SM Strong (family/body, weight/semibold, size/14, lineHeight/20, letterSpacing/normal)
-- **Size=40+**: Text/Body/MD Strong (family/body, weight/semibold, size/16, lineHeight/20, letterSpacing/normal)
+| Token | Uso | Notas |
+|--------|--------|--------|
+| Text/Label/XS | Label | Size=16 (size/11, line-height/16, letter-spacing/wide) |
+| Text/Body/XS Strong | Label | Size=24 (size/12, line-height/16, letter-spacing/normal) |
+| Text/Body/SM Strong | Label | Size=32 (size/14, line-height/20) |
+| Text/Body/MD Strong | Label | Size=40 y Size=48 (size/16, line-height/20, letter-spacing/normal) |
+
+Cada estilo se asoció a un Size según sus variables vinculadas. Todos los estilos usan family/body y weight/semibold.
 
 ### Espaciado
 
-- **Posición del indicador de estado**: Esquina superior izquierda, inserto por margen proporcional relativo al tamaño
-- **Relleno del contenedor**: Contenido centrado dentro del contenedor
+| Token | Uso | Notas |
+|--------|--------|--------|
+| none | — | El componente no tiene tokens de espaciado vinculados. |
 
 ### Radio
 
-- **Contenedor**: radius/24 (cuadrado completamente redondeado)
-- **Imagen (Type=Person)**: radius/24
-- **Contenedor de ícono**: radius/24
+| Token | Uso | Notas |
+|--------|--------|--------|
+| radius/24 | Radio de esquina del contenedor | Todas las variantes. La capa de imagen de Person usa 360px (sin token). |
 
 ### Sombra
 
-[Pendiente de confirmación]
+| Token | Uso | Notas |
+|--------|--------|--------|
+| none | — | El componente no tiene tokens de sombra vinculados. |
+
+Color del indicador de estado (Ellipse): no se encontró un token vinculado.
+
+---
+
+## Interacción
+
+El componente tiene una variante State=Focused. La fuente no define interacciones de prototipo, disparadores ni transiciones, ni indica si el componente es interactivo.
+
+---
 
 ## Accesibilidad
 
-| Propiedad | Valor |
-|-----------|-------|
-| Estado de enfoque | Borde verde visible (2px, color border/focus) |
-| Indicador de estado | Solo visual; indica estado de presencia |
-| Label (Type=Print) | Contenido de texto accesible para lector de pantalla cuando se proporciona Label |
-| Texto alternativo | [Pendiente de confirmación] |
+| Tema | Información |
+|--------|--------|
+| Requisito de accesibilidad | [Pending confirmation] |
+| Soporte visible de estado | Variante State=Focused con borde de 2px border/focus. |
+| Notas | No hay documentación de texto alternativo, nombre accesible, rol ni comportamiento con lectores de pantalla. [Pending confirmation] |
+
+---
+
+## Guías de contenido
+
+- Label: carácter o inicial de texto; solo aplica a Type=Print (fuente: descripción del componente en Figma). Valor por defecto: B.
+- Límite de caracteres, uso de mayúsculas y reglas para generar la inicial: [Pending confirmation]
+
+---
 
 ## Ejemplos
 
-| Ejemplo | Descripción | Configuración |
-|---------|-------------|----------------|
-| Elemento de lista de usuarios | Avatar compacto mostrando identidad del usuario | Type=Icon, Color=Default, Size=32, Show State=true |
-| Página de perfil | Avatar grande con foto de usuario | Type=Person, Color=Default, Size=48, Show State=false |
-| Insignia inicial | Avatar mostrando inicial de letra | Type=Print, Color=Indigo, Size=40, Label=B, Show State=true |
-| Estado enfocado | Avatar en estado de enfoque del teclado | Cualquier combinación + estado Focused |
-| Miembro del equipo | Avatar inicial coloreado en evergreen | Type=Print, Color=Evergreen, Size=32, Label=J, Show State=false |
-| Lista de menciones | Avatares compactos pequeños | Type=Icon, Color=Evergreen, Size=16, Show State=false |
+### Ejemplo 1
+
+Configuración:
+
+```text
+Type=Icon, Color=Default, Size=32, Show State=true
+```
+
+Descripción:
+
+Lista de usuarios activos (fuente: descripción del componente en Figma).
+
+### Ejemplo 2
+
+Configuración:
+
+```text
+Type=Person, Color=Default, Size=40, Show State=false
+```
+
+Descripción:
+
+Perfil con foto (fuente: descripción del componente en Figma).
+
+### Ejemplo 3
+
+Configuración:
+
+```text
+Type=Print, Color=Indigo, Size=40, Label=B, Show State=true
+```
+
+Descripción:
+
+Avatar con inicial (fuente: descripción del componente en Figma).
+
+---
 
 ## Combinaciones inválidas
 
-- **Type=Person sin imagen**: Cae automáticamente a Icon; evite usar Print como alternativa
-- **Label con Type=Icon o Type=Person**: La propiedad Label solo se aplica a Type=Print
-- **Size=16 con Show State=true**: El indicador de estado puede no renderizarse correctamente debido a restricciones de espacio; use Show State=false para Size=16
+- Type=Icon + Color=Evergreen (la variante no existe)
+- Type=Icon + Color=Indigo (la variante no existe)
+- Type=Person + Color=Evergreen (la variante no existe)
+- Type=Person + Color=Indigo (la variante no existe)
+- Label con Type=Icon o Type=Person (estas variantes no tienen capa de texto)
+- Size=16 + Show State=true (indicado en la descripción de Figma; las variantes Size=16 sí tienen una capa de indicador de 6×6 px) [Pending confirmation]
 
-## Guías de uso
+---
 
-- Usa avatars para apoyar la identidad, no como imagen decorativa
-- Mantén el label en un solo carácter cuando uses el tipo Print
-- Prefiere 32px para la mayoría de las superficies y reserva tamaños mayores para perfiles
-- Oculta el indicador de estado cuando el espacio sea limitado o la presencia no sea relevante
-- Usa el tipo Photo/Person solo cuando la imagen exista y aporte valor
+## Checklist de QA
 
-## Notas de implementación
+- Propiedades documentadas.
+- Los nombres de propiedades coinciden exactamente con Figma.
+- Los valores de variantes coinciden exactamente con Figma.
+- Valores por defecto documentados.
+- Combinaciones inválidas documentadas.
+- Tokens verificados.
+- No se añadió comportamiento no documentado.
+- No se añadió comportamiento de accesibilidad no documentado.
+- Conflicto de Size por defecto (16 vs 32) resuelto.
+- Token de color del indicador de estado definido.
 
-- Conserva la forma completamente redondeada para que se vea consistente en todos los tamaños
-- Reserva el foco visual para usos interactivos, como enlaces de perfil o selectores
-- Mantén el indicador de estado lo suficientemente pequeño para no competir con el contenido principal
-- Asegura un fallback consistente cuando no haya assets de imagen
+---
+
+## Aclaraciones pendientes
+
+- Size por defecto: la variante por defecto del component set es Size=16, pero la descripción de Figma indica Size=32. ¿Cuál es el correcto?
+- Size=16 + Show State=true: la descripción lo marca como inválido, pero las variantes Size=16 tienen una capa de indicador de 6×6 px. ¿Se debe eliminar la capa o actualizar la regla?
+- La descripción de Figma dice que "Type=Person sin imagen asignada vuelve a Icon automáticamente". Es comportamiento en ejecución y no se puede verificar en Figma. Confirmarlo con desarrollo.
+- Indicador de estado: color/token y estados que representa (por ejemplo, en línea, ocupado, desconectado).
+- Qué activa State=Focused (foco de teclado, selección) y si Avatar es interactivo.
+- Accesibilidad: texto alternativo para Person y nombre accesible para Print e Icon.
+- Valores sin token: grosor de borde de 1px (Print + Default) y radio de imagen de 360px (Person).
+- Type=Person, Size=16, State=Default tiene un relleno de imagen adicional al 20% de opacidad en el contenedor, que los demás tamaños no tienen. ¿Es intencional?
+- Status, versión y owner del componente.
+
+---
+
+## Notas / Changelog
+
+Generado a partir del material fuente disponible el 2026-10-19.

@@ -1,122 +1,221 @@
 ---
-component: Backdrop
-system: Genome Evolution Design System
-type: Component
-status: Design
-version: 1.0
-owner: UX Design Team
-last_updated: 2026-06-02
-tags: [overlay, modal, underlay, focus]
+component: "Backdrop"
+system: "Genome Evolution Design System"
+type: "Visual overlay/underlay element"
+status: "Done"
+version: "1.2"
+owner: "UX Design"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2041-81"
+last_updated: "2026-10-19"
+tags:
+  - "backdrop"
+  - "overlay"
+  - "layering"
 ---
 
-# Backdrop
+# Backdrop — Genome Evolution Design System
 
-## Purpose
-
-Provides a semi-transparent overlay layer that darkens or lightens background content, commonly used with modals, dropdowns, and other overlays to establish visual hierarchy and focus. The backdrop creates a scrim effect that reduces background visual complexity and directs user attention to primary content.
+Semi-transparent layer that darkens or lightens the background content, used together with modals, dropdowns and other overlays to establish visual hierarchy and focus.
 
 ## Quick Reference
 
-| Property | Values | Default |
-|----------|--------|---------|
-| Color | White, Black | Black |
+### What it is
+
+Visual overlay/underlay element (source: Figma component description).
+
+### Key Properties
+
+- Color [White | Black] — default: Black
+
+### Default Configuration
+
+Color=Black
+
+### Typical Usage
+
+- Modal dialog: Color=Black
+- Overlay for light theme: Color=White
+- Dropdown background: Color=Black
+
+---
+
+## Purpose / Intent
+
+### Problem Solved
+
+Establishes visual hierarchy and focus by separating layers (source: Figma component description).
+
+### Expected Outcome
+
+Improved contrast of floating content (source: Figma component description).
+
+### Typical Context
+
+Used alongside modals, dropdowns, popovers and tooltips (source: Figma component description).
+
+---
 
 ## When to Use
 
-- Darken background when displaying modal dialogs
-- Create focus on overlay content (dropdowns, popovers, tooltips)
-- Reduce visual clutter by desaturating background
-- Establish visual separation between layers
-- Improve contrast for floating content
-- Disable background interaction during modal interaction
-- Create layered visual hierarchy
+- To darken the background when showing modal dialogs
+- To create focus on overlaid content (dropdowns, popovers, tooltips)
+- To establish visual separation between layers and improve the contrast of floating content
+
+---
 
 ## When NOT to Use
 
-- For permanent page backgrounds
-- When full background interaction is required
-- Without accompanying overlay component
-- For simple hover states without modal
-- When accessibility requires background content visibility
-- As decorative element without functional purpose
+- As a permanent page background
+- Without an accompanying overlay component
+- For simple hover states without a modal
+- When full interaction with the background is required
+- When accessibility requires the background content to remain visible
 
-## Anatomy
+---
 
-| Part | Required | Description | Condition |
-|------|----------|-------------|-----------|
-| Overlay Container | Yes | Semi-transparent background layer | Always present |
-| Blur Effect | Yes | Backdrop blur applied to content behind | Always present |
+## Structure (Anatomy)
 
-## Properties
+### Component Parts
 
-| Property | Type | Default | Values | Description |
-|----------|------|---------|--------|-------------|
-| Color | Enum | Black | White, Black | Controls overlay color. Black creates dark overlay; White creates light overlay |
+| Part | Required | Description |
+|--------|--------|--------|
+| Layer | Required | Single semi-transparent rectangle with a background blur. No child layers or text. |
 
-## Visual Specifications
+### Layout
 
-| Attribute | Value |
-|-----------|-------|
-| Width | 182px |
-| Height | 131px |
-| Backdrop Blur | 8px |
-| Opacity | 60% (0.6) |
-| Overflow | clip |
+| Property | Value |
+|-----------|-----------|
+| Height | 131 (in both variants; may be a sample size) |
+| Width | 182 (in both variants; may be a sample size) |
+| Padding | None |
+| Gap | None |
+| Radius | (radius/0 is present in the variables) |
+
+---
+
+## Iconography
+
+The component contains no icons.
+
+### Icon Slots
+
+| Slot | Description |
+|--------|--------|
+| Leading | Not applicable. |
+| Trailing | Not applicable. |
+
+## Variants (Properties)
+
+### Color
+
+| Value | Description |
+|--------|--------|
+| White | Light semi-transparent layer (overlay/white). Typical use: overlay for light theme. |
+| Black | Dark semi-transparent layer (overlay/black). Typical use: modal dialog, dropdown background. |
+
+---
 
 ## States
 
-[Only one visual state exists; no interactive states]
+No state property exists in the component set.
 
-## Colors
-
-| Color | Overlay Value | Hex (Reference) | Use Case |
-|-------|---------------|-----------------|----------|
-| Black | overlay/black | rgba(76,87,78,0.6) | Dark tint; modals, standard overlays |
-| White | overlay/white | rgba(247,248,247,0.6) | Light tint; light theme overlays, subtle backgrounds |
+---
 
 ## Token Mapping
 
 ### Background
 
-- **Color=Black**: overlay/black (rgba(76,87,78,0.6))
-- **Color=White**: overlay/white (rgba(247,248,247,0.6))
+| Token | Usage | Notes |
+|--------|--------|--------|
+| overlay/black | Layer fill | Color=Black |
+| overlay/white | Layer fill | Color=White |
 
-### Effects
+### Radius
 
-- **Blur**: backdrop-blur-8px
-- **Overflow**: clip (prevents blur artifacts at edges)
+| Token | Usage | Notes |
+|--------|--------|--------|
+| radius/0 | Present in the variables | Layer not verified |
+
+Not tokenized: background blur of 8px.
+
+---
 
 ## Accessibility
 
-| Property | Value |
-|----------|-------|
-| Color contrast | Semi-transparent overlays; verify contrast with underlying content |
-| Opacity | 60% maintains some background visibility; sufficient for modal context |
-| Focus management | Backdrop does not receive focus; focus should be on modal content |
-| Keyboard navigation | Backdrop typically non-interactive; underlying modal handles interactions |
+| Topic | Information |
+|--------|--------|
+| Accessibility Requirement | The Figma description advises against use when accessibility requires the background content to remain visible. |
+| Visible State Support | [Pending confirmation] |
+| Notes | No roles, focus handling or contrast values are documented. |
+
+---
 
 ## Examples
 
-| Example | Description | Configuration |
-|---------|-------------|----------------|
-| Modal Dialog | Standard dark overlay for modal | Color=Black |
-| Light Theme Modal | Subtle overlay for light interfaces | Color=White |
-| Dropdown Scrim | Background darkening for dropdown menus | Color=Black |
-| Popover Underlay | Focus-establishing overlay for popovers | Color=Black |
-| Toast Background | Semi-transparent background for toast notifications | Color=Black |
+### Example 1
 
-## Usage Guidelines
+Configuration:
 
-- Always pair backdrop with modal, dropdown, or other overlay component
-- Ensure backdrop covers entire viewport or intended area
-- Black is recommended for most use cases
-- White should be used in light-themed interfaces
-- Backdrop blur effect maintains slight visibility of background content
-- Consider backdrop as non-interactive layer; handle interactions in overlay component above
+```text
+Color=Black
+```
 
-## Implementation Notes
+Description:
 
-- Backdrop should be positioned absolutely or fixed behind overlay content
-- Z-index must be lower than overlay component but higher than main page content
-- Blur effect may impact performance on lower-end devices; consider optimization
-- Opacity level (60%) balances focus with background visibility
+Modal dialog (source: Figma component description).
+
+### Example 2
+
+Configuration:
+
+```text
+Color=White
+```
+
+Description:
+
+Overlay for light theme (source: Figma component description).
+
+### Example 3
+
+Configuration:
+
+```text
+Color=Black
+```
+
+Description:
+
+Dropdown background (source: Figma component description).
+
+---
+
+## QA Checklist
+
+- Properties documented.
+- Property names match Figma exactly.
+- Variant values match Figma exactly.
+- Defaults documented.
+- Invalid combinations documented.
+- Tokens verified.
+- No undocumented behavior added.
+- No undocumented accessibility behavior added.
+- Variant count verified (2).
+
+---
+
+## Pending Clarification
+
+- Invalid combinations (not documented in Figma).
+- Sizing: are 182×131 the real dimensions or a sample size? Resizing behavior.
+- Blur: 8px is not tokenized. Is there a token for it?
+- Radius: layer where radius/0 is used.
+- Interaction: whether the Backdrop closes the overlay on click, and its layering order relative to the overlay component.
+- Accessibility: focus handling and contrast requirements.
+- Status, version and owner.
+
+---
+
+## Notes / Changelog
+
+Generated from available source material on 2026-10-19.

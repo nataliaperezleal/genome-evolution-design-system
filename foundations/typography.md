@@ -7,7 +7,8 @@ Typography roles are published under `typography.role.base.<role>.<size>.<proper
 | Role token | Value | Use |
 |---|---|---|
 | `typography.role.base.body.md.family` | Open Sans | General interface text |
-| `typography.role.base.display.md.family` | Open Sans | Large display text |
+| `typography.role.base.heading.md.family` | Poppins | Headings |
+| `typography.role.base.display.md.family` | Poppins | Large display text |
 | `typography.role.base.code.md.family` | Roboto Mono | Code and technical values |
 
 ## Role examples
