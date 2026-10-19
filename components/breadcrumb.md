@@ -373,7 +373,7 @@ Compact: Overflow + Level 1 + Current for deep hierarchies (source: Figma compon
 - The same draft says the chevron color matches the current text color. In the component the Overflow chevron is gray in all Color values. Confirm.
 - Color: the draft says it affects only the current item. The Level chevrons also change. Confirm.
 - Chevron tokens: which of icon/primary, icon/secondary, icon/evergreen, icon/indigo applies to each chevron.
-- Focus border width (2px) uses the `border.base.focus.width` token (`--ge-border-focus-width`).
+- Focus border width (2px) is `focus/width` in the Figma Border export.
 - States only exist in .BreadcrumbItem. How do consumers set an item's state from Breadcrumb?
 - Current items have Hovered, Pressed and Focused variants. Is the current page interactive?
 - Overflow item behavior when activated, and responsive/truncation behavior.

@@ -207,7 +207,7 @@ Texto del encabezado. Valor por defecto: Placeholder.
 | Default | Apariencia base. | Encabezado con background/canvas; borde inferior border/strong en Expanded, border/default en Collapsed Size=MD. |
 | Hovered | Variante State=Hovered. | Fondo del encabezado: background/interactive/hovered. |
 | Pressed | Variante State=Pressed. | Fondo del encabezado: background/interactive/pressed. |
-| Focused | Variante State=Focused. | Borde de 2px (`border.base.focus.width`) `border/focus` alrededor del encabezado. |
+| Focused | Variante State=Focused. | Borde de 2px (`focus/width`) `border/focus` alrededor del encabezado. |
 | Disabled | Variante State=Disabled. | Tokens text/disabled, icon/disabled, background/disabled, border/disabled. |
 | Loading | Variante State=Loading. | Bloques de esqueleto (background/loading) en lugar de texto, chevron y contenido. |
 
@@ -245,7 +245,7 @@ Los tokens están confirmados por variante. No se verificó la capa exacta de ca
 | border/evergreen | Borde inferior del encabezado | Color=Evergreen |
 | border/indigo | Borde inferior del encabezado | Color=Indigo |
 | border/focus | Borde de foco | State=Focused |
-| border.base.focus.width | Grosor del borde de foco (2) | State=Focused |
+| focus/width | Grosor del borde de foco (2) | State=Focused |
 | border/disabled | Borde deshabilitado | State=Disabled |
 
 ### Icono

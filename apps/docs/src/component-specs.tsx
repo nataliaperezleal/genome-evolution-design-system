@@ -1887,7 +1887,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 <SplitButton\n  label=\"Publish\"\n  onClick={() => {}}\n  items={[{ label: \"Publish now\", onSelect: () => {} }]}\n/>;\n`
       }
     ],
-    tokenCards: [{ label: "Dropdown z-index", token: "layer.zIndex.dropdown", value: "var(--ge-layer-z-index-dropdown)" }]
+    tokenCards: [{ label: "Dropdown z-index", token: "layer.z-index.dropdown", value: "var(--ge-layer-z-index-dropdown)" }]
   },
   Snackbar: {
     subtitle: "Transient feedback message anchored to the bottom of the viewport.",
@@ -1918,7 +1918,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 <Snackbar open message=\"Saved\" tone=\"success\" onClose={() => {}} />;\n`
       }
     ],
-    tokenCards: [{ label: "Toast z-index", token: "layer.zIndex.toast", value: "var(--ge-layer-z-index-toast)" }]
+    tokenCards: [{ label: "Toast z-index", token: "layer.z-index.toast", value: "var(--ge-layer-z-index-toast)" }]
   },
   Stepper: {
     subtitle: "Progress indicator for multi-step flows.",
@@ -2057,7 +2057,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
 <Tooltip content=\"Search\">\n  <IconButton label=\"Search\" icon={<SearchIcon />} />\n</Tooltip>;\n`
       }
     ],
-    tokenCards: [{ label: "Tooltip z-index", token: "layer.zIndex.tooltip", value: "var(--ge-layer-z-index-tooltip)" }]
+    tokenCards: [{ label: "Tooltip z-index", token: "layer.z-index.tooltip", value: "var(--ge-layer-z-index-tooltip)" }]
   },
   "Text Area": {
     subtitle: "Multi-line text input for longer content and notes.",

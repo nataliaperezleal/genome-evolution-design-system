@@ -76,7 +76,7 @@ ClearButton es un botón interactivo de estilo inline y mínimo, sin fondo sóli
 | Default | Estado en reposo. Sin fondo visible. | Sin fondo. Color de texto e ícono según el token de `color` o `type`. |
 | Hovered | El cursor está sobre el componente. | Fondo: `background/interactive/hovered`. Color de texto e ícono sin cambio. |
 | Pressed | El componente está siendo clickeado o presionado. | Fondo: `background/interactive/pressed`. Color de texto e ícono sin cambio. |
-| Focused | El componente recibe foco por teclado o de forma programática. | Borde de `border/focus` con grosor `border.base.focus.width` (2px). Sin cambio de fondo. |
+| Focused | El componente recibe foco por teclado o de forma programática. | Borde de `border/focus` con grosor `focus/width` (2px). Sin cambio de fondo. |
 | Disabled | El componente no es interactivo. | Texto e íconos: `text/disabled`. Sin fondo. Solo documentado para color=Default. |
 
 ## Tamaños
@@ -116,7 +116,7 @@ ClearButton tiene un único tamaño. No expone una propiedad de Size.
 
 | Estado | Token | Notas |
 |--------|-------|-------|
-| Focused | `border/focus` | Grosor: `border.base.focus.width` (2px) — aplica a todos los valores de color y type |
+| Focused | `border/focus` | Grosor: `focus/width` (2px) — aplica a todos los valores de color y type |
 
 ### Ícono
 
@@ -153,7 +153,7 @@ Pendiente de confirmación.
 
 | Propiedad | Valor |
 |-----------|-------|
-| Indicador de foco | `border/focus` con grosor `border.base.focus.width` (2px) — confirmado en State=Focused para todos los valores de color y type |
+| Indicador de foco | `border/focus` con grosor `focus/width` (2px) — confirmado en State=Focused para todos los valores de color y type |
 | Visual deshabilitado | `text/disabled` aplicado a label e íconos |
 | Interacción con teclado | Pendiente de confirmación |
 | Roles ARIA | Pendiente de confirmación |

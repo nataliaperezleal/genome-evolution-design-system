@@ -204,7 +204,7 @@ Visible button text. Default value: "Button".
 | Hovered | Hover appearance. | Primary: surface/evergreen/bold/hovered or surface/indigo/bold/hovered fill. Secondary and Tertiary: background/interactive/hovered fill. Danger, Information, Success, Warning: surface/{type}/subtle/hovered fill. |
 | Pressed | Press appearance. | Primary: surface/evergreen/bold/pressed or surface/indigo/bold/pressed fill. Secondary and Tertiary: background/interactive/pressed fill. Danger, Information, Success, Warning: surface/{type}/subtle/pressed fill. |
 | Disabled | Non-interactive appearance. | Primary: background/disabled fill, text/disabled text. Secondary: background/disabled fill, border/disabled border, text/disabled text. |
-| Focused | Focus appearance. | 2px (`border.base.focus.width`) `border/focus` border; fill and text as in Default. |
+| Focused | Focus appearance. | 2px (`focus/width`) `border/focus` border; fill and text as in Default. |
 
 ---
 
@@ -258,7 +258,7 @@ Tokens are confirmed per variant. For Indigo, Information, Success and Warning t
 | border/warning | 1px border | Type=Warning |
 | border/disabled | 1px border | Secondary, State=Disabled |
 | border/focus | Focus border | State=Focused |
-| border.base.focus.width | Focus border width (2) | State=Focused |
+| focus/width | Focus border width (2) | State=Focused |
 | width/1 | Border width (1) | Bordered variants |
 
 ### Typography

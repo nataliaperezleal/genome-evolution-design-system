@@ -207,7 +207,7 @@ Header text. Default value: Placeholder.
 | Default | Base appearance. | Header with background/canvas; border/strong bottom border when Expanded, border/default when Collapsed Size=MD. |
 | Hovered | Variant State=Hovered. | Header background: background/interactive/hovered. |
 | Pressed | Variant State=Pressed. | Header background: background/interactive/pressed. |
-| Focused | Variant State=Focused. | 2px (`border.base.focus.width`) `border/focus` border around the header. |
+| Focused | Variant State=Focused. | 2px (`focus/width`) `border/focus` border around the header. |
 | Disabled | Variant State=Disabled. | Tokens text/disabled, icon/disabled, background/disabled, border/disabled. |
 | Loading | Variant State=Loading. | Skeleton blocks (background/loading) in place of text, chevron and content. |
 
@@ -245,7 +245,7 @@ Tokens are confirmed per variant. The exact layer of each binding was not verifi
 | border/evergreen | Header bottom border | Color=Evergreen |
 | border/indigo | Header bottom border | Color=Indigo |
 | border/focus | Focus border | State=Focused |
-| border.base.focus.width | Focus border width (2) | State=Focused |
+| focus/width | Focus border width (2) | State=Focused |
 | border/disabled | Disabled border | State=Disabled |
 
 ### Icon

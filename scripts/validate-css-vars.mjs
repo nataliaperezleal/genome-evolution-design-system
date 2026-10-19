@@ -45,7 +45,7 @@ function findUnitlessDefinitions(cssText) {
     if (!m) continue;
     const name = m[1];
     const value = m[2].trim();
-    if (/^-?\d+(\.\d+)?$/.test(value)) {
+    if (/^-?\d+(\.\d+)?$/.test(value) && !/-z-index-/i.test(name)) {
       issues.push({ name, value, line: i + 1 });
     }
   }
@@ -110,7 +110,7 @@ async function main() {
     return;
   }
 
-  console.log("OK: All referenced `--ge-*` CSS variables are defined, and no unitless numeric definitions were found.");
+  console.log("OK: All referenced `--ge-*` CSS variables are defined, and no unexpected unitless numeric definitions were found.");
 }
 
 await main();

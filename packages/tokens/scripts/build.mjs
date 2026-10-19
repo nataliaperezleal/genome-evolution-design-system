@@ -139,26 +139,10 @@ function toCssVariable(token) {
   return `--ge-${token.replace(/\./g, "-")}`;
 }
 
-function aliasTokensFor(token, theme = null) {
-  const aliases = new Set();
-
-  if (theme && token.includes(`${theme}.`)) {
-    aliases.add(token.replace(`${theme}.`, ""));
-  }
-
-  if (token.includes(".base.")) {
-    aliases.add(token.replace(".base.", "."));
-  }
-
-  // If both rules apply, also emit the combined alias (e.g. remove theme then base).
-  for (const alias of [...aliases]) {
-    if (alias.includes(".base.")) {
-      aliases.add(alias.replace(".base.", "."));
-    }
-  }
-
-  aliases.delete(token);
-  return [...aliases];
+function toSourceTokenPath(token) {
+  return token
+    .replace(/^color\.role\.light\./, "color.role.")
+    .replace(/\.base\./g, ".");
 }
 
 function shouldAppendPx(token) {
@@ -182,18 +166,19 @@ function formatCssValue(token, value) {
   return String(value);
 }
 
-function toCssBlock(selector, tokenMap, theme = null) {
-  const lines = Object.entries(tokenMap).map(([token, value]) => {
-    const themedVar = toCssVariable(token);
-    const aliasVars = aliasTokensFor(token, theme).map((aliasToken) => toCssVariable(aliasToken));
+function toCssBlock(selector, tokenMap) {
+  const sourceTokens = new Map();
+  for (const [token, value] of Object.entries(tokenMap)) {
+    const sourceToken = toSourceTokenPath(token);
+    if (sourceTokens.has(sourceToken) && sourceTokens.get(sourceToken) !== value) {
+      throw new Error(`Multiple generated values map to source token "${sourceToken}".`);
+    }
+    sourceTokens.set(sourceToken, value);
+  }
 
-    const aliasLines = aliasVars
-      .filter((aliasVar) => aliasVar !== themedVar)
-      .map((aliasVar) => `  ${aliasVar}: var(${themedVar});`)
-      .join("\n");
-
+  const lines = [...sourceTokens.entries()].map(([token, value]) => {
     const cssValue = formatCssValue(token, value);
-    return aliasLines ? `  ${themedVar}: ${cssValue};\n${aliasLines}` : `  ${themedVar}: ${cssValue};`;
+    return `  ${toCssVariable(token)}: ${cssValue};`;
   });
   return `${selector} {\n${lines.join("\n")}\n}\n`;
 }
@@ -237,7 +222,11 @@ export function token(name, theme = "light") {
 }
 
 export function cssVar(name) {
-  return \`var(--ge-\${name.replace(/\\./g, "-")})\`;
+  const sourceToken = name
+    .replaceAll("/", ".")
+    .replace(/^color\\.role\\.light\\./, "color.role.")
+    .replace(/\\.base\\./g, ".");
+  return \`var(--ge-\${sourceToken.replace(/\\./g, "-")})\`;
 }
 `;
 
@@ -278,7 +267,7 @@ await writeFile(path.join(themesDir, "dark.json"), `${JSON.stringify(darkPublic,
 await writeFile(path.join(distDir, "metadata.json"), `${JSON.stringify(publicMetadata, null, 2)}\n`);
 await writeFile(
   path.join(distDir, "variables.css"),
-  `${toCssBlock(":root, [data-theme=\"light\"]", lightPublic, "light")}\n${toCssBlock("[data-theme=\"dark\"]", darkOverrides, "dark")}`
+  `${toCssBlock(":root, [data-theme=\"light\"]", lightPublic)}\n${toCssBlock("[data-theme=\"dark\"]", darkOverrides)}`
 );
 await writeFile(path.join(distDir, "index.js"), indexJs);
 await writeFile(path.join(distDir, "index.d.ts"), indexDts);

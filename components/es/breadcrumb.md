@@ -373,7 +373,7 @@ Compacto: Overflow + Level 1 + Current para jerarquías profundas (fuente: descr
 - El mismo borrador dice que el color del chevron coincide con el texto actual. En el componente, el chevron de Overflow es gris en todos los valores de Color. Confirmar.
 - Color: el borrador dice que solo afecta al ítem actual. Los chevrons de Level también cambian. Confirmar.
 - Tokens del chevron: cuál de icon/primary, icon/secondary, icon/evergreen, icon/indigo aplica a cada chevron.
-- El grosor del borde de foco (2px) usa el token `border.base.focus.width` (`--ge-border-focus-width`).
+- El grosor del borde de foco (2px) corresponde a `focus/width` en la exportación Border de Figma.
 - Los estados solo existen en .BreadcrumbItem. ¿Cómo establecen los consumidores el estado de un ítem desde Breadcrumb?
 - Los ítems Current tienen variantes Hovered, Pressed y Focused. ¿La página actual es interactiva?
 - Comportamiento del ítem Overflow al activarse, y comportamiento responsivo/de truncado.

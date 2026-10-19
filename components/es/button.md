@@ -204,7 +204,7 @@ Texto visible del botón. Valor por defecto: "Button".
 | Hovered | Apariencia en hover. | Primary: relleno surface/evergreen/bold/hovered o surface/indigo/bold/hovered. Secondary y Tertiary: relleno background/interactive/hovered. Danger, Information, Success, Warning: relleno surface/{type}/subtle/hovered. |
 | Pressed | Apariencia al presionar. | Primary: relleno surface/evergreen/bold/pressed o surface/indigo/bold/pressed. Secondary y Tertiary: relleno background/interactive/pressed. Danger, Information, Success, Warning: relleno surface/{type}/subtle/pressed. |
 | Disabled | Apariencia no interactiva. | Primary: relleno background/disabled, texto text/disabled. Secondary: relleno background/disabled, borde border/disabled, texto text/disabled. |
-| Focused | Apariencia de foco. | Borde de 2px (`border.base.focus.width`) `border/focus`; relleno y texto como en Default. |
+| Focused | Apariencia de foco. | Borde de 2px (`focus/width`) `border/focus`; relleno y texto como en Default. |
 
 ---
 
@@ -258,7 +258,7 @@ Los tokens están confirmados por variante. Para Indigo, Information, Success y 
 | border/warning | Borde de 1px | Type=Warning |
 | border/disabled | Borde de 1px | Secondary, State=Disabled |
 | border/focus | Borde de foco | State=Focused |
-| border.base.focus.width | Grosor del borde de foco (2) | State=Focused |
+| focus/width | Grosor del borde de foco (2) | State=Focused |
 | width/1 | Grosor de borde (1) | Variantes con borde |
 
 ### Tipografía
