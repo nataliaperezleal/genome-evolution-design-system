@@ -1,114 +1,219 @@
-import { useMemo } from "react";
-
-import { allTokens } from "@genome-evolution/tokens";
+import { allTokens, themes } from "@genome-evolution/tokens";
 import type { Language } from "../i18n";
 
-type PaletteEntry = { token: string; value: string };
+type ColorScaleEntry = {
+  token: string;
+  label: string;
+  light: string;
+  dark: string;
+};
 
-function pick(prefix: string) {
-  const entries: PaletteEntry[] = [];
+type ColorGroup = {
+  id: string;
+  title: string;
+  entries: ColorScaleEntry[];
+};
+
+const palettePrefix = "color.primitive.light.palette.";
+const rolePrefix = "color.role.light.";
+
+const groupTitles: Record<string, { en: string; es: string }> = {
+  primary: { en: "Primary", es: "Primario" },
+  secondary: { en: "Secondary", es: "Secundario" },
+  accent: { en: "Accent", es: "Acento" },
+  error: { en: "Error", es: "Error" },
+  info: { en: "Information", es: "Información" },
+  success: { en: "Success", es: "Éxito" },
+  alert: { en: "Alert", es: "Alerta" },
+  neutral: { en: "Neutral", es: "Neutros" },
+  alpha: { en: "Transparency", es: "Transparencias" },
+  evergreen: { en: "Evergreen", es: "Evergreen" },
+  indigo: { en: "Indigo", es: "Índigo" },
+  citrus: { en: "Citrus", es: "Citrus" },
+  beryllium: { en: "Beryllium", es: "Beryllium" },
+  "brand.evergreen": { en: "Brand · Evergreen", es: "Marca · Evergreen" },
+  "brand.indigo": { en: "Brand · Indigo", es: "Marca · Índigo" },
+  "brand.citrus": { en: "Brand · Citrus", es: "Marca · Citrus" },
+  "brand.beryllium": { en: "Brand · Beryllium", es: "Marca · Beryllium" },
+  state: { en: "Product states", es: "Estados de producto" },
+  "products.state": { en: "Product states", es: "Estados de producto" },
+  "products.modeler": { en: "Modeler", es: "Modeler" },
+  "products.studio": { en: "Studio", es: "Studio" },
+  "products.automation": { en: "Automation", es: "Automation" },
+  "products.apps": { en: "Apps", es: "Apps" },
+  "products.neutrals": { en: "Product neutrals", es: "Neutros de producto" },
+  modeler: { en: "Modeler", es: "Modeler" },
+  studio: { en: "Studio", es: "Studio" },
+  automation: { en: "Automation", es: "Automation" },
+  apps: { en: "Apps", es: "Apps" },
+  neutrals: { en: "Product neutrals", es: "Neutros de producto" }
+};
+
+const roleTitles: Record<string, { en: string; es: string }> = {
+  text: { en: "Text", es: "Texto" },
+  link: { en: "Links", es: "Enlaces" },
+  icon: { en: "Icons", es: "Iconos" },
+  border: { en: "Borders", es: "Bordes" },
+  background: { en: "Backgrounds", es: "Fondos" },
+  surface: { en: "Surfaces", es: "Superficies" },
+  overlay: { en: "Overlays", es: "Superposiciones" }
+};
+
+function titleFor(id: string, titles: Record<string, { en: string; es: string }>, language: Language) {
+  const title = titles[id];
+  if (title) return title[language];
+  return id
+    .split(".")
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+}
+
+function collectPaletteGroups(): ColorGroup[] {
+  const groups = new Map<string, ColorScaleEntry[]>();
+
   for (const [token, value] of Object.entries(allTokens)) {
-    if (token.startsWith(prefix) && typeof value === "string") {
-      entries.push({ token, value });
+    if (!token.startsWith(palettePrefix) || typeof value !== "string") continue;
+    const suffix = token.slice(palettePrefix.length);
+    const parts = suffix.split(".");
+    const groupId = ["brand", "products"].includes(parts[0]) ? parts.slice(0, 2).join(".") : parts[0];
+    const darkToken = `color.primitive.dark.palette.${suffix}`;
+    const darkValue = allTokens[darkToken];
+    if (typeof darkValue !== "string") {
+      throw new Error(`Missing dark color primitive "${darkToken}".`);
     }
+
+    const entries = groups.get(groupId) ?? [];
+    entries.push({
+      token,
+      label: parts.slice(groupId.split(".").length).join("."),
+      light: value,
+      dark: darkValue
+    });
+    groups.set(groupId, entries);
   }
-  entries.sort((a, b) => a.token.localeCompare(b.token, undefined, { numeric: true }));
-  return entries;
+
+  return [...groups.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([id, entries]) => ({
+      id,
+      title: id,
+      entries: entries.sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true }))
+    }));
+}
+
+function collectRoleGroups(): ColorGroup[] {
+  const groups = new Map<string, ColorScaleEntry[]>();
+
+  for (const [token, value] of Object.entries(themes.light)) {
+    if (!token.startsWith(rolePrefix) || typeof value !== "string") continue;
+    const suffix = token.slice(rolePrefix.length);
+    const [groupId] = suffix.split(".");
+    const darkValue = themes.dark[token];
+    if (typeof darkValue !== "string") {
+      throw new Error(`Missing dark semantic color role "${token}".`);
+    }
+
+    const entries = groups.get(groupId) ?? [];
+    entries.push({ token, label: suffix, light: value, dark: darkValue });
+    groups.set(groupId, entries);
+  }
+
+  return [...groups.entries()]
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([id, entries]) => ({
+      id,
+      title: id,
+      entries: entries.sort((a, b) => a.label.localeCompare(b.label))
+    }));
+}
+
+function ColorValue({ value, label }: { value: string; label: string }) {
+  return (
+    <span className="color-value">
+      <span
+        className="color-value__swatch"
+        style={{ background: value }}
+        role="img"
+        aria-label={`${label}: ${value}`}
+      />
+      <span className="color-value__hex">{value}</span>
+    </span>
+  );
+}
+
+function ColorGroupTable({
+  group,
+  language,
+  role = false
+}: {
+  group: ColorGroup;
+  language: Language;
+  role?: boolean;
+}) {
+  return (
+    <section className="color-group-card">
+      <h3>{titleFor(group.id, role ? roleTitles : groupTitles, language)}</h3>
+      <div className="color-group-table">
+        <div className="color-group-row color-group-row--header">
+          <span>Token</span>
+          <span>{language === "es" ? "Claro" : "Light"}</span>
+          <span>{language === "es" ? "Oscuro" : "Dark"}</span>
+        </div>
+        {group.entries.map((entry) => (
+          <div className="color-group-row" key={entry.token}>
+            <span className="color-group-row__token">
+              {role ? entry.label : entry.label || entry.token.slice(palettePrefix.length)}
+            </span>
+            <ColorValue value={entry.light} label={language === "es" ? "Claro" : "Light"} />
+            <ColorValue value={entry.dark} label={language === "es" ? "Oscuro" : "Dark"} />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
 }
 
 export function ColorsFoundation({ language }: { language: Language }) {
-  const primary = useMemo(() => pick("color.primitive.light.palette.brand.primary."), []);
-  const secondary = useMemo(() => pick("color.primitive.light.palette.brand.secondary."), []);
-  const accent = useMemo(() => pick("color.primitive.light.palette.brand.accent."), []);
-  const neutral = useMemo(() => pick("color.primitive.light.palette.neutral."), []);
-  const alpha = useMemo(() => pick("color.primitive.light.palette.alpha."), []);
+  const paletteGroups = collectPaletteGroups();
+  const roleGroups = collectRoleGroups();
 
   return (
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>{language === "es" ? "Colores" : "Colors"}</h1>
+        <h1>Color</h1>
         <p className="foundation-lead">
           {language === "es"
-            ? "El sistema usa tokens de color para mantener la consistencia. Incluye escalas de marca, colores neutros y transparencias para capas y estados."
-            : "The system uses color tokens to ensure consistency. It includes saturated brand scales, neutrals, and alpha colors for overlays and states."}
+            ? "Una referencia única para todas las escalas primitivas y los roles semánticos de color del contexto Product, con sus valores para temas claro y oscuro."
+            : "One reference for every primitive color scale and semantic color role in the Product context, with values for both light and dark themes."}
         </p>
       </section>
 
       <section className="foundation-section">
-        <h2>{language === "es" ? "Anatomía del color" : "Color anatomy"}</h2>
+        <h2>{language === "es" ? "Escalas primitivas" : "Primitive scales"}</h2>
         <p>
           {language === "es"
-            ? "Una paleta clara ayuda a comunicar intención: marca, jerarquía, estado y contraste."
-            : "A clear palette communicates intent: brand, hierarchy, state, and contrast."}
+            ? "Las escalas son los valores de base. Cada fila muestra el mismo token en claro y oscuro."
+            : "Scales are the base color values. Each row shows the same token in light and dark themes."}
         </p>
-
-        <div className="foundation-subsection">
-          <h3>{language === "es" ? "Colores saturados" : "Saturated colors"}</h3>
-          <p>
-            {language === "es"
-              ? "Los colores saturados representan la marca y se usan como acento, énfasis y estados destacados."
-              : "Saturated colors represent the brand and are used for emphasis and highlighted states."}
-          </p>
-          <div className="palette-columns">
-            {[
-              { title: language === "es" ? "Primario" : "Primary", entries: primary },
-              { title: language === "es" ? "Secundario" : "Secondary", entries: secondary },
-              { title: language === "es" ? "Acento" : "Accent", entries: accent }
-            ].map((col) => (
-              <div className="palette-column" key={col.title}>
-                <p className="palette-column__title">{col.title}</p>
-                <div className="swatch-stack">
-                  {col.entries.map((entry) => (
-                    <div key={entry.token} className="swatch-row" style={{ background: entry.value }}>
-                      <span className="swatch-label">{entry.token.replace("color.primitive.light.palette.", "")}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="color-group-grid">
+          {paletteGroups.map((group) => (
+            <ColorGroupTable key={group.id} group={group} language={language} />
+          ))}
         </div>
+      </section>
 
-        <div className="foundation-subsection">
-          <h3>{language === "es" ? "Colores neutros" : "Neutral colors"}</h3>
-          <p>
-            {language === "es"
-              ? "Los colores neutros se usan en fondos, texto y contenedores. Son la base de las interfaces claras y oscuras."
-              : "Neutrals are used for backgrounds, text, and containers. They are the backbone of light and dark UIs."}
-          </p>
-          <div className="neutral-stage">
-            <div className="neutral-stack">
-              {neutral.map((entry) => (
-                <div key={entry.token} className="neutral-swatch" style={{ background: entry.value }}>
-                  <span>{entry.token.replace("color.primitive.light.palette.", "")}</span>
-                  <span className="neutral-hex">{entry.value}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="foundation-subsection">
-          <h3>{language === "es" ? "Colores con transparencia" : "Alpha colors"}</h3>
-          <p>
-            {language === "es"
-              ? "Las transparencias permiten que las capas y los estados funcionen sobre distintas superficies."
-              : "Alpha colors help overlays, scrims, and states work across multiple surfaces."}
-          </p>
-          <div className="alpha-stage">
-            <div className="alpha-card">
-              <div className="alpha-stack">
-                {alpha.map((entry) => (
-                  <div key={entry.token} className="alpha-swatch" style={{ background: entry.value }}>
-                    <span>{entry.token.replace("color.primitive.light.palette.", "")}</span>
-                    <span className="neutral-hex">{entry.value}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="alpha-circle" aria-hidden="true" />
-            </div>
-          </div>
+      <section className="foundation-section">
+        <h2>{language === "es" ? "Roles semánticos · Product" : "Semantic roles · Product"}</h2>
+        <p>
+          {language === "es"
+            ? "Los roles describen para qué se usa cada color —texto, enlace, icono, borde, fondo, superficie o superposición— y conectan con las escalas anteriores."
+            : "Roles describe how each color is used—text, link, icon, border, background, surface, or overlay—and connect back to the scales above."}
+        </p>
+        <div className="color-group-grid">
+          {roleGroups.map((group) => (
+            <ColorGroupTable key={group.id} group={group} language={language} role />
+          ))}
         </div>
       </section>
     </div>

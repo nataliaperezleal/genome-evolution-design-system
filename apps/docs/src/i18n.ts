@@ -11,7 +11,6 @@ export const dict: Dict = {
   "nav.foundation.elevation": { en: "Elevation", es: "Elevación" },
   "nav.foundation.layout": { en: "Layout", es: "Diseño de página" },
   "nav.foundation.opacity": { en: "Opacity", es: "Opacidad" },
-  "nav.foundation.palette": { en: "Palette", es: "Paleta" },
   "nav.foundation.spacing": { en: "Spacing", es: "Espaciado" },
   "nav.foundation.tokens": { en: "Tokens", es: "Tokens" },
   "nav.foundation.typography": { en: "Typography", es: "Tipografía" },

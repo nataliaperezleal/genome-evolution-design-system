@@ -1,50 +1,15 @@
-# Color — Genome Plus DS
+# Color — Genome Evolution Design System
 
-## Paleta de marca
-| Nombre | Valor hex | Token | Uso |
-|---|---|---|---|
-| Evergreen (primary) | #297a39 | `border/evergreen` | Marca primaria verde |
-| Evergreen bold | — | `surface/evergreen/bold` | Fondo botones primarios |
-| Indigo (secondary) | #6b1b99 | `border/indigo` | Marca secundaria púrpura |
-| Indigo bold | — | `surface/indigo/bold` | Fondo botones indigo |
+The unified Color reference combines primitive scales and semantic roles from the Product context. Values come from the split Figma exports in `packages/tokens/source/figma`.
 
-## Tokens de superficie
-| Token | Uso |
-|---|---|
-| `background/canvas` | #ffffff — Fondo base de componentes |
-| `background/interactive/hovered` | #f7f8f7 — Hover |
-| `background/interactive/pressed` | #e9ecea — Pressed |
-| `background/disabled` | #f4f6f4 — Disabled |
-| `background/loading` | rgba(217,222,218,0.6) — Skeleton |
+## Primitive scales
 
-## Tokens de texto
-| Token | Valor hex | Uso |
-|---|---|---|
-| `text/primary` | #2d342f | Texto principal |
-| `text/secondary` | #5f6d62 | Texto secundario |
-| `text/disabled` | #849588 | Texto deshabilitado |
-| `text/inverse` | blanco | Sobre fondos oscuros |
-| `text/evergreen` | #297a39 | Texto en variante Evergreen |
-| `text/indigo` | #6b1b99 | Texto en variante Indigo |
+These include primary, secondary, accent, error, info, success, alert, neutral, and alpha, as well as brand and product scales. Each token has a light and a dark theme value.
 
-## Tokens de borde
-| Token | Valor hex | Uso |
-|---|---|---|
-| `border/default` | #c3cbc5 | Borde en reposo |
-| `border/strong` | #5f6d62 | Borde enfatizado |
-| `border/focus` | #339947 | Anillo de foco (2px) |
-| `border/disabled` | #c3cbc5 | Borde deshabilitado |
-| `border/evergreen` | #297a39 | Borde Evergreen |
-| `border/indigo` | #6b1b99 | Borde Indigo |
+## Semantic roles
 
-## Semánticos
-| Token | Color |
-|---|---|
-| `surface/danger/bold` | Rojo error |
-| `surface/warning/bold` | Amarillo advertencia |
-| `surface/success/bold` | Verde éxito |
-| `surface/info/bold` | Azul información |
+Product roles organize colors by use: text, links, icons, borders, backgrounds, surfaces, and overlays. Roles reference primitive scales to keep values consistent.
 
-## Regla especial Warning
-El color Warning siempre usa `text/primary` para texto, nunca `text/warning`.
-Razón: el amarillo no tiene contraste suficiente sobre fondos claros (WCAG 2.1 AA).
+Surface exports include hovered and pressed states but do not always include a default state. Where that happens, the default uses the preceding tone from the same scale.
+
+The **Color** page presents both parts together in English and Spanish.

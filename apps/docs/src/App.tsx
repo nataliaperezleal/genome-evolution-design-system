@@ -46,7 +46,6 @@ import { renderMarkdown } from "./markdown";
 import type { DocRecord, NavItem } from "./types";
 import { BorderFoundation } from "./foundations/BorderFoundation";
 import { ColorsFoundation } from "./foundations/ColorsFoundation";
-import { PaletteFoundation } from "./foundations/PaletteFoundation";
 import { TokensFoundation } from "./foundations/TokensFoundation";
 import { TypographyFoundation } from "./foundations/TypographyFoundation";
 import { LayoutFoundation } from "./foundations/LayoutFoundation";
@@ -148,7 +147,6 @@ function localizedFoundationLabel(item: NavItem, language: Language) {
     "foundations-elevation": "nav.foundation.elevation",
     "foundations-layout": "nav.foundation.layout",
     "foundations-opacity": "nav.foundation.opacity",
-    "foundations-palette": "nav.foundation.palette",
     "foundations-spacing": "nav.foundation.spacing",
     "foundations-tokens.json": "nav.foundation.tokens",
     "foundations-typography": "nav.foundation.typography"
@@ -2315,7 +2313,6 @@ export function App() {
 
   const isBorderFoundation = activeId === "foundations-border";
   const isColorsFoundation = activeId === "foundations-color";
-  const isPaletteFoundation = activeId === "foundations-palette";
   const isTokensFoundation = activeId === "foundations-tokens.json";
   const isTypographyFoundation = activeId === "foundations-typography";
   const isLayoutFoundation = activeId === "foundations-layout";
@@ -2671,8 +2668,6 @@ export function App() {
             <OpacityFoundation language={language} />
           ) : isElevationFoundation ? (
             <ElevationFoundation language={language} />
-          ) : isPaletteFoundation ? (
-            <PaletteFoundation language={language} />
           ) : isBorderFoundation ? (
             <BorderFoundation theme={theme} language={language} />
           ) : isTokensFoundation ? (

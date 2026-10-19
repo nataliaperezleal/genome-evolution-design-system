@@ -1,6 +1,7 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { loadFigmaExports } from "./load-figma-exports.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
@@ -8,7 +9,8 @@ const sourceFile = path.join(packageRoot, "source", "tokens.json");
 const distDir = path.join(packageRoot, "dist");
 const themesDir = path.join(distDir, "themes");
 
-const source = JSON.parse(await readFile(sourceFile, "utf8"));
+const legacySource = JSON.parse(await readFile(sourceFile, "utf8"));
+const source = await loadFigmaExports(legacySource);
 const fallbackReferences = {
   "family.display": "Open Sans"
 };
@@ -224,7 +226,7 @@ const publicMetadata = {
   system: source.$metadata?.name ?? "Genome Evolution Design System",
   version: source.$metadata?.version ?? "0.0.0",
   generatedAt: source.$metadata?.generatedAt ?? null,
-  source: "packages/tokens/source/tokens.json",
+  source: "packages/tokens/source/figma (current exports) + packages/tokens/source/tokens.json (retained tokens not included in exports)",
   publicPrefixes,
   themes
 };

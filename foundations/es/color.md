@@ -1,51 +1,15 @@
 # Color — Genome Evolution Design System
 
-## Paleta de marca
-| Nombre | Valor hex | Token | Uso |
-|---|---|---|---|
-| Evergreen (primario) | #297a39 | `border/evergreen` | Color verde principal de marca |
-| Evergreen intenso | — | `surface/evergreen/bold` | Fondo de botones primarios |
-| Indigo (secundario) | #6b1b99 | `border/indigo` | Color púrpura secundario de marca |
-| Indigo intenso | — | `surface/indigo/bold` | Fondo de botones secundarios |
+La referencia única de color combina las escalas primitivas y los roles semánticos del contexto Product. Los valores provienen de los exports separados de Figma en `packages/tokens/source/figma`.
 
-## Tokens de superficie
-| Token | Uso |
-|---|---|
-| `background/canvas` | #ffffff — Fondo base de los componentes |
-| `background/interactive/hovered` | #f7f8f7 — Estado al pasar el cursor |
-| `background/interactive/pressed` | #e9ecea — Estado presionado |
-| `background/disabled` | #f4f6f4 — Estado deshabilitado |
-| `background/loading` | rgba(217,222,218,0.6) — Indicador de carga |
+## Escalas primitivas
 
-## Tokens de texto
-| Token | Valor hex | Uso |
-|---|---|---|
-| `text/primary` | #2d342f | Texto principal |
-| `text/secondary` | #5f6d62 | Texto secundario |
-| `text/disabled` | #849588 | Texto deshabilitado |
-| `text/inverse` | blanco | Texto sobre fondos oscuros |
-| `text/evergreen` | #297a39 | Texto en la variante Evergreen |
-| `text/indigo` | #6b1b99 | Texto en la variante Indigo |
+Incluyen las familias primary, secondary, accent, error, info, success, alert, neutral y alpha; además de las escalas de marca y de producto. Cada token tiene un valor para tema claro y otro para tema oscuro.
 
-## Tokens de borde
-| Token | Valor hex | Uso |
-|---|---|---|
-| `border/default` | #c3cbc5 | Borde en estado normal |
-| `border/strong` | #5f6d62 | Borde enfatizado |
-| `border/focus` | #339947 | Anillo de foco de 2px |
-| `border/disabled` | #c3cbc5 | Borde de elementos deshabilitados |
-| `border/evergreen` | #297a39 | Borde Evergreen |
-| `border/indigo` | #6b1b99 | Borde Indigo |
+## Roles semánticos
 
-## Colores semánticos
-| Token | Color |
-|---|---|
-| `surface/danger/bold` | Rojo de error |
-| `surface/warning/bold` | Amarillo de advertencia |
-| `surface/success/bold` | Verde de éxito |
-| `surface/info/bold` | Azul informativo |
+Los roles Product organizan los colores según su uso: texto, enlaces, iconos, bordes, fondos, superficies y superposiciones. Los roles apuntan a las escalas primitivas para mantener los valores consistentes.
 
-## Regla especial para Warning
+Los exports de superficies incluyen estados al pasar el cursor y al presionar, pero no siempre incluyen el estado normal. En esos casos, el estado normal se completa usando el tono anterior de la misma escala.
 
-El color Warning siempre usa `text/primary` para el texto, nunca `text/warning`.
-Razón: el amarillo no tiene contraste suficiente sobre fondos claros (WCAG 2.1 AA).
+La página **Color** presenta ambas partes juntas y en español e inglés.
