@@ -67,11 +67,12 @@ function flattenRoleEntries(node, trail = [], result = []) {
   if (!node || typeof node !== "object") return result;
 
   if ("$value" in node) {
-    const reference = node.$extensions?.["com.figma.aliasData"]?.targetVariableName;
+    const aliasData = node.$extensions?.["com.figma.aliasData"]?.targetVariableName;
+    const valueAlias = typeof node.$value === "string" ? node.$value.match(/^\{([^}]+)\}$/)?.[1] : null;
     result.push({
       token: trail.join("."),
       value: colorToCss(node.$value),
-      reference: typeof reference === "string" ? reference : null
+      reference: typeof aliasData === "string" ? aliasData : valueAlias ?? null
     });
     return result;
   }
@@ -159,28 +160,49 @@ export async function loadFigmaExports() {
 
   source.$colorRoleContexts = contexts.map(({ id, data }) => ({
     id,
-    roles: flattenRoleEntries(data).map((role) => {
-      if (!role.reference) {
-        return {
+    roles: (() => {
+      const entries = flattenRoleEntries(data);
+      const entriesByToken = new Map(entries.map((role) => [role.token, role]));
+      const resolved = new Map();
+
+      function resolve(role, stack = []) {
+        if (resolved.has(role.token)) return resolved.get(role.token);
+        if (stack.includes(role.token)) {
+          throw new Error(`Circular color role alias in ${id}: ${[...stack, role.token].join(" -> ")}`);
+        }
+
+        if (!role.reference) {
+          const result = { ...role, light: role.value, dark: null };
+          resolved.set(role.token, result);
+          return result;
+        }
+
+        const targetRole = entriesByToken.get(role.reference.replaceAll("/", "."));
+        if (targetRole) {
+          const target = resolve(targetRole, [...stack, role.token]);
+          const result = { ...role, light: target.light, dark: target.dark };
+          resolved.set(role.token, result);
+          return result;
+        }
+
+        const primitivePath = role.reference.replaceAll("/", ".");
+        const lightValue = lightPalette.get(primitivePath);
+        const darkValue = darkPalette.get(primitivePath);
+        if (!lightValue || !darkValue) {
+          throw new Error(`Could not resolve Figma role alias "${role.reference}" in context "${id}".`);
+        }
+
+        const result = {
           ...role,
-          light: role.value,
-          dark: null
+          light: colorToCss(lightValue),
+          dark: colorToCss(darkValue)
         };
+        resolved.set(role.token, result);
+        return result;
       }
 
-      const primitivePath = role.reference.replaceAll("/", ".");
-      const lightValue = lightPalette.get(primitivePath);
-      const darkValue = darkPalette.get(primitivePath);
-      if (!lightValue || !darkValue) {
-        throw new Error(`Could not resolve Figma role alias "${role.reference}" in both color themes.`);
-      }
-
-      return {
-        ...role,
-        light: colorToCss(lightValue),
-        dark: colorToCss(darkValue)
-      };
-    })
+      return entries.map((role) => resolve(role));
+    })()
   }));
 
   source["Border/Base"] = withoutSetMetadata(border);

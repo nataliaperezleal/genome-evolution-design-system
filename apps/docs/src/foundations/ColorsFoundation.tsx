@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import { allTokens, colorRoleContexts } from "@genome-evolution/tokens";
 import type { Language } from "../i18n";
 
@@ -158,44 +160,76 @@ function ColorGroupTable({
   language: Language;
 }) {
   return (
-    <section className="color-group-card">
-      <h3>{titleFor(group.id, groupTitles, language)}</h3>
-      <div className="color-group-table">
-        <div className="color-group-row color-group-row--header">
-          <span>Token</span>
-          <span>{language === "es" ? "Claro" : "Light"}</span>
-          <span>{language === "es" ? "Oscuro" : "Dark"}</span>
-        </div>
-        {group.entries.map((entry) => (
-          <div className="color-group-row" key={entry.token}>
-            <span className="color-group-row__token">
-              {entry.label || entry.token.slice(palettePrefix.length)}
-            </span>
-            <ColorValue value={entry.light} label={language === "es" ? "Claro" : "Light"} />
-            <ColorValue value={entry.dark} label={language === "es" ? "Oscuro" : "Dark"} />
-          </div>
-        ))}
+    <div className="color-group-table">
+      <div className="color-group-row color-group-row--header">
+        <span>Token</span>
+        <span>{language === "es" ? "Claro" : "Light"}</span>
+        <span>{language === "es" ? "Oscuro" : "Dark"}</span>
       </div>
-    </section>
+      {group.entries.map((entry) => (
+        <div className="color-group-row" key={entry.token}>
+          <span className="color-group-row__token">
+            {entry.label || entry.token.slice(palettePrefix.length)}
+          </span>
+          <ColorValue value={entry.light} label={language === "es" ? "Claro" : "Light"} />
+          <ColorValue value={entry.dark} label={language === "es" ? "Oscuro" : "Dark"} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PaletteGroups({ groups, language }: { groups: ColorGroup[]; language: Language }) {
+  return (
+    <div className="color-group-grid">
+      {groups.map((group) => (
+        <details className="color-group-disclosure" key={group.id}>
+          <summary>
+            <span>{titleFor(group.id, groupTitles, language)}</span>
+            <span className="color-disclosure-count">{group.entries.length} {language === "es" ? "colores" : "colors"}</span>
+          </summary>
+          <ColorGroupTable group={group} language={language} />
+        </details>
+      ))}
+    </div>
   );
 }
 
 function RoleMatrix({
   groups,
   language,
-  theme
+  theme,
+  query
 }: {
   groups: RoleGroup[];
   language: Language;
   theme: "light" | "dark";
+  query: string;
 }) {
   const contexts = colorRoleContexts.map((context) => context.id);
+  const normalizedQuery = query.trim().toLowerCase();
+  const filteredGroups = groups
+    .map((group) => ({
+      ...group,
+      rows: group.rows.filter((row) => {
+        if (!normalizedQuery) return true;
+        const roleText = [
+          row.token,
+          ...Object.values(row.contexts).flatMap((role) => [role.reference ?? "", role.value])
+        ].join(" ").toLowerCase();
+        return roleText.includes(normalizedQuery);
+      })
+    }))
+    .filter((group) => group.rows.length > 0);
 
   return (
     <div className="role-matrix-groups">
-      {groups.map((group) => (
-        <section className="role-matrix-group" key={group.id}>
-          <h3>{titleFor(group.id, roleTitles, language)}</h3>
+      {filteredGroups.map((group, index) => (
+        <details className="role-matrix-group" key={group.id} open={Boolean(normalizedQuery) || index === 0}>
+          <summary>
+            <span>{titleFor(group.id, roleTitles, language)}</span>
+            <span className="color-disclosure-count">{group.rows.length} {language === "es" ? "roles" : "roles"}</span>
+          </summary>
           <div className="role-matrix-scroll">
             <table className="role-matrix">
               <thead>
@@ -241,15 +275,23 @@ function RoleMatrix({
               </tbody>
             </table>
           </div>
-        </section>
+        </details>
       ))}
+      {filteredGroups.length === 0 && (
+        <p className="color-empty-state">
+          {language === "es" ? "No hay roles que coincidan con la búsqueda." : "No roles match your search."}
+        </p>
+      )}
     </div>
   );
 }
 
 export function ColorsFoundation({ language, theme }: { language: Language; theme: "light" | "dark" }) {
+  const [activeView, setActiveView] = useState<"roles" | "scales">("roles");
+  const [roleQuery, setRoleQuery] = useState("");
   const paletteGroups = collectPaletteGroups();
   const roleGroups = collectRoleGroups();
+  const roleCount = roleGroups.reduce((total, group) => total + group.rows.length, 0);
 
   return (
     <div className="foundation-page">
@@ -264,27 +306,61 @@ export function ColorsFoundation({ language, theme }: { language: Language; them
       </section>
 
       <section className="foundation-section">
-        <h2>{language === "es" ? "Escalas primitivas" : "Primitive scales"}</h2>
-        <p>
-          {language === "es"
-            ? "Las escalas son los valores de base. Cada fila muestra el mismo token en claro y oscuro."
-            : "Scales are the base color values. Each row shows the same token in light and dark themes."}
-        </p>
-        <div className="color-group-grid">
-          {paletteGroups.map((group) => (
-            <ColorGroupTable key={group.id} group={group} language={language} />
-          ))}
+        <div className="color-view-switch" role="group" aria-label={language === "es" ? "Vistas de color" : "Color views"}>
+          <button
+            type="button"
+            aria-pressed={activeView === "roles"}
+            onClick={() => setActiveView("roles")}
+          >
+            {language === "es" ? "Roles" : "Roles"} <span>{roleCount}</span>
+          </button>
+          <button
+            type="button"
+            aria-pressed={activeView === "scales"}
+            onClick={() => setActiveView("scales")}
+          >
+            {language === "es" ? "Escalas primitivas" : "Primitive scales"} <span>{paletteGroups.length}</span>
+          </button>
         </div>
-      </section>
 
-      <section className="foundation-section">
-        <h2>{language === "es" ? "Roles semánticos por contexto" : "Semantic roles by context"}</h2>
-        <p>
-          {language === "es"
-            ? `Cada fila muestra el mismo rol en todos los contextos. Las referencias vienen directamente de Figma; la vista actual usa el tema ${theme === "light" ? "claro" : "oscuro"}.`
-            : `Each row shows the same role across all contexts. References come directly from Figma; the current view uses the ${theme} theme.`}
-        </p>
-        <RoleMatrix groups={roleGroups} language={language} theme={theme} />
+        {activeView === "roles" ? (
+          <div>
+            <div className="color-panel-intro">
+              <div>
+                <h2>{language === "es" ? "Roles por contexto" : "Roles by context"}</h2>
+                <p>
+                  {language === "es"
+                    ? `Compara las referencias de Figma para los seis contextos. Product sigue activo para los componentes; las muestras usan el tema ${theme === "light" ? "claro" : "oscuro"}.`
+                    : `Compare Figma references across all six contexts. Product remains active for components; swatches use the ${theme} theme.`}
+                </p>
+              </div>
+              <label className="color-role-search">
+                <span>{language === "es" ? "Buscar rol o referencia" : "Search role or reference"}</span>
+                <input
+                  type="search"
+                  value={roleQuery}
+                  onChange={(event) => setRoleQuery(event.target.value)}
+                  placeholder={language === "es" ? "Ej. text.primary" : "e.g. text.primary"}
+                />
+              </label>
+            </div>
+            <RoleMatrix groups={roleGroups} language={language} theme={theme} query={roleQuery} />
+          </div>
+        ) : (
+          <div>
+            <div className="color-panel-intro">
+              <div>
+                <h2>{language === "es" ? "Escalas primitivas" : "Primitive scales"}</h2>
+                <p>
+                  {language === "es"
+                    ? "Abre una escala para ver los valores primitivos en los temas claro y oscuro."
+                    : "Expand a scale to see its primitive values in light and dark themes."}
+                </p>
+              </div>
+            </div>
+            <PaletteGroups groups={paletteGroups} language={language} />
+          </div>
+        )}
       </section>
     </div>
   );
