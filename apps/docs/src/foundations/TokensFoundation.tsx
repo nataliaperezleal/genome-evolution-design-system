@@ -5,7 +5,8 @@ import type { Language } from "../i18n";
 
 type RoleTokenRow = { token: string; light: string; dark: string };
 
-function pickRole(prefix: string) {
+function pickRole(category: string) {
+  const prefix = `color.role.light.${category}.`;
   const entries: RoleTokenRow[] = [];
   for (const [token, value] of Object.entries(themes.light)) {
     if (!token.startsWith(prefix) || typeof value !== "string") continue;
@@ -30,7 +31,7 @@ function TokenGroup({ title, rows, language }: { title: string; rows: RoleTokenR
         {rows.map((row) => (
           <div className="role-table__row" key={row.token}>
             <div>
-              <span className="token-pill">{row.token}</span>
+              <span className="token-pill">{row.token.replace("color.role.light.", "color.role.")}</span>
             </div>
             <div className="role-sample">
               <div className="role-swatch" style={{ background: row.light }} aria-hidden="true" />
@@ -50,13 +51,13 @@ function TokenGroup({ title, rows, language }: { title: string; rows: RoleTokenR
 export function TokensFoundation({ language }: { language: Language }) {
   const groups = useMemo(
     () => [
-      { id: "text", title: language === "es" ? "Texto" : "Text", rows: pickRole("color.role.text.") },
-      { id: "link", title: language === "es" ? "Enlace" : "Link", rows: pickRole("color.role.link.") },
-      { id: "icon", title: language === "es" ? "Ícono" : "Icon", rows: pickRole("color.role.icon.") },
-      { id: "border", title: language === "es" ? "Borde" : "Border", rows: pickRole("color.role.border.") },
-      { id: "background", title: language === "es" ? "Fondo" : "Background", rows: pickRole("color.role.background.") },
-      { id: "surface", title: language === "es" ? "Superficie" : "Surface", rows: pickRole("color.role.surface.") },
-      { id: "overlay", title: language === "es" ? "Superposición" : "Overlay", rows: pickRole("color.role.overlay.") }
+      { id: "text", title: language === "es" ? "Texto" : "Text", rows: pickRole("text") },
+      { id: "link", title: language === "es" ? "Enlace" : "Link", rows: pickRole("link") },
+      { id: "icon", title: language === "es" ? "Ícono" : "Icon", rows: pickRole("icon") },
+      { id: "border", title: language === "es" ? "Borde" : "Border", rows: pickRole("border") },
+      { id: "background", title: language === "es" ? "Fondo" : "Background", rows: pickRole("background") },
+      { id: "surface", title: language === "es" ? "Superficie" : "Surface", rows: pickRole("surface") },
+      { id: "overlay", title: language === "es" ? "Superposición" : "Overlay", rows: pickRole("overlay") }
     ],
     [language]
   );
