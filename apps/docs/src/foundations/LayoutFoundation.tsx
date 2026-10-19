@@ -38,9 +38,9 @@ function GridPreview({ columns }: { columns: number }) {
 }
 
 export function LayoutFoundation({ language }: { language: Language }) {
-  const spacing = useMemo(() => pick("spacing.space."), []);
-  const gaps = useMemo(() => pick("spacing.gap."), []);
-  const layout = useMemo(() => pick("layout."), []);
+  const spacing = useMemo(() => pick("spacing.base.space."), []);
+  const gaps = useMemo(() => pick("spacing.base.gap."), []);
+  const layout = useMemo(() => pick("layout.base."), []);
 
   const columns = useMemo(() => {
     const read = (id: string) => {
@@ -48,9 +48,9 @@ export function LayoutFoundation({ language }: { language: Language }) {
       return typeof value === "number" ? value : Number(value);
     };
     return {
-      desktop: read("layout.columns.desktop") || 12,
-      tablet: read("layout.columns.tablet") || 8,
-      mobile: read("layout.columns.mobile") || 4
+      desktop: read("layout.base.columns.desktop"),
+      tablet: read("layout.base.columns.tablet"),
+      mobile: read("layout.base.columns.mobile")
     };
   }, []);
 
@@ -70,8 +70,8 @@ export function LayoutFoundation({ language }: { language: Language }) {
         <h2>Spacing</h2>
         <p>
           {language === "es"
-            ? "El sistema usa una base de 4px (y múltiplos). Usa spacing.space.* para padding/margin y spacing.gap.* para separaciones entre elementos."
-            : "The system uses a 4px base (and multiples). Use spacing.space.* for padding/margin and spacing.gap.* for gaps between elements."}
+            ? "Los tokens spacing.base.space.* definen la escala de espacio en píxeles. Usa spacing.base.gap.* para las separaciones entre elementos."
+            : "The spacing.base.space.* tokens define the spacing scale in pixels. Use spacing.base.gap.* for gaps between elements."}
         </p>
 
         <div className="foundation-table">
@@ -85,14 +85,14 @@ export function LayoutFoundation({ language }: { language: Language }) {
             const px = row.value;
             const pxValue = extractPx(px);
             const rem = pxToRem(px);
-            const barWidth = Math.min(220, Math.max(2, pxValue * 2.2));
+            const barWidth = Math.min(220, Math.max(0, pxValue * 2.2));
             return (
               <div className="foundation-table__row foundation-table__row--layout" key={row.token}>
                 <div>
                   <span className="token-pill">{row.token}</span>
                 </div>
                 <div className="token-value-mono">{rem}</div>
-                <div className="token-value-mono">{px}</div>
+                <div className="token-value-mono">{pxValue}px</div>
                 <div>
                   <div className="space-bar" style={{ width: barWidth }} />
                 </div>
@@ -117,14 +117,17 @@ export function LayoutFoundation({ language }: { language: Language }) {
             </div>
             {gaps.map((row) => {
               const pxValue = extractPx(row.value);
-              const barWidth = Math.min(180, Math.max(2, pxValue * 4));
+              const primitive = spacing.find((space) => extractPx(space.value) === pxValue);
+              const barWidth = Math.min(180, Math.max(0, pxValue * 4));
               return (
                 <div className="foundation-table__row foundation-table__row--layout" key={row.token}>
                   <div>
                     <span className="token-pill">{row.token}</span>
                   </div>
-                  <div className="token-value-mono">{row.token.replace("spacing.gap.", "spacing.space.")}</div>
-                  <div className="token-value-mono">{row.value}</div>
+                  <div className="token-value-mono">
+                    {primitive?.token ?? (language === "es" ? "Sin equivalencia" : "No equivalent")}
+                  </div>
+                  <div className="token-value-mono">{pxValue}px</div>
                   <div>
                     <div className="space-bar space-bar--thin" style={{ width: barWidth }} />
                   </div>
