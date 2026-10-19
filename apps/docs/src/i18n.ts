@@ -5,10 +5,17 @@ type Dict = Record<string, { en: string; es: string }>;
 export const dict: Dict = {
   "nav.overview": { en: "Overview", es: "Inicio" },
   "nav.gettingStarted": { en: "Getting Started", es: "Primeros pasos" },
-  "nav.foundations": { en: "Foundations", es: "Foundations" },
+  "nav.foundations": { en: "Foundations", es: "Fundamentos" },
+  "nav.foundation.border": { en: "Border", es: "Bordes" },
+  "nav.foundation.color": { en: "Color", es: "Color" },
+  "nav.foundation.elevation": { en: "Elevation", es: "Elevación" },
+  "nav.foundation.layout": { en: "Layout", es: "Diseño de página" },
+  "nav.foundation.spacing": { en: "Spacing", es: "Espaciado" },
+  "nav.foundation.tokens": { en: "Tokens", es: "Tokens" },
+  "nav.foundation.typography": { en: "Typography", es: "Tipografía" },
   "nav.components": { en: "Components", es: "Componentes" },
 
-  "search.placeholder": { en: "Search components, tokens or foundations", es: "Busca componentes, tokens o foundations" },
+  "search.placeholder": { en: "Search components, tokens or foundations", es: "Busca componentes, tokens o fundamentos" },
 
   "topbar.eyebrow": { en: "Design system docs", es: "Documentación del sistema" },
   "theme.light": { en: "Light", es: "Claro" },
@@ -23,13 +30,13 @@ export const dict: Dict = {
   },
   "overview.hero.body": {
     en: "Centralized documentation for foundations, components, tokens and implementation patterns.",
-    es: "Documentación centralizada para foundations, componentes, tokens y patrones de implementación."
+    es: "Documentación centralizada para fundamentos, componentes, tokens y patrones de implementación."
   },
   "overview.hero.cta.primary": { en: "Explore components", es: "Explorar componentes" },
-  "overview.hero.cta.secondary": { en: "View foundations", es: "Ver Foundations" },
+  "overview.hero.cta.secondary": { en: "View foundations", es: "Ver fundamentos" },
 
   "overview.signal.scale": { en: "Scale", es: "Escala" },
-  "overview.signal.foundations": { en: "Foundations", es: "Foundations" },
+  "overview.signal.foundations": { en: "Foundations", es: "Fundamentos" },
   "overview.signal.impl": { en: "Implementation", es: "Implementación" },
   "overview.signal.scale.body": {
     en: "From actions and form controls to overlays, navigation and data display.",
@@ -38,9 +45,9 @@ export const dict: Dict = {
   "overview.signal.scale.valueSuffix": { en: "documented components", es: "componentes documentados" },
   "overview.signal.foundations.body": {
     en: "Color, typography, spacing, layout, border, elevation and token exports aligned in code.",
-    es: "Color, tipografía, spacing, layout, border, elevation y exports de tokens alineados en código."
+    es: "Color, tipografía, espaciado, diseño de página, bordes, elevación y tokens alineados en el código."
   },
-  "overview.signal.foundations.valueSuffix": { en: "foundation references", es: "referencias de foundations" },
+  "overview.signal.foundations.valueSuffix": { en: "foundation references", es: "referencias de fundamentos" },
   "overview.signal.impl.value": { en: "React + tokens + docs", es: "React + tokens + docs" },
   "overview.signal.impl.body": {
     en: "A working package layer sits underneath the documentation surface and feeds the live previews.",
@@ -76,7 +83,7 @@ export const dict: Dict = {
 
   "overview.panel.subtitle.system": {
     en: "Foundations, components, tokens and docs shipped as one source of truth.",
-    es: "Foundations, componentes, tokens y docs como un solo source of truth."
+    es: "Fundamentos, componentes, tokens y documentación como una única fuente de verdad."
   },
   "overview.panel.subtitle.overview": { en: "Token-driven primitives in context.", es: "Primitivas guiadas por tokens en contexto." },
   "overview.panel.subtitle.guidelines": {
@@ -96,7 +103,7 @@ export const dict: Dict = {
   "overview.panel.checks.components": { en: "Components described", es: "Componentes descritos" },
   "overview.panel.checks.guidelines": { en: "Usage guidelines connected", es: "Guías de uso conectadas" },
 
-  "overview.foundation.eyebrow": { en: "Foundation system", es: "Sistema de foundations" },
+  "overview.foundation.eyebrow": { en: "Foundation system", es: "Sistema de fundamentos" },
   "overview.foundation.title": {
     en: "The visual language is already codified across color, typography and spacing.",
     es: "El lenguaje visual ya está codificado en color, tipografía y espaciado."
@@ -114,12 +121,12 @@ export const dict: Dict = {
   "overview.portal.headline": { en: "A practical map for design and engineering.", es: "Un mapa práctico para diseño e ingeniería." },
   "overview.portal.body": {
     en: "Start from foundations, scan component guidance, or grab tokens and styles for implementation.",
-    es: "Empieza por foundations, revisa guías de componentes o toma tokens y estilos para implementar."
+    es: "Empieza por los fundamentos, revisa las guías de componentes o consulta los tokens y estilos para implementar."
   },
-  "overview.portal.foundations.title": { en: "Foundations", es: "Foundations" },
+  "overview.portal.foundations.title": { en: "Foundations", es: "Fundamentos" },
   "overview.portal.foundations.body": {
     en: "Color, typography, spacing and layout decisions that keep the UI coherent.",
-    es: "Color, tipografía, spacing y layout: decisiones que mantienen coherencia en la UI."
+    es: "Color, tipografía, espaciado y diseño de página: decisiones que mantienen la coherencia de la interfaz."
   },
   "overview.portal.components.title": { en: "Components", es: "Components" },
   "overview.portal.components.body": {
@@ -150,7 +157,7 @@ export const dict: Dict = {
     es: "Es el sistema de diseño para los productos de Bizagi, que contiene guías, elementos y definiciones para diseñadores con código para que los desarrolladores puedan usarlo. Incluye reglas de UX para diseñar interfaces que funcionen muy bien para nuestros usuarios."
   },
   "gettingStarted.parts.title": { en: "Parts of the design system", es: "Partes del sistema de diseño" },
-  "gettingStarted.sections.foundations.title": { en: "Foundations", es: "Foundations" },
+  "gettingStarted.sections.foundations.title": { en: "Foundations", es: "Fundamentos" },
   "gettingStarted.sections.foundations.body": {
     en: "You will find the definitions, guidelines, and foundations for building the system. It includes tokens, colors, typography, spacing, and more.",
     es: "Encontrarás las definiciones, guías y fundamentos para construir el sistema. Incluye tokens, colores, tipografía, espaciado y más."

@@ -1,10 +1,10 @@
 # Spacing — Genome Evolution Design System
 
-## Escala de espacio
+## Spacing scale
 
-Tokens primitivos publicados por el paquete `@genome-evolution/tokens`. Sus valores son píxeles.
+Primitive tokens published by the `@genome-evolution/tokens` package. Values are in pixels.
 
-| Token | Valor |
+| Token | Value |
 |---|---:|
 | `spacing.base.space.0` | 0px |
 | `spacing.base.space.1` | 1px |
@@ -22,11 +22,11 @@ Tokens primitivos publicados por el paquete `@genome-evolution/tokens`. Sus valo
 | `spacing.base.space.80` | 80px |
 | `spacing.base.space.96` | 96px |
 
-## Tokens de separación (gap)
+## Gap tokens
 
-Estos tokens semánticos reutilizan valores de la escala primitiva.
+These semantic tokens reuse values from the primitive scale.
 
-| Token | Token primitivo | Valor |
+| Token | Primitive token | Value |
 |---|---|---:|
 | `spacing.base.gap.none` | `spacing.base.space.0` | 0px |
 | `spacing.base.gap.xxs` | `spacing.base.space.2` | 2px |
@@ -36,12 +36,12 @@ Estos tokens semánticos reutilizan valores de la escala primitiva.
 | `spacing.base.gap.lg` | `spacing.base.space.16` | 16px |
 | `spacing.base.gap.xl` | `spacing.base.space.24` | 24px |
 
-## Uso por componente
+## Component usage
 
-- **Accordion MD**: padding horizontal `spacing.base.space.16`; padding vertical derivado de `size/40`.
-- **Accordion SM**: padding horizontal `spacing.base.space.8`; padding vertical derivado de `size/32`.
-- **Button MD**: padding horizontal `spacing.base.space.16` y vertical `spacing.base.space.8`.
-- **Button SM**: padding horizontal `spacing.base.space.12` y vertical `spacing.base.space.4`.
-- **Table header**: padding horizontal `spacing.base.space.16` y vertical `spacing.base.space.8`.
-- **Table cell small**: padding horizontal `spacing.base.space.16` y vertical `spacing.base.space.4`.
-- **Table cell medium**: padding horizontal `spacing.base.space.16` y vertical `spacing.base.space.8`.
+- **Accordion MD**: horizontal padding `spacing.base.space.16`; vertical padding derived from `size/40`.
+- **Accordion SM**: horizontal padding `spacing.base.space.8`; vertical padding derived from `size/32`.
+- **Button MD**: horizontal padding `spacing.base.space.16` and vertical padding `spacing.base.space.8`.
+- **Button SM**: horizontal padding `spacing.base.space.12` and vertical padding `spacing.base.space.4`.
+- **Table header**: horizontal padding `spacing.base.space.16` and vertical padding `spacing.base.space.8`.
+- **Table cell small**: horizontal padding `spacing.base.space.16` and vertical padding `spacing.base.space.4`.
+- **Table cell medium**: horizontal padding `spacing.base.space.16` and vertical padding `spacing.base.space.8`.

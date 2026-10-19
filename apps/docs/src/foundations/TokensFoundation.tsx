@@ -17,15 +17,15 @@ function pickRole(prefix: string) {
   return entries;
 }
 
-function TokenGroup({ title, rows }: { title: string; rows: RoleTokenRow[] }) {
+function TokenGroup({ title, rows, language }: { title: string; rows: RoleTokenRow[]; language: Language }) {
   return (
     <section className="role-group">
       <h2>{title}</h2>
       <div className="role-table">
         <div className="role-table__head">
           <div>Token</div>
-          <div>Light</div>
-          <div>Dark</div>
+          <div>{language === "es" ? "Claro" : "Light"}</div>
+          <div>{language === "es" ? "Oscuro" : "Dark"}</div>
         </div>
         {rows.map((row) => (
           <div className="role-table__row" key={row.token}>
@@ -50,32 +50,32 @@ function TokenGroup({ title, rows }: { title: string; rows: RoleTokenRow[] }) {
 export function TokensFoundation({ language }: { language: Language }) {
   const groups = useMemo(
     () => [
-      { title: "Text", rows: pickRole("color.role.text.") },
-      { title: "Link", rows: pickRole("color.role.link.") },
-      { title: "Icon", rows: pickRole("color.role.icon.") },
-      { title: "Border", rows: pickRole("color.role.border.") },
-      { title: "Background", rows: pickRole("color.role.background.") },
-      { title: "Surface", rows: pickRole("color.role.surface.") },
-      { title: "Overlay", rows: pickRole("color.role.overlay.") }
+      { id: "text", title: language === "es" ? "Texto" : "Text", rows: pickRole("color.role.text.") },
+      { id: "link", title: language === "es" ? "Enlace" : "Link", rows: pickRole("color.role.link.") },
+      { id: "icon", title: language === "es" ? "Ícono" : "Icon", rows: pickRole("color.role.icon.") },
+      { id: "border", title: language === "es" ? "Borde" : "Border", rows: pickRole("color.role.border.") },
+      { id: "background", title: language === "es" ? "Fondo" : "Background", rows: pickRole("color.role.background.") },
+      { id: "surface", title: language === "es" ? "Superficie" : "Surface", rows: pickRole("color.role.surface.") },
+      { id: "overlay", title: language === "es" ? "Superposición" : "Overlay", rows: pickRole("color.role.overlay.") }
     ],
-    []
+    [language]
   );
 
   return (
     <div className="foundation-page">
       <section className="foundation-hero">
-        <p className="eyebrow">Foundations</p>
-        <h1>Role Tokens</h1>
+        <p className="eyebrow">{language === "es" ? "Fundamentos" : "Foundations"}</p>
+        <h1>{language === "es" ? "Tokens de rol" : "Role Tokens"}</h1>
         <p className="foundation-lead">
           {language === "es"
-            ? "Los role tokens son la capa pública del sistema: nombres semánticos listos para usar en componentes. Aquí puedes ver cómo cambian entre light y dark mode."
+            ? "Los tokens de rol son la capa pública del sistema: nombres semánticos listos para usar en componentes. Aquí puedes ver cómo cambian entre los temas claro y oscuro."
             : "Role tokens are the public layer of the system: semantic names ready to use in components. Here you can see how they change between light and dark mode."}
         </p>
       </section>
 
       <div className="role-groups">
         {groups.map((group) => (
-          <TokenGroup key={group.title} title={group.title} rows={group.rows} />
+          <TokenGroup key={group.id} title={group.title} rows={group.rows} language={language} />
         ))}
       </div>
     </div>

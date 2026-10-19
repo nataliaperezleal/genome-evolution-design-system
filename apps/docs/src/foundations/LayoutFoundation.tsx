@@ -58,16 +58,16 @@ export function LayoutFoundation({ language }: { language: Language }) {
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>Layout</h1>
+        <h1>{language === "es" ? "Diseño de página" : "Layout"}</h1>
         <p className="foundation-lead">
           {language === "es"
-            ? "Layout y spacing ayudan a construir consistencia: márgenes, gutters, columnas y escalas de espacio que mantienen densidad uniforme."
+            ? "El diseño de página y el espaciado crean consistencia mediante márgenes, separaciones, columnas y escalas que mantienen una densidad uniforme."
             : "Layout and spacing create consistency: margins, gutters, columns, and spacing scales that keep density uniform."}
         </p>
       </section>
 
       <section className="foundation-section">
-        <h2>Spacing</h2>
+        <h2>{language === "es" ? "Espaciado" : "Spacing"}</h2>
         <p>
           {language === "es"
             ? "Los tokens spacing.base.space.* definen la escala de espacio en píxeles. Usa spacing.base.gap.* para las separaciones entre elementos."
@@ -76,9 +76,9 @@ export function LayoutFoundation({ language }: { language: Language }) {
 
         <div className="foundation-table">
           <div className="foundation-table__head">
-            <div>Token</div>
+            <div>{language === "es" ? "Token" : "Token"}</div>
             <div>REM</div>
-            <div>Pixels</div>
+            <div>{language === "es" ? "Píxeles" : "Pixels"}</div>
             <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
           </div>
           {spacing.map((row) => {
@@ -102,17 +102,17 @@ export function LayoutFoundation({ language }: { language: Language }) {
         </div>
 
         <div className="foundation-subsection">
-          <h3>Gap</h3>
+          <h3>{language === "es" ? "Separación" : "Gap"}</h3>
           <p>
             {language === "es"
-              ? "Tokens de gap ayudan a mantener ritmo consistente entre ítems. Úsalos en stacks, grids y grupos."
+              ? "Los tokens de separación mantienen un ritmo consistente entre elementos. Úsalos en grupos, cuadrículas y listas."
               : "Gap tokens keep spacing rhythm consistent between items. Use them in stacks, grids, and groups."}
           </p>
           <div className="foundation-table">
             <div className="foundation-table__head">
               <div>Token</div>
-              <div>Primitive token</div>
-              <div>Pixels</div>
+              <div>{language === "es" ? "Token primitivo" : "Primitive token"}</div>
+              <div>{language === "es" ? "Píxeles" : "Pixels"}</div>
               <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
             </div>
             {gaps.map((row) => {
@@ -139,15 +139,15 @@ export function LayoutFoundation({ language }: { language: Language }) {
       </section>
 
       <section className="foundation-section">
-        <h2>Grid and breakpoints</h2>
+        <h2>{language === "es" ? "Cuadrícula y puntos de quiebre" : "Grid and breakpoints"}</h2>
         <p>
           {language === "es"
-            ? "La grilla define columnas, gutters y márgenes por breakpoint para asegurar layouts consistentes."
+            ? "La cuadrícula define columnas, separaciones y márgenes para cada tamaño de pantalla."
             : "The grid defines columns, gutters, and margins per breakpoint to keep layouts consistent."}
         </p>
 
         <div className="grid-block">
-          <p className="grid-block__title">Desktop</p>
+          <p className="grid-block__title">{language === "es" ? "Escritorio" : "Desktop"}</p>
           <GridPreview columns={columns.desktop} />
         </div>
         <div className="grid-block">
@@ -155,16 +155,16 @@ export function LayoutFoundation({ language }: { language: Language }) {
           <GridPreview columns={columns.tablet} />
         </div>
         <div className="grid-block">
-          <p className="grid-block__title">Mobile</p>
+          <p className="grid-block__title">{language === "es" ? "Móvil" : "Mobile"}</p>
           <GridPreview columns={columns.mobile} />
         </div>
 
         <div className="foundation-subsection">
-          <h3>Tokens</h3>
+          <h3>{language === "es" ? "Tokens" : "Tokens"}</h3>
           <div className="foundation-table">
             <div className="foundation-table__head">
               <div>Token</div>
-              <div>Value</div>
+              <div>{language === "es" ? "Valor" : "Value"}</div>
               <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
             </div>
             {layout.map((row) => (

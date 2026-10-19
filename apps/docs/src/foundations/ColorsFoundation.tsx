@@ -27,16 +27,16 @@ export function ColorsFoundation({ language }: { language: Language }) {
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>Colors</h1>
+        <h1>{language === "es" ? "Colores" : "Colors"}</h1>
         <p className="foundation-lead">
           {language === "es"
-            ? "Nuestro sistema de diseño usa tokens de color para asegurar consistencia. Incluye colores saturados (marca), neutrales y alphas para overlays y estados."
+            ? "El sistema usa tokens de color para mantener la consistencia. Incluye escalas de marca, colores neutros y transparencias para capas y estados."
             : "The system uses color tokens to ensure consistency. It includes saturated brand scales, neutrals, and alpha colors for overlays and states."}
         </p>
       </section>
 
       <section className="foundation-section">
-        <h2>Color anatomy</h2>
+        <h2>{language === "es" ? "Anatomía del color" : "Color anatomy"}</h2>
         <p>
           {language === "es"
             ? "Una paleta clara ayuda a comunicar intención: marca, jerarquía, estado y contraste."
@@ -44,7 +44,7 @@ export function ColorsFoundation({ language }: { language: Language }) {
         </p>
 
         <div className="foundation-subsection">
-          <h3>Saturated colors</h3>
+          <h3>{language === "es" ? "Colores saturados" : "Saturated colors"}</h3>
           <p>
             {language === "es"
               ? "Los colores saturados representan la marca y se usan como acento, énfasis y estados destacados."
@@ -52,9 +52,9 @@ export function ColorsFoundation({ language }: { language: Language }) {
           </p>
           <div className="palette-columns">
             {[
-              { title: "Primary", entries: primary },
-              { title: "Secondary", entries: secondary },
-              { title: "Accent", entries: accent }
+              { title: language === "es" ? "Primario" : "Primary", entries: primary },
+              { title: language === "es" ? "Secundario" : "Secondary", entries: secondary },
+              { title: language === "es" ? "Acento" : "Accent", entries: accent }
             ].map((col) => (
               <div className="palette-column" key={col.title}>
                 <p className="palette-column__title">{col.title}</p>
@@ -71,10 +71,10 @@ export function ColorsFoundation({ language }: { language: Language }) {
         </div>
 
         <div className="foundation-subsection">
-          <h3>Neutral colors</h3>
+          <h3>{language === "es" ? "Colores neutros" : "Neutral colors"}</h3>
           <p>
             {language === "es"
-              ? "Los neutrales se usan para fondos, texto y contenedores. Son la base de la UI en light y dark mode."
+              ? "Los colores neutros se usan en fondos, texto y contenedores. Son la base de las interfaces claras y oscuras."
               : "Neutrals are used for backgrounds, text, and containers. They are the backbone of light and dark UIs."}
           </p>
           <div className="neutral-stage">
@@ -90,10 +90,10 @@ export function ColorsFoundation({ language }: { language: Language }) {
         </div>
 
         <div className="foundation-subsection">
-          <h3>Alpha colors</h3>
+          <h3>{language === "es" ? "Colores con transparencia" : "Alpha colors"}</h3>
           <p>
             {language === "es"
-              ? "Las transparencias ayudan a que overlays, scrims y estados funcionen sobre múltiples superficies."
+              ? "Las transparencias permiten que las capas y los estados funcionen sobre distintas superficies."
               : "Alpha colors help overlays, scrims, and states work across multiple surfaces."}
           </p>
           <div className="alpha-stage">

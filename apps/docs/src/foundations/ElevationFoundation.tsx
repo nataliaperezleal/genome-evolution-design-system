@@ -59,26 +59,26 @@ export function ElevationFoundation({ theme, language }: { theme: string; langua
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>Elevation</h1>
+        <h1>{language === "es" ? "Elevación" : "Elevation"}</h1>
         <p className="foundation-lead">
           {language === "es"
-            ? "Elevation define profundidad visual a través de sombras. Úsala para establecer jerarquía, separar capas y mejorar affordance en overlays y contenedores elevados."
+            ? "La elevación crea profundidad visual mediante sombras. Úsala para establecer jerarquía, separar capas y destacar paneles y elementos superpuestos."
             : "Elevation defines visual depth through shadows. Use it to establish hierarchy, separate layers, and improve affordance in overlays and raised containers."}
         </p>
       </section>
 
       <section className="foundation-section">
-        <h2>Shadows</h2>
+        <h2>{language === "es" ? "Sombras" : "Shadows"}</h2>
         <p>
           {language === "es"
-            ? "Los niveles combinan posición y blur. El color proviene de la paleta alpha para mantener sutileza."
+            ? "Cada nivel combina posición y desenfoque. El color proviene de la paleta con transparencia para mantener un efecto sutil."
             : "Levels combine position and blur. Color comes from the alpha palette to stay subtle."}
         </p>
         <div className="foundation-table">
           <div className="foundation-table__head">
             <div>Token</div>
-            <div>Value</div>
-            <div>Visual representation</div>
+            <div>{language === "es" ? "Valor" : "Value"}</div>
+            <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
           </div>
           {rows.map((row) => (
             <div className="foundation-table__row" key={row.token}>
@@ -87,11 +87,11 @@ export function ElevationFoundation({ theme, language }: { theme: string; langua
               </div>
               <div className="elevation-meta">
                 <div>
-                  Position: X={row.positionX} Y={row.positionY}
+                  {language === "es" ? "Posición" : "Position"}: X={row.positionX} Y={row.positionY}
                 </div>
-                <div>Blur: {row.blur}</div>
+                <div>{language === "es" ? "Desenfoque" : "Blur"}: {row.blur}</div>
                 <div>
-                  Color: <span className="token-value-mono">{row.colorValue}</span>
+                  {language === "es" ? "Color" : "Color"}: <span className="token-value-mono">{row.colorValue}</span>
                 </div>
               </div>
               <div>

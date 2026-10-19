@@ -64,7 +64,7 @@ export function BorderFoundation({ theme, language }: { theme: string; language:
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>Border</h1>
+        <h1>{language === "es" ? "Bordes" : "Border"}</h1>
         <p className="foundation-lead">
           {language === "es"
             ? "Los bordes ayudan a suavizar contornos y separar elementos sin recargar la interfaz. Usamos tokens semánticos para radio, grosor y color para asegurar consistencia."
@@ -73,16 +73,16 @@ export function BorderFoundation({ theme, language }: { theme: string; language:
       </section>
 
       <section className="foundation-section">
-        <h2>{language === "es" ? "Border radius" : "Border radius"}</h2>
+        <h2>{language === "es" ? "Radio de borde" : "Border radius"}</h2>
         <p>
           {language === "es"
-            ? "Redondea esquinas para una apariencia más amable y moderna. Usa aliases semánticos, no valores de escala directos."
+            ? "Redondea las esquinas para una apariencia más amable y moderna. Usa alias semánticos, no valores directos de la escala."
             : "Rounds corners for a friendlier, more modern look. Use semantic aliases, not raw scale values."}
         </p>
         <div className="foundation-table">
           <div className="foundation-table__head">
             <div>Token</div>
-            <div>Value</div>
+            <div>{language === "es" ? "Valor" : "Value"}</div>
             <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
           </div>
           {radiusRows.map((row) => (
@@ -100,16 +100,16 @@ export function BorderFoundation({ theme, language }: { theme: string; language:
       </section>
 
       <section className="foundation-section">
-        <h2>{language === "es" ? "Border width" : "Border width"}</h2>
+        <h2>{language === "es" ? "Ancho del borde" : "Border width"}</h2>
         <p>
           {language === "es"
-            ? "Define jerarquía visual. Mantén el default en 1px y reserva el foco para su token dedicado."
+            ? "Define la jerarquía visual. Mantén el valor predeterminado en 1px y reserva el foco para su token específico."
             : "Controls visual hierarchy. Keep the default at 1px and reserve focus for its dedicated token."}
         </p>
         <div className="foundation-table">
           <div className="foundation-table__head">
             <div>Token</div>
-            <div>Value</div>
+            <div>{language === "es" ? "Valor" : "Value"}</div>
             <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
           </div>
           {widthRows.map((row) => {
@@ -135,16 +135,16 @@ export function BorderFoundation({ theme, language }: { theme: string; language:
       </section>
 
       <section className="foundation-section">
-        <h2>{language === "es" ? "Border colors" : "Border colors"}</h2>
+        <h2>{language === "es" ? "Colores del borde" : "Border colors"}</h2>
         <p>
           {language === "es"
-            ? "Aplica estos tokens a propiedades de borde/outline/ring (no a fills) para comunicar estado y jerarquía."
+            ? "Aplica estos tokens a propiedades de borde, contorno o anillo de foco (no a rellenos) para comunicar estado y jerarquía."
             : "Apply these tokens to border/outline/ring properties (not fills) to communicate state and hierarchy."}
         </p>
         <div className="foundation-table">
           <div className="foundation-table__head">
             <div>Token</div>
-            <div>Value</div>
+            <div>{language === "es" ? "Valor" : "Value"}</div>
             <div>{language === "es" ? "Representación visual" : "Visual representation"}</div>
           </div>
           {colorRows.map((row) => (

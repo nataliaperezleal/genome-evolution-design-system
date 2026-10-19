@@ -140,6 +140,21 @@ const navItems: NavItem[] = [
   ...componentItems
 ];
 
+function localizedFoundationLabel(item: NavItem, language: Language) {
+  if (item.group !== "foundations") return item.label;
+  const keyById: Record<string, Parameters<typeof t>[0]> = {
+    "foundations-border": "nav.foundation.border",
+    "foundations-color": "nav.foundation.color",
+    "foundations-elevation": "nav.foundation.elevation",
+    "foundations-layout": "nav.foundation.layout",
+    "foundations-spacing": "nav.foundation.spacing",
+    "foundations-tokens.json": "nav.foundation.tokens",
+    "foundations-typography": "nav.foundation.typography"
+  };
+  const key = keyById[item.id];
+  return key ? t(key, language) : item.label;
+}
+
 function getItemMeta(id: string, language: Language) {
   if (id === "overview") {
     return { kind: "overview" as const };
@@ -2233,19 +2248,22 @@ export function App() {
           ? t("nav.overview", language)
           : item.id === "getting-started"
             ? t("nav.gettingStarted", language)
-            : item.label;
+            : localizedFoundationLabel(item, language);
       return label.toLowerCase().includes(normalized);
     });
   }, [language, query]);
 
   const active = getItemMeta(activeId, language);
-  const activeLabel = navItems.find((item) => item.id === activeId)?.label ?? "Overview";
+  const activeNavItem = navItems.find((item) => item.id === activeId);
+  const activeLabel = activeNavItem?.label ?? "Overview";
   const activeLabelDisplay =
     activeId === "overview"
       ? t("nav.overview", language)
       : activeId === "getting-started"
         ? t("nav.gettingStarted", language)
-        : activeLabel;
+        : activeNavItem
+          ? localizedFoundationLabel(activeNavItem, language)
+          : activeLabel;
   const componentManifest = manifest.components.find((entry) => entry.name === activeLabel);
 
   const activeGroup: NavItem["group"] = navItems.find((item) => item.id === activeId)?.group ?? "overview";
@@ -2432,9 +2450,9 @@ export function App() {
                               ? t("nav.overview", language)
                               : item.id === "getting-started"
                                 ? t("nav.gettingStarted", language)
-                                : item.id === "components"
-                                  ? t("nav.components", language)
-                                  : item.label}
+                                      : item.id === "components"
+                                        ? t("nav.components", language)
+                                        : localizedFoundationLabel(item, language)}
                           </a>
                         </li>
                       ))}

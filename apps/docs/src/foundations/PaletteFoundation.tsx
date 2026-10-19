@@ -5,6 +5,13 @@ import type { Language } from "../i18n";
 
 type PaletteEntry = { token: string; value: string };
 
+const semanticCardTitleEs: Record<string, string> = {
+  Error: "Error",
+  Info: "Información",
+  Success: "Éxito",
+  Alert: "Advertencia"
+};
+
 function pick(prefix: string) {
   const entries: PaletteEntry[] = [];
   for (const [token, value] of Object.entries(allTokens)) {
@@ -98,7 +105,7 @@ export function PaletteFoundation({ language }: { language: Language }) {
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>Primitive tokens</h1>
+        <h1>{language === "es" ? "Tokens primitivos" : "Primitive tokens"}</h1>
         <p className="foundation-lead">
           {language === "es"
             ? "La paleta es una selección de colores que trabajan juntos para crear consistencia. Estas escalas son el punto de partida para construir tokens semánticos."
@@ -107,16 +114,16 @@ export function PaletteFoundation({ language }: { language: Language }) {
       </section>
 
       <section className="foundation-section">
-        <h2>The palette</h2>
+        <h2>{language === "es" ? "La paleta" : "The palette"}</h2>
         <div className="palette-columns palette-columns--table">
-          <SwatchTable title="Main" entries={primary} />
-          <SwatchTable title="Secondary" entries={secondary} />
-          <SwatchTable title="Accent" entries={accent} />
+          <SwatchTable title={language === "es" ? "Principal" : "Main"} entries={primary} />
+          <SwatchTable title={language === "es" ? "Secundario" : "Secondary"} entries={secondary} />
+          <SwatchTable title={language === "es" ? "Acento" : "Accent"} entries={accent} />
         </div>
       </section>
 
       <section className="foundation-section">
-        <h2>Semantics</h2>
+        <h2>{language === "es" ? "Semántica" : "Semantics"}</h2>
         <p>
           {language === "es"
             ? "Los tokens semánticos traducen la paleta a intención: estados, feedback y jerarquía."
@@ -125,7 +132,9 @@ export function PaletteFoundation({ language }: { language: Language }) {
         <div className="semantics-grid">
           {semanticCards.map((card) => (
             <div className="semantics-card" key={card.title}>
-              <p className="semantics-card__title">{card.title}</p>
+              <p className="semantics-card__title">
+                {language === "es" ? semanticCardTitleEs[card.title] ?? card.title : card.title}
+              </p>
               <div className="semantics-card__list">
                 {card.items.map((item) => (
                   <div key={item.token} className="semantics-row" style={{ background: item.value }}>
@@ -140,7 +149,7 @@ export function PaletteFoundation({ language }: { language: Language }) {
       </section>
 
       <section className="foundation-section">
-        <h2>Neutrals</h2>
+        <h2>{language === "es" ? "Colores neutros" : "Neutrals"}</h2>
         <div className="palette-wide">
           {neutral.map((entry) => (
             <div key={entry.token} className="palette-wide__row" style={{ background: entry.value }}>
@@ -152,7 +161,7 @@ export function PaletteFoundation({ language }: { language: Language }) {
       </section>
 
       <section className="foundation-section">
-        <h2>Alpha colors</h2>
+        <h2>{language === "es" ? "Colores con transparencia" : "Alpha colors"}</h2>
         <div className="palette-wide">
           {alpha.map((entry) => (
             <div key={entry.token} className="palette-wide__row" style={{ background: entry.value }}>
@@ -163,7 +172,7 @@ export function PaletteFoundation({ language }: { language: Language }) {
         </div>
         {overlay.length ? (
           <div className="overlay-note">
-            <p className="eyebrow">Overlay roles</p>
+            <p className="eyebrow">{language === "es" ? "Roles de superposición" : "Overlay roles"}</p>
             <div className="overlay-pills">
               {overlay.map((entry) => (
                 <div key={entry.token} className="overlay-pill">

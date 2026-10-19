@@ -13,6 +13,17 @@ type TypographyRow = {
   tracking: string;
 };
 
+const typographyBlockTitlesEs: Record<string, string> = {
+  Body: "Cuerpo",
+  Label: "Etiqueta",
+  Title: "Título",
+  Heading: "Encabezado",
+  Display: "Display",
+  Button: "Botón",
+  Code: "Código",
+  Overline: "Antetítulo"
+};
+
 function tokenValue(name: string) {
   const value = allTokens[name];
   return typeof value === "string" || typeof value === "number" ? String(value) : "";
@@ -45,24 +56,28 @@ function buildRows(category: string) {
   });
 }
 
-function formatWeight(weight: string) {
-  const map: Record<string, string> = {
-    400: "Regular",
-    500: "Medium",
-    600: "Semibold",
-    700: "Bold"
+function formatWeight(weight: string, language: Language) {
+  const map: Record<string, { en: string; es: string }> = {
+    400: { en: "Regular", es: "Regular" },
+    500: { en: "Medium", es: "Mediana" },
+    600: { en: "Semibold", es: "Seminegrita" },
+    700: { en: "Bold", es: "Negrita" }
   };
-  return map[weight] ?? weight;
+  return map[weight]?.[language] ?? weight;
 }
 
-function Typefaces() {
+function Typefaces({ language }: { language: Language }) {
   const bodyFamily = tokenValue("typography.primitive.family.body") || "system-ui";
   const monoFamily = tokenValue("typography.primitive.family.mono") || "ui-monospace";
 
   return (
     <section className="foundation-section">
-      <h2>Typefaces</h2>
-      <p>Estas familias están definidas como primitivos y se consumen por los roles tipográficos.</p>
+      <h2>{language === "es" ? "Familias tipográficas" : "Typefaces"}</h2>
+      <p>
+        {language === "es"
+          ? "Estas familias están definidas como tokens primitivos y se utilizan en los roles tipográficos."
+          : "These type families are defined as primitive tokens and used by typography roles."}
+      </p>
       <div className="typeface-grid">
         <div className="typeface-card">
           <div className="typeface-sample" style={{ fontFamily: bodyFamily }}>
@@ -81,28 +96,38 @@ function Typefaces() {
   );
 }
 
-function TextFormatting() {
+function TextFormatting({ language }: { language: Language }) {
   return (
     <section className="foundation-section">
-      <h2>Text formatting</h2>
-      <p>Los estilos de texto ayudan a crear jerarquía y guiar lectura sin cambiar la intención del contenido.</p>
+      <h2>{language === "es" ? "Estilos de texto" : "Text formatting"}</h2>
+      <p>
+        {language === "es"
+          ? "Los estilos de texto ayudan a crear jerarquía y guiar la lectura sin cambiar la intención del contenido."
+          : "Text styles create hierarchy and guide reading without changing the intent of the content."}
+      </p>
       <div className="formatting-grid">
         <div className="formatting-card">
-          <p className="formatting-title">Regular</p>
+          <p className="formatting-title">{language === "es" ? "Regular" : "Regular"}</p>
           <p className="formatting-body">
-            El estilo por defecto: úsalo para textos de lectura, descripciones y la mayoría del contenido.
+            {language === "es"
+              ? "Estilo predeterminado para textos de lectura, descripciones y la mayoría del contenido."
+              : "The default style for body copy, descriptions, and most content."}
           </p>
         </div>
         <div className="formatting-card">
-          <p className="formatting-title">Italic</p>
+          <p className="formatting-title">{language === "es" ? "Itálica" : "Italic"}</p>
           <p className="formatting-body">
-            Reserva itálica para énfasis editorial o nombres. Evita usarla como único indicador de estado.
+            {language === "es"
+              ? "Reserva la itálica para énfasis editorial o nombres. No la uses como único indicador de estado."
+              : "Reserve italics for editorial emphasis or names. Do not use them as the only indicator of state."}
           </p>
         </div>
         <div className="formatting-card">
-          <p className="formatting-title">Strong</p>
+          <p className="formatting-title">{language === "es" ? "Negrita" : "Strong"}</p>
           <p className="formatting-body">
-            Úsalo para resaltar palabras claves. Mantén el contraste y evita saturar el párrafo con negritas.
+            {language === "es"
+              ? "Úsala para resaltar palabras clave. Mantén el contraste y evita saturar el párrafo con negritas."
+              : "Use it to emphasize key words. Maintain contrast and avoid overloading paragraphs with bold text."}
           </p>
         </div>
       </div>
@@ -110,7 +135,17 @@ function TextFormatting() {
   );
 }
 
-function TypographyTable({ title, description, rows }: { title: string; description: string; rows: TypographyRow[] }) {
+function TypographyTable({
+  title,
+  description,
+  rows,
+  language
+}: {
+  title: string;
+  description: string;
+  rows: TypographyRow[];
+  language: Language;
+}) {
   return (
     <section className="typo-block">
       <div className="typo-block__head">
@@ -119,13 +154,13 @@ function TypographyTable({ title, description, rows }: { title: string; descript
       </div>
       <div className="typo-table">
         <div className="typo-table__head">
-          <div>Preview</div>
-          <div>Name</div>
-          <div>Font formatting</div>
-          <div>Font weight</div>
-          <div>Font size</div>
-          <div>Line height</div>
-          <div>Letter spacing</div>
+          <div>{language === "es" ? "Vista previa" : "Preview"}</div>
+          <div>{language === "es" ? "Nombre" : "Name"}</div>
+          <div>{language === "es" ? "Estilo de fuente" : "Font formatting"}</div>
+          <div>{language === "es" ? "Peso de fuente" : "Font weight"}</div>
+          <div>{language === "es" ? "Tamaño de fuente" : "Font size"}</div>
+          <div>{language === "es" ? "Altura de línea" : "Line height"}</div>
+          <div>{language === "es" ? "Espaciado entre letras" : "Letter spacing"}</div>
         </div>
         {rows.map((row) => {
           const isMono = row.family.toLowerCase().includes("mono");
@@ -138,8 +173,10 @@ function TypographyTable({ title, description, rows }: { title: string; descript
               <div>
                 <span className="token-pill">{row.tokenPrefix}</span>
               </div>
-              <div className="typo-cell">{row.label.includes("strong") ? "Strong" : "Regular"}</div>
-              <div className="typo-cell">{formatWeight(row.weight)}</div>
+              <div className="typo-cell">
+                {row.label.includes("strong") ? (language === "es" ? "Negrita" : "Strong") : "Regular"}
+              </div>
+              <div className="typo-cell">{formatWeight(row.weight, language)}</div>
               <div className="typo-cell">
                 <span className="token-value-mono">{row.size}</span>
                 <span className="typo-muted"> / {pxToRem(row.size)}</span>
@@ -164,53 +201,77 @@ export function TypographyFoundation({ language }: { language: Language }) {
     () => [
       {
         title: "Body",
-        description: "Texto para lectura. Úsalo para descripciones, mensajes y contenido editorial.",
+        description:
+          language === "es"
+            ? "Texto para lectura. Úsalo en descripciones, mensajes y contenido editorial."
+            : "Reading text for descriptions, messages, and editorial content.",
         rows: buildRows("body")
       },
       {
         title: "Label",
-        description: "Etiquetas para inputs, botones y microcopy. Mantén tamaños pequeños y legibles.",
+        description:
+          language === "es"
+            ? "Etiquetas para campos, botones y textos breves. Mantén los tamaños pequeños y legibles."
+            : "Labels for fields, buttons, and microcopy. Keep sizes small and legible.",
         rows: buildRows("label")
       },
       {
         title: "Title",
-        description: "Titulares de sección y jerarquía intermedia. Ideal para cards y encabezados internos.",
+        description:
+          language === "es"
+            ? "Títulos de sección y jerarquía intermedia. Ideales para tarjetas y encabezados internos."
+            : "Section titles and mid-level hierarchy, ideal for cards and internal headings.",
         rows: buildRows("title")
       },
       {
         title: "Heading",
-        description: "Titulares para páginas y áreas principales. Úsalos con moderación para no saturar jerarquía.",
+        description:
+          language === "es"
+            ? "Encabezados para páginas y áreas principales. Úsalos con moderación para mantener una jerarquía clara."
+            : "Headings for pages and primary areas. Use them sparingly to keep hierarchy clear.",
         rows: buildRows("heading")
       },
       {
         title: "Display",
-        description: "Titulares editoriales grandes para landing/hero. Evita usarlos en layouts densos.",
+        description:
+          language === "es"
+            ? "Titulares editoriales grandes para páginas de inicio y secciones principales. Evítalos en diseños densos."
+            : "Large editorial headlines for landing pages and hero sections. Avoid them in dense layouts.",
         rows: buildRows("display")
       },
       {
         title: "Button",
-        description: "Texto para botones. Debe priorizar legibilidad y consistencia en estados.",
+        description:
+          language === "es"
+            ? "Texto para botones. Debe priorizar la legibilidad y mantener la consistencia entre estados."
+            : "Button text that prioritizes legibility and remains consistent across states.",
         rows: buildRows("button")
       },
       {
         title: "Code",
-        description: "Texto monoespaciado para snippets y valores técnicos. Úsalo para tokens y ejemplos.",
+        description:
+          language === "es"
+            ? "Texto monoespaciado para fragmentos de código y valores técnicos. Úsalo para tokens y ejemplos."
+            : "Monospaced text for code snippets and technical values. Use it for tokens and examples.",
         rows: buildRows("code")
       },
       {
         title: "Overline",
-        description: "Micro jerarquía en mayúsculas para categorizar o seccionar contenido.",
+        description:
+          language === "es"
+            ? "Texto breve en mayúsculas para categorizar o dividir el contenido."
+            : "Short uppercase text used to categorize or section content.",
         rows: buildRows("overline")
       }
     ],
-    []
+    [language]
   );
 
   return (
     <div className="foundation-page">
       <section className="foundation-hero">
         <p className="eyebrow">Genome</p>
-        <h1>Typography</h1>
+        <h1>{language === "es" ? "Tipografía" : "Typography"}</h1>
         <p className="foundation-lead">
           {language === "es"
             ? "La tipografía construye jerarquía y claridad en la interfaz. Estos tokens definen roles consistentes para lectura, UI y código, manteniendo un ritmo estable."
@@ -218,15 +279,25 @@ export function TypographyFoundation({ language }: { language: Language }) {
         </p>
       </section>
 
-      <Typefaces />
-      <TextFormatting />
+      <Typefaces language={language} />
+      <TextFormatting language={language} />
 
       <section className="foundation-section">
-        <h2>Text style and tokens</h2>
-        <p>Roles tipográficos listos para uso en componentes. Cada fila representa un token público.</p>
+        <h2>{language === "es" ? "Estilos de texto y tokens" : "Text styles and tokens"}</h2>
+        <p>
+          {language === "es"
+            ? "Roles tipográficos listos para usarse en componentes. Cada fila representa un token público."
+            : "Typography roles ready for use in components. Each row represents a public token."}
+        </p>
         <div className="typo-blocks">
           {blocks.map((block) => (
-            <TypographyTable key={block.title} title={block.title} description={block.description} rows={block.rows} />
+            <TypographyTable
+              key={block.title}
+              title={language === "es" ? typographyBlockTitlesEs[block.title] ?? block.title : block.title}
+              description={block.description}
+              rows={block.rows}
+              language={language}
+            />
           ))}
         </div>
       </section>
