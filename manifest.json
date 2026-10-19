@@ -58,8 +58,7 @@
     { "name": "Layout", "file": "foundations/layout.md" },
     { "name": "Opacity", "file": "foundations/opacity.md" },
     { "name": "Elevation", "file": "foundations/elevation.md" },
-    { "name": "Border", "file": "foundations/border.md" },
-    { "name": "Tokens", "file": "foundations/tokens.json" }
+    { "name": "Border", "file": "foundations/border.md" }
   ],
   "ai_rules": [
     { "name": "Component Selection Rules", "file": "ai/component-selection-rules.md" },

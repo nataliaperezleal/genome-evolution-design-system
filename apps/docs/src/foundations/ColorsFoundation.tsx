@@ -1,4 +1,4 @@
-import { allTokens, themes } from "@genome-evolution/tokens";
+import { allTokens, colorRoleContexts } from "@genome-evolution/tokens";
 import type { Language } from "../i18n";
 
 type ColorScaleEntry = {
@@ -14,8 +14,19 @@ type ColorGroup = {
   entries: ColorScaleEntry[];
 };
 
+type RoleContext = (typeof colorRoleContexts)[number];
+type RoleEntry = RoleContext["roles"][number];
+type RoleRow = {
+  token: string;
+  label: string;
+  contexts: Record<string, RoleEntry>;
+};
+type RoleGroup = {
+  id: string;
+  rows: RoleRow[];
+};
+
 const palettePrefix = "color.primitive.light.palette.";
-const rolePrefix = "color.role.light.";
 
 const groupTitles: Record<string, { en: string; es: string }> = {
   primary: { en: "Primary", es: "Primario" },
@@ -101,30 +112,28 @@ function collectPaletteGroups(): ColorGroup[] {
     }));
 }
 
-function collectRoleGroups(): ColorGroup[] {
-  const groups = new Map<string, ColorScaleEntry[]>();
+function collectRoleGroups(): RoleGroup[] {
+  const groups = new Map<string, Map<string, RoleRow>>();
 
-  for (const [token, value] of Object.entries(themes.light)) {
-    if (!token.startsWith(rolePrefix) || typeof value !== "string") continue;
-    const suffix = token.slice(rolePrefix.length);
-    const [groupId] = suffix.split(".");
-    const darkValue = themes.dark[token];
-    if (typeof darkValue !== "string") {
-      throw new Error(`Missing dark semantic color role "${token}".`);
+  for (const context of colorRoleContexts) {
+    for (const role of context.roles) {
+      const [groupId] = role.token.split(".");
+      const groupRows = groups.get(groupId) ?? new Map<string, RoleRow>();
+      const row = groupRows.get(role.token) ?? {
+        token: role.token,
+        label: role.token.slice(groupId.length + 1),
+        contexts: {}
+      };
+      row.contexts[context.id] = role;
+      groupRows.set(role.token, row);
+      groups.set(groupId, groupRows);
     }
-
-    const entries = groups.get(groupId) ?? [];
-    entries.push({ token, label: suffix, light: value, dark: darkValue });
-    groups.set(groupId, entries);
   }
 
-  return [...groups.entries()]
-    .sort(([a], [b]) => a.localeCompare(b))
-    .map(([id, entries]) => ({
-      id,
-      title: id,
-      entries: entries.sort((a, b) => a.label.localeCompare(b.label))
-    }));
+  return [...groups.entries()].map(([id, rows]) => ({
+    id,
+    rows: [...rows.values()]
+  }));
 }
 
 function ColorValue({ value, label }: { value: string; label: string }) {
@@ -143,16 +152,14 @@ function ColorValue({ value, label }: { value: string; label: string }) {
 
 function ColorGroupTable({
   group,
-  language,
-  role = false
+  language
 }: {
   group: ColorGroup;
   language: Language;
-  role?: boolean;
 }) {
   return (
     <section className="color-group-card">
-      <h3>{titleFor(group.id, role ? roleTitles : groupTitles, language)}</h3>
+      <h3>{titleFor(group.id, groupTitles, language)}</h3>
       <div className="color-group-table">
         <div className="color-group-row color-group-row--header">
           <span>Token</span>
@@ -162,7 +169,7 @@ function ColorGroupTable({
         {group.entries.map((entry) => (
           <div className="color-group-row" key={entry.token}>
             <span className="color-group-row__token">
-              {role ? entry.label : entry.label || entry.token.slice(palettePrefix.length)}
+              {entry.label || entry.token.slice(palettePrefix.length)}
             </span>
             <ColorValue value={entry.light} label={language === "es" ? "Claro" : "Light"} />
             <ColorValue value={entry.dark} label={language === "es" ? "Oscuro" : "Dark"} />
@@ -173,7 +180,74 @@ function ColorGroupTable({
   );
 }
 
-export function ColorsFoundation({ language }: { language: Language }) {
+function RoleMatrix({
+  groups,
+  language,
+  theme
+}: {
+  groups: RoleGroup[];
+  language: Language;
+  theme: "light" | "dark";
+}) {
+  const contexts = colorRoleContexts.map((context) => context.id);
+
+  return (
+    <div className="role-matrix-groups">
+      {groups.map((group) => (
+        <section className="role-matrix-group" key={group.id}>
+          <h3>{titleFor(group.id, roleTitles, language)}</h3>
+          <div className="role-matrix-scroll">
+            <table className="role-matrix">
+              <thead>
+                <tr>
+                  <th scope="col">{language === "es" ? "Rol" : "Role"}</th>
+                  {contexts.map((context) => <th scope="col" key={context}>{context}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {group.rows.map((row) => (
+                  <tr key={row.token}>
+                    <th scope="row">{row.label}</th>
+                    {contexts.map((context) => {
+                      const role = row.contexts[context];
+                      if (!role) return <td key={context}>—</td>;
+
+                      const value = theme === "light" ? role.light : role.dark;
+                      const swatchValue = value ?? role.value;
+                      const missingAlias = !role.reference;
+                      return (
+                        <td key={context}>
+                          <span
+                            className="role-matrix-cell"
+                            title={`${context}: ${swatchValue}${missingAlias ? " (no Figma alias exported)" : ""}`}
+                          >
+                            <span
+                              className="role-matrix-swatch"
+                              style={{ background: swatchValue }}
+                              aria-hidden="true"
+                            />
+                            <code>{role.reference ?? role.value}</code>
+                            {missingAlias && (
+                              <span className="role-matrix-warning">
+                                {language === "es" ? "sin alias" : "no alias"}
+                              </span>
+                            )}
+                          </span>
+                        </td>
+                      );
+                    })}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+export function ColorsFoundation({ language, theme }: { language: Language; theme: "light" | "dark" }) {
   const paletteGroups = collectPaletteGroups();
   const roleGroups = collectRoleGroups();
 
@@ -184,8 +258,8 @@ export function ColorsFoundation({ language }: { language: Language }) {
         <h1>Color</h1>
         <p className="foundation-lead">
           {language === "es"
-            ? "Una referencia única para todas las escalas primitivas y los roles semánticos de color del contexto Product, con sus valores para temas claro y oscuro."
-            : "One reference for every primitive color scale and semantic color role in the Product context, with values for both light and dark themes."}
+            ? "Una referencia para las escalas primitivas y los roles de color de los seis contextos, con sus valores para tema claro y oscuro."
+            : "One reference for primitive scales and semantic color roles across all six contexts, with values for both light and dark themes."}
         </p>
       </section>
 
@@ -204,17 +278,13 @@ export function ColorsFoundation({ language }: { language: Language }) {
       </section>
 
       <section className="foundation-section">
-        <h2>{language === "es" ? "Roles semánticos · Product" : "Semantic roles · Product"}</h2>
+        <h2>{language === "es" ? "Roles semánticos por contexto" : "Semantic roles by context"}</h2>
         <p>
           {language === "es"
-            ? "Los roles describen para qué se usa cada color —texto, enlace, icono, borde, fondo, superficie o superposición— y conectan con las escalas anteriores."
-            : "Roles describe how each color is used—text, link, icon, border, background, surface, or overlay—and connect back to the scales above."}
+            ? `Cada fila muestra el mismo rol en todos los contextos. Las referencias vienen directamente de Figma; la vista actual usa el tema ${theme === "light" ? "claro" : "oscuro"}.`
+            : `Each row shows the same role across all contexts. References come directly from Figma; the current view uses the ${theme} theme.`}
         </p>
-        <div className="color-group-grid">
-          {roleGroups.map((group) => (
-            <ColorGroupTable key={group.id} group={group} language={language} role />
-          ))}
-        </div>
+        <RoleMatrix groups={roleGroups} language={language} theme={theme} />
       </section>
     </div>
   );

@@ -42,13 +42,6 @@ function flattenTokens(node, trail = [], result = new Map()) {
   return result;
 }
 
-function colorSignature(value) {
-  if (!value || typeof value !== "object" || !Array.isArray(value.components)) return null;
-  const components = value.components.map((component) => Math.round(component * 255));
-  const alpha = Math.round((value.alpha ?? 1) * 255);
-  return [...components, alpha].join(",");
-}
-
 function colorToCss(value) {
   if (typeof value === "string") return value;
   if (!value || typeof value !== "object" || typeof value.hex !== "string") {
@@ -70,52 +63,23 @@ function normalizeTypographyValue(value) {
   return value;
 }
 
-function preferredPaletteGroup(rolePath) {
-  const role = rolePath.toLowerCase();
-  if (role.includes("danger")) return "error";
-  if (role.includes("warning")) return "alert";
-  if (role.includes("info")) return "info";
-  if (role.includes("success")) return "success";
-  if (role.includes("evergreen")) return "primary";
-  if (role.includes("indigo")) return "secondary";
-  if (role.includes("accent")) return "accent";
-  if (role === "background.canvas") return "neutral";
-  if (role === "background.alpha") return "alpha";
-  return null;
-}
+function flattenRoleEntries(node, trail = [], result = []) {
+  if (!node || typeof node !== "object") return result;
 
-function roleAliases(roleTokens, lightPalette, darkPalette) {
-  const bySignature = new Map();
-  for (const [path, value] of lightPalette) {
-    const signature = colorSignature(value);
-    if (!signature) continue;
-    const candidates = bySignature.get(signature) ?? [];
-    candidates.push(path);
-    bySignature.set(signature, candidates);
+  if ("$value" in node) {
+    const reference = node.$extensions?.["com.figma.aliasData"]?.targetVariableName;
+    result.push({
+      token: trail.join("."),
+      value: colorToCss(node.$value),
+      reference: typeof reference === "string" ? reference : null
+    });
+    return result;
   }
 
-  const darkPaths = new Set(darkPalette.keys());
-  const aliases = new Map();
-  for (const [rolePath, token] of roleTokens) {
-    const signature = colorSignature(token);
-    const candidates = bySignature.get(signature) ?? [];
-    const preferredGroup = preferredPaletteGroup(rolePath);
-    const preferredCandidates = preferredGroup
-      ? candidates.filter((candidate) => candidate.startsWith(`palette.${preferredGroup}.`))
-      : [];
-    const selected = (preferredCandidates.length ? preferredCandidates : candidates)
-      .sort((a, b) => a.split(".").length - b.split(".").length || a.localeCompare(b))[0];
-
-    if (!selected || !darkPaths.has(selected)) {
-      throw new Error(
-        `Could not map Product color role "${rolePath}" to the matching light and dark primitive palettes.`
-      );
-    }
-
-    aliases.set(rolePath, `{${selected}}`);
+  for (const [key, value] of Object.entries(node)) {
+    if (!key.startsWith("$")) flattenRoleEntries(value, [...trail, key], result);
   }
-
-  return aliases;
+  return result;
 }
 
 function setTokenValue(tree, tokenPath, value) {
@@ -133,7 +97,7 @@ function setTokenValue(tree, tokenPath, value) {
   };
 }
 
-export async function loadFigmaExports(legacySource) {
+export async function loadFigmaExports() {
   const [
     border,
     elevation,
@@ -144,7 +108,12 @@ export async function loadFigmaExports(legacySource) {
     spacing,
     colorLight,
     colorDark,
+    colorRoleAI,
+    colorRoleApps,
+    colorRoleAutomation,
+    colorRoleModeler,
     colorRoleProduct,
+    colorRoleStudio,
     typographyBase,
     typographyBrand,
     typographyRoles
@@ -158,19 +127,61 @@ export async function loadFigmaExports(legacySource) {
     readExport("Spacing.json"),
     readExport("Color_Primitive/Color_PrimitiveLight.tokens.json"),
     readExport("Color_Primitive/Color_PrimitiveDark.tokens.json"),
+    readExport("Color_Role/Color_RoleAI.tokens.json"),
+    readExport("Color_Role/Color_RoleApps.tokens.json"),
+    readExport("Color_Role/Color_RoleAutomation.tokens.json"),
+    readExport("Color_Role/Color_RoleModeler.tokens.json"),
     readExport("Color_Role/Color_RoleProduct.tokens.json"),
+    readExport("Color_Role/Color_RoleStudio.tokens.json"),
     readExport("Typography_Primitive/Typography_PrimitiveBase.tokens.json"),
     readExport("Typography_Primitive/Typography_PrimitiveBrand.tokens.json"),
     readExport("Typography_Role/Typography_RoleBase.tokens.json")
   ]);
 
-  const source = structuredClone(legacySource);
+  const source = {
+    $metadata: {
+      name: "Genome Evolution Design System",
+      version: "1.0.0"
+    }
+  };
   const colorLightTokens = withoutSetMetadata(colorLight, colorToCss);
   const colorDarkTokens = withoutSetMetadata(colorDark, colorToCss);
   const lightPalette = flattenTokens(withoutSetMetadata(colorLight));
   const darkPalette = flattenTokens(withoutSetMetadata(colorDark));
-  const productRoles = flattenTokens(colorRoleProduct);
-  const roleReferences = roleAliases(productRoles, lightPalette, darkPalette);
+  const contexts = [
+    { id: "Product", data: colorRoleProduct },
+    { id: "AI", data: colorRoleAI },
+    { id: "Modeler", data: colorRoleModeler },
+    { id: "Studio", data: colorRoleStudio },
+    { id: "Automation", data: colorRoleAutomation },
+    { id: "Apps", data: colorRoleApps }
+  ];
+
+  source.$colorRoleContexts = contexts.map(({ id, data }) => ({
+    id,
+    roles: flattenRoleEntries(data).map((role) => {
+      if (!role.reference) {
+        return {
+          ...role,
+          light: role.value,
+          dark: null
+        };
+      }
+
+      const primitivePath = role.reference.replaceAll("/", ".");
+      const lightValue = lightPalette.get(primitivePath);
+      const darkValue = darkPalette.get(primitivePath);
+      if (!lightValue || !darkValue) {
+        throw new Error(`Could not resolve Figma role alias "${role.reference}" in both color themes.`);
+      }
+
+      return {
+        ...role,
+        light: colorToCss(lightValue),
+        dark: colorToCss(darkValue)
+      };
+    })
+  }));
 
   source["Border/Base"] = withoutSetMetadata(border);
   source["Elevation/Base"] = withoutSetMetadata(elevation);
@@ -189,8 +200,11 @@ export async function loadFigmaExports(legacySource) {
   );
 
   const convertedRoles = {};
-  for (const [rolePath, reference] of roleReferences) {
-    setTokenValue(convertedRoles, rolePath, reference);
+  for (const role of flattenRoleEntries(colorRoleProduct)) {
+    if (!role.reference) {
+      throw new Error(`Product color role "${role.token}" is missing its Figma alias reference.`);
+    }
+    setTokenValue(convertedRoles, role.token, `{${role.reference.replaceAll("/", ".")}}`);
   }
   // Product exports hover and pressed surfaces but omit their default states.
   for (const [rolePath, reference] of Object.entries({

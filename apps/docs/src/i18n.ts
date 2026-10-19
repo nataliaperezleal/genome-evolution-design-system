@@ -12,7 +12,6 @@ export const dict: Dict = {
   "nav.foundation.layout": { en: "Layout", es: "Diseño de página" },
   "nav.foundation.opacity": { en: "Opacity", es: "Opacidad" },
   "nav.foundation.spacing": { en: "Spacing", es: "Espaciado" },
-  "nav.foundation.tokens": { en: "Tokens", es: "Tokens" },
   "nav.foundation.typography": { en: "Typography", es: "Tipografía" },
   "nav.components": { en: "Components", es: "Componentes" },
 
@@ -134,12 +133,6 @@ export const dict: Dict = {
     en: "Editorial guidance, tokens and implementation contracts for each component.",
     es: "Guía editorial, tokens y contrato de implementación por componente."
   },
-  "overview.portal.tokens.title": { en: "Tokens & styles", es: "Tokens y estilos" },
-  "overview.portal.tokens.body": {
-    en: "Consume semantic exports (themes + CSS variables) instead of raw primitives.",
-    es: "Consume exports semánticos (themes + variables CSS) en lugar de primitivos raw."
-  },
-
   "overview.featured.title": { en: "Featured components", es: "Componentes destacados" },
   "overview.featured.body": {
     en: "A small set of pages to calibrate hierarchy, forms, overlays and feedback.",

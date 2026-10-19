@@ -5,24 +5,17 @@ import { loadFigmaExports } from "./load-figma-exports.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const packageRoot = path.resolve(__dirname, "..");
-const sourceFile = path.join(packageRoot, "source", "tokens.json");
 const distDir = path.join(packageRoot, "dist");
 const themesDir = path.join(distDir, "themes");
 
-const legacySource = JSON.parse(await readFile(sourceFile, "utf8"));
-const source = await loadFigmaExports(legacySource);
-const fallbackReferences = {
-  "family.display": "Open Sans"
-};
+const source = await loadFigmaExports();
 const themes = ["light", "dark"];
 const publicPrefixes = [
   "border.base.width.",
   "border.base.focus.width",
   "color.role.",
-  "focus.",
   "layer.base.z-index.",
   "layout.",
-  "motion.",
   "opacity.state.",
   "radius.base.",
   "spacing.",
@@ -110,10 +103,6 @@ function findReferenceValue(ref, theme) {
     return suffixMatches[0][1];
   }
 
-  if (ref in fallbackReferences) {
-    return fallbackReferences[ref];
-  }
-
   return undefined;
 }
 
@@ -178,8 +167,6 @@ function shouldAppendPx(token) {
   if (token.startsWith("border.")) return true;
   if (token.startsWith("elevation.")) return true;
 
-  if (token.startsWith("focus.") && /\.(width|offset|inner-width|outer-width)$/.test(token)) return true;
-
   if (token.startsWith("layout.") && /(breakpoint|gutter|margin)/.test(token)) return true;
 
   if (token.startsWith("typography.role.") && /\.(size|line-height|tracking)$/.test(token)) return true;
@@ -226,17 +213,19 @@ const publicMetadata = {
   system: source.$metadata?.name ?? "Genome Evolution Design System",
   version: source.$metadata?.version ?? "0.0.0",
   generatedAt: source.$metadata?.generatedAt ?? null,
-  source: "packages/tokens/source/figma (current exports) + packages/tokens/source/tokens.json (retained tokens not included in exports)",
+  source: "packages/tokens/source/figma (split Figma exports)",
   publicPrefixes,
   themes
 };
 
+const colorRoleContexts = source.$colorRoleContexts ?? [];
 const indexJs = `import tokens from "./tokens.json" with { type: "json" };
 import light from "./themes/light.json" with { type: "json" };
 import dark from "./themes/dark.json" with { type: "json" };
 import allTokens from "./all-tokens.json" with { type: "json" };
+import colorRoleContexts from "./color-role-contexts.json" with { type: "json" };
 
-export { allTokens, dark, light, tokens };
+export { allTokens, colorRoleContexts, dark, light, tokens };
 
 export const themes = { light, dark };
 
@@ -256,6 +245,17 @@ const indexDts = `export declare const tokens: Record<string, string | number | 
 export declare const light: Record<string, string | number | boolean>;
 export declare const dark: Record<string, string | number | boolean>;
 export declare const allTokens: Record<string, string | number | boolean>;
+export type ColorRoleContext = {
+  id: string;
+  roles: Array<{
+    token: string;
+    value: string;
+    reference: string | null;
+    light: string;
+    dark: string | null;
+  }>;
+};
+export declare const colorRoleContexts: ColorRoleContext[];
 export declare const themes: {
   light: Record<string, string | number | boolean>;
   dark: Record<string, string | number | boolean>;
@@ -271,6 +271,7 @@ await rm(distDir, { recursive: true, force: true });
 await mkdir(themesDir, { recursive: true });
 
 await writeFile(path.join(distDir, "all-tokens.json"), `${JSON.stringify(resolvedByTheme.light, null, 2)}\n`);
+await writeFile(path.join(distDir, "color-role-contexts.json"), `${JSON.stringify(colorRoleContexts, null, 2)}\n`);
 await writeFile(path.join(distDir, "tokens.json"), `${JSON.stringify(lightPublic, null, 2)}\n`);
 await writeFile(path.join(themesDir, "light.json"), `${JSON.stringify(lightPublic, null, 2)}\n`);
 await writeFile(path.join(themesDir, "dark.json"), `${JSON.stringify(darkPublic, null, 2)}\n`);

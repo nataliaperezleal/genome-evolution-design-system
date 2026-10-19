@@ -111,7 +111,6 @@ genome-design-system/
 - [Layout](foundations/layout.md)
 - [Elevation](foundations/elevation.md)
 - [Border](foundations/border.md)
-- [Tokens](foundations/tokens.json)
 
 ---
 

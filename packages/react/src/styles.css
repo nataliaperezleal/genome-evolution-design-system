@@ -43,7 +43,7 @@ body {
 .ge-icon-button:focus-visible,
 .ge-input:focus-visible {
   outline: none;
-  box-shadow: inset 0 0 0 var(--ge-focus-light-ring-width) var(--ge-color-role-border-focus);
+  box-shadow: inset 0 0 0 var(--ge-border-focus-width) var(--ge-color-role-border-focus);
 }
 
 .ge-button:disabled,
@@ -626,8 +626,8 @@ body {
 }
 
 .ge-check__input:focus-visible + .ge-check__box {
-  outline: var(--ge-focus-light-ring-outer-width) solid var(--ge-focus-light-ring-outer-color);
-  outline-offset: var(--ge-focus-light-ring-offset);
+  outline: var(--ge-border-focus-width) solid var(--ge-color-role-border-focus);
+  outline-offset: 2px;
 }
 
 .ge-check__label {
@@ -1605,8 +1605,8 @@ body {
 }
 
 .ge-radio__input:focus-visible + .ge-radio__dot {
-  outline: var(--ge-focus-light-ring-outer-width) solid var(--ge-focus-light-ring-outer-color);
-  outline-offset: var(--ge-focus-light-ring-offset);
+  outline: var(--ge-border-focus-width) solid var(--ge-color-role-border-focus);
+  outline-offset: 2px;
 }
 
 .ge-radio__copy {

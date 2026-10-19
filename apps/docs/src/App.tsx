@@ -46,7 +46,6 @@ import { renderMarkdown } from "./markdown";
 import type { DocRecord, NavItem } from "./types";
 import { BorderFoundation } from "./foundations/BorderFoundation";
 import { ColorsFoundation } from "./foundations/ColorsFoundation";
-import { TokensFoundation } from "./foundations/TokensFoundation";
 import { TypographyFoundation } from "./foundations/TypographyFoundation";
 import { LayoutFoundation } from "./foundations/LayoutFoundation";
 import { OpacityFoundation } from "./foundations/OpacityFoundation";
@@ -148,7 +147,6 @@ function localizedFoundationLabel(item: NavItem, language: Language) {
     "foundations-layout": "nav.foundation.layout",
     "foundations-opacity": "nav.foundation.opacity",
     "foundations-spacing": "nav.foundation.spacing",
-    "foundations-tokens.json": "nav.foundation.tokens",
     "foundations-typography": "nav.foundation.typography"
   };
   const key = keyById[item.id];
@@ -2313,7 +2311,6 @@ export function App() {
 
   const isBorderFoundation = activeId === "foundations-border";
   const isColorsFoundation = activeId === "foundations-color";
-  const isTokensFoundation = activeId === "foundations-tokens.json";
   const isTypographyFoundation = activeId === "foundations-typography";
   const isLayoutFoundation = activeId === "foundations-layout";
   const isOpacityFoundation = activeId === "foundations-opacity";
@@ -2581,11 +2578,6 @@ export function App() {
                     <h4>{t("overview.portal.components.title", language)}</h4>
                     <p>{t("overview.portal.components.body", language)}</p>
                   </a>
-                  <a className="portal-card" href="#foundations-tokens.json" onClick={() => setActiveId("foundations-tokens.json")}>
-                    <p className="eyebrow">{t("overview.portal.tokens.title", language)}</p>
-                    <h4>{t("overview.portal.tokens.title", language)}</h4>
-                    <p>{t("overview.portal.tokens.body", language)}</p>
-                  </a>
                 </div>
               </section>
 
@@ -2661,7 +2653,7 @@ export function App() {
           ) : isTypographyFoundation ? (
             <TypographyFoundation language={language} />
           ) : isColorsFoundation ? (
-            <ColorsFoundation language={language} />
+            <ColorsFoundation language={language} theme={theme} />
           ) : isLayoutFoundation ? (
             <LayoutFoundation language={language} />
           ) : isOpacityFoundation ? (
@@ -2670,8 +2662,6 @@ export function App() {
             <ElevationFoundation language={language} />
           ) : isBorderFoundation ? (
             <BorderFoundation theme={theme} language={language} />
-          ) : isTokensFoundation ? (
-            <TokensFoundation language={language} />
           ) : active.kind === "component" ? (
             <ComponentDocumentation componentName={activeLabel} language={language} doc={active.doc} />
           ) : (

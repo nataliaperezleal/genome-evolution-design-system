@@ -3613,6 +3613,99 @@ input {
   border: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 60%, transparent);
 }
 
+.role-matrix-groups {
+  display: grid;
+  gap: 24px;
+}
+
+.role-matrix-group h3 {
+  margin: 0 0 10px;
+  color: var(--ge-color-role-text-primary);
+  font-size: 16px;
+}
+
+.role-matrix-scroll {
+  overflow-x: auto;
+  border: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 45%, transparent);
+  border-radius: 12px;
+}
+
+.role-matrix {
+  width: 100%;
+  min-width: 1120px;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 12px;
+}
+
+.role-matrix th,
+.role-matrix td {
+  padding: 9px 10px;
+  border-right: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 30%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 30%, transparent);
+  text-align: left;
+}
+
+.role-matrix tr:last-child th,
+.role-matrix tr:last-child td {
+  border-bottom: 0;
+}
+
+.role-matrix th:first-child {
+  width: 170px;
+}
+
+.role-matrix th:last-child,
+.role-matrix td:last-child {
+  border-right: 0;
+}
+
+.role-matrix thead th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--ge-color-role-background-canvas);
+  color: var(--ge-color-role-text-secondary);
+  font-weight: 700;
+}
+
+.role-matrix tbody th {
+  background: var(--ge-color-role-background-canvas);
+  color: var(--ge-color-role-text-primary);
+  font-weight: 600;
+}
+
+.role-matrix-cell {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.role-matrix-swatch {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+  border: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 55%, transparent);
+  border-radius: 4px;
+}
+
+.role-matrix-cell code {
+  min-width: 0;
+  overflow: hidden;
+  color: var(--ge-color-role-text-secondary);
+  font-family: var(--ge-typography-primitive-family-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.role-matrix-warning {
+  color: var(--ge-color-role-text-warning);
+  font-size: 10px;
+  white-space: nowrap;
+}
+
 .typeface-grid {
   margin-top: 18px;
   display: grid;
