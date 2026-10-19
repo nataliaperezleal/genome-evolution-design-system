@@ -1,40 +1,24 @@
 # Elevación — Genome Evolution Design System
 
-## Recetas de sombra
-La elevación se compone con `position`, `blur` y `color.role.overlay.black`.
+Las recetas de elevación se publican como `color.role.light.elevation.<nivel>`. La página de documentación muestra estas recetas con sus valores canónicos de posición y desenfoque.
 
-| Nivel | Receta | Uso |
-|---|---|---|
-| `elevation/none` | sin sombra | Lienzo y superficies planas |
-| `elevation/sm` | `0 1px 2px 0 overlay.black` | Resaltado sutil al pasar el cursor o foco leve |
-| `elevation/md` | `0 2px 4px 0 overlay.black` | Tarjetas y ventanas emergentes pequeñas |
-| `elevation/lg` | `0 4px 8px 0 overlay.black` | Menús desplegables y paneles flotantes |
-| `elevation/xl` | `0 4px 16px 0 overlay.black` | Modales y capas prominentes |
+## Recetas de sombra
+
+| Nivel | Token | X | Y | Desenfoque | Color |
+|---|---|---:|---:|---:|---|
+| `none` | `color.role.light.elevation.none` | 0px | 0px | 0px | transparente |
+| `xs` | `color.role.light.elevation.xs` | 1px | 1px | 1px | `#d9deda99` |
+| `sm` | `color.role.light.elevation.sm` | 2px | 2px | 2px | `#d9deda99` |
+| `md` | `color.role.light.elevation.md` | 2px | 4px | 4px | `#d9deda99` |
+| `lg` | `color.role.light.elevation.lg` | 2px | 4px | 8px | `#d9deda99` |
+| `overlay` | `color.role.light.elevation.overlay` | 2px | 4px | 16px | `#d9deda99` |
 
 ## Tokens base
-| Token | Valor |
-|---|---|
-| `elevation/position/0` | 0 |
-| `elevation/position/1` | 1 |
-| `elevation/position/2` | 2 |
-| `elevation/position/4` | 4 |
-| `elevation/blur/0` | 0px |
-| `elevation/blur/1` | 1px |
-| `elevation/blur/2` | 2px |
-| `elevation/blur/4` | 4px |
-| `elevation/blur/8` | 8px |
-| `elevation/blur/16` | 16px |
 
-## Uso por componente
-- `Dropdown`, `Tooltip` y `Datepicker`: `elevation/lg`
-- `Modal`: `elevation/xl`
-- `Group` elevado o un futuro `Card`: `elevation/md`
-- Superficies base y campos en reposo: `elevation/none`
+Los valores de posición y desenfoque de estas recetas están disponibles en `elevation.base.position.<valor>` y `elevation.base.blur.<valor>`.
 
-## Regla clave
-- No usar `elevation/position/*` o `elevation/blur/*` directamente en componentes. Siempre componer una receta semántica.
+## Uso
 
-## Antipatrones
-- No inventar sombras con valores arbitrarios.
-- No aplicar `elevation/xl` a elementos pequeños como insignias o etiquetas.
-- No usar sombras para comunicar selección cuando basta con `border` o `surface`.
+- Usa la receta de elevación que corresponda a la jerarquía del componente; no inventes valores de sombra.
+- Reserva `overlay` para capas superpuestas y modales. Usa `none` en superficies planas.
+- Evita las sombras en elementos pequeños, como insignias o etiquetas, cuando baste con un borde o color de superficie.

@@ -1,42 +1,30 @@
-# Typography — Genome Plus DS
+# Typography — Genome Evolution Design System
 
-## Familias tipográficas
-- `family/body` → Open Sans (uso general: body, labels, buttons)
-- `family/display` → display font (headings XL, hero)
-- `family/mono` → monospace (código)
+Typography roles are published under `typography.role.base.<role>.<size>.<property>`. The documentation page reads these tokens directly.
 
-## Escala de tamaños
-| Token | Valor | Uso típico |
+## Font families
+
+| Role token | Value | Use |
 |---|---|---|
-| `size/100` | 11px | Label XS, Badge |
-| `size/200` | 12px | Body XS, Button SM |
-| `size/300` (aprox) | 13px | — |
-| `size/14` | 14px | Body SM, Button MD, Trigger Accordion |
-| `size/400` | 16px | Body MD |
-| `size/500` | 18px | Title SM |
-| `size/600` | 20px | Title MD |
-| `size/800` | 24px+ | Heading XL |
+| `typography.role.base.body.md.family` | Open Sans | General interface text |
+| `typography.role.base.display.md.family` | Open Sans | Large display text |
+| `typography.role.base.code.md.family` | Roboto Mono | Code and technical values |
 
-## Pesos
-| Token | Valor |
-|---|---|
-| `weight/regular` | 400 |
-| `weight/medium` | 500 |
-| `weight/semibold` | 600 |
-| `weight/bold` | 700 |
+## Role examples
 
-## Estilos de texto (roles)
-| Estilo | Familia | Tamaño | Peso | Line-height | Tracking |
-|---|---|---|---|---|---|
-| Text/Button/SM | body | 12px | semibold | 16px | normal |
-| Text/Button/MD | body | 14px | semibold | 16px | normal |
-| Text/Button/LG | body | 16px | semibold | 20px | normal |
-| Text/Label/MD | body | 14px | medium | 20px | normal |
-| Text/Body/SM | body | 14px | regular | 20px | normal |
-| Text/Label/XS | body | 11px | medium | 16px | wide |
-| Text/Title/SM | body | 18px | semibold | — | tight |
-| Text/Title/MD | body | 20px | semibold | — | tight |
-| Text/Title/LG | body | 24px | bold | — | tight |
-| Text/Heading/XL | display | 32px+ | bold | — | tight |
-| Text/Code/MD | mono | 14px | regular | 20px | normal |
-| Text/Code/LG | mono | 16px | regular | 22px | normal |
+| Role token | Size | Weight | Line height |
+|---|---:|---|---:|
+| `typography.role.base.body.sm` | 14px | regular | 20px |
+| `typography.role.base.label.xs` | 12px | medium | 16px |
+| `typography.role.base.button.md` | 14px | semibold | 16px |
+| `typography.role.base.heading.xl` | 36px | bold | 56px |
+| `typography.role.base.display.md` | 48px | bold | 56px |
+| `typography.role.base.code.md` | 14px | regular | 20px |
+
+Other published roles include `body`, `label`, `title`, `heading`, `display`, `button`, `code`, and `overline`, with the sizes and properties available in the token package.
+
+## Usage
+
+- Prefer a role token over setting font family, size, weight, line height, or tracking separately.
+- Use body roles for reading, label and button roles for controls, heading and title roles for hierarchy, and code roles for technical content.
+- Keep display roles for prominent page or section titles.

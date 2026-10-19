@@ -26,7 +26,10 @@ const typographyBlockTitlesEs: Record<string, string> = {
 
 function tokenValue(name: string) {
   const value = allTokens[name];
-  return typeof value === "string" || typeof value === "number" ? String(value) : "";
+  if (typeof value !== "string" && typeof value !== "number") {
+    throw new Error(`Missing typography token "${name}".`);
+  }
+  return String(value);
 }
 
 function pxToRem(px: string) {
@@ -36,7 +39,7 @@ function pxToRem(px: string) {
 }
 
 function buildRows(category: string) {
-  const prefix = `typography.role.${category}.`;
+  const prefix = `typography.role.base.${category}.`;
   const candidates = Object.keys(allTokens).filter((key) => key.startsWith(prefix) && key.endsWith(".family"));
   const sizeIds = candidates
     .map((key) => key.slice(prefix.length, -".family".length))
@@ -58,25 +61,25 @@ function buildRows(category: string) {
 
 function formatWeight(weight: string, language: Language) {
   const map: Record<string, { en: string; es: string }> = {
-    400: { en: "Regular", es: "Regular" },
-    500: { en: "Medium", es: "Mediana" },
-    600: { en: "Semibold", es: "Seminegrita" },
-    700: { en: "Bold", es: "Negrita" }
+    regular: { en: "Regular", es: "Regular" },
+    medium: { en: "Medium", es: "Medio" },
+    semibold: { en: "Semibold", es: "Seminegrita" },
+    bold: { en: "Bold", es: "Negrita" }
   };
   return map[weight]?.[language] ?? weight;
 }
 
 function Typefaces({ language }: { language: Language }) {
-  const bodyFamily = tokenValue("typography.primitive.family.body") || "system-ui";
-  const monoFamily = tokenValue("typography.primitive.family.mono") || "ui-monospace";
+  const bodyFamily = tokenValue("typography.role.base.body.md.family");
+  const monoFamily = tokenValue("typography.role.base.code.md.family");
 
   return (
     <section className="foundation-section">
       <h2>{language === "es" ? "Familias tipográficas" : "Typefaces"}</h2>
       <p>
         {language === "es"
-          ? "Estas familias están definidas como tokens primitivos y se utilizan en los roles tipográficos."
-          : "These type families are defined as primitive tokens and used by typography roles."}
+          ? "Estas familias se leen de los roles tipográficos publicados para texto y código."
+          : "These families come from the published typography roles for text and code."}
       </p>
       <div className="typeface-grid">
         <div className="typeface-card">

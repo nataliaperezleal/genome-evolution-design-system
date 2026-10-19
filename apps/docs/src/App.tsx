@@ -2670,7 +2670,7 @@ export function App() {
           ) : isOpacityFoundation ? (
             <OpacityFoundation language={language} />
           ) : isElevationFoundation ? (
-            <ElevationFoundation theme={theme} language={language} />
+            <ElevationFoundation language={language} />
           ) : isPaletteFoundation ? (
             <PaletteFoundation language={language} />
           ) : isBorderFoundation ? (

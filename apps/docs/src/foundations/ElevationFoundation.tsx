@@ -8,52 +8,56 @@ type Row = {
   positionX: number;
   positionY: number;
   blur: string;
-  colorToken: string;
   colorValue: string;
   boxShadow: string;
 };
 
 function readNumber(name: string) {
   const value = allTokens[name];
-  if (typeof value === "number") return value;
-  const numeric = Number(value);
-  return Number.isFinite(numeric) ? numeric : 0;
+  if (typeof value !== "number" || !Number.isFinite(value)) {
+    throw new Error(`Missing or invalid elevation token "${name}".`);
+  }
+  return value;
 }
 
 function readString(name: string) {
   const value = allTokens[name];
-  return typeof value === "string" || typeof value === "number" ? String(value) : "";
+  if (typeof value !== "string" && typeof value !== "number") {
+    throw new Error(`Missing elevation token "${name}".`);
+  }
+  return String(value);
 }
 
-export function ElevationFoundation({ theme, language }: { theme: string; language: Language }) {
+export function ElevationFoundation({ language }: { language: Language }) {
   const rows = useMemo<Row[]>(() => {
     const levels = [
-      { id: "none", position: "elevation.position.0", blur: "elevation.blur.4" },
-      { id: "xs", position: "elevation.position.1", blur: "elevation.blur.1" },
-      { id: "sm", position: "elevation.position.2", blur: "elevation.blur.2" },
-      { id: "md", position: "elevation.position.2", blur: "elevation.blur.4" },
-      { id: "lg", position: "elevation.position.2", blur: "elevation.blur.8" },
-      { id: "overlay", position: "elevation.position.2", blur: "elevation.blur.16" }
+      { id: "none", x: 0, y: 0, blur: 0 },
+      { id: "xs", x: 1, y: 1, blur: 1 },
+      { id: "sm", x: 2, y: 2, blur: 2 },
+      { id: "md", x: 2, y: 4, blur: 4 },
+      { id: "lg", x: 2, y: 4, blur: 8 },
+      { id: "overlay", x: 2, y: 4, blur: 16 }
     ];
 
-    const alphaToken = theme === "dark" ? "color.primitive.dark.palette.alpha.300" : "color.primitive.light.palette.alpha.300";
-    const alphaValue = readString(alphaToken) || "rgba(0,0,0,0.12)";
+    const alphaToken = "color.primitive.light.palette.alpha.300";
+    const alphaValue = readString(alphaToken);
 
     return levels.map((level) => {
-      const position = readNumber(level.position);
-      const blur = readString(level.blur);
-      const boxShadow = `0 ${position}px ${blur} 0 ${alphaValue}`;
+      const positionX = readNumber(`elevation.base.position.${level.x}`);
+      const positionY = readNumber(`elevation.base.position.${level.y}`);
+      const blur = readNumber(`elevation.base.blur.${level.blur}`);
+      const color = level.id === "none" ? "transparent" : alphaValue;
+      const boxShadow = `${positionX}px ${positionY}px ${blur}px 0 ${color}`;
       return {
-        token: `elevation.${level.id}`,
-        positionX: 0,
-        positionY: position,
-        blur,
-        colorToken: alphaToken.replace("color.primitive.", "palette/").replace(/\./g, "/"),
-        colorValue: alphaValue,
+        token: `color.role.light.elevation.${level.id}`,
+        positionX,
+        positionY,
+        blur: `${blur}px`,
+        colorValue: color,
         boxShadow
       };
     });
-  }, [theme]);
+  }, []);
 
   return (
     <div className="foundation-page">
