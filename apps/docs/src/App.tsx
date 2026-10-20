@@ -41,7 +41,7 @@ import {
 import ColorPickerDemo from "./ColorPickerDemo";
 
 import { componentDocsBySlug, componentDocsBySlugEs, foundationDocsBySlug, foundationDocsBySlugEs, manifest, tokenStats } from "./data";
-import { componentSpecs, componentTabLabels, tr, type ComponentTabId } from "./component-specs";
+import { componentSpecs, componentTabLabels, tr, type ComponentTabId, type SpecSection } from "./component-specs";
 import { renderMarkdown } from "./markdown";
 import type { DocRecord, NavItem } from "./types";
 import { BorderFoundation } from "./foundations/BorderFoundation";
@@ -733,6 +733,39 @@ function ComponentPreview({
       <div className="preview-stack">
         <Button>Button</Button>
         <Button variant="secondary">Button</Button>
+      </div>
+    );
+  }
+
+  if (componentName === "Duo Button") {
+    const buttonPairs = [
+      { color: "Evergreen" as const, tone: "evergreen" as const, size: "md" as const },
+      { color: "Indigo" as const, tone: "indigo" as const, size: "md" as const },
+      { color: "Evergreen" as const, tone: "evergreen" as const, size: "sm" as const },
+      { color: "Indigo" as const, tone: "indigo" as const, size: "sm" as const }
+    ];
+
+    return (
+      <div className="duo-button-specimen">
+        <p className="table-muted">
+          {language === "es" ? "Muestra visual basada en la guía del componente." : "Visual specimen based on the component guide."}
+        </p>
+        {buttonPairs.map((pair) => (
+          <div className="duo-button-specimen__row" key={`${pair.color}-${pair.size}`}>
+            <span className="duo-button-specimen__label">
+              {pair.color} ·{" "}
+              {pair.size === "md" ? "Regular" : language === "es" ? "Pequeño" : "Small"}
+            </span>
+            <div className="preview-row">
+              <Button variant="secondary" tone={pair.tone} size={pair.size}>
+                {language === "es" ? "Cancelar" : "Cancel"}
+              </Button>
+              <Button variant="primary" tone={pair.tone} size={pair.size}>
+                {language === "es" ? "Aplicar" : "Apply"}
+              </Button>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
@@ -1893,6 +1926,145 @@ function ClearButtonStatesPreview({ language }: { language: Language }) {
   );
 }
 
+const stateTitlesEs: Record<string, string> = {
+  default: "Predeterminado",
+  interactive: "Interactivo",
+  visible: "Visible",
+  hidden: "Oculto",
+  hover: "Al pasar el cursor",
+  hovered: "Al pasar el cursor",
+  "focus visible": "Foco visible",
+  focused: "Con foco",
+  pressed: "Presionado",
+  disabled: "Deshabilitado",
+  unchecked: "Desmarcado",
+  checked: "Marcado",
+  selected: "Seleccionado",
+  unselected: "No seleccionado",
+  open: "Abierto",
+  closed: "Cerrado",
+  determinate: "Determinado",
+  indeterminate: "Indeterminado",
+  active: "Activo",
+  "active page": "Página activa",
+  "disabled prev/next at edges": "Anterior/siguiente deshabilitado en los extremos",
+  off: "Desactivado",
+  on: "Activado",
+  todo: "Pendiente",
+  current: "Actual",
+  done: "Completado",
+  error: "Error",
+  filled: "Con valor",
+  loading: "Cargando",
+  visited: "Visitado",
+  "auto-hide": "Ocultamiento automático",
+  "read only": "Solo lectura",
+  "focused tab": "Foco de teclado"
+};
+
+function localizeStateTitle(title: string, language: Language) {
+  if (language === "en") return title;
+  const optional = title.endsWith(" (optional)");
+  const baseTitle = optional ? title.slice(0, -" (optional)".length) : title;
+  const translated = stateTitlesEs[baseTitle.toLowerCase()] ?? baseTitle;
+  return optional ? `${translated} (opcional)` : translated;
+}
+
+function ComponentStatesShowcase({
+  componentName,
+  doc,
+  language,
+  sections
+}: {
+  componentName: string;
+  doc: DocRecord;
+  language: Language;
+  sections: SpecSection[];
+}) {
+  const previewSections = sections.filter((section) => section.preview);
+  const documentedStates = sections.flatMap((section) =>
+    (section.bullets ?? []).map((bullet) => {
+      const text = tr(bullet, language);
+      const divider = text.indexOf(":");
+      const title = divider > 0 ? text.slice(0, divider).trim() : text;
+      return {
+        title: localizeStateTitle(title, language)
+      };
+    })
+  );
+  const states = sections.flatMap((section) =>
+    section.bullets?.length
+      ? []
+      : section.title
+        ? [{ title: localizeStateTitle(tr(section.title, language), language) }]
+        : []
+  );
+  const stateLabels = documentedStates.length ? documentedStates : states;
+
+  return (
+    <section className="component-states-showcase">
+      <header className="component-states-showcase__header">
+        <p className="eyebrow">{language === "es" ? "Guía visual" : "Visual guide"}</p>
+        <h4>{language === "es" ? "Variantes y estados" : "Variants and states"}</h4>
+        <p>
+          {language === "es"
+            ? "Explora el ejemplo del componente y consulta aquí los estados documentados."
+            : "Explore the component example and review its documented states here."}
+        </p>
+      </header>
+
+      <div className={`component-states-showcase__body ${previewSections.length ? "component-states-showcase__body--specimens" : ""}`}>
+        <div className="component-states-showcase__preview">
+          <p className="component-states-showcase__label">
+            {language === "es"
+              ? previewSections.length ? "Estados visuales documentados" : "Ejemplo visual"
+              : previewSections.length ? "Documented visual states" : "Visual example"}
+          </p>
+          {previewSections.length ? (
+            <div className="component-states-showcase__specimens">
+              {previewSections.map((section, index) => (
+                <article className="component-states-showcase__specimen" key={`${section.title ?? "state"}-${index}`}>
+                  <div className="component-states-showcase__specimen-preview">{section.preview}</div>
+                  {section.title ? (
+                    <strong>{localizeStateTitle(tr(section.title, language), language)}</strong>
+                  ) : null}
+                  {section.body?.map((paragraph, paragraphIndex) => (
+                    <p key={`${index}-${paragraphIndex}`}>{tr(paragraph, language)}</p>
+                  ))}
+                </article>
+              ))}
+            </div>
+          ) : (
+            <ComponentPreview componentName={componentName} docBody={doc.body} language={language} />
+          )}
+        </div>
+
+        {!previewSections.length && stateLabels.length ? (
+          <div className="component-states-showcase__states">
+            <p className="component-states-showcase__label">{language === "es" ? "Estados documentados" : "Documented states"}</p>
+            <ul>
+              {stateLabels.map((state, index) => (
+                <li key={`${state.title}-${index}`}>
+                  <strong>{state.title}</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : !previewSections.length ? (
+          <div className="component-states-showcase__states component-states-showcase__states--empty">
+            <p className="component-states-showcase__label">{language === "es" ? "Estados documentados" : "Documented states"}</p>
+            <p>
+              {language === "es"
+                ? "Consulta la especificación del componente para conocer las variantes disponibles."
+                : "See the component specification for its available variants."}
+            </p>
+          </div>
+        ) : null}
+      </div>
+    </section>
+  );
+}
+
 function ComponentDocumentation({
   componentName,
   language,
@@ -1925,7 +2097,8 @@ function ComponentDocumentation({
       // Prefer Markdown: if the heading exists in the MD, show the tab.
       if (hasMarkdown) return true;
       // If there's no Markdown for this tab, allow a fallback from the spec
-      // only for tokens and implementation (props/code/tokenCards).
+      // for documented states, tokens, and implementation (props/code/tokenCards).
+      if (tab === "states") return Boolean(spec?.tabs.states?.length);
       if (tab === "tokens") return Boolean(spec?.tokenCards?.length);
       if (tab === "implementation") return Boolean(spec?.props?.length || spec?.code?.length);
       return false;
@@ -2039,6 +2212,9 @@ function ComponentDocumentation({
           {componentName === "Button" && activeTab === "states" ? <ButtonStatesPreview language={language} /> : null}
           {componentName === "Clear Button" && activeTab === "states" ? (
             <ClearButtonStatesPreview language={language} />
+          ) : null}
+          {activeTab === "states" && componentName !== "Button" && componentName !== "Clear Button" ? (
+            <ComponentStatesShowcase componentName={componentName} doc={doc} language={language} sections={sections} />
           ) : null}
 
           {activeTab === "anatomy" ? (
