@@ -1,188 +1,357 @@
 ---
-component: ClearButton
-system: Genome Evolution Design System
-type: Component
-status: "Production"
-version: 1.0
-owner: UX Design Team
-last_updated: 2026-06-02
-tags: [acción, inline, ghost, navegación]
+component: "Clear button"
+system: "Genome Evolution Design System"
+type: "Button (Inline / Ghost)"
+status: "Done"
+version: "1.2"
+owner: "UX Team"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2103-36"
+last_updated: "2026-10-20"
+tags:
+  - "Button"
+  - "Inline"
+  - "Ghost"
 ---
 
-# ClearButton
+# Clear button — Genome Evolution Design System
 
-## Propósito
+Botón de acción inline sin fondo sólido, con íconos de navegación (izquierda y derecha) flanqueando un label.
 
-ClearButton es un botón interactivo de estilo inline y mínimo, sin fondo sólido en reposo. Combina un label de texto con íconos opcionales izquierdo y derecho (por defecto: arrow-left y arrow-right). Está diseñado para acciones secundarias contextuales embebidas en contenido, listas, paneles o banners, donde un Button de peso completo generaría demasiado ruido visual.
+## Quick Reference
 
-## Referencia Rápida
+### What it is
 
-| Propiedad | Valores | Default |
-|-----------|---------|---------|
-| color | Default, Evergreen, Indigo | Default |
-| type | Default, Information, Success, Danger, Warning | Default |
-| state | Default, Hovered, Pressed, Focused, Disabled | Default |
-| corner | Default, Rounded | Default |
-| showLeadingIcon | true, false | true |
-| showTrailingIcon | true, false | true |
-| label | string | "Button" |
+Botón de acción inline sin fondo sólido. Un ícono arrow-left inicial y un ícono arrow-right final flanquean un label de texto.
 
-**Combinaciones inválidas:**
-- type=Information, Success, Danger, Warning solo están documentados con color=Indigo.
-- state=Disabled solo está documentado para color=Default.
-- color=Default combinado con type=Information, Success, Danger, Warning no está documentado.
-- color=Evergreen combinado con type=Information, Success, Danger, Warning no está documentado.
+### Key Properties
 
-## Cuándo Usar
+- Color [Default | Evergreen | Indigo] — default: Default
+- Type [Default | Information | Success | Danger | Warning] — default: Default
+- State [Default | Hovered | Pressed | Focused | Disabled] — default: Default
+- Corner [Default | Rounded] — default: Default
+- showLeadingIcon [true | false] — default: true
+- showTrailingIcon [true | false] — default: true
+- label — texto visible, default: "Button"
 
-- Para acciones inline embebidas en texto, listas o bloques de contenido.
-- Para navegación contextual de tipo anterior / siguiente dentro de una secuencia de contenido.
-- Para acciones secundarias de bajo énfasis que no deben competir con un Button principal.
-- Para acciones contextuales dentro de banners, alertas o paneles informativos.
-- Cuando una acción necesita ser visible pero no visualmente prominente.
+### Default Configuration
 
-## Cuándo NO Usar
+Color=Default, Type=Default, State=Default, Corner=Default, showLeadingIcon=true, showTrailingIcon=true, label="Button"
 
-- No usar como acción principal de una pantalla o sección — usar Button (Type=Primary) en su lugar.
-- No usar en sustitución de Button Secondary cuando la acción necesita mayor presencia visual.
-- No usar cuando la acción requiere alta visibilidad o fuerte affordance.
-- No usar para navegación entre páginas — usar un componente Link en su lugar.
+### Invalid Combinations
 
-## Anatomía
+- Type=Information, Success, Danger o Warning solo está documentado con Color=Indigo
+- State=Disabled no está documentado para Color=Evergreen ni Color=Indigo
+- Color=Default con Type=Information, Success, Danger o Warning no está documentado
 
-| Parte | Requerida | Descripción | Condición |
-|-------|-----------|-------------|-----------|
-| Contenedor | Sí | Envolvente sin fondo visible en reposo. Aplica fondo solo en estados Hovered, Pressed y Focused. El padding y el radio de esquina siempre se aplican. | Siempre |
-| Ícono izquierdo (Leading Icon) | No | Ícono a la izquierda del label. Ícono por defecto: arrow-left (12×12px). | Solo cuando showLeadingIcon=true |
-| Label | Sí | Texto del botón. Usa tipografía `Text/Body/XS Strong` (12px, semibold). | Siempre |
-| Ícono derecho (Trailing Icon) | No | Ícono a la derecha del label. Ícono por defecto: arrow-right (12×12px). | Solo cuando showTrailingIcon=true |
+### Typical Usage
 
-## Propiedades
+- Navegación inline: Color=Default, Type=Default, State=Default, Corner=Default
+- Acción de marca: Color=Evergreen, Type=Default, State=Default, Corner=Default
+- Acción Danger inline: Color=Indigo, Type=Danger, State=Default, Corner=Default
+- Variante píldora: Color=Default, Type=Default, State=Default, Corner=Rounded
 
-| Propiedad | Tipo | Default | Valores | Aplica a | Descripción |
-|-----------|------|---------|---------|----------|-------------|
-| color | Enum | Default | Default, Evergreen, Indigo | Todos | Controla el color de texto e ícono. Default usa `text/primary`. Evergreen usa `text/evergreen`. Indigo usa `text/indigo`. |
-| type | Enum | Default | Default, Information, Success, Danger, Warning | Principalmente color=Indigo | Aplica color semántico al texto y los íconos, sobreescribiendo el token de text del color con el token semántico correspondiente. |
-| state | Enum | Default | Default, Hovered, Pressed, Focused, Disabled | Todos | Representa el estado interactivo actual del componente. |
-| corner | Enum | Default | Default, Rounded | Todos | Controla la forma del radio de borde. Default aplica `radius/4` (4px). Rounded aplica `semantic/full` (999px). |
-| showLeadingIcon | Boolean | true | true, false | Todos | Muestra u oculta el slot del ícono izquierdo. |
-| showTrailingIcon | Boolean | true | true, false | Todos | Muestra u oculta el slot del ícono derecho. |
-| label | String | "Button" | Cualquier texto | Todos | Texto visible del componente. |
+---
 
-## Estados
+## Purpose / Intent
 
-| Estado | Descripción | Cambios Visuales |
-|--------|-------------|------------------|
-| Default | Estado en reposo. Sin fondo visible. | Sin fondo. Color de texto e ícono según el token de `color` o `type`. |
-| Hovered | El cursor está sobre el componente. | Fondo: `background/interactive/hovered`. Color de texto e ícono sin cambio. |
-| Pressed | El componente está siendo clickeado o presionado. | Fondo: `background/interactive/pressed`. Color de texto e ícono sin cambio. |
-| Focused | El componente recibe foco por teclado o de forma programática. | Borde de `border/focus` con grosor `focus/width` (2px). Sin cambio de fondo. |
-| Disabled | El componente no es interactivo. | Texto e íconos: `text/disabled`. Sin fondo. Solo documentado para color=Default. |
+### Problem Solved
 
-## Tamaños
+Ofrece una acción discreta, sin peso visual, para acciones secundarias contextuales.
 
-ClearButton tiene un único tamaño. No expone una propiedad de Size.
+### Typical Context
 
-| Padding X | Padding Y | Tipografía | Tamaño Ícono | Notas |
-|-----------|-----------|------------|--------------|-------|
-| `space/8` (8px) | `space/4` (4px) | `Text/Body/XS Strong` — 12px, semibold, line-height 16px | 12×12px | Tamaño único fijo. |
+Dentro de contenido, listas o paneles, y dentro de banners o alertas.
 
-## Mapeo de Tokens
+---
 
-### Fondo (Background)
+## When to Use
 
-| Estado | Token | Notas |
-|--------|-------|-------|
-| Default | Ninguno | Sin fondo en reposo |
-| Hovered | `background/interactive/hovered` | #f7f8f7 — aplica a todos los valores de color y type |
-| Pressed | `background/interactive/pressed` | #e9ecea — aplica a todos los valores de color y type |
-| Focused | Ninguno | Sin fondo; usa borde en su lugar |
-| Disabled | Ninguno | Sin fondo |
+- Acciones inline dentro de texto o listas
+- Navegación contextual (anterior / siguiente)
+- Acciones secundarias que no compiten con un Button principal
+- Acciones dentro de banners o alertas
 
-### Texto (Text)
+---
 
-| color / type | Token | Valor |
-|---|---|---|
-| color=Default, type=Default | `text/primary` | #2d342f |
-| color=Evergreen, type=Default | `text/evergreen` | #297a39 |
-| color=Indigo, type=Default | `text/indigo` | #6b1b99 |
-| color=Indigo, type=Information | `text/info` | #2f7cb6 |
-| color=Indigo, type=Success | `text/success` | #00885c |
-| color=Indigo, type=Danger | `text/danger` | #ba1a1a |
-| color=Indigo, type=Warning | `text/warning` | #8c7500 |
-| Todos — Disabled | `text/disabled` | |
+## When NOT to Use
 
-### Borde (Border)
+- Como acción principal de una pantalla
+- En sustitución de Button Primary o Secondary
+- Cuando la acción requiere prominencia visual
 
-| Estado | Token | Notas |
-|--------|-------|-------|
-| Focused | `border/focus` | Grosor: `focus/width` (2px) — aplica a todos los valores de color y type |
+---
 
-### Ícono
+## Structure (Anatomy)
 
-Los íconos heredan el color del token de texto de su combinación de color/type correspondiente. No se documenta un token de color de ícono independiente en el material fuente.
+### Component Parts
 
-### Tipografía
+| Part | Required | Description |
+|--------|--------|--------|
+| Container | Obligatorio | Frame con auto layout que define padding, gap, radius y (según State) fondo o borde de foco |
+| arrow-left | Opcional | Ícono inicial de 12 × 12 px. Su visibilidad se controla con showLeadingIcon |
+| Label | Obligatorio | Texto del botón (propiedad label). No se encontró un control de visibilidad |
+| arrow-right | Opcional | Ícono final de 12 × 12 px. Su visibilidad se controla con showTrailingIcon |
 
-| Token | Tamaño | Line-height | Weight | Familia |
-|-------|--------|-------------|--------|---------|
-| `Text/Body/XS Strong` | 12px (`size/12`) | 16px (`line-height/16`) | semibold (`weight/semibold`) | `family/body` (Open Sans) |
+### Layout
 
-Espaciado de letras: `letter-spacing/normal` (0px)
+| Property | Value |
+|-----------|-----------|
+| Height | 24 px (todas las variantes) |
+| Width | 96 px en variantes con label "Button" (fijo vs. hug: [Pending confirmation]) |
+| Padding | 8 px horizontal (space/8), 4 px vertical (space/4) |
+| Gap | 8 px (gap/sm) |
+| Radius | Corner=Default: 4 px (radius/4). Corner=Rounded: semantic/full (999) |
 
-### Espaciado
+## Iconography
 
-| Token | Valor | Aplicado a |
-|-------|-------|------------|
-| `gap/sm` | 8px | Gap entre ícono y label |
-| `space/8` | 8px | Padding horizontal |
-| `space/4` | 4px | Padding vertical |
+### Icon Slots
 
-### Radio de Esquina
+| Slot | Description |
+|--------|--------|
+| Leading | arrow-left, 12 × 12 px. Visible cuando showLeadingIcon=true |
+| Trailing | arrow-right, 12 × 12 px. Visible cuando showTrailingIcon=true |
 
-| Corner | Token | Valor |
-|--------|-------|-------|
-| Default | `radius/4` | 4px |
-| Rounded | `semantic/full` | 999px |
+### Rules
 
-### Sombra
+- Ambos íconos están visibles por defecto (showLeadingIcon=true, showTrailingIcon=true).
+- El color de los íconos sigue el Color / Type / State de la variante (ver Token Mapping).
+- El contexto exportado del componente también expone leadingIcon y trailingIcon, que reemplazan las flechas por defecto. Su nombre exacto y tipo en Figma están [Pending confirmation].
 
-Pendiente de confirmación.
+---
 
-## Accesibilidad
+## Variants (Properties)
 
-| Propiedad | Valor |
-|-----------|-------|
-| Indicador de foco | `border/focus` con grosor `focus/width` (2px) — confirmado en State=Focused para todos los valores de color y type |
-| Visual deshabilitado | `text/disabled` aplicado a label e íconos |
-| Interacción con teclado | Pendiente de confirmación |
-| Roles ARIA | Pendiente de confirmación |
-| Comportamiento con lector de pantalla | Pendiente de confirmación |
-| Cumplimiento WCAG | Pendiente de confirmación |
+Los nombres de propiedades y valores deben coincidir exactamente con Figma.
 
-## Ejemplos
+### Color
 
-| Ejemplo | Descripción | Configuración |
-|---------|-------------|---------------|
-| Acción inline neutra | Botón inline neutral con ambos íconos | color=Default, type=Default, state=Default, corner=Default |
-| Acción inline Evergreen | Acción inline con color de marca Evergreen | color=Evergreen, type=Default, state=Default, corner=Default |
-| Acción inline Indigo | Acción inline con color de marca Indigo | color=Indigo, type=Default, state=Default, corner=Default |
-| Píldora redondeada — Default | Acción inline neutra con forma de píldora | color=Default, type=Default, state=Default, corner=Rounded |
-| Píldora redondeada — Indigo | Acción inline Indigo con forma de píldora | color=Indigo, type=Default, state=Default, corner=Rounded |
-| Danger inline | Acción de color Danger dentro de alerta o panel | color=Indigo, type=Danger, state=Default, corner=Default |
-| Information inline | Acción contextual de color Information | color=Indigo, type=Information, state=Default, corner=Default |
-| Success inline | Acción contextual de color Success | color=Indigo, type=Success, state=Default, corner=Default |
-| Warning inline | Acción contextual de color Warning | color=Indigo, type=Warning, state=Default, corner=Default |
-| Estado Hovered | Fondo visible al hacer hover | color=Default, type=Default, state=Hovered, corner=Default |
-| Estado Focused | Anillo de foco visible | color=Default, type=Default, state=Focused, corner=Default |
-| Estado Disabled | Apariencia no interactiva | color=Default, type=Default, state=Disabled, corner=Default |
-| Solo label | Sin íconos | color=Default, type=Default, showLeadingIcon=false, showTrailingIcon=false |
+| Value | Description |
+|--------|--------|
+| Default | Label e íconos neutros (text/primary, icon/primary) |
+| Evergreen | Label e íconos en verde (text/evergreen, icon/evergreen) |
+| Indigo | Label e íconos en morado (text/indigo, icon/indigo). Único Color que se combina con Type=Information, Success, Danger y Warning |
 
-## Pendiente de Confirmación
+### Type
 
-- type=Information, Success, Danger, Warning solo están documentados con color=Indigo. El comportamiento con color=Default o color=Evergreen no está documentado.
-- state=Disabled solo está documentado para color=Default. El comportamiento Disabled para color=Evergreen y color=Indigo no está documentado.
-- Los tokens de sombra no están documentados en el material fuente.
-- Los roles ARIA y el comportamiento de interacción con teclado no están documentados.
-- Las etiquetas para lectores de pantalla y el orden de foco no están especificados.
-- No se especifica si los slots de ícono izquierdo y derecho aceptan íconos personalizados o están restringidos a arrow-left / arrow-right.
+| Value | Description |
+|--------|--------|
+| Default | Tipo base. Existe con Color=Default, Evergreen e Indigo |
+| Information | Label e íconos en azul (text/info, icon/info). Solo con Color=Indigo |
+| Success | Label e íconos en verde (text/success, icon/success). Solo con Color=Indigo |
+| Danger | Label e íconos en rojo (text/danger, icon/danger). Solo con Color=Indigo |
+| Warning | Label e íconos en tono oliva/amarillo (text/warning, icon/warning). Solo con Color=Indigo |
+
+### State
+
+| Value | Description |
+|--------|--------|
+| Default | Apariencia en reposo, sin fondo y sin borde |
+| Hovered | Fondo background/interactive/hovered |
+| Pressed | Fondo background/interactive/pressed |
+| Focused | Borde de 2 px con border/focus |
+| Disabled | Label e íconos usan text/disabled e icon/disabled. Solo existe con Color=Default, Type=Default |
+
+### Corner
+
+| Value | Description |
+|--------|--------|
+| Default | Radio de esquina radius/4 |
+| Rounded | Forma de píldora (semantic/full) |
+
+### showLeadingIcon
+
+| Value | Description |
+|--------|--------|
+| true | Se muestra el ícono inicial (arrow-left) |
+| false | El ícono inicial se oculta |
+
+### showTrailingIcon
+
+| Value | Description |
+|--------|--------|
+| true | Se muestra el ícono final (arrow-right) |
+| false | El ícono final se oculta |
+
+### label
+
+Propiedad de texto con el texto visible. Default: "Button".
+
+---
+
+## States
+
+| State | Description | Visual Changes |
+|--------|--------|--------|
+| Default | Estado en reposo | Sin fondo, sin borde |
+| Hovered | Variante State=Hovered | Fondo background/interactive/hovered (#f7f8f7) |
+| Pressed | Variante State=Pressed | Fondo background/interactive/pressed (#e9ecea) |
+| Focused | Variante State=Focused | Borde sólido de 2 px, border/focus (#339947) |
+| Disabled | Variante State=Disabled (solo Color=Default, Type=Default) | Label text/disabled (#849588), íconos icon/disabled (#9daaa0) |
+
+---
+
+## Token Mapping
+
+### Background
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| background/interactive/hovered | State=Hovered | Verificado en Color=Default |
+| background/interactive/pressed | State=Pressed | Verificado en Color=Default |
+
+### Text
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| text/primary | Label, Color=Default, Type=Default | Verificado |
+| text/disabled | Label, State=Disabled | Verificado |
+| text/evergreen | Label, Color=Evergreen | Verificado en State=Focused |
+| text/info | Label, Type=Information | Verificado |
+| text/danger | Label, Type=Danger | Verificado |
+| text/indigo | Label, Color=Indigo | Listado en las variables del nodo; no verificado por variante |
+| text/success | Label, Type=Success | Listado en las variables del nodo; no verificado por variante |
+| text/warning | Label, Type=Warning | Listado en las variables del nodo; no verificado por variante |
+
+### Border
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| border/focus | State=Focused | Verificado en Color=Evergreen. Token de grosor: focus/width (2) |
+
+### Icon
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| icon/primary | Íconos, Color=Default | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/disabled | Íconos, State=Disabled | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/evergreen | Íconos, Color=Evergreen | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/indigo | Íconos, Color=Indigo | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/info | Íconos, Type=Information | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/success | Íconos, Type=Success | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/danger | Íconos, Type=Danger | Listado en las variables del nodo; asignación por variante no verificada |
+| icon/warning | Íconos, Type=Warning | Listado en las variables del nodo; asignación por variante no verificada |
+
+### Typography
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| Text/Body/XS Strong | Estilo de texto del label | Compuesto por family/body (Open Sans), weight/semibold, size/12, line-height/16, letter-spacing/normal |
+
+### Spacing
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| space/8 | Padding horizontal | 8 px |
+| space/4 | Padding vertical | 4 px |
+| gap/sm | Espacio entre ícono y label | 8 px |
+
+### Radius
+
+| Token | Usage | Notes |
+|--------|--------|--------|
+| radius/4 | Corner=Default | 4 px |
+| semantic/full | Corner=Rounded | 999. Verificado en Color=Default, State=Default |
+
+radius/24 aparece en las variables del nodo.
+---
+
+## Interaction
+
+El componente ofrece variantes visuales para State=Hovered, Pressed, Focused y Disabled. Disparadores, transiciones, navegación y comportamiento al hacer clic:
+
+---
+
+## Accessibility
+
+| Topic | Information |
+|--------|--------|
+| Accessibility Requirement | [Pending confirmation] |
+| Visible State Support | Existen las variantes State=Focused (borde de 2 px con border/focus) y State=Disabled (Color=Default, Type=Default) |
+| Notes | Roles ARIA, soporte de teclado, contraste y comportamiento con lectores de pantalla: [Pending confirmation] |
+
+---
+
+## Content Guidelines
+
+El valor por defecto del label es "Button".
+
+---
+
+## Examples
+
+### Example 1
+
+Configuration:
+
+```text
+Color=Default, Type=Default, State=Default, Corner=Default
+```
+
+Description:
+
+Navegación inline.
+
+### Example 2
+
+Configuration:
+
+```text
+Color=Evergreen, Type=Default, State=Default, Corner=Default
+```
+
+Description:
+
+Acción de marca.
+
+### Example 3
+
+Configuration:
+
+```text
+Color=Indigo, Type=Danger, State=Default, Corner=Default
+```
+
+Description:
+
+Acción Danger inline.
+
+---
+
+## Invalid Combinations
+
+- Type=Information, Success, Danger o Warning solo está documentado con Color=Indigo
+- State=Disabled no está documentado para Color=Evergreen ni Color=Indigo
+- Color=Default con Type=Information, Success, Danger o Warning no está documentado
+
+---
+
+## QA Checklist
+
+- Propiedades documentadas.
+- Los nombres de propiedades coinciden exactamente con Figma.
+- Los valores de variantes coinciden exactamente con Figma.
+- Defaults documentados.
+- Combinaciones inválidas documentadas.
+- Tokens verificados.
+- No se agregó comportamiento no documentado.
+- No se agregó comportamiento de accesibilidad no documentado.
+- Uso de tokens verificado por variante: parcial (ver notas en Token Mapping).
+- Matriz de variantes contrastada con la metadata (58 variantes).
+
+---
+
+## Pending Clarification
+
+- Mayúsculas en los nombres de propiedades: la descripción en Figma lista color, type, state y corner en minúscula, mientras que los nombres de variantes usan Color, Type, State y Corner. Este documento sigue los nombres de las variantes.
+- Nombres y tipos exactos en Figma de showLeadingIcon, showTrailingIcon, label, leadingIcon y trailingIcon.
+- status, version y owner.
+- Asignaciones de tokens por variante sin verificar: text/indigo, text/success, text/warning, todos los icon/*, radius/24 y el radio de Corner=Rounded + State=Focused.
+- Los nombres de tokens se tomaron tal cual de Figma y no se cruzaron con los archivos JSON de tokens.
+- Comportamiento del ancho (fijo vs. hug), Semantics, Interaction, Accessibility y Content Guidelines.
+- weight/semibold se exporta con valor "Medium", mientras que el estilo de texto reporta weight 600.
+
+---
+
+## Notes / Changelog
+
+Generado a partir del material fuente disponible el 2026-10-20.
