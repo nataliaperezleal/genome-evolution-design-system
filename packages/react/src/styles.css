@@ -902,6 +902,16 @@ body {
   background: var(--ge-color-role-background-interactive-pressed);
 }
 
+.ge-clear-button:focus-visible {
+  outline: none;
+  box-shadow: inset 0 0 0 var(--ge-border-focus-width) var(--ge-color-role-border-focus);
+}
+
+.ge-clear-button:disabled {
+  color: var(--ge-color-role-text-disabled);
+  cursor: not-allowed;
+}
+
 .ge-clear-button--rounded {
   border-radius: var(--ge-radius-semantic-pill);
 }

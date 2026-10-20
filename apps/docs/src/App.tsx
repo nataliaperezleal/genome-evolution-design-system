@@ -1592,17 +1592,18 @@ function GettingStartedPage({ language }: { language: Language }) {
   );
 }
 
-function ButtonStatesPreview() {
+function ButtonStatesPreview({ language }: { language: Language }) {
   const states = [
-    { id: "default", label: "Default" },
-    { id: "hover", label: "Hovered" },
-    { id: "pressed", label: "Pressed" },
-    { id: "focus", label: "Focused" },
-    { id: "disabled", label: "Disabled" }
+    { id: "default", label: language === "es" ? "Predeterminado" : "Default" },
+    { id: "hover", label: language === "es" ? "Al pasar" : "Hovered" },
+    { id: "pressed", label: language === "es" ? "Presionado" : "Pressed" },
+    { id: "focus", label: language === "es" ? "Con foco" : "Focused" },
+    { id: "disabled", label: language === "es" ? "Deshabilitado" : "Disabled" }
   ] as const;
 
   const [size, setSize] = useState<"md" | "sm">("md");
   const [corner, setCorner] = useState<"default" | "rounded">("default");
+  const [showIcons, setShowIcons] = useState(false);
 
   const columns = [
     { key: "primary-evergreen", label: "Primary / Evergreen", props: { variant: "primary" as const, tone: "evergreen" as const } },
@@ -1623,13 +1624,16 @@ function ButtonStatesPreview() {
 
   return (
     <section className="button-states">
-      <p className="eyebrow">States</p>
-      <h4>Type × Color × State</h4>
+      <p className="eyebrow">{language === "es" ? "Estados" : "States"}</p>
+      <h4>{language === "es" ? "Tipo × Color × Estado" : "Type × Color × State"}</h4>
 
-      <div className="button-states__controls" aria-label="Button states controls">
+      <div
+        className="button-states__controls"
+        aria-label={language === "es" ? "Controles de vista de Button" : "Button preview controls"}
+      >
         <div className="button-states__control">
-          <span className="button-states__control-label">Size</span>
-          <div className="button-states__segmented" role="group" aria-label="Size">
+          <span className="button-states__control-label">{language === "es" ? "Tamaño" : "Size"}</span>
+          <div className="button-states__segmented" role="group" aria-label={language === "es" ? "Tamaño" : "Size"}>
             <button type="button" className={size === "md" ? "is-selected" : undefined} onClick={() => setSize("md")}>
               MD
             </button>
@@ -1640,8 +1644,8 @@ function ButtonStatesPreview() {
         </div>
 
         <div className="button-states__control">
-          <span className="button-states__control-label">Corner</span>
-          <div className="button-states__segmented" role="group" aria-label="Corner">
+          <span className="button-states__control-label">{language === "es" ? "Esquinas" : "Corner"}</span>
+          <div className="button-states__segmented" role="group" aria-label={language === "es" ? "Esquinas" : "Corner"}>
             <button
               type="button"
               className={corner === "default" ? "is-selected" : undefined}
@@ -1658,17 +1662,44 @@ function ButtonStatesPreview() {
             </button>
           </div>
         </div>
+
+        <div className="button-states__control">
+          <span className="button-states__control-label">{language === "es" ? "Íconos" : "Icons"}</span>
+          <div className="button-states__segmented" role="group" aria-label={language === "es" ? "Íconos" : "Icons"}>
+            <button
+              type="button"
+              className={!showIcons ? "is-selected" : undefined}
+              aria-pressed={!showIcons}
+              onClick={() => setShowIcons(false)}
+            >
+              {language === "es" ? "Ocultos" : "Off"}
+            </button>
+            <button
+              type="button"
+              className={showIcons ? "is-selected" : undefined}
+              aria-pressed={showIcons}
+              onClick={() => setShowIcons(true)}
+            >
+              {language === "es" ? "Visibles" : "On"}
+            </button>
+          </div>
+        </div>
       </div>
 
-      <div className="button-states__scroll" role="region" aria-label="Button states table">
+      <div
+        className="button-states__scroll"
+        role="region"
+        aria-label={language === "es" ? "Matriz de estados de Button" : "Button states matrix"}
+        tabIndex={0}
+      >
         <div
           className="button-states__grid"
           role="table"
-          aria-label="Button states"
+          aria-label={language === "es" ? "Estados de Button" : "Button states"}
           style={{ ["--button-states-cols" as never]: String(columns.length + 1) }}
         >
           <div className="button-states__header" role="row">
-            <div role="columnheader">State</div>
+            <div role="columnheader">{language === "es" ? "Estado" : "State"}</div>
             {columns.map((col) => (
               <div key={col.key} role="columnheader">
                 {col.label}
@@ -1687,7 +1718,7 @@ function ButtonStatesPreview() {
                 if (!valid) {
                   return (
                     <div key={col.key} role="cell" className="button-states__na">
-                      —
+                      <span aria-label={language === "es" ? "No disponible" : "Not available"}>—</span>
                     </div>
                   );
                 }
@@ -1698,7 +1729,9 @@ function ButtonStatesPreview() {
                 return (
                   <div key={col.key} role="cell">
                     <Button {...col.props} size={size} corner={corner} disabled={isDisabled} data-sim={sim}>
+                      {showIcons ? <span className="button-state-icon" aria-hidden="true">✓</span> : null}
                       Button
+                      {showIcons ? <span className="button-state-icon" aria-hidden="true">×</span> : null}
                     </Button>
                   </div>
                 );
@@ -1707,6 +1740,155 @@ function ButtonStatesPreview() {
           ))}
         </div>
       </div>
+    </section>
+  );
+}
+
+function ClearButtonStatesPreview({ language }: { language: Language }) {
+  const states = [
+    { id: "default", label: language === "es" ? "Predeterminado" : "Default" },
+    { id: "hover", label: language === "es" ? "Al pasar" : "Hovered" },
+    { id: "pressed", label: language === "es" ? "Presionado" : "Pressed" },
+    { id: "focus", label: language === "es" ? "Con foco" : "Focused" },
+    { id: "disabled", label: language === "es" ? "Deshabilitado" : "Disabled" }
+  ] as const;
+
+  const [corner, setCorner] = useState<"default" | "rounded">("default");
+  const [showIcons, setShowIcons] = useState(true);
+  const columns = [
+    { key: "default", label: "Default", tone: "default" as const, typeTone: "default" as const },
+    { key: "evergreen", label: "Evergreen", tone: "evergreen" as const, typeTone: "default" as const },
+    { key: "indigo", label: "Indigo", tone: "indigo" as const, typeTone: "default" as const },
+    { key: "information", label: "Information", tone: "indigo" as const, typeTone: "information" as const },
+    { key: "success", label: "Success", tone: "indigo" as const, typeTone: "success" as const },
+    { key: "danger", label: "Danger", tone: "indigo" as const, typeTone: "danger" as const },
+    { key: "warning", label: "Warning", tone: "indigo" as const, typeTone: "warning" as const }
+  ] as const;
+
+  return (
+    <section className="button-states clear-button-states">
+      <p className="eyebrow">{language === "es" ? "Estados" : "States"}</p>
+      <h4>{language === "es" ? "Color × Tipo × Estado" : "Color × Type × State"}</h4>
+      <p className="button-states__description">
+        {language === "es"
+          ? "Compara los tonos y estados disponibles. Desplázate horizontalmente para ver toda la matriz."
+          : "Compare available tones and states. Scroll horizontally to view the full matrix."}
+      </p>
+
+      <div
+        className="button-states__controls"
+        aria-label={language === "es" ? "Controles de vista de Clear Button" : "Clear Button preview controls"}
+      >
+        <div className="button-states__control">
+          <span className="button-states__control-label">{language === "es" ? "Esquinas" : "Corner"}</span>
+          <div className="button-states__segmented" role="group" aria-label={language === "es" ? "Esquinas" : "Corner"}>
+            <button
+              type="button"
+              className={corner === "default" ? "is-selected" : undefined}
+              aria-pressed={corner === "default"}
+              onClick={() => setCorner("default")}
+            >
+              Default
+            </button>
+            <button
+              type="button"
+              className={corner === "rounded" ? "is-selected" : undefined}
+              aria-pressed={corner === "rounded"}
+              onClick={() => setCorner("rounded")}
+            >
+              Rounded
+            </button>
+          </div>
+        </div>
+
+        <div className="button-states__control">
+          <span className="button-states__control-label">{language === "es" ? "Íconos" : "Icons"}</span>
+          <div className="button-states__segmented" role="group" aria-label={language === "es" ? "Íconos" : "Icons"}>
+            <button
+              type="button"
+              className={!showIcons ? "is-selected" : undefined}
+              aria-pressed={!showIcons}
+              onClick={() => setShowIcons(false)}
+            >
+              {language === "es" ? "Ocultos" : "Off"}
+            </button>
+            <button
+              type="button"
+              className={showIcons ? "is-selected" : undefined}
+              aria-pressed={showIcons}
+              onClick={() => setShowIcons(true)}
+            >
+              {language === "es" ? "Visibles" : "On"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div
+        className="button-states__scroll"
+        role="region"
+        aria-label={language === "es" ? "Matriz de estados de Clear Button" : "Clear Button states matrix"}
+        tabIndex={0}
+      >
+        <div
+          className="button-states__grid"
+          role="table"
+          aria-label={language === "es" ? "Estados de Clear Button" : "Clear Button states"}
+          style={{ ["--button-states-cols" as never]: String(columns.length + 1) }}
+        >
+          <div className="button-states__header" role="row">
+            <div role="columnheader">{language === "es" ? "Estado" : "State"}</div>
+            {columns.map((column) => (
+              <div key={column.key} role="columnheader">
+                {column.key === "default" || column.key === "evergreen" || column.key === "indigo"
+                  ? `${column.label} / ${language === "es" ? "Predeterminado" : "Default"}`
+                  : `${column.label} / Indigo`}
+              </div>
+            ))}
+          </div>
+
+          {states.map((state) => (
+            <div key={state.id} className="button-states__row" role="row">
+              <div className="button-states__state" role="rowheader">
+                {state.label}
+              </div>
+              {columns.map((column) => {
+                const isDisabled = state.id === "disabled";
+                const isUnavailable = isDisabled && column.key !== "default";
+                if (isUnavailable) {
+                  return (
+                    <div key={column.key} role="cell" className="button-states__na">
+                      <span aria-label={language === "es" ? "No disponible" : "Not available"}>—</span>
+                    </div>
+                  );
+                }
+
+                const sim = state.id === "default" || isDisabled ? undefined : state.id;
+                return (
+                  <div key={column.key} role="cell">
+                    <ClearButton
+                      tone={column.tone}
+                      typeTone={column.typeTone}
+                      corner={corner}
+                      disabled={isDisabled}
+                      data-sim={sim}
+                      leadingIcon={showIcons ? <span className="clear-button-state__leading" aria-hidden="true"><ArrowIcon /></span> : undefined}
+                      trailingIcon={showIcons ? <ArrowIcon /> : undefined}
+                    >
+                      Button
+                    </ClearButton>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="button-states__note">
+        {language === "es"
+          ? "Deshabilitado solo está documentado para Color=Default y Type=Default."
+          : "Disabled is only documented for Color=Default and Type=Default."}
+      </p>
     </section>
   );
 }
@@ -1854,7 +2036,10 @@ function ComponentDocumentation({
 
       <div className="component-layout">
         <section className="component-content">
-          {componentName === "Button" && activeTab === "states" ? <ButtonStatesPreview /> : null}
+          {componentName === "Button" && activeTab === "states" ? <ButtonStatesPreview language={language} /> : null}
+          {componentName === "Clear Button" && activeTab === "states" ? (
+            <ClearButtonStatesPreview language={language} />
+          ) : null}
 
           {activeTab === "anatomy" ? (
             <div className={`anatomy-two-column ${mdCards.length ? "anatomy--paired" : ""}`}>
