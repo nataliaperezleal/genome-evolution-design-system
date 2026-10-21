@@ -1,0 +1,33 @@
+{{ComponentName}} — {{ComponentType}}
+
+{{OneSentenceDescription}}
+
+USE WHEN:
+- {{UseCase1}}
+- {{UseCase2}}
+- {{UseCase3}}
+
+DO NOT USE:
+- {{AvoidCase1}}
+- {{AvoidCase2}}
+
+PROPERTIES (exactly as they appear in Figma):
+- {{Property1}} [{{Value1A}} | {{Value1B}} | {{Value1C}}] — default: {{Default1}}
+- {{Property2}} [{{Value2A}} | {{Value2B}}] — default: {{Default2}}
+- {{Property3}} [true | false] — default: {{Default3}}
+- {{Property4}} [true | false] — default: {{Default4}}
+- {{Property5}} [true | false] — default: {{Default5}}
+- {{Property6}} — {{PropertyDescription6}}
+
+DEFAULT CONFIGURATION:
+- {{DefaultConfiguration}}
+
+INVALID COMBINATIONS:
+- {{InvalidCombo1}}
+- {{InvalidCombo2}}
+- {{InvalidCombo3}}
+
+TYPICAL USAGE:
+- {{ContextName1}}: {{Property}}={{Value}}, {{Property}}={{Value}}
+- {{ContextName2}}: {{Property}}={{Value}}, {{Property}}={{Value}}
+- {{ContextName3}}: {{Property}}={{Value}}, {{Property}}={{Value}}
