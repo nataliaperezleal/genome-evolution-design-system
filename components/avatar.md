@@ -1,10 +1,10 @@
 ---
 component: "Avatar"
 system: "Genome Evolution Design System"
-type: "Not verified in Figma"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+type: "profile image, user photo, avatar"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2040-247"
 last_updated: "2026-10-21"
 ---
