@@ -13,7 +13,19 @@ tags:
   - "{{Tag3}}"
 ---
 
-# {{ComponentName}} — {{DesignSystemName}}
+# {{ComponentName}}
+
+System: {{DesignSystemName}}
+
+## Documentation Rules
+
+- Use standard Markdown headings without bold formatting.
+- Include only relevant information supported by available evidence.
+- Remove unused rows, placeholders, and template instructions.
+- Omit sections that are not applicable.
+- Use [Pending confirmation] when relevant information cannot be verified.
+- Clearly distinguish verified observations from recommendations.
+- Never invent metadata, properties, values, tokens, or behaviors.
 
 {{OneSentenceDescription}}
 
@@ -25,42 +37,68 @@ tags:
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
 
 ### Key Properties
 
-- {{Property1}} [{{Value1A}} | {{Value1B}} | {{Value1C}}] — default: {{Default1}}
-- {{Property2}} [{{Value2A}} | {{Value2B}}] — default: {{Default2}}
-- {{Property3}} [true | false] — default: {{Default3}}
-- {{Property4}} [true | false] — default: {{Default4}}
-- {{Property5}} [true | false] — default: {{Default5}}
-- {{Property6}} — {{PropertyDescription6}}
+Generate a table with one row per verified Figma property.
+Include available values and defaults only when verified.
+Remove this instruction and generate the actual table.
+
+Rules:
+
+- Include only existing properties.
+- Include only verified values.
+- Remove unused example rows.
+- Remove unresolved placeholders.
+- Do not create empty rows.
+
+Default values are a special category of information.
+
+A value may be documented as default only when at least one of the following is true:
+
+- Explicitly marked as default in Figma.
+- Explicitly documented.
+- Explicitly present in metadata.
+- Explicitly provided by the user.
+
+Do not assume that:
+
+- the first visible variant is the default.
+- the selected variant in a screenshot is the default.
+- the first value in a property list is the default.
 
 ### Default Configuration
 
 {{DefaultConfiguration}}
 
-### Invalid Combinations
-
-- {{InvalidCombo1}}
-- {{InvalidCombo2}}
-- {{InvalidCombo3}}
-
 If unavailable:
 
-```text
 [Pending confirmation]
-```
+
+
 
 ### Typical Usage
 
-- {{ContextName1}}: {{Property}}={{Value}}, {{Property}}={{Value}}
-- {{ContextName2}}: {{Property}}={{Value}}, {{Property}}={{Value}}
-- {{ContextName3}}: {{Property}}={{Value}}, {{Property}}={{Value}}
+Document relevant usage contexts and verified configurations.
 
----
+Recommendations must be clearly labeled.
+
+Examples:
+
+Verified Observation:
+Available Size values are Small, Medium, Large.
+
+Recommendation:
+Use Size=Medium for standard application layouts.
+
+Never merge recommendations and verified observations into the same statement.
+
+{{TypicalUsage}}
+
+If unavailable:
+
+[Pending confirmation]
 
 ## Purpose / Intent
 
@@ -68,359 +106,311 @@ If unavailable:
 
 {{WhatProblemItSolves}}
 
+If unavailable:
+
+[Pending confirmation]
+
 ### Expected Outcome
 
 {{UserOutcome}}
+
+If unavailable:
+
+[Pending confirmation]
 
 ### Typical Context
 
 {{TypicalContext}}
 
----
+If unavailable:
+
+[Pending confirmation]
 
 ## When to Use
 
 - {{UseCase1}}
 - {{UseCase2}}
-- {{UseCase3}}
 
----
+If unavailable:
+
+[Pending confirmation]
 
 ## When NOT to Use
 
 - {{AvoidCase1}}
 - {{AvoidCase2}}
-- {{AvoidCase3}}
 
----
+If unavailable:
+
+[Pending confirmation]
 
 ## Structure (Anatomy)
 
 ### Component Parts
 
 | Part | Required | Description |
-|--------|--------|--------|
-| {{Part1Name}} | {{RequiredOrOptional}} | {{Part1Description}} |
-| {{Part2Name}} | {{RequiredOrOptional}} | {{Part2Description}} |
-| {{Part3Name}} | {{RequiredOrOptional}} | {{Part3Description}} |
+|------|----------|-------------|
+| {{PartName}} | {{RequiredOrOptional}} | {{PartDescription}} |
+
+Rules:
+
+- Generate one row per verified component part.
+- Remove unused example rows.
+- Do not invent anatomy elements.
+
+If unavailable:
+
+[Pending confirmation]
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
+| Property | Verified Value |
+|----------|----------------|
 | Height | {{Height}} |
 | Width | {{Width}} |
 | Padding | {{Padding}} |
 | Gap | {{Gap}} |
 | Radius | {{Radius}} |
 
+Rules:
+
+- Include only relevant layout properties supported by available evidence.
+- Remove rows that cannot be verified.
+- Do not invent measurements.
+
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
----
 
 ## Semantics
 
-Document only semantic information explicitly supported by the provided source material.
+Document semantic information only when explicitly supported by the source material.
+
+Do not infer semantics from visual appearance alone.
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
----
 
 ## Iconography
 
-Document only icon information explicitly visible or documented.
-
-### Icon Slots
+Document icons only when their usage can be verified.
 
 | Slot | Description |
-|--------|--------|
-| Leading | {{LeadingIconInfo}} |
-| Trailing | {{TrailingIconInfo}} |
+|------|-------------|
+| {{IconSlot}} | {{IconDescription}} |
 
-### Rules
+Rules:
 
-- {{IconRule1}}
-- {{IconRule2}}
-- {{IconRule3}}
+- Generate rows only for verified icon placements.
+- Remove unused example rows.
+- Do not infer icon behavior.
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
----
 
 ## Variants (Properties)
 
-Property names and values must match Figma exactly.
+Use property names and values exactly as defined in Figma.
 
-### {{Property1Name}}
+Generate one subsection per actual Figma property.
 
-| Value | Description |
-|--------|--------|
-| {{Value1A}} | {{MeaningA}} |
-| {{Value1B}} | {{MeaningB}} |
-| {{Value1C}} | {{MeaningC}} |
+Rules:
 
-### {{Property2Name}}
+- Use only existing Figma properties.
+- Use only existing Figma values.
+- Remove unused examples.
+- Do not generate empty property sections.
+- Do not document inferred meanings.
+- Do not invent undocumented values.
+- Remove all unresolved placeholders.
 
-| Value | Description |
-|--------|--------|
-| {{Value2A}} | {{MeaningA}} |
-| {{Value2B}} | {{MeaningB}} |
-
-### {{Property3Name}}
+### {{PropertyName}}
 
 | Value | Description |
-|--------|--------|
-| true | {{TrueMeaning}} |
-| false | {{FalseMeaning}} |
-
-### {{Property4Name}}
-
-| Value | Description |
-|--------|--------|
-| true | {{TrueMeaning}} |
-| false | {{FalseMeaning}} |
-
-### {{Property5Name}}
-
-| Value | Description |
-|--------|--------|
-| true | {{TrueMeaning}} |
-| false | {{FalseMeaning}} |
-
-### {{Property6Name}}
-
-{{PropertyDescription}}
-
----
+|--------|-------------|
+| {{PropertyValue}} | {{VerifiedDescription}} |
 
 ## States
 
-Document only states explicitly visible in:
+Document only states that are explicitly supported by:
 
 - variants
 - screenshots
+- prototypes
 - metadata
-- provided documentation
+- explicit documentation
+
+Do not infer behavior from appearance alone.
+
+| State | Description | Visual Changes |
+|--------|-------------|----------------|
+| {{StateName}} | {{StateDescription}} | {{VisualChanges}} |
+
+Rules:
+
+- Generate only verified states.
+- Remove unused example rows.
+- Do not invent state transitions.
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
-| State | Description | Visual Changes |
-|--------|--------|--------|
-| {{State1}} | {{StateDescription1}} | {{StateVisualChange1}} |
-| {{State2}} | {{StateDescription2}} | {{StateVisualChange2}} |
-
----
 
 ## Token Mapping
 
-### Background
+Document only tokens that can be identified and verified.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{BackgroundToken}} | {{Usage}} | {{Notes}} |
+Include only relevant token categories.
 
-### Text
+| Category | Token | Usage |
+|----------|--------|--------|
+| {{Category}} | {{TokenName}} | {{VerifiedUsage}} |
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{TextToken}} | {{Usage}} | {{Notes}} |
+Rules:
 
-### Border
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{BorderToken}} | {{Usage}} | {{Notes}} |
-
-### Icon
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{IconToken}} | {{Usage}} | {{Notes}} |
-
-### Typography
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{TypographyToken}} | {{Usage}} | {{Notes}} |
-
-### Spacing
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{SpacingToken}} | {{Usage}} | {{Notes}} |
-
-### Radius
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{RadiusToken}} | {{Usage}} | {{Notes}} |
-
-### Shadow
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| {{ShadowToken}} | {{Usage}} | {{Notes}} |
+- Generate only verified token mappings.
+- Remove unsupported categories.
+- Do not infer token usage from visual appearance.
+- Do not generate guessed token names.
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
----
 
 ## Interaction
 
-Document only interactions explicitly visible in:
+Document interactions only when explicitly supported by:
 
-- variants
 - prototypes
 - metadata
 - provided documentation
+- verified source material
+
+Distinguish observed visual states from verified interactive behavior.
+
+{{InteractionDetails}}
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
----
 
 ## Accessibility
 
-Document only accessibility information explicitly provided.
+Document only accessibility information explicitly provided by the source material.
+
+Do not infer:
+
+- WCAG compliance
+- keyboard support
+- focus behavior
+- ARIA support
+- screen reader behavior
+
+{{AccessibilityDetails}}
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
-| Topic | Information |
-|--------|--------|
-| Accessibility Requirement | {{AccessibilityRequirement}} |
-| Visible State Support | {{VisibleAccessibilityState}} |
-| Notes | {{AccessibilityNotes}} |
-
----
 
 ## Content Guidelines
 
-Document only content guidance explicitly supported by the source material.
+Document verified guidance for:
+
+- labels
+- messages
+- capitalization
+- formatting
+- terminology
+
+Only include guidance supported by evidence.
+
+{{ContentGuidelines}}
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
-
----
 
 ## Examples
 
-### Example 1
+Include only examples supported by available source material.
 
-Configuration:
+Recommendations must be explicitly labeled.
 
-```text
-{{ExampleConfig1}}
-```
+### {{ExampleName}}
 
-Description:
+Configuration: {{ExampleConfiguration}}
 
-{{ExampleDescription1}}
-
-### Example 2
-
-Configuration:
-
-```text
-{{ExampleConfig2}}
-```
-
-Description:
-
-{{ExampleDescription2}}
-
-### Example 3
-
-Configuration:
-
-```text
-{{ExampleConfig3}}
-```
-
-Description:
-
-{{ExampleDescription3}}
-
----
-
-## Invalid Combinations
-
-- {{InvalidCombo1}}
-- {{InvalidCombo2}}
-- {{InvalidCombo3}}
+Description: {{ExampleDescription}}
 
 If unavailable:
 
-```text
 [Pending confirmation]
-```
 
----
+## Invalid Combinations
+
+Document combinations only when they are explicitly identified as invalid by:
+
+- the design system
+- metadata
+- documentation
+- the user
+
+{{InvalidCombinations}}
+
+If no invalid combinations are documented and evidence confirms none are defined:
+
+[No documented invalid combinations found]
+
+If the available source material is insufficient to determine this:
+
+[Pending confirmation]
 
 ## QA Checklist
 
-- Properties documented.
-- Property names match Figma exactly.
-- Variant values match Figma exactly.
-- Defaults documented.
-- Invalid combinations documented.
-- Tokens verified.
-- No undocumented behavior added.
-- No undocumented accessibility behavior added.
-- {{CustomCheckItem1}}
-- {{CustomCheckItem2}}
-
----
+- [ ] All documented properties and values match the available Figma source.
+- [ ] Variant values verified.
+- [ ] Default values included only when verified.
+- [ ] Relevant tokens verified against available sources.
+- [ ] No undocumented behavior added.
+- [ ] No undocumented accessibility claims added.
+- [ ] Recommendations distinguished from verified observations.
+- [ ] No unresolved template placeholders remain.
+- [ ] No template instructions remain.
+- [ ] No fabricated information present.
 
 ## Pending Clarification
 
-- {{PendingItem1}}
-- {{PendingItem2}}
-- {{PendingItem3}}
+List only unresolved questions that materially affect the accuracy or use of the documentation.
 
-If there are no pending items:
+Do not repeat every instance of [Pending confirmation].
 
-```text
+{{PendingQuestions}}
+
+If no clarification is needed:
+
 None
-```
-
----
 
 ## Notes / Changelog
 
-Generated from available source material on {{YYYY-MM-DD}}.
+Generated from verified source material on {{YYYY-MM-DD}}.
 
-Additional historical changes:
+Historical changes may only be documented when evidence from multiple versions exists.
 
-```text
-[Pending confirmation]
-```
+Do not infer historical changes from:
+
+- timestamps
+- naming conventions
+- variant names
+- property structures
+- design patterns
+- component organization
+
+If verified version history exists:
+
+{{HistoricalChanges}}
+
+Otherwise:
+
+[No verified historical changes available]
