@@ -2,9 +2,9 @@
 component: "Clear button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2103-36"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Clear button is a compact, borderless button with a colored label and optional l
 
 ### What It Is
 
-Evidence-based interpretation: Clear button is a low-emphasis action. This is supported by its name, its transparent background in the resting state (a background appears only on hover and press), the absence of a border except in the focused state, the compact 24 px height and the 12 px label. Figma does not include a written usage description for this component.
+The Clear Button is a low-prominence button variant designed to perform secondary or supporting actions without competing with primary interface actions. Its lightweight appearance prioritizes surrounding content while maintaining clear interactivity.
+
+It can include leading and trailing icons, making it especially useful for navigation, back, forward, or contextual actions that benefit from additional visual cues.
 
 ### Key Properties
 
@@ -84,20 +86,20 @@ Specific product contexts are not documented in Figma.
 
 ## When to Use
 
-Evidence-based interpretations based on the available variants:
-
-- For low-emphasis actions that should not have a filled or outlined appearance.
-- For brand-colored low-emphasis actions (`Evergreen`, `Indigo`).
-- For low-emphasis actions associated with a status (`Information`, `Success`, `Danger`, `Warning`).
+- For secondary actions within a page or workflow.
+- For navigation actions such as “Back,” “Next,” or “View more.”
+- In toolbars, headers, or information-dense layouts.
+- When an action should remain available without requiring strong visual emphasis.
+- To complement primary actions without competing with them.
+- In experiences where icons help reinforce the direction or purpose of the action.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- `Disabled` exists only for `Color=Default`, `Type=Default`.
-- The component has a single size (24 px high).
+- For the primary action of a page or form.
+- For critical actions that require high visibility.
+- When users must quickly identify the most important action on the interface.
+- As a replacement for Primary, Danger, or Warning buttons when stronger visual emphasis is required.
+- When the action needs to stand out from surrounding content.
 
 ## Structure (Anatomy)
 
@@ -227,15 +229,10 @@ Not verified in Figma: the action triggered, keyboard activation and prototype i
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- `Focused` shows a visible 2 px `border/focus` border, which is the only border the component displays.
-- At rest the button has no background or border; it is identified by its colored label and icons.
-- The label is 12 px (`size/12`) at weight 600.
-- Status is conveyed by label and icon color; the label text carries the meaning.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for icon-only use, disabled semantics, ARIA attributes and keyboard support.
+- Required: ensure sufficient contrast between text, icons, and background across all color variants and states.
+- Required: the component must be keyboard accessible and operable using Enter or Space.
+- Required: provide a visible focus indicator in the Focused state.
+- Recommended: accompany icons with text labels when their meaning is not universally recognizable.
 
 ## Content Guidelines
 
@@ -284,5 +281,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
