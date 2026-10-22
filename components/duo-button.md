@@ -2,9 +2,9 @@
 component: "Duo button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2135-676"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Duo button is a pair of Button instances, a Secondary button followed by a Prima
 
 ### What It Is
 
-Evidence-based interpretation: Duo button presents a secondary action and a primary action side by side, for example an alternative or cancel action next to the main action. This is supported by its structure (a Secondary Button on the left and a Primary Button on the right, both in the same `Color`) and by the Button guidance in Figma, which lists "To confirm or cancel processes" among its uses. Figma does not include a written usage description for the Duo button component set.
+The Duo Button is a composite component consisting of two adjacent buttons presented as a single visual unit. It typically combines one secondary action (outlined) and one primary action (filled), allowing two related choices to be offered within the same context while maintaining a clear visual hierarchy.
+
+Its purpose is to support decision-making when two complementary or closely related actions need to be available simultaneously.
 
 ### Key Properties
 
@@ -65,19 +67,21 @@ Specific product contexts are not documented in Figma.
 
 ## When to Use
 
-- To present a primary action with one secondary alternative, such as confirm and cancel (evidence-based interpretation, supported by the Button guidance "To confirm or cancel processes").
+- When a task requires one primary action and one related secondary action.
+- In confirmation flows where users can choose between two relevant options.
+- To group complementary actions such as “Cancel” and “Save,” “Skip” and “Continue,” or “Back” and “Next.”
+- When you want to visually reinforce the relationship between two actions.
+- In forms, wizards, or guided workflows where both actions belong to the same step.
+- When the primary action should stand out without completely separating the secondary action.
 
 ## When NOT to Use
 
-Documented guidance inherited from the child Button component:
-
-- Figma states that there should be only one Primary button per view. Because Duo button contains a Primary button, using it together with another Primary button in the same view conflicts with that rule.
-- The Button guidance in Figma says not to use buttons "to group multiple actions with the same visual hierarchy in a single context"; Duo button groups two actions of different hierarchy.
-
-Limitations of the current component:
-
-- Only two actions; no variant with a single button or more than two buttons.
-- The order (Secondary, then Primary) and the types are fixed in the variants.
+- When only a single action is available.
+- When the actions are unrelated.
+- When both actions have the same visual and business priority.
+- To group more than two actions.
+- When one action requires a separate destructive or semantic treatment.
+- As a replacement for a more complex action bar with multiple options.
 
 ## Composition and Hierarchy Rules
 
@@ -183,13 +187,10 @@ Not verified in Figma: the actions triggered and keyboard order.
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The two actions differ by fill (outlined vs. solid) and position, not only by color.
-- Focus appearance is defined by Button (`State=Focused`, 2 px `border/focus`).
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): grouping semantics, focus order between the two buttons and keyboard behavior.
+- Required: each button must be individually keyboard accessible and operable using Enter or Space.
+- Required: maintain sufficient contrast between text, borders, and backgrounds across all color and size variants.
+- Required: provide visible and independent focus indicators for each action.
+- Recommended: use descriptive labels that clearly communicate the difference between both actions.
 
 ## Content Guidelines
 
@@ -226,5 +227,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
