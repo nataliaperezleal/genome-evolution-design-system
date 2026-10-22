@@ -1,12 +1,16 @@
 ---
 component: "Avatar"
 system: "Genome Evolution Design System"
-type: "profile image, user photo, avatar"
-status: "Design"
-version: "1.2"
-owner: "UX Team"
+type: "Component set"
+status: "Not verified in Figma"
+version: "Not verified in Figma"
+owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2040-247"
-last_updated: "2026-10-21"
+last_updated: "2026-10-22"
+tags:
+  - "avatar"
+  - "identity"
+  - "data-display"
 ---
 
 # Avatar
@@ -15,46 +19,72 @@ System: Genome Evolution Design System
 
 ## Component Summary
 
-Avatar is a component with three Type values (Print, Person, Icon), five Size values, and two State values. The Color values Evergreen and Indigo exist for Type=Print.
+Avatar is a circular visual representation of an entity, available as a generic icon, a photo (Person), or a text initial (Print), in five sizes from 16 to 48 px, with a focused state and an optional status indicator.
 
 ## Quick Reference
 
 ### What It Is
 
-[Pending confirmation]
-
-Verified observation: Figma exposes three Type values. Print contains a text label, Person contains a photographic image, and Icon contains a single vector graphic.
+Evidence-based interpretation: Avatar represents a user or entity visually. This is supported by the component name, the `Type` values `Person` (a photo placeholder), `Print` (a text label showing an initial, "B" in all examples), and `Icon` (a generic person silhouette), and by the fully rounded container (`radius/24`) used across all sizes. The Figma component has no written usage description; its only documentation entry is a link to the repository documentation.
 
 ### Key Properties
 
 | Property | Available Values | Default |
 |----------|------------------|---------|
-| Type | Print, Person, Icon | Not verified in Figma |
-| Color | Default, Evergreen, Indigo | Not verified in Figma |
-| Size | 16, 24, 32, 40, 48 | Not verified in Figma |
-| State | Default, Focused | Not verified in Figma |
+| Type | Icon, Person, Print | Icon (as reported by Figma MCP property definitions; see Pending Clarification) |
+| Color | Default, Evergreen, Indigo | Default |
+| Size | 16, 24, 32, 40, 48 | 16 |
+| State | Default, Focused | Default |
+| label (text) | Free text | B |
+| showState (boolean) | true, false | false |
 
-Evergreen and Indigo exist only for Type=Print. Type=Person and Type=Icon exist only with Color=Default.
+`Evergreen` and `Indigo` exist only for `Type=Print`. `Icon` and `Person` exist only with `Color=Default`.
 
 ### Default Configuration
 
-[Pending confirmation]
+The Figma MCP property definitions report the following defaults: `Type=Icon`, `Color=Default`, `Size=16`, `State=Default`, `label="B"`, `showState=false`. These values come from the component's property definitions rather than from a written specification, so the default for `Type` should be confirmed (see Pending Clarification).
 
 ### Typical Usage
 
-[Pending confirmation]
+Verified observation: The component set exposes 50 variants: 10 `Icon` (5 sizes × 2 states), 10 `Person` (5 sizes × 2 states) and 30 `Print` (3 colors × 5 sizes × 2 states).
+
+Evidence-based interpretation:
+
+- Use `Type=Person` when a photo of the person is available.
+- Use `Type=Print` to show an initial when no photo is available; `Color` (`Default`, `Evergreen`, `Indigo`) provides visual variety for Print avatars.
+- Use `Type=Icon` as a generic placeholder when neither a photo nor an initial is available.
+- Choose `Size` according to the density of the surrounding layout; smaller sizes reduce the label typography (see Layout).
+
+Recommendation: Use the same `Size` for avatars displayed together in a list or group so they align visually.
 
 ## Purpose / Intent
 
-[Pending confirmation]
+### Problem Solved
+
+Evidence-based interpretation: Provides a consistent, compact way to identify a person or entity visually, with fallbacks (initial or generic icon) for when a photo is unavailable.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can recognize who or what an item refers to at a glance, at a size appropriate to the layout.
+
+### Typical Context
+
+Specific product contexts are not documented in Figma. The 16–48 px size range indicates use inside other components and layouts (for example, lists, headers or tables) rather than as a standalone hero element; this is an evidence-based interpretation.
 
 ## When to Use
 
-[Pending confirmation]
+Evidence-based interpretations based on the available variants:
+
+- To represent a person with a photo (`Type=Person`).
+- To represent a person or entity with an initial when no photo exists (`Type=Print`).
+- To show a generic placeholder when no identifying data exists (`Type=Icon`).
+- To show a status indicator on the avatar (`showState=true`); the meaning of the indicator is not documented in Figma.
 
 ## When NOT to Use
 
-[Pending confirmation]
+[No documented restrictions found]
+
+The Figma component has no usage description or documented restrictions. The component set does not provide sizes above 48 px or colors other than `Default` for `Icon` and `Person`.
 
 ## Structure (Anatomy)
 
@@ -62,152 +92,189 @@ Evergreen and Indigo exist only for Type=Print. Type=Person and Type=Icon exist 
 
 | Part | Required / Optional | Description |
 |------|---------------------|-------------|
-| Container | Not verified in Figma | Root element with the variable radius/24 bound in Type=Print and Type=Person variants. In Type=Print it carries the fill and border. In Type=Person the root has no fill or border. |
-| Label | Not verified in Figma | Centered text present in Type=Print variants. The sample content in every Print variant is "B". |
-| Image | Not verified in Figma | Layer named "unsplash:LWkFHEGpleE" in Type=Person variants, with a literal 360px corner radius. |
-| Icon graphic | Not verified in Figma | Single vector graphic filling Type=Icon variants. The glyph is not identified by name. |
-| State indicator | Not verified in Figma | Small element at the bottom-right of Print and Person variants, exposed through a `showState` switch in the generated component interface. Its Figma property type, default, meaning, and fill color are not verified. Not present in Type=Icon variants. |
+| Container | Required | Circular frame (`radius/24`) sized by `Size`. In `Print`, it carries the fill and border. |
+| Label | Required in `Type=Print` | Text layer that displays the `label` property value ("B" in all variants). |
+| Image | Required in `Type=Person` | Image layer named `unsplash:LWkFHEGpleE` (sample photo), cropped to a circle. |
+| Icon vector | Required in `Type=Icon` | A single vector layer showing a generic person silhouette that fills the avatar. |
+| Status indicator | Optional | Ellipse layer (`Ellipse 3`) at the bottom-right, hidden by default and controlled by `showState` in `Print` and `Person`. |
 
 ### Layout
 
 | Property | Verified Value | Evidence |
 |----------|----------------|----------|
-| Variant dimensions | Width = Height = Size value (16, 24, 32, 40, 48) | Figma metadata, all 50 variants |
-| Corner radius (token binding) | Variable radius/24 (value 24) is bound on the root of all 30 Type=Print variants and all 10 Type=Person variants | Figma design context; value from Figma variable definitions |
-| Corner radius (Person image layer) | Literal 360px, not bound to a variable | Figma design context |
-| Corner radius (Type=Icon) | No radius found on the root of the 10 Icon variants | Figma design context |
-| Border (Print, Color=Default, State=Default) | 1px, border/strong | Figma design context |
-| Border (Print, Color=Evergreen or Indigo, State=Default) | None; fill only | Figma design context |
-| Border (State=Focused, Print and Person) | 2px, border/focus (focus/width). In Person it is applied to the image layer. | Figma design context |
-| State indicator size | 6 (Size 16), 8 (Size 24), 10 (Size 32), 12 (Size 40), 12 (Size 48) | Figma design context |
-| State indicator position (top = left) | Size 16: 9 or 10; Size 24: 15 or 16; Size 32: 21 or 22; Size 40: 27 or 28; Size 48: 35 or 36 | Figma design context |
-
-The indicator position is 1px smaller in Print, Color=Default, State=Default than in the other Print variants and in the Person variants, at every size. The reason is not documented (see Pending Clarification).
-
-The rendered corner radius at Sizes below 48 was not independently measured. Measurements are per variant and are not generalized across variants. Person and Icon variants were measured for their root dimensions, borders, and indicator geometry only.
+| Width × height | 16, 24, 32, 40 or 48 px (square), matching `Size` | Variant dimensions |
+| Corner radius | `radius/24` (24) — renders as a circle at every size | Variable binding |
+| Label alignment | Centered horizontally and vertically (vertical auto layout) | Design context, `Print` variants |
+| Label typography — Size 16 | `Text/Label/XS`: `family/body` (Open Sans), weight 600, `size/11`, `line-height/16`, `letter-spacing/wide` (1) | Variable bindings |
+| Label typography — Size 24 | `Text/Body/XS Strong`: `size/12`, `line-height/16`, `letter-spacing/normal` (0) | Variable bindings |
+| Label typography — Size 32 | `Text/Body/SM Strong`: `size/14`, `line-height/20`, letter-spacing 0 | Variable bindings |
+| Label typography — Size 40 and 48 | `Text/Body/MD Strong`: `size/16`, `line-height/20`, `letter-spacing/normal` | Variable bindings |
+| Status indicator size | 6 px (16), 8 px (24), 10 px (32), 12 px (40 and 48) | Layer dimensions |
+| Status indicator position | Bottom-right; aligned to the container's bottom-right edge | Layer positions (e.g., 12 × 12 at x 36, y 36 in Size 48) |
+| Border — Print, Color=Default, State=Default | 1 px, `border/strong` | Design context |
+| Border — State=Focused | `focus/width` (2), `border/focus` | Design context |
 
 ## Semantics
 
-[Pending confirmation]
+Evidence-based interpretation: The component conveys identity. `Person` shows the actual image of the individual, `Print` shows an abbreviation of the name (an initial), and `Icon` shows a non-specific person. `Color` values in `Print` are visual themes; Figma does not document whether they carry meaning (for example, roles or categories). The meaning of the status indicator (`showState`) is not documented.
+
+Not verified in Figma: HTML element, ARIA role, alternative text and screen-reader behavior.
 
 ## Iconography
 
 | Slot | Verified Icon / Description | Evidence |
 |------|-----------------------------|----------|
-| Type=Icon graphic | A single vector graphic per Size and State. The glyph name is not exposed. | Figma design context |
+| Icon vector (`Type=Icon`) | Generic person silhouette (head and shoulders) on a circular background, using `icon/secondary` | Screenshot, layer `Vector`, variable binding |
+
+The icon is a single flattened vector layer, not a swappable icon instance.
 
 ## Variants (Properties)
+
+The inventory below is complete: all 50 variants of the component set were inspected.
 
 ### Type
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| Print | Text label inside a container | 30 variants |
-| Person | Photographic image | 10 variants, Color=Default only |
-| Icon | Single vector graphic | 10 variants, Color=Default only |
+| Icon | Generic person silhouette rendered as a vector filling the avatar. | 10 variants; `Color=Default` only |
+| Person | Circular photo (sample image `unsplash:LWkFHEGpleE`). | 10 variants; `Color=Default` only |
+| Print | Text initial (`label`) on a filled circle. | 30 variants; all three colors |
 
 ### Color
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| Default | Print: background/canvas fill, border/strong border, label in text/secondary | Figma variable bindings |
-| Evergreen | Print: surface/evergreen/subtle fill, label in text/evergreen, no border in State=Default | Print only |
-| Indigo | Print: surface/indigo/subtle fill, label in text/indigo, no border in State=Default | Print only |
+| Default | Print: `background/canvas` fill, 1 px `border/strong` border, `text/secondary` label. Icon and Person use their own content. | All types |
+| Evergreen | Print: `surface/evergreen/subtle` fill, no border, `text/evergreen` label. | `Type=Print` only |
+| Indigo | Print: `surface/indigo/subtle` fill, no border, `text/indigo` label. | `Type=Print` only |
 
 ### Size
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| 16 | 16 x 16; Print label style Text/Label/XS | Figma |
-| 24 | 24 x 24; Print label style Text/Body/XS Strong | Figma |
-| 32 | 32 x 32; Print label style Text/Body/SM Strong | Figma |
-| 40 | 40 x 40; Print label style Text/Body/MD Strong | Figma |
-| 48 | 48 x 48; Print label style Text/Body/MD Strong | Figma |
+| 16 | 16 × 16 px; label `Text/Label/XS`; indicator 6 px | All types |
+| 24 | 24 × 24 px; label `Text/Body/XS Strong`; indicator 8 px | All types |
+| 32 | 32 × 32 px; label `Text/Body/SM Strong`; indicator 10 px | All types |
+| 40 | 40 × 40 px; label `Text/Body/MD Strong`; indicator 12 px | All types |
+| 48 | 48 × 48 px; label `Text/Body/MD Strong`; indicator 12 px | All types |
 
 ### State
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| Default | Visual variant | Figma |
-| Focused | Visual variant with a 2px border/focus ring (see States) | Figma |
+| Default | Resting appearance. | All combinations |
+| Focused | Adds a 2 px (`focus/width`) `border/focus` ring around the avatar. | All combinations |
 
-Inventory completeness: all 50 variants listed in the node metadata were inspected. Properties defined outside this node, if any, were not inspected.
+### label
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Text | Text shown in `Type=Print`. "B" in all variants. | Text property; applies to the Print label layer |
+
+### showState
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| false | Status indicator hidden. | Default |
+| true | Shows the bottom-right status indicator. | Bound in `Print` and `Person`; see Pending Clarification for `Icon` |
 
 ## States
 
 | State | Verified Description | Visual Changes | Evidence |
 |-------|----------------------|----------------|----------|
-| Default | Visual variant | Print Color=Default: 1px border/strong. Print Evergreen and Indigo: fill only, no border. Person and Icon: no border. | Figma |
-| Focused | Visual variant | Print Color=Default: a 2px border/focus replaces the 1px border/strong. Print Evergreen and Indigo: a 2px border/focus is present where Default has no border. Person: 2px border/focus on the image layer at all five Sizes. Icon: a separate graphic asset whose inset is -12.5% (Size 16), -8.33% (24), -6.25% (32), -5% (40), and -4.17% (48), which equals 2px at each size by arithmetic. The ring color of the Icon asset was not verified. | Figma |
+| Default | Resting state. | Print Default: 1 px `border/strong`; Evergreen/Indigo: no border. | `State=Default` variants |
+| Focused | Focus appearance. | 2 px `border/focus` ring replaces or adds to the border; in `Person` the ring is applied to the image layer. | `State=Focused` variants |
 
-These are visual state variants only. They do not prove that any interaction, focus behavior, or state transition is implemented.
+`Focused` is a visual variant; Figma does not establish whether or how the avatar receives focus. No hover, pressed, selected or disabled states exist.
 
 ## Token Mapping
 
 | Category | Token | Verified Usage | Evidence |
 |----------|-------|----------------|----------|
-| Color | background/canvas (#ffffff) | Print, Color=Default fill | Figma variable binding |
-| Color | border/strong (#5f6d62) | Print, Color=Default border in State=Default | Figma variable binding |
-| Color | border/focus (#339947) | Border in State=Focused (Print, Person) | Figma variable binding |
-| Color | text/secondary (#5f6d62) | Print, Color=Default label | Figma variable binding |
-| Color | surface/evergreen/subtle (#eefbf2) | Print, Color=Evergreen fill | Figma variable binding |
-| Color | text/evergreen (#297a39) | Print, Color=Evergreen label | Figma variable binding |
-| Color | surface/indigo/subtle (#fdf5ff) | Print, Color=Indigo fill | Figma variable binding |
-| Color | text/indigo (#6b1b99) | Print, Color=Indigo label | Figma variable binding |
-| Shape | radius/24 (24) | Corner radius bound on the root of Print and Person variants. Not bound on the Person image layer (literal 360px) or on Icon variants. | Figma variable binding |
-| Border width | focus/width (2) | State=Focused border | Figma variable binding |
-| Typography | Text/Label/XS | Print label at Size 16 (family/body, size/11, weight 600, line-height/16, letter-spacing/wide) | Figma |
-| Typography | Text/Body/XS Strong | Print label at Size 24 (size/12, line-height/16, letter-spacing/normal) | Figma |
-| Typography | Text/Body/SM Strong | Print label at Size 32 (size/14, line-height/20, letter spacing 0) | Figma |
-| Typography | Text/Body/MD Strong | Print label at Sizes 40 and 48 (size/16, line-height/20, letter-spacing/normal) | Figma |
+| Radius | `radius/24` | Container corner radius (all types) | Variable binding |
+| Background | `background/canvas` | Print, Color=Default fill | Variable binding |
+| Background | `surface/evergreen/subtle` | Print, Color=Evergreen fill | Variable binding |
+| Background | `surface/indigo/subtle` | Print, Color=Indigo fill | Variable binding |
+| Border | `border/strong` | Print, Color=Default border (State=Default) | Variable binding |
+| Border | `border/focus` | Focus ring (State=Focused) | Variable binding |
+| Border width | `focus/width` | Focus ring width (2) | Variable binding |
+| Text color | `text/secondary` | Print, Color=Default label | Variable binding |
+| Text color | `text/evergreen` | Print, Color=Evergreen label | Variable binding |
+| Text color | `text/indigo` | Print, Color=Indigo label | Variable binding |
+| Icon color | `icon/secondary` | Icon type silhouette | Variable binding |
+| Typography | `Text/Label/XS`, `Text/Body/XS Strong`, `Text/Body/SM Strong`, `Text/Body/MD Strong` | Print label by size (see Layout) | Text styles in component |
+| Typography | `family/body`, `weight/semibold`, `size/11`, `size/12`, `size/14`, `size/16`, `line-height/16`, `line-height/20`, `letter-spacing/wide`, `letter-spacing/normal` | Print label typography | Variable bindings |
 
-The variable icon/secondary (#849588) is returned for this node, but its usage in the component was not established. The 1px Default border width is not bound to a variable that I could identify. Token values come from Figma only; repository token JSON files were not used.
+Not verified in Figma: the status indicator fill has no variable binding, so its color token cannot be established.
 
 ## Interaction
 
-[Pending confirmation]
+Observed states: `Default` and `Focused` variants exist for every type, color and size.
+
+Not verified in Figma: whether the avatar is interactive (clickable or focusable), prototype interactions, and transitions. No prototype links were found on the component.
 
 ## Accessibility
 
-[Pending confirmation]
+Accessibility-related observations:
+
+- `State=Focused` provides a visible 2 px `border/focus` ring at every size, distinct from the 1 px `border/strong` default border.
+- In `Print`, label and fill colors are paired by color (`text/evergreen` on `surface/evergreen/subtle`, `text/indigo` on `surface/indigo/subtle`, `text/secondary` on `background/canvas`). Contrast ratios have not been verified.
+- At `Size=16`, the label uses an 11 px font (`size/11`).
+- The status indicator is conveyed visually only; no text alternative is defined in Figma.
+
+Missing accessibility information (not verified in Figma): alternative text for `Person` and `Icon`, accessible name, ARIA role, keyboard support, screen-reader announcement, and whether a status indicator requires a text equivalent.
+
+## Content Guidelines
+
+Verified observation: All `Print` variants show a single uppercase character ("B") in the `label` property.
+
+Recommendation: Use one or two initials so the label fits the circle, especially at `Size=16` and `Size=24`. Figma does not define a maximum label length.
+
+## Examples
+
+### Photo avatar
+
+Configuration: `Type=Person`, `Color=Default`, `Size=40`, `State=Default`
+
+Description: Shows a person's photo at 40 px.
+
+Evidence / Classification: Existing variant in Figma.
+
+### Initial avatar with color
+
+Configuration: `Type=Print`, `Color=Evergreen`, `Size=32`, `State=Default`, `label="B"`
+
+Description: Initial "B" on an Evergreen subtle background.
+
+Evidence / Classification: Existing variant in Figma.
+
+### Focused placeholder with status
+
+Configuration: `Type=Icon`, `Color=Default`, `Size=48`, `State=Focused`, `showState=true`
+
+Description: Generic avatar with focus ring and status indicator.
+
+Evidence / Classification: Proposed configuration; the `Icon` variant exists, but `showState` behavior for `Icon` is unverified (see Pending Clarification).
 
 ## Invalid Combinations
 
-[Pending confirmation]
+| Combination / Condition | Verified Reason | Evidence |
+|-------------------------|-----------------|----------|
+| `Type=Icon` with `Color=Evergreen` or `Color=Indigo` | No such variant exists in the component set | Variant inventory |
+| `Type=Person` with `Color=Evergreen` or `Color=Indigo` | No such variant exists in the component set | Variant inventory |
 
-Observation, not a rule: Color values Evergreen and Indigo are not provided for Type=Person or Type=Icon.
-
-## QA Checklist
-
-- [x] Component identity and source references verified.
-- [ ] Documented properties and values checked against available Figma evidence.
-- [x] Variant inventory completeness assessed and any inspection limitations documented.
-- [ ] Default values verified, or unresolved conflicts recorded.
-- [ ] Layout measurements checked against the relevant configurations.
-- [ ] Token mappings verified against their actual sources.
-- [x] Visual states distinguished from verified interactive behavior.
-- [ ] Accessibility claims supported by explicit evidence.
-- [ ] Invalid combinations supported by explicit evidence.
-- [x] Recommendations distinguished from verified observations.
-- [ ] English and Spanish documentation are semantically equivalent.
-- [x] No unresolved template placeholders remain.
-- [x] No template instructions remain in the final document.
-- [ ] No unsupported or fabricated information has been added.
-- [x] Historical changes included only when supported by version history.
+These combinations are unavailable rather than explicitly documented as invalid.
 
 ## Pending Clarification
 
-1. Component structure. Node 2040:247 is a frame holding 50 components, and it is not confirmed as a component set. Properties defined outside it, if any, were not inspected. Resolve by confirming the component set in Figma.
-2. Property inventory and defaults. The default value of Type, Color, Size, and State is not established. The generated interface also lists `label` (sample "B") and `showState`, but whether they are Figma properties, their types, and their defaults are unverified. Resolve by confirming the component properties panel in Figma.
-3. State indicator. Its purpose, fill color (an SVG asset that was not opened), and property status are unverified. Its position is 1px smaller in Print, Color=Default, State=Default than in other variants, and it is not known whether this is intentional.
-4. Layout and radius. The rendered corner radius below Size 48 and the Person image layer's literal 360px radius are not reconciled with the radius/24 binding. The ring color of Icon Focused assets is not verified.
-5. Tokens. The variable weight/semibold resolves to the style name "Medium" with numeric weight 600. The usage of icon/secondary is unknown. The 1px Default border width has no identified variable.
-6. Not documented in Figma: purpose, usage guidance, restrictions, semantics, interaction, accessibility, invalid combinations, status, version, owner, and tags.
-7. Person image. It is a placeholder photograph. Whether it is meant to be swapped is not documented.
-8. Print-only colors. It is not known whether the absence of Evergreen and Indigo for Person and Icon is intentional.
+1. Default `Type`: The Figma MCP property definitions report `Icon` as the default, but the variant order in the component set lists `Print` first. Confirm the intended default `Type`.
+2. Status indicator for `Icon`: `Icon` variants contain a hidden `Ellipse 3` layer, but it does not appear to be bound to `showState`, unlike `Print` and `Person`. Confirm whether `showState` should work for `Icon`.
+3. Status indicator meaning and color: The indicator's meaning (for example, online status) is not documented, and its fill is not bound to a variable. Confirm the meaning and the token to use.
+4. Typography weight: `weight/semibold` resolves to the style "Medium" while the text styles declare weight 600. Confirm whether the label should render as Medium or SemiBold.
+5. Focus and interactivity: A `Focused` state exists, but Figma does not establish whether the avatar is interactive. Confirm whether the avatar is focusable and in which contexts.
 
 ## Notes / Changelog
 
-Generated or reviewed using available source material on 2026-10-21.
+Generated or reviewed using available source material on 2026-10-22.
 
 [No verified historical changes available]
