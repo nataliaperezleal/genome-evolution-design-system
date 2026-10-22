@@ -2,9 +2,9 @@
 component: "Icon Button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2182-3348"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Icon Button is an icon-only button available in Filled and Outline types, four c
 
 ### What It Is
 
-Verified specification (Figma description): Icon Button is an icon-only button. It is used when the available space does not allow a button with text, when the icon is clear enough without a label (for example send, trash, save, edit, close), and when multiple actions are grouped in a toolbar where text would be visually noisy.
+The Icon Button is an icon-only button designed to perform quick and recurring actions while minimizing the amount of visual space used in the interface. It allows actions to be represented through recognizable symbols without requiring visible text labels.
+
+The component is available in Filled and Outline variants, multiple colors, sizes, and corner styles, making it adaptable to different visual hierarchies and usage contexts.
 
 ### Key Properties
 
@@ -85,22 +87,20 @@ Verified specification (Figma description): Toolbars and constrained spaces.
 
 ## When to Use
 
-Verified guidance (Figma description):
-
-- When the available space does not allow a button with text.
-- When the icon is clear enough without a label (send, trash, save, edit, close).
-- When multiple actions are grouped in a toolbar where text would be visually noisy.
+- For common actions represented by widely recognized icons.
+- In toolbars and action bars.
+- For contextual actions within tables, lists, or cards.
+- For navigation, edit, delete, share, or search controls.
+- When available space is limited.
+- For frequent actions that users can quickly identify through iconography.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Current behavior: The Figma description includes a "DO NOT USE" section, but its three items repeat the "USE WHEN" items word for word, so it does not document any restriction.
-
-Limitations of the current component:
-
-- `Disable` exists only with `Color=Default`.
-- `Inverse` exists only for `Filled`; `Default` exists for `Outline` in all states but for `Filled` only in `Disable`.
+- When the action cannot be easily understood through an icon alone.
+- For critical or irreversible actions without additional context.
+- As the only option when multiple similar actions may create ambiguity.
+- When understanding the action depends entirely on descriptive text.
+- For primary actions in complex screens where a labeled button provides better clarity.
 
 ## Structure (Anatomy)
 
@@ -219,13 +219,10 @@ Not verified in Figma: the action triggered and keyboard activation.
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The button has no visible label; the icon is the only cue.
-- `Focused` shows a 2 px `border/focus` border.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names or tooltips for icon-only buttons, disabled semantics and keyboard support.
+- Required: ensure sufficient contrast between icon, background, and border across all variants, sizes, and states.
+- Required: the button must be keyboard accessible and operable using Enter or Space.
+- Required: provide a visible focus indicator in the Focused state.
+- Recommended: provide accessible labels (aria-label) or descriptive tooltips whenever no visible text is available.
 
 ## Content Guidelines
 
@@ -274,5 +271,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
