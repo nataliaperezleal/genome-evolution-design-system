@@ -2,9 +2,9 @@
 component: "Header"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-1376"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Header is a 1440 px wide top bar on `surface/evergreen/bold`, available in three
 
 ### What It Is
 
-Evidence-based interpretation: Header is the application top bar that identifies the product and gives access to navigation, tools and the user's account. This is supported by the component name, its full-width layout at the top of a 1440 px frame, the Bizagi logo in every theme, and the theme-specific content: user name, email and avatar (`Apps Designer`), tool and app actions (`Apps Tools`), and navigation items with search and avatar (`Workportal`). Figma does not include a written usage description for the Header component set.
+The Header is a global navigation component that provides access to the main functions, tools, applications, and workspaces within a platform. It serves as a persistent orientation point throughout the experience, allowing users to identify the current product, access key functionality, and manage profile-related information.
+
+The component supports multiple visual themes, including Apps Designer, Apps Tools, and Workportal, adapting its content and structure to different product contexts. It may include elements such as branding, primary navigation, global tools, search, quick actions, avatar, user name, and email information.
 
 ### Key Properties
 
@@ -68,20 +70,21 @@ Evidence-based interpretation: The top of application screens designed at 1440 p
 
 ## When to Use
 
-Evidence-based interpretations based on the variants:
-
-- As the top bar of App Designer screens (`Apps Designer`).
-- As the top bar while working on an app (`Apps Tools`).
-- As the top bar of Workportal screens (`Workportal`).
+- As a global navigation element in web applications.
+- To provide persistent access to key functionality.
+- When users need to switch between modules, tools, or areas of the product.
+- To display product or corporate identity information.
+- When quick access to profile, settings, or global actions is required.
+- In experiences where navigation context and orientation are essential.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- The width is fixed at 1440 px; responsive behavior is not defined.
-- Navigation items, actions and labels are fixed in each theme and are not exposed as properties.
+- Inside modal dialogs or temporary panels.
+- As a replacement for local or contextual navigation.
+- In minimalist experiences without global navigation needs.
+- To display purely decorative information without functionality.
+- When navigation only applies to a specific section rather than the entire application.
+- Within internal components that do not represent the overall product context.
 
 ## Composition and Hierarchy Rules
 
@@ -226,13 +229,10 @@ Not verified in Figma: what each action and navigation item does, how submenus o
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- All navigation items and actions combine an icon with a text label.
-- Apps Tools labels are 10 px (`size/10`); Workportal labels are 14 px.
-- Labels use `text/inverse` on `surface/evergreen/bold`. Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): landmarks, current-page indication, focus appearance for items, keyboard support, and accessible names for the logo and avatar.
+- Required: ensure sufficient contrast between text, icons, interactive elements, and backgrounds across all Header variants.
+- Required: all interactive elements must be keyboard accessible and provide visible focus indicators.
+- Required: global navigation must use semantic structure to support assistive technologies.
+- Recommended: provide accessible labels for icons, branding elements, global actions, and user controls.
 
 ## Content Guidelines
 
@@ -283,5 +283,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
