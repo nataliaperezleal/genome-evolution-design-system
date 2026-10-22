@@ -201,7 +201,7 @@ Include only relevant, verified measurements and layout properties, such as widt
 
 Rules:
 
-- Distinguish directly measured values from values obtained from design tokens or implementation code.
+- Distinguish directly measured values from values obtained from design tokens.
 - Identify the relevant variant or configuration when measurements differ.
 - Do not generalize measurements from one variant to all variants.
 - Do not infer responsive behavior or layout constraints without evidence.
@@ -414,12 +414,9 @@ Rules:
 - Do not label a combination invalid solely because it is not shown in the available variants.
 - Preserve relevant constraints and conditions accurately.
 - Remove unused rows.
-
-If the available evidence has been checked and no invalid combinations are documented, write:
+If no invalid combinations are documented after inspection, write:
 
 [No documented invalid combinations found]
-
-If no invalid combinations are documented, explicitly state that none were found during inspection rather than leaving the section empty.
 
 ## Pending Clarification
 

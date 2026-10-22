@@ -22,6 +22,8 @@
 - Only include sections that contain verified, useful information.
 - Omit empty sections rather than displaying empty headings.
 
+Include only the sections that contain verified, useful information. The output format below is illustrative rather than mandatory.
+
 ## Output Format
 
 {{ComponentName}} — {{ComponentType}}
