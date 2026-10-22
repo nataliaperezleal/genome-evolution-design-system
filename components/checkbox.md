@@ -2,9 +2,9 @@
 component: "Checkbox"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2085-1201"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Checkbox is a selection control made of a 16 px box, an optional 16 px icon and 
 
 ### What It Is
 
-Evidence-based interpretation: Checkbox lets users select or deselect an option. This is supported by the component name, the `Type` values (`Default` shows an empty box, `Check` a check mark, `Mixed` a horizontal bar, `Plus` a plus sign), the interactive state variants and the label next to the box. Figma does not include a written usage description for this component.
+The Checkbox is a selection component that allows users to enable or disable one or multiple options independently. It is used when several options can be selected simultaneously within the same group.
+
+The component supports different visual types to represent specific states, including Check, Mixed, and Plus, as well as color variants and interaction states that help communicate the current selection status.
 
 ### Key Properties
 
@@ -79,21 +81,20 @@ Specific product contexts are not documented in the Checkbox component.
 
 ## When to Use
 
-Evidence-based interpretations based on the available variants:
-
-- To let users select or deselect an option (`Default` and `Check`).
-- To show that a group of related options is partially selected (`Mixed`).
-- The use of `Plus` is not documented in Figma (see Pending Clarification).
+- To allow multiple selections within a list of options.
+- In forms where users can choose one or more preferences.
+- To enable or disable features, settings, or permissions.
+- In tables or lists where multiple items can be selected.
+- To represent partial selections using the Mixed state.
+- In scenarios where options are not mutually exclusive.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- `Disabled` exists only for `Color=Default`.
-- The component has a single size.
-- The `bizagi-lines` icon is a fixed icon; it can be shown or hidden but not swapped.
+- When users can select only one option. In those cases, use a Radio Button.
+- To trigger immediate actions. In those cases, use a button or dedicated action control.
+- As a navigation mechanism.
+- When a setting takes effect instantly and continuously. In those cases, a Switch is usually more appropriate.
+- To represent information that cannot be modified.
 
 ## Structure (Anatomy)
 
@@ -232,15 +233,10 @@ Not verified in Figma: the transition between types when activated, whether the 
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- `Focused` shows a visible circular 2 px `border/focus` ring.
-- Selection is shown by both fill and a mark glyph, not by color alone.
-- Hover and press add a 32 px halo around the 16 px box.
-- The label is 12 px (`size/12`).
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible name when `showLabel=false`, checked and mixed state announcements, the role of the `bizagi-lines` icon for assistive technologies, and keyboard support.
+- Required: ensure sufficient contrast between the checkbox, its icon, and the background across all variants and states.
+- Required: the component must be keyboard accessible and operable using the Space key.
+- Required: provide a visible focus indicator in the Focused state.
+- Recommended: always associate the control with a clear and descriptive accessible label.
 
 ## Content Guidelines
 
