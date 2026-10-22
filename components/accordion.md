@@ -2,9 +2,9 @@
 component: "Accordion"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2016-2350"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,7 @@ Accordion is a disclosure container with a header that shows or hides a content 
 
 ### What It Is
 
-Evidence-based interpretation: Accordion lets users reveal or hide a section of content under a labeled header. This is supported by the `Behavior` values `Collapsed` (header only, `chevron-down`) and `Expanded` (header plus a content area, `chevron-up`), and by the content area being a Figma slot that accepts any content. Figma does not include a written usage description for this component.
+The Accordion is a progressive disclosure component that allows users to show and hide content associated with a section. Its primary purpose is to organize information into expandable and collapsible areas, reducing visual clutter and improving the exploration of lengthy content within an interface.
 
 ### Key Properties
 
@@ -80,18 +80,20 @@ Specific product contexts are not documented in Figma. The fixed 265 px width in
 
 Evidence-based interpretations based on the available variants:
 
-- To group related content under a header that can be collapsed and expanded.
-- To show a count or indicator next to the header (`showBadge`), an icon before the label (`showLeftIcon`), or a checkbox in the header (`showCheckbox`).
-- To indicate a section that is loading (`State=Loading`) or unavailable (`State=Disabled`).
+- To organize secondary or supporting information that does not need to remain permanently visible.
+- When multiple related content sections exist on the same page.
+- For FAQs, configuration details, or explanatory content.
+- In complex forms where groups of fields can be displayed on demand.
+- When optimizing vertical space is important.
+- To enable users to progressively explore content.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Figma does not document restrictions. Limitations of the current component set:
-
-- A collapsed appearance is available only for `Color=Default`.
-- `Disabled` and `Loading` are available only for `Color=Default`.
+- When the content is critical and must remain visible at all times.
+- To hide information required to complete a primary task.
+- When the content volume is small enough to fit comfortably on screen.
+- As a replacement for structured page or application navigation.
+- When users need to compare information across multiple sections simultaneously.
 
 ## Structure (Anatomy)
 
@@ -307,5 +309,3 @@ These combinations are unavailable rather than explicitly documented as invalid.
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
