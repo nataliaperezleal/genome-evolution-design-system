@@ -37,6 +37,9 @@ System: {{DesignSystemName}}
 - Remove unused examples, template instructions, and unresolved placeholders from the final document.
 - Record only material unresolved questions in Pending Clarification.
 - Do not modify the documentation templates while documenting a component.
+- Documentation is not an audit report.
+- Prioritize usability, understanding, and adoption of the component over documenting the inspection process.
+- Describe the component from the perspective of a consumer of the design system, not from the perspective of a reviewer validating the component.
 - For Default Configuration, Typical Usage, Purpose / Intent, When to Use, When NOT to Use, Semantics, Iconography, Interaction, Accessibility, and Invalid Combinations, make a best-effort attempt to provide meaningful documentation before resorting to [Pending confirmation].
 
 ## Component Summary
@@ -437,11 +440,15 @@ If no material questions remain, write:
 
 None
 
-Only include questions that materially affect documentation accuracy.
+Do not add clarification items for:
 
-Do not create clarification items simply because a detail is absent from Figma.
+- internal implementation details
+- property names already exposed by Figma
+- variant combinations that can already be documented from inspection
+- visual observations that do not affect usage guidance
+- speculative design intent
 
-Absence of evidence is not automatically a clarification request.
+A clarification must have a meaningful impact on how designers or developers use, implement, or maintain the component.
 
 ## Notes / Changelog
 
