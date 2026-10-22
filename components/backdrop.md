@@ -2,9 +2,9 @@
 component: "Backdrop"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2041-81"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,7 @@ Backdrop is a semi-transparent, blurred overlay surface available in a dark (`Bl
 
 ### What It Is
 
-Evidence-based interpretation: Backdrop is an overlay layer placed over existing content to visually separate it from content shown on top. This is supported by the component name, its fills bound to the `overlay/black` and `overlay/white` variables (both at 60% opacity), and its 8 px background blur. The component contains no other layers. Figma does not include a written usage description for this component.
+The Backdrop is an overlay layer displayed behind temporary or modal components to visually dim background content and direct the user's attention to an active foreground element. Its primary purpose is to establish visual hierarchy, reduce distractions, and communicate that the main interaction is occurring in the foreground.
 
 ### Key Properties
 
@@ -65,14 +65,20 @@ The components that use Backdrop are not documented in Figma.
 
 ## When to Use
 
-Evidence-based interpretations based on the component's structure and tokens:
-
-- When underlying content needs to be visually de-emphasized behind content displayed on top of it.
-- Use `Color=Black` to darken and `Color=White` to lighten the underlying content.
+- Behind modal dialogs.
+- For drawers, side panels, or slide-out panels.
+- During processes that temporarily block interaction with the interface.
+- To highlight high-priority content that requires immediate attention.
+- As visual support for overlays, popups, or focus-driven experiences.
+- When it is necessary to communicate a temporary change in interaction context.
 
 ## When NOT to Use
 
-[No documented restrictions found]
+- To visually separate sections within a page.
+- As a replacement for containers, cards, or content surfaces.
+- When interaction with background content must remain available.
+- To emphasize permanent interface elements.
+- When the foreground component does not require visual priority or contextual blocking.
 
 ## Structure (Anatomy)
 
@@ -126,10 +132,10 @@ Backdrop has no state variants and no prototype interactions in Figma. Whether i
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Both overlays are 60% opaque with an 8 px blur, so the underlying content remains partially visible but de-emphasized.
-- The backdrop contains no text, so it has no text contrast requirements of its own. The contrast of content placed on top depends on that content and has not been verified.
+- Required: maintain sufficient contrast between the active content and the backdrop to ensure readability.
+- Required: when used with modal components, keyboard focus must remain within the active content until it is dismissed.
+- Required: provide visible focus indicators for interactive elements displayed in the foreground.
+- Recommended: avoid opacity levels that make contextual changes difficult to perceive for users with low vision.
 
 Missing accessibility information (not verified in Figma): how focus and assistive-technology access to the underlying content are handled while the backdrop is shown.
 
@@ -151,16 +157,6 @@ Description: Lightens and blurs the content behind it.
 
 Evidence / Classification: Existing variant in Figma.
 
-## Invalid Combinations
-
-[No documented invalid combinations found]
-
-## Pending Clarification
-
-None
-
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
