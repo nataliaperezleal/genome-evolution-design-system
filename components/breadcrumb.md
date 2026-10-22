@@ -2,9 +2,9 @@
 component: "Breadcrumb"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2998-19525"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Breadcrumb is a horizontal navigation trail built from `.BreadcrumbItem` instanc
 
 ### What It Is
 
-Evidence-based interpretation: Breadcrumb shows the user's location within a hierarchy and the levels above it. This is supported by its structure: a fixed sequence of `.BreadcrumbItem` instances using `Item=Overflow`, `Item=Level` and `Item=Current`, separated by `chevron-right` icons and ending with the current location. Figma does not include a written usage description for the Breadcrumb component set.
+The Breadcrumb is a secondary navigation component that displays the user's current location within a hierarchical structure. It helps users understand their navigation context, visualize the path taken, and quickly navigate back to higher levels in the hierarchy.
+
+It is composed of a sequence of levels connected by separators, where the last item represents the current location. When space is limited, intermediate levels can be collapsed using an overflow option.
 
 ### Key Properties
 
@@ -71,19 +73,20 @@ Specific product contexts are not documented in Figma. The 36 px height and sing
 
 ## When to Use
 
-Evidence-based interpretations based on the component structure:
-
-- To show the path from higher levels of a hierarchy to the current location.
-- To indicate that some higher levels are collapsed (`showOverflow=true`).
+- In applications with multi-level hierarchical structures.
+- To help users understand where they are within the product.
+- When quick navigation to parent pages or sections is needed.
+- In portals, enterprise platforms, content management systems, and complex applications.
+- In experiences where the same page can be reached through multiple hierarchical paths.
+- When navigation depth exceeds one or two levels.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- A maximum of five `Level` items can be shown.
-- The trail is a single row; labels do not wrap or truncate.
+- In single-page applications or flat structures without hierarchy.
+- When primary navigation already clearly communicates the current location.
+- To represent sequential workflows or step-by-step processes. Use a Stepper instead.
+- As a replacement for the application's primary navigation.
+- When items do not represent a true hierarchical relationship.
 
 ## Composition and Hierarchy Rules
 
@@ -220,11 +223,10 @@ Not verified in Figma: navigation behavior when an item is activated, overflow e
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The current location is distinguished from previous levels by weight (600 vs 400), color and the absence of a separator, not by color alone.
-- Separators are icons; the labels carry the hierarchy text.
-- Contrast ratios have not been verified.
+- Required: ensure sufficient contrast between text, icons, and background across all color variants (Default, Evergreen, and Indigo).
+- Required: all interactive items must be keyboard accessible and provide a visible focus indicator.
+- Required: identify the current item using appropriate accessibility attributes (for example, aria-current="page").
+- Recommended: use a semantic navigation structure to improve interpretation by assistive technologies.
 
 Missing accessibility information (not verified in Figma): navigation landmark and labeling, current-page indication for assistive technologies, accessible name for the "…" item, how separators are exposed to screen readers, and keyboard support.
 
@@ -273,5 +275,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
