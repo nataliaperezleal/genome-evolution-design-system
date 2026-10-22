@@ -2,9 +2,9 @@
 component: "BreadcrumbItem"
 system: "Genome Evolution Design System"
 type: "Component set (internal building block)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2998-19004"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ BreadcrumbItem is a single step of a breadcrumb trail, available as an overflow 
 
 ### What It Is
 
-Evidence-based interpretation: BreadcrumbItem is the building block used to compose a breadcrumb trail. This is supported by the component name, the `Item` values `Overflow` (an ellipsis "…" followed by `chevron-right`), `Level` (a label followed by `chevron-right`) and `Current` (a label without a chevron), and by the interactive state variants. The Figma name `.BreadcrumbItem` starts with a period; in Figma, components whose names start with a period are not published to the library, so this component is meant to be used inside another component rather than inserted directly. Figma does not include a written usage description for this component.
+The Breadcrumb is a secondary navigation component that displays the user's current location within a hierarchical structure. It helps users understand their navigation context, visualize the path taken, and quickly navigate back to higher levels in the hierarchy.
+
+It is composed of a sequence of levels connected by separators, where the last item represents the current location. When space is limited, intermediate levels can be collapsed using an overflow option.
 
 ### Key Properties
 
@@ -66,17 +68,20 @@ Evidence-based interpretation: Used inside a breadcrumb component, as indicated 
 
 ## When to Use
 
-Evidence-based interpretations based on the available variants:
-
-- `Item=Level` for each previous level of the hierarchy.
-- `Item=Current` for the final item that represents the current location.
-- `Item=Overflow` to represent intermediate levels that are collapsed.
+- In applications with multi-level hierarchical structures.
+- To help users understand where they are within the product.
+- When quick navigation to parent pages or sections is needed.
+- In portals, enterprise platforms, content management systems, and complex applications.
+- In experiences where the same page can be reached through multiple hierarchical paths.
+- When navigation depth exceeds one or two levels.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Because the component is not published to the library (period-prefixed name), it is not available for direct insertion from the library.
+- In single-page applications or flat structures without hierarchy.
+- When primary navigation already clearly communicates the current location.
+- To represent sequential workflows or step-by-step processes. Use a Stepper instead.
+- As a replacement for the application's primary navigation.
+- When items do not represent a true hierarchical relationship.
 
 ## Structure (Anatomy)
 
@@ -178,10 +183,10 @@ Not verified in Figma: navigation behavior, what activating `Overflow` does (for
 
 Accessibility-related observations:
 
-- `Focused` shows a visible 2 px `border/focus` border on every item.
-- `Current` is distinguished from `Level` by weight (600 vs 400), color (`text/primary` vs `text/secondary`) and the absence of a chevron, so the current location is not indicated by color alone.
-- `Disabled` changes both label and chevron colors.
-- Contrast ratios have not been verified.
+- Required: ensure sufficient contrast between text, icons, and background across all color variants (Default, Evergreen, and Indigo).
+- Required: all interactive items must be keyboard accessible and provide a visible focus indicator.
+- Required: identify the current item using appropriate accessibility attributes (for example, aria-current="page").
+- Recommended: use a semantic navigation structure to improve interpretation by assistive technologies.
 
 Missing accessibility information (not verified in Figma): accessible names (including for the "…" overflow item), indication of the current page to assistive technologies, the role of the chevron for screen readers, and keyboard support.
 
@@ -226,5 +231,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
