@@ -1,286 +1,230 @@
 ---
 component: "Duo button"
 system: "Genome Evolution Design System"
-type: "Component"
-status: "Done"
-version: "1.2"
-owner: "UX Design"
+type: "Component set"
+status: "Not verified in Figma"
+version: "Not verified in Figma"
+owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2135-676"
-last_updated: "2026-10-20"
+last_updated: "2026-10-22"
 tags:
-  - "Duo button"
-  - "Button pair"
-  - "Complementary actions"
+  - "button"
+  - "button-group"
+  - "action"
 ---
 
-# Duo button — Genome Evolution Design System
+# Duo button
 
-Pair of adjacent buttons: one secondary (outlined) action and one primary (filled) action presented as a single visual unit.
+System: Genome Evolution Design System
+
+## Component Summary
+
+Duo button is a pair of Button instances, a Secondary button followed by a Primary button in the same brand color, available in two sizes and two colors.
 
 ## Quick Reference
 
-### What it is
+### What It Is
 
-Grouping of two adjacent buttons that represents a pair of complementary actions: a secondary (outlined) action on the left and a primary (filled) action on the right, presented as a cohesive visual unit.
+Evidence-based interpretation: Duo button presents a secondary action and a primary action side by side, for example an alternative or cancel action next to the main action. This is supported by its structure (a Secondary Button on the left and a Primary Button on the right, both in the same `Color`) and by the Button guidance in Figma, which lists "To confirm or cancel processes" among its uses. Figma does not include a written usage description for the Duo button component set.
 
 ### Key Properties
 
-- Size [Regular | Small] — default: Regular
-- Color [Evergreen | Indigo] — default: Evergreen
+| Property | Available Values | Default |
+|----------|------------------|---------|
+| Size | Regular, Small | Regular |
+| Color | Evergreen, Indigo | Evergreen |
+
+Defaults are taken from the component property definitions in Figma. The component exposes no other properties at the Duo button level; the labels ("Button") are set on the nested Button instances.
 
 ### Default Configuration
 
-Size=Regular, Color=Evergreen
-
-### Invalid Combinations
-
-- Mixing Color=Evergreen in one button with Color=Indigo in the other within the same Duo button
-- Using Duo button with a single visible action (both buttons are always Required)
-- Using Duo button when the actions are not complementary
+`Size=Regular`, `Color=Evergreen`: a 166 × 32 px pair of an Evergreen Secondary button and an Evergreen Primary button, 8 px apart, both labeled "Button".
 
 ### Typical Usage
 
-- Modal footer (Cancel + Apply): Size=Regular, Color=Evergreen
-- AI drawer footer (Descartar + Guardar): Size=Regular, Color=Indigo
-- Compact action in card: Size=Small, Color=Evergreen
-- Confirmation in AI panel: Size=Small, Color=Indigo
+Verified observation: The component set has four variants (two sizes × two colors). In every variant the left button is a Secondary Button and the right button is a Primary Button, both in the variant's `Color`.
 
----
+Evidence-based interpretation:
+
+- Use Duo button when a view or section needs a main action and one lower-emphasis alternative presented together.
+- Use `Size=Regular` with MD-size layouts and `Size=Small` with SM-size layouts.
 
 ## Purpose / Intent
 
 ### Problem Solved
 
-Presents two directly related actions as one unit, keeping the dual-action pattern visually consistent across the interface.
+Evidence-based interpretation: Provides a ready-made, consistently spaced pair of actions with a clear emphasis order.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can identify the main action (Primary, on the right) and its alternative (Secondary, on the left).
 
 ### Typical Context
 
-Footers of modals and drawers, cards and panels.
-
----
+Specific product contexts are not documented in Figma.
 
 ## When to Use
 
-- Two directly related actions must be presented as a unit (e.g. Cancel + Apply, Cancelar + Guardar, Volver + Continuar)
-- The dual-action pattern is recurrent and must stay visually consistent across the interface
-
----
+- To present a primary action with one secondary alternative, such as confirm and cancel (evidence-based interpretation, supported by the Button guidance "To confirm or cancel processes").
 
 ## When NOT to Use
 
-- The two actions are not complementary or not directly related to each other
-- More than two actions are needed (use a group of individual buttons)
-- Only one action is available
+Documented guidance inherited from the child Button component:
 
----
+- Figma states that there should be only one Primary button per view. Because Duo button contains a Primary button, using it together with another Primary button in the same view conflicts with that rule.
+- The Button guidance in Figma says not to use buttons "to group multiple actions with the same visual hierarchy in a single context"; Duo button groups two actions of different hierarchy.
+
+Limitations of the current component:
+
+- Only two actions; no variant with a single button or more than two buttons.
+- The order (Secondary, then Primary) and the types are fixed in the variants.
+
+## Composition and Hierarchy Rules
+
+### Child components
+
+| Position | Child | Configuration observed |
+|----------|-------|------------------------|
+| 1 (left) | Button | `Type=Secondary`, `Color` = Duo button `Color`, `State=Default`, `Corner=Default`; `Size=MD` in Regular, `Size=SM` in Small |
+| 2 (right) | Button | `Type=Primary`, `Color` = Duo button `Color`, `State=Default`, `Corner=Default`; `Size=MD` in Regular, `Size=SM` in Small |
+
+### Hierarchy and ordering
+
+- The lower-emphasis action (Secondary) is always on the left and the higher-emphasis action (Primary) is always on the right.
+- Both buttons always share the same brand color.
+- Both buttons share the same size.
+
+### Size mapping
+
+| Duo button Size | Button Size | Button height | Duo button size (default labels) |
+|-----------------|-------------|---------------|----------------------------------|
+| Regular | MD | 32 px | 166 × 32 px |
+| Small | SM | 24 px | 136 × 24 px |
+
+### Overflow
+
+- The component uses horizontal auto layout; its width grows with the button labels.
+- Labels are single-line (inherited from Button).
 
 ## Structure (Anatomy)
 
 ### Component Parts
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Container | Required | Horizontal flow with gap/sm between the two buttons, items centered |
-| Button (left) | Required | Secondary (outlined): background/canvas with a brand-color border and brand-color label |
-| Button (right) | Required | Primary (filled): solid brand-color fill with text/inverse label |
+| Part | Required / Optional | Description |
+|------|---------------------|-------------|
+| Container | Required | Horizontal auto layout row, centered, with `gap/sm` between buttons. |
+| Secondary button | Required | Button instance, outlined in the brand color. |
+| Primary button | Required | Button instance, filled in the brand color. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | Regular: 32 px per the Figma description (the Evergreen variant measures 34 px). Small: 24 px |
-| Width | Regular: 168 px. Small: 138 px (measured with the label "Button"; fixed vs. hug: [Pending confirmation]) |
-| Padding | Regular: space/16 (16 px) horizontal, space/8 (8 px) vertical. Small: space/12 (12 px) horizontal, space/4 (4 px) vertical |
-| Gap | gap/sm (8 px) between the two buttons |
-| Radius | semantic/sm (4 px) on both buttons |
-
----
+| Property | Verified Value | Evidence |
+|----------|----------------|----------|
+| Direction | Horizontal, items centered | Design context |
+| Gap | `gap/sm` (8); `Size=Small, Color=Indigo` uses a fixed 8 px value not bound to the variable | Design context |
+| Height | 32 px (Regular), 24 px (Small) | Variant dimensions |
+| Width (default labels) | 166 px (Regular), 136 px (Small) | Variant dimensions |
+| Button padding — Regular | 16 px horizontal, `space/8` vertical | Variable bindings |
+| Button padding — Small | `space/12` horizontal, `space/4` vertical | Variable bindings |
+| Button radius | `semantic/sm` (4) | Variable binding |
 
 ## Semantics
 
-Pair of complementary actions: the left button is the secondary (outlined) action and the right button is the primary (filled) action, presented as one visual unit.
+Evidence-based interpretation: The right button is the main action and the left button is the alternative. The Primary type is described in Figma as the button for the most important action of a screen or section.
 
----
-
-## Iconography
-
-### Icon Slots
-
-| Slot | Description |
-|--------|--------|
-| Leading | None visible |
-| Trailing | None visible |
-
----
+Not verified in Figma: HTML structure (for example, a button group), ARIA attributes and focus order.
 
 ## Variants (Properties)
 
-Property names and values must match Figma exactly.
+The inventory below is complete: all four variants were inspected.
 
 ### Size
 
-| Value | Description |
-|--------|--------|
-| Regular | Text/Button/MD (14/16). Padding space/16 horizontal, space/8 vertical. Height 32 px per the Figma description |
-| Small | Text/Button/SM (12/16). Padding space/12 horizontal, space/4 vertical. Height 24 px |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Regular | Two MD buttons (32 px high); `Text/Button/MD` labels. | Default |
+| Small | Two SM buttons (24 px high); `Text/Button/SM` labels. | — |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Evergreen | Green brand color: border/evergreen and text/evergreen on the secondary button, surface/evergreen/bold on the primary button |
-| Indigo | Purple brand color: border/indigo and text/indigo on the secondary button, surface/indigo/bold on the primary button |
-
----
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Evergreen | Secondary: `border/evergreen`, `text/evergreen`, `background/canvas`. Primary: `surface/evergreen/bold`, `text/inverse`. | Default |
+| Indigo | Secondary: `border/indigo`, `text/indigo`, `background/canvas`. Primary: `surface/indigo/bold`, `text/inverse`. | — |
 
 ## States
 
-The component has no State property.
-
----
+The Duo button component set has no state property; both nested buttons use `State=Default`. Interactive states are defined by the Button component.
 
 ## Token Mapping
 
-### Background
+| Category | Token | Verified Usage | Evidence |
+|----------|-------|----------------|----------|
+| Spacing | `gap/sm` | Gap between buttons | Variable binding |
+| Background | `background/canvas` | Secondary button fill | Variable binding |
+| Surface | `surface/evergreen/bold`, `surface/indigo/bold` | Primary button fill | Variable binding |
+| Border | `border/evergreen`, `border/indigo`, `width/1` | Secondary button border | Variable binding |
+| Text | `text/evergreen`, `text/indigo` | Secondary label | Variable binding |
+| Text | `text/inverse` | Primary label | Variable binding |
+| Spacing | `size/16`, `space/16`, `space/8`, `space/12`, `space/4` | Button padding | Variable binding |
+| Radius | `semantic/sm` | Button corners | Variable binding |
+| Typography | `Text/Button/MD`, `Text/Button/SM` | Labels by size | Text styles |
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| background/canvas | Secondary button fill | Verified |
-| surface/evergreen/bold | Primary button fill, Color=Evergreen | Verified on Size=Regular |
-| surface/indigo/bold | Primary button fill, Color=Indigo | Verified on Size=Small |
+Current behavior:
 
-### Text
+- The gap in `Size=Small, Color=Indigo` is a fixed 8 px value rather than `gap/sm`; the result is the same.
+- In `Size=Regular`, both nested buttons are 32 px high; the Primary button uses 8 px vertical padding here.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/evergreen | Secondary button label, Color=Evergreen | Verified on Size=Regular |
-| text/indigo | Secondary button label, Color=Indigo | Verified on Size=Small |
-| text/inverse | Primary button label | Verified |
+## Interaction
 
-### Border
+The component has no state variants or prototype interactions of its own. Interaction states are those of the nested Button instances.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/evergreen | Secondary button border, Color=Evergreen | Verified on Size=Regular. Width: width/1 (1) |
-| border/indigo | Secondary button border, Color=Indigo | Verified on Size=Small. Width: width/1 (1) |
-
-### Typography
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Button/MD | Size=Regular labels | Verified values: family/body, weight/semibold, size/14, line-height/16, letter-spacing/normal |
-| Text/Button/SM | Size=Small labels | Verified values: family/body, weight/semibold, size/12, line-height/16, letter-spacing/normal |
-
-### Spacing
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/16 | Horizontal padding, Size=Regular | 16 px |
-| space/8 | Vertical padding, Size=Regular | 8 px |
-| space/12 | Horizontal padding, Size=Small | 12 px |
-| space/4 | Vertical padding, Size=Small | 4 px |
-| gap/sm | Gap between the two buttons and inside each button | 8 px |
-| size/16 | Horizontal padding of the secondary button, Size=Regular, Color=Evergreen | Listed in the exported code in place of space/16 |
-
-### Radius
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| semantic/sm | Both buttons | 4 px |
+Not verified in Figma: the actions triggered and keyboard order.
 
 ## Accessibility
 
-| Topic | Information |
-|--------|--------|
-| Accessibility Requirement | [Pending confirmation] |
-| Visible State Support | [Pending confirmation] |
-| Notes | ARIA roles, keyboard support, contrast and screen reader behavior: [Pending confirmation] |
+Accessibility-related observations:
 
----
+- The two actions differ by fill (outlined vs. solid) and position, not only by color.
+- Focus appearance is defined by Button (`State=Focused`, 2 px `border/focus`).
+- Contrast ratios have not been verified.
+
+Missing accessibility information (not verified in Figma): grouping semantics, focus order between the two buttons and keyboard behavior.
 
 ## Content Guidelines
 
-Both buttons show the placeholder label "Button" in the variants. Label pairs mentioned in the Figma description: Cancel + Apply, Cancelar + Guardar, Volver + Continuar, Descartar + Guardar.
-
----
+Verified observation: Both buttons use the sample label "Button". Labels are set on the nested Button instances and are single-line.
 
 ## Examples
 
-### Example 1
+### Confirmation pair
 
-Configuration:
+Configuration: `Size=Regular`, `Color=Evergreen`
 
-```text
-Size=Regular, Color=Evergreen
-```
+Description: Evergreen Secondary and Primary buttons: an alternative action next to the main action.
 
-Description:
+Evidence / Classification: Existing variant in Figma (default configuration).
 
-Modal footer (Cancel + Apply).
+### Compact Indigo pair
 
-### Example 2
+Configuration: `Size=Small`, `Color=Indigo`
 
-Configuration:
+Description: SM Indigo Secondary and Primary buttons.
 
-```text
-Size=Regular, Color=Indigo
-```
-
-Description:
-
-AI drawer footer (Descartar + Guardar).
-
-### Example 3
-
-Configuration:
-
-```text
-Size=Small, Color=Evergreen
-```
-
-Description:
-
-Compact action in a card.
-
----
+Evidence / Classification: Existing variant in Figma.
 
 ## Invalid Combinations
 
-- Mixing Color=Evergreen in one button with Color=Indigo in the other within the same Duo button
-- Using Duo button with a single visible action (both buttons are always Required)
-- Using Duo button when the actions are not complementary
-
----
-
-## QA Checklist
-
-- Properties documented.
-- Property names match Figma exactly.
-- Variant values match Figma exactly.
-- Defaults documented.
-- Invalid combinations documented.
-- Tokens verified.
-- No undocumented behavior added.
-- No undocumented accessibility behavior added.
-- Variant matrix checked against metadata (4 variants: Size × Color).
-- Differences between the Figma description and the design flagged in Pending Clarification.
-
----
+| Combination / Condition | Verified Reason | Evidence |
+|-------------------------|-----------------|----------|
+| Duo button together with another Primary button in the same view | Figma states there should be only one Primary button per view | Button Primary description in Figma |
 
 ## Pending Clarification
 
-- Height: the Figma description says Regular is 32 px, but Size=Regular, Color=Evergreen measures 34 px (Color=Indigo measures 32 px). In the exported code its secondary button pads with size/16 (fallback 17 px) and space/8 (fallback 9 px) instead of the documented space/16 and space/8.
-- The secondary button in Size=Small, Color=Indigo uses fallback paddings of 13 px and 5 px for space/12 and space/4.
-- The root gap of Size=Small, Color=Indigo is hard-coded at 8 px instead of using gap/sm. The Figma description names the gap token gap/s, while the variable in Figma is gap/sm.
-- Only Size=Regular, Color=Evergreen and Size=Small, Color=Indigo were inspected in the exported code. The other two variants rely on metadata and the Figma description.
-- The component type is only stated as "Component" in the Figma description.
-- The two buttons are nested Button instances. Their variants, whether their labels can be edited from the Duo button, and their interactive states are not documented.
-- Token names are taken verbatim from Figma and were not cross-checked against the token JSON files.
-- status, version and owner.
-- Expected Outcome, Interaction, Accessibility, Content Guidelines, Iconography rules and Shadow.
-
----
+None
 
 ## Notes / Changelog
 
-Generated from available source material on 2026-10-20.
+Generated or reviewed using available source material on 2026-10-22.
+
+[No verified historical changes available]

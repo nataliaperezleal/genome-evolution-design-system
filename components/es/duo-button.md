@@ -1,288 +1,230 @@
 ---
 component: "Duo button"
 system: "Genome Evolution Design System"
-type: "Component"
-status: "Done"
-version: "1.2"
-owner: "UX Design"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2135-676"
-last_updated: "2026-10-20"
+last_updated: "2026-10-22"
 tags:
-  - "Duo button"
-  - "Button pair"
-  - "Complementary actions"
+  - "button"
+  - "button-group"
+  - "action"
 ---
 
-# Duo button — Genome Evolution Design System
+# Duo button
 
-Par de botones adyacentes: una acción secundaria (outlined) y una acción primaria (filled) presentadas como una sola unidad visual.
+Sistema: Genome Evolution Design System
 
-## Quick Reference
+## Resumen del componente
 
-### What it is
+Duo button es un par de instancias de Button, un botón Secondary seguido de un botón Primary en el mismo color de marca, disponible en dos tamaños y dos colores.
 
-Agrupación de dos botones adyacentes que representa una pareja de acciones complementarias: una acción secundaria (outlined) a la izquierda y una acción primaria (filled) a la derecha, presentadas como una unidad visual cohesiva.
+## Referencia rápida
 
-### Key Properties
+### Qué es
 
-- Size [Regular | Small] — default: Regular
-- Color [Evergreen | Indigo] — default: Evergreen
+Interpretación basada en evidencia: Duo button presenta una acción secundaria y una acción principal una junto a la otra, por ejemplo una acción alternativa o de cancelación junto a la acción principal. Esto se sustenta en su estructura (un Button Secondary a la izquierda y un Button Primary a la derecha, ambos en el mismo `Color`) y en las pautas de Button en Figma, que incluyen "To confirm or cancel processes" (confirmar o cancelar procesos) entre sus usos. Figma no incluye una descripción de uso escrita para el conjunto de componentes Duo button.
 
-### Default Configuration
+### Propiedades clave
 
-Size=Regular, Color=Evergreen
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Size | Regular, Small | Regular |
+| Color | Evergreen, Indigo | Evergreen |
 
-### Invalid Combinations
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. El componente no expone otras propiedades a nivel de Duo button; las etiquetas ("Button") se definen en las instancias anidadas de Button.
 
-- Mezclar Color=Evergreen en un botón con Color=Indigo en el otro dentro del mismo Duo button
-- Usar Duo button con una sola acción visible (ambos botones son siempre obligatorios)
-- Usar Duo button cuando las acciones no son complementarias
+### Configuración predeterminada
 
-### Typical Usage
+`Size=Regular`, `Color=Evergreen`: un par de 166 × 32 px formado por un botón Secondary Evergreen y un botón Primary Evergreen, separados 8 px, ambos con la etiqueta "Button".
 
-- Footer de modal (Cancel + Apply): Size=Regular, Color=Evergreen
-- Footer de drawer IA (Descartar + Guardar): Size=Regular, Color=Indigo
-- Acción compacta en card: Size=Small, Color=Evergreen
-- Confirmación en panel IA: Size=Small, Color=Indigo
+### Uso típico
 
----
+Observación verificada: El conjunto de componentes tiene cuatro variantes (dos tamaños × dos colores). En todas las variantes, el botón izquierdo es un Button Secondary y el derecho un Button Primary, ambos en el `Color` de la variante.
 
-## Purpose / Intent
+Interpretación basada en evidencia:
 
-### Problem Solved
+- Use Duo button cuando una vista o sección necesite una acción principal y una alternativa de menor énfasis presentadas juntas.
+- Use `Size=Regular` en diseños con tamaño MD y `Size=Small` en diseños con tamaño SM.
 
-Presenta dos acciones directamente relacionadas como una sola unidad, manteniendo el patrón de acción dual visualmente consistente en toda la interfaz.
+## Propósito / Intención
 
-### Typical Context
+### Problema que resuelve
 
-Footers de modales y drawers, cards y paneles.
+Interpretación basada en evidencia: Ofrece un par de acciones listo para usar, con espaciado consistente y un orden de énfasis claro.
 
----
+### Resultado esperado
 
-## When to Use
+Interpretación basada en evidencia: Los usuarios pueden identificar la acción principal (Primary, a la derecha) y su alternativa (Secondary, a la izquierda).
 
-- Se necesita presentar dos acciones directamente relacionadas como una unidad (p. ej. Cancel + Apply, Cancelar + Guardar, Volver + Continuar)
-- El patrón de acción dual es recurrente y debe mantener consistencia visual en toda la interfaz
+### Contexto típico
 
----
+Los contextos específicos de producto no están documentados en Figma.
 
-## When NOT to Use
+## Cuándo usar
 
-- Las dos acciones no son complementarias o no están directamente relacionadas entre sí
-- Se necesitan más de dos acciones (usar un grupo de botones individuales)
-- Solo hay una acción disponible
+- Para presentar una acción principal con una alternativa secundaria, como confirmar y cancelar (interpretación basada en evidencia, respaldada por la pauta de Button "To confirm or cancel processes").
 
----
+## Cuándo NO usar
 
-## Structure (Anatomy)
+Pautas documentadas heredadas del componente hijo Button:
 
-### Component Parts
+- Figma indica que solo debe haber un botón Primary por vista. Como Duo button contiene un botón Primary, usarlo junto con otro botón Primary en la misma vista contradice esa regla.
+- Las pautas de Button en Figma indican no usar botones "to group multiple actions with the same visual hierarchy in a single context" (para agrupar varias acciones con la misma jerarquía visual en un mismo contexto); Duo button agrupa dos acciones de jerarquía distinta.
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Container | Obligatorio | Flujo horizontal con gap/sm entre los dos botones, elementos centrados |
-| Button (izquierdo) | Obligatorio | Secundario (outlined): background/canvas con borde y label en el color de marca |
-| Button (derecho) | Obligatorio | Primario (filled): relleno sólido en el color de marca con label text/inverse |
+Limitaciones del componente actual:
+
+- Solo dos acciones; no hay variante con un solo botón ni con más de dos.
+- El orden (Secondary y luego Primary) y los tipos son fijos en las variantes.
+
+## Reglas de composición y jerarquía
+
+### Componentes hijos
+
+| Posición | Hijo | Configuración observada |
+|----------|------|-------------------------|
+| 1 (izquierda) | Button | `Type=Secondary`, `Color` = `Color` del Duo button, `State=Default`, `Corner=Default`; `Size=MD` en Regular, `Size=SM` en Small |
+| 2 (derecha) | Button | `Type=Primary`, `Color` = `Color` del Duo button, `State=Default`, `Corner=Default`; `Size=MD` en Regular, `Size=SM` en Small |
+
+### Jerarquía y orden
+
+- La acción de menor énfasis (Secondary) está siempre a la izquierda y la de mayor énfasis (Primary) siempre a la derecha.
+- Ambos botones comparten siempre el mismo color de marca.
+- Ambos botones comparten el mismo tamaño.
+
+### Correspondencia de tamaños
+
+| Size de Duo button | Size de Button | Alto del botón | Tamaño de Duo button (etiquetas predeterminadas) |
+|--------------------|----------------|----------------|--------------------------------------------------|
+| Regular | MD | 32 px | 166 × 32 px |
+| Small | SM | 24 px | 136 × 24 px |
+
+### Desbordamiento
+
+- El componente usa auto layout horizontal; su ancho crece con las etiquetas de los botones.
+- Las etiquetas ocupan una sola línea (heredado de Button).
+
+## Estructura (Anatomía)
+
+### Partes del componente
+
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Contenedor | Obligatoria | Fila horizontal de auto layout, centrada, con `gap/sm` entre los botones. |
+| Botón Secondary | Obligatoria | Instancia de Button, delineada en el color de marca. |
+| Botón Primary | Obligatoria | Instancia de Button, rellena en el color de marca. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | Regular: 32 px según la descripción de Figma (la variante Evergreen mide 34 px). Small: 24 px |
-| Width | Regular: 168 px. Small: 138 px (medido con el label "Button"; fijo vs. hug: [Pending confirmation]) |
-| Padding | Regular: space/16 (16 px) horizontal, space/8 (8 px) vertical. Small: space/12 (12 px) horizontal, space/4 (4 px) vertical |
-| Gap | gap/sm (8 px) entre los dos botones |
-| Radius | semantic/sm (4 px) en ambos botones |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Dirección | Horizontal, elementos centrados | Contexto de diseño |
+| Espacio | `gap/sm` (8); `Size=Small, Color=Indigo` usa un valor fijo de 8 px no vinculado a la variable | Contexto de diseño |
+| Alto | 32 px (Regular), 24 px (Small) | Dimensiones de las variantes |
+| Ancho (etiquetas predeterminadas) | 166 px (Regular), 136 px (Small) | Dimensiones de las variantes |
+| Relleno de los botones — Regular | 16 px horizontal, `space/8` vertical | Vinculaciones de variables |
+| Relleno de los botones — Small | `space/12` horizontal, `space/4` vertical | Vinculaciones de variables |
+| Radio de los botones | `semantic/sm` (4) | Vinculación de variable |
 
----
+## Semántica
 
-## Semantics
+Interpretación basada en evidencia: El botón derecho es la acción principal y el izquierdo la alternativa. Figma describe el tipo Primary como el botón para la acción más importante de una pantalla o sección.
 
-Pareja de acciones complementarias: el botón izquierdo es la acción secundaria (outlined) y el botón derecho es la acción primaria (filled), presentadas como una unidad visual.
+No verificado en Figma: estructura HTML (por ejemplo, un grupo de botones), atributos ARIA y orden de foco.
 
----
+## Variantes (Propiedades)
 
-## Iconography
-
-### Icon Slots
-
-| Slot | Description |
-|--------|--------|
-| Leading | Ninguno visible |
-| Trailing | Ninguno visible |
-
----
-
-## Variants (Properties)
-
-Los nombres de propiedades y valores deben coincidir exactamente con Figma.
+El inventario siguiente es completo: se inspeccionaron las cuatro variantes.
 
 ### Size
 
-| Value | Description |
-|--------|--------|
-| Regular | Text/Button/MD (14/16). Padding space/16 horizontal, space/8 vertical. Altura 32 px según la descripción de Figma |
-| Small | Text/Button/SM (12/16). Padding space/12 horizontal, space/4 vertical. Altura 24 px |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Regular | Dos botones MD (32 px de alto); etiquetas `Text/Button/MD`. | Predeterminado |
+| Small | Dos botones SM (24 px de alto); etiquetas `Text/Button/SM`. | — |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Evergreen | Color de marca verde: border/evergreen y text/evergreen en el botón secundario, surface/evergreen/bold en el botón primario |
-| Indigo | Color de marca morado: border/indigo y text/indigo en el botón secundario, surface/indigo/bold en el botón primario |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Evergreen | Secondary: `border/evergreen`, `text/evergreen`, `background/canvas`. Primary: `surface/evergreen/bold`, `text/inverse`. | Predeterminado |
+| Indigo | Secondary: `border/indigo`, `text/indigo`, `background/canvas`. Primary: `surface/indigo/bold`, `text/inverse`. | — |
 
----
+## Estados
 
-## States
+El conjunto de componentes Duo button no tiene propiedad de estado; ambos botones anidados usan `State=Default`. Los estados interactivos los define el componente Button.
 
-El componente no tiene una propiedad State.
+## Mapeo de tokens
 
----
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Espaciado | `gap/sm` | Espacio entre botones | Vinculación de variable |
+| Fondo | `background/canvas` | Relleno del botón Secondary | Vinculación de variable |
+| Superficie | `surface/evergreen/bold`, `surface/indigo/bold` | Relleno del botón Primary | Vinculación de variable |
+| Borde | `border/evergreen`, `border/indigo`, `width/1` | Borde del botón Secondary | Vinculación de variable |
+| Texto | `text/evergreen`, `text/indigo` | Etiqueta del Secondary | Vinculación de variable |
+| Texto | `text/inverse` | Etiqueta del Primary | Vinculación de variable |
+| Espaciado | `size/16`, `space/16`, `space/8`, `space/12`, `space/4` | Relleno de los botones | Vinculación de variable |
+| Radio | `semantic/sm` | Esquinas de los botones | Vinculación de variable |
+| Tipografía | `Text/Button/MD`, `Text/Button/SM` | Etiquetas según el tamaño | Estilos de texto |
 
-## Token Mapping
+Comportamiento actual:
 
-### Background
+- El espacio en `Size=Small, Color=Indigo` es un valor fijo de 8 px en lugar de `gap/sm`; el resultado es el mismo.
+- En `Size=Regular`, ambos botones anidados miden 32 px de alto; aquí el botón Primary usa un relleno vertical de 8 px.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| background/canvas | Relleno del botón secundario | Verificado |
-| surface/evergreen/bold | Relleno del botón primario, Color=Evergreen | Verificado en Size=Regular |
-| surface/indigo/bold | Relleno del botón primario, Color=Indigo | Verificado en Size=Small |
+## Interacción
 
-### Text
+El componente no tiene variantes de estado ni interacciones de prototipo propias. Los estados de interacción son los de las instancias anidadas de Button.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/evergreen | Label del botón secundario, Color=Evergreen | Verificado en Size=Regular |
-| text/indigo | Label del botón secundario, Color=Indigo | Verificado en Size=Small |
-| text/inverse | Label del botón primario | Verificado |
+No verificado en Figma: las acciones que se desencadenan y el orden de teclado.
 
-### Border
+## Accesibilidad
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/evergreen | Borde del botón secundario, Color=Evergreen | Verificado en Size=Regular. Grosor: width/1 (1) |
-| border/indigo | Borde del botón secundario, Color=Indigo | Verificado en Size=Small. Grosor: width/1 (1) |
+Observaciones relacionadas con la accesibilidad:
 
-### Typography
+- Las dos acciones se diferencian por el relleno (delineado frente a sólido) y la posición, no solo por el color.
+- La apariencia de foco la define Button (`State=Focused`, 2 px `border/focus`).
+- Las relaciones de contraste no se han verificado.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Button/MD | Labels de Size=Regular | Valores verificados: family/body, weight/semibold, size/14, line-height/16, letter-spacing/normal |
-| Text/Button/SM | Labels de Size=Small | Valores verificados: family/body, weight/semibold, size/12, line-height/16, letter-spacing/normal |
+Información de accesibilidad faltante (no verificado en Figma): semántica de agrupación, orden de foco entre los dos botones y comportamiento con teclado.
 
-### Spacing
+## Pautas de contenido
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/16 | Padding horizontal, Size=Regular | 16 px |
-| space/8 | Padding vertical, Size=Regular | 8 px |
-| space/12 | Padding horizontal, Size=Small | 12 px |
-| space/4 | Padding vertical, Size=Small | 4 px |
-| gap/sm | Espacio entre los dos botones y dentro de cada botón | 8 px |
-| size/16 | Padding horizontal del botón secundario, Size=Regular, Color=Evergreen | Aparece en el código exportado en lugar de space/16 |
+Observación verificada: Ambos botones usan la etiqueta de ejemplo "Button". Las etiquetas se definen en las instancias anidadas de Button y ocupan una sola línea.
 
-### Radius
+## Ejemplos
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| semantic/sm | Ambos botones | 4 px |
+### Par de confirmación
 
----
+Configuración: `Size=Regular`, `Color=Evergreen`
 
-## Accessibility
+Descripción: Botones Secondary y Primary Evergreen: una acción alternativa junto a la acción principal.
 
-| Topic | Information |
-|--------|--------|
-| Accessibility Requirement | [Pending confirmation] |
-| Visible State Support | [Pending confirmation] |
-| Notes | Roles ARIA, soporte de teclado, contraste y comportamiento con lectores de pantalla: [Pending confirmation] |
+Evidencia / Clasificación: Variante existente en Figma (configuración predeterminada).
 
----
+### Par Indigo compacto
 
-## Content Guidelines
+Configuración: `Size=Small`, `Color=Indigo`
 
-Ambos botones muestran el label de ejemplo "Button" en las variantes. Pares de labels mencionados en la descripción de Figma: Cancel + Apply, Cancelar + Guardar, Volver + Continuar, Descartar + Guardar.
+Descripción: Botones Secondary y Primary Indigo en tamaño SM.
 
----
+Evidencia / Clasificación: Variante existente en Figma.
 
-## Examples
+## Combinaciones inválidas
 
-### Example 1
+| Combinación / Condición | Razón verificada | Evidencia |
+|-------------------------|------------------|-----------|
+| Duo button junto con otro botón Primary en la misma vista | Figma indica que solo debe haber un botón Primary por vista | Descripción de Button Primary en Figma |
 
-Configuration:
+## Aclaraciones pendientes
 
-```text
-Size=Regular, Color=Evergreen
-```
+Ninguna
 
-Description:
+## Notas / Registro de cambios
 
-Footer de modal (Cancel + Apply).
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-### Example 2
-
-Configuration:
-
-```text
-Size=Regular, Color=Indigo
-```
-
-Description:
-
-Footer de drawer IA (Descartar + Guardar).
-
-### Example 3
-
-Configuration:
-
-```text
-Size=Small, Color=Evergreen
-```
-
-Description:
-
-Acción compacta en una card.
-
----
-
-## Invalid Combinations
-
-- Mezclar Color=Evergreen en un botón con Color=Indigo en el otro dentro del mismo Duo button
-- Usar Duo button con una sola acción visible (ambos botones son siempre obligatorios)
-- Usar Duo button cuando las acciones no son complementarias
-
----
-
-## QA Checklist
-
-- Propiedades documentadas.
-- Los nombres de propiedades coinciden exactamente con Figma.
-- Los valores de variantes coinciden exactamente con Figma.
-- Defaults documentados.
-- Combinaciones inválidas documentadas.
-- Tokens verificados.
-- No se agregó comportamiento no documentado.
-- No se agregó comportamiento de accesibilidad no documentado.
-- Matriz de variantes contrastada con la metadata (4 variantes: Size × Color).
-- Diferencias entre la descripción de Figma y el diseño señaladas en Pending Clarification.
-
----
-
-## Pending Clarification
-
-- Altura: la descripción de Figma indica que Regular mide 32 px, pero Size=Regular, Color=Evergreen mide 34 px (Color=Indigo mide 32 px). En el código exportado, su botón secundario usa size/16 (fallback 17 px) y space/8 (fallback 9 px) en lugar de los space/16 y space/8 documentados.
-- El botón secundario de Size=Small, Color=Indigo usa paddings de respaldo de 13 px y 5 px para space/12 y space/4.
-- El gap raíz de Size=Small, Color=Indigo está fijo en 8 px en lugar de usar gap/sm. La descripción de Figma nombra el token del gap como gap/s, mientras que la variable en Figma es gap/sm.
-- Solo se inspeccionaron en el código exportado Size=Regular, Color=Evergreen y Size=Small, Color=Indigo. Las otras dos variantes se apoyan en la metadata y la descripción de Figma.
-- El tipo de componente solo aparece como "Component" en la descripción de Figma.
-- Los dos botones son instancias anidadas de Button. No están documentadas sus variantes, si sus labels se pueden editar desde el Duo button, ni sus estados interactivos.
-- Los nombres de tokens se tomaron tal cual de Figma y no se cruzaron con los archivos JSON de tokens.
-- status, version y owner.
-- Expected Outcome, Interaction, Accessibility, Content Guidelines, reglas de Iconography y Shadow.
-
----
-
-## Notes / Changelog
-
-Generado a partir del material fuente disponible el 2026-10-20.
+[No hay cambios históricos verificados disponibles]
