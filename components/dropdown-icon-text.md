@@ -2,9 +2,9 @@
 component: "Dropdown icon + text"
 system: "Genome Evolution Design System"
 type: "Component set (internal building block)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2145-444"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,11 @@ Dropdown icon + text (`.Dropdown icon + text` in Figma) is a 163 px wide option 
 
 ### What It Is
 
-Evidence-based interpretation: Dropdown icon + text is an option item for a dropdown list. This is supported by the component name, the sample label "Item list", the `Selected` state, the interactive states and the row layout with leading and trailing icons. The Figma name starts with a period; in Figma, components whose names start with a period are not published to the library, so this component is meant to be used inside another component. The parent component is not referenced in this component set, and Figma does not include a written usage description.
+The Dropdown Icon + Text component is an option item used as an internal building block for Dropdown menus. It combines a descriptive icon, a text label, and optionally a navigation indicator or secondary action.
+
+Its purpose is to represent a selectable option within a dropdown menu, enabling quick visual recognition through iconography while supporting hierarchical navigation, submenus, or additional actions.
+
+This component serves as the primary pattern for building option lists within dropdowns, contextual menus, and action menus.
 
 ### Key Properties
 
@@ -74,16 +78,22 @@ Evidence-based interpretation: Used inside a dropdown list or menu, as indicated
 
 ## When to Use
 
-Evidence-based interpretations based on the available variants:
-
-- As an option row in a dropdown list, with or without leading and trailing icons.
-- To show the selected option (`Selected`) or unavailable options (`Disable`).
+- To represent options inside a Dropdown.
+- When an icon helps users quickly identify an action or category.
+- In contextual navigation menus.
+- To display common actions inside a dropdown list.
+- When an option leads to a submenu or a deeper navigation level.
+- In action menus, settings menus, or tool menus.
+- To build consistent menu structures across the platform.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Because the component is not published to the library (period-prefixed name), it is not available for direct insertion from the library.
+- To display static, non-selectable information.
+- As the primary action button of a page or workflow.
+- When iconography does not add meaningful value.
+- For complex lists that require multiple fields or detailed information.
+- As a replacement for persistent navigation components.
+- When the option performs a critical action that requires stronger visual emphasis.
 
 ## Structure (Anatomy)
 
@@ -203,14 +213,15 @@ Not verified in Figma: selection behavior, what the trailing chevron does, and k
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- `Focused` shows a visible 2 px `border/focus` border.
-- `Selected` is shown only by a subtle background (`background/selected`); the label and icons do not change.
-- `SM` labels are 10 px (`size/10`).
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for icon meanings, selected and disabled announcements, and keyboard support.
+Mandatory requirements
+- All options must be keyboard accessible.
+- Focus states must be visible and clearly distinguishable.
+- Icon, text, and background contrast must meet WCAG AA requirements.
+- Active or selected options must be communicated visually and programmatically.
+Recommendations
+- Provide accessible labels for icons with functional meaning.
+- Maintain consistent keyboard navigation throughout the dropdown.
+- Ensure adequate interaction target sizes for touch devices.
 
 ## Content Guidelines
 
@@ -255,5 +266,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
