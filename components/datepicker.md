@@ -2,9 +2,9 @@
 component: "Datepicker"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2115-2296"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Datepicker is a calendar panel with three views (days, months and years), two si
 
 ### What It Is
 
-Evidence-based interpretation: Datepicker lets users choose a date by navigating a calendar. This is supported by the component name, the `Type` values `Numbers` (a month grid of days with weekday headers), `Month` (a grid of twelve months) and `Year` (a grid of years), the header with a period label, a dropdown arrow and previous/next chevrons, and the Cancel and Apply buttons. Figma does not include a written usage description for the Datepicker component set.
+The Datepicker is a date selection component that allows users to choose a date through a visual calendar interface. It simplifies navigation between days, months, and years while reducing input errors and ensuring consistent date formats.
+
+The component provides different selection views (Numbers, Month, and Year) and can include explicit confirmation actions as well as additional conventions or references associated with the calendar.
 
 ### Key Properties
 
@@ -72,20 +74,21 @@ Evidence-based interpretation: The fixed panel width (184 px or 256 px) and the 
 
 ## When to Use
 
-Evidence-based interpretations based on the variants:
-
-- To select a single day (`Numbers`), month (`Month`) or year (`Year`).
-- To require confirmation of the selection (`showButtons=true`).
-- To show a legend for day markers (`showConventions=true`).
-
+- To indicate that an element is interactive or selectable.
+- To support drag-and-drop interactions.
+- In design, editing, or content manipulation tools.
+- To indicate areas that support resizing.
+- To communicate temporary system states such as loading or waiting.
+- To signal restricted actions through unavailable or prohibited cursors.
+- In experiences that require precision, multi-selection, or object positioning.
+- 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- The variants show single selection only; range selection is not shown at the Datepicker level, although the child `.Number` component has a `Range` state.
-- The conventions legend is available only in `Type=Numbers`.
+- When the date is fixed and cannot be changed.
+- For complex period selections requiring advanced ranges or multiple date selections.
+- When only free-text date-related input is needed.
+- In situations where only a few predefined options exist and a simpler selector is sufficient.
+- When the required information is not tied to a specific date.
 
 ## Composition and Hierarchy Rules
 
@@ -260,14 +263,10 @@ Not verified in Figma: navigation with the chevrons, switching views through the
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The selected cell uses a solid fill with inverse text, and the focused cell a 1 px `border/focus` border (from the child components).
-- Adjacent-month days are de-emphasized with `text/secondary`.
-- SM day numbers are 10 px and weekday initials 11 px.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for the chevrons and header button, grid semantics, current-date and selected-date announcements, keyboard navigation and focus management.
+- Required: ensure sufficient contrast between dates, selected states, navigation controls, and backgrounds.
+- Required: support full keyboard navigation, including movement between days, months, and years.
+- Required: provide visible focus indicators on all interactive elements.
+- Recommended: announce selected dates and view changes to assistive technologies.
 
 ## Content Guidelines
 
