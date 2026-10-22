@@ -2,9 +2,9 @@
 component: "Dropdown"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3747-6162"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,14 @@ Dropdown is a 174 px wide list panel that stacks ten option rows, a footer with 
 
 ### What It Is
 
-Evidence-based interpretation: Dropdown is the panel that displays a list of options when a dropdown is opened. This is supported by the component name, its vertical stack of `.Dropdown icon + text` or `.Dropdown empty content` rows, the vertical Scroll indicator and the footer action. Figma does not include a written usage description for the Dropdown component set; its child components do have descriptions in Figma.
+The Dropdown Item is an individual element within a Dropdown menu. It represents a selectable option that can trigger an action, navigate to a destination, or reveal additional content. The component supports text, supporting icons, and multiple visual states to communicate availability, interaction, and selection. 
+
+It may include:
+- A leading icon.
+- Descriptive text.
+- A trailing icon, typically used to indicate navigation or submenus.
+- Supporting small icons.
+- Interaction states that communicate the item's behavior within the menu.
 
 ### Key Properties
 
@@ -65,20 +72,20 @@ Evidence-based interpretation: Shown as a floating panel below a trigger, such a
 
 ## When to Use
 
-Evidence-based interpretations based on the component structure:
-
-- To present a list of options in a panel (`Items default`).
-- To present options with custom content (`Slots`).
+- As an option inside a dropdown menu.
+- To present actions related to a specific context.
+- Within secondary navigation menus.
+- To display compact and organized action lists.
+- When multiple options need to be grouped under a single trigger.
+- To build hierarchical menus using submenu indicators.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- Both variants contain exactly ten rows and a footer button; there are no properties to change the number of rows or to hide the footer.
-- Rows are always `Size=LG`; MD and SM rows are not shown at the Dropdown level.
-- The panel has a single width (174 px).
+- As the primary action on a page.
+- To display complex content or complete forms.
+- When options should always remain visible.
+- As a replacement for standalone buttons, links, or controls outside a menu.
+- When only a few options exist and can be displayed directly on the interface.
 
 ## Composition and Hierarchy Rules
 
@@ -181,14 +188,11 @@ Not verified in Figma: opening and closing, scrolling, selection, keyboard navig
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Row states, including a 2 px focus border, are provided by the row components.
-- The Scroll indicator is visual only.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): listbox or menu semantics, keyboard navigation, focus management between rows and the footer, and announcements of the selected option.
-
+- Required: maintain sufficient contrast between text, icons, backgrounds, and interactive states.
+- Required: all items must be keyboard accessible and navigable using arrow keys, Enter, and Space when applicable.
+- Required: provide visible focus indicators in the Focused state.
+- Recommended: provide descriptive accessible names for options that include icons.
+  
 ## Content Guidelines
 
 Verified observations: Rows use the sample label "Item list" (`Items default`) or empty slots (`Slots`). The footer button uses the sample label "Button".
@@ -222,5 +226,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
