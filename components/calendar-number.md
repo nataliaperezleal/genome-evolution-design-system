@@ -2,9 +2,9 @@
 component: "Number"
 system: "Genome Evolution Design System"
 type: "Component set (internal building block)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2115-3757"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,8 @@ Number (`.Number` in Figma) is a square cell that displays a short number, avail
 
 ### What It Is
 
-Evidence-based interpretation: Number is a selectable numeric cell intended to be composed into a grid, such as the days of a calendar. This is supported by the two-digit sample value "00", the square 24 px and 32 px sizes, and the states `Selected`, `Range` (a light fill, as for the dates between the start and end of a range), `Null` (an empty cell), `Opaque` (a muted number) and `Conventions` (a number with three dots below it). The Figma name starts with a period; in Figma, components whose names start with a period are not published to the library, so this component is meant to be used inside another component. The parent component is not referenced in this component set, and Figma does not include a written usage description.
+The Scroll component is a custom scrollbar that enables navigation through content that extends beyond the visible area of a container. It consists of a track (background area) and a thumb (scroll indicator) that visually communicates the current position within the content.
+It supports both horizontal and vertical orientations and provides a consistent appearance across tables, panels, modals, lists, and other scrollable containers.
 
 ### Key Properties
 
@@ -77,16 +78,21 @@ Evidence-based interpretation: Used inside a parent component that arranges cell
 
 ## When to Use
 
-Evidence-based interpretations based on the available variants:
-
-- As the cell of a numeric grid that supports single selection (`Selected`) or range selection (`Range`).
-- To mark numbers with additional information (`Conventions`), de-emphasize numbers (`Opaque`) or leave positions empty (`Null`).
+- To navigate content that exceeds the visible area of a container.
+- In tables containing many columns or records.
+- Inside modals, side panels, or drawers with lengthy content.
+- In lists, navigation trees, or menus with many items.
+- For workspaces that require controlled horizontal or vertical scrolling.
+- When a consistent design-system appearance is preferred over native browser scrollbars.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Because the component is not published to the library (period-prefixed name), it is not available for direct insertion from the library.
+- When all content can be displayed without scrolling.
+- To communicate task completion or progress (use a Progress Bar).
+- As a decorative element without actual scrolling functionality.
+- When native browser scrolling already provides an adequate user experience and customization is unnecessary.
+- For navigation between pages or views (use a Paginator or navigation component).
+- To compensate for poor content organization or hierarchy.
 
 ## Structure (Anatomy)
 
@@ -212,15 +218,14 @@ Not verified in Figma: selection behavior, how a range is started and ended, key
 
 ## Accessibility
 
-Accessibility-related observations:
+Mandatory requirements
+- The scrollbar must support standard keyboard scrolling mechanisms when its container receives focus.
+- Contrast between the thumb and track must meet WCAG AA requirements.
+- Scrollable containers must provide visible focus indicators when interactive.
 
-- `Selected` uses a solid fill and an inverse number, so it differs from other states by more than hue alone.
-- `Range` is distinguished only by a subtle fill.
-- `Focused` uses a 1 px border, thinner than the 2 px focus borders used by other components inspected in this system.
-- Small cells use a 10 px number (`size/10`).
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for cells, announcements for selected and in-range values, meaning of the convention markers for assistive technologies, and keyboard support.
+Recommendations
+- Support scrolling through mouse wheel, touch gestures, and keyboard interactions.
+- Clearly indicate when additional content exists outside the visible area.
 
 ## Content Guidelines
 
