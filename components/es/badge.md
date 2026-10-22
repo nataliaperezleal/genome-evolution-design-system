@@ -1,308 +1,226 @@
 ---
 component: "Badge"
 system: "Genome Evolution Design System"
-type: "Indicator/label component"
-status: "Production"
-version: "1.2"
-owner: "UX Design"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2046-82"
-last_updated: "2026-10-19"
+last_updated: "2026-10-22"
 tags:
   - "badge"
-  - "estado"
-  - "etiqueta"
+  - "counter"
+  - "status"
 ---
 
-# Badge — Genome Evolution Design System
+# Badge
 
-Muestra un conteo, estado o categoría en un formato compacto y visualmente distintivo, para dar retroalimentación visual rápida.
+Sistema: Genome Evolution Design System
+
+## Resumen del componente
+
+Badge es una pequeña etiqueta en forma de píldora que muestra un valor breve, como un conteo, en estilo delineado (`Line`) o sólido (`Filled`) en ocho colores, incluidos colores de estado.
 
 ## Referencia rápida
 
 ### Qué es
 
-Componente indicador/etiqueta (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: Badge muestra un valor compacto, normalmente un número, junto a otros elementos. Esto se sustenta en el valor predeterminado de `label` "0", la tipografía de 10 px de la etiqueta, el contenedor completamente redondeado (`semantic/full`) y la altura de 14 px. Los colores de estado (`Information`, `Warning`, `Error`, `Success`) están vinculados a los tokens `info`, `warning`, `danger` y `success` correspondientes, por lo que el badge también puede comunicar estado mediante el color. Figma no incluye una descripción de uso escrita para este componente.
 
 ### Propiedades clave
 
-- Type [Filled | Line] — default: Line
-- Color [Default | Evergreen | Indigo | Inverse | Information | Warning | Error | Success] — default: Default
-- Label — contenido de texto (default: 0)
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Type | Line, Filled | Line |
+| Color | Default, Inverse, Information, Warning, Error, Success, Evergreen, Indigo | Default |
+| label (texto) | Texto libre | 0 |
 
-### Configuración por defecto
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. Existen todas las combinaciones de `Type` y `Color` (16 variantes).
 
-Type=Line, Color=Default, Label=0
+### Configuración predeterminada
+
+`Type=Line`, `Color=Default`, `label="0"`: una píldora `surface/subtlest` con un borde de 1 px `border/default` y una etiqueta `text/secondary`.
 
 ### Uso típico
 
-- Conteo de notificaciones: Type=Filled, Color=Default, Label=5
-- Etiqueta de advertencia: Type=Line, Color=Warning, Label=Warning
-- Estado de error: Type=Filled, Color=Error, Label=!
+Observación verificada: El conjunto de componentes contiene 16 variantes, una por cada combinación de `Type` (2 valores) y `Color` (8 valores). Todas las variantes comparten el mismo layout y la misma tipografía, y solo difieren en el relleno, el borde y el color de la etiqueta.
 
----
+Interpretación basada en evidencia:
+
+- Use `Type=Line` para un badge delineado y más ligero, y `Type=Filled` para un badge sólido de mayor énfasis.
+- Use `Information`, `Warning`, `Error` o `Success` cuando el valor se relacione con un estado, ya que estos colores usan los tokens de estado del sistema.
+- Use `Default`, `Evergreen` o `Indigo` para badges neutros o de color de marca.
+- Use `Inverse` sobre superficies oscuras: `Line / Inverse` usa borde y texto claros (`border/inverse`, `text/inverse`) sin relleno, y `Filled / Inverse` usa un relleno `background/canvas`.
 
 ## Propósito / Intención
 
 ### Problema que resuelve
 
-Da retroalimentación visual rápida sobre un conteo, estado o categoría en un formato compacto (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: Ofrece una forma compacta y consistente de mostrar un valor breve, como un conteo, junto a otros elementos de la interfaz, opcionalmente coloreado según el estado.
+
+### Resultado esperado
+
+Interpretación basada en evidencia: Los usuarios pueden notar un valor o un estado de un vistazo sin que ocupe mucho espacio.
 
 ### Contexto típico
 
-Conteos de notificaciones, indicadores de estado, etiquetas de categoría y marcadores semánticos como advertencias y alertas (fuente: descripción del componente en Figma).
-
----
+Interpretación basada en evidencia: La altura de 14 px y la etiqueta de 10 px indican uso junto a otros componentes o dentro de ellos, más que de forma independiente. Los componentes contenedores específicos no están documentados en el componente Badge.
 
 ## Cuándo usar
 
-- Para mostrar conteos de notificaciones o indicadores de estado
-- Para mostrar etiquetas o tags de categoría
-- Para indicar estado (nuevo, actualizado, error, éxito) o marcar elementos con significado semántico (advertencias, alertas)
+Interpretaciones basadas en evidencia a partir de las variantes disponibles:
 
----
+- Para mostrar un valor breve, como un conteo, junto a una etiqueta, un ícono o un encabezado.
+- Para asociar ese valor con un estado (`Information`, `Warning`, `Error`, `Success`).
+- Para colocar un badge sobre una superficie oscura (`Inverse`).
 
 ## Cuándo NO usar
 
-- Para texto descriptivo largo
-- Cuando se necesita información detallada
-- Como elemento de acción principal
-- Para estados de carga (usar un spinner dedicado)
-- Cuando la accesibilidad requiere texto de forma más larga
+[No se encontraron restricciones documentadas]
 
----
+El badge tiene un único tamaño y una sola línea de texto de 10 px; el conjunto de componentes no ofrece tamaños mayores ni íconos.
 
 ## Estructura (Anatomía)
 
 ### Partes del componente
 
-| Parte | Requerido | Descripción |
-|--------|--------|--------|
-| Contenedor | Requerido | Marco en forma de píldora (radio semantic/full) con padding horizontal. El relleno y el borde dependen de Type y Color. |
-| Label | Requerido | Texto centrado. Valor por defecto: 0. |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Contenedor | Obligatoria | Marco de auto layout en forma de píldora que lleva el relleno y, en `Line`, el borde. |
+| Etiqueta | Obligatoria | Capa de texto centrada que muestra el valor de la propiedad `label`. |
 
 ### Layout
 
-| Propiedad | Valor |
-|-----------|-----------|
-| Alto | 14 (mínimo observado; igual a line-height/14, sin padding vertical) |
-| Ancho | 14 en las variantes con el Label por defecto "0". Regla de redimensionamiento: [Pending confirmation] |
-| Padding | space/4 horizontal, space/0 vertical |
-| Gap | gap/none |
-| Radio | semantic/full |
-
----
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Tamaño con la etiqueta predeterminada ("0") | 14 × 14 px | Dimensiones de las variantes |
+| Ancho | Se adapta a la etiqueta (auto layout, sin ancho fijo) | Contexto de diseño |
+| Relleno horizontal | `space/4` (4) | Vinculación de variable |
+| Relleno vertical | `space/0` (0) | Vinculación de variable |
+| Espacio | `gap/none` (0) | Vinculación de variable |
+| Radio de esquina | `semantic/full` (999) — completamente redondeado | Vinculación de variable |
+| Borde (`Type=Line`) | 1 px (ancho no vinculado a una variable) | Contexto de diseño |
+| Alineación | Etiqueta centrada horizontal y verticalmente | Contexto de diseño |
+| Tipografía de la etiqueta | `Text/Body/XXS Strong`: `family/body` (Open Sans), `weight/semibold` (600), `size/10`, `line-height/14`, `letter-spacing/normal` | Estilo de texto |
+| Ajuste de la etiqueta | Una sola línea (sin ajuste) | Contexto de diseño |
 
 ## Semántica
 
-Según la descripción de Figma, Badge comunica un conteo, un estado o una categoría. Los valores de Color Information, Warning, Error y Success se nombran según significados semánticos. Significado de Default, Evergreen, Indigo e Inverse: Usado según necesidad.
+Interpretación basada en evidencia:
 
----
+- `Information`, `Warning`, `Error` y `Success` comunican estado, ya que están vinculados a las familias de tokens `info`, `warning`, `danger` y `success`. `Error` usa los tokens `danger`.
+- `Default`, `Evergreen` e `Indigo` no tienen un significado de estado documentado.
+- `Inverse` es una variante de contraste para superficies oscuras, no un estado.
+- `Filled` aporta más énfasis visual que `Line`; Figma no documenta una diferencia semántica entre ambos.
 
-## Iconografía
-
-El componente no contiene iconos.
-
-### Slots de icono
-
-| Slot | Descripción |
-|--------|--------|
-| Leading | No aplica. |
-| Trailing | No aplica. |
-
----
+No verificado en Figma: elemento HTML, rol ARIA y cómo anuncian el valor los lectores de pantalla.
 
 ## Variantes (Propiedades)
 
+El inventario siguiente es completo: se inspeccionaron las 16 variantes.
+
 ### Type
 
-| Valor | Descripción |
-|--------|--------|
-| Filled | Relleno sólido de fondo. El color del texto es text/inverse, excepto con Color=Inverse. |
-| Line | Contorno con borde. El relleno depende de Color (ver Mapeo de tokens). |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Line | Borde de 1 px en el token de borde del color; relleno claro o sin relleno; etiqueta de color. | 8 variantes |
+| Filled | Relleno sólido en el token de superficie bold del color; sin borde; etiqueta `text/inverse` (excepto `Inverse`). | 8 variantes |
 
 ### Color
 
-| Valor | Descripción |
-|--------|--------|
-| Default | Neutro. Line: relleno surface/subtlest, borde border/default. Filled: relleno surface/raised. |
-| Evergreen | Evergreen. Line: borde border/evergreen, sin relleno. Filled: relleno surface/evergreen/bold. |
-| Indigo | Indigo. Line: borde border/indigo, sin relleno. Filled: relleno surface/indigo/bold. |
-| Inverse | Para fondos oscuros. Line: borde border/inverse, texto text/inverse, sin relleno. Filled: relleno background/canvas, texto text/secondary. |
-| Information | Información. Line: relleno surface/info/subtle, borde border/info. Filled: relleno surface/info/bold. |
-| Warning | Advertencia. Line: relleno surface/warning/subtle, borde border/warning. Filled: relleno surface/warning/bold. |
-| Error | Error. Line: relleno surface/danger/subtle, borde border/danger. Filled: relleno surface/danger/bold. |
-| Success | Éxito. Line: relleno surface/evergreen/subtle, borde border/success. Filled: relleno surface/success/bold. |
+| Valor | Line (relleno / borde / etiqueta) | Filled (relleno / etiqueta) |
+|-------|-----------------------------------|-----------------------------|
+| Default | `surface/subtlest` / `border/default` / `text/secondary` | `surface/raised` / `text/inverse` |
+| Inverse | Sin relleno / `border/inverse` / `text/inverse` | `background/canvas` / `text/secondary` |
+| Information | `surface/info/subtle` / `border/info` / `text/info` | `surface/info/bold` / `text/inverse` |
+| Warning | `surface/warning/subtle` / `border/warning` / `text/warning` | `surface/warning/bold` / `text/inverse` |
+| Error | `surface/danger/subtle` / `border/danger` / `text/danger` | `surface/danger/bold` / `text/inverse` |
+| Success | `surface/evergreen/subtle` / `border/success` / `text/success` | `surface/success/bold` / `text/inverse` |
+| Evergreen | Sin relleno / `border/evergreen` / `text/evergreen` | `surface/evergreen/bold` / `text/inverse` |
+| Indigo | Sin relleno / `border/indigo` / `text/indigo` | `surface/indigo/bold` / `text/inverse` |
 
-### Label
+Comportamiento actual: `Line / Success` usa `surface/evergreen/subtle` como relleno, mientras que su borde y su etiqueta usan tokens `success`. `Line / Evergreen`, `Line / Indigo` y `Line / Inverse` no tienen relleno, por lo que se ve la superficie que queda detrás.
 
-Contenido de texto. Valor por defecto: 0. Límite de longitud: [Pending confirmation]
+### label
 
----
-
-## Estados
-
-El component set no tiene una propiedad de estado.
-
----
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Texto | Valor que se muestra en el badge. "0" en todas las variantes. | Propiedad de texto |
 
 ## Mapeo de tokens
 
-### Fondo
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Superficie | `surface/subtlest`, `surface/raised` | Relleno de Default (Line, Filled) | Vinculación de variable |
+| Superficie | `background/canvas` | Relleno de Filled / Inverse | Vinculación de variable |
+| Superficie | `surface/info/subtle`, `surface/info/bold` | Relleno de Information (Line, Filled) | Vinculación de variable |
+| Superficie | `surface/warning/subtle`, `surface/warning/bold` | Relleno de Warning (Line, Filled) | Vinculación de variable |
+| Superficie | `surface/danger/subtle`, `surface/danger/bold` | Relleno de Error (Line, Filled) | Vinculación de variable |
+| Superficie | `surface/evergreen/subtle`, `surface/success/bold` | Relleno de Success (Line, Filled) | Vinculación de variable |
+| Superficie | `surface/evergreen/bold`, `surface/indigo/bold` | Relleno de Evergreen e Indigo (Filled) | Vinculación de variable |
+| Borde | `border/default`, `border/inverse`, `border/info`, `border/warning`, `border/danger`, `border/success`, `border/evergreen`, `border/indigo` | Borde de Line según el color | Vinculación de variable |
+| Texto | `text/secondary`, `text/inverse`, `text/info`, `text/warning`, `text/danger`, `text/success`, `text/evergreen`, `text/indigo` | Color de la etiqueta según tipo y color | Vinculación de variable |
+| Espaciado | `space/4`, `space/0`, `gap/none` | Relleno y espacio | Vinculación de variable |
+| Radio | `semantic/full` | Radio de esquina | Vinculación de variable |
+| Tipografía | `Text/Body/XXS Strong` | Etiqueta | Estilo de texto |
 
-| Token | Uso | Notas |
-|--------|--------|--------|
-| surface/subtlest | Relleno | Type=Line, Color=Default |
-| surface/raised | Relleno | Type=Filled, Color=Default |
-| surface/evergreen/bold | Relleno | Type=Filled, Color=Evergreen |
-| surface/indigo/bold | Relleno | Type=Filled, Color=Indigo |
-| background/canvas | Relleno | Type=Filled, Color=Inverse |
-| surface/info/subtle | Relleno | Type=Line, Color=Information |
-| surface/info/bold | Relleno | Type=Filled, Color=Information |
-| surface/warning/subtle | Relleno | Type=Line, Color=Warning |
-| surface/warning/bold | Relleno | Type=Filled, Color=Warning |
-| surface/danger/subtle | Relleno | Type=Line, Color=Error |
-| surface/danger/bold | Relleno | Type=Filled, Color=Error |
-| surface/evergreen/subtle | Relleno | Type=Line, Color=Success (no es un token success) |
-| surface/success/bold | Relleno | Type=Filled, Color=Success |
+El ancho de borde de 1 px es un valor fijo y no está vinculado a una variable.
 
-### Texto
+## Interacción
 
-| Token | Uso | Notas |
-|--------|--------|--------|
-| text/secondary | Label | Type=Line, Color=Default; Type=Filled, Color=Inverse |
-| text/inverse | Label | Todos los Type=Filled excepto Color=Inverse; Type=Line, Color=Inverse |
-| text/evergreen | Label | Type=Line, Color=Evergreen |
-| text/indigo | Label | Type=Line, Color=Indigo |
-| text/info | Label | Type=Line, Color=Information |
-| text/warning | Label | Type=Line, Color=Warning |
-| text/danger | Label | Type=Line, Color=Error |
-| text/success | Label | Type=Line, Color=Success |
-
-### Borde
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| border/default | Borde de 1px | Type=Line, Color=Default |
-| border/evergreen | Borde de 1px | Type=Line, Color=Evergreen |
-| border/indigo | Borde de 1px | Type=Line, Color=Indigo |
-| border/inverse | Borde de 1px | Type=Line, Color=Inverse |
-| border/info | Borde de 1px | Type=Line, Color=Information |
-| border/warning | Borde de 1px | Type=Line, Color=Warning |
-| border/danger | Borde de 1px | Type=Line, Color=Error |
-| border/success | Borde de 1px | Type=Line, Color=Success |
-
-Las variantes Filled no tienen borde. El grosor de 1px no tiene token.
-
-### Tipografía
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| Text/Body/XXS Strong | Label | size/10, line-height/14, letter-spacing/normal, weight/semibold, family/body |
-
-### Espaciado
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| space/4 | Padding horizontal | |
-| space/0 | Padding vertical | |
-| gap/none | Gap | |
-
-### Radio
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| semantic/full | Radio del contenedor (999) | Confirmado en las variables de Figma; no contrastado con los archivos de tokens |
-
----
+Badge no tiene variantes de estado ni interacciones de prototipo en Figma. Se presenta como un elemento de visualización no interactivo.
 
 ## Accesibilidad
 
-| Tema | Información |
-|--------|--------|
-| Requisito de accesibilidad | La descripción de Figma indica no usarlo cuando la accesibilidad requiere texto de forma más larga. |
-| Soporte visible de estado | [Pending confirmation] |
-| Notas | No hay documentación de roles, anuncios ni valores de contraste. |
+Observaciones relacionadas con la accesibilidad:
 
----
+- La etiqueta tiene 10 px (`size/10`) con peso 600.
+- El estado se comunica mediante el color; el badge no tiene ícono ni texto que indique el estado por sí mismo.
+- `Line / Inverse` usa borde y texto claros sin relleno, por lo que solo es legible sobre superficies oscuras.
+- Las relaciones de contraste no se han verificado.
 
-## Guías de contenido
+Información de accesibilidad faltante (no verificado en Figma): nombre accesible, cómo se anuncian el valor y su estado a las tecnologías de asistencia, y alternativas textuales para el estado comunicado solo por color.
 
-- Label: contenido de texto (default: 0). La descripción de Figma da ejemplos de un conteo (5), una palabra (Warning) y un símbolo (!).
+## Pautas de contenido
 
----
+Observación verificada: Todas las variantes muestran el carácter único "0". La etiqueta no se ajusta en varias líneas y el badge crece horizontalmente con su contenido.
 
 ## Ejemplos
 
-### Ejemplo 1
+### Conteo neutro
 
-Configuración:
+Configuración: `Type=Line`, `Color=Default`, `label="0"`
 
-```text
-Type=Filled, Color=Default, Label=5
-```
+Descripción: Badge neutro delineado con un conteo.
 
-Descripción:
+Evidencia / Clasificación: Variante existente en Figma.
 
-Conteo de notificaciones (fuente: descripción del componente en Figma).
+### Conteo de error
 
-### Ejemplo 2
+Configuración: `Type=Filled`, `Color=Error`, `label="0"`
 
-Configuración:
+Descripción: Badge sólido `surface/danger/bold` con etiqueta inversa.
 
-```text
-Type=Line, Color=Warning, Label=Warning
-```
+Evidencia / Clasificación: Variante existente en Figma.
 
-Descripción:
+### Badge sobre superficie oscura
 
-Etiqueta de advertencia (fuente: descripción del componente en Figma).
+Configuración: `Type=Line`, `Color=Inverse`, `label="0"`
 
-### Ejemplo 3
+Descripción: Badge delineado con borde y etiqueta claros, para fondos oscuros.
 
-Configuración:
+Evidencia / Clasificación: Variante existente en Figma.
 
-```text
-Type=Filled, Color=Error, Label=!
-```
+## Combinaciones inválidas
 
-Descripción:
-
-Estado de error (fuente: descripción del componente en Figma).
-
----
-
-Las 16 combinaciones Type × Color existen en el component set.
-
----
-
-## Checklist de QA
-
-- Propiedades documentadas.
-- Los nombres de propiedades coinciden exactamente con Figma.
-- Los valores de variantes coinciden exactamente con Figma.
-- Valores por defecto documentados.
-- Combinaciones inválidas documentadas.
-- Tokens verificados.
-- No se añadió comportamiento no documentado.
-- No se añadió comportamiento de accesibilidad no documentado.
-- Conteo de variantes verificado (16).
-- semantic/full verificado contra los archivos de tokens.
-
----
+[No se encontraron combinaciones inválidas documentadas]
 
 ## Aclaraciones pendientes
 
-- Combinaciones inválidas (no documentadas en Figma).
-- Type=Line, Color=Success usa surface/evergreen/subtle como relleno. ¿Es intencional?
-- Type=Line, Color=Evergreen / Indigo no tienen relleno, a diferencia de las demás variantes Line.
-- Ancho: ¿el badge se ajusta a su Label? Longitud máxima y comportamiento de desbordamiento.
-- Significado de Color=Default, Evergreen, Indigo e Inverse.
-- Si el Badge incrustado en Accordion debería usar este componente; usa valores distintos (#9e9e9e, #272727).
-- Accesibilidad: anuncio de conteos y estados, requisitos de contraste.
-- Status, versión y owner.
+Ninguna
 
----
+## Notas / Registro de cambios
 
-## Notas / Changelog
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-Generado a partir del material fuente disponible el 2026-10-19.
+[No hay cambios históricos verificados disponibles]

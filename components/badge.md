@@ -1,308 +1,226 @@
 ---
 component: "Badge"
 system: "Genome Evolution Design System"
-type: "Indicator/label component"
-status: "Production"
-version: "1.2"
-owner: "UX Design"
+type: "Component set"
+status: "Not verified in Figma"
+version: "Not verified in Figma"
+owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2046-82"
-last_updated: "2026-10-19"
+last_updated: "2026-10-22"
 tags:
   - "badge"
+  - "counter"
   - "status"
-  - "label"
 ---
 
-# Badge — Genome Evolution Design System
+# Badge
 
-Shows a count, status or category in a compact, visually distinctive format to give quick visual feedback.
+System: Genome Evolution Design System
+
+## Component Summary
+
+Badge is a small pill-shaped label that displays a short value, such as a count, in an outlined (`Line`) or solid (`Filled`) style across eight colors, including status colors.
 
 ## Quick Reference
 
-### What it is
+### What It Is
 
-Indicator/label component (source: Figma component description).
+Evidence-based interpretation: Badge displays a compact value, typically a number, next to other elements. This is supported by the default `label` value "0", the 10 px label typography, the fully rounded container (`semantic/full`) and the 14 px height. The status colors (`Information`, `Warning`, `Error`, `Success`) are bound to the corresponding `info`, `warning`, `danger` and `success` tokens, so the badge can also communicate status through color. Figma does not include a written usage description for this component.
 
 ### Key Properties
 
-- Type [Filled | Line] — default: Line
-- Color [Default | Evergreen | Indigo | Inverse | Information | Warning | Error | Success] — default: Default
-- Label — text content (default: 0)
+| Property | Available Values | Default |
+|----------|------------------|---------|
+| Type | Line, Filled | Line |
+| Color | Default, Inverse, Information, Warning, Error, Success, Evergreen, Indigo | Default |
+| label (text) | Free text | 0 |
+
+Defaults are taken from the component property definitions in Figma. Every `Type` and `Color` combination exists (16 variants).
 
 ### Default Configuration
 
-Type=Line, Color=Default, Label=0
+`Type=Line`, `Color=Default`, `label="0"`: a `surface/subtlest` pill with a 1 px `border/default` border and a `text/secondary` label.
 
 ### Typical Usage
 
-- Notification count: Type=Filled, Color=Default, Label=5
-- Warning label: Type=Line, Color=Warning, Label=Warning
-- Error state: Type=Filled, Color=Error, Label=!
+Verified observation: The component set contains 16 variants, one per combination of `Type` (2 values) and `Color` (8 values). All variants share the same layout and typography and differ only in fill, border and label color.
 
----
+Evidence-based interpretation:
+
+- Use `Type=Line` for a lighter, outlined badge and `Type=Filled` for a higher-emphasis solid badge.
+- Use `Information`, `Warning`, `Error` or `Success` when the value relates to a status, as these colors use the system's status tokens.
+- Use `Default`, `Evergreen` or `Indigo` for neutral or brand-colored badges.
+- Use `Inverse` on dark surfaces: `Line / Inverse` uses light border and text (`border/inverse`, `text/inverse`) with no fill, and `Filled / Inverse` uses a `background/canvas` fill.
 
 ## Purpose / Intent
 
 ### Problem Solved
 
-Gives quick visual feedback about a count, status or category in a compact format (source: Figma component description).
+Evidence-based interpretation: Provides a compact, consistent way to display a short value, such as a count, alongside other UI elements, optionally colored by status.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can notice a value or status at a glance without it taking much space.
 
 ### Typical Context
 
-Notification counts, status indicators, category tags and semantic markers such as warnings and alerts (source: Figma component description).
-
----
+Evidence-based interpretation: The 14 px height and 10 px label indicate use alongside or inside other components rather than on its own. Specific host components are not documented in the Badge component.
 
 ## When to Use
 
-- To show notification counts or status indicators
-- To show category labels or tags
-- To indicate status (new, updated, error, success) or mark items with semantic meaning (warnings, alerts)
+Evidence-based interpretations based on the available variants:
 
----
+- To show a short value, such as a count, next to a label, icon or header.
+- To associate that value with a status (`Information`, `Warning`, `Error`, `Success`).
+- To place a badge on a dark surface (`Inverse`).
 
 ## When NOT to Use
 
-- For long descriptive text
-- When detailed information is needed
-- As a primary action element
-- For loading states (use a dedicated spinner)
-- When accessibility requires longer-form text
+[No documented restrictions found]
 
----
+The badge has a single size and a single line of 10 px text; the component set does not provide larger sizes or icons.
 
 ## Structure (Anatomy)
 
 ### Component Parts
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Container | Required | Pill-shaped frame (semantic/full radius) with horizontal padding. Fill and border depend on Type and Color. |
-| Label | Required | Centered text. Default: 0. |
+| Part | Required / Optional | Description |
+|------|---------------------|-------------|
+| Container | Required | Pill-shaped auto layout frame that carries the fill and, in `Line`, the border. |
+| Label | Required | Centered text layer that displays the `label` property value. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | 14 (minimum observed; equals line-height/14, no vertical padding) |
-| Width | 14 in variants with the default Label "0". Resizing rule: [Pending confirmation] |
-| Padding | space/4 horizontal, space/0 vertical |
-| Gap | gap/none |
-| Radius | semantic/full |
-
----
+| Property | Verified Value | Evidence |
+|----------|----------------|----------|
+| Size with default label ("0") | 14 × 14 px | Variant dimensions |
+| Width | Adapts to the label (auto layout, no fixed width) | Design context |
+| Horizontal padding | `space/4` (4) | Variable binding |
+| Vertical padding | `space/0` (0) | Variable binding |
+| Gap | `gap/none` (0) | Variable binding |
+| Corner radius | `semantic/full` (999) — fully rounded | Variable binding |
+| Border (`Type=Line`) | 1 px (width not bound to a variable) | Design context |
+| Alignment | Label centered horizontally and vertically | Design context |
+| Label typography | `Text/Body/XXS Strong`: `family/body` (Open Sans), `weight/semibold` (600), `size/10`, `line-height/14`, `letter-spacing/normal` | Text style |
+| Label wrapping | Single line (no wrapping) | Design context |
 
 ## Semantics
 
-According to the Figma description, Badge communicates a count, a status or a category. The Color values Information, Warning, Error and Success are named after semantic meanings. Meaning of Default, Evergreen, Indigo and Inverse: Used for need.
+Evidence-based interpretation:
 
----
+- `Information`, `Warning`, `Error` and `Success` convey status, as they are bound to the `info`, `warning`, `danger` and `success` token families. `Error` uses the `danger` tokens.
+- `Default`, `Evergreen` and `Indigo` carry no documented status meaning.
+- `Inverse` is a contrast variant for dark surfaces, not a status.
+- `Filled` gives more visual emphasis than `Line`; Figma does not document a semantic difference between them.
 
-## Iconography
-
-The component contains no icons.
-
-### Icon Slots
-
-| Slot | Description |
-|--------|--------|
-| Leading | Not applicable. |
-| Trailing | Not applicable. |
-
----
+Not verified in Figma: HTML element, ARIA role and how the value is announced by screen readers.
 
 ## Variants (Properties)
 
+The inventory below is complete: all 16 variants were inspected.
+
 ### Type
 
-| Value | Description |
-|--------|--------|
-| Filled | Solid background fill. Text color is text/inverse, except Color=Inverse. |
-| Line | Border outline. Fill depends on Color (see Token Mapping). |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Line | 1 px border in the color's border token; light or no fill; colored label. | 8 variants |
+| Filled | Solid fill in the color's bold surface token; no border; `text/inverse` label (except `Inverse`). | 8 variants |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Default | Neutral. Line: surface/subtlest fill, border/default border. Filled: surface/raised fill. |
-| Evergreen | Evergreen. Line: border/evergreen border, no fill. Filled: surface/evergreen/bold fill. |
-| Indigo | Indigo. Line: border/indigo border, no fill. Filled: surface/indigo/bold fill. |
-| Inverse | For dark backgrounds. Line: border/inverse border, text/inverse text, no fill. Filled: background/canvas fill, text/secondary text. |
-| Information | Information. Line: surface/info/subtle fill, border/info border. Filled: surface/info/bold fill. |
-| Warning | Warning. Line: surface/warning/subtle fill, border/warning border. Filled: surface/warning/bold fill. |
-| Error | Error. Line: surface/danger/subtle fill, border/danger border. Filled: surface/danger/bold fill. |
-| Success | Success. Line: surface/evergreen/subtle fill, border/success border. Filled: surface/success/bold fill. |
+| Value | Line (fill / border / label) | Filled (fill / label) |
+|-------|------------------------------|-----------------------|
+| Default | `surface/subtlest` / `border/default` / `text/secondary` | `surface/raised` / `text/inverse` |
+| Inverse | No fill / `border/inverse` / `text/inverse` | `background/canvas` / `text/secondary` |
+| Information | `surface/info/subtle` / `border/info` / `text/info` | `surface/info/bold` / `text/inverse` |
+| Warning | `surface/warning/subtle` / `border/warning` / `text/warning` | `surface/warning/bold` / `text/inverse` |
+| Error | `surface/danger/subtle` / `border/danger` / `text/danger` | `surface/danger/bold` / `text/inverse` |
+| Success | `surface/evergreen/subtle` / `border/success` / `text/success` | `surface/success/bold` / `text/inverse` |
+| Evergreen | No fill / `border/evergreen` / `text/evergreen` | `surface/evergreen/bold` / `text/inverse` |
+| Indigo | No fill / `border/indigo` / `text/indigo` | `surface/indigo/bold` / `text/inverse` |
 
-### Label
+Current behavior: `Line / Success` uses `surface/evergreen/subtle` as its fill, while its border and label use `success` tokens. `Line / Evergreen`, `Line / Indigo` and `Line / Inverse` have no fill, so the surface behind them shows through.
 
-Text content. Default value: 0. 
+### label
 
----
-
-## States
-
-No state property exists in the component set.
-
----
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Text | Value shown in the badge. "0" in all variants. | Text property |
 
 ## Token Mapping
 
-### Background
+| Category | Token | Verified Usage | Evidence |
+|----------|-------|----------------|----------|
+| Surface | `surface/subtlest`, `surface/raised` | Default fill (Line, Filled) | Variable binding |
+| Surface | `background/canvas` | Filled / Inverse fill | Variable binding |
+| Surface | `surface/info/subtle`, `surface/info/bold` | Information fill (Line, Filled) | Variable binding |
+| Surface | `surface/warning/subtle`, `surface/warning/bold` | Warning fill (Line, Filled) | Variable binding |
+| Surface | `surface/danger/subtle`, `surface/danger/bold` | Error fill (Line, Filled) | Variable binding |
+| Surface | `surface/evergreen/subtle`, `surface/success/bold` | Success fill (Line, Filled) | Variable binding |
+| Surface | `surface/evergreen/bold`, `surface/indigo/bold` | Evergreen and Indigo fill (Filled) | Variable binding |
+| Border | `border/default`, `border/inverse`, `border/info`, `border/warning`, `border/danger`, `border/success`, `border/evergreen`, `border/indigo` | Line border by color | Variable binding |
+| Text | `text/secondary`, `text/inverse`, `text/info`, `text/warning`, `text/danger`, `text/success`, `text/evergreen`, `text/indigo` | Label color by type and color | Variable binding |
+| Spacing | `space/4`, `space/0`, `gap/none` | Padding and gap | Variable binding |
+| Radius | `semantic/full` | Corner radius | Variable binding |
+| Typography | `Text/Body/XXS Strong` | Label | Text style |
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| surface/subtlest | Fill | Type=Line, Color=Default |
-| surface/raised | Fill | Type=Filled, Color=Default |
-| surface/evergreen/bold | Fill | Type=Filled, Color=Evergreen |
-| surface/indigo/bold | Fill | Type=Filled, Color=Indigo |
-| background/canvas | Fill | Type=Filled, Color=Inverse |
-| surface/info/subtle | Fill | Type=Line, Color=Information |
-| surface/info/bold | Fill | Type=Filled, Color=Information |
-| surface/warning/subtle | Fill | Type=Line, Color=Warning |
-| surface/warning/bold | Fill | Type=Filled, Color=Warning |
-| surface/danger/subtle | Fill | Type=Line, Color=Error |
-| surface/danger/bold | Fill | Type=Filled, Color=Error |
-| surface/evergreen/subtle | Fill | Type=Line, Color=Success (not a success token) |
-| surface/success/bold | Fill | Type=Filled, Color=Success |
+The 1 px border width is a fixed value and is not bound to a variable.
 
-### Text
+## Interaction
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/secondary | Label | Type=Line, Color=Default; Type=Filled, Color=Inverse |
-| text/inverse | Label | All Type=Filled except Color=Inverse; Type=Line, Color=Inverse |
-| text/evergreen | Label | Type=Line, Color=Evergreen |
-| text/indigo | Label | Type=Line, Color=Indigo |
-| text/info | Label | Type=Line, Color=Information |
-| text/warning | Label | Type=Line, Color=Warning |
-| text/danger | Label | Type=Line, Color=Error |
-| text/success | Label | Type=Line, Color=Success |
-
-### Border
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/default | 1px border | Type=Line, Color=Default |
-| border/evergreen | 1px border | Type=Line, Color=Evergreen |
-| border/indigo | 1px border | Type=Line, Color=Indigo |
-| border/inverse | 1px border | Type=Line, Color=Inverse |
-| border/info | 1px border | Type=Line, Color=Information |
-| border/warning | 1px border | Type=Line, Color=Warning |
-| border/danger | 1px border | Type=Line, Color=Error |
-| border/success | 1px border | Type=Line, Color=Success |
-
-Filled variants have no border. The 1px border width is not tokenized.
-
-### Typography
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Body/XXS Strong | Label | size/10, line-height/14, letter-spacing/normal, weight/semibold, family/body |
-
-### Spacing
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/4 | Horizontal padding | |
-| space/0 | Vertical padding | |
-| gap/none | Gap | |
-
-### Radius
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| semantic/full | Container radius (999) | Confirmed in Figma variables; not cross-checked against the token files |
-
----
+Badge has no state variants and no prototype interactions in Figma. It is presented as a non-interactive display element.
 
 ## Accessibility
 
-| Topic | Information |
-|--------|--------|
-| Accessibility Requirement | The Figma description advises against use when accessibility requires longer-form text. |
-| Visible State Support | [Pending confirmation] |
-| Notes | No roles, announcements or contrast values are documented. |
+Accessibility-related observations:
 
----
+- The label is 10 px (`size/10`) at weight 600.
+- Status is conveyed by color; the badge has no icon or text that indicates the status on its own.
+- `Line / Inverse` uses light border and text with no fill, so it is only legible on dark surfaces.
+- Contrast ratios have not been verified.
+
+Missing accessibility information (not verified in Figma): accessible name, how the value and its status are announced to assistive technologies, and text alternatives for color-only status.
 
 ## Content Guidelines
 
-- Label: text content (default: 0). The Figma description gives examples of a count (5), a word (Warning) and a symbol (!).
-
----
+Verified observation: All variants show the single character "0". The label does not wrap and the badge grows horizontally with its content.
 
 ## Examples
 
-### Example 1
+### Neutral count
 
-Configuration:
+Configuration: `Type=Line`, `Color=Default`, `label="0"`
 
-```text
-Type=Filled, Color=Default, Label=5
-```
+Description: Outlined neutral badge with a count.
 
-Description:
+Evidence / Classification: Existing variant in Figma.
 
-Notification count (source: Figma component description).
+### Error count
 
-### Example 2
+Configuration: `Type=Filled`, `Color=Error`, `label="0"`
 
-Configuration:
+Description: Solid `surface/danger/bold` badge with an inverse label.
 
-```text
-Type=Line, Color=Warning, Label=Warning
-```
+Evidence / Classification: Existing variant in Figma.
 
-Description:
+### Badge on a dark surface
 
-Warning label (source: Figma component description).
+Configuration: `Type=Line`, `Color=Inverse`, `label="0"`
 
-### Example 3
+Description: Outlined badge with light border and label, for dark backgrounds.
 
-Configuration:
+Evidence / Classification: Existing variant in Figma.
 
-```text
-Type=Filled, Color=Error, Label=!
-```
+## Invalid Combinations
 
-Description:
-
-Error state (source: Figma component description).
-
----
-
-All 16 Type × Color combinations exist in the component set.
-
----
-
-## QA Checklist
-
-- Properties documented.
-- Property names match Figma exactly.
-- Variant values match Figma exactly.
-- Defaults documented.
-- Invalid combinations documented.
-- Tokens verified.
-- No undocumented behavior added.
-- No undocumented accessibility behavior added.
-- Variant count verified (16).
-- semantic/full verified against token files.
-
----
+[No documented invalid combinations found]
 
 ## Pending Clarification
 
-- Invalid combinations (not documented in Figma).
-- Type=Line, Color=Success uses surface/evergreen/subtle as fill. Is this intentional?
-- Type=Line, Color=Evergreen / Indigo have no fill, unlike the other Line variants.
-- Width: does the badge hug its Label? Maximum length and overflow behavior.
-- Meaning of Color=Default, Evergreen, Indigo and Inverse.
-- Whether the Badge embedded in Accordion should use this component; it uses different values (#9e9e9e, #272727).
-- Accessibility: announcement of counts and status, contrast requirements.
-- Status, version and owner.
-
----
+None
 
 ## Notes / Changelog
 
-Generated from available source material on 2026-10-19.
+Generated or reviewed using available source material on 2026-10-22.
+
+[No verified historical changes available]

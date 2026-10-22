@@ -1,222 +1,166 @@
 ---
 component: "Backdrop"
 system: "Genome Evolution Design System"
-type: "Visual overlay/underlay element"
-status: "Production"
-version: "1.2"
-owner: "UX Design"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2041-81"
-last_updated: "2026-10-19"
+last_updated: "2026-10-22"
 tags:
   - "backdrop"
   - "overlay"
-  - "capas"
+  - "layering"
 ---
 
-# Backdrop — Genome Evolution Design System
+# Backdrop
 
-Capa semitransparente que oscurece o aclara el contenido de fondo, usada junto con modales, dropdowns y otras superposiciones para establecer jerarquía visual y foco.
+Sistema: Genome Evolution Design System
+
+## Resumen del componente
+
+Backdrop es una superficie de superposición semitransparente y desenfocada, disponible en un color oscuro (`Black`) y uno claro (`White`).
 
 ## Referencia rápida
 
 ### Qué es
 
-Elemento visual de superposición/subcapa (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: Backdrop es una capa de superposición que se coloca sobre el contenido existente para separarlo visualmente del contenido que se muestra encima. Esto se sustenta en el nombre del componente, en sus rellenos vinculados a las variables `overlay/black` y `overlay/white` (ambas con 60 % de opacidad) y en su desenfoque de fondo de 8 px. El componente no contiene otras capas. Figma no incluye una descripción de uso escrita para este componente.
 
 ### Propiedades clave
 
-- Color [White | Black] — default: Black
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Color | Black, White | Black |
 
-### Configuración por defecto
+El valor predeterminado proviene de la definición de propiedades del componente en Figma.
 
-Color=Black
+### Configuración predeterminada
+
+`Color=Black`: un relleno `overlay/black` (#4C574E con 60 % de opacidad) con un desenfoque de fondo de 8 px.
 
 ### Uso típico
 
-- Diálogo modal: Color=Black
-- Overlay para tema claro: Color=White
-- Fondo de dropdown: Color=Black
+Observación verificada: El conjunto de componentes tiene dos variantes, `Color=Black` y `Color=White`, que solo se diferencian en el relleno. Ambas carecen de contenido, no tienen radio de esquina (`radius/0`) y tienen un desenfoque de fondo de 8 px.
 
----
+Interpretación basada en evidencia:
+
+- `Color=Black` oscurece el contenido que queda detrás.
+- `Color=White` aclara el contenido que queda detrás.
+- Como el componente no tiene contenido propio, se usa como capa debajo de otros componentes y no de forma independiente.
 
 ## Propósito / Intención
 
 ### Problema que resuelve
 
-Establece jerarquía visual y foco separando capas (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: Reduce la prominencia visual del contenido subyacente para que el contenido mostrado sobre el backdrop destaque.
 
 ### Resultado esperado
 
-Mejor contraste del contenido flotante (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: El contenido subyacente sigue siendo parcialmente visible, pero oscurecido o aclarado y desenfocado, y la atención se dirige al contenido colocado encima.
 
 ### Contexto típico
 
-Se usa junto con modales, dropdowns, popovers y tooltips (fuente: descripción del componente en Figma).
-
----
+Los componentes que usan Backdrop no están documentados en Figma.
 
 ## Cuándo usar
 
-- Para oscurecer el fondo al mostrar diálogos modales
-- Para crear foco en contenido superpuesto (dropdowns, popovers, tooltips)
-- Para establecer separación visual entre capas y mejorar el contraste del contenido flotante
+Interpretaciones basadas en evidencia a partir de la estructura y los tokens del componente:
 
----
+- Cuando el contenido subyacente deba quedar visualmente en segundo plano detrás del contenido mostrado encima.
+- Use `Color=Black` para oscurecer y `Color=White` para aclarar el contenido subyacente.
 
 ## Cuándo NO usar
 
-- Como fondo permanente de página
-- Sin un componente de superposición que lo acompañe
-- Para estados hover simples sin modal
-- Cuando se requiere interacción total con el fondo
-- Cuando la accesibilidad exige que el contenido de fondo siga visible
-
----
+[No se encontraron restricciones documentadas]
 
 ## Estructura (Anatomía)
 
 ### Partes del componente
 
-| Parte | Requerido | Descripción |
-|--------|--------|--------|
-| Capa | Requerido | Un único rectángulo semitransparente con desenfoque de fondo. Sin capas hijas ni texto. |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Superficie de superposición | Obligatoria | Marco rectangular único con el relleno de superposición y el desenfoque de fondo. No tiene capas hijas. |
 
 ### Layout
 
-| Propiedad | Valor |
-|-----------|-----------|
-| Alto | 131 (en ambas variantes; puede ser un tamaño de muestra) |
-| Ancho | 182 (en ambas variantes; puede ser un tamaño de muestra) |
-| Padding | Ninguno |
-| Gap | Ninguno |
-| Radio | [Pending confirmation] (radius/0 está presente en las variables) |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Dimensiones del componente | 182 × 131 px | Dimensiones de las variantes (ambas) |
+| Radio de esquina | `radius/0` (0) | Vinculación de variable |
+| Desenfoque de fondo | 8 px | Contexto de diseño (no vinculado a una variable) |
+| Desbordamiento | Recortado | Contexto de diseño |
 
----
+El componente no usa auto layout. Figma no define restricciones de redimensionamiento; el tamaño de 182 × 131 px es el tamaño del componente tal como está publicado.
 
-## Iconografía
+## Semántica
 
-El componente no contiene iconos.
+Interpretación basada en evidencia: Backdrop es una capa decorativa que separa niveles de contenido. No contiene texto, íconos ni elementos interactivos, por lo que no aporta significado de contenido propio. La diferencia entre `Black` y `White` es visual (oscurecer o aclarar).
 
-### Slots de icono
-
-| Slot | Descripción |
-|--------|--------|
-| Leading | No aplica. |
-| Trailing | No aplica. |
-
+No verificado en Figma: elemento HTML, rol ARIA y si el backdrop oculta el contenido subyacente a las tecnologías de asistencia.
 
 ## Variantes (Propiedades)
 
+El inventario siguiente es completo: se inspeccionaron ambas variantes.
+
 ### Color
 
-| Valor | Descripción |
-|--------|--------|
-| White | Capa clara semitransparente (overlay/white). Uso típico: overlay para tema claro. |
-| Black | Capa oscura semitransparente (overlay/black). Uso típico: diálogo modal, fondo de dropdown. |
-
----
-
-## Estados
-
-El component set no tiene una propiedad de estado.
-
----
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Black | Relleno `overlay/black` (#4C574E, 60 % de opacidad); desenfoque de fondo de 8 px. | Predeterminado |
+| White | Relleno `overlay/white` (#F7F8F7, 60 % de opacidad); desenfoque de fondo de 8 px. | — |
 
 ## Mapeo de tokens
 
-### Fondo
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Superposición | `overlay/black` | Relleno, `Color=Black` | Vinculación de variable |
+| Superposición | `overlay/white` | Relleno, `Color=White` | Vinculación de variable |
+| Radio | `radius/0` | Radio de esquina | Vinculación de variable |
 
-| Token | Uso | Notas |
-|--------|--------|--------|
-| overlay/black | Relleno de la capa | Color=Black |
-| overlay/white | Relleno de la capa | Color=White |
+El desenfoque de fondo de 8 px es un valor fijo y no está vinculado a una variable.
 
-### Radio
+## Interacción
 
-| Token | Uso | Notas |
-|--------|--------|--------|
-| radius/0 | Presente en las variables | Capa no verificada |
+Backdrop no tiene variantes de estado ni interacciones de prototipo en Figma. Figma no define si interactuar con el backdrop tiene algún efecto (por ejemplo, cerrar el contenido que está encima).
 
-### Sombra
+## Accesibilidad
 
-Sin token: desenfoque de fondo de 8px.
+Observaciones relacionadas con la accesibilidad:
 
----
+- Ambas superposiciones tienen 60 % de opacidad y un desenfoque de 8 px, por lo que el contenido subyacente sigue siendo parcialmente visible pero queda en segundo plano.
+- El backdrop no contiene texto, por lo que no tiene requisitos de contraste de texto propios. El contraste del contenido colocado encima depende de ese contenido y no se ha verificado.
 
-| Tema | Información |
-|--------|--------|
-| Requisito de accesibilidad | La descripción de Figma indica no usarlo cuando la accesibilidad exige que el contenido de fondo siga visible. |
-| Soporte visible de estado | [Pending confirmation] |
-| Notas | No hay documentación de roles, manejo de foco ni valores de contraste. |
-
----
+Información de accesibilidad faltante (no verificado en Figma): cómo se gestionan el foco y el acceso de las tecnologías de asistencia al contenido subyacente mientras se muestra el backdrop.
 
 ## Ejemplos
 
-### Ejemplo 1
+### Backdrop oscuro
 
-Configuración:
+Configuración: `Color=Black`
 
-```text
-Color=Black
-```
+Descripción: Oscurece y desenfoca el contenido que queda detrás.
 
-Descripción:
+Evidencia / Clasificación: Variante existente en Figma.
 
-Diálogo modal (fuente: descripción del componente en Figma).
+### Backdrop claro
 
-### Ejemplo 2
+Configuración: `Color=White`
 
-Configuración:
+Descripción: Aclara y desenfoca el contenido que queda detrás.
 
-```text
-Color=White
-```
+Evidencia / Clasificación: Variante existente en Figma.
 
-Descripción:
+## Combinaciones inválidas
 
-Overlay para tema claro (fuente: descripción del componente en Figma).
-
-### Ejemplo 3
-
-Configuración:
-
-```text
-Color=Black
-```
-
-Descripción:
-
-Fondo de dropdown (fuente: descripción del componente en Figma).
-
----
-
-## Checklist de QA
-
-- Propiedades documentadas.
-- Los nombres de propiedades coinciden exactamente con Figma.
-- Los valores de variantes coinciden exactamente con Figma.
-- Valores por defecto documentados.
-- Combinaciones inválidas documentadas.
-- Tokens verificados.
-- No se añadió comportamiento no documentado.
-- No se añadió comportamiento de accesibilidad no documentado.
-- Conteo de variantes verificado (2).
-
----
+[No se encontraron combinaciones inválidas documentadas]
 
 ## Aclaraciones pendientes
 
-- Combinaciones inválidas (no documentadas en Figma).
-- Dimensiones: ¿182×131 son las medidas reales o un tamaño de muestra? Comportamiento al redimensionar.
-- Desenfoque: los 8px no tienen token. ¿Existe uno?
-- Radio: capa donde se usa radius/0.
-- Interacción: si el Backdrop cierra la superposición al hacer clic y su orden de capas respecto al componente superpuesto.
-- Accesibilidad: manejo de foco y requisitos de contraste.
-- Status, versión y owner.
+Ninguna
 
----
+## Notas / Registro de cambios
 
-## Notas / Changelog
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-Generado a partir del material fuente disponible el 2026-10-19.
+[No hay cambios históricos verificados disponibles]
