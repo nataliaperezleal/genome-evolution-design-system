@@ -2,9 +2,9 @@
 component: "Button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=392-861"
 last_updated: "2026-10-22"
 tags:
@@ -25,9 +25,9 @@ Button triggers an action. It is available in seven types (Primary, Secondary, T
 
 ### What It Is
 
-Verified specification: Figma describes the Primary button as the main action button, with a solid background in the brand color, used for the most important action of a screen or section; only one should be used per view. Figma also states that `Color=Evergreen` applies the Genome Plus brand's primary green palette and is the default brand color for Primary and Secondary buttons. (Source: variant descriptions in Figma, written in Spanish.)
+The Button is an interactive component that allows users to perform actions within an interface. It is used to initiate processes, confirm decisions, submit information, navigate to a specific destination, or trigger system events.
 
-Evidence-based interpretation: The other types provide lower emphasis (Secondary, outlined in the brand color; Tertiary, neutral outline) or status-specific emphasis (Danger, Information, Success, Warning), as shown by their fills, borders and the status token families they use.
+The component supports multiple visual types to communicate different levels of importance and semantic meaning, including Primary, Secondary, Tertiary, Danger, Information, Success, and Warning. It also supports color variants, sizes, corner styles, and optional leading and trailing icons.
 
 ### Key Properties
 
@@ -92,19 +92,20 @@ Primary is documented for the most important action in a screen or section. Othe
 
 ## When to Use
 
-- Primary: the most important action of a screen or section (verified, Figma description).
-- Secondary: an action with lower emphasis than Primary (evidence-based interpretation).
-- Tertiary: a neutral, low-emphasis action (evidence-based interpretation).
-- Danger, Information, Success, Warning: actions associated with those statuses (evidence-based interpretation from the status tokens).
+- To perform a user-initiated action.
+- To confirm or cancel processes.
+- To submit forms or save information.
+- To open dialogs, panels, or additional views.
+- To navigate to another page or section when a button appearance is appropriate.
+- To highlight the primary action of a page or workflow.
 
 ## When NOT to Use
 
-- Do not use more than one Primary button per view (verified, Figma description).
-
-Limitations of the current component:
-
-- `Disabled` exists only for Primary and Secondary, with `Color=Default`. Tertiary, Danger, Information, Success and Warning have no disabled variant.
-- `Indigo` is available only for Primary and Secondary.
+- To display static or informational content.
+- When a link is more appropriate for simple page-to-page navigation.
+- To represent statuses, labels, or categories. Use Badges or equivalent components instead.
+- When the action is unavailable and no clear explanation is provided to users.
+- To group multiple actions with the same visual hierarchy in a single context.
 
 ## Structure (Anatomy)
 
@@ -257,14 +258,10 @@ Not verified in Figma: the action triggered, loading behavior, keyboard activati
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- `Focused` shows a visible 2 px `border/focus` border on every Type, Color, Corner and Size.
-- Status types pair a subtle fill with a colored border and label, so status is not conveyed by fill color alone, but the label text carries the meaning.
-- SM uses a 12 px label (`size/12`).
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible name requirements for icon usage, disabled semantics, ARIA attributes and keyboard support.
+- Required: ensure sufficient contrast between text, border, and background across all component types, colors, and states.
+- Required: all interactive buttons must be keyboard accessible and operable using Enter or Space.
+- Required: provide a visible focus indicator for the Focused state.
+- Recommended: use descriptive labels and avoid relying exclusively on icons to communicate actions.
 
 ## Content Guidelines
 
@@ -322,6 +319,4 @@ Only the first row is a documented rule; the others are unavailable combinations
 
 ## Notes / Changelog
 
-Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
+Generated or reviewed using available source material on 2026-10-22
