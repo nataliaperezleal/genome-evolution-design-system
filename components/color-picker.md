@@ -2,9 +2,9 @@
 component: "Color Picker"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3082-25123"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Color Picker is a 264 px panel for choosing a color, with a `Solid` mode (color 
 
 ### What It Is
 
-Evidence-based interpretation: Color Picker lets users define a solid color or a two-stop gradient and pick from saved colors. This is supported by the component name, the `Type` values `Solid` and `Gradient`, the tabs labeled "Solid" and "Gradient" at the top of the panel, the color area and sliders in `Solid`, the gradient bar and "Stops" fields in `Gradient`, and the "My colors library" section with an "Add" action in both. Figma does not include a written usage description for the Color Picker component set.
+The Color Picker is an input component that allows users to select, preview, and edit colors within an interface. It enables both visual and numerical color selection, providing precision and flexibility for customization, visual configuration, and design-related tasks.
+
+The component supports two main modes: Solid for single colors and Gradient for multi-stop color compositions
 
 ### Key Properties
 
@@ -65,20 +67,20 @@ Evidence-based interpretation: The fixed 264 px width, rounded panel and drop sh
 
 ## When to Use
 
-Evidence-based interpretations based on the component structure:
-
-- When users need to choose or enter a solid color (`Type=Solid`).
-- When users need to define a gradient by stops (`Type=Gradient`).
-- When users should be able to pick from or add to a saved colors library.
+- To enable color customization in settings or preferences.
+- In visual editing, design, or branding tools.
+- When users need to select specific colors for interface elements.
+- To configure backgrounds, charts, diagrams, or visual components.
+- When support for both solid colors and gradients is required.
+- In scenarios where users need to enter or adjust colors using formats such as Hex values.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- The `Gradient` mode shows two stops; Figma does not show a control for adding stops or for choosing the gradient type or angle.
-- The panel has a single size (264 px wide).
+- When only a small predefined set of colors is available. In those cases, a simple color palette is more appropriate.
+- For settings where users do not need detailed color control.
+- When the color is informational only and cannot be modified.
+- In workflows where the additional complexity of a color picker may negatively impact the user experience.
+- As a replacement for simple selection controls when available options are limited.
 
 ## Structure (Anatomy)
 
@@ -195,15 +197,10 @@ Not verified in Figma: dragging behavior of the handle, sliders and stop selecto
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Every visual control has an equivalent text field (format, value, opacity; and position, color, opacity per stop), so values can be read and entered as text.
-- The active mode tab is marked by a 2 px bottom border and a darker label color, not by color alone.
-- The selected swatch is marked with a border and shadow.
-- Labels and values use 12 px text.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for sliders, swatches and the stop remove button, keyboard operation of the color area and sliders, focus order and screen-reader announcements.
+- Required: ensure sufficient contrast between controls, indicators, and backgrounds so interactive elements remain identifiable.
+- Required: all color picker controls must be keyboard accessible and provide visible focus states.
+- Required: color values and related controls must include accessible labels for assistive technologies.
+- Recommended: provide textual alternatives to identify selected colors in addition to visual representation.
 
 ## Content Guidelines
 
@@ -243,5 +240,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
