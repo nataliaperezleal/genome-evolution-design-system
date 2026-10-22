@@ -2,9 +2,9 @@
 component: "Dropdown empty content"
 system: "Genome Evolution Design System"
 type: "Component set (internal building block)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3751-6300"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Dropdown empty content (`.Dropdown empty content` in Figma) is a 163 px wide opt
 
 ### What It Is
 
-Evidence-based interpretation: Dropdown empty content is an option row for dropdown lists whose content is supplied by the designer through a Figma slot, instead of the fixed icon and label of `.Dropdown icon + text`. This is supported by the component name, the `Property=No content` value, the single slot layer that fills the row, and the same sizes, widths, padding and state backgrounds as `.Dropdown icon + text`. The Figma name starts with a period; in Figma, components whose names start with a period are not published to the library, so this component is meant to be used inside another component. Figma does not include a written usage description.
+The Dropdown Empty Content component is an empty content container used as an internal building block for composing custom Dropdown menus. It provides a flexible surface where controls, filters, forms, lists, indicators, actions, or any other required content can be placed inside a dropdown panel.
+
+Unlike a list item or selectable option, this component only represents the content area of the dropdown and does not define specific behaviour by itself. Its primary purpose is to serve as the structural foundation for more advanced dropdown experiences that require custom content.
 
 ### Key Properties
 
@@ -67,15 +69,22 @@ Evidence-based interpretation: Used inside a dropdown list, alongside or instead
 
 ## When to Use
 
-Evidence-based interpretations based on the component structure:
-
-- As a dropdown option row with custom content placed in the slot.
+- To build the internal content of a custom Dropdown.
+- When the dropdown contains forms or advanced filters.
+- To include dynamic option lists.
+- For rich selectors that include search, grouping, or additional actions.
+- To display contextual information within a dropdown panel.
+- When buttons or other actions need to be included inside the dropdown.
+- To create composite menus that combine multiple component types.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Because the component is not published to the library (period-prefixed name), it is not available for direct insertion from the library.
+- As a generic page or layout container.
+- To display permanent content within a view.
+- When a simple set of options can be handled by standard Dropdown or Select components.
+- As a replacement for Modals, Popovers, or Drawers.
+- As a standalone interactive component.
+- When the content does not need to appear inside a dropdown surface.
 
 ## Structure (Anatomy)
 
@@ -175,13 +184,13 @@ Not verified in Figma: selection behavior and keyboard navigation.
 
 ## Accessibility
 
-Accessibility-related observations:
+Mandatory requirements
+- All interactive elements inside the container must be keyboard accessible.
+- Focus must move correctly into the dropdown when opened and remain visible throughout interaction.
+- Embedded controls must meet WCAG AA requirements for contrast and interaction states.
 
-- `Focused` shows a visible 2 px `border/focus` border.
-- `Selected` and `Disabled` are shown only by background changes; any additional cues must come from the slot content.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for slot content, selected and disabled announcements, and keyboard support.
+Recommendations
+- Maintain a logical keyboard navigation order.
 
 ## Content Guidelines
 
@@ -205,9 +214,6 @@ Description: 22 px row with an empty slot.
 
 Evidence / Classification: Existing variant in Figma.
 
-## Invalid Combinations
-
-[No documented invalid combinations found]
 
 ## Pending Clarification
 
@@ -216,5 +222,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
