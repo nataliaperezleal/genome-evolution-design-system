@@ -4,11 +4,12 @@
 
 - Produce the final description in English only.
 - The description is intended to be copied manually into the existing Figma component description field.
-- Derive the description from the validated long documentation and the underlying verified source material.
+- Derive the description from the validated long documentation and the verified Figma evidence used to create it.
 - Use concise, practical language suitable for designers and developers working with the design system.
 - Preserve actual Figma property names, variant values, token names, and technical identifiers exactly as defined.
-- Only include information supported by Figma properties, variants, component structure, verified tokens, metadata, implementation evidence, or approved documentation.
-- Treat Figma, implementation code, and existing documentation as distinct sources.
+- Only include information supported by Figma properties, variants, component structure, verified tokens, metadata, or other verified Figma evidence.
+- Treat Figma as the authoritative source for component specifications.
+- Keep the description short enough to fit comfortably within a Figma component description.
 - Do not invent defaults, properties, behaviors, accessibility support, responsive behavior, validation logic, usage restrictions, or invalid combinations.
 - A visible variant proves that a variant exists, not that its associated behavior is implemented.
 - Distinguish verified facts from recommendations. Do not present recommendations as official design-system rules.
@@ -18,6 +19,8 @@
 - Do not reproduce the full long documentation in this description.
 - Do not include frontmatter, a changelog, a QA checklist, or lengthy implementation details.
 - Do not modify the Figma canvas. Return the final description in the chat for manual copy and paste.
+- Only include sections that contain verified, useful information.
+- Omit empty sections rather than displaying empty headings.
 
 ## Output Format
 
@@ -31,19 +34,13 @@ USE WHEN:
 
 DO NOT USE:
 - {{DocumentedRestriction1}}
-- {{DocumentedRestriction2}}
 
 PROPERTIES:
-- {{PropertyName}} [{{VerifiedValue1}} | {{VerifiedValue2}}] — default: {{VerifiedDefault}}
-
-DEFAULT CONFIGURATION:
-- {{VerifiedDefaultConfiguration}}
-
-INVALID COMBINATIONS:
-- {{VerifiedInvalidCombination}} — {{VerifiedReason}}
+- {{PropertyName}} [{{VerifiedValue1}} | {{VerifiedValue2}}]
 
 TYPICAL USAGE:
-- {{VerifiedOrRecommendedContext}}: {{PropertyName}}={{Value}}
+- {{VerifiedOrRecommendedContext}}
+
 
 ## Section Rules
 
@@ -57,6 +54,7 @@ TYPICAL USAGE:
 
 - Include only useful, evidence-supported usage contexts.
 - Keep entries short and actionable.
+- Prefer actionable guidance over exhaustive documentation.
 - Label recommendations explicitly when they are not official guidance.
 - If no usage guidance is established, omit the section.
 
@@ -84,19 +82,6 @@ Rules:
 - Do not include implementation-only properties as Figma properties.
 - Remove unused entries.
 
-### DEFAULT CONFIGURATION
-
-- Include only a verified default configuration.
-- Do not treat the first listed variant or a selected screenshot as proof of a default.
-- If no default configuration can be established, omit this section.
-
-### INVALID COMBINATIONS
-
-- Include only explicitly documented or verified invalid combinations.
-- State the reason only when supported by evidence.
-- Do not treat undocumented combinations as invalid.
-- If no invalid combinations are documented after sufficient inspection, omit this section.
-- If verification is incomplete, do not imply that the component has no constraints.
 
 ### TYPICAL USAGE
 
@@ -117,3 +102,7 @@ Before returning the description, verify that:
 - It does not duplicate information unnecessarily.
 - It is concise and suitable for a Figma component description.
 - It is returned in the chat and not saved as a separate repository file.
+- When verified defaults, restrictions, or invalid combinations are not available, omit those sections instead of adding placeholders or uncertainty statements.
+- Target 100–250 words total.
+- Prioritize the information most useful for selecting and configuring the component in Figma.
+- Include only the sections that contain verified, useful information.

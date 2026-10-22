@@ -20,21 +20,24 @@ System: {{DesignSystemName}}
 ## Documentation Rules
 
 - Use standard Markdown headings without bold formatting.
-- Follow the existing repository conventions and preserve verified information from existing documentation.
-- Use Figma, implementation code, metadata, design tokens, and existing documentation as distinct evidence sources.
-- Identify the source supporting important technical claims when the source is relevant or when sources conflict.
-- Never invent metadata, properties, values, defaults, tokens, dimensions, behavior, constraints, or historical changes.
-- Distinguish verified facts, legacy information, recommendations, and unresolved questions.
-- Do not treat visual appearance as proof of implementation behavior, accessibility support, or interaction behavior.
-- Remove unused examples, template instructions, and unresolved template placeholders from the final document.
-- Generate sections dynamically. Include only sections relevant to the component and supported by available evidence.
-- Omit sections that are not applicable. If a relevant section cannot be verified, use a concise pending-confirmation note rather than inventing content.
-- Do not repeat the same unresolved question in multiple sections. Record material unresolved questions in Pending Clarification.
-- If sources conflict, document the competing evidence and leave the conclusion unresolved until it can be verified.
-- Do not change component property names or variant values when translating documentation.
+- Follow the repository templates and naming conventions.
+- Use Figma as the authoritative source for component specifications.
+- Existing component documentation must not be read, reused, referenced, or treated as evidence.
+- Never invent properties, values, defaults, tokens, dimensions, behavior, constraints, accessibility requirements, or historical changes.
+- Complete all relevant sections using the strongest available Figma evidence.
+- Evidence-based interpretations are allowed when supported by multiple observable pieces of Figma evidence.
+- Clearly distinguish verified specifications from evidence-based interpretations.
+- Do not treat visual appearance alone as proof of behavior, accessibility support, semantics, or implementation details.
+- Generate sections dynamically and omit sections that are genuinely not applicable.
+- Reserve [Pending confirmation] only for material gaps that cannot reasonably be addressed from available Figma evidence.
+- If sources conflict, document the conflicting evidence and leave the conclusion unresolved.
+- Do not change component property names, token names, or variant values when translating documentation.
 - Keep English and Spanish documentation semantically equivalent.
-- Preserve the original language of technical identifiers, token names, code, and property values.
-- Do not update the source templates while documenting an individual component.
+- Preserve the original language of technical identifiers, tokens, code, and property values.
+- Remove unused examples, template instructions, and unresolved placeholders from the final document.
+- Record only material unresolved questions in Pending Clarification.
+- Do not modify the documentation templates while documenting a component.
+- For Default Configuration, Typical Usage, Purpose / Intent, When to Use, When NOT to Use, Semantics, Iconography, Interaction, Accessibility, and Invalid Combinations, make a best-effort attempt to provide meaningful documentation before resorting to [Pending confirmation].
 
 ## Component Summary
 
@@ -48,9 +51,15 @@ System: {{DesignSystemName}}
 
 Use a concise, evidence-supported description of the component's purpose.
 
-If the role cannot be established, write:
+Describe the component's purpose using available evidence from:
 
-[Pending confirmation]
+- component description
+- properties
+- variants
+- visible examples
+- surrounding design-system context
+
+If the exact role cannot be fully verified, document the strongest evidence-based interpretation and identify any uncertainty.
 
 ### Key Properties
 
@@ -76,9 +85,13 @@ Rules:
 
 Document only a configuration supported by verified evidence. Identify the source when the default is ambiguous or disputed.
 
-If a default cannot be verified, write:
+If a default cannot be verified:
 
-[Pending confirmation]
+- Document the visible configurations that were inspected.
+- Identify which values were observed.
+- Explicitly state that no verified default configuration was found.
+
+Do not assume that a visible example represents the default.
 
 ### Typical Usage
 
@@ -96,11 +109,22 @@ Do not present recommendations as official design-system rules.
 
 {{TypicalUsage}}
 
-If no usage guidance can be established, write:
+Use examples, variants, naming conventions, component structure, and surrounding design-system context to describe likely usage patterns.
 
-[Pending confirmation]
+When usage is inferred from evidence rather than explicitly documented, label it as:
+
+Evidence-based interpretation:
 
 ## Purpose / Intent
+
+Describe the component's purpose as completely as the available evidence allows.
+
+A lack of written documentation does not prevent documenting purpose when the purpose is reasonably supported by the component's structure, variants, naming, or examples.
+
+Clearly distinguish:
+
+- Verified specification
+- Evidence-based interpretation
 
 ### Problem Solved
 
@@ -125,9 +149,11 @@ Include supported usage guidance. Distinguish official design-system guidance fr
 
 Omit unsupported examples and remove unused rows.
 
-If usage guidance is relevant but cannot be verified, write:
+Use available evidence to describe appropriate usage scenarios.
 
-[Pending confirmation]
+Where scenarios are inferred rather than documented, label them as evidence-based interpretations.
+
+Use [Pending confirmation] only when the available evidence is insufficient to support any meaningful usage guidance.
 
 ## When NOT to Use
 
@@ -145,6 +171,10 @@ If no restrictions are documented, state:
 Use this statement only when the available sources have been checked sufficiently. Otherwise, write:
 
 [Pending confirmation]
+
+If no explicit restrictions are documented, describe only verified limitations or clearly state that no restrictions were found.
+
+Do not invent prohibitions.
 
 ## Structure (Anatomy)
 
@@ -183,7 +213,15 @@ If layout information is relevant but cannot be verified, write:
 
 ## Semantics
 
-Document semantic purpose, role, and meaning only when supported by explicit source material.
+Document semantic meaning using all available Figma evidence, including:
+
+- component descriptions
+- properties
+- variants
+- labels
+- surrounding examples
+
+Do not invent implementation details, HTML elements, ARIA roles, or screen-reader behavior that cannot be verified.
 
 Do not infer semantic roles or intended meaning from visual appearance alone.
 
@@ -236,7 +274,7 @@ If the available sources do not establish the property inventory sufficiently, d
 
 ## States
 
-Document states explicitly supported by variants, prototypes, metadata, implementation code, or documentation.
+Document states explicitly supported by variants, prototypes, metadata, component descriptions, or other verified Figma evidence.
 
 | State | Verified Description | Visual Changes | Evidence |
 |-------|----------------------|----------------|----------|
@@ -266,7 +304,8 @@ Document only tokens that can be identified and verified in the available source
 Rules:
 
 - Preserve token names exactly.
-- Distinguish tokens directly inspected in Figma from tokens found in code or legacy documentation.
+- Distinguish tokens directly verified in Figma from tokens referenced in supplemental sources.
+- Mark any token not verified in Figma as "Not verified in Figma".
 - Do not infer a token mapping from a visually similar color, dimension, or style.
 - Do not claim a token is used by the component unless the relationship is supported by evidence.
 - Identify partial verification where applicable.
@@ -278,46 +317,51 @@ If token usage is relevant but cannot be verified, write:
 
 ## Interaction
 
-Document interactive behavior only when supported by prototypes, implementation code, metadata, explicit documentation, or other reliable evidence.
+Document observed interaction-related evidence, including:
 
-Distinguish:
+- visible states
+- state variants
+- prototype links
+- interaction labels
+- component descriptions
 
-- Observed visual states.
-- Verified interactive behavior.
-- Behavior described in documentation but not independently verified.
-- Recommendations for future implementation.
+Clearly distinguish between:
 
-{{InteractionDetails}}
+- Verified interactions
+- Observed states
+- Evidence-based interpretations
 
-Do not assume click behavior, dismissal behavior, keyboard interactions, state transitions, animations, or event handling.
-
-If interaction is not applicable, omit this section. If relevant behavior cannot be verified, write:
-
-[Pending confirmation]
+Do not assume implementation behavior that cannot be verified.
 
 ## Accessibility
 
-Document accessibility requirements and implementation details only when supported by explicit evidence.
+Document all accessibility-related evidence available in Figma.
 
 Relevant information may include:
 
-- Semantic role.
-- Accessible name or label.
-- Keyboard interaction.
-- Focus indicators and focus management.
-- Screen reader behavior.
-- Documented accessibility requirements.
-- Verified accessibility-related implementation details.
+- labels
+- visible state differentiation
+- focus indicators
+- icon usage
+- contrast-related observations
+- accessibility notes
+- semantic descriptions
 
-Do not infer WCAG compliance, ARIA attributes, keyboard support, focus behavior, or screen reader behavior from appearance alone.
+Clearly distinguish:
 
-Distinguish documented recommendations from verified implementation.
+- Verified accessibility requirements
+- Accessibility-related observations
+- Missing accessibility information
 
-{{AccessibilityDetails}}
+Do not invent:
 
-If accessibility behavior is relevant but cannot be verified, write:
+- ARIA roles
+- WCAG compliance claims
+- keyboard support
+- screen-reader behavior
+- focus management behavior
 
-[Pending confirmation]
+unless explicitly verified.
 
 ## Content Guidelines
 
@@ -357,7 +401,7 @@ Rules:
 
 ## Invalid Combinations
 
-Document invalid combinations only when explicitly supported by the design system, component metadata, implementation validation, existing documentation, or the user.
+Document invalid combinations only when explicitly supported by available Figma evidence or information provided by the user.
 
 | Combination / Condition | Verified Reason | Evidence |
 |-------------------------|-----------------|----------|
@@ -375,29 +419,7 @@ If the available evidence has been checked and no invalid combinations are docum
 
 [No documented invalid combinations found]
 
-If the available evidence is insufficient, write:
-
-[Pending confirmation]
-
-## QA Checklist
-
-Mark an item as complete only when sufficient evidence supports it. If verification is partial, leave the item unchecked and explain the limitation in Pending Clarification.
-
-- [ ] Component identity and source references verified.
-- [ ] Documented properties and values checked against available Figma evidence.
-- [ ] Variant inventory completeness assessed and any inspection limitations documented.
-- [ ] Default values verified, or unresolved conflicts recorded.
-- [ ] Layout measurements checked against the relevant configurations.
-- [ ] Token mappings verified against their actual sources.
-- [ ] Visual states distinguished from verified interactive behavior.
-- [ ] Accessibility claims supported by explicit evidence.
-- [ ] Invalid combinations supported by explicit evidence.
-- [ ] Recommendations distinguished from verified observations.
-- [ ] English and Spanish documentation are semantically equivalent.
-- [ ] No unresolved template placeholders remain.
-- [ ] No template instructions remain in the final document.
-- [ ] No unsupported or fabricated information has been added.
-- [ ] Historical changes included only when supported by version history.
+If no invalid combinations are documented, explicitly state that none were found during inspection rather than leaving the section empty.
 
 ## Pending Clarification
 
@@ -418,6 +440,12 @@ If no material questions remain, write:
 
 None
 
+Only include questions that materially affect documentation accuracy.
+
+Do not create clarification items simply because a detail is absent from Figma.
+
+Absence of evidence is not automatically a clarification request.
+
 ## Notes / Changelog
 
 Generated or reviewed using available source material on {{YYYY-MM-DD}}.
@@ -427,6 +455,8 @@ Record changes only when they are supported by verifiable evidence.
 Do not infer historical changes from timestamps, naming conventions, variant names, property structures, design patterns, or component organization.
 
 Distinguish the current documentation update from verified historical component changes.
+
+Do not attempt to reconstruct component history from naming conventions, timestamps, component structure, or inferred design evolution.
 
 If verified version history exists:
 
