@@ -2,9 +2,9 @@
 component: "Badge"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2046-82"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Badge is a small pill-shaped label that displays a short value, such as a count,
 
 ### What It Is
 
-Evidence-based interpretation: Badge displays a compact value, typically a number, next to other elements. This is supported by the default `label` value "0", the 10 px label typography, the fully rounded container (`semantic/full`) and the 14 px height. The status colors (`Information`, `Warning`, `Error`, `Success`) are bound to the corresponding `info`, `warning`, `danger` and `success` tokens, so the badge can also communicate status through color. Figma does not include a written usage description for this component.
+The Badge is a compact component used to display brief information, statuses, categories, labels, or counters associated with an interface element. Its primary purpose is to provide additional context in a quick and visual way without taking up significant space within the experience.
+
+It can be displayed using Filled or Line styles and leverage different color variants to communicate meaning, priority, or status.
 
 ### Key Properties
 
@@ -70,15 +72,20 @@ Evidence-based interpretation: The 14 px height and 10 px label indicate use alo
 
 Evidence-based interpretations based on the available variants:
 
-- To show a short value, such as a count, next to a label, icon or header.
-- To associate that value with a status (`Information`, `Warning`, `Error`, `Success`).
-- To place a badge on a dark surface (`Inverse`).
+- To display counts or numeric indicators associated with an action or item.
+- To indicate the status of a process, record, or entity.
+- To highlight relevant information within lists, tables, or cards.
+- As a classification or categorization label.
+- To communicate semantic states such as information, success, warning, or error.
+- When a concise and easily recognizable visual reference is needed.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-The badge has a single size and a single line of 10 px text; the component set does not provide larger sizes or icons.
+- To display long text or complex information.
+- As a replacement for full notifications, alerts, or messages.
+- When the displayed information requires additional explanation to be understood.
+- As the sole mechanism for communicating critical information.
+- To represent interactive actions when a button or link would be more appropriate.
 
 ## Structure (Anatomy)
 
@@ -222,5 +229,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
