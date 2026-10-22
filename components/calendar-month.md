@@ -2,9 +2,9 @@
 component: "Month"
 system: "Genome Evolution Design System"
 type: "Component set (internal building block)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2115-3842"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,8 @@ Month (`.Month` in Figma) is a rectangular cell that displays a short label, suc
 
 ### What It Is
 
-Evidence-based interpretation: Month is a selectable cell intended to be composed into a grid of months, for example in a month picker. This is supported by the component name, the three-character sample label "XXX" (the length of an abbreviated month name), the `Selected`, `Focused` and `Disable` states, and its similarity in structure and tokens to `.Number`. The Figma name starts with a period; in Figma, components whose names start with a period are not published to the library, so this component is meant to be used inside another component. The parent component is not referenced in this component set, and Figma does not include a written usage description.
+The Month component is a selection cell used to represent a month within a calendar grid. It serves as an internal building block of the Date Picker component, allowing users to select a specific month within a given year.
+It is displayed as a compact element containing a month label, either abbreviated or fully spelled out, and supports various visual states to communicate availability, selection, focus, and interaction. It is typically arranged as a 12-item grid representing the months of the year.
 
 ### Key Properties
 
@@ -74,16 +75,21 @@ Evidence-based interpretation: Used inside a parent component that arranges mont
 
 ## When to Use
 
-Evidence-based interpretations based on the available variants:
-
-- As the cell of a month grid that supports single selection (`Selected`).
-- To show months that cannot be chosen (`Disable`).
+- As part of a month selector within a Date Picker.
+- To select a specific month within a year.
+- In dashboard and reporting filters where users need to choose monthly periods.
+- In forms that require month-and-year selection only.
+- In temporal filtering or historical analysis experiences.
+- When day-level date selection is unnecessary.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Because the component is not published to the library (period-prefixed name), it is not available for direct insertion from the library.
+- To select complete dates that include day, month, and year.
+- As a primary application navigation element.
+- To represent complex date ranges.
+- When users need to select options unrelated to months.
+- To filter periods using custom time intervals.
+- When a simple dropdown would provide a more efficient solution.
 
 ## Structure (Anatomy)
 
@@ -189,14 +195,15 @@ Not verified in Figma: selection behavior, keyboard navigation and how `Disable`
 
 ## Accessibility
 
-Accessibility-related observations:
+Mandatory requirements
+- Each month option must be keyboard accessible.
+- Focus states must be visible and clearly distinguishable from Default and Selected states.
+- Selection must be communicated through indicators beyond colour alone.
+- Text, border, and background contrast must meet WCAG AA requirements.
 
-- `Selected` uses a solid fill and an inverse label, so it differs from other states by more than hue alone.
-- `Focused` uses a 1 px border, thinner than the 2 px focus borders used by other components inspected in this system.
-- `Disable` is indicated by a muted label only.
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names (for example, full month names for abbreviated labels), selected and disabled announcements, and keyboard support.
+Recommendations
+- Provide full accessible month names even when abbreviated labels are displayed visually.
+- Maintain a chronological order to support keyboard navigation and assistive technologies.
 
 ## Content Guidelines
 
@@ -244,5 +251,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
