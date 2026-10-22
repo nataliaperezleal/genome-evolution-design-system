@@ -1,12 +1,16 @@
 ---
 component: "Accordion"
 system: "Genome Evolution Design System"
-type: "Not verified in Figma"
+type: "Component set"
 status: "Not verified in Figma"
 version: "Not verified in Figma"
 owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2016-2350"
-last_updated: "2026-10-21"
+last_updated: "2026-10-22"
+tags:
+  - "accordion"
+  - "disclosure"
+  - "layout"
 ---
 
 # Accordion
@@ -15,46 +19,79 @@ System: Genome Evolution Design System
 
 ## Component Summary
 
-Accordion is a component with a header row and, in Behavior=Expanded, a content area. It has two Behavior values, two Size values, three Color values, and six State values.
+Accordion is a disclosure container with a header that shows or hides a content area, available in two sizes, three colors, and Default, Hovered, Pressed, Focused, Disabled and Loading states.
 
 ## Quick Reference
 
 ### What It Is
 
-[Pending confirmation]
-
-Verified observation: Figma exposes the Behavior values Collapsed and Expanded. Collapsed variants contain only a header row with a chevron-down icon. Expanded variants contain a header row with a chevron-up icon and a content container below it.
+Evidence-based interpretation: Accordion lets users reveal or hide a section of content under a labeled header. This is supported by the `Behavior` values `Collapsed` (header only, `chevron-down`) and `Expanded` (header plus a content area, `chevron-up`), and by the content area being a Figma slot that accepts any content. Figma does not include a written usage description for this component.
 
 ### Key Properties
 
 | Property | Available Values | Default |
 |----------|------------------|---------|
-| Color | Default, Evergreen, Indigo | Not verified in Figma |
-| Behavior | Collapsed, Expanded | Not verified in Figma |
-| Size | MD, SM | Not verified in Figma |
-| State | Default, Hovered, Pressed, Focused, Disabled, Loading | Not verified in Figma |
+| Behavior | Collapsed, Expanded | Collapsed |
+| Color | Default, Evergreen, Indigo | Default |
+| Size | MD, SM | MD |
+| State | Default, Hovered, Pressed, Focused, Disabled, Loading | Default |
+| text (text) | Free text | Placeholder |
+| showLeftIcon (boolean) | true, false | false |
+| icon (instance swap) | Any icon instance | info |
+| showCheckbox (boolean) | true, false | false |
+| showBadge (boolean) | true, false | false |
+| Content slot | Any content | Empty |
 
-Variant availability is not a full matrix. Color=Default exists for both Behavior values, both Sizes, and all six States (24 variants). Evergreen and Indigo exist only for Behavior=Expanded, with the States Default, Hovered, Pressed, and Focused, in both Sizes (16 variants). Disabled and Loading exist only for Color=Default.
+Defaults are taken from the component property definitions in Figma. `Evergreen` and `Indigo` are available only with `Behavior=Expanded` and the states `Default`, `Hovered`, `Pressed` and `Focused`.
 
 ### Default Configuration
 
-[Pending confirmation]
+`Behavior=Collapsed`, `Color=Default`, `Size=MD`, `State=Default`, `text="Placeholder"`, with the left icon, checkbox and badge hidden. In this configuration, the accordion shows a 36 px header with the label and a `chevron-down` icon.
 
 ### Typical Usage
 
-[Pending confirmation]
+Verified observation: The component set contains 40 variants. `Color=Default` covers both behaviors, both sizes and all six states (24 variants). `Evergreen` and `Indigo` cover only `Behavior=Expanded` in four states and both sizes (8 variants each).
+
+Evidence-based interpretation:
+
+- Use `Behavior=Collapsed` to show only the header, and `Behavior=Expanded` to show the header and its content.
+- Use `Size=MD` for standard layouts and `Size=SM` for compact layouts; SM reduces header padding and content padding.
+- Use `Color=Evergreen` or `Color=Indigo` to tint the expanded header label and divider.
+- Use `State=Loading` while the header and content are being loaded; the variant replaces them with skeleton placeholders.
+- Use `State=Disabled` when the section is unavailable.
+
+Recommendation: Stack several accordions vertically to build a group of collapsible sections, using the same `Size` and `Color` across the group.
 
 ## Purpose / Intent
 
-[Pending confirmation]
+### Problem Solved
+
+Evidence-based interpretation: Reduces visual load by letting users hide secondary or lengthy content behind a labeled header and reveal it on demand.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can scan section headers and open only the sections they need.
+
+### Typical Context
+
+Specific product contexts are not documented in Figma. The fixed 265 px width in all variants and the optional checkbox, badge and left icon suggest use in panels, side bars or settings lists; this is an evidence-based interpretation.
 
 ## When to Use
 
-[Pending confirmation]
+Evidence-based interpretations based on the available variants:
+
+- To group related content under a header that can be collapsed and expanded.
+- To show a count or indicator next to the header (`showBadge`), an icon before the label (`showLeftIcon`), or a checkbox in the header (`showCheckbox`).
+- To indicate a section that is loading (`State=Loading`) or unavailable (`State=Disabled`).
 
 ## When NOT to Use
 
-[Pending confirmation]
+[No documented restrictions found]
+
+Figma does not document restrictions. Limitations of the current component set:
+
+- A collapsed appearance is available only for `Color=Default`.
+- `Disabled` and `Loading` are available only for `Color=Default`.
 
 ## Structure (Anatomy)
 
@@ -62,170 +99,213 @@ Variant availability is not a full matrix. Color=Default exists for both Behavio
 
 | Part | Required / Optional | Description |
 |------|---------------------|-------------|
-| Header Container | Not verified in Figma | Row holding the left icon, text, and trailing icons. It carries the background and the bottom border, and in Focused it carries the 2px border (in Expanded). |
-| Left icon ("info") | Not verified in Figma | 16 x 16 icon at the start of the header, toggled by `showLeftIcon` and replaceable through `icon` in the generated interface. |
-| Checkbox | Not verified in Figma | 20 x 20 "Check" frame containing a 16 x 16 box (1px icon/primary border, 2px radius) and a 16 x 16 "bizagi-lines" icon, toggled by `showCheckbox` in the generated interface. In Behavior=Collapsed, Size=MD, State=Default it also contains a text layer "Label". |
-| Text | Not verified in Figma | Header text, with sample content "Placeholder". |
-| Badge | Not verified in Figma | 14px-wide pill containing the sample text "0", toggled by `showBadge` in the generated interface. |
-| Chevron | Not verified in Figma | 12 x 12 icon: chevron-down in Collapsed, chevron-up in Expanded. |
-| Content Container | Not verified in Figma | Present in Behavior=Expanded variants only, 100px tall, with a content slot inside (layer names vary by variant, such as "Content MD Default" and "Accordion Content"). |
-| Loading placeholders | Not verified in Figma | In State=Loading, rectangles using background/loading replace the text and chevron, and two bars replace the content in Expanded. |
+| Header Container | Required | Row containing the header elements; carries the state background. |
+| Left icon (`info`) | Optional (`showLeftIcon`) | 16 px icon before the label; swappable through `icon`. |
+| Checkbox | Optional (`showCheckbox`) | Nested checkbox instance with a `bizagi-lines` icon, placed before the label. |
+| Label | Required | Header text, set through `text`. |
+| Badge | Optional (`showBadge`) | Small rounded counter (shows "0") before the chevron. |
+| Chevron | Required | 12 px `chevron-down` (Collapsed) or `chevron-up` (Expanded). |
+| Content Container | Required in `Behavior=Expanded` | Area below the header that holds the content slot. |
+| Content slot | Required in `Behavior=Expanded` | Figma slot (for example, `Content MD Default`) that accepts custom content. |
 
 ### Layout
 
 | Property | Verified Value | Evidence |
 |----------|----------------|----------|
-| Variant width | 265 in all 40 variants | Figma metadata |
-| Variant height | Collapsed MD 36; Collapsed SM 24; Expanded MD 136; Expanded SM 124 | Figma metadata, all 40 variants |
-| Header padding (Size=MD) | Horizontal space/16, vertical space/8 | Figma design context, Default-color MD variants and Evergreen/Indigo MD variants inspected |
-| Header padding (Size=SM) | Horizontal space/8, vertical space/2 | Figma design context, SM Default Expanded and Collapsed only |
-| Header item spacing | 8, bound to gap/sm or space/8 in most inspected layers and a literal 8 in others | Figma design context |
-| Content Container height | 100 in Expanded variants | Figma design context |
-| Content Container padding | space/16 (MD), space/8 (SM Default); literal 16 in Indigo MD Focused | Figma design context |
-| Content slot corner radius | radius/4 | Figma design context |
-| Bottom border (Collapsed, Default color) | 1px on the root, border/default; none on the Collapsed Disabled root | Figma design context |
-| Bottom border (Expanded header) | 1px: border/strong (Default color: Default, Hovered, Pressed), border/disabled (Disabled), border/evergreen (Evergreen Default) | Figma design context |
-| Focus border (State=Focused) | 2px, border/focus (focus/width), around the header container in Expanded and around the root in Collapsed MD | Figma design context |
-| Icon sizes | Left icon 16; chevron 12; checkbox frame 20 with a 16 box | Figma design context |
-
-The 1px border widths come from the generated border classes. I did not find a variable bound to the 1px width. Measurements are per variant and are not generalized. Fixed width or responsive behavior was not verified.
+| Width | 265 px (all variants) | Variant dimensions |
+| Header height — MD | 36 px | Variant dimensions |
+| Header height — SM | 24 px | Variant dimensions |
+| Header padding — MD | `space/16` (16) horizontal, `space/8` (8) vertical | Variable bindings |
+| Header padding — SM | `space/8` (8) horizontal, `space/2` (2) vertical | Variable bindings |
+| Header gap | `gap/sm` (8) | Variable bindings |
+| Content Container height | 100 px (Expanded, both sizes) | Variant dimensions |
+| Content padding — MD | `space/16` (16) | Variable bindings; slot 233 × 68 px |
+| Content padding — SM | `space/8` (8) | Layer positions; slot 249 × 84 px |
+| Content slot radius | `radius/4` (4) | Variable binding |
+| Total height — Expanded | 136 px (MD), 124 px (SM) | Variant dimensions |
+| Label typography | `Text/Body/SM`: `family/body` (Open Sans), `weight/regular` (400), `size/14`, `line-height/20` | Text style |
+| Icon sizes | Left icon 16 px; chevron 12 px | Layer dimensions |
 
 ## Semantics
 
-[Pending confirmation]
+Evidence-based interpretation: The header labels a section of content, and the chevron direction reflects whether the section is collapsed (`chevron-down`) or expanded (`chevron-up`). `Color` values tint the label and the header divider in the expanded state; Figma does not document whether they carry meaning. The meaning of the checkbox and badge in the header is not documented in Figma.
+
+Not verified in Figma: HTML elements, ARIA roles or attributes (for example, expanded state announcement), and screen-reader behavior.
 
 ## Iconography
 
 | Slot | Verified Icon / Description | Evidence |
 |------|-----------------------------|----------|
-| Left icon | "info" | Figma design context |
-| Checkbox icon | "bizagi-lines" | Figma design context |
-| Trailing icon | "chevron-down" (Collapsed) and "chevron-up" (Expanded) | Figma design context |
-
-Icon colors are defined inside SVG assets that were not opened. The icon/disabled and icon/primary variables are returned for this node, but their application to specific icons is not verified.
+| Left icon | `info` by default; swappable via `icon`; hidden unless `showLeftIcon=true` | Instance swap property |
+| Chevron | `chevron-down` (Collapsed), `chevron-up` (Expanded); `icon/primary`, `icon/disabled` in Disabled | Layer names, variable bindings |
+| Checkbox icon | `bizagi-lines`, shown next to the checkbox when `showCheckbox=true` | Nested instance |
 
 ## Variants (Properties)
 
-### Color
-
-| Value | Verified Description | Evidence / Notes |
-|-------|----------------------|------------------|
-| Default | Header text in text/primary, header background background/canvas | 24 variants |
-| Evergreen | Header text in text/evergreen, Expanded header bottom border in border/evergreen (verified in Size=MD, State=Default) | 8 variants, Behavior=Expanded only |
-| Indigo | Header text in text/indigo (verified in Size=MD, State=Focused) | 8 variants, Behavior=Expanded only |
+The inventory below is complete: all 40 variants were inspected.
 
 ### Behavior
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| Collapsed | Header row with chevron-down | 12 variants, Color=Default only |
-| Expanded | Header row with chevron-up, plus a 100px Content Container | 28 variants |
+| Collapsed | Header only, with `chevron-down` and a 1 px `border/default` bottom border. | `Color=Default` only |
+| Expanded | Header plus a 100 px content area; `chevron-up`; header divider in the color of `Color`. | All colors |
+
+### Color
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Default | Label `text/primary`; expanded divider `border/strong`. | All behaviors and states |
+| Evergreen | Label `text/evergreen`; expanded divider `border/evergreen`. | Expanded only; Default, Hovered, Pressed, Focused |
+| Indigo | Label `text/indigo`; expanded divider `border/indigo`. | Expanded only; Default, Hovered, Pressed, Focused |
 
 ### Size
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| MD | Header padding space/16 by space/8; heights 36 (Collapsed) and 136 (Expanded) | Verified in Default-color variants and 2 colored variants |
-| SM | Header padding space/8 by space/2; heights 24 (Collapsed) and 124 (Expanded). Header text style is the same Text/Body/SM as MD. | Verified in SM Default Expanded and Collapsed only |
+| MD | 36 px header; 16 px content padding. | All colors |
+| SM | 24 px header; 8 px content padding. | All colors |
 
 ### State
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| Default | Resting appearance | Figma |
-| Hovered | Visual variant | Figma |
-| Pressed | Visual variant | Figma |
-| Focused | Visual variant with a 2px border/focus | Figma |
-| Disabled | Visual variant | Color=Default only |
-| Loading | Visual variant | Color=Default only |
+| Default | Header background `background/canvas`. | All colors |
+| Hovered | Header background `background/interactive/hovered`. | All colors |
+| Pressed | Header background `background/interactive/pressed`. | All colors |
+| Focused | 2 px (`focus/width`) `border/focus` outline around the whole accordion. | All colors |
+| Disabled | Header background `background/disabled`, label `text/disabled`, icons `icon/disabled`. | `Color=Default` only |
+| Loading | Header and content replaced by skeleton blocks in `background/loading`. | `Color=Default` only |
 
-Inventory completeness: all 40 variants listed in the node metadata were identified. Detailed inspection covered 16 of them, so behavior-specific details for the remaining 24 variants are not documented. Properties defined outside this node, if any, were not inspected.
+### text
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Text | Header label. "Placeholder" in all variants. | Text property |
+
+### showLeftIcon / icon
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| showLeftIcon=false | Left icon hidden. | Default |
+| showLeftIcon=true | Shows the icon set in `icon` (`info` by default). | In `Disabled`, the icon is not exposed for swapping |
+
+### showCheckbox
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| false | Checkbox hidden. | Default |
+| true | Shows the nested checkbox (with `bizagi-lines` icon) before the label. | In `Collapsed / MD / Default` the nested checkbox also shows its own "Label" text |
+
+### showBadge
+
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| false | Badge hidden. | Default |
+| true | Shows a counter badge before the chevron. | Not shown in `Disabled` and `Loading` |
 
 ## States
 
 | State | Verified Description | Visual Changes | Evidence |
 |-------|----------------------|----------------|----------|
-| Default | Visual variant | Header background background/canvas, text text/primary. | Figma |
-| Hovered | Visual variant | Header background becomes background/interactive/hovered. | Figma, Default color MD |
-| Pressed | Visual variant | Header background becomes background/interactive/pressed. | Figma, Default color MD |
-| Focused | Visual variant | A 2px border/focus appears around the header container (Expanded) or the root (Collapsed MD). | Figma, Default color MD; Indigo MD Expanded |
-| Disabled | Visual variant | Header background becomes background/disabled and text becomes text/disabled. In Expanded the header bottom border is border/disabled. In Collapsed MD no root bottom border was found. | Figma, Default color MD |
-| Loading | Visual variant | The text and chevron are replaced by background/loading rectangles (a 170 x 20 bar and a 12 x 12 square). In Expanded the content shows two background/loading bars (full width and 129 wide). | Figma, Default color MD |
+| Default | Resting state. | `background/canvas` header. | State variants |
+| Hovered | Hover appearance. | `background/interactive/hovered` header. | State variants |
+| Pressed | Pressed appearance. | `background/interactive/pressed` header. | State variants |
+| Focused | Focus appearance. | 2 px `border/focus` outline around the accordion; replaces the bottom border/divider. | State variants |
+| Disabled | Unavailable appearance. | `background/disabled` header; `text/disabled` label; `icon/disabled` chevron; Collapsed has no bottom border. | State variants |
+| Loading | Loading appearance. | Skeleton blocks (`background/loading`) replace label, chevron and content. | State variants |
 
-These are visual state variants only. They do not prove that any interaction, expand or collapse behavior, focus behavior, or state transition is implemented. Hovered, Pressed, and Focused for Evergreen and Indigo, and all SM states other than Default, were not inspected in detail.
+These are visual variants; transitions and timing are not defined in Figma.
 
 ## Token Mapping
 
 | Category | Token | Verified Usage | Evidence |
 |----------|-------|----------------|----------|
-| Color | background/canvas (#ffffff) | Header background (Default, Focused, Loading) and Content Container background | Figma variable binding |
-| Color | background/interactive/hovered (#f7f8f7) | Hovered header background | Figma variable binding |
-| Color | background/interactive/pressed (#e9ecea) | Pressed header background | Figma variable binding |
-| Color | background/disabled (#f4f6f4) | Disabled header background | Figma variable binding |
-| Color | background/loading (#d9deda99) | Loading placeholder rectangles | Figma variable binding |
-| Color | text/primary (#2d342f) | Header text (Default color, not Disabled) | Figma variable binding |
-| Color | text/disabled (#849588) | Disabled header text | Figma variable binding |
-| Color | text/evergreen (#297a39) | Evergreen header text (verified in Size=MD, State=Default) | Figma variable binding |
-| Color | text/indigo (#6b1b99) | Indigo header text (verified in Size=MD, State=Focused) | Figma variable binding |
-| Color | border/strong (#5f6d62) | Expanded header bottom border in Default color | Figma variable binding |
-| Color | border/default (#c3cbc5) | Collapsed root bottom border | Figma variable binding |
-| Color | border/disabled (#c3cbc5) | Expanded Disabled header bottom border | Figma variable binding |
-| Color | border/evergreen (#297a39) | Evergreen Expanded header bottom border (verified in Size=MD, State=Default) | Figma variable binding |
-| Color | border/focus (#339947) | State=Focused border | Figma variable binding |
-| Color | icon/primary (#5f6d62) | Checkbox box border | Figma variable binding |
-| Border width | focus/width (2) | State=Focused border | Figma variable binding |
-| Spacing | space/16, space/8, space/2 | Header and content padding (see Layout) | Figma variable binding |
-| Spacing | gap/sm (8) | Header item spacing in most inspected layers | Figma variable binding |
-| Shape | radius/4 (4) | Content slot corner radius | Figma variable binding |
-| Typography | Text/Body/SM | Header text (family/body, size/14, weight 400, line-height/20, letter spacing 0) | Figma |
-| Typography | size/12, line-height/16, letter-spacing/normal | "Label" text in the checkbox (Collapsed, MD, Default) | Figma variable binding |
+| Background | `background/canvas` | Header (Default state) and content area | Variable binding |
+| Background | `background/interactive/hovered` | Header, Hovered | Variable binding |
+| Background | `background/interactive/pressed` | Header, Pressed | Variable binding |
+| Background | `background/disabled` | Header, Disabled | Variable binding |
+| Background | `background/loading` | Skeleton blocks, Loading | Variable binding |
+| Border | `border/default` | Collapsed bottom border | Variable binding |
+| Border | `border/strong` | Expanded divider, Color=Default | Variable binding |
+| Border | `border/evergreen` | Expanded divider, Color=Evergreen | Variable binding |
+| Border | `border/indigo` | Expanded divider, Color=Indigo | Variable binding |
+| Border | `border/disabled` | Expanded divider, Disabled | Variable binding |
+| Border | `border/focus`, `focus/width` | Focus outline | Variable binding |
+| Text | `text/primary`, `text/evergreen`, `text/indigo`, `text/disabled` | Label color by Color/State | Variable binding |
+| Icon | `icon/primary`, `icon/disabled` | Chevron and icons | Variable binding |
+| Spacing | `space/16`, `space/8`, `space/2`, `gap/sm` | Header and content padding, gaps | Variable binding |
+| Radius | `radius/4` | Content slot | Variable binding |
+| Typography | `Text/Body/SM` | Label | Text style |
 
-The following were returned for this node, but their usage was not established: border/indigo (#6b1b99), icon/disabled (#9daaa0), radius/0, and weight/regular (resolves to the style name "Regular"). The Badge uses literal values (border #9e9e9e, text #272727) and font/* variable references that were not returned by Figma's variable definitions, and the checkbox border width references width/1, which was also not returned. Token values come from Figma only; repository token JSON files were not used.
+Limitation: The nested Badge uses hard-coded colors and type values that are not bound to Genome Evolution variables, so its token mapping cannot be documented.
 
 ## Interaction
 
-[Pending confirmation]
+Observed states: `Default`, `Hovered`, `Pressed` and `Focused` exist for all colors; `Disabled` and `Loading` exist for `Color=Default`.
+
+Evidence-based interpretation: The header acts as the control that toggles between `Collapsed` and `Expanded`, as indicated by the interactive header states and the chevron direction.
+
+Not verified in Figma: the actual toggle behavior, whether multiple accordions can be open at once, keyboard interaction, animation, and the interaction of the header checkbox. No prototype interactions were found.
 
 ## Accessibility
 
-[Pending confirmation]
+Accessibility-related observations:
+
+- `Focused` shows a visible 2 px `border/focus` outline around the whole accordion in every color and size.
+- `Disabled` changes background, label and icon colors, so the state is not conveyed by a single cue.
+- The chevron direction differs between collapsed and expanded, but the expanded state is also conveyed by the visible content area.
+- Contrast ratios have not been verified.
+
+Missing accessibility information (not verified in Figma): ARIA roles and attributes, keyboard support, focus order, screen-reader announcements and the accessible name of the header checkbox.
+
+## Content Guidelines
+
+Verified observation: The header label uses `Text/Body/SM` and wraps within the available width (the label fills the remaining space in the header).
+
+Recommendation: Keep header labels short and descriptive so the section content is clear before expanding. Figma does not define a maximum label length.
+
+## Examples
+
+### Collapsed section
+
+Configuration: `Behavior=Collapsed`, `Color=Default`, `Size=MD`, `State=Default`
+
+Description: A single header with label and `chevron-down`.
+
+Evidence / Classification: Existing variant in Figma.
+
+### Expanded colored section
+
+Configuration: `Behavior=Expanded`, `Color=Evergreen`, `Size=MD`, `State=Default`
+
+Description: Evergreen label and divider with the content slot visible.
+
+Evidence / Classification: Existing variant in Figma.
+
+### Compact loading section
+
+Configuration: `Behavior=Expanded`, `Color=Default`, `Size=SM`, `State=Loading`
+
+Description: Skeleton placeholders while the content loads.
+
+Evidence / Classification: Existing variant in Figma.
 
 ## Invalid Combinations
 
-[Pending confirmation]
+| Combination / Condition | Verified Reason | Evidence |
+|-------------------------|-----------------|----------|
+| `Color=Evergreen` or `Color=Indigo` with `Behavior=Collapsed` | No such variant exists | Variant inventory |
+| `Color=Evergreen` or `Color=Indigo` with `State=Disabled` or `State=Loading` | No such variant exists | Variant inventory |
 
-Observation, not a rule: Evergreen and Indigo are not provided for Behavior=Collapsed, and Disabled and Loading are not provided for them either.
-
-## QA Checklist
-
-- [x] Component identity and source references verified.
-- [ ] Documented properties and values checked against available Figma evidence.
-- [x] Variant inventory completeness assessed and any inspection limitations documented.
-- [ ] Default values verified, or unresolved conflicts recorded.
-- [ ] Layout measurements checked against the relevant configurations.
-- [ ] Token mappings verified against their actual sources.
-- [x] Visual states distinguished from verified interactive behavior.
-- [ ] Accessibility claims supported by explicit evidence.
-- [ ] Invalid combinations supported by explicit evidence.
-- [x] Recommendations distinguished from verified observations.
-- [ ] English and Spanish documentation are semantically equivalent.
-- [x] No unresolved template placeholders remain.
-- [x] No template instructions remain in the final document.
-- [ ] No unsupported or fabricated information has been added.
-- [x] Historical changes included only when supported by version history.
+These combinations are unavailable rather than explicitly documented as invalid.
 
 ## Pending Clarification
 
-1. Component structure. Node 2016:2350 is a frame holding 40 components and is not confirmed as a component set. Properties defined outside it, if any, were not inspected. Resolve by confirming the component set in Figma.
-2. Property inventory and defaults. The default of Color, Behavior, Size, and State is not established. The generated interface also lists `text` (sample "Placeholder"), `showLeftIcon`, `showCheckbox`, `showBadge`, `icon`, and content slots, but whether they are Figma properties, and their types and defaults, are unverified. Resolve by confirming the properties panel in Figma.
-3. Partial inspection. Only 16 of 40 variants were inspected in detail. SM states other than Default, Evergreen and Indigo variants other than the two listed, and Hovered and Pressed for colored variants were identified by name and size only.
-4. Token gaps. Badge literals, unresolved font/* and width/1 references, unbound 1px border widths, the literal 16 padding in Indigo MD Focused, and the unestablished usage of border/indigo, icon/disabled, icon/primary on icons, and radius/0.
-5. Layer differences between variants. The "Label" text in the checkbox appears only in Collapsed, MD, Default among the inspected variants. Collapsed Disabled has no root bottom border while Expanded Disabled does. In Focused, the border is on the root in Collapsed and on the header container in Expanded. It is not known whether these are intentional.
-6. Variant availability. It is not known whether the absence of Evergreen and Indigo for Collapsed, and of Disabled and Loading for those colors, is intentional.
-7. Not documented in Figma: purpose, usage guidance, restrictions, semantics, interaction (including expand and collapse), accessibility, invalid combinations, status, version, owner, tags, and the content that goes in the content slot.
+1. Collapsed colored accordions: `Evergreen` and `Indigo` exist only as `Expanded`. When a colored accordion is collapsed, should it switch to `Color=Default`, or are collapsed Evergreen/Indigo variants missing? This determines how designers represent the collapsed state of a colored accordion.
 
 ## Notes / Changelog
 
-Generated or reviewed using available source material on 2026-10-21.
+Generated or reviewed using available source material on 2026-10-22.
 
 [No verified historical changes available]

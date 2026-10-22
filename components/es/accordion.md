@@ -1,12 +1,16 @@
 ---
 component: "Accordion"
 system: "Genome Evolution Design System"
-type: "No verificado en Figma"
+type: "Conjunto de componentes"
 status: "No verificado en Figma"
 version: "No verificado en Figma"
 owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2016-2350"
-last_updated: "2026-10-21"
+last_updated: "2026-10-22"
+tags:
+  - "accordion"
+  - "disclosure"
+  - "layout"
 ---
 
 # Accordion
@@ -15,217 +19,293 @@ Sistema: Genome Evolution Design System
 
 ## Resumen del componente
 
-Accordion es un componente con una fila de encabezado y, en Behavior=Expanded, un área de contenido. Tiene dos valores de Behavior, dos de Size, tres de Color y seis de State.
+Accordion es un contenedor desplegable con un encabezado que muestra u oculta un área de contenido, disponible en dos tamaños, tres colores y los estados Default, Hovered, Pressed, Focused, Disabled y Loading.
 
 ## Referencia rápida
 
 ### Qué es
 
-[Pendiente de confirmación]
-
-Observación verificada: Figma expone los valores de Behavior Collapsed y Expanded. Las variantes Collapsed contienen solo una fila de encabezado con un icono chevron-down. Las variantes Expanded contienen una fila de encabezado con un icono chevron-up y un contenedor de contenido debajo.
+Interpretación basada en evidencia: Accordion permite a los usuarios mostrar u ocultar una sección de contenido bajo un encabezado con etiqueta. Esto se sustenta en los valores de `Behavior` `Collapsed` (solo encabezado, `chevron-down`) y `Expanded` (encabezado más un área de contenido, `chevron-up`), y en que el área de contenido es un slot de Figma que acepta cualquier contenido. Figma no incluye una descripción de uso escrita para este componente.
 
 ### Propiedades clave
 
-| Propiedad | Valores disponibles | Valor por defecto |
-|-----------|---------------------|-------------------|
-| Color | Default, Evergreen, Indigo | No verificado en Figma |
-| Behavior | Collapsed, Expanded | No verificado en Figma |
-| Size | MD, SM | No verificado en Figma |
-| State | Default, Hovered, Pressed, Focused, Disabled, Loading | No verificado en Figma |
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Behavior | Collapsed, Expanded | Collapsed |
+| Color | Default, Evergreen, Indigo | Default |
+| Size | MD, SM | MD |
+| State | Default, Hovered, Pressed, Focused, Disabled, Loading | Default |
+| text (texto) | Texto libre | Placeholder |
+| showLeftIcon (booleano) | true, false | false |
+| icon (intercambio de instancia) | Cualquier instancia de ícono | info |
+| showCheckbox (booleano) | true, false | false |
+| showBadge (booleano) | true, false | false |
+| Slot de contenido | Cualquier contenido | Vacío |
 
-La disponibilidad de variantes no es una matriz completa. Color=Default existe para ambos valores de Behavior, ambos Size y los seis State (24 variantes). Evergreen e Indigo existen solo para Behavior=Expanded, con los State Default, Hovered, Pressed y Focused, en ambos Size (16 variantes). Disabled y Loading existen solo para Color=Default.
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. `Evergreen` e `Indigo` están disponibles solo con `Behavior=Expanded` y los estados `Default`, `Hovered`, `Pressed` y `Focused`.
 
-### Configuración por defecto
+### Configuración predeterminada
 
-[Pendiente de confirmación]
+`Behavior=Collapsed`, `Color=Default`, `Size=MD`, `State=Default`, `text="Placeholder"`, con el ícono izquierdo, la casilla de verificación y el badge ocultos. En esta configuración, el accordion muestra un encabezado de 36 px con la etiqueta y un ícono `chevron-down`.
 
 ### Uso típico
 
-[Pendiente de confirmación]
+Observación verificada: El conjunto de componentes contiene 40 variantes. `Color=Default` cubre ambos comportamientos, ambos tamaños y los seis estados (24 variantes). `Evergreen` e `Indigo` cubren solo `Behavior=Expanded` en cuatro estados y ambos tamaños (8 variantes cada uno).
+
+Interpretación basada en evidencia:
+
+- Use `Behavior=Collapsed` para mostrar solo el encabezado y `Behavior=Expanded` para mostrar el encabezado y su contenido.
+- Use `Size=MD` para diseños estándar y `Size=SM` para diseños compactos; SM reduce el relleno del encabezado y del contenido.
+- Use `Color=Evergreen` o `Color=Indigo` para teñir la etiqueta y el divisor del encabezado expandido.
+- Use `State=Loading` mientras se cargan el encabezado y el contenido; la variante los reemplaza con marcadores de carga (skeleton).
+- Use `State=Disabled` cuando la sección no esté disponible.
+
+Recomendación: Apile varios accordions verticalmente para crear un grupo de secciones desplegables, usando el mismo `Size` y `Color` en todo el grupo.
 
 ## Propósito / Intención
 
-[Pendiente de confirmación]
+### Problema que resuelve
 
-## Cuándo usarlo
+Interpretación basada en evidencia: Reduce la carga visual al permitir ocultar contenido secundario o extenso tras un encabezado con etiqueta y mostrarlo cuando se necesite.
 
-[Pendiente de confirmación]
+### Resultado esperado
 
-## Cuándo NO usarlo
+Interpretación basada en evidencia: Los usuarios pueden recorrer los encabezados de las secciones y abrir solo las que necesitan.
 
-[Pendiente de confirmación]
+### Contexto típico
+
+Los contextos específicos de producto no están documentados en Figma. El ancho fijo de 265 px en todas las variantes y la casilla de verificación, el badge y el ícono izquierdo opcionales sugieren uso en paneles, barras laterales o listas de configuración; esto es una interpretación basada en evidencia.
+
+## Cuándo usar
+
+Interpretaciones basadas en evidencia a partir de las variantes disponibles:
+
+- Para agrupar contenido relacionado bajo un encabezado que se puede contraer y expandir.
+- Para mostrar un contador o indicador junto al encabezado (`showBadge`), un ícono antes de la etiqueta (`showLeftIcon`) o una casilla de verificación en el encabezado (`showCheckbox`).
+- Para indicar una sección que se está cargando (`State=Loading`) o que no está disponible (`State=Disabled`).
+
+## Cuándo NO usar
+
+[No se encontraron restricciones documentadas]
+
+Figma no documenta restricciones. Limitaciones del conjunto de componentes actual:
+
+- La apariencia contraída solo está disponible para `Color=Default`.
+- `Disabled` y `Loading` solo están disponibles para `Color=Default`.
 
 ## Estructura (Anatomía)
 
 ### Partes del componente
 
-| Parte | Requerida / Opcional | Descripción |
-|-------|----------------------|-------------|
-| Header Container | No verificado en Figma | Fila que contiene el icono izquierdo, el texto y los iconos finales. Lleva el fondo y el borde inferior, y en Focused lleva el borde de 2px (en Expanded). |
-| Icono izquierdo ("info") | No verificado en Figma | Icono de 16 x 16 al inicio del encabezado, activado por `showLeftIcon` y reemplazable mediante `icon` en la interfaz generada. |
-| Checkbox | No verificado en Figma | Marco "Check" de 20 x 20 que contiene una casilla de 16 x 16 (borde de 1px icon/primary, radio de 2px) y un icono "bizagi-lines" de 16 x 16, activado por `showCheckbox` en la interfaz generada. En Behavior=Collapsed, Size=MD, State=Default contiene además una capa de texto "Label". |
-| Texto | No verificado en Figma | Texto del encabezado, con contenido de muestra "Placeholder". |
-| Badge | No verificado en Figma | Píldora de 14px de ancho con el texto de muestra "0", activada por `showBadge` en la interfaz generada. |
-| Chevron | No verificado en Figma | Icono de 12 x 12: chevron-down en Collapsed, chevron-up en Expanded. |
-| Content Container | No verificado en Figma | Presente solo en las variantes Behavior=Expanded, de 100px de alto, con una ranura de contenido en su interior (los nombres de capa varían según la variante, como "Content MD Default" y "Accordion Content"). |
-| Marcadores de carga | No verificado en Figma | En State=Loading, rectángulos que usan background/loading reemplazan el texto y el chevron, y dos barras reemplazan el contenido en Expanded. |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Header Container | Obligatoria | Fila que contiene los elementos del encabezado; lleva el fondo del estado. |
+| Ícono izquierdo (`info`) | Opcional (`showLeftIcon`) | Ícono de 16 px antes de la etiqueta; intercambiable mediante `icon`. |
+| Casilla de verificación | Opcional (`showCheckbox`) | Instancia anidada de casilla con un ícono `bizagi-lines`, ubicada antes de la etiqueta. |
+| Etiqueta | Obligatoria | Texto del encabezado, definido mediante `text`. |
+| Badge | Opcional (`showBadge`) | Contador pequeño redondeado (muestra "0") antes del chevron. |
+| Chevron | Obligatoria | `chevron-down` (Collapsed) o `chevron-up` (Expanded) de 12 px. |
+| Content Container | Obligatoria en `Behavior=Expanded` | Área bajo el encabezado que contiene el slot de contenido. |
+| Slot de contenido | Obligatoria en `Behavior=Expanded` | Slot de Figma (por ejemplo, `Content MD Default`) que acepta contenido personalizado. |
 
 ### Layout
 
 | Propiedad | Valor verificado | Evidencia |
 |-----------|------------------|-----------|
-| Ancho de la variante | 265 en las 40 variantes | Metadatos de Figma |
-| Alto de la variante | Collapsed MD 36; Collapsed SM 24; Expanded MD 136; Expanded SM 124 | Metadatos de Figma, las 40 variantes |
-| Padding del encabezado (Size=MD) | Horizontal space/16, vertical space/8 | Contexto de diseño de Figma, variantes MD de color Default y variantes MD Evergreen/Indigo inspeccionadas |
-| Padding del encabezado (Size=SM) | Horizontal space/8, vertical space/2 | Contexto de diseño de Figma, solo SM Default Expanded y Collapsed |
-| Espaciado entre elementos del encabezado | 8, vinculado a gap/sm o space/8 en la mayoría de las capas inspeccionadas y 8 literal en otras | Contexto de diseño de Figma |
-| Alto del Content Container | 100 en las variantes Expanded | Contexto de diseño de Figma |
-| Padding del Content Container | space/16 (MD), space/8 (SM Default); 16 literal en Indigo MD Focused | Contexto de diseño de Figma |
-| Radio de esquina de la ranura de contenido | radius/4 | Contexto de diseño de Figma |
-| Borde inferior (Collapsed, color Default) | 1px en la raíz, border/default; ninguno en la raíz de Collapsed Disabled | Contexto de diseño de Figma |
-| Borde inferior (encabezado Expanded) | 1px: border/strong (color Default: Default, Hovered, Pressed), border/disabled (Disabled), border/evergreen (Evergreen Default) | Contexto de diseño de Figma |
-| Borde de foco (State=Focused) | 2px, border/focus (focus/width), alrededor del contenedor del encabezado en Expanded y alrededor de la raíz en Collapsed MD | Contexto de diseño de Figma |
-| Tamaños de iconos | Icono izquierdo 16; chevron 12; marco del checkbox 20 con una casilla de 16 | Contexto de diseño de Figma |
-
-Los anchos de borde de 1px provienen de las clases de borde generadas. No encontré una variable vinculada al ancho de 1px. Las medidas son por variante y no se generalizan. No se verificó un ancho fijo ni comportamiento responsivo.
+| Ancho | 265 px (todas las variantes) | Dimensiones de las variantes |
+| Alto del encabezado — MD | 36 px | Dimensiones de las variantes |
+| Alto del encabezado — SM | 24 px | Dimensiones de las variantes |
+| Relleno del encabezado — MD | `space/16` (16) horizontal, `space/8` (8) vertical | Vinculaciones de variables |
+| Relleno del encabezado — SM | `space/8` (8) horizontal, `space/2` (2) vertical | Vinculaciones de variables |
+| Espacio del encabezado | `gap/sm` (8) | Vinculaciones de variables |
+| Alto del Content Container | 100 px (Expanded, ambos tamaños) | Dimensiones de las variantes |
+| Relleno del contenido — MD | `space/16` (16) | Vinculaciones de variables; slot de 233 × 68 px |
+| Relleno del contenido — SM | `space/8` (8) | Posiciones de capa; slot de 249 × 84 px |
+| Radio del slot de contenido | `radius/4` (4) | Vinculación de variable |
+| Alto total — Expanded | 136 px (MD), 124 px (SM) | Dimensiones de las variantes |
+| Tipografía de la etiqueta | `Text/Body/SM`: `family/body` (Open Sans), `weight/regular` (400), `size/14`, `line-height/20` | Estilo de texto |
+| Tamaños de íconos | Ícono izquierdo 16 px; chevron 12 px | Dimensiones de capa |
 
 ## Semántica
 
-[Pendiente de confirmación]
+Interpretación basada en evidencia: El encabezado identifica una sección de contenido, y la dirección del chevron refleja si la sección está contraída (`chevron-down`) o expandida (`chevron-up`). Los valores de `Color` tiñen la etiqueta y el divisor del encabezado en el estado expandido; Figma no documenta si tienen significado. El significado de la casilla de verificación y del badge en el encabezado no está documentado en Figma.
+
+No verificado en Figma: elementos HTML, roles o atributos ARIA (por ejemplo, el anuncio del estado expandido) y comportamiento con lectores de pantalla.
 
 ## Iconografía
 
-| Ranura | Icono / Descripción verificada | Evidencia |
+| Ranura | Ícono / descripción verificada | Evidencia |
 |--------|--------------------------------|-----------|
-| Icono izquierdo | "info" | Contexto de diseño de Figma |
-| Icono del checkbox | "bizagi-lines" | Contexto de diseño de Figma |
-| Icono final | "chevron-down" (Collapsed) y "chevron-up" (Expanded) | Contexto de diseño de Figma |
-
-Los colores de los iconos están definidos dentro de recursos SVG que no se abrieron. Las variables icon/disabled e icon/primary se devuelven para este nodo, pero no se verificó su aplicación a iconos concretos.
+| Ícono izquierdo | `info` por defecto; intercambiable mediante `icon`; oculto salvo con `showLeftIcon=true` | Propiedad de intercambio de instancia |
+| Chevron | `chevron-down` (Collapsed), `chevron-up` (Expanded); `icon/primary`, `icon/disabled` en Disabled | Nombres de capa, vinculaciones de variables |
+| Ícono de la casilla | `bizagi-lines`, mostrado junto a la casilla cuando `showCheckbox=true` | Instancia anidada |
 
 ## Variantes (Propiedades)
 
-### Color
-
-| Valor | Descripción verificada | Evidencia / Notas |
-|-------|------------------------|-------------------|
-| Default | Texto del encabezado en text/primary, fondo del encabezado background/canvas | 24 variantes |
-| Evergreen | Texto del encabezado en text/evergreen, borde inferior del encabezado Expanded en border/evergreen (verificado en Size=MD, State=Default) | 8 variantes, solo Behavior=Expanded |
-| Indigo | Texto del encabezado en text/indigo (verificado en Size=MD, State=Focused) | 8 variantes, solo Behavior=Expanded |
+El inventario siguiente es completo: se inspeccionaron las 40 variantes.
 
 ### Behavior
 
 | Valor | Descripción verificada | Evidencia / Notas |
 |-------|------------------------|-------------------|
-| Collapsed | Fila de encabezado con chevron-down | 12 variantes, solo Color=Default |
-| Expanded | Fila de encabezado con chevron-up, más un Content Container de 100px | 28 variantes |
+| Collapsed | Solo encabezado, con `chevron-down` y un borde inferior de 1 px `border/default`. | Solo `Color=Default` |
+| Expanded | Encabezado más un área de contenido de 100 px; `chevron-up`; divisor del encabezado en el color de `Color`. | Todos los colores |
+
+### Color
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Default | Etiqueta `text/primary`; divisor expandido `border/strong`. | Todos los comportamientos y estados |
+| Evergreen | Etiqueta `text/evergreen`; divisor expandido `border/evergreen`. | Solo Expanded; Default, Hovered, Pressed, Focused |
+| Indigo | Etiqueta `text/indigo`; divisor expandido `border/indigo`. | Solo Expanded; Default, Hovered, Pressed, Focused |
 
 ### Size
 
 | Valor | Descripción verificada | Evidencia / Notas |
 |-------|------------------------|-------------------|
-| MD | Padding del encabezado space/16 por space/8; alturas 36 (Collapsed) y 136 (Expanded) | Verificado en variantes de color Default y 2 variantes con color |
-| SM | Padding del encabezado space/8 por space/2; alturas 24 (Collapsed) y 124 (Expanded). El estilo del texto del encabezado es el mismo Text/Body/SM que en MD. | Verificado solo en SM Default Expanded y Collapsed |
+| MD | Encabezado de 36 px; relleno de contenido de 16 px. | Todos los colores |
+| SM | Encabezado de 24 px; relleno de contenido de 8 px. | Todos los colores |
 
 ### State
 
 | Valor | Descripción verificada | Evidencia / Notas |
 |-------|------------------------|-------------------|
-| Default | Apariencia en reposo | Figma |
-| Hovered | Variante visual | Figma |
-| Pressed | Variante visual | Figma |
-| Focused | Variante visual con un border/focus de 2px | Figma |
-| Disabled | Variante visual | Solo Color=Default |
-| Loading | Variante visual | Solo Color=Default |
+| Default | Fondo del encabezado `background/canvas`. | Todos los colores |
+| Hovered | Fondo del encabezado `background/interactive/hovered`. | Todos los colores |
+| Pressed | Fondo del encabezado `background/interactive/pressed`. | Todos los colores |
+| Focused | Contorno de 2 px (`focus/width`) `border/focus` alrededor de todo el accordion. | Todos los colores |
+| Disabled | Fondo del encabezado `background/disabled`, etiqueta `text/disabled`, íconos `icon/disabled`. | Solo `Color=Default` |
+| Loading | Encabezado y contenido reemplazados por bloques skeleton en `background/loading`. | Solo `Color=Default` |
 
-Completitud del inventario: se identificaron las 40 variantes listadas en los metadatos del nodo. La inspección detallada cubrió 16 de ellas, por lo que no se documentan los detalles específicos de las 24 variantes restantes. No se inspeccionaron las propiedades definidas fuera de este nodo, si existen.
+### text
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Texto | Etiqueta del encabezado. "Placeholder" en todas las variantes. | Propiedad de texto |
+
+### showLeftIcon / icon
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| showLeftIcon=false | Ícono izquierdo oculto. | Predeterminado |
+| showLeftIcon=true | Muestra el ícono definido en `icon` (`info` por defecto). | En `Disabled`, el ícono no está expuesto para intercambio |
+
+### showCheckbox
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| false | Casilla oculta. | Predeterminado |
+| true | Muestra la casilla anidada (con ícono `bizagi-lines`) antes de la etiqueta. | En `Collapsed / MD / Default` la casilla anidada también muestra su propio texto "Label" |
+
+### showBadge
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| false | Badge oculto. | Predeterminado |
+| true | Muestra un badge contador antes del chevron. | No se muestra en `Disabled` ni en `Loading` |
 
 ## Estados
 
 | Estado | Descripción verificada | Cambios visuales | Evidencia |
 |--------|------------------------|------------------|-----------|
-| Default | Variante visual | Fondo del encabezado background/canvas, texto text/primary. | Figma |
-| Hovered | Variante visual | El fondo del encabezado pasa a background/interactive/hovered. | Figma, color Default MD |
-| Pressed | Variante visual | El fondo del encabezado pasa a background/interactive/pressed. | Figma, color Default MD |
-| Focused | Variante visual | Aparece un border/focus de 2px alrededor del contenedor del encabezado (Expanded) o de la raíz (Collapsed MD). | Figma, color Default MD; Indigo MD Expanded |
-| Disabled | Variante visual | El fondo del encabezado pasa a background/disabled y el texto pasa a text/disabled. En Expanded el borde inferior del encabezado es border/disabled. En Collapsed MD no se encontró borde inferior en la raíz. | Figma, color Default MD |
-| Loading | Variante visual | El texto y el chevron se reemplazan por rectángulos background/loading (una barra de 170 x 20 y un cuadrado de 12 x 12). En Expanded el contenido muestra dos barras background/loading (ancho completo y 129 de ancho). | Figma, color Default MD |
+| Default | Estado en reposo. | Encabezado `background/canvas`. | Variantes de estado |
+| Hovered | Apariencia al pasar el cursor. | Encabezado `background/interactive/hovered`. | Variantes de estado |
+| Pressed | Apariencia al presionar. | Encabezado `background/interactive/pressed`. | Variantes de estado |
+| Focused | Apariencia de foco. | Contorno de 2 px `border/focus` alrededor del accordion; reemplaza el borde inferior o el divisor. | Variantes de estado |
+| Disabled | Apariencia no disponible. | Encabezado `background/disabled`; etiqueta `text/disabled`; chevron `icon/disabled`; Collapsed no tiene borde inferior. | Variantes de estado |
+| Loading | Apariencia de carga. | Bloques skeleton (`background/loading`) reemplazan la etiqueta, el chevron y el contenido. | Variantes de estado |
 
-Son únicamente variantes visuales de estado. No demuestran que se haya implementado ninguna interacción, comportamiento de expandir o contraer, comportamiento de foco o transición de estado. No se inspeccionaron en detalle Hovered, Pressed y Focused para Evergreen e Indigo, ni los State de SM distintos de Default.
+Son variantes visuales; las transiciones y su duración no están definidas en Figma.
 
 ## Mapeo de tokens
 
 | Categoría | Token | Uso verificado | Evidencia |
 |-----------|-------|----------------|-----------|
-| Color | background/canvas (#ffffff) | Fondo del encabezado (Default, Focused, Loading) y fondo del Content Container | Vinculación de variable en Figma |
-| Color | background/interactive/hovered (#f7f8f7) | Fondo del encabezado en Hovered | Vinculación de variable en Figma |
-| Color | background/interactive/pressed (#e9ecea) | Fondo del encabezado en Pressed | Vinculación de variable en Figma |
-| Color | background/disabled (#f4f6f4) | Fondo del encabezado en Disabled | Vinculación de variable en Figma |
-| Color | background/loading (#d9deda99) | Rectángulos de marcador de carga | Vinculación de variable en Figma |
-| Color | text/primary (#2d342f) | Texto del encabezado (color Default, no Disabled) | Vinculación de variable en Figma |
-| Color | text/disabled (#849588) | Texto del encabezado en Disabled | Vinculación de variable en Figma |
-| Color | text/evergreen (#297a39) | Texto del encabezado Evergreen (verificado en Size=MD, State=Default) | Vinculación de variable en Figma |
-| Color | text/indigo (#6b1b99) | Texto del encabezado Indigo (verificado en Size=MD, State=Focused) | Vinculación de variable en Figma |
-| Color | border/strong (#5f6d62) | Borde inferior del encabezado Expanded en color Default | Vinculación de variable en Figma |
-| Color | border/default (#c3cbc5) | Borde inferior de la raíz en Collapsed | Vinculación de variable en Figma |
-| Color | border/disabled (#c3cbc5) | Borde inferior del encabezado Expanded en Disabled | Vinculación de variable en Figma |
-| Color | border/evergreen (#297a39) | Borde inferior del encabezado Expanded Evergreen (verificado en Size=MD, State=Default) | Vinculación de variable en Figma |
-| Color | border/focus (#339947) | Borde de State=Focused | Vinculación de variable en Figma |
-| Color | icon/primary (#5f6d62) | Borde de la casilla del checkbox | Vinculación de variable en Figma |
-| Ancho de borde | focus/width (2) | Borde de State=Focused | Vinculación de variable en Figma |
-| Espaciado | space/16, space/8, space/2 | Padding del encabezado y del contenido (ver Layout) | Vinculación de variable en Figma |
-| Espaciado | gap/sm (8) | Espaciado entre elementos del encabezado en la mayoría de las capas inspeccionadas | Vinculación de variable en Figma |
-| Forma | radius/4 (4) | Radio de esquina de la ranura de contenido | Vinculación de variable en Figma |
-| Tipografía | Text/Body/SM | Texto del encabezado (family/body, size/14, peso 400, line-height/20, espaciado entre letras 0) | Figma |
-| Tipografía | size/12, line-height/16, letter-spacing/normal | Texto "Label" en el checkbox (Collapsed, MD, Default) | Vinculación de variable en Figma |
+| Fondo | `background/canvas` | Encabezado (estado Default) y área de contenido | Vinculación de variable |
+| Fondo | `background/interactive/hovered` | Encabezado, Hovered | Vinculación de variable |
+| Fondo | `background/interactive/pressed` | Encabezado, Pressed | Vinculación de variable |
+| Fondo | `background/disabled` | Encabezado, Disabled | Vinculación de variable |
+| Fondo | `background/loading` | Bloques skeleton, Loading | Vinculación de variable |
+| Borde | `border/default` | Borde inferior en Collapsed | Vinculación de variable |
+| Borde | `border/strong` | Divisor expandido, Color=Default | Vinculación de variable |
+| Borde | `border/evergreen` | Divisor expandido, Color=Evergreen | Vinculación de variable |
+| Borde | `border/indigo` | Divisor expandido, Color=Indigo | Vinculación de variable |
+| Borde | `border/disabled` | Divisor expandido, Disabled | Vinculación de variable |
+| Borde | `border/focus`, `focus/width` | Contorno de foco | Vinculación de variable |
+| Texto | `text/primary`, `text/evergreen`, `text/indigo`, `text/disabled` | Color de la etiqueta según Color/State | Vinculación de variable |
+| Ícono | `icon/primary`, `icon/disabled` | Chevron e íconos | Vinculación de variable |
+| Espaciado | `space/16`, `space/8`, `space/2`, `gap/sm` | Relleno y espacios del encabezado y del contenido | Vinculación de variable |
+| Radio | `radius/4` | Slot de contenido | Vinculación de variable |
+| Tipografía | `Text/Body/SM` | Etiqueta | Estilo de texto |
 
-Lo siguiente se devuelve para este nodo, pero no se estableció su uso: border/indigo (#6b1b99), icon/disabled (#9daaa0), radius/0 y weight/regular (se resuelve al nombre de estilo "Regular"). El Badge usa valores literales (borde #9e9e9e, texto #272727) y referencias a variables font/* que no devolvieron las definiciones de variables de Figma, y el ancho de borde del checkbox referencia width/1, que tampoco se devolvió. Los valores de los tokens provienen únicamente de Figma; no se usaron los archivos JSON de tokens del repositorio.
+Limitación: El Badge anidado usa colores y valores tipográficos fijos que no están vinculados a variables de Genome Evolution, por lo que no se puede documentar su mapeo de tokens.
 
 ## Interacción
 
-[Pendiente de confirmación]
+Estados observados: `Default`, `Hovered`, `Pressed` y `Focused` existen para todos los colores; `Disabled` y `Loading` existen para `Color=Default`.
+
+Interpretación basada en evidencia: El encabezado actúa como el control que alterna entre `Collapsed` y `Expanded`, según indican los estados interactivos del encabezado y la dirección del chevron.
+
+No verificado en Figma: el comportamiento real de alternancia, si varios accordions pueden estar abiertos a la vez, la interacción con teclado, la animación y la interacción de la casilla del encabezado. No se encontraron interacciones de prototipo.
 
 ## Accesibilidad
 
-[Pendiente de confirmación]
+Observaciones relacionadas con la accesibilidad:
+
+- `Focused` muestra un contorno visible de 2 px `border/focus` alrededor de todo el accordion en todos los colores y tamaños.
+- `Disabled` cambia los colores de fondo, etiqueta e íconos, por lo que el estado no depende de una sola señal.
+- La dirección del chevron difiere entre contraído y expandido, pero el estado expandido también se comunica mediante el área de contenido visible.
+- Las relaciones de contraste no se han verificado.
+
+Información de accesibilidad faltante (no verificado en Figma): roles y atributos ARIA, soporte de teclado, orden de foco, anuncios en lectores de pantalla y nombre accesible de la casilla del encabezado.
+
+## Pautas de contenido
+
+Observación verificada: La etiqueta del encabezado usa `Text/Body/SM` y se ajusta al ancho disponible (la etiqueta ocupa el espacio restante del encabezado).
+
+Recomendación: Mantenga las etiquetas de encabezado breves y descriptivas para que el contenido de la sección sea claro antes de expandirla. Figma no define una longitud máxima para la etiqueta.
+
+## Ejemplos
+
+### Sección contraída
+
+Configuración: `Behavior=Collapsed`, `Color=Default`, `Size=MD`, `State=Default`
+
+Descripción: Un único encabezado con etiqueta y `chevron-down`.
+
+Evidencia / Clasificación: Variante existente en Figma.
+
+### Sección expandida con color
+
+Configuración: `Behavior=Expanded`, `Color=Evergreen`, `Size=MD`, `State=Default`
+
+Descripción: Etiqueta y divisor Evergreen con el slot de contenido visible.
+
+Evidencia / Clasificación: Variante existente en Figma.
+
+### Sección compacta en carga
+
+Configuración: `Behavior=Expanded`, `Color=Default`, `Size=SM`, `State=Loading`
+
+Descripción: Marcadores skeleton mientras se carga el contenido.
+
+Evidencia / Clasificación: Variante existente en Figma.
 
 ## Combinaciones inválidas
 
-[Pendiente de confirmación]
+| Combinación / Condición | Razón verificada | Evidencia |
+|-------------------------|------------------|-----------|
+| `Color=Evergreen` o `Color=Indigo` con `Behavior=Collapsed` | No existe esa variante | Inventario de variantes |
+| `Color=Evergreen` o `Color=Indigo` con `State=Disabled` o `State=Loading` | No existe esa variante | Inventario de variantes |
 
-Observación, no una regla: Evergreen e Indigo no se proporcionan para Behavior=Collapsed, y Disabled y Loading tampoco se proporcionan para ellos.
-
-## Lista de verificación de QA
-
-- [x] Identidad del componente y referencias de origen verificadas.
-- [ ] Propiedades y valores documentados contrastados con la evidencia disponible de Figma.
-- [x] Completitud del inventario de variantes evaluada y limitaciones de inspección documentadas.
-- [ ] Valores por defecto verificados, o conflictos sin resolver registrados.
-- [ ] Medidas de layout contrastadas con las configuraciones relevantes.
-- [ ] Mapeos de tokens verificados contra sus fuentes reales.
-- [x] Estados visuales distinguidos del comportamiento interactivo verificado.
-- [ ] Afirmaciones de accesibilidad respaldadas por evidencia explícita.
-- [ ] Combinaciones inválidas respaldadas por evidencia explícita.
-- [x] Recomendaciones distinguidas de las observaciones verificadas.
-- [ ] La documentación en inglés y en español es semánticamente equivalente.
-- [x] No quedan marcadores de posición de la plantilla sin resolver.
-- [x] No quedan instrucciones de la plantilla en el documento final.
-- [ ] No se ha añadido información no respaldada o inventada.
-- [x] Cambios históricos incluidos solo cuando los respalda un historial de versiones.
+Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
 ## Aclaraciones pendientes
 
-1. Estructura del componente. El nodo 2016:2350 es un frame que contiene 40 componentes y no está confirmado como component set. No se inspeccionaron las propiedades definidas fuera de él, si existen. Se resuelve confirmando el component set en Figma.
-2. Inventario de propiedades y valores por defecto. No se ha establecido el valor por defecto de Color, Behavior, Size ni State. La interfaz generada también lista `text` (muestra "Placeholder"), `showLeftIcon`, `showCheckbox`, `showBadge`, `icon` y ranuras de contenido, pero no están verificados si son propiedades de Figma, ni sus tipos ni sus valores por defecto. Se resuelve confirmando el panel de propiedades en Figma.
-3. Inspección parcial. Solo 16 de las 40 variantes se inspeccionaron en detalle. Los State de SM distintos de Default, las variantes Evergreen e Indigo distintas de las dos indicadas, y Hovered y Pressed de las variantes con color se identificaron solo por nombre y tamaño.
-4. Brechas de tokens. Literales del Badge, referencias font/* y width/1 sin resolver, anchos de borde de 1px sin vincular, el padding literal de 16 en Indigo MD Focused, y el uso no establecido de border/indigo, icon/disabled, icon/primary en los iconos y radius/0.
-5. Diferencias de capas entre variantes. El texto "Label" del checkbox aparece solo en Collapsed, MD, Default entre las variantes inspeccionadas. Collapsed Disabled no tiene borde inferior en la raíz mientras que Expanded Disabled sí. En Focused, el borde está en la raíz en Collapsed y en el contenedor del encabezado en Expanded. Se desconoce si son intencionales.
-6. Disponibilidad de variantes. Se desconoce si la ausencia de Evergreen e Indigo para Collapsed, y de Disabled y Loading para esos colores, es intencional.
-7. No documentado en Figma: propósito, guía de uso, restricciones, semántica, interacción (incluido expandir y contraer), accesibilidad, combinaciones inválidas, status, version, owner, tags y el contenido que va en la ranura de contenido.
+1. Accordions con color contraídos: `Evergreen` e `Indigo` existen solo como `Expanded`. Cuando un accordion con color se contrae, ¿debe cambiar a `Color=Default`, o faltan variantes Evergreen/Indigo contraídas? Esto determina cómo los diseñadores representan el estado contraído de un accordion con color.
 
 ## Notas / Registro de cambios
 
-Generado o revisado usando el material de origen disponible el 2026-10-21.
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
 [No hay cambios históricos verificados disponibles]
