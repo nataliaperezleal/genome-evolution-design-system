@@ -1,340 +1,322 @@
 ---
 component: "Datepicker"
 system: "Genome Evolution Design System"
-type: "Selection Panel / Complex Control"
-status: "Done"
-version: "1.2"
-owner: "UX Design"
+type: "Component set"
+status: "Not verified in Figma"
+version: "Not verified in Figma"
+owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2115-2296"
-last_updated: "2026-10-20"
+last_updated: "2026-10-22"
 tags:
-  - "Selection Panel"
-  - "Complex Control"
-  - "Datepicker"
+  - "datepicker"
+  - "calendar"
+  - "input"
 ---
 
-# Datepicker — Genome Evolution Design System
+# Datepicker
 
-Date selection panel with three navigable views: Numbers (day grid), Month (month grid) and Year (year grid).
+System: Genome Evolution Design System
+
+## Component Summary
+
+Datepicker is a calendar panel with three views (days, months and years), two sizes and two brand colors, built from `.Number`, `.Month` and Button instances, with optional Cancel/Apply buttons and an optional conventions legend.
 
 ## Quick Reference
 
-### What it is
+### What It Is
 
-Date selection panel with three navigable views. It supports two sizes, two accent colors, optional footer buttons and an optional conventions legend.
+Evidence-based interpretation: Datepicker lets users choose a date by navigating a calendar. This is supported by the component name, the `Type` values `Numbers` (a month grid of days with weekday headers), `Month` (a grid of twelve months) and `Year` (a grid of years), the header with a period label, a dropdown arrow and previous/next chevrons, and the Cancel and Apply buttons. Figma does not include a written usage description for the Datepicker component set.
 
 ### Key Properties
 
-- Type [Numbers | Month | Year] — default: Numbers
-- Size [SM | MD] — default: SM
-- Color [Evergreen | Indigo] — default: Evergreen
-- showButtons [true | false] — default: true
-- showConventions [true | false] — default: true
+| Property | Available Values | Default |
+|----------|------------------|---------|
+| Type | Numbers, Month, Year | Numbers |
+| Size | SM, MD | SM |
+| Color | Evergreen, Indigo | Evergreen |
+| showButtons (boolean) | true, false | true |
+| showConventions (boolean) | true, false | true |
+
+Defaults are taken from the component property definitions in Figma. Every `Type`, `Size` and `Color` combination exists (12 variants). `showConventions` affects only `Type=Numbers`, the only type with a conventions legend.
 
 ### Default Configuration
 
-Type=Numbers, Size=SM, Color=Evergreen, showButtons=true, showConventions=true
-
-### Invalid Combinations
-
-- showConventions=true with Type=Month or Type=Year
-- Mixing Evergreen and Indigo tokens in the same instance
+`Type=Numbers`, `Size=SM`, `Color=Evergreen`, buttons and conventions shown: a 184 px wide panel with the header "MAR 2021", the weekday row, five week rows of 24 px day cells, Cancel and Apply buttons and a three-item conventions legend.
 
 ### Typical Usage
 
-- Day picker: Type=Numbers, Size=SM, Color=Evergreen, showButtons=true
-- Indigo day picker: Type=Numbers, Size=SM, Color=Indigo, showButtons=true
-- Month picker: Type=Month, Size=SM, Color=Evergreen, showButtons=true
-- Year picker without footer: Type=Year, Size=MD, Color=Indigo, showButtons=false
-- Day picker with legend: Type=Numbers, Size=SM, Color=Evergreen, showConventions=true
+Verified observation: All variants share the same structure: header, content grid, optional buttons and (in `Numbers`) optional conventions. Selection in every sample uses the single-selection `Selected` state of the child cells; no variant shows a range.
 
----
+Evidence-based interpretation:
+
+- `Type=Numbers` to choose a day within a month.
+- `Type=Month` to choose a month within a year.
+- `Type=Year` to choose a year within a range of years.
+- `Size=SM` for compact layouts and `Size=MD` for standard layouts.
+- `showButtons=true` when the selection must be confirmed with Apply or discarded with Cancel.
+- `showConventions=true` to explain the markers shown on days.
 
 ## Purpose / Intent
 
 ### Problem Solved
 
-Lets the user select a specific date and navigate between day, month and year views.
+Evidence-based interpretation: Provides a consistent calendar for selecting a day, month or year, with navigation between periods and optional confirmation.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can move between periods, see the current selection and focus, and confirm or cancel their choice.
 
 ### Typical Context
 
-Forms, filters and settings.
-
----
+Evidence-based interpretation: The fixed panel width (184 px or 256 px) and the confirmation buttons indicate a panel shown from a date field or similar trigger. The trigger is not documented in Figma.
 
 ## When to Use
 
-- The user needs to select a specific date in forms, filters or settings
-- Navigation between views (day → month → year) is required
+Evidence-based interpretations based on the variants:
 
----
+- To select a single day (`Numbers`), month (`Month`) or year (`Year`).
+- To require confirmation of the selection (`showButtons=true`).
+- To show a legend for day markers (`showConventions=true`).
 
 ## When NOT to Use
 
-- For complex date range selection without component adaptation
-- When a free-text date input is sufficient
+[No documented restrictions found]
 
----
+Limitations of the current component:
+
+- The variants show single selection only; range selection is not shown at the Datepicker level, although the child `.Number` component has a `Range` state.
+- The conventions legend is available only in `Type=Numbers`.
+
+## Composition and Hierarchy Rules
+
+The following rules are established by the component's structure and child components.
+
+### Child components
+
+| Child | Used in | Configuration observed |
+|-------|---------|------------------------|
+| `.Number` | Day cells in `Type=Numbers` | `Size=Small` in SM, `Size=Regular` in MD; states `Default`, `Opaque`, `Focused`, `Selected` |
+| `.Month` | Month cells in `Type=Month` and year cells in `Type=Year` | `Size=Small` in SM (42 × 24 px), `Size=Regular` in MD (56 × 32 px); states `Default`, `Selected` |
+| Button | Cancel and Apply actions | Cancel: `Type=Tertiary`. Apply: `Type=Primary` in the same `Color` as the Datepicker. Button `Size=SM` in SM, `Size=MD` in MD |
+
+The child cells take the Datepicker `Color` for their `Selected` (and, in `Numbers`, `Focused`) states.
+
+### Views and hierarchy
+
+| Type | Header label (sample) | Grid | Cell |
+|------|-----------------------|------|------|
+| Numbers | Month and year, uppercase ("MAR 2021") | Weekday row + 5 week rows × 7 days | `.Number` |
+| Month | Year ("2024") | 3 rows × 4 months (12) | `.Month` |
+| Year | Year range ("2010-2033") | 6 rows × 4 years (24) | `.Month` |
+
+Evidence-based interpretation: The three types form a hierarchy of day → month → year. The header label with a dropdown arrow suggests switching to the next higher view (for example, from days to months); this behavior is not defined in Figma.
+
+### Ordering
+
+- Weekday headers start on Sunday: S, M, T, W, T, F, S.
+- Days are ordered left to right, top to bottom. Days from the previous and next months fill the first and last rows and use the `Opaque` state (for example, 29, 30 and 31 before the 1st).
+- Months are ordered January to December, left to right, top to bottom, as uppercase three-letter abbreviations (JAN … DEC).
+- Years are ordered ascending, left to right, top to bottom; the header shows the first and last year of the page.
+
+### Navigation
+
+- The header contains `chevron-left` and `chevron-right` icons on the right. Evidence-based interpretation: they move to the previous and next period (month, year or year range, depending on `Type`).
+- The header label is followed by an `arrow-dropdown` icon. Evidence-based interpretation: it opens a higher-level view or period selection.
+- Prototype interactions were not available through the inspection tools, so navigation behavior is not verified in Figma.
+
+### Overflow and grid size
+
+- `Numbers` shows five week rows in all variants; a sixth row is not provided.
+- `Month` always shows 12 cells and `Year` 24 cells.
+- Cells have fixed sizes; the panel has a fixed width.
+
+### Confirmation
+
+- When `showButtons=true`, a button row appears below the grid, separated by a 1 px `border/default` line, with Cancel and Apply aligned to the right.
+- When `showConventions=true` (Numbers only), the legend appears below the buttons.
 
 ## Structure (Anatomy)
 
 ### Component Parts
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Header | Required | Date label (e.g. "MAR 2021" in Type=Numbers, a year in Type=Month, a year range in Type=Year) with an arrow-dropdown icon, plus an Arrows group with chevron-left and chevron-right icons |
-| Content | Required | Holds the grid for the selected Type |
-| Days | Required (Type=Numbers) | Weekday row: S M T W T F S |
-| Week 1 to Week 5 | Required (Type=Numbers) | Five rows of .Number cells, 7 per row |
-| .Month cells | Required (Type=Month, Type=Year) | Month names (JAN to DEC) or years (2010 to 2033). Type=Year reuses the .Month sub-component |
-| Buttons | Optional | Footer with a Cancel button and an Apply button, separated from the grid by a top border. Controlled by showButtons |
-| Conventions | Optional (Type=Numbers) | Up to 3 rows, each with an 8 px colored dot and the label "Convention". Controlled by showConventions |
+| Part | Required / Optional | Description |
+|------|---------------------|-------------|
+| Panel | Required | Vertical auto layout container with background, padding and radius. |
+| Header | Required | Period label with `arrow-dropdown` (left) and previous/next chevrons (right). |
+| Weekday row (`Days`) | Required in `Numbers` | Seven weekday initials. |
+| Content grid | Required | Rows of `.Number` or `.Month` cells. |
+| Buttons | Optional (`showButtons`) | Cancel (Tertiary) and Apply (Primary) Button instances. |
+| Conventions | Optional (`showConventions`, Numbers only) | Three rows, each with an 8 px dot and a "Convention" label. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | Numbers: SM 282 px (Evergreen) / 284 px (Indigo), MD 364 px. Month: SM 160 px, MD 218 px. Year: SM 244 px, MD 326 px |
-| Width | SM 184 px, MD 256 px |
-| Padding | space/8 (8 px) |
-| Gap | gap/sm (8 px) |
-| Radius | radius/4 (4 px) |
+| Property | Verified Value | Evidence |
+|----------|----------------|----------|
+| Panel width | 184 px (SM), 256 px (MD) | Variant dimensions |
+| Panel height (all optional parts shown) | Numbers 282 px (SM) / 362 px (MD); Month 160 / 216 px; Year 244 / 324 px | Variant dimensions |
+| Panel padding | `space/8` (SM), `space/16` (MD) | Variable bindings |
+| Gap between sections | `gap/sm` (8) | Variable binding |
+| Panel radius | `radius/4` (4) | Variable binding |
+| Header | Space-between row; label gap `gap/xxs` (4); chevron gap `gap/lg` (16); 12 px icons | Variable bindings, layer dimensions |
+| Day grid | 7 columns of 24 px (SM) or 32 px (MD) cells, no gap | Layer dimensions |
+| Month and year grids | 4 columns; 4 px row gap in MD | Layer positions |
+| Button row | 1 px `border/default` top border; top padding `space/8` (SM) / `space/12` (MD); gap `gap/sm`; right-aligned | Variable bindings |
+| Conventions | Top padding `space/8`; rows with 8 px dot, `gap/sm`, label in `Text/Body/XXS` | Variable bindings |
 
-Cell sizes (Figma description):
+## Semantics
 
-- SM: .Number 24 × 24 px, .Month and Year cells 42 × 24 px
-- MD: .Number 32 × 32 px, .Month and Year cells 56 × 32 px
+Evidence-based interpretation:
 
----
+- The header label names the visible period; the chevrons move between periods.
+- In `Numbers`, `Opaque` days belong to adjacent months, the `Focused` cell has focus, and the `Selected` cell is the chosen date.
+- Apply confirms the selection and Cancel discards it.
+- The conventions legend explains the meaning of the colored markers that `.Number` can show (`State=Conventions`); the sample labels are placeholders ("Convention").
+
+Not verified in Figma: HTML elements, ARIA roles (for example, dialog or grid), keyboard interaction and screen-reader announcements.
 
 ## Iconography
 
-### Icon Slots
-
-| Slot | Description |
-|--------|--------|
-| Leading | None |
-| Trailing | arrow-dropdown icon (12 px) next to the date label in the Header |
-
-### Rules
-
-- The Header always shows chevron-left and chevron-right icons (12 px) in the Arrows group.
-- The same Header icons appear in all three Type values.
-
----
+| Slot | Verified Icon / Description | Evidence |
+|------|-----------------------------|----------|
+| Period selector | `arrow-dropdown`, 12 px, after the header label | Layer name |
+| Previous period | `chevron-left`, 12 px | Layer name |
+| Next period | `chevron-right`, 12 px | Layer name |
+| Convention markers | 8 px dots in three tones | Layers, screenshot |
 
 ## Variants (Properties)
 
-Property names and values must match Figma exactly.
+The inventory below is complete: all 12 variants were listed, and representative variants of every Type, Size and Color were inspected in detail.
 
 ### Type
 
-| Value | Description |
-|--------|--------|
-| Numbers | Day grid: weekday row, 5 week rows of .Number cells, optional conventions legend |
-| Month | Month grid (JAN to DEC) of .Month cells. showConventions is not valid |
-| Year | Year grid (2010 to 2033) of .Month cells. showConventions is not valid |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Numbers | Day grid with weekday row; `.Number` cells; supports conventions. | Default |
+| Month | 12 `.Month` cells in 3 × 4. | No conventions |
+| Year | 24 `.Month` cells in 6 × 4. | No conventions |
 
 ### Size
 
-| Value | Description |
-|--------|--------|
-| SM | Panel width 184 px. .Number 24 × 24 px, .Month 42 × 24 px |
-| MD | Panel width 256 px. .Number 32 × 32 px, .Month 56 × 32 px |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| SM | 184 px wide; `space/8` padding; small child cells and SM buttons. | Default |
+| MD | 256 px wide; `space/16` padding; regular child cells and MD buttons. | — |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Evergreen | Green accent on the selected cell and the Apply button |
-| Indigo | Purple accent on the selected cell and the Apply button |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Evergreen | Selected cells and Apply button in Evergreen. | Default |
+| Indigo | Selected cells and Apply button in Indigo. | — |
+
+The focused day cell uses `border/focus` in both colors.
 
 ### showButtons
 
-| Value | Description |
-|--------|--------|
-| true | The footer with Cancel and Apply buttons is shown |
-| false | The footer is hidden |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| true | Shows the Cancel/Apply row. | Default |
+| false | Hides the button row. | All types |
 
 ### showConventions
 
-| Value | Description |
-|--------|--------|
-| true | The conventions legend is shown. Valid only with Type=Numbers |
-| false | The conventions legend is hidden |
-
----
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| true | Shows the conventions legend. | Default; Numbers only |
+| false | Hides the legend. | Numbers only |
 
 ## States
 
-The component has no State property. The Figma variants show these cell appearances.
-
-| State | Description | Visual Changes |
-|--------|--------|--------|
-| Selected cell | Highlighted cell (5 in Numbers, APR in Month, 2021 in Year) | Filled background, text/inverse label. Evergreen Numbers: surface/evergreen/bold fill with border/evergreen border |
-| Outlined cell | Cell "2" in Numbers (Evergreen, SM) | 1 px border/focus border. Meaning [Pending confirmation] |
-| Out-of-month day | Days from adjacent months (29, 30, 31, 1, 2) | Label text/secondary |
-
----
+The Datepicker component set has no state property. Cell states (Default, Opaque, Focused, Selected) come from the child `.Number` and `.Month` components, and button states from Button.
 
 ## Token Mapping
 
-### Background
+| Category | Token | Verified Usage | Evidence |
+|----------|-------|----------------|----------|
+| Background | `background/canvas` | Panel | Variable binding |
+| Border | `border/default`, `width/1` | Button row divider | Variable binding |
+| Text | `text/primary` | Header label, current-month numbers, convention labels | Variable binding |
+| Text | `text/secondary` | Weekday initials, adjacent-month days | Variable binding |
+| Icon | `icon/primary`, `icon/secondary` | Header icons, markers | Variable binding |
+| Spacing | `space/8`, `space/16`, `space/12`, `space/0`, `gap/sm`, `gap/xxs`, `gap/lg` | Padding and gaps | Variable binding |
+| Radius | `radius/4` | Panel | Variable binding |
+| Typography | `Text/Body/XS Strong` (SM), `Text/Body/SM Strong` (MD) | Header label | Text styles |
+| Typography | `Text/Label/XS` (SM), `Body/small/strong` (MD) | Weekday initials | Text styles |
+| Typography | `Text/Body/XXS` | Convention labels | Text style |
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| background/canvas | Panel and Cancel button | Verified |
-| surface/evergreen/bold | Selected .Number cell and Apply button, Color=Evergreen | Verified on Type=Numbers, Size=SM, Color=Evergreen |
-| surface/indigo/bold | Color=Indigo accent | Listed in node variables; binding not verified |
-| border/indigo | Selected .Month cell, Color=Indigo | Verified on Type=Month, Size=MD, Color=Indigo (used as the fill) |
+Child cell and button tokens are documented with `.Number`, `.Month` and Button.
 
-### Text
+Current behavior:
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/primary | Header label, current-month numbers, month cells, Cancel label, conventions labels | Verified |
-| text/secondary | Weekday row and out-of-month days | Verified |
-| text/inverse | Selected cell label, Apply label | Verified |
-
-### Border
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/default | Top border of the footer | Verified. Width: width/1 (1) |
-| border/strong | Cancel button border | Verified |
-| border/focus | Outlined .Number cell | Verified |
-| border/evergreen | Selected .Number cell, Color=Evergreen | Verified |
-| border/indigo | Selected .Month cell, Color=Indigo | Verified |
-
-### Typography
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Label/XS | Weekday row | Verified values: family/body, weight/semibold, size/11, line-height/16, letter-spacing/wide |
-| Text/Body/XXS | .Number cells and conventions labels | Verified values: family/body, weight/regular, size/10, line-height/14 |
-| Text/Body/XS Strong | Header label | Listed in the design styles; also matches Text/Button/SM. Exact binding not verified. Values: size/12, weight/semibold, line-height/16 |
-| Text/Button/SM | Cancel and Apply labels | Listed in the design styles; exact binding not verified |
-| Text/Body/SM Strong | .Month cells, Size=MD | Values verified: size/14, weight/semibold, line-height/20. Style name listed in the design styles; binding not verified |
-
-### Spacing
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/8 | Panel padding, top padding of Buttons and Conventions | 8 px |
-| space/0 | Remaining padding of Buttons and Conventions | 0 px |
-| space/12 | Horizontal padding of footer buttons | 12 px |
-| space/4 | Vertical padding of footer buttons | 4 px |
-| gap/sm | Gap between panel sections, footer buttons and convention dot and label | 8 px |
-| gap/xxs | Gap between the date label and arrow-dropdown | 4 px |
-| gap/lg | Gap between the chevrons | 16 px |
-
-### Radius
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| radius/4 | Panel and cells | 4 px |
-| semantic/sm | Footer buttons | 4 px |
-
----
+- In `Size=MD`, the weekday initials use the `Body/small/strong` text style (`font/...` variables) instead of a `Text/...` style used elsewhere in the component.
+- The Apply button in the Evergreen MD variants is 30 px high while Cancel is 32 px, because Apply uses the Button default variant (see Button documentation).
+- The panel has no shadow.
 
 ## Interaction
 
-The Figma description calls the three views navigable and says navigation between views (day → month → year) is required. 
+The component has no state variants. Prototype interactions were not available through the inspection tools.
 
----
+Not verified in Figma: navigation with the chevrons, switching views through the header label, selection, what Apply and Cancel do, and keyboard interaction.
 
 ## Accessibility
 
-| Topic | Information |
-|--------|--------|
-| Notes | ARIA roles, keyboard support|
+Accessibility-related observations:
 
----
+- The selected cell uses a solid fill with inverse text, and the focused cell a 1 px `border/focus` border (from the child components).
+- Adjacent-month days are de-emphasized with `text/secondary`.
+- SM day numbers are 10 px and weekday initials 11 px.
+- Contrast ratios have not been verified.
+
+Missing accessibility information (not verified in Figma): accessible names for the chevrons and header button, grid semantics, current-date and selected-date announcements, keyboard navigation and focus management.
 
 ## Content Guidelines
 
-Visible text in the variants: "MAR 2021", weekday initials S M T W T F S, "Cancel", "Apply", "Convention", month names JAN to DEC, and years 2010 to 2033 under the range "2010-2033". These are sample content.
+Verified observations:
 
----
+- Header labels: uppercase month abbreviation and year ("MAR 2021"), year ("2024") or year range with a hyphen ("2010-2033").
+- Weekday initials: one uppercase letter per day, starting with Sunday.
+- Month labels: uppercase three-letter abbreviations (JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC).
+- Button labels: "Cancel" and "Apply".
+- Convention labels: "Convention" (placeholder).
 
 ## Examples
 
-### Example 1
+### Day selection with confirmation
 
-Configuration:
+Configuration: `Type=Numbers`, `Size=MD`, `Color=Evergreen`, `showButtons=true`, `showConventions=true`
 
-```text
-Type=Numbers, Size=SM, Color=Evergreen, showButtons=true
-```
+Description: March 2021 with the 5th selected, the 2nd focused and a conventions legend.
 
-Description:
+Evidence / Classification: Existing variant in Figma (sample content).
 
-Day picker with footer buttons.
+### Month selection
 
-### Example 2
+Configuration: `Type=Month`, `Size=SM`, `Color=Indigo`
 
-Configuration:
+Description: Twelve months of 2024 with APR selected.
 
-```text
-Type=Month, Size=SM, Color=Evergreen, showButtons=true
-```
+Evidence / Classification: Existing variant in Figma (sample content).
 
-Description:
+### Year selection without buttons
 
-Month picker with footer buttons.
+Configuration: `Type=Year`, `Size=MD`, `Color=Evergreen`, `showButtons=false`
 
-### Example 3
+Description: Years 2010–2033 without the button row.
 
-Configuration:
-
-```text
-Type=Year, Size=MD, Color=Indigo, showButtons=false
-```
-
-Description:
-
-Year picker without footer buttons.
-
----
+Evidence / Classification: Configuration supported by the `showButtons` property.
 
 ## Invalid Combinations
 
-- showConventions=true with Type=Month or Type=Year
-- Mixing Evergreen and Indigo tokens in the same instance
-
----
-
-## QA Checklist
-
-- Properties documented.
-- Property names match Figma exactly.
-- Variant values match Figma exactly.
-- Defaults documented.
-- Invalid combinations documented.
-- Tokens verified.
-- No undocumented behavior added.
-- No undocumented accessibility behavior added.
-- Variant matrix checked against metadata (12 variants: Type × Size × Color).
-- Differences between the Figma description and the design flagged in Pending Clarification.
-
----
+| Combination / Condition | Verified Reason | Evidence |
+|-------------------------|-----------------|----------|
+| `showConventions` with `Type=Month` or `Type=Year` | The property has no visible effect; these types contain no conventions legend | Component structure |
 
 ## Pending Clarification
 
-- Grid columns: the Figma description says 3 columns for Type=Month and Type=Year, but the screenshot and cell widths (42 px × 4 in a 168 px content area) show 4 columns (3 rows of months, 6 rows of years).
-- Panel height for Type=Numbers, Size=SM is 282 px in Evergreen and 284 px in Indigo.
-- Meaning of the outlined cell "2" (border/focus, 1 px) in Type=Numbers is not documented.
-- Meaning and colors of the 3 convention dots are not documented. The labels read "Convention" (sample content).
-- Footer buttons are Button instances. The description names them Tertiary/Default/SM (Cancel) and Primary/Evergreen/SM (Apply), but the Cancel button shows a border/strong outline. Instance properties, MD sizes and the Indigo Apply button were not verified.
-- Selected-cell fill is inconsistent across the variants checked: surface/evergreen/bold (Numbers, Evergreen) vs border/indigo (Month, Indigo). The other variants were not verified.
-- Icon tokens (icon/primary, icon/secondary, icon/disabled) appear in node variables but their usage is not identified; the icons are exported as SVG images. space/16, size/16 and Body/small/strong are also listed with no identified usage.
-- Token names are taken verbatim from Figma and were not cross-checked against the token JSON files.
-- status, version and owner.
-- Semantics, Interaction, Accessibility, Content Guidelines and Shadow.
-
----
+None
 
 ## Notes / Changelog
 
-Generated from available source material on 2026-10-20.
-```
+Generated or reviewed using available source material on 2026-10-22.
+
+[No verified historical changes available]

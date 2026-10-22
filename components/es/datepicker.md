@@ -1,339 +1,322 @@
 ---
 component: "Datepicker"
 system: "Genome Evolution Design System"
-type: "Selection Panel / Complex Control"
-status: "Done"
-version: "1.2"
-owner: "UX Design"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2115-2296"
-last_updated: "2026-10-20"
+last_updated: "2026-10-22"
 tags:
-  - "Selection Panel"
-  - "Complex Control"
-  - "Datepicker"
+  - "datepicker"
+  - "calendar"
+  - "input"
 ---
 
-# Datepicker — Genome Evolution Design System
+# Datepicker
 
-Panel de selección de fecha con tres vistas navegables: Numbers (cuadrícula de días), Month (cuadrícula de meses) y Year (cuadrícula de años).
+Sistema: Genome Evolution Design System
 
-## Quick Reference
+## Resumen del componente
 
-### What it is
+Datepicker es un panel de calendario con tres vistas (días, meses y años), dos tamaños y dos colores de marca, construido con instancias de `.Number`, `.Month` y Button, con botones opcionales Cancel/Apply y una leyenda de convenciones opcional.
 
-Panel de selección de fecha con tres vistas navegables. Soporta dos tamaños, dos colores de acento, botones de pie opcionales y una leyenda de convenciones opcional.
+## Referencia rápida
 
-### Key Properties
+### Qué es
 
-- Type [Numbers | Month | Year] — default: Numbers
-- Size [SM | MD] — default: SM
-- Color [Evergreen | Indigo] — default: Evergreen
-- showButtons [true | false] — default: true
-- showConventions [true | false] — default: true
+Interpretación basada en evidencia: Datepicker permite elegir una fecha navegando por un calendario. Esto se sustenta en el nombre del componente, en los valores de `Type` `Numbers` (una cuadrícula mensual de días con encabezados de día de la semana), `Month` (una cuadrícula de doce meses) y `Year` (una cuadrícula de años), en el encabezado con una etiqueta de periodo, una flecha desplegable y chevrons de anterior/siguiente, y en los botones Cancel y Apply. Figma no incluye una descripción de uso escrita para el conjunto de componentes Datepicker.
 
-### Default Configuration
+### Propiedades clave
 
-Type=Numbers, Size=SM, Color=Evergreen, showButtons=true, showConventions=true
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Type | Numbers, Month, Year | Numbers |
+| Size | SM, MD | SM |
+| Color | Evergreen, Indigo | Evergreen |
+| showButtons (booleano) | true, false | true |
+| showConventions (booleano) | true, false | true |
 
-### Invalid Combinations
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. Existen todas las combinaciones de `Type`, `Size` y `Color` (12 variantes). `showConventions` afecta solo a `Type=Numbers`, el único tipo con leyenda de convenciones.
 
-- showConventions=true con Type=Month o Type=Year
-- Mezclar tokens Evergreen e Indigo en la misma instancia
+### Configuración predeterminada
 
-### Typical Usage
+`Type=Numbers`, `Size=SM`, `Color=Evergreen`, con botones y convenciones visibles: un panel de 184 px de ancho con el encabezado "MAR 2021", la fila de días de la semana, cinco filas de semanas con celdas de día de 24 px, los botones Cancel y Apply y una leyenda de convenciones de tres elementos.
 
-- Selector de día: Type=Numbers, Size=SM, Color=Evergreen, showButtons=true
-- Selector de día Indigo: Type=Numbers, Size=SM, Color=Indigo, showButtons=true
-- Selector de mes: Type=Month, Size=SM, Color=Evergreen, showButtons=true
-- Selector de año sin pie: Type=Year, Size=MD, Color=Indigo, showButtons=false
-- Selector de día con leyenda: Type=Numbers, Size=SM, Color=Evergreen, showConventions=true
+### Uso típico
 
----
+Observación verificada: Todas las variantes comparten la misma estructura: encabezado, cuadrícula de contenido, botones opcionales y (en `Numbers`) convenciones opcionales. En todos los ejemplos la selección usa el estado de selección simple `Selected` de las celdas hijas; ninguna variante muestra un rango.
 
-## Purpose / Intent
+Interpretación basada en evidencia:
 
-### Problem Solved
+- `Type=Numbers` para elegir un día dentro de un mes.
+- `Type=Month` para elegir un mes dentro de un año.
+- `Type=Year` para elegir un año dentro de un rango de años.
+- `Size=SM` para diseños compactos y `Size=MD` para diseños estándar.
+- `showButtons=true` cuando la selección deba confirmarse con Apply o descartarse con Cancel.
+- `showConventions=true` para explicar los marcadores que se muestran en los días.
 
-Permite al usuario seleccionar una fecha específica y navegar entre las vistas de día, mes y año.
+## Propósito / Intención
 
-### Typical Context
+### Problema que resuelve
 
-Formularios, filtros y configuraciones.
+Interpretación basada en evidencia: Ofrece un calendario consistente para seleccionar un día, un mes o un año, con navegación entre periodos y confirmación opcional.
 
----
+### Resultado esperado
 
-## When to Use
+Interpretación basada en evidencia: Los usuarios pueden moverse entre periodos, ver la selección y el foco actuales, y confirmar o cancelar su elección.
 
-- El usuario necesita seleccionar una fecha específica en formularios, filtros o configuraciones
-- Se requiere navegación entre vistas (día → mes → año)
+### Contexto típico
 
----
+Interpretación basada en evidencia: El ancho fijo del panel (184 px o 256 px) y los botones de confirmación indican un panel que se muestra desde un campo de fecha u otro disparador similar. El disparador no está documentado en Figma.
 
-## When NOT to Use
+## Cuándo usar
 
-- Para selección compleja de rangos de fechas sin adaptar el componente
-- Cuando basta una entrada de fecha en texto libre
+Interpretaciones basadas en evidencia a partir de las variantes:
 
----
+- Para seleccionar un único día (`Numbers`), mes (`Month`) o año (`Year`).
+- Para exigir la confirmación de la selección (`showButtons=true`).
+- Para mostrar una leyenda de los marcadores de los días (`showConventions=true`).
 
-## Structure (Anatomy)
+## Cuándo NO usar
 
-### Component Parts
+[No se encontraron restricciones documentadas]
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Header | Obligatorio | Etiqueta de fecha (p. ej. "MAR 2021" en Type=Numbers, un año en Type=Month, un rango de años en Type=Year) con un ícono arrow-dropdown, más un grupo Arrows con los íconos chevron-left y chevron-right |
-| Content | Obligatorio | Contiene la cuadrícula del Type seleccionado |
-| Days | Obligatorio (Type=Numbers) | Fila de días de la semana: S M T W T F S |
-| Week 1 a Week 5 | Obligatorio (Type=Numbers) | Cinco filas de celdas .Number, 7 por fila |
-| Celdas .Month | Obligatorio (Type=Month, Type=Year) | Nombres de meses (JAN a DEC) o años (2010 a 2033). Type=Year reutiliza el subcomponente .Month |
-| Buttons | Opcional | Pie con un botón Cancel y un botón Apply, separado de la cuadrícula por un borde superior. Controlado por showButtons |
-| Conventions | Opcional (Type=Numbers) | Hasta 3 filas, cada una con un punto de color de 8 px y la etiqueta "Convention". Controlado por showConventions |
+Limitaciones del componente actual:
+
+- Las variantes muestran solo selección simple; la selección de rango no se muestra a nivel de Datepicker, aunque el componente hijo `.Number` tiene un estado `Range`.
+- La leyenda de convenciones solo está disponible en `Type=Numbers`.
+
+## Reglas de composición y jerarquía
+
+Las siguientes reglas se derivan de la estructura del componente y de sus componentes hijos.
+
+### Componentes hijos
+
+| Hijo | Uso | Configuración observada |
+|------|-----|-------------------------|
+| `.Number` | Celdas de día en `Type=Numbers` | `Size=Small` en SM, `Size=Regular` en MD; estados `Default`, `Opaque`, `Focused`, `Selected` |
+| `.Month` | Celdas de mes en `Type=Month` y de año en `Type=Year` | `Size=Small` en SM (42 × 24 px), `Size=Regular` en MD (56 × 32 px); estados `Default`, `Selected` |
+| Button | Acciones Cancel y Apply | Cancel: `Type=Tertiary`. Apply: `Type=Primary` en el mismo `Color` que el Datepicker. Button `Size=SM` en SM, `Size=MD` en MD |
+
+Las celdas hijas toman el `Color` del Datepicker para su estado `Selected` (y, en `Numbers`, `Focused`).
+
+### Vistas y jerarquía
+
+| Type | Etiqueta del encabezado (ejemplo) | Cuadrícula | Celda |
+|------|-----------------------------------|------------|-------|
+| Numbers | Mes y año, en mayúsculas ("MAR 2021") | Fila de días de la semana + 5 filas de semanas × 7 días | `.Number` |
+| Month | Año ("2024") | 3 filas × 4 meses (12) | `.Month` |
+| Year | Rango de años ("2010-2033") | 6 filas × 4 años (24) | `.Month` |
+
+Interpretación basada en evidencia: Los tres tipos forman una jerarquía día → mes → año. La etiqueta del encabezado con flecha desplegable sugiere el paso a la vista de nivel superior (por ejemplo, de días a meses); este comportamiento no está definido en Figma.
+
+### Orden
+
+- Los encabezados de día de la semana comienzan en domingo: S, M, T, W, T, F, S.
+- Los días se ordenan de izquierda a derecha y de arriba abajo. Los días de los meses anterior y siguiente completan la primera y la última fila y usan el estado `Opaque` (por ejemplo, 29, 30 y 31 antes del día 1).
+- Los meses se ordenan de enero a diciembre, de izquierda a derecha y de arriba abajo, como abreviaturas de tres letras en mayúsculas (JAN … DEC).
+- Los años se ordenan de forma ascendente, de izquierda a derecha y de arriba abajo; el encabezado muestra el primer y el último año de la página.
+
+### Navegación
+
+- El encabezado contiene los íconos `chevron-left` y `chevron-right` a la derecha. Interpretación basada en evidencia: mueven al periodo anterior y siguiente (mes, año o rango de años, según `Type`).
+- La etiqueta del encabezado va seguida de un ícono `arrow-dropdown`. Interpretación basada en evidencia: abre una vista de nivel superior o la selección del periodo.
+- Las interacciones de prototipo no estaban disponibles con las herramientas de inspección, por lo que el comportamiento de navegación no está verificado en Figma.
+
+### Desbordamiento y tamaño de la cuadrícula
+
+- `Numbers` muestra cinco filas de semanas en todas las variantes; no se ofrece una sexta fila.
+- `Month` muestra siempre 12 celdas y `Year` 24 celdas.
+- Las celdas tienen tamaños fijos; el panel tiene un ancho fijo.
+
+### Confirmación
+
+- Cuando `showButtons=true`, aparece una fila de botones debajo de la cuadrícula, separada por una línea de 1 px `border/default`, con Cancel y Apply alineados a la derecha.
+- Cuando `showConventions=true` (solo Numbers), la leyenda aparece debajo de los botones.
+
+## Estructura (Anatomía)
+
+### Partes del componente
+
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Panel | Obligatoria | Contenedor vertical de auto layout con fondo, relleno y radio. |
+| Encabezado | Obligatoria | Etiqueta de periodo con `arrow-dropdown` (izquierda) y chevrons de anterior/siguiente (derecha). |
+| Fila de días de la semana (`Days`) | Obligatoria en `Numbers` | Siete iniciales de días de la semana. |
+| Cuadrícula de contenido | Obligatoria | Filas de celdas `.Number` o `.Month`. |
+| Botones | Opcional (`showButtons`) | Instancias de Button Cancel (Tertiary) y Apply (Primary). |
+| Convenciones | Opcional (`showConventions`, solo Numbers) | Tres filas, cada una con un punto de 8 px y una etiqueta "Convention". |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | Numbers: SM 282 px (Evergreen) / 284 px (Indigo), MD 364 px. Month: SM 160 px, MD 218 px. Year: SM 244 px, MD 326 px |
-| Width | SM 184 px, MD 256 px |
-| Padding | space/8 (8 px) |
-| Gap | gap/sm (8 px) |
-| Radius | radius/4 (4 px) |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Ancho del panel | 184 px (SM), 256 px (MD) | Dimensiones de las variantes |
+| Alto del panel (con todas las partes opcionales) | Numbers 282 px (SM) / 362 px (MD); Month 160 / 216 px; Year 244 / 324 px | Dimensiones de las variantes |
+| Relleno del panel | `space/8` (SM), `space/16` (MD) | Vinculaciones de variables |
+| Espacio entre secciones | `gap/sm` (8) | Vinculación de variable |
+| Radio del panel | `radius/4` (4) | Vinculación de variable |
+| Encabezado | Fila con distribución entre extremos; espacio de la etiqueta `gap/xxs` (4); espacio entre chevrons `gap/lg` (16); íconos de 12 px | Vinculaciones de variables, dimensiones de capa |
+| Cuadrícula de días | 7 columnas de celdas de 24 px (SM) o 32 px (MD), sin espacio | Dimensiones de capa |
+| Cuadrículas de meses y años | 4 columnas; espacio entre filas de 4 px en MD | Posiciones de capa |
+| Fila de botones | Borde superior de 1 px `border/default`; relleno superior `space/8` (SM) / `space/12` (MD); espacio `gap/sm`; alineada a la derecha | Vinculaciones de variables |
+| Convenciones | Relleno superior `space/8`; filas con punto de 8 px, `gap/sm` y etiqueta en `Text/Body/XXS` | Vinculaciones de variables |
 
-Tamaños de celda (descripción de Figma):
+## Semántica
 
-- SM: .Number 24 × 24 px, celdas .Month y de año 42 × 24 px
-- MD: .Number 32 × 32 px, celdas .Month y de año 56 × 32 px
+Interpretación basada en evidencia:
 
----
+- La etiqueta del encabezado nombra el periodo visible; los chevrons permiten moverse entre periodos.
+- En `Numbers`, los días `Opaque` pertenecen a meses adyacentes, la celda `Focused` tiene el foco y la celda `Selected` es la fecha elegida.
+- Apply confirma la selección y Cancel la descarta.
+- La leyenda de convenciones explica el significado de los marcadores de color que puede mostrar `.Number` (`State=Conventions`); las etiquetas de ejemplo son marcadores de posición ("Convention").
 
-## Iconography
+No verificado en Figma: elementos HTML, roles ARIA (por ejemplo, diálogo o cuadrícula), interacción con teclado y anuncios en lectores de pantalla.
 
-### Icon Slots
+## Iconografía
 
-| Slot | Description |
-|--------|--------|
-| Leading | Ninguno |
-| Trailing | Ícono arrow-dropdown (12 px) junto a la etiqueta de fecha en el Header |
+| Ranura | Ícono / descripción verificada | Evidencia |
+|--------|--------------------------------|-----------|
+| Selector de periodo | `arrow-dropdown`, 12 px, después de la etiqueta del encabezado | Nombre de capa |
+| Periodo anterior | `chevron-left`, 12 px | Nombre de capa |
+| Periodo siguiente | `chevron-right`, 12 px | Nombre de capa |
+| Marcadores de convención | Puntos de 8 px en tres tonos | Capas, captura |
 
-### Rules
+## Variantes (Propiedades)
 
-- El Header siempre muestra los íconos chevron-left y chevron-right (12 px) en el grupo Arrows.
-- Los mismos íconos del Header aparecen en los tres valores de Type.
-
----
-
-## Variants (Properties)
-
-Los nombres de propiedades y valores deben coincidir exactamente con Figma.
+El inventario siguiente es completo: se listaron las 12 variantes y se inspeccionaron en detalle variantes representativas de cada Type, Size y Color.
 
 ### Type
 
-| Value | Description |
-|--------|--------|
-| Numbers | Cuadrícula de días: fila de días de la semana, 5 filas de celdas .Number, leyenda de convenciones opcional |
-| Month | Cuadrícula de meses (JAN a DEC) de celdas .Month. showConventions no es válido |
-| Year | Cuadrícula de años (2010 a 2033) de celdas .Month. showConventions no es válido |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Numbers | Cuadrícula de días con fila de días de la semana; celdas `.Number`; admite convenciones. | Predeterminado |
+| Month | 12 celdas `.Month` en 3 × 4. | Sin convenciones |
+| Year | 24 celdas `.Month` en 6 × 4. | Sin convenciones |
 
 ### Size
 
-| Value | Description |
-|--------|--------|
-| SM | Ancho del panel 184 px. .Number 24 × 24 px, .Month 42 × 24 px |
-| MD | Ancho del panel 256 px. .Number 32 × 32 px, .Month 56 × 32 px |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| SM | 184 px de ancho; relleno `space/8`; celdas hijas pequeñas y botones SM. | Predeterminado |
+| MD | 256 px de ancho; relleno `space/16`; celdas hijas regulares y botones MD. | — |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Evergreen | Acento verde en la celda seleccionada y en el botón Apply |
-| Indigo | Acento morado en la celda seleccionada y en el botón Apply |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Evergreen | Celdas seleccionadas y botón Apply en Evergreen. | Predeterminado |
+| Indigo | Celdas seleccionadas y botón Apply en Indigo. | — |
+
+La celda de día con foco usa `border/focus` en ambos colores.
 
 ### showButtons
 
-| Value | Description |
-|--------|--------|
-| true | Se muestra el pie con los botones Cancel y Apply |
-| false | El pie se oculta |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| true | Muestra la fila Cancel/Apply. | Predeterminado |
+| false | Oculta la fila de botones. | Todos los tipos |
 
 ### showConventions
 
-| Value | Description |
-|--------|--------|
-| true | Se muestra la leyenda de convenciones. Válido solo con Type=Numbers |
-| false | La leyenda de convenciones se oculta |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| true | Muestra la leyenda de convenciones. | Predeterminado; solo Numbers |
+| false | Oculta la leyenda. | Solo Numbers |
 
----
+## Estados
 
-## States
+El conjunto de componentes Datepicker no tiene propiedad de estado. Los estados de las celdas (Default, Opaque, Focused, Selected) provienen de los componentes hijos `.Number` y `.Month`, y los de los botones, de Button.
 
-El componente no tiene una propiedad State. Las variantes de Figma muestran estas apariencias de celda.
+## Mapeo de tokens
 
-| State | Description | Visual Changes |
-|--------|--------|--------|
-| Celda seleccionada | Celda resaltada (5 en Numbers, APR en Month, 2021 en Year) | Fondo relleno, label text/inverse. Numbers Evergreen: relleno surface/evergreen/bold con borde border/evergreen |
-| Celda con contorno | Celda "2" en Numbers (Evergreen, SM) | Borde de 1 px border/focus. Significado [Pending confirmation] |
-| Día fuera del mes | Días de meses adyacentes (29, 30, 31, 1, 2) | Label text/secondary |
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Fondo | `background/canvas` | Panel | Vinculación de variable |
+| Borde | `border/default`, `width/1` | Divisor de la fila de botones | Vinculación de variable |
+| Texto | `text/primary` | Etiqueta del encabezado, números del mes actual, etiquetas de convenciones | Vinculación de variable |
+| Texto | `text/secondary` | Iniciales de los días de la semana, días de meses adyacentes | Vinculación de variable |
+| Ícono | `icon/primary`, `icon/secondary` | Íconos del encabezado, marcadores | Vinculación de variable |
+| Espaciado | `space/8`, `space/16`, `space/12`, `space/0`, `gap/sm`, `gap/xxs`, `gap/lg` | Rellenos y espacios | Vinculación de variable |
+| Radio | `radius/4` | Panel | Vinculación de variable |
+| Tipografía | `Text/Body/XS Strong` (SM), `Text/Body/SM Strong` (MD) | Etiqueta del encabezado | Estilos de texto |
+| Tipografía | `Text/Label/XS` (SM), `Body/small/strong` (MD) | Iniciales de los días de la semana | Estilos de texto |
+| Tipografía | `Text/Body/XXS` | Etiquetas de convenciones | Estilo de texto |
 
----
+Los tokens de las celdas hijas y de los botones se documentan en `.Number`, `.Month` y Button.
 
-## Token Mapping
+Comportamiento actual:
 
-### Background
+- En `Size=MD`, las iniciales de los días de la semana usan el estilo de texto `Body/small/strong` (variables `font/...`) en lugar de un estilo `Text/...` como en el resto del componente.
+- El botón Apply de las variantes Evergreen MD mide 30 px de alto mientras que Cancel mide 32 px, porque Apply usa la variante predeterminada de Button (ver la documentación de Button).
+- El panel no tiene sombra.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| background/canvas | Panel y botón Cancel | Verificado |
-| surface/evergreen/bold | Celda .Number seleccionada y botón Apply, Color=Evergreen | Verificado en Type=Numbers, Size=SM, Color=Evergreen |
-| surface/indigo/bold | Acento de Color=Indigo | Listado en las variables del nodo; asignación no verificada |
-| border/indigo | Celda .Month seleccionada, Color=Indigo | Verificado en Type=Month, Size=MD, Color=Indigo (usado como relleno) |
+## Interacción
 
-### Text
+El componente no tiene variantes de estado. Las interacciones de prototipo no estaban disponibles con las herramientas de inspección.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/primary | Etiqueta del Header, números del mes actual, celdas de mes, label Cancel, etiquetas de convenciones | Verificado |
-| text/secondary | Fila de días de la semana y días fuera del mes | Verificado |
-| text/inverse | Label de la celda seleccionada, label Apply | Verificado |
+No verificado en Figma: la navegación con los chevrons, el cambio de vista mediante la etiqueta del encabezado, la selección, qué hacen Apply y Cancel, y la interacción con teclado.
 
-### Border
+## Accesibilidad
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/default | Borde superior del pie | Verificado. Grosor: width/1 (1) |
-| border/strong | Borde del botón Cancel | Verificado |
-| border/focus | Celda .Number con contorno | Verificado |
-| border/evergreen | Celda .Number seleccionada, Color=Evergreen | Verificado |
-| border/indigo | Celda .Month seleccionada, Color=Indigo | Verificado |
+Observaciones relacionadas con la accesibilidad:
 
-### Typography
+- La celda seleccionada usa un relleno sólido con texto inverso, y la celda con foco un borde de 1 px `border/focus` (de los componentes hijos).
+- Los días de meses adyacentes se atenúan con `text/secondary`.
+- En SM, los números de los días miden 10 px y las iniciales de los días de la semana 11 px.
+- Las relaciones de contraste no se han verificado.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Label/XS | Fila de días de la semana | Valores verificados: family/body, weight/semibold, size/11, line-height/16, letter-spacing/wide |
-| Text/Body/XXS | Celdas .Number y etiquetas de convenciones | Valores verificados: family/body, weight/regular, size/10, line-height/14 |
-| Text/Body/XS Strong | Etiqueta del Header | Listado en los estilos del diseño; también coincide con Text/Button/SM. Asignación exacta no verificada. Valores: size/12, weight/semibold, line-height/16 |
-| Text/Button/SM | Labels de Cancel y Apply | Listado en los estilos del diseño; asignación exacta no verificada |
-| Text/Body/SM Strong | Celdas .Month, Size=MD | Valores verificados: size/14, weight/semibold, line-height/20. Nombre del estilo listado en los estilos del diseño; asignación no verificada |
+Información de accesibilidad faltante (no verificado en Figma): nombres accesibles para los chevrons y el botón del encabezado, semántica de cuadrícula, anuncios de la fecha actual y de la seleccionada, navegación con teclado y gestión del foco.
 
-### Spacing
+## Pautas de contenido
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/8 | Padding del panel, padding superior de Buttons y Conventions | 8 px |
-| space/0 | Resto del padding de Buttons y Conventions | 0 px |
-| space/12 | Padding horizontal de los botones del pie | 12 px |
-| space/4 | Padding vertical de los botones del pie | 4 px |
-| gap/sm | Espacio entre secciones del panel, botones del pie y punto y etiqueta de convención | 8 px |
-| gap/xxs | Espacio entre la etiqueta de fecha y arrow-dropdown | 4 px |
-| gap/lg | Espacio entre los chevrons | 16 px |
+Observaciones verificadas:
 
-### Radius
+- Etiquetas del encabezado: abreviatura del mes en mayúsculas y año ("MAR 2021"), año ("2024") o rango de años con guion ("2010-2033").
+- Iniciales de los días de la semana: una letra mayúscula por día, comenzando por el domingo.
+- Etiquetas de mes: abreviaturas de tres letras en mayúsculas (JAN, FEB, MAR, APR, MAY, JUN, JUL, AUG, SEP, OCT, NOV, DEC).
+- Etiquetas de los botones: "Cancel" y "Apply".
+- Etiquetas de convenciones: "Convention" (marcador de posición).
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| radius/4 | Panel y celdas | 4 px |
-| semantic/sm | Botones del pie | 4 px |
+## Ejemplos
 
----
+### Selección de día con confirmación
 
-## Interaction
+Configuración: `Type=Numbers`, `Size=MD`, `Color=Evergreen`, `showButtons=true`, `showConventions=true`
 
-La descripción de Figma llama navegables a las tres vistas y dice que se requiere navegación entre vistas (día → mes → año). Cómo se comportan la navegación, la selección y los botones del pie:
+Descripción: Marzo de 2021 con el día 5 seleccionado, el día 2 con foco y una leyenda de convenciones.
 
----
+Evidencia / Clasificación: Variante existente en Figma (contenido de ejemplo).
 
-## Accessibility
+### Selección de mes
 
-| Topic | Information |
-|--------|--------|
-| Notes | Roles ARIA, soporte de teclado
+Configuración: `Type=Month`, `Size=SM`, `Color=Indigo`
 
----
+Descripción: Los doce meses de 2024 con APR seleccionado.
 
-## Content Guidelines
+Evidencia / Clasificación: Variante existente en Figma (contenido de ejemplo).
 
-Texto visible en las variantes: "MAR 2021", iniciales de los días S M T W T F S, "Cancel", "Apply", "Convention", nombres de meses JAN a DEC y años 2010 a 2033 bajo el rango "2010-2033". Es contenido de ejemplo.
+### Selección de año sin botones
 
----
+Configuración: `Type=Year`, `Size=MD`, `Color=Evergreen`, `showButtons=false`
 
-## Examples
+Descripción: Años 2010–2033 sin la fila de botones.
 
-### Example 1
+Evidencia / Clasificación: Configuración admitida por la propiedad `showButtons`.
 
-Configuration:
+## Combinaciones inválidas
 
-```text
-Type=Numbers, Size=SM, Color=Evergreen, showButtons=true
-```
+| Combinación / Condición | Razón verificada | Evidencia |
+|-------------------------|------------------|-----------|
+| `showConventions` con `Type=Month` o `Type=Year` | La propiedad no tiene efecto visible; estos tipos no contienen leyenda de convenciones | Estructura del componente |
 
-Description:
+## Aclaraciones pendientes
 
-Selector de día con botones de pie.
+Ninguna
 
-### Example 2
+## Notas / Registro de cambios
 
-Configuration:
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-```text
-Type=Month, Size=SM, Color=Evergreen, showButtons=true
-```
-
-Description:
-
-Selector de mes con botones de pie.
-
-### Example 3
-
-Configuration:
-
-```text
-Type=Year, Size=MD, Color=Indigo, showButtons=false
-```
-
-Description:
-
-Selector de año sin botones de pie.
-
----
-
-## Invalid Combinations
-
-- showConventions=true con Type=Month o Type=Year
-- Mezclar tokens Evergreen e Indigo en la misma instancia
-
----
-
-## QA Checklist
-
-- Propiedades documentadas.
-- Los nombres de propiedades coinciden exactamente con Figma.
-- Los valores de variantes coinciden exactamente con Figma.
-- Defaults documentados.
-- Combinaciones inválidas documentadas.
-- Tokens verificados.
-- No se agregó comportamiento no documentado.
-- No se agregó comportamiento de accesibilidad no documentado.
-- Matriz de variantes contrastada con la metadata (12 variantes: Type × Size × Color).
-- Diferencias entre la descripción de Figma y el diseño señaladas en Pending Clarification.
-
----
-
-## Pending Clarification
-
-- Columnas de la cuadrícula: la descripción de Figma indica 3 columnas para Type=Month y Type=Year, pero la captura y los anchos de celda (42 px × 4 en un área de contenido de 168 px) muestran 4 columnas (3 filas de meses, 6 filas de años).
-- La altura del panel para Type=Numbers, Size=SM es 282 px en Evergreen y 284 px en Indigo.
-- El significado de la celda "2" con contorno (border/focus, 1 px) en Type=Numbers no está documentado.
-- El significado y los colores de los 3 puntos de convención no están documentados. Las etiquetas dicen "Convention" (contenido de ejemplo).
-- Los botones del pie son instancias de Button. La descripción los nombra Tertiary/Default/SM (Cancel) y Primary/Evergreen/SM (Apply), pero el botón Cancel muestra un contorno border/strong. No se verificaron las propiedades de las instancias, los tamaños en MD ni el botón Apply en Indigo.
-- El relleno de la celda seleccionada es inconsistente entre las variantes revisadas: surface/evergreen/bold (Numbers, Evergreen) vs border/indigo (Month, Indigo). Las demás variantes no se verificaron.
-- Los tokens de ícono (icon/primary, icon/secondary, icon/disabled) aparecen en las variables del nodo pero su uso no se identificó; los íconos se exportan como imágenes SVG. space/16, size/16 y Body/small/strong también están listados sin uso identificado.
-- Los nombres de tokens se tomaron tal cual de Figma y no se cruzaron con los archivos JSON de tokens.
-- status, version y owner.
-- Semantics, Interaction, Accessibility, Content Guidelines y Shadow.
-
----
-
-## Notes / Changelog
-
-Generado a partir del material fuente disponible el 2026-10-20.
+[No hay cambios históricos verificados disponibles]
