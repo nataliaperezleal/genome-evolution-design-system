@@ -25,9 +25,14 @@ BreadcrumbItem is a single step of a breadcrumb trail, available as an overflow 
 
 ### What It Is
 
-The Breadcrumb is a secondary navigation component that displays the user's current location within a hierarchical structure. It helps users understand their navigation context, visualize the path taken, and quickly navigate back to higher levels in the hierarchy.
+Breadcrumb Item is an individual element that composes a breadcrumb navigation trail. It represents one level within the navigation hierarchy and helps users understand their current location within the application while allowing them to navigate back to previous levels.
 
-It is composed of a sequence of levels connected by separators, where the last item represents the current location. When space is limited, intermediate levels can be collapsed using an overflow option.
+The component can be represented as:
+
+- A navigable previous level.
+- The current level.
+- A collapsed levels indicator (overflow).
+- An element with different interaction states.
 
 ### Key Properties
 
@@ -68,20 +73,19 @@ Evidence-based interpretation: Used inside a breadcrumb component, as indicated 
 
 ## When to Use
 
-- In applications with multi-level hierarchical structures.
-- To help users understand where they are within the product.
-- When quick navigation to parent pages or sections is needed.
-- In portals, enterprise platforms, content management systems, and complex applications.
-- In experiences where the same page can be reached through multiple hierarchical paths.
-- When navigation depth exceeds one or two levels.
+- To build hierarchical navigation within a Breadcrumb component.
+- When users need to understand their position within a multi-level structure.
+- To provide quick access to previous pages or sections without relying on the browser back button.
+- When navigation depth requires displaying intermediate levels or collapsing them through overflow.
+- In enterprise applications with complex content, process, or configuration structures.
 
 ## When NOT to Use
 
-- In single-page applications or flat structures without hierarchy.
-- When primary navigation already clearly communicates the current location.
-- To represent sequential workflows or step-by-step processes. Use a Stepper instead.
-- As a replacement for the application's primary navigation.
-- When items do not represent a true hierarchical relationship.
+- As a replacement for primary navigation.
+- To represent steps in a sequential process; use a Stepper instead.
+- In flat navigation structures where no hierarchy exists.
+- As the primary mechanism for accessing actions or features.
+- When navigation only contains one or two levels and the breadcrumb provides little contextual value.
 
 ## Structure (Anatomy)
 
@@ -181,12 +185,15 @@ Not verified in Figma: navigation behavior, what activating `Overflow` does (for
 
 ## Accessibility
 
-Accessibility-related observations:
+Mandatory requirements
+- Maintain a minimum contrast ratio of 4.5:1 for essential text and icons.
+- Interactive items must be operable using a keyboard.
+- The Focus state must be clearly visible and distinguishable from the Hover state.
+- The current item should be properly communicated to assistive technologies using appropriate semantic attributes.
 
-- Required: ensure sufficient contrast between text, icons, and background across all color variants (Default, Evergreen, and Indigo).
-- Required: all interactive items must be keyboard accessible and provide a visible focus indicator.
-- Required: identify the current item using appropriate accessibility attributes (for example, aria-current="page").
-- Recommended: use a semantic navigation structure to improve interpretation by assistive technologies.
+Recommendations
+- Provide sufficiently large interactive target areas.
+- Ensure descriptive accessible names for overflow items.
 
 Missing accessibility information (not verified in Figma): accessible names (including for the "…" overflow item), indication of the current page to assistive technologies, the role of the chevron for screen readers, and keyboard support.
 
