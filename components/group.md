@@ -1,361 +1,291 @@
 ---
 component: "Group"
-system: "Genome Evolution"
-type: "Component"
-status: "Done"
-version: "1.0"
-owner: "UX Design"
-figma_node: "2203:2517"
-last_updated: "2026-10-20"
+system: "Genome Evolution Design System"
+type: "Component set"
+status: "Not verified in Figma"
+version: "Not verified in Figma"
+owner: "Not verified in Figma"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2203-2517"
+last_updated: "2026-10-22"
 tags:
-  - "collapsible-panel"
-  - "footer-actions"
-  - "paginator"
+  - "group"
+  - "container"
+  - "collapsible"
 ---
 
-# Group — Genome Evolution
+# Group
 
-Collapsible panel that toggles between a closed state (header with title and chevron) and an open state (header, content area and footer with paginator and action icons), with two accent colors in the open state.
+System: Genome Evolution Design System
+
+## Component Summary
+
+Group is a 648 px wide collapsible container with a titled header, a content slot and an optional footer with a Paginator and optional action icons, shown either collapsed (header only) or expanded (header, content and footer).
 
 ## Quick Reference
 
-### What it is
+### What It Is
 
-Collapsible panel used to group content into sections.
+Evidence-based interpretation: Group is a section container that groups related content under a title and can be collapsed to its header. This is supported by the `State` values `Collapsed` (32 px header with `chevron-down`) and `Expanded` (header with `chevron-up`, a content slot and a footer), the title property, the content slot that accepts any content, and the footer with a Paginator and action icons (add, edit, delete, search, save, cancel). Figma does not include a written usage description for the Group component set.
 
 ### Key Properties
 
-- State [Collapsed | Expanded] — default: Collapsed
-- Color [Default | Evergreen | Indigo] — default: Default
-- showFooter [true | false] — default: true
-- showPaginator [true | false] — default: true
-- showLeftIcons [true | false] — default: false
-- showRightIcons [true | false] — default: false
-- showLeftIcon1–4 [true | false] — default: true
-- showRighIcon1 [true | false] — default: true
-- showIconRight2 [true | false] — default: true
-- showRightIcon3 [true | false] — default: true
-- showRightIcon4 [true | false] — default: true
-- title — header text (default: "Title")
-- children — free content slot inside the content area (Content2)
+| Property | Available Values | Default |
+|----------|------------------|---------|
+| State | Collapsed, Expanded | Collapsed |
+| Color | Default, Evergreen, Indigo | Default |
+| title (text) | Free text | Title |
+| showFooter (boolean) | true, false | true |
+| showPaginator (boolean) | true, false | true |
+| showLeftIcons (boolean) | true, false | false |
+| showLeftIcon1 – showLeftIcon4 (boolean) | true, false | true |
+| showRightIcons (boolean) | true, false | false |
+| showRighIcon1, showIconRight2, showRightIcon3, showRightIcon4 (boolean) | true, false | true |
+| Content slot | Any content | Empty |
+
+Defaults are taken from the component property definitions in Figma. Property names are listed exactly as they appear in Figma, including `showRighIcon1` and `showIconRight2`.
 
 ### Default Configuration
 
-State=Collapsed, Color=Default, title="Title"
-
-### Invalid Combinations
-
-- State=Collapsed with Color=Evergreen or Color=Indigo (Color only applies when the panel is open).
-- showLeftIcons=true and showRightIcons=true simultaneously, if the paginator space compresses.
-- showFooter=false with showPaginator=true (showPaginator depends on showFooter=true).
+`State=Collapsed`, `Color=Default`, `title="Title"`: a 648 × 32 px bar with `chevron-down` and the title.
 
 ### Typical Usage
 
-- Standard closed panel: State=Collapsed, Color=Default, title="Sección"
-- Open with paginator: State=Expanded, Color=Evergreen, showFooter=true, showPaginator=true
-- Open with right actions: State=Expanded, Color=Indigo, showRightIcons=true, showPaginator=false
-- Open with left actions: State=Expanded, Color=Evergreen, showLeftIcons=true, showPaginator=true
+Verified observation: The component set has three variants: `Collapsed` with `Color=Default`, and `Expanded` with `Color=Evergreen` or `Color=Indigo`.
 
----
+Evidence-based interpretation:
+
+- Use `State=Collapsed` to show only the group title.
+- Use `State=Expanded` with the brand color of the context to show the content.
+- Place the group's content in the content slot.
+- Use `showPaginator` when the content is paged, and `showLeftIcons` / `showRightIcons` to show the footer actions.
 
 ## Purpose / Intent
 
 ### Problem Solved
 
-Groups content into collapsible sections within a layout, with optional pagination of the content area and contextual actions in the panel footer.
+Evidence-based interpretation: Organizes related content in a titled, collapsible section with paging and actions in a consistent footer.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can collapse or expand sections, page through content and use the section's actions.
 
 ### Typical Context
 
-Collapsible sections within a layout. The component has a fixed width of 648px.
-
----
+Specific product contexts are not documented in Figma. The fixed 648 px width indicates use within page or form layouts; this is an evidence-based interpretation.
 
 ## When to Use
 
-- Content needs to be grouped into collapsible sections within a layout.
-- The content area requires pagination.
-- Contextual actions are needed in the footer of the panel.
+Evidence-based interpretations based on the component structure:
 
----
+- To group content under a title that can be collapsed.
+- To page through the group's content with a Paginator.
+- To offer actions on the group's content from the footer.
 
 ## When NOT to Use
 
-- As a modal or dialog.
-- When the content does not need to be grouped or collapsed.
-- In contexts where the fixed 648px width cannot be accommodated.
+[No documented restrictions found]
 
----
+Limitations of the current component:
+
+- `Collapsed` exists only with `Color=Default`, and `Expanded` only with `Evergreen` or `Indigo`.
+- The width is fixed at 648 px.
+- The footer action icons are fixed (add, pencil, trash, file-search on the left; add, trash, save, cancel on the right); each can be hidden but not swapped.
+
+## Composition and Hierarchy Rules
+
+### Order
+
+In `Expanded`, from top to bottom: header, content area, footer (when `showFooter=true`).
+
+### Footer layout
+
+| Position | Element | Visibility | Default |
+|----------|---------|------------|---------|
+| Left | Icons: `add`, `pencil`, `trash`, `file-search` | `showLeftIcons`, then `showLeftIcon1` – `showLeftIcon4` | Hidden group |
+| Center | Paginator | `showPaginator` | Shown |
+| Right | Icons: `add`, `trash`, `save`, `cancel` | `showRightIcons`, then `showRighIcon1`, `showIconRight2`, `showRightIcon3`, `showRightIcon4` | Hidden group |
+
+- The icon groups are positioned at the left and right edges of the footer; the Paginator is centered.
+- Each icon group has a master toggle (`showLeftIcons`, `showRightIcons`, default `false`) and one toggle per icon (default `true`).
+
+### Child components
+
+| Child | Configuration observed |
+|-------|------------------------|
+| Paginator | Input type: first-page, previous, a page field ("0 / 0"), next, last-page. Its states and types are documented with Paginator. |
+| Icon instances | `chevron-down` / `chevron-up` (12 px) in the header; 16 px action icons in the footer. |
 
 ## Structure (Anatomy)
 
 ### Component Parts
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Container | Required | Outer panel. Collapsed: background, 1px border and radius. |
-| Head | Required | Chevron (chevron-down when collapsed, chevron-up when expanded) and title. 32px tall. Expanded: 1px bottom border in the accent color. |
-| Content area (Content2) | Required in State=Expanded | 184px tall area with the `children` slot. |
-| Footer | Optional (showFooter) | 40px tall bar, only in State=Expanded. |
-| Paginator | Optional (showPaginator) | first-page, chevron-left, Page box ("0" and "/ 0"), chevron-right, last-page. |
-| Left icons group | Optional (showLeftIcons) | add, pencil, trash, file-search (individually controlled by showLeftIcon1–4). |
-| Right icons group | Optional (showRightIcons) | add, trash, save, cancel (individually controlled by showRighIcon1, showIconRight2, showRightIcon3, showRightIcon4). |
+| Part | Required / Optional | Description |
+|------|---------------------|-------------|
+| Container | Required | 648 px wide panel with `background/canvas`, 1 px `border/default` and `semantic/sm` radius. |
+| Header (`Head`) | Required | 32 px row with a 12 px chevron and the title. In `Expanded`, it has a 1 px bottom border in the brand color. |
+| Content area | Required in `Expanded` | Padded area (`space/16`) containing the content slot (616 × 184 px). |
+| Footer | Optional (`showFooter`) in `Expanded` | 40 px row on `surface/subtlest` with left icons, Paginator and right icons. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | State=Collapsed: 32px. State=Expanded: 288px (Head 32px + content area 184px + Footer 40px + padding 16px × 2). |
-| Width | 648px (fixed) |
-| Padding | Collapsed: horizontal space/16, vertical space/4. Expanded content wrapper: space/16. Footer: horizontal 16px, vertical 4px (hard-coded values). |
-| Gap | Collapsed: 8px (hard-coded). Expanded content wrapper: gap/none. Footer icon groups: 16px. Paginator: gap/lg. Footer gap between groups: 110px (hard-coded). |
-| Radius | 4px (hard-coded) |
+| Property | Verified Value | Evidence |
+|----------|----------------|----------|
+| Width | 648 px | Variant dimensions |
+| Height | 32 px (Collapsed), 288 px (Expanded with footer) | Variant dimensions |
+| Container border and radius | 1 px `border/default`; `semantic/sm` (4) | Variable bindings |
+| Header | 32 px high; `space/16` horizontal, `space/4` vertical padding; 8 px gap | Variable bindings, design context |
+| Header divider (Expanded) | 1 px `border/evergreen` or `border/indigo` | Variable bindings |
+| Content area | `space/16` padding; slot 616 × 184 px | Variable binding, layer dimensions |
+| Footer | 40 px high; 16 px horizontal, 4 px vertical padding (fixed values); `surface/subtlest` | Design context |
+| Footer icon groups | 16 px icons, 16 px apart; 16 px from the footer edges | Layer positions |
+| Title typography — Collapsed | `Text/Body/XXS`: weight 400, `size/10`, `line-height/14`; `text/secondary` | Text style |
+| Title typography — Expanded | `Text/Body/XS Strong`: weight 600, `size/12`, `line-height/16`; `text/primary` | Text style |
 
+## Semantics
+
+Evidence-based interpretation:
+
+- The header identifies the group; the chevron indicates whether the group is collapsed (`chevron-down`) or expanded (`chevron-up`).
+- The footer icons represent actions on the group's content (add, edit, delete, search on the left; add, delete, save, cancel on the right); their meanings are inferred from the icon names.
+- The Paginator moves between pages of the content.
+
+Not verified in Figma: HTML elements, ARIA attributes (for example, expanded state), and accessible names for icon-only actions.
 
 ## Iconography
 
-### Icon Slots
-
-The component has no leading or trailing slot in the template sense. The icons it contains are documented below.
-
-| Location | Icons | Size |
-|--------|--------|--------|
-| Head | chevron-down (State=Collapsed), chevron-up (State=Expanded) | 12×12px |
-| Footer left group | add, pencil, trash, file-search | 16×16px |
-| Footer right group | add, trash, save, cancel | 16×16px |
-| Paginator | first-page, chevron-left, chevron-right, last-page | 12×12px |
-
-### Rules
-
-- Left group icons are shown or hidden individually with showLeftIcon1–4 once showLeftIcons=true.
-- Right group icons are shown or hidden individually with showRighIcon1 (add), showIconRight2 (trash), showRightIcon3 (save) and showRightIcon4 (cancel) once showRightIcons=true.
-
----
+| Slot | Verified Icon / Description | Evidence |
+|------|-----------------------------|----------|
+| Header — Collapsed | `chevron-down`, 12 px | Layer |
+| Header — Expanded | `chevron-up`, 12 px | Layer |
+| Footer left | `add`, `pencil`, `trash`, `file-search`, 16 px | Layers |
+| Footer right | `add`, `trash`, `save`, `cancel`, 16 px | Layers |
+| Paginator | `first-page`, `chevron-left`, `chevron-right`, `last-page`, 12 px | Nested instance |
 
 ## Variants (Properties)
 
-Property names and values must match Figma exactly.
+The inventory below is complete: all three variants were inspected.
 
 ### State
 
-| Value | Description |
-|--------|--------|
-| Collapsed | Closed panel: only the header with chevron-down and title. Height 32px. |
-| Expanded | Open panel: header with chevron-up, content area and footer. Height 288px. |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Collapsed | Header only: `chevron-down` and a `Text/Body/XXS` `text/secondary` title. | `Color=Default` only; default |
+| Expanded | Header with `chevron-up`, `Text/Body/XS Strong` `text/primary` title and brand-colored divider; content area; footer. | `Color=Evergreen` or `Indigo` |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Default | Used by State=Collapsed. |
-| Evergreen | Accent color for State=Expanded: Head bottom border uses border/evergreen. |
-| Indigo | Accent color for State=Expanded: Head bottom border uses border/indigo. |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Default | No brand accent. | `State=Collapsed` only |
+| Evergreen | Header divider `border/evergreen`. | `State=Expanded` only |
+| Indigo | Header divider `border/indigo`. | `State=Expanded` only |
 
-### showFooter
+### Footer properties
 
-| Value | Description |
-|--------|--------|
-| true | Shows the full footer. |
-| false | Hides the full footer. |
-
-### showPaginator
-
-| Value | Description |
-|--------|--------|
-| true | Shows the paginator in the footer. |
-| false | Hides the paginator. |
-
-### showLeftIcons
-
-| Value | Description |
-|--------|--------|
-| true | Shows the left icon group in the footer. |
-| false | Hides the left icon group. |
-
-### showRightIcons
-
-| Value | Description |
-|--------|--------|
-| true | Shows the right icon group in the footer. |
-| false | Hides the right icon group. |
-
-### showLeftIcon1–4
-
-| Value | Description |
-|--------|--------|
-| true | Shows the individual icon of the left group (add, pencil, trash, file-search respectively). Default: true. |
-| false | Hides the individual icon. |
-
-### showRighIcon1, showIconRight2, showRightIcon3, showRightIcon4
-
-| Value | Description |
-|--------|--------|
-| true | Shows the individual icon of the right group (add, trash, save, cancel respectively). Default: true. |
-| false | Hides the individual icon. |
-
-Property names are kept exactly as they appear in Figma, including `showRighIcon1` and `showIconRight2`.
-
-### title
-
-Header text. Default: "Title".
-
-### children
-
-Slot for free content inside the content area (Content2).
-
----
+| Property | Verified Description | Evidence / Notes |
+|----------|----------------------|------------------|
+| showFooter | Shows the footer. | Default `true`; Expanded only |
+| showPaginator | Shows the centered Paginator. | Default `true` |
+| showLeftIcons | Shows the left icon group. | Default `false` |
+| showLeftIcon1 – showLeftIcon4 | Show `add`, `pencil`, `trash`, `file-search`. | Default `true` |
+| showRightIcons | Shows the right icon group. | Default `false` |
+| showRighIcon1, showIconRight2, showRightIcon3, showRightIcon4 | Show `add`, `trash`, `save`, `cancel`. | Default `true` |
 
 ## States
 
-The variants expose two visible panel states. Interactive states (hover, pressed, focus, disabled) are `[Pending confirmation]`.
+| State | Verified Description | Visual Changes | Evidence |
+|-------|----------------------|----------------|----------|
+| Collapsed | Group closed. | 32 px header; smaller, regular, secondary-colored title. | State variants |
+| Expanded | Group open. | Header with brand divider and stronger title; content and footer visible. | State variants |
 
-| State | Description | Visual Changes |
-|--------|--------|--------|
-| Collapsed | Closed panel (Color=Default). | Height 32px; chevron-down; title with Text/Body/XXS in text/secondary; 1px border/default border. |
-| Expanded | Open panel (Color=Evergreen or Color=Indigo). | Height 288px; chevron-up; title semibold (size/12) in text/primary; Head bottom border in the accent color; content area and footer visible. |
-
----
+No hover, pressed or focused variants exist for the header. Transitions are not defined in Figma.
 
 ## Token Mapping
 
-Verification levels: "Verified" = seen in the exported component code. "Listed in node variables; binding not verified" = the token appears in the node variables but its binding to this element could not be confirmed.
+| Category | Token | Verified Usage | Evidence |
+|----------|-------|----------------|----------|
+| Background | `background/canvas` | Container, header, content | Variable binding |
+| Surface | `surface/subtlest` | Footer | Variable binding |
+| Border | `border/default` | Container border | Variable binding |
+| Border | `border/evergreen`, `border/indigo` | Header divider (Expanded) | Variable binding |
+| Text | `text/secondary` | Title (Collapsed) | Variable binding |
+| Text | `text/primary` | Title (Expanded) | Variable binding |
+| Spacing | `space/16`, `space/4` | Header and content padding | Variable binding |
+| Radius | `semantic/sm` | Container corners | Variable binding |
+| Typography | `Text/Body/XXS`, `Text/Body/XS Strong` | Title by state | Text styles |
 
-### Background
+Paginator tokens are documented with Paginator.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| background/canvas | Container (State=Collapsed); Paginator Page box | Verified |
-| surface/subtlest | Footer | Verified (#f7f8f7). See Pending Clarification. |
+Current behavior:
 
-### Text
+- The title style changes between states: `Text/Body/XXS` in `text/secondary` when collapsed, `Text/Body/XS Strong` in `text/primary` when expanded.
+- The brand color applies only to the expanded header divider; the collapsed state has no brand color.
+- The footer padding and the header gap use fixed values rather than spacing variables.
+- In `Color=Indigo`, the content area has a fixed 216 px height and the slot a fixed 617 px width; in `Color=Evergreen`, the slot fills the content width.
+- Two property names are irregular: `showRighIcon1` and `showIconRight2`.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/secondary | Title, State=Collapsed | Verified |
-| text/primary | Title, State=Expanded; paginator numbers | Verified |
+## Interaction
 
-### Border
+Observed states: Collapsed and Expanded. No prototype interactions were inspected.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/default | Container border (1px); Paginator Page box | Verified |
-| border/evergreen | Head bottom border, Color=Evergreen | Verified |
-| border/indigo | Head bottom border, Color=Indigo | Verified |
+Not verified in Figma: toggling between states, paging behavior, and what the footer icons do.
 
-### Icon
+## Accessibility
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| icon/primary | Icons | Listed in node variables; binding not verified |
+Accessibility-related observations:
 
-### Typography
+- The expanded state is shown by the chevron direction, the visible content and the stronger title, not by color alone.
+- Footer actions are icon-only.
+- The collapsed title is 10 px (`size/10`).
+- Contrast ratios have not been verified.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Body/XXS | Title, State=Collapsed (size/10, line-height/14, weight/regular, family/body, letter-spacing/normal) | Verified |
-| Text/Body/XS Strong | Title, State=Expanded (size/12, line-height/16, weight/semibold) | Listed in node variables; style name not verified in code |
-| size/10 | Paginator numbers "0" and "/ 0" | Verified |
+Missing accessibility information (not verified in Figma): accessible names for the footer icons and the header toggle, expanded-state announcement, keyboard support and focus appearance.
 
-### Spacing
+## Content Guidelines
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/16 | Horizontal padding (Collapsed and Head); content wrapper padding | Verified |
-| space/4 | Vertical padding | Verified |
-| space/8 | Paginator Page box horizontal padding | Verified |
-| gap/none | Gap in the content wrapper | Verified |
-| gap/xxs | Paginator Page box gap | Verified |
-| gap/lg | Paginator gap | Verified |
-
-Values without token (hard-coded): Collapsed gap 8px; footer padding 16px / 4px; gap between footer groups 110px.
-
-### Radius
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| spread/md | Paginator Page box | Verified |
-| spread/lg | Paginator inner number box | Verified |
-
-Container radius semantic semantic/sm (4px)
+Verified observations: The sample title is "Title". The title is a single line in a fixed-width (596 px) text box. The Paginator shows "0 / 0" as sample content.
 
 ## Examples
 
-### Example 1
+### Collapsed group
 
-Configuration:
+Configuration: `State=Collapsed`, `Color=Default`
 
-```text
-State=Collapsed, Color=Default, title="Sección"
-```
+Description: Title bar only.
 
-Description:
+Evidence / Classification: Default variant in Figma.
 
-Standard closed panel: only the header with chevron-down and title.
+### Expanded group with paging
 
-### Example 2
+Configuration: `State=Expanded`, `Color=Evergreen`, `showFooter=true`, `showPaginator=true`
 
-Configuration:
+Description: Header, content slot and a footer with the Paginator.
 
-```text
-State=Expanded, Color=Evergreen, showFooter=true, showPaginator=true
-```
+Evidence / Classification: Existing variant in Figma.
 
-Description:
+### Expanded group with actions
 
-Open panel with Evergreen accent, content area and a footer that includes the paginator.
+Configuration: `State=Expanded`, `Color=Indigo`, `showLeftIcons=true`, `showRightIcons=true`
 
-### Example 3
+Description: Footer with action icons on both sides and the Paginator in the center.
 
-Configuration:
-
-```text
-State=Expanded, Color=Indigo, showRightIcons=true, showPaginator=false
-```
-
-Description:
-
-Open panel with Indigo accent and the right icon group (add, trash, save, cancel) in the footer, without paginator.
-
----
+Evidence / Classification: Configuration supported by the footer properties.
 
 ## Invalid Combinations
 
-- State=Collapsed with Color=Evergreen or Color=Indigo.
-- showLeftIcons=true and showRightIcons=true simultaneously, if the paginator space compresses.
-- showFooter=false with showPaginator=true.
+| Combination / Condition | Verified Reason | Evidence |
+|-------------------------|-----------------|----------|
+| `State=Collapsed` with `Color=Evergreen` or `Color=Indigo` | No such variant exists | Variant inventory |
+| `State=Expanded` with `Color=Default` | No such variant exists | Variant inventory |
 
----
-
-## QA Checklist
-
-- Properties documented.
-- Property names match Figma exactly.
-- Variant values match Figma exactly.
-- Defaults documented.
-- Invalid combinations documented.
-- Tokens verified.
-- No undocumented behavior added.
-- No undocumented accessibility behavior added.
-- Discrepancies between the Figma description and the visible design recorded under Pending Clarification.
-- Hard-coded values (no token) identified.
-
----
+These combinations are unavailable rather than explicitly documented as invalid.
 
 ## Pending Clarification
 
-- Property naming: the Figma description lists `state` [false | true] and `color`, while the variants and exported code expose `State` [Collapsed | Expanded] and `Color`. This document uses the variant names. Confirm the final names.
-- Footer background: the description says #fafafa (Neutral/Neutral200); the design uses surface/subtlest (#f7f8f7).
-- Title style in State=Collapsed: the description says Text/Body/XS (12/16); the design uses Text/Body/XXS (size/10, line-height/14).
-- Content2 width: 617px in Color=Indigo vs. full width in Color=Evergreen. Confirm intent.
-- Hard-coded values without token: container radius 4px, Collapsed gap 8px, footer padding 16px / 4px, gap of 110px between footer groups.
-- Paginator Page box radius: the description says radius/4; the design uses spread/md and spread/lg.
-- Icon token binding (icon/primary): not verified, icons are exported as SVG.
-- Property names `showRighIcon1` and `showIconRight2` do not follow the naming of the other properties. Kept as in Figma; confirm whether they are intentional.
-- Token names were not cross-checked against the project token files.
-- status, version and owner.
-- Semantics, Interaction, Accessibility, Content Guidelines, Expected Outcome, interactive states and Shadow.
-
----
+None
 
 ## Notes / Changelog
 
-Generated from available source material on 2026-10-20.
+Generated or reviewed using available source material on 2026-10-22.
+
+[No verified historical changes available]
