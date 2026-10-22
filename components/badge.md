@@ -181,10 +181,10 @@ Badge has no state variants and no prototype interactions in Figma. It is presen
 
 Accessibility-related observations:
 
-- The label is 10 px (`size/10`) at weight 600.
-- Status is conveyed by color; the badge has no icon or text that indicates the status on its own.
-- `Line / Inverse` uses light border and text with no fill, so it is only legible on dark surfaces.
-- Contrast ratios have not been verified.
+- Required: ensure sufficient contrast between text, border, and background across all color and style variants (Filled and Line).
+- Required: when a badge communicates important information, it must also be available to assistive technologies and not rely solely on color.
+- Required: if the badge is interactive, it must be keyboard accessible and provide a visible focus indicator.
+- Recommended: accompany critical states with descriptive text or supporting iconography.
 
 Missing accessibility information (not verified in Figma): accessible name, how the value and its status are announced to assistive technologies, and text alternatives for color-only status.
 
