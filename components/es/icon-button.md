@@ -1,307 +1,278 @@
 ---
 component: "Icon Button"
 system: "Genome Evolution Design System"
-type: "Action"
-status: "Production"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2182-3348"
-last_updated: "2026-10-20"
+last_updated: "2026-10-22"
 tags:
   - "button"
   - "icon"
   - "action"
-  - "toolbar"
-  - "compact"
-  - "filled"
-  - "outline"
 ---
 
-# Icon Button — Genome Evolution Design System
+# Icon Button
 
-System: Genome Evolution Design System
+Sistema: Genome Evolution Design System
 
-Botón de acción compacto que contiene solo un ícono, disponible en tipos Filled y Outline, cuatro colores, cinco estados, tres tamaños y dos estilos de esquina.
+## Resumen del componente
 
-Clave de fuentes: el contenido sin marca está verificado en Figma. El contenido marcado como "Legacy" proviene de la documentación anterior de este archivo y está pendiente de validación [Pending confirmation].
+Icon Button es un botón solo con ícono, disponible en los tipos Filled y Outline, cuatro colores, tres tamaños (24, 32 y 48 px) y dos estilos de esquina, con los estados Default, Hover, Pressed, Focused y Disable.
 
 ## Referencia rápida
 
 ### Qué es
 
-Control de acción solo con ícono, sin texto. La descripción del componente en Figma lo clasifica como "Button".
+Especificación verificada (descripción en Figma): Icon Button es un botón solo con ícono. Se usa cuando el espacio disponible no permite un botón con texto, cuando el ícono es lo bastante claro sin etiqueta (por ejemplo, enviar, papelera, guardar, editar, cerrar) y cuando se agrupan varias acciones en una barra de herramientas donde el texto generaría ruido visual.
 
 ### Propiedades clave
 
-| Propiedad | Valores | Default |
-|---|---|---|
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
 | Type | Filled, Outline | Filled |
 | Color | Evergreen, Indigo, Inverse, Default | Evergreen |
 | State | Default, Hover, Pressed, Focused, Disable | Default |
-| Size | SM, MD, LG | MD |
+| Size | LG, MD, SM | LG |
 | Corner | Square, Rounded | Square |
-| smallIcon | Ícono intercambiable para Size=SM | — |
-| mediumIcon | Ícono intercambiable para Size=MD | — |
-| largeIcon | Ícono intercambiable para Size=LG | — |
+| largeIcon (intercambio de instancia) | Cualquier ícono | send (LG) |
+| mediumIcon (intercambio de instancia) | Cualquier ícono | send (MD) |
+| smallIcon (intercambio de instancia) | Cualquier ícono | trash (SM) |
 
-Los defaults figuran en la descripción del componente en Figma. El default de Size (MD) coincide además con el default de la implementación en React, pero es provisional: ver Aclaración pendiente 9. Figma no marca íconos por defecto; consulta Iconografía para ver las instancias de ícono usadas en las variantes inspeccionadas.
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. Los valores de estado se escriben `Hover` y `Disable`.
 
-### Configuración por defecto
+Comportamiento actual: el ícono se define mediante una propiedad de intercambio de instancia distinta para cada tamaño: `largeIcon` (LG), `mediumIcon` (MD) y `smallIcon` (SM).
 
-Type=Filled, Color=Evergreen, State=Default, Size=MD, Corner=Square. Size=MD es provisional (ver Aclaración pendiente 9).
+### Configuración predeterminada
+
+`Type=Filled`, `Color=Evergreen`, `State=Default`, `Size=LG`, `Corner=Square`: un botón `surface/evergreen/bold` de 48 × 48 px con un ícono `send` de 24 px en `icon/inverse` y un radio de esquina de 4 px.
 
 ### Uso típico
 
-Observación verificada: la descripción del componente en Figma lista tres variantes de ejemplo y las marca como "no son guía de uso" (ver Ejemplos).
+Observación verificada: El conjunto de componentes contiene 156 variantes. Los colores disponibles dependen de `Type` y `State`:
 
-Recomendación (Legacy, pendiente de validación):
+| Type | Colores | Estados |
+|------|---------|---------|
+| Filled | Evergreen, Indigo, Inverse | Default, Hover, Pressed, Focused |
+| Filled | Default | Disable |
+| Outline | Default, Evergreen, Indigo | Default, Hover, Pressed, Focused |
+| Outline | Default | Disable |
 
-- Usar Filled para mayor peso visual y acciones primarias, y Outline para acciones secundarias.
-- Usar Indigo para funcionalidades de IA.
-- Usar Inverse sobre fondos oscuros.
+Cada combinación anterior existe en los tres tamaños y en ambos estilos de esquina.
+
+Pauta verificada (descripción en Figma): Use Icon Button cuando el espacio no permita un botón con texto, cuando el ícono sea claro sin etiqueta o cuando se agrupen acciones en una barra de herramientas.
+
+Interpretación basada en evidencia:
+
+- `Filled` aporta más énfasis que `Outline`.
+- `Inverse` (un botón blanco con un ícono neutro) es para usarse sobre fondos de color u oscuros.
+- Para mostrar un botón deshabilitado, configure `Color=Default` junto con `State=Disable`.
 
 ## Propósito / Intención
 
 ### Problema que resuelve
 
-Ofrece una acción cuando el espacio disponible no permite un botón con texto.
+Especificación verificada: Ofrece una acción en forma compacta, solo con ícono, donde un botón con texto no cabe o el texto añadiría ruido.
 
 ### Resultado esperado
 
-[Pending confirmation]
+Interpretación basada en evidencia: Los usuarios pueden reconocer y activar acciones solo por su ícono.
 
 ### Contexto típico
 
-Toolbars donde se agrupan varias acciones y el texto generaría ruido visual.
+Especificación verificada (descripción en Figma): Barras de herramientas y espacios reducidos.
 
 ## Cuándo usar
 
-- El espacio disponible no permite un botón con texto.
-- El ícono es lo bastante claro sin etiqueta (send, trash, save, edit, close).
-- Se agrupan varias acciones en una toolbar donde el texto sería visualmente ruidoso.
+Pauta verificada (descripción en Figma):
+
+- Cuando el espacio disponible no permite un botón con texto.
+- Cuando el ícono es lo bastante claro sin etiqueta (enviar, papelera, guardar, editar, cerrar).
+- Cuando se agrupan varias acciones en una barra de herramientas donde el texto generaría ruido visual.
 
 ## Cuándo NO usar
 
-El bloque "DO NOT USE" de la descripción en Figma repite el texto de "USE WHEN", por lo que no hay casos a evitar verificados [Pending confirmation].
+[No se encontraron restricciones documentadas]
 
-Legacy (pendiente de validación):
+Comportamiento actual: La descripción en Figma incluye una sección "DO NOT USE", pero sus tres puntos repiten textualmente los de "USE WHEN", por lo que no documenta ninguna restricción.
 
-- La acción es ambigua sin etiqueta.
-- Es el CTA principal de una pantalla.
+Limitaciones del componente actual:
+
+- `Disable` existe solo con `Color=Default`.
+- `Inverse` existe solo para `Filled`; `Default` existe para `Outline` en todos los estados, pero para `Filled` solo en `Disable`.
 
 ## Estructura (Anatomía)
 
 ### Partes del componente
 
-| Parte | Requerida | Descripción |
-|---|---|---|
-| Contenedor | Sí | Marco cuyo fondo y borde dependen de Type, Color y State. |
-| Ícono | Sí (en las variantes inspeccionadas) | Instancia de ícono intercambiable, centrada en el contenedor. |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Contenedor | Obligatoria | Marco cuadrado que lleva el relleno o el borde, el radio de esquina y el borde de foco. |
+| Ícono | Obligatoria | Un único ícono, intercambiable mediante la propiedad de ícono del tamaño. |
 
 ### Layout
 
-| Propiedad | Valor verificado |
-|---|---|
-| Alto y ancho | LG 48px, MD 32px, SM 24px (cuadrado) |
-| Padding | LG 12px, MD 8px, SM 4px (`space/4`) |
-| Tamaño del ícono | LG 24px, MD 16px, SM 16px |
-| Radio, Corner=Square | 4px (`semantic/sm`) |
-| Radio, Corner=Rounded | 999px (`semantic/full`) |
-| Anillo de foco | 2px (`focus/width`), color `border/focus` #339947 |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Tamaño — LG | 48 × 48 px; relleno de 12 px; ícono de 24 px | Dimensiones de las variantes, contexto de diseño |
+| Tamaño — MD | 32 × 32 px; relleno de 8 px; ícono de 16 px | Dimensiones de las variantes, contexto de diseño |
+| Tamaño — SM | 24 × 24 px; relleno `space/4`; ícono de 16 px | Dimensiones de las variantes, vinculación de variable |
+| Esquina — Square | `semantic/sm` (4) | Vinculación de variable |
+| Esquina — Rounded | `semantic/full` (999), completamente circular | Vinculación de variable (inspeccionado en SM) |
+| Borde de Outline | 1 px | Contexto de diseño |
+| Borde de foco | `focus/width` (2 px) `border/focus` | Vinculaciones de variables (inspeccionado en Filled) |
 
-Medido directamente en variantes Type=Filled, Color=Evergreen, State=Default: Square para LG y SM, Rounded para MD. El padding de LG y MD se leyó como valor fijo, sin token de espaciado asociado. Las variantes Outline y el resto de los estados no se midieron una por una.
+Comportamiento actual: En SM, el ícono de 16 px con relleno de 4 px ocupa el botón de 24 px, por lo que el ícono ocupa una proporción mayor del botón que en MD y LG.
 
 ## Semántica
 
-[Pending confirmation]
+Especificación verificada: El ícono comunica la acción; la descripción en Figma indica enviar, papelera, guardar, editar y cerrar como ejemplos de íconos lo bastante claros para usarse sin etiqueta.
+
+Interpretación basada en evidencia: `Filled` y `Outline` expresan distintos niveles de énfasis; `Color` selecciona la paleta de marca (Evergreen, Indigo), un estilo neutro (Default) o un estilo claro para fondos oscuros (Inverse).
+
+No verificado en Figma: elemento HTML, atributos ARIA y nombres accesibles.
 
 ## Iconografía
 
-| Slot | Descripción |
-|---|---|
-| largeIcon | Size=LG. Ícono de 24px. Las variantes inspeccionadas usan `send`. |
-| mediumIcon | Size=MD. Ícono de 16px. Las variantes inspeccionadas usan `send`. |
-| smallIcon | Size=SM. Ícono de 16px. Las variantes inspeccionadas usan `trash`. |
+| Ranura | Ícono / descripción verificada | Evidencia |
+|--------|--------------------------------|-----------|
+| Ícono — LG | `send`, 24 px; intercambiable mediante `largeIcon` | Propiedad de intercambio de instancia |
+| Ícono — MD | `send`, 16 px; intercambiable mediante `mediumIcon` | Propiedad de intercambio de instancia |
+| Ícono — SM | `trash`, 16 px; intercambiable mediante `smallIcon` | Propiedad de intercambio de instancia |
 
 ## Variantes (Propiedades)
 
-### Type
+El inventario de variantes siguiente es completo (156 variantes listadas). Los tokens se inspeccionaron en variantes representativas; ver Mapeo de tokens para las partes que no se pudieron inspeccionar.
 
-| Valor | Descripción |
-|---|---|
-| Filled | Variante con relleno de fondo. |
-| Outline | Variante definida por su borde. |
+### Type y Color
 
-### Color
-
-| Valor | Descripción |
-|---|---|
-| Evergreen | Verde. Usa `surface/evergreen/bold` #297a39 en la variante inspeccionada. |
-| Indigo | Índigo. |
-| Inverse | Fondo claro. Existe solo con Type=Filled y no tiene estado Disable. |
-| Default | Neutro. Existe con Type=Outline en los cinco estados, y con Type=Filled solo en State=Disable. |
+| Type / Color | Apariencia predeterminada | Evidencia |
+|--------------|---------------------------|-----------|
+| Filled / Evergreen | Relleno `surface/evergreen/bold`; ícono `icon/inverse` | Vinculación de variable |
+| Filled / Indigo | Relleno Indigo; ícono inverso | Captura; tokens no verificados en Figma |
+| Filled / Inverse | Relleno `background/canvas`; ícono `icon/primary` | Vinculación de variable |
+| Filled / Default | Solo Disable | Inventario de variantes |
+| Outline / Default | Borde de 1 px `border/default`; ícono `icon/primary` | Vinculación de variable |
+| Outline / Evergreen | Borde de 1 px `border/evergreen`; ícono Evergreen | Vinculación de variable (borde), captura (ícono) |
+| Outline / Indigo | Borde de 1 px `border/indigo`; ícono `icon/indigo` | Vinculación de variable |
 
 ### State
 
-| Valor | Descripción |
-|---|---|
-| Default | Variante en reposo. |
-| Hover | Variante de hover. |
-| Pressed | Variante de presionado. |
-| Focused | Variante con anillo de foco. |
-| Disable | Variante deshabilitada. Existe solo con Color=Default. |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Default | Apariencia en reposo. | Todos los colores |
+| Hover | Colores de marca Filled: `surface/<color>/bold/hovered`. Filled Inverse y Outline: `background/interactive/hovered`. | Vinculaciones de variables (Evergreen, Inverse, Outline Default) |
+| Pressed | Colores de marca Filled: `surface/<color>/bold/pressed`. Outline: `background/interactive/pressed`. | Vinculaciones de variables (Evergreen, Outline Indigo) |
+| Focused | Borde de 2 px `border/focus`; el relleno se mantiene como en Default. | Vinculaciones de variables (Filled Evergreen SM) |
+| Disable | Relleno o borde claros y un ícono atenuado. | Captura; tokens no verificados en Figma |
 
 ### Size
 
-| Valor | Descripción |
-|---|---|
-| SM | 24×24px. |
-| MD | 32×32px. |
-| LG | 48×48px. |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| LG | 48 px; ícono de 24 px. | Predeterminado |
+| MD | 32 px; ícono de 16 px. | — |
+| SM | 24 px; ícono de 16 px. | — |
 
 ### Corner
 
-| Valor | Descripción |
-|---|---|
-| Square | Radio de 4px. |
-| Rounded | Radio de 999px (inspeccionado en Size=MD), apariencia circular. |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Square | Radio de 4 px (`semantic/sm`). | Predeterminado |
+| Rounded | Circular (`semantic/full`). | — |
 
 ## Estados
 
-| Estado | Descripción | Cambios visuales |
-|---|---|---|
-| Default | Variante en reposo. | Tokens base del Type y Color. |
-| Hover | La variante existe. | Cambia el fondo (ver Mapeo de tokens). |
-| Pressed | La variante existe. | Cambia el fondo (ver Mapeo de tokens). |
-| Focused | La variante existe. | Anillo de 2px en `border/focus` #339947. |
-| Disable | La variante existe, solo para Color=Default. | Tokens disabled de fondo o borde e ícono. |
+| Estado | Descripción verificada | Cambios visuales | Evidencia |
+|--------|------------------------|------------------|-----------|
+| Default | Estado en reposo. | Ver Type y Color. | Variantes de estado |
+| Hover | Apariencia al pasar el cursor. | Relleno más oscuro (Filled de marca) o fondo hovered (Inverse, Outline). | Variantes de estado |
+| Pressed | Apariencia al presionar. | Relleno aún más oscuro (Filled de marca) o fondo pressed (Outline). | Variantes de estado |
+| Focused | Apariencia de foco. | Borde de 2 px `border/focus`. | Variantes de estado |
+| Disable | Apariencia no disponible. | Relleno, borde e ícono atenuados. | Variantes de estado (`Color=Default`) |
+
+Son variantes visuales; las transiciones no están definidas en Figma.
 
 ## Mapeo de tokens
 
-### Verificados directamente en Figma (variante inspeccionada)
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Superficie | `surface/evergreen/bold`, `/hovered`, `/pressed` | Relleno de Filled Evergreen según el estado | Vinculación de variable |
+| Fondo | `background/canvas` | Relleno de Filled Inverse | Vinculación de variable |
+| Fondo | `background/interactive/hovered`, `background/interactive/pressed` | Relleno de Hover y Pressed en Inverse y Outline | Vinculación de variable |
+| Borde | `border/default`, `border/evergreen`, `border/indigo` | Borde de Outline | Vinculación de variable |
+| Borde | `border/focus`, `focus/width` | Borde de Focused | Vinculación de variable |
+| Ícono | `icon/inverse` | Ícono de Filled de marca | Vinculación de variable |
+| Ícono | `icon/primary` | Ícono de Filled Inverse y Outline Default | Vinculación de variable |
+| Ícono | `icon/indigo` | Ícono de Outline Indigo | Vinculación de variable |
+| Radio | `semantic/sm`, `semantic/full` | Esquinas Square y Rounded | Vinculación de variable |
+| Espaciado | `space/4` | Relleno de SM | Vinculación de variable |
 
-| Categoría | Token | Uso |
-|---|---|---|
-| Fondo | `surface/evergreen/bold` #297a39 | Type=Filled, Color=Evergreen, State=Default |
-| Ícono | `icon/inverse` #f7f8f7 | Type=Filled, Color=Evergreen, State=Default |
-| Radio | `semantic/sm` 4 | Corner=Square (Size=LG y SM inspeccionados) |
-| Radio | `semantic/full` 999 | Corner=Rounded (Size=MD inspeccionado) |
-| Padding | `space/4` 4 | Size=SM |
-
-### Presentes en las variables de Figma del componente (vínculo con cada variante no verificado)
-
-Los nombres y valores de los tokens existen en Figma. La columna de uso proviene de la documentación anterior y no se comprobó variante por variante [Pending confirmation].
-
-| Token | Valor | Uso (Legacy) |
-|---|---|---|
-| `surface/evergreen/bold/hovered` | #1f5c2b | Filled, Evergreen, Hover |
-| `surface/evergreen/bold/pressed` | #174520 | Filled, Evergreen, Pressed |
-| `surface/indigo/bold` | #6b1b99 | Filled, Indigo, Default |
-| `surface/indigo/bold/hovered` | #4f0077 | Filled, Indigo, Hover |
-| `surface/indigo/bold/pressed` | #30004a | Filled, Indigo, Pressed |
-| `background/canvas` | #ffffff | Filled, Inverse, Default |
-| `background/interactive/hovered` | #f7f8f7 | Fondo hover de Filled Inverse y de Outline |
-| `background/interactive/pressed` | #e9ecea | Fondo pressed de Filled Inverse y de Outline |
-| `background/disabled` | #f4f6f4 | Filled, Disable |
-| `border/evergreen` | #297a39 | Outline, Evergreen, borde |
-| `border/indigo` | #6b1b99 | Outline, Indigo, borde |
-| `border/disabled` | #c3cbc5 | Outline, Disable, borde |
-| `icon/evergreen` | #297a39 | Outline, Evergreen, ícono |
-| `icon/indigo` | #6b1b99 | Outline, Indigo, ícono |
-| `icon/primary` | #5f6d62 | Ícono de Filled Inverse y de Outline Default |
-| `icon/disabled` | #9daaa0 | Disable, ícono |
-| `border/focus` | #339947 | Anillo de foco |
-| `focus/width` | 2 | Grosor del anillo de foco |
-
-### No encontrados en Figma
-
-`border/strong` #5f6d62 figura en la versión anterior como borde de Type=Outline, Color=Default. No aparece en las variables de Figma del componente. `border/default` #c3cbc5 sí está presente, pero se desconoce su uso [Pending confirmation].
+No verificado en Figma (se alcanzó el límite de inspección): los tokens de Filled Indigo, el ícono de Outline Evergreen, el estado `Disable` y el estado Focused en las variantes Outline. Su apariencia se describe solo a partir de la captura de las variantes. Los rellenos de LG y MD (12 px y 8 px) son valores fijos en las variantes inspeccionadas.
 
 ## Interacción
 
-Los estados visuales existen como variantes (ver Estados). El comportamiento interactivo no está verificado: no había prototipo ni documentación de interacción disponibles. [Pending confirmation]
+Estados observados: Default, Hover, Pressed y Focused para todos los Type y Color; Disable para `Color=Default`. No se inspeccionaron interacciones de prototipo.
+
+No verificado en Figma: la acción que se desencadena y la activación con teclado.
 
 ## Accesibilidad
 
-Guía de implementación Legacy, tomada de la documentación anterior. No es un requisito oficial del Design System y está pendiente de validación [Pending confirmation]:
+Observaciones relacionadas con la accesibilidad:
 
-- Añadir una etiqueta accesible descriptiva, ya que el control no tiene texto visible (ejemplo anterior: `aria-label="Eliminar"`).
-- Marcar el ícono como decorativo (`aria-hidden="true"`).
-- En el estado deshabilitado, usar `aria-disabled="true"` y mantenerlo fuera del orden de foco.
-- Usar Size=MD (32px) como tamaño mínimo para áreas táctiles en móvil.
+- El botón no tiene etiqueta visible; el ícono es la única señal.
+- `Focused` muestra un borde de 2 px `border/focus`.
+- Las relaciones de contraste no se han verificado.
 
-## Guías de contenido
+Información de accesibilidad faltante (no verificado en Figma): nombres accesibles o tooltips para los botones solo con ícono, semántica de deshabilitado y soporte de teclado.
 
-[Pending confirmation]
+## Pautas de contenido
+
+Pauta verificada (descripción en Figma): Use íconos que sean claros sin etiqueta, como enviar, papelera, guardar, editar y cerrar.
 
 ## Ejemplos
 
-### Ejemplo 1
+### Acción de barra de herramientas
 
-Configuración: Type=Filled, Color=Evergreen, State=Default, Size=LG, Corner=Square
+Configuración: `Type=Outline`, `Color=Default`, `State=Default`, `Size=MD`, `Corner=Square`
 
-Descripción: Variante de ejemplo listada en la descripción de Figma. No es guía de uso.
+Descripción: Botón de ícono neutro delineado para una barra de herramientas.
 
-### Ejemplo 2
+Evidencia / Clasificación: Variante existente; uso en barras de herramientas documentado en Figma.
 
-Configuración: Type=Outline, Color=Indigo, State=Hover, Size=MD, Corner=Rounded
+### Acción principal con ícono
 
-Descripción: Variante de ejemplo listada en la descripción de Figma. No es guía de uso.
+Configuración: `Type=Filled`, `Color=Evergreen`, `State=Default`, `Size=LG`, `Corner=Square`
 
-### Ejemplo 3
+Descripción: Botón Evergreen sólido con el ícono `send`.
 
-Configuración: Type=Outline, Color=Default, State=Disable, Size=SM, Corner=Square
+Evidencia / Clasificación: Variante predeterminada en Figma.
 
-Descripción: Variante de ejemplo listada en la descripción de Figma. No es guía de uso.
+### Acción compacta redonda
+
+Configuración: `Type=Outline`, `Color=Indigo`, `State=Hover`, `Size=SM`, `Corner=Rounded`
+
+Descripción: Botón Outline Indigo pequeño y circular en su estado de hover.
+
+Evidencia / Clasificación: Variante existente en Figma.
 
 ## Combinaciones inválidas
 
-### No presentes en el set de variantes (verificado)
+| Combinación / Condición | Razón verificada | Evidencia |
+|-------------------------|------------------|-----------|
+| `State=Disable` con `Color=Evergreen`, `Indigo` o `Inverse` | No existe esa variante | Inventario de variantes |
+| `Type=Outline` con `Color=Inverse` | No existe esa variante | Inventario de variantes |
+| `Type=Filled` con `Color=Default` en estados distintos de `Disable` | No existe esa variante | Inventario de variantes |
 
-Las siguientes combinaciones no tienen variante en Figma, en ningún Size ni Corner. Su ausencia no significa que estén prohibidas oficialmente.
-
-| Type | Color | States sin variante |
-|---|---|---|
-| Filled | Evergreen, Indigo, Inverse | Disable |
-| Filled | Default | Default, Hover, Pressed, Focused |
-| Outline | Evergreen, Indigo | Disable |
-| Outline | Inverse | Default, Hover, Pressed, Focused, Disable |
-
-### Declaradas oficialmente como inválidas
-
-[Pending confirmation]. La descripción de Figma indica que la validez de estas combinaciones no está confirmada, y `ai/invalid-combinations.md` no tiene entrada para Icon Button.
-
-### Legacy (pendiente de validación)
-
-- La documentación anterior listaba como inválidas las combinaciones ausentes de arriba. Figma no lo confirma.
-- largeIcon con Size=MD o SM (usar mediumIcon o smallIcon).
-- Color=Inverse sobre fondos claros. Parece una recomendación de uso más que una regla de variantes.
-
-## Checklist de QA
-
-- [ ] Todas las propiedades y valores documentados coinciden con la fuente de Figma disponible. (Parcial: el Layout se midió solo en variantes Filled / Evergreen / Default.)
-- [x] Valores de variantes verificados.
-- [ ] Valores por defecto incluidos solo cuando están verificados. (Parcial: Size=MD es provisional; ver Aclaración pendiente 9.)
-- [ ] Tokens relevantes verificados contra las fuentes disponibles. (Parcial: ver Mapeo de tokens.)
-- [x] No se añadió comportamiento no documentado.
-- [ ] No se añadieron afirmaciones de accesibilidad no documentadas. (Se incluye guía Legacy etiquetada.)
-- [x] Recomendaciones diferenciadas de las observaciones verificadas.
-- [x] No quedan placeholders de plantilla sin resolver.
-- [x] No quedan instrucciones de plantilla.
-- [x] No hay información fabricada.
+Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
 ## Aclaraciones pendientes
 
-1. ¿Qué token de borde usa Type=Outline, Color=Default: `border/strong` (no encontrado en Figma) o `border/default` #c3cbc5?
-2. ¿Qué debería decir el bloque "DO NOT USE" de Figma, y se mantienen los elementos Legacy de "Cuándo NO usar"?
-3. ¿Alguna de las guías de accesibilidad Legacy o de las recomendaciones de uso Legacy es oficial?
-4. ¿El Design System declara oficialmente inválida alguna de las combinaciones ausentes?
-5. ¿A qué tokens se vincula realmente cada variante Hover, Pressed, Disable y Outline?
-6. ¿Las variantes Outline, el resto de los estados y las variantes Rounded de otros tamaños comparten el padding, el tamaño de ícono y el radio medidos?
-7. ¿Son correctos "Action" (type) y "Production" (status)? Provienen del archivo anterior y del manifest, no de Figma.
-8. ¿Hay versión y responsable definidos? No se encontró ninguno, por lo que se dejaron fuera del front-matter.
-9. ¿Cuál es el default real de Size en el set del componente? El código generado desde Figma al inspeccionar variantes devolvió LG como default, mientras que la descripción del componente en Figma y la implementación en React indican MD. Se mantiene MD como default provisional hasta confirmar la variante por defecto del set.
+Ninguna
 
-## Notas / Changelog
+## Notas / Registro de cambios
 
-Generado el 2026-10-20 a partir del componente en Figma (nodo 2182:3348) y de la documentación anterior de este archivo.
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-[No verified historical changes available]
+[No hay cambios históricos verificados disponibles]
