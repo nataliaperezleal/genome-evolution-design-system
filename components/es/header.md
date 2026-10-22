@@ -1,186 +1,287 @@
 ---
-component: Header
-system: Genome Evolution Design System
-type: Navigation / Global bar
-status: Done
-version: 1.2
-figma_node: 2184:1376
-last_updated: "2026-10-19"
-tags: [header, navigation, global-bar, Apps Designer, Apps Tools, Workportal]
+component: "Header"
+system: "Genome Evolution Design System"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-1376"
+last_updated: "2026-10-22"
+tags:
+  - "header"
+  - "navigation"
+  - "app-bar"
 ---
 
 # Header
 
+Sistema: Genome Evolution Design System
+
+## Resumen del componente
+
+Header es una barra superior de 1440 px de ancho sobre `surface/evergreen/bold`, disponible en tres temas de producto: `Apps Designer` (identidad del producto e información del usuario), `Apps Tools` (acciones de herramientas, la app actual y acciones de la app) y `Workportal` (navegación principal, búsqueda y avatar del usuario).
+
 ## Referencia rápida
 
 ### Qué es
-Barra de navegación global de ancho completo (1440px) cuya estructura y contenido cambian según el theme del producto. Existen tres themes: `Apps Designer`, `Apps Tools` y `Workportal`.
+
+Interpretación basada en evidencia: Header es la barra superior de la aplicación que identifica el producto y da acceso a la navegación, las herramientas y la cuenta del usuario. Esto se sustenta en el nombre del componente, en su diseño a ancho completo en la parte superior de un marco de 1440 px, en el logo de Bizagi presente en todos los temas y en el contenido específico de cada tema: nombre, correo y avatar del usuario (`Apps Designer`), acciones de herramientas y de la app (`Apps Tools`), y elementos de navegación con búsqueda y avatar (`Workportal`). Figma no incluye una descripción de uso escrita para el conjunto de componentes Header.
 
 ### Propiedades clave
 
-| Propiedad | Valores | Por defecto |
-|---|---|---|
-| Theme | Apps Designer \| Apps Tools \| Workportal | Apps Designer |
-| avatar | true \| false | true |
-| mail | true \| false | true |
-| userName | true \| false | true |
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Theme | Apps Designer, Apps Tools, Workportal | Apps Designer |
+| userName (booleano) | true, false | true |
+| mail (booleano) | true, false | true |
+| avatar (booleano) | true, false | true |
 
-### Configuración por defecto
-`Theme=Apps Designer`, `avatar=true`, `mail=true`, `userName=true`
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. `userName`, `mail` y `avatar` afectan solo a `Theme=Apps Designer`; los demás temas tienen contenido fijo. Las etiquetas (nombre del producto, elementos de navegación, acciones) no se exponen como propiedades.
 
-### Combinaciones inválidas
-- Mezclar el contenido de un theme en otro (cada theme tiene estructura fija).
-- Usar el header sin logo zone.
-- Avatar `Size=40` en `Theme=Workportal` (usa `Size=24`).
-- Avatar `Size=24` en `Theme=Apps Designer` (usa `Size=40`).
+### Configuración predeterminada
+
+`Theme=Apps Designer` con nombre de usuario, correo y avatar visibles: una barra de 1440 × 64 px con el ícono de Bizagi, el nombre de producto "App Designer" y, a la derecha, "User name", "user.name@company.com" y un avatar `Print` de 40 px.
 
 ### Uso típico
-- `Theme=Apps Designer`, `avatar=true`, `mail=true`, `userName=true`
-- `Theme=Apps Tools`
-- `Theme=Workportal`
+
+Observación verificada: El conjunto de componentes tiene tres variantes, una por cada `Theme`. Cada tema tiene una estructura y un contenido distintos; comparten el ancho, el fondo de marca y el logo de Bizagi.
+
+Interpretación basada en evidencia:
+
+- `Apps Designer` para el encabezado del producto App Designer, con la información del usuario que ha iniciado sesión.
+- `Apps Tools` para un contexto de edición de una app: acciones de herramientas a la izquierda, la app actual en el centro y acciones de la app (desbloquear, estado de guardado, descargar, abrir, publicar) a la derecha.
+- `Workportal` para el producto Workportal: navegación principal, búsqueda y avatar del usuario.
 
 ## Propósito / Intención
-Barra principal de navegación global de la aplicación, disponible en tres themes según el producto o contexto (Apps Designer, Apps Tools, Workportal).
+
+### Problema que resuelve
+
+Interpretación basada en evidencia: Ofrece una barra superior consistente y con la marca para cada contexto de producto, con la navegación y las acciones que ese contexto necesita.
+
+### Resultado esperado
+
+Interpretación basada en evidencia: Los usuarios pueden identificar el producto en el que se encuentran, acceder a la navegación y a las herramientas, y ver su cuenta.
+
+### Contexto típico
+
+Interpretación basada en evidencia: La parte superior de pantallas de aplicación diseñadas a 1440 px de ancho, en productos de Bizagi (App Designer, herramientas de apps y Workportal).
 
 ## Cuándo usar
-- Cuando se necesita la barra de navegación principal de la aplicación en cualquiera de los tres productos/contextos.
+
+Interpretaciones basadas en evidencia a partir de las variantes:
+
+- Como barra superior de las pantallas de App Designer (`Apps Designer`).
+- Como barra superior mientras se trabaja en una app (`Apps Tools`).
+- Como barra superior de las pantallas de Workportal (`Workportal`).
 
 ## Cuándo NO usar
-- Como header de sección o de panel interno.
-- En viewports menores a 1440px sin adaptación responsive.
+
+[No se encontraron restricciones documentadas]
+
+Limitaciones del componente actual:
+
+- El ancho es fijo de 1440 px; el comportamiento adaptable no está definido.
+- Los elementos de navegación, las acciones y las etiquetas son fijos en cada tema y no se exponen como propiedades.
+
+## Reglas de composición y jerarquía
+
+### Apps Designer (64 px)
+
+| Posición | Contenido |
+|----------|-----------|
+| Izquierda | Bloque de logo: ícono de Bizagi de 32 px con relleno de 16 px. |
+| Izquierda, después del logo | Nombre del producto: wordmark pequeño de Bizagi sobre "App Designer" (gráficos vectoriales). |
+| Derecha | Bloque de usuario: "User name" (`userName`) y "user.name@company.com" (`mail`), alineados a la derecha, y luego un Avatar de 40 px (`avatar`; `Type=Print`, `Color=Evergreen`). |
+
+### Apps Tools (64 px)
+
+| Posición | Contenido |
+|----------|-----------|
+| Izquierda | Ícono de Bizagi y luego cuatro acciones: Controls (`add`), Settings (`settings`), Tools (`toolbox`), ADA Charts (`ADA-Charts`). |
+| Centro | Botón "Main menu" (ícono de candado, etiqueta, chevron-down) sobre el nombre de la app ("test-app-ux"). |
+| Derecha | Unlock app (`lock-open`), App saved (`check`, después de la etiqueta), Download app (`download`), Open app (`external-link`), Publish (`publish`). |
+
+- Cada acción es un elemento de 64 px de alto con un ícono de 16 px y una etiqueta de 10 px, relleno horizontal de 16 px y espacio de 8 px.
+- Publish es el último elemento y se resalta con un fondo `surface/evergreen/subtle` y una etiqueta `text/primary`.
+
+### Workportal (48 px)
+
+| Posición | Contenido |
+|----------|-----------|
+| Izquierda | Wordmark completo de Bizagi (104 × 32 px) y luego los elementos de navegación: Me (`home`), Inbox (`inbox`), New Case (`suitcase-add`), Queries (`Search`), Reports (`chart-bars`), Live Processes (`live-process`), Admin (`settings`). |
+| Derecha | Campo de búsqueda (Input, 244 px de ancho, marcador "Search") y luego un Avatar de 24 px (`Type=Print`, `Color=Evergreen`). |
+
+- New Case, Queries, Reports, Live Processes y Admin terminan con un ícono `arrow-dropdown`. Interpretación basada en evidencia: estos elementos abren menús; Me e Inbox navegan directamente.
+
+### Componentes hijos
+
+| Hijo | Uso | Configuración observada |
+|------|-----|-------------------------|
+| Logo de Bizagi | Todos los temas | `Type=Icon` de 32 px (Apps Designer, Apps Tools), `Type=Full` de 104 × 32 px (Workportal); blanco |
+| Avatar | Apps Designer, Workportal | `Type=Print`, `Color=Evergreen`, `Size=40` / `Size=24` |
+| Button | Apps Tools (Main menu) | Sobrescrito: relleno `background/alpha`, borde `border/evergreen`, íconos de candado y chevron-down |
+| Input | Workportal (búsqueda) | Campo de 24 px con un ícono de búsqueda en la ranura inicial, marcador "Search"; etiqueta y texto de ayuda ocultos |
 
 ## Estructura (Anatomía)
 
 ### Partes del componente
 
-| Theme | Parte | Contenido |
-|---|---|---|
-| Apps Designer | Logo | Logo bizagi 32×32 |
-| Apps Designer | Header → Content (296px) | Logotipo Group (8px de alto) + wordmark "App Designer" |
-| Apps Designer | Header → User Actions | Nombre de usuario, email, Avatar (Color=Evergreen, Size=40) |
-| Apps Tools | Left actions | Logo + 4 ítems con ícono + texto: Controls, Settings, Tools, ADA Charts |
-| Apps Tools | Page info (204px) | Botón "Main menu" (ícono lock-closed + ícono chevron-down) + label "test-app-ux" |
-| Apps Tools | Right actions | Unlock app, App saved (check), Download app, Open app, Publish |
-| Workportal | Left → Logo | Logo bizagi completo 104×32 |
-| Workportal | Left → Navigation Menu | 7 Navigation Items: Me, Inbox, New Case, Queries, Reports, Live Processes, Admin |
-| Workportal | User Actions | Search input (244px) + Avatar (Color=Evergreen, Size=24) |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Barra | Obligatoria | Contenedor de 1440 px de ancho sobre `surface/evergreen/bold`. |
+| Logo | Obligatoria | Ícono o wordmark de Bizagi. |
+| Identidad del producto | Apps Designer | Gráfico con el nombre del producto. |
+| Acciones de herramientas y de la app | Apps Tools | Elementos de acción con ícono y etiqueta a ambos lados; app actual en el centro. |
+| Menú de navegación | Workportal | Elementos de navegación con ícono y etiqueta. |
+| Área de usuario | Apps Designer, Workportal | Nombre y correo del usuario (Apps Designer), búsqueda (Workportal), avatar. |
 
 ### Layout
 
-| Theme | Ancho × Alto | Layout (según lo visible en Figma) |
-|---|---|---|
-| Apps Designer | 1440×64 | Fila, ítems centrados; Logo padding 16; Header padding horizontal 16, justify-between; gap 16 en User Actions |
-| Apps Tools | 1440×64 | Fila, justify-between; cada ítem de acción con padding horizontal 16, gap 8, alto 64 |
-| Workportal | 1440×48 | Fila, justify-between, padding horizontal 16; Logo padding 24 horizontal / 8 vertical; Navigation Item padding horizontal 16, gap 4; gap 16 en User Actions |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Ancho | 1440 px | Dimensiones de las variantes |
+| Alto | 64 px (Apps Designer, Apps Tools), 48 px (Workportal) | Dimensiones de las variantes |
+| Fondo | `surface/evergreen/bold` | Vinculación de variable |
+| Relleno horizontal | 16 px (área de contenido de Apps Designer, Workportal) | Contexto de diseño |
+| Bloque de logo | Relleno de 16 px (Apps Designer, Apps Tools); 24 px horizontal y 8 px vertical (Workportal) | Contexto de diseño |
+| Elementos de acción de Apps Tools | 64 px de alto, relleno horizontal de 16 px, espacio de 8 px, íconos de 16 px | Contexto de diseño |
+| Elementos de navegación de Workportal | Alto completo, relleno horizontal `space/16`, espacio de 4 px, íconos de 16 px | Vinculación de variable, contexto de diseño |
+| Bloque de usuario de Apps Designer | 154 px de ancho, alineado a la derecha; espacio de 16 px hasta el avatar | Contexto de diseño |
+| Área de usuario de Workportal | Búsqueda de 244 px de ancho; espacio de 16 px hasta el avatar | Contexto de diseño |
+
+## Semántica
+
+Interpretación basada en evidencia:
+
+- El logo identifica la familia de productos de Bizagi; el nombre del producto o la navegación identifican el producto concreto.
+- En `Apps Tools`, "App saved" con una marca de verificación es un indicador de estado, mientras que los demás elementos son acciones; Publish es la acción destacada.
+- En `Workportal`, los elementos de navegación llevan a áreas del producto; los elementos con `arrow-dropdown` abren submenús.
+
+No verificado en Figma: regiones HTML (por ejemplo, banner o navegación), indicación de la página actual y el comportamiento de cada elemento.
 
 ## Iconografía
 
-| Theme | Íconos (nombres de capa en Figma) | Tamaño |
-|---|---|---|
-| Apps Designer | bizagi (logo) | 32×32 |
-| Apps Tools | add, settings, toolbox, ADA-Charts, lock-open, check, download, external-link, publish; botón Main menu: check (nombre de capa, asset lock-closed), close (nombre de capa, asset chevron-down) | 16×16 |
-| Workportal | home, inbox, suitcase-add, arrow-dropdown, Search, chart-bars, live-process, settings | 16×16 |
+| Tema | Íconos |
+|------|--------|
+| Apps Tools | `add`, `settings`, `toolbox`, `ADA-Charts`, candado (Main menu), `chevron-down`, `lock-open`, `check`, `download`, `external-link`, `publish` |
+| Workportal | `home`, `inbox`, `suitcase-add`, `Search`, `chart-bars`, `live-process`, `settings`, `arrow-dropdown`, búsqueda (en Input) |
 
-Nota: algunos nombres de capa no coinciden con el ícono que contienen (ver Aclaraciones pendientes).
+Todos los íconos miden 16 px.
 
 ## Variantes (Propiedades)
 
-| Propiedad | Valores | Por defecto | Aplica a |
-|---|---|---|---|
-| Theme | Apps Designer \| Apps Tools \| Workportal | Apps Designer | Todos |
-| avatar | true \| false | true | Booleano visible en Theme=Apps Designer 
-| mail | true \| false | true | Booleano visible en Theme=Apps Designer 
-| userName | true \| false | true | Booleano visible en Theme=Apps Designer 
+El inventario siguiente es completo: se inspeccionaron las tres variantes.
+
+### Theme
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Apps Designer | 64 px; logo, nombre del producto, nombre y correo del usuario, avatar de 40 px. | Predeterminado |
+| Apps Tools | 64 px; logo y acciones de herramientas, Main menu y nombre de la app, acciones de la app con Publish resaltado. | — |
+| Workportal | 48 px; wordmark completo, siete elementos de navegación, campo de búsqueda, avatar de 24 px. | — |
+
+### userName, mail, avatar
+
+| Propiedad | Descripción verificada | Evidencia / Notas |
+|-----------|------------------------|-------------------|
+| userName | Muestra "User name". | Solo Apps Designer; predeterminado `true` |
+| mail | Muestra la dirección de correo. | Solo Apps Designer; predeterminado `true` |
+| avatar | Muestra el avatar de 40 px. | Solo Apps Designer; predeterminado `true` |
+
+## Estados
+
+El conjunto de componentes Header no tiene propiedad de estado. Los elementos de navegación y las acciones no tienen variantes de hover, presión, selección ni foco en este componente.
 
 ## Mapeo de tokens
 
-Los tokens listados son los exportados por Figma para este nodo. Los nombres de tokens de color se verificaron contra `Color_RoleProduct.tokens.json`. Los tokens de spacing, gap, radius, semantic y tipografía no se cruzaron con sus archivos de tokens [Pending confirmation].
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Superficie | `surface/evergreen/bold` | Fondo de la barra | Vinculación de variable |
+| Superficie | `surface/evergreen/subtle` | Fondo del elemento Publish (Apps Tools) | Vinculación de variable |
+| Texto | `text/inverse` | Etiquetas sobre la barra | Vinculación de variable |
+| Texto | `text/primary` | Etiqueta de Publish | Vinculación de variable |
+| Fondo | `background/alpha` | Relleno del botón Main menu | Vinculación de variable |
+| Borde | `border/evergreen` | Borde del botón Main menu | Vinculación de variable |
+| Espaciado | `space/16` | Relleno de los elementos de navegación de Workportal | Vinculación de variable |
+| Tipografía | `Text/Body/XXS` | Etiquetas de las acciones de Apps Tools | Estilo de texto |
+| Tipografía | `Text/Label/XS` | Nombre de la app (Apps Tools) | Estilo de texto |
+| Tipografía | `Text/Body/SM`, `Body/medium/regular` | Etiquetas de navegación de Workportal | Estilos de texto |
+| Tipografía | `Body/medium/strong`, `Body/small/regular` | Nombre y correo del usuario (Apps Designer) | Estilos de texto |
 
-### Fondo
+Los tokens de Avatar, Button e Input se documentan en esos componentes.
 
-| Elemento | Token | Valor |
-|---|---|---|
-| Barra del header (todos los themes) | surface/evergreen/bold | #297a39 |
-| Avatar | surface/evergreen/subtle | #eefbf2 |
-| Ítem Publish (Apps Tools) | surface/evergreen/subtle | #eefbf2 |
-| Botón Main menu (Apps Tools) | background/alpha | #adb8b099 |
-| Search input (Workportal) | background/canvas | #ffffff |
+Comportamiento actual:
 
-### Texto
+- Varios textos usan los estilos de texto anteriores `Body/...` (variables `font/...`): el nombre y el correo del usuario en Apps Designer, y las etiquetas "Inbox" y "Queries" de Workportal. Las demás etiquetas de Workportal usan `Text/Body/SM`.
+- La etiqueta "Live Processes" está vinculada a `icon/inverse` en lugar de `text/inverse`; ambos se resuelven en el mismo color.
+- La mayoría de los rellenos y espacios usan valores fijos en lugar de variables de espaciado.
+- El nombre del producto en `Apps Designer` y los logos son gráficos vectoriales, no texto.
+- En `Workportal`, la capa del ícono inicial del campo de búsqueda se llama `calendar` y muestra un ícono de búsqueda.
 
-| Elemento | Token | Valor |
-|---|---|---|
-| Ítems de navegación, acciones, nombre de usuario, email | text/inverse | #f7f8f7 |
-| Label de Publish | text/primary | #2d342f |
-| Label del Avatar | text/evergreen | #297a39 |
-| Placeholder de búsqueda | text/secondary | #5f6d62 |
-| Label "Live Processes" | icon/inverse (usado como color de texto) | #f7f8f7 |
-| "test-app-ux", "Download app" | text/inverse | #FFFFFF |
+## Interacción
 
-### Borde
+El componente no tiene variantes de estado. No se inspeccionaron interacciones de prototipo.
 
-| Elemento | Token | Valor |
-|---|---|---|
-| Botón Main menu | border/evergreen | #297a39 |
-| Search input | border/default | #c3cbc5 |
+No verificado en Figma: qué hace cada acción y cada elemento de navegación, cómo se abren los submenús, la indicación de la página activa y la navegación con teclado.
 
-### Ícono
-Tokens exportados: icon/inverse (#f7f8f7), icon/evergreen (#297a39), icon/primary (#5f6d62). Mapeo por ícono: [Pending confirmation].
+## Accesibilidad
 
-### Tipografía
+Observaciones relacionadas con la accesibilidad:
 
-| Elemento | Estilo |
-|---|---|
-| Nombre de usuario Apps Designer | Body/medium/strong |
-| Email Apps Designer | Body/small/regular |
-| Ítems y acciones de Apps Tools | Text/Body/XXS (10/14, regular) |
-| Main menu de Apps Tools | Text/Button/SM |
-| Label de página de Apps Tools | Text/Label/XS |
-| Ítems de navegación Workportal | Text/Body/SM (algunos ítems usan Body/medium/regular) |
-| Placeholder de búsqueda Workportal | Text/Body/XXS |
-| Label del Avatar Size=40 | Text/Body/MD Strong |
-| Label del Avatar Size=24 | Text/Body/XS Strong |
+- Todos los elementos de navegación y las acciones combinan un ícono con una etiqueta de texto.
+- Las etiquetas de Apps Tools miden 10 px (`size/10`); las de Workportal, 14 px.
+- Las etiquetas usan `text/inverse` sobre `surface/evergreen/bold`. Las relaciones de contraste no se han verificado.
 
-### Espaciado
-space/4, space/8, space/16, gap/sm, gap/xxxs (según lo exportado por Figma).
+Información de accesibilidad faltante (no verificado en Figma): regiones, indicación de la página actual, apariencia de foco de los elementos, soporte de teclado y nombres accesibles para el logo y el avatar.
 
-### Radio
-semantic/sm (4px) para el botón Main menu y el Search input; radius/24 para el Avatar.
+## Pautas de contenido
+
+Observaciones verificadas (contenido de ejemplo):
+
+- Apps Designer: "User name", "user.name@company.com".
+- Apps Tools: "Controls", "Settings", "Tools", "ADA Charts", "Main menu", "test-app-ux", "Unlock app", "App saved", "Download app", "Open app", "Publish".
+- Workportal: "Me", "Inbox", "New Case", "Queries", "Reports", "Live Processes", "Admin", "Search".
+
+Las etiquetas ocupan una sola línea y usan mayúscula inicial o mayúsculas de título, como se muestra.
 
 ## Ejemplos
 
-1. `Theme=Apps Designer`, `avatar=true`, `mail=true`, `userName=true`: logo, wordmark "App Designer", "User name", "user.name@company.com" y Avatar Size=40.
-2. `Theme=Apps Tools`: acciones izquierdas (Controls, Settings, Tools, ADA Charts), Main menu con label "test-app-ux", acciones derechas (Unlock app, App saved, Download app, Open app, Publish).
-3. `Theme=Workportal`: navegación (Me, Inbox, New Case, Queries, Reports, Live Processes, Admin), Search input y Avatar Size=24.
+### Encabezado de App Designer
+
+Configuración: `Theme=Apps Designer`, `userName=true`, `mail=true`, `avatar=true`
+
+Descripción: Identidad del producto a la izquierda y nombre, correo y avatar del usuario a la derecha.
+
+Evidencia / Clasificación: Variante predeterminada en Figma.
+
+### Encabezado de edición de app
+
+Configuración: `Theme=Apps Tools`
+
+Descripción: Acciones de herramientas, la app actual con su Main menu y acciones de la app que terminan con Publish.
+
+Evidencia / Clasificación: Variante existente en Figma.
+
+### Encabezado de Workportal
+
+Configuración: `Theme=Workportal`
+
+Descripción: Navegación principal con elementos desplegables, búsqueda y avatar.
+
+Evidencia / Clasificación: Variante existente en Figma.
 
 ## Combinaciones inválidas
-- Mezclar el contenido de un theme en otro (cada theme tiene estructura fija).
-- Usar el header sin logo zone.
-- Avatar `Size=40` en `Theme=Workportal`.
-- Avatar `Size=24` en `Theme=Apps Designer`.
 
-(Fuente: descripción del componente en Figma.)
-
-## Checklist de QA
-- [ ] El Theme corresponde al producto (Apps Designer, Apps Tools o Workportal)
-- [ ] Dimensiones: 1440×64 (Apps Designer, Apps Tools) y 1440×48 (Workportal)
-- [ ] Avatar Size=40 en Apps Designer y Size=24 en Workportal
-- [ ] Tokens de color y tipografía vinculados, sin valores hard-coded
-- [ ] Logo zone presente
-- [ ] No se usa como header de sección o panel interno
+| Combinación / Condición | Razón verificada | Evidencia |
+|-------------------------|------------------|-----------|
+| `userName`, `mail` o `avatar` con `Theme=Apps Tools` o `Theme=Workportal` | Las propiedades no tienen efecto en estos temas | Vinculaciones de propiedades |
 
 ## Aclaraciones pendientes
-1. Fondo de la logo zone: la descripción indica `surface/evergreen/subtle`; el diseño renderiza `surface/evergreen/bold` en los tres themes.
-2. Nombres de propiedad: la descripción usa `theme`; las variantes usan `Theme`. Los booleanos `avatar`, `mail`, `userName` están en camelCase y solo controlan Apps Designer.
-3. Tipografía de ítems de Apps Tools: la descripción indica Text/Body/XS (12/16); el diseño usa Text/Body/XXS (10/14).
-4. Placeholder de búsqueda en Workportal: la descripción indica Text/Body/XS; el diseño usa Text/Body/XXS (10/14).
-5. Los ítems de navegación de Workportal mezclan Text/Body/SM y Body/medium/regular (line-height 22).
-6. Textos con white / Neutral/Neutral100 en lugar de text/inverse ("test-app-ux", "Download app"), e icon/inverse usado como color de texto ("Live Processes").
-7. Padding del botón Main menu: space/8 resuelve a 9px y space/4 a 5px en el código generado, frente a 8px/4px en otros elementos.
-8. Nombres de capa que no coinciden con el ícono (Main menu: check/close; Search input: calendar).
-9. La descripción menciona logo "Bizagi Apps 32×32" y Avatar "size/24 (radius pill)"; el diseño usa radius/24 y el ícono bizagi.
-10. Estados, interacción, semántica, accesibilidad, comportamiento responsive y color del ícono Publish.
 
-## Notas / Changelog
-- Las reglas derivadas de la descripción (Cuándo NO usar, Combinaciones inválidas) provienen de la descripción del componente en Figma.
-- 2026-10-19: Documentación inicial generada a partir del material fuente disponible (nodo 2184:1376).
+Ninguna
+
+## Notas / Registro de cambios
+
+Generado o revisado con el material de origen disponible el 2026-10-22.
+
+[No hay cambios históricos verificados disponibles]
