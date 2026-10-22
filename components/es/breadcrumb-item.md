@@ -1,186 +1,230 @@
 ---
-component: .BreadcrumbItem
-system: Genome Evolution Design System
-type: Component
-status: "Production"
-version: 1.0
-owner: UX Design Team
-last_updated: 2026-05-27
-tags: [navegacion, jerarquia, componente-interno, breadcrumb]
+component: "BreadcrumbItem"
+system: "Genome Evolution Design System"
+type: "Conjunto de componentes (bloque interno)"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2998-19004"
+last_updated: "2026-10-22"
+tags:
+  - "breadcrumb"
+  - "navigation"
+  - "building-block"
 ---
 
-# .BreadcrumbItem
+# BreadcrumbItem
 
-## Propósito
+Sistema: Genome Evolution Design System
 
-Elemento individual de breadcrumb que representa un solo paso en la jerarquía de navegación. Se utiliza internamente por el componente Breadcrumb para construir la ruta de navegación. Este es un componente interno y no debe usarse directamente en interfaces; siempre use el contenedor principal Breadcrumb en su lugar.
+## Resumen del componente
 
-## Referencia Rápida
+BreadcrumbItem es un paso individual de una ruta de navegación (breadcrumb), disponible como indicador de desbordamiento (`Overflow`), nivel intermedio (`Level`) o página actual (`Current`), cada uno con los estados Default, Hovered, Pressed, Focused y Disabled.
 
-| Propiedad | Valores | Predeterminado |
-|-----------|---------|----------------|
+## Referencia rápida
+
+### Qué es
+
+Interpretación basada en evidencia: BreadcrumbItem es el bloque con el que se compone una ruta de navegación. Esto se sustenta en el nombre del componente, en los valores de `Item` `Overflow` (una elipsis "…" seguida de `chevron-right`), `Level` (una etiqueta seguida de `chevron-right`) y `Current` (una etiqueta sin chevron), y en las variantes de estado interactivo. El nombre en Figma `.BreadcrumbItem` comienza con un punto; en Figma, los componentes cuyo nombre comienza con un punto no se publican en la biblioteca, por lo que este componente está pensado para usarse dentro de otro componente y no para insertarse directamente. Figma no incluye una descripción de uso escrita para este componente.
+
+### Propiedades clave
+
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
 | Item | Overflow, Level, Current | Overflow |
-| State | Default, Disabled, Hovered, Pressed, Focused | Default |
-| Text | String | Text (Level/Current), ... (Overflow) |
+| State | Default, Hovered, Pressed, Focused, Disabled | Default |
+
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. Existen todas las combinaciones de `Item` y `State` (15 variantes). El componente no expone una propiedad de texto; la etiqueta ("Text") y la elipsis ("…") se editan sobrescribiendo directamente la capa de texto.
+
+### Configuración predeterminada
+
+`Item=Overflow`, `State=Default`: una elipsis ("…") en `Text/Button/MD` (`text/primary`) seguida de un `chevron-right` de 12 px en `icon/secondary`, sin fondo.
+
+### Uso típico
+
+Observación verificada: El conjunto de componentes contiene 15 variantes: tres valores de `Item`, cada uno en cinco estados. Todas las variantes tienen 36 px de alto, 8 px de relleno y un radio de esquina de 4 px.
+
+Interpretación basada en evidencia:
+
+- `Level` representa un paso anterior de la ruta; su chevron lo separa del siguiente elemento.
+- `Current` representa el último paso (la ubicación actual); no tiene chevron y usa un estilo de etiqueta más fuerte (`Text/Button/MD`, `text/primary`) que `Level` (`Text/Body/SM`, `text/secondary`).
+- `Overflow` representa pasos intermedios contraídos, mostrados como "…".
+
+## Propósito / Intención
+
+### Problema que resuelve
+
+Interpretación basada en evidencia: Ofrece un elemento consistente y con estados para construir rutas de navegación, con apariencias distintas para los niveles anteriores, la ubicación actual y los pasos contraídos.
+
+### Resultado esperado
+
+Interpretación basada en evidencia: Los usuarios pueden ver dónde se encuentran en una jerarquía e identificar los niveles anteriores.
+
+### Contexto típico
+
+Interpretación basada en evidencia: Se usa dentro de un componente de breadcrumb, como indica el nombre con prefijo de punto (no publicado). El componente contenedor no se referencia en este conjunto de componentes.
 
 ## Cuándo usar
 
-- Construir implementaciones personalizadas de breadcrumb
-- Extender componente Breadcrumb con tipos de elementos adicionales
-- Crear patrones de navegación tipo breadcrumb
-- Desarrollar patrones de navegación especializados
+Interpretaciones basadas en evidencia a partir de las variantes disponibles:
+
+- `Item=Level` para cada nivel anterior de la jerarquía.
+- `Item=Current` para el elemento final que representa la ubicación actual.
+- `Item=Overflow` para representar niveles intermedios contraídos.
 
 ## Cuándo NO usar
 
-- Como componente independiente en interfaces de usuario (usar padre Breadcrumb)
-- Para elementos fuera del contexto de navegación breadcrumb
-- Cuando el componente Breadcrumb puede usarse directamente
-- Para navegación no jerárquica
+[No se encontraron restricciones documentadas]
 
-## Anatomía
+Como el componente no se publica en la biblioteca (nombre con prefijo de punto), no está disponible para insertarse directamente desde la biblioteca.
 
-| Parte | Requerida | Descripción | Condición |
-|-------|-----------|-------------|-----------|
-| Contenedor | Sí | Envoltorio de elemento con relleno y radio de borde | Siempre presente |
-| Etiqueta de texto | Sí | Contenido de texto/etiqueta de elemento | Siempre presente |
-| Separador | Condicional | Ícono de chevron (final) | Solo para elementos Overflow y Level |
+## Estructura (Anatomía)
 
-## Propiedades
+### Partes del componente
 
-| Propiedad | Tipo | Predeterminado | Valores | Descripción |
-|-----------|------|----------------|---------|-------------|
-| Item | Enum | Overflow | Overflow, Level, Current | Tipo de elemento breadcrumb en jerarquía |
-| State | Enum | Default | Default, Disabled, Hovered, Pressed, Focused | Estado visual e interactivo |
-| Text | String | Dependiente del contexto | Cualquier string | Texto de etiqueta del elemento |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Contenedor | Obligatoria | Marco de auto layout que lleva el fondo del estado o el borde de foco. |
+| Etiqueta | Obligatoria | Capa de texto: "…" en `Overflow`, "Text" en `Level` y `Current`. |
+| Chevron (`chevron-right`) | Presente en `Overflow` y `Level` | Ícono separador de 12 px después de la etiqueta. No está presente en `Current`. |
 
-## Tipos de elemento
+### Layout
 
-| Tipo | Descripción | Pantalla de texto | Separador | Caso de uso |
-|------|-------------|------------------|-----------|------------|
-| Overflow | Indicador colapsado | "..." (puntos suspensivos) | Sí (chevron-right) | Elemento raíz al mostrar breadcrumbs colapsados |
-| Level | Nivel intermedio de jerarquía | Texto personalizable | Sí (chevron-right) | Niveles principales (Level 2-4 en jerarquía) |
-| Current | Página actual/final | Texto personalizable | No | Último elemento indicando ubicación página actual |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Alto | 36 px (todas las variantes) | Dimensiones de las variantes |
+| Ancho (con contenido de muestra) | 48 px (`Overflow`), 64 px (`Level`), 46 px (`Current`) | Dimensiones de las variantes |
+| Relleno | `space/8` (8) | Vinculación de variable |
+| Espacio entre etiqueta y chevron | `gap/sm` (8) | Vinculación de variable |
+| Radio de esquina | `radius/4` (4) | Vinculación de variable |
+| Tamaño del chevron | 12 × 12 px | Dimensiones de capa |
+| Tipografía de la etiqueta — `Overflow`, `Current` | `Text/Button/MD`: `family/body` (Open Sans), `weight/semibold` (600), `size/14`, `line-height/16` | Estilo de texto |
+| Tipografía de la etiqueta — `Level` | `Text/Body/SM`: `family/body`, `weight/regular` (400), `size/14`, `line-height/20` | Estilo de texto |
+| Ajuste de la etiqueta | Una sola línea (sin ajuste) | Contexto de diseño |
+| Borde de foco | 2 px `border/focus` (ancho no vinculado a una variable) | Contexto de diseño |
+
+## Semántica
+
+Interpretación basada en evidencia: Los valores de `Item` describen la posición del elemento en una jerarquía: nivel anterior (`Level`), ubicación actual (`Current`) o niveles contraídos (`Overflow`). El chevron es un separador visual que apunta al siguiente nivel. El estilo de etiqueta más fuerte de `Current` distingue la ubicación actual de los niveles anteriores.
+
+No verificado en Figma: elementos HTML, roles o atributos ARIA (por ejemplo, para marcar la página actual), comportamiento de enlace y anuncios en lectores de pantalla.
+
+## Iconografía
+
+| Ranura | Ícono / descripción verificada | Evidencia |
+|--------|--------------------------------|-----------|
+| Separador | `chevron-right`, 12 px, después de la etiqueta en `Overflow` y `Level` | Nombre de capa, dimensiones |
+
+Color del chevron por variante: `icon/secondary` en `Overflow / Default`; `icon/primary` en `Overflow` Hovered, Pressed y Focused y en `Level` Default, Hovered, Pressed y Focused; `icon/disabled` en Disabled.
+
+## Variantes (Propiedades)
+
+El inventario siguiente es completo: se inspeccionaron las 15 variantes.
+
+### Item
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Overflow | Etiqueta "…" (`Text/Button/MD`, `text/primary`) más `chevron-right`. | 5 estados |
+| Level | Etiqueta "Text" (`Text/Body/SM`, `text/secondary`) más `chevron-right`. | 5 estados |
+| Current | Etiqueta "Text" (`Text/Button/MD`, `text/primary`); sin chevron. | 5 estados |
+
+### State
+
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Default | Sin fondo. | Todos los elementos |
+| Hovered | Fondo `background/interactive/hovered`. | Todos los elementos |
+| Pressed | Fondo `background/interactive/pressed`. | Todos los elementos |
+| Focused | Borde de 2 px `border/focus`; sin fondo. | Todos los elementos |
+| Disabled | Etiqueta `text/disabled`; chevron `icon/disabled`; sin fondo. | Todos los elementos |
 
 ## Estados
 
-| Estado | Descripción | Cambios visuales | Fondo | Borde |
-|--------|-------------|------------------|-------|-------|
-| Default | Estado de elemento estándar | Colores estándar | Transparente | Ninguno |
-| Hovered | Hover del ratón sobre elemento | Resaltado de fondo claro | interactive/hovered | Ninguno |
-| Pressed | Clic/presión activa | Fondo más oscuro | interactive/pressed | Ninguno |
-| Focused | Enfoque de teclado vía Tab | Borde de enfoque verde | Transparente | Borde 2px border/focus |
-| Disabled | Estado no interactivo | Color de texto apagado | Transparente | Ninguno |
+| Estado | Descripción verificada | Cambios visuales | Evidencia |
+|--------|------------------------|------------------|-----------|
+| Default | Estado en reposo. | Sin fondo. En `Overflow`, el chevron usa `icon/secondary`. | Variantes de estado |
+| Hovered | Apariencia al pasar el cursor. | `background/interactive/hovered`; chevron `icon/primary`. | Variantes de estado |
+| Pressed | Apariencia al presionar. | `background/interactive/pressed`; chevron `icon/primary`. | Variantes de estado |
+| Focused | Apariencia de foco. | Borde de 2 px `border/focus` alrededor del elemento. | Variantes de estado |
+| Disabled | Apariencia no disponible. | Etiqueta `text/disabled`; chevron `icon/disabled`. | Variantes de estado |
 
-## Tipografía
-
-| Tipo de elemento | Peso | Estilo | Tamaño | Altura línea | Espaciado letra |
-|------------------|------|--------|--------|------------|-----------------|
-| Overflow | semibold | Text/Button/MD | 14px | 16px | normal |
-| Level | regular | Text/Body/SM | 14px | 20px | 0 |
-| Current | semibold | Text/Button/MD | 14px | 16px | normal |
+`Current` tiene los mismos cinco estados que los demás elementos. Son variantes visuales; las transiciones no están definidas en Figma.
 
 ## Mapeo de tokens
 
-### Fondo
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Fondo | `background/interactive/hovered` | Hovered | Vinculación de variable |
+| Fondo | `background/interactive/pressed` | Pressed | Vinculación de variable |
+| Borde | `border/focus` | Focused | Vinculación de variable |
+| Texto | `text/primary` | Etiqueta de `Overflow` y `Current` | Vinculación de variable |
+| Texto | `text/secondary` | Etiqueta de `Level` | Vinculación de variable |
+| Texto | `text/disabled` | Etiqueta en Disabled | Vinculación de variable |
+| Ícono | `icon/primary`, `icon/secondary`, `icon/disabled` | Chevron (ver Iconografía) | Vinculación de variable |
+| Espaciado | `space/8`, `gap/sm` | Relleno y espacio | Vinculación de variable |
+| Radio | `radius/4` | Radio de esquina | Vinculación de variable |
+| Tipografía | `Text/Button/MD`, `Text/Body/SM` | Etiqueta según el elemento | Estilos de texto |
 
-- **State=Default**: Transparente
-- **State=Hovered**: background/interactive/hovered
-- **State=Pressed**: background/interactive/pressed
-- **State=Focused**: Transparente (solo borde)
-- **State=Disabled**: Transparente
+El ancho de 2 px del borde de foco es un valor fijo y no está vinculado a `focus/width`.
 
-### Color de texto
+## Interacción
 
-- **Overflow, Default**: text/primary
-- **Overflow, Disabled**: text/disabled
-- **Level, Default/Hovered/Pressed/Focused**: text/secondary
-- **Level, Disabled**: text/disabled
-- **Current, Default/Hovered/Pressed/Focused**: text/primary
-- **Current, Disabled**: text/disabled
+Estados observados: `Default`, `Hovered`, `Pressed`, `Focused` y `Disabled` existen para los tres elementos, incluido `Current`.
 
-### Borde
-
-- **State=Focused**: border/focus (2px)
-- **State=Default/Hovered/Pressed/Disabled**: Ninguno
-
-### Ícono (Separador Chevron)
-
-- **Estado Default/Disabled**: Ícono gris primario
-- **Estado Hovered/Pressed/Focused**: Ícono gris secundario
-- **Tamaño ícono**: 12px (ancho) × 12px (alto)
-- **Tamaño contenedor**: 12px ancho × 12.004px alto
-
-### Espaciado
-
-- **Relleno horizontal**: space/8 (8px)
-- **Relleno vertical**: space/8 (8px)
-- **Brecha (texto a chevron)**: gap/sm (8px)
-- **Radio de borde**: radius/4 (4px)
-- **Altura elemento**: 36px
-
-## Guía visual de estados de interacción
-
-### Elemento Overflow
-- **Default**: "..." en semibold, texto primario, chevron estándar
-- **Hovered**: Fondo claro con "..."
-- **Pressed**: Fondo más oscuro con "..."
-- **Focused**: Borde verde con "..."
-- **Disabled**: "..." en color texto deshabilitado, chevron deshabilitado
-
-### Elemento Level
-- **Default**: "Text" en regular, texto secundario, chevron estándar
-- **Hovered**: Fondo claro con "Text"
-- **Pressed**: Fondo más oscuro con "Text"
-- **Focused**: Borde verde con "Text"
-- **Disabled**: "Text" en color texto deshabilitado, chevron deshabilitado
-
-### Elemento Current
-- **Default**: "Text" en semibold, texto primario (sin separador)
-- **Hovered**: Fondo claro con "Text"
-- **Pressed**: Fondo más oscuro con "Text"
-- **Focused**: Borde verde con "Text"
-- **Disabled**: "Text" en color texto deshabilitado (sin separador)
-
-## Ejemplos
-
-| Ejemplo | Descripción | Configuración |
-|---------|-------------|----------------|
-| Elemento overflow | Raíz de puntos suspensivos | Item=Overflow, State=Default |
-| Navegación de nivel | Breadcrumb intermedio | Item=Level, State=Default, Text="Products" |
-| Página actual | Breadcrumb final | Item=Current, State=Default, Text="Electronics" |
-| Nivel en hover | Hover interactivo | Item=Level, State=Hovered |
-| Navegación enfocada | Enfoque de teclado | Item=Level, State=Focused |
-| Breadcrumb deshabilitado | No interactivo | Item=Level, State=Disabled |
+No verificado en Figma: el comportamiento de navegación, qué ocurre al activar `Overflow` (por ejemplo, mostrar los niveles contraídos), si `Current` es interactivo, la interacción con teclado y las interacciones de prototipo. No se encontraron interacciones de prototipo.
 
 ## Accesibilidad
 
-| Propiedad | Valor |
-|-----------|-------|
-| Navegación de teclado | Los elementos deben ser enfocables (tecla Tab) |
-| Indicador de enfoque | Borde verde visible de 2px en enfoque |
-| Contraste de color de texto | Todos los colores de texto cumplen estándares WCAG AA |
-| Estado deshabilitado | Visualmente deshabilitado; pointer-events deshabilitado |
-| HTML semántico | Debe implementarse como elementos de enlace dentro de nav breadcrumb |
-| Etiquetas ARIA | Debe marcarse con ARIA breadcrumb apropiado |
+Observaciones relacionadas con la accesibilidad:
 
-## Guías de uso
+- `Focused` muestra un borde visible de 2 px `border/focus` en todos los elementos.
+- `Current` se distingue de `Level` por el peso (600 frente a 400), el color (`text/primary` frente a `text/secondary`) y la ausencia de chevron, por lo que la ubicación actual no se indica solo mediante el color.
+- `Disabled` cambia los colores de la etiqueta y del chevron.
+- Las relaciones de contraste no se han verificado.
 
-- No use como componente independiente; use padre Breadcrumb
-- El contenido de texto debe ser conciso y descriptivo
-- Mantener estilo consistente dentro de rutas de breadcrumb
-- Asegurar accesibilidad de teclado (navegación Tab)
-- Usar tipo de elemento apropiado para posición en jerarquía
-- El elemento actual debe ser siempre el último en breadcrumb
-- Proporcionar retroalimentación visual para todos los estados interactivos
-- Deshabilitar elementos solo cuando sea necesario (enlaces rotos, secciones no disponibles)
+Información de accesibilidad faltante (no verificado en Figma): nombres accesibles (incluido el del elemento de desbordamiento "…"), indicación de la página actual a las tecnologías de asistencia, el papel del chevron para los lectores de pantalla y el soporte de teclado.
 
-## Notas de implementación
+## Pautas de contenido
 
-- El componente está diseñado para uso interno dentro de Breadcrumb
-- El tipo de elemento y estado determinan toda presentación visual y de texto
-- El separador de chevron está oculto para tipo de elemento Current
-- El elemento Overflow muestra "..." automáticamente (sin personalización)
-- El borde de enfoque utiliza ancho sólido de 2px
-- Las transiciones de fondo se aplican a estados hover y press
-- El color de texto varía según la combinación de tipo de elemento y estado
-- El color del ícono (chevron) cambia basado en estado de interacción
+Observación verificada: Las etiquetas ocupan una sola línea y usan "Text" como contenido de muestra; `Overflow` usa una elipsis ("…"). El componente no tiene propiedad de texto, por lo que las etiquetas se cambian sobrescribiendo la capa de texto.
+
+## Ejemplos
+
+### Nivel anterior
+
+Configuración: `Item=Level`, `State=Default`
+
+Descripción: Etiqueta en color secundario seguida de un chevron.
+
+Evidencia / Clasificación: Variante existente en Figma.
+
+### Ubicación actual
+
+Configuración: `Item=Current`, `State=Default`
+
+Descripción: Etiqueta seminegrita en color primario, sin chevron.
+
+Evidencia / Clasificación: Variante existente en Figma.
+
+### Niveles contraídos, con foco
+
+Configuración: `Item=Overflow`, `State=Focused`
+
+Descripción: Elipsis y chevron con borde de foco.
+
+Evidencia / Clasificación: Variante existente en Figma.
+
+## Combinaciones inválidas
+
+[No se encontraron combinaciones inválidas documentadas]
+
+## Aclaraciones pendientes
+
+Ninguna
+
+## Notas / Registro de cambios
+
+Generado o revisado con el material de origen disponible el 2026-10-22.
+
+[No hay cambios históricos verificados disponibles]

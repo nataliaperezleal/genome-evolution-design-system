@@ -1,389 +1,277 @@
 ---
 component: "Breadcrumb"
 system: "Genome Evolution Design System"
-type: "Componente de navegación/jerarquía"
-status: "Production"
-version: "1.0"
-owner: "UX Design Team"
-figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2081-1144"
-last_updated: "2026-10-19"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
+figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2998-19525"
+last_updated: "2026-10-22"
 tags:
-  - "navegación"
-  - "jerarquía"
   - "breadcrumb"
-  - "orientación"
+  - "navigation"
+  - "hierarchy"
 ---
 
-# Breadcrumb — Genome Evolution Design System
+# Breadcrumb
 
-Muestra la ubicación actual del usuario dentro de una jerarquía de navegación como una ruta de elementos, permitiendo comprender la estructura de la página y navegar hacia atrás por los niveles jerárquicos.
+Sistema: Genome Evolution Design System
 
-Status, versión y owner provienen del borrador de documentación guardado en la página de Figma y no están confirmados de otra forma.
+## Resumen del componente
+
+Breadcrumb es una ruta de navegación horizontal construida con instancias de `.BreadcrumbItem`, que muestra un indicador de desbordamiento opcional, hasta cinco niveles anteriores y la ubicación actual, en color Default, Evergreen o Indigo.
 
 ## Referencia rápida
 
 ### Qué es
 
-Componente de navegación/jerarquía (fuente: descripción del componente en Figma). Se construye con el subcomponente interno `.BreadcrumbItem`, que según la descripción de Figma no debe usarse directamente en interfaces.
+Interpretación basada en evidencia: Breadcrumb muestra la ubicación del usuario dentro de una jerarquía y los niveles superiores. Esto se sustenta en su estructura: una secuencia fija de instancias de `.BreadcrumbItem` con `Item=Overflow`, `Item=Level` e `Item=Current`, separadas por íconos `chevron-right` y que termina con la ubicación actual. Figma no incluye una descripción de uso escrita para el conjunto de componentes Breadcrumb.
 
 ### Propiedades clave
 
-- Color [Default | Evergreen | Indigo] — default: Default
-- Show Overflow [true | false] — default: true
-- Show Level 1 [true | false] — default: true
-- Show Level 2 [true | false] — default: true
-- Show Level 3 [true | false] — default: true
-- Show Level 4 [true | false] — default: true
-- Show Level 5 [true | false] — default: true
-- `.BreadcrumbItem` Item [Overflow | Level | Current] — default: Overflow
-- `.BreadcrumbItem` State [Default | Disabled | Hovered | Pressed | Focused] — default: Default
-- `.BreadcrumbItem` Text — texto del ítem (default: "Text" para Level y Current, "..." para Overflow)
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Color | Default, Evergreen, Indigo | Default |
+| showOverflow (booleano) | true, false | true |
+| showLevel5 (booleano) | true, false | true |
+| showLevel4 (booleano) | true, false | true |
+| showLevel3 (booleano) | true, false | true |
+| showLevel2 (booleano) | true, false | true |
+| showLevel1 (booleano) | true, false | true |
 
-### Configuración por defecto
+Los valores predeterminados provienen de las definiciones de propiedades del componente en Figma. El elemento de ubicación actual no tiene propiedad de visibilidad y siempre se muestra.
 
-Color=Default, Show Overflow=true, Show Level 1=true, Show Level 2=true, Show Level 3=true, Show Level 4=true, Show Level 5=true
+### Configuración predeterminada
+
+`Color=Default` con todos los elementos visibles: Overflow ("…"), cinco elementos `Level` ("Text") y un elemento `Current` ("Text"). En esta configuración el breadcrumb mide 414 × 36 px.
 
 ### Uso típico
 
-- E-commerce: Show Overflow=true, Show Level 1=true, Show Level 2=true, Show Level 3=false, Show Level 4=false, Show Level 5=false
-- Documentación: Color=Default, Show Overflow=true, Show Level 1=true, Show Level 2=true, Show Level 3=true, Show Level 4=true, Show Level 5=true
-- Compacto: Show Overflow=true, Show Level 1=true, Show Level 2=false, Show Level 3=false, Show Level 4=false, Show Level 5=false
+Observación verificada: El conjunto de componentes tiene tres variantes, una por cada `Color`. Cada variante contiene las mismas siete instancias de `.BreadcrumbItem` en el mismo orden, controladas por las mismas seis propiedades booleanas.
 
----
+Interpretación basada en evidencia:
+
+- Muestre un elemento `Level` por cada ancestro de la ubicación actual activando o desactivando `showLevel1`–`showLevel5`.
+- Active `showOverflow` cuando haya más ancestros de los que pueden representar los elementos `Level` visibles.
+- Use `Evergreen` o `Indigo` para teñir los separadores y la etiqueta de la ubicación actual.
 
 ## Propósito / Intención
 
 ### Problema que resuelve
 
-Muestra dónde está el usuario dentro de una jerarquía de navegación y le permite volver atrás por los niveles (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: Comunica dónde se encuentra el usuario dentro de una jerarquía y qué niveles conducen a la ubicación actual, en una sola fila compacta.
 
 ### Resultado esperado
 
-Los usuarios comprenden la estructura de la página y reducen los clics necesarios para llegar a páginas superiores (fuente: descripción del componente en Figma).
+Interpretación basada en evidencia: Los usuarios pueden identificar su ubicación actual y los niveles superiores.
 
 ### Contexto típico
 
-Estructuras jerárquicas, páginas profundamente anidadas y navegación multinivel (fuente: descripción del componente en Figma).
-
----
+Los contextos específicos de producto no están documentados en Figma. La altura de 36 px y el layout de una sola fila indican su ubicación en la parte superior de una página o vista; esto es una interpretación basada en evidencia.
 
 ## Cuándo usar
 
-- Para mostrar la ubicación de la página actual en estructuras jerárquicas
-- Para permitir la navegación hacia atrás a través de los niveles de la jerarquía
-- Para dar contexto en páginas profundamente anidadas
-- Para mostrar relaciones entre páginas en navegación multinivel
-- Para reducir los clics necesarios para navegar a páginas superiores
-- Para aclarar la posición en arquitecturas de información complejas
+Interpretaciones basadas en evidencia a partir de la estructura del componente:
 
----
+- Para mostrar la ruta desde los niveles superiores de una jerarquía hasta la ubicación actual.
+- Para indicar que algunos niveles superiores están contraídos (`showOverflow=true`).
 
 ## Cuándo NO usar
 
-- Para navegación plana (un solo nivel)
-- Cuando la navegación principal es suficiente
-- Para aplicaciones pequeñas sin jerarquía
-- En páginas de aterrizaje o páginas índice principales
-- Cuando el espacio es extremadamente limitado
-- Como reemplazo de la navegación principal
+[No se encontraron restricciones documentadas]
 
----
+Limitaciones del componente actual:
+
+- Se puede mostrar un máximo de cinco elementos `Level`.
+- La ruta ocupa una sola fila; las etiquetas no se ajustan en varias líneas ni se truncan.
+
+## Reglas de composición y jerarquía
+
+Las siguientes reglas se derivan de la estructura y las propiedades del componente.
+
+### Orden de los elementos
+
+Los elementos siempre aparecen en este orden fijo, de izquierda a derecha:
+
+| Posición | Elemento | Propiedad de visibilidad | Configuración de `.BreadcrumbItem` |
+|----------|----------|--------------------------|------------------------------------|
+| 1 | Overflow | `showOverflow` | `Item=Overflow` |
+| 2 | Level 5 | `showLevel5` | `Item=Level` |
+| 3 | Level 4 | `showLevel4` | `Item=Level` |
+| 4 | Level 3 | `showLevel3` | `Item=Level` |
+| 5 | Level 2 | `showLevel2` | `Item=Level` |
+| 6 | Level 1 | `showLevel1` | `Item=Level` |
+| 7 | Current | Siempre visible | `Item=Current` |
+
+Al ocultar un elemento, este desaparece de la fila y los elementos restantes cierran el espacio (auto layout con `gap/none`). El orden no se puede cambiar mediante propiedades.
+
+### Jerarquía
+
+- `Current` es siempre el último elemento y siempre está presente.
+- Los elementos `Level` se numeran desde la ubicación actual hacia afuera: `Level 1` está inmediatamente antes de `Current` y `Level 5` es el más alejado. Interpretación basada en evidencia: `Level 1` representa el padre directo de la ubicación actual, y los números mayores representan ancestros de nivel superior.
+- Todos los elementos excepto `Current` terminan con un separador `chevron-right`, por lo que los separadores siempre aparecen entre elementos y nunca después del último.
+
+### Comportamiento de desbordamiento
+
+- `Overflow` es un único elemento "…" ubicado al inicio de la ruta, antes de todos los elementos `Level`.
+- Interpretación basada en evidencia: representa los ancestros que están por encima de los elementos `Level` visibles y que están contraídos.
+- El desbordamiento se controla manualmente mediante `showOverflow`; el componente no oculta ni contrae elementos automáticamente según el ancho disponible.
+- Figma no define qué ocurre al activar el elemento de desbordamiento.
+
+### Cantidad de elementos
+
+- Mínimo: un elemento (solo `Current`, con todas las propiedades booleanas en `false`).
+- Máximo: siete elementos (Overflow, cinco elementos `Level` y `Current`).
 
 ## Estructura (Anatomía)
 
 ### Partes del componente
 
-| Parte | Requerido | Descripción |
-|--------|--------|--------|
-| Contenedor | Requerido | Fila horizontal de instancias de `.BreadcrumbItem` sin gap entre ítems (gap/none). |
-| Ítem Overflow | Opcional — Show Overflow | `.BreadcrumbItem` Item=Overflow: texto "..." seguido de un chevron-right. Representa los niveles colapsados (fuente: descripción de Figma). |
-| Ítems Level (Level 1–5) | Opcional — Show Level 1…5 | `.BreadcrumbItem` Item=Level: texto seguido de un chevron-right. |
-| Ítem Current | Requerido | `.BreadcrumbItem` Item=Current: ítem final, solo texto, sin chevron. Siempre presente en las variantes revisadas. |
-| Separador (chevron-right) | Parte de cada ítem no final | Icono de 12×12 dentro de los ítems Overflow y Level. |
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Contenedor | Obligatoria | Fila horizontal de auto layout que contiene los elementos. |
+| Elemento de desbordamiento | Opcional (`showOverflow`) | `.BreadcrumbItem` con `Item=Overflow`: "…" más `chevron-right`. |
+| Elementos de nivel (1–5) | Opcional (`showLevel1`–`showLevel5`) | `.BreadcrumbItem` con `Item=Level`: etiqueta más `chevron-right`. |
+| Elemento actual | Obligatoria | `.BreadcrumbItem` con `Item=Current`: etiqueta sin chevron. |
 
 ### Layout
 
-| Propiedad | Valor |
-|-----------|-----------|
-| Alto | 36 (cada ítem) |
-| Ancho | Se ajusta al contenido. Variante Default con todos los ítems: 414. Anchos de ítem con el texto por defecto: Overflow 48, Level 64, Current 46. |
-| Padding | space/8 en cada ítem |
-| Gap | gap/sm entre el texto del ítem y su chevron; gap/none entre ítems |
-| Radio | radius/4 (ítem) |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Dirección | Horizontal, elementos centrados verticalmente | Contexto de diseño |
+| Espacio entre elementos | `gap/none` (0) | Vinculación de variable |
+| Alto | 36 px | Dimensiones de las variantes |
+| Ancho (todos los elementos visibles, etiquetas de muestra) | 414 px; se adapta a los elementos visibles y a las etiquetas | Dimensiones de las variantes, auto layout |
+| Relleno de los elementos | `space/8` (8) | Vinculación de variable (en `.BreadcrumbItem`) |
+| Espacio entre etiqueta y chevron | `gap/sm` (8) | Vinculación de variable (en `.BreadcrumbItem`) |
+| Radio de esquina de los elementos | `radius/4` (4) | Vinculación de variable (en `.BreadcrumbItem`) |
+| Tipografía de la etiqueta — Level | `Text/Body/SM` (`size/14`, peso 400, `line-height/20`) | Estilo de texto |
+| Tipografía de la etiqueta — Overflow, Current | `Text/Button/MD` (`size/14`, peso 600, `line-height/16`) | Estilo de texto |
+| Ajuste de la etiqueta | Una sola línea (sin ajuste ni truncado) | Contexto de diseño |
 
----
+El espacio visible entre elementos proviene del relleno propio de cada elemento.
 
 ## Semántica
 
-Según la descripción de Figma, Breadcrumb muestra "una ruta de enlaces" y el ítem Current es la página donde se encuentra el usuario. Si los ítems se renderizan como enlaces y el marcado semántico no están definidos en el componente.
+Interpretación basada en evidencia: La ruta representa un camino jerárquico. `Current` marca la ubicación del usuario y se enfatiza visualmente (etiqueta seminegrita, sin chevron). Los elementos `Level` son ancestros, y `Overflow` representa ancestros contraídos. `Color` cambia el color de acento de los separadores y de la etiqueta actual; Figma no documenta si tiene significado.
 
----
+No verificado en Figma: elementos HTML, roles o atributos ARIA (por ejemplo, una región de navegación o la marca de la página actual), comportamiento de enlace y anuncios en lectores de pantalla.
 
 ## Iconografía
 
-### Slots de icono
+| Ranura | Ícono / descripción verificada | Evidencia |
+|--------|--------------------------------|-----------|
+| Separador | `chevron-right`, 12 px, al final de cada elemento Overflow y Level | `.BreadcrumbItem` anidado |
 
-| Slot | Descripción |
-|--------|--------|
-| Leading | No aplica. |
-| Trailing | chevron-right (12×12) en los ítems Overflow y Level. Los ítems Current no lo tienen. |
-
-### Reglas
-
-- El chevron-right es el separador entre ítems y no es un icono intercambiable en las propiedades revisadas.
-- El chevron de Overflow es gris en todos los valores de Color. Los chevrons de Level siguen el valor de Color (Default: gris, Evergreen: verde, Indigo: morado) según se ve en las variantes.
-- En State=Disabled el chevron es más claro (fuente: descripción de Figma de .BreadcrumbItem).
-
----
+Color del separador según `Color`: ver Variantes.
 
 ## Variantes (Propiedades)
 
+El inventario siguiente es completo: se inspeccionaron las tres variantes.
+
 ### Color
 
-| Valor | Descripción |
-|--------|--------|
-| Default | Texto del ítem Current: text/primary. Texto de Level: text/secondary. Chevrons grises. |
-| Evergreen | Texto del ítem Current: text/evergreen. Texto de Level: text/secondary. Chevrons de Level en evergreen. |
-| Indigo | Texto del ítem Current: text/indigo. Texto de Level: text/secondary. Chevrons de Level en indigo. |
+| Valor | Separadores de Level | Etiqueta Current | Elemento Overflow | Etiquetas Level |
+|-------|----------------------|------------------|-------------------|-----------------|
+| Default | `icon/primary` | `text/primary` | "…" `text/primary`, separador `icon/secondary` | `text/secondary` |
+| Evergreen | `icon/evergreen` | `text/evergreen` | Sin cambios respecto a Default | `text/secondary` |
+| Indigo | `icon/indigo` | `text/indigo` | Sin cambios respecto a Default | `text/secondary` |
 
-### Show Overflow
+Comportamiento actual: En `Evergreen` e `Indigo`, solo se cambia el color de los separadores de `Level` y de la etiqueta `Current`. El elemento Overflow mantiene sus colores predeterminados y las etiquetas `Level` siguen en `text/secondary`. Los colores se aplican como sobrescrituras sobre las instancias anidadas de `.BreadcrumbItem`, que no tienen propiedad de color propia.
 
-| Valor | Descripción |
-|--------|--------|
-| true | Muestra el ítem Overflow ("...") antes de los niveles. |
-| false | Oculta el ítem Overflow. |
+### showOverflow
 
-### Show Level 1
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| true | Muestra el elemento "…" al inicio de la ruta. | Predeterminado |
+| false | Oculta el elemento de desbordamiento. | — |
 
-| Valor | Descripción |
-|--------|--------|
-| true | Muestra Level 1. |
-| false | Oculta Level 1. |
+### showLevel1 – showLevel5
 
-### Show Level 2
-
-| Valor | Descripción |
-|--------|--------|
-| true | Muestra Level 2. |
-| false | Oculta Level 2. |
-
-### Show Level 3
-
-| Valor | Descripción |
-|--------|--------|
-| true | Muestra Level 3. |
-| false | Oculta Level 3. |
-
-### Show Level 4
-
-| Valor | Descripción |
-|--------|--------|
-| true | Muestra Level 4. |
-| false | Oculta Level 4. |
-
-### Show Level 5
-
-| Valor | Descripción |
-|--------|--------|
-| true | Muestra Level 5. |
-| false | Oculta Level 5. |
-
-### Item (.BreadcrumbItem)
-
-| Valor | Descripción |
-|--------|--------|
-| Overflow | Puntos suspensivos "..." con un chevron. Representa niveles colapsados. Text/Button/MD. |
-| Level | Nivel intermedio: texto con un chevron. Text/Body/SM. |
-| Current | Ítem final: solo texto. Text/Button/MD. |
-
-### State (.BreadcrumbItem)
-
-| Valor | Descripción |
-|--------|--------|
-| Default | Apariencia base. |
-| Disabled | Color de texto deshabilitado y chevron más claro. |
-| Hovered | Fondo claro. |
-| Pressed | Fondo más oscuro. |
-| Focused | Borde verde de 2px. |
-
-### Text (.BreadcrumbItem)
-
-Texto del ítem. Por defecto: "Text" para Level y Current, "..." para Overflow.
-
----
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| true | Muestra el elemento `Level` correspondiente en su posición fija. | Predeterminado para los cinco |
+| false | Oculta el elemento `Level` correspondiente. | — |
 
 ## Estados
 
-Los estados existen solo en el subcomponente `.BreadcrumbItem`. Las tres variantes de Breadcrumb muestran todos los ítems en State=Default.
-
-| Estado | Descripción | Cambios visuales |
-|--------|--------|--------|
-| Default | Apariencia base de cada Item. | Overflow y Current: text/primary. Level: text/secondary. |
-| Disabled | Apariencia no interactiva (fuente: descripción de Figma). | Texto: text/disabled. Chevron: más claro (icon/disabled presente en las variables). |
-| Hovered | Apariencia en hover. | Fondo del ítem: background/interactive/hovered. |
-| Pressed | Apariencia al presionar. | Fondo del ítem: background/interactive/pressed. |
-| Focused | Apariencia de foco. | Borde de 2px border/focus alrededor del ítem. |
-
----
+El conjunto de componentes Breadcrumb no tiene propiedad de estado. Todas las instancias anidadas de `.BreadcrumbItem` usan `State=Default`. El componente `.BreadcrumbItem` define los estados Default, Hovered, Pressed, Focused y Disabled (ver la documentación de BreadcrumbItem).
 
 ## Mapeo de tokens
 
-Los tokens están confirmados por component set. No se verificó la capa exacta de cada vinculación. Los tokens de espaciado, gap y radio se confirmaron como variables de Figma, pero no se contrastaron con los archivos de tokens.
-
-### Fondo
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| background/interactive/hovered | Fondo del ítem | .BreadcrumbItem, State=Hovered |
-| background/interactive/pressed | Fondo del ítem | .BreadcrumbItem, State=Pressed |
-
-### Texto
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| text/primary | Texto de Overflow y Current | Current con Color=Default; Overflow en todos los valores de Color |
-| text/secondary | Texto de Level | Todos los valores de Color |
-| text/evergreen | Texto de Current | Color=Evergreen |
-| text/indigo | Texto de Current | Color=Indigo |
-| text/disabled | Texto del ítem | State=Disabled |
-
-### Borde
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| border/focus | Borde de foco | State=Focused. Grosor de 2px, sin token |
-
-### Icono
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| icon/primary | Chevron | Presente en las variables; vinculación por capa [Pending confirmation] |
-| icon/secondary | Chevron | Presente en las variables; vinculación por capa [Pending confirmation] |
-| icon/evergreen | Chevron | Presente en las variables; esperado para Color=Evergreen, vinculación [Pending confirmation] |
-| icon/indigo | Chevron | Presente en las variables; esperado para Color=Indigo, vinculación [Pending confirmation] |
-| icon/disabled | Chevron | .BreadcrumbItem, State=Disabled |
-
-### Tipografía
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| Text/Button/MD | Texto de Overflow y Current | size/14, line-height/16, weight/semibold, family/body |
-| Text/Body/SM | Texto de Level | size/14, line-height/20, weight/regular, family/body |
-
-### Espaciado
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| space/8 | Padding del ítem | |
-| gap/sm | Gap entre texto y chevron | |
-| gap/none | Gap entre ítems | Contenedor Breadcrumb |
-
-### Radio
-
-| Token | Uso | Notas |
-|--------|--------|--------|
-| radius/4 | Esquinas del ítem | |
-
----
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Espaciado | `gap/none` | Espacio entre elementos | Vinculación de variable |
+| Espaciado | `space/8`, `gap/sm` | Relleno de los elementos y espacio etiqueta–chevron | Vinculación de variable |
+| Radio | `radius/4` | Radio de esquina de los elementos | Vinculación de variable |
+| Texto | `text/primary` | Etiquetas Current y Overflow (Default) | Vinculación de variable |
+| Texto | `text/secondary` | Etiquetas Level | Vinculación de variable |
+| Texto | `text/evergreen`, `text/indigo` | Etiqueta Current (Evergreen, Indigo) | Vinculación de variable |
+| Ícono | `icon/primary` | Separadores de Level (Default) | Vinculación de variable |
+| Ícono | `icon/secondary` | Separador de Overflow | Vinculación de variable |
+| Ícono | `icon/evergreen`, `icon/indigo` | Separadores de Level (Evergreen, Indigo) | Vinculación de variable |
+| Tipografía | `Text/Body/SM`, `Text/Button/MD` | Etiquetas Level; etiquetas Overflow y Current | Estilos de texto |
 
 ## Interacción
 
-El subcomponente `.BreadcrumbItem` tiene los estados Hovered, Pressed, Focused y Disabled. La página de Figma muestra anotaciones de teclado: "tab", "Enter" y "selects item".
+Breadcrumb no tiene variantes de estado ni interacciones de prototipo. Las apariencias interactivas se definen a nivel de elemento en `.BreadcrumbItem`.
 
-No están documentados si los ítems Current son interactivos (también tienen variantes Hovered, Pressed y Focused), qué hace el ítem Overflow al activarse ni el comportamiento responsivo.
-
----
+No verificado en Figma: comportamiento de navegación al activar un elemento, expansión del desbordamiento, si `Current` es interactivo e interacción con teclado.
 
 ## Accesibilidad
 
-| Tema | Información |
-|--------|--------|
-| Requisito de accesibilidad | Un borrador de documentación guardado en la página de Figma indica que "debe usar <nav> con marcado adecuado", con atributos ARIA [Pending confirmation]. No está definido en el componente. |
-| Soporte visible de estado | Variantes State=Focused (borde de 2px border/focus) y State=Disabled en .BreadcrumbItem. |
-| Notas | El mismo borrador indica que los ítems deben ser accesibles por teclado (Tab), con un anillo de foco visible, y que los lectores de pantalla deben anunciar la estructura del breadcrumb y la página actual. Tratarlo como no confirmado hasta validarlo. |
+Observaciones relacionadas con la accesibilidad:
 
----
+- La ubicación actual se distingue de los niveles anteriores por el peso (600 frente a 400), el color y la ausencia de separador, no solo por el color.
+- Los separadores son íconos; las etiquetas contienen el texto de la jerarquía.
+- Las relaciones de contraste no se han verificado.
 
-## Guías de contenido
+Información de accesibilidad faltante (no verificado en Figma): región de navegación y su etiqueta, indicación de la página actual para las tecnologías de asistencia, nombre accesible del elemento "…", cómo se exponen los separadores a los lectores de pantalla y soporte de teclado.
 
-- Texto del ítem: por defecto "Text" (Level, Current) y "..." (Overflow).
-- El borrador de documentación en la página de Figma sugiere texto conciso y descriptivo y mostrar siempre la página actual como último ítem. Sin confirmar.
-- Límite de longitud y truncado: [Pending confirmation]
+## Pautas de contenido
 
----
+Observaciones verificadas:
+
+- Las etiquetas usan "Text" como contenido de muestra y el elemento de desbordamiento usa "…".
+- Las etiquetas ocupan una sola línea y no se truncan, por lo que el ancho de la ruta crece con la longitud de las etiquetas.
+- Breadcrumb no expone propiedades de texto; las etiquetas se cambian sobrescribiendo las capas de texto de los elementos anidados.
 
 ## Ejemplos
 
-### Ejemplo 1
+### Ruta completa
 
-Configuración:
+Configuración: `Color=Default`, todas las propiedades booleanas en `true`
 
-```text
-Show Overflow=true, Show Level 1=true, Show Level 2=true, Show Level 3=false, Show Level 4=false, Show Level 5=false
-```
+Descripción: Overflow, cinco niveles y la ubicación actual.
 
-Descripción:
+Evidencia / Clasificación: Configuración predeterminada en Figma.
 
-E-commerce: Overflow, Level 1, Level 2, Current (Categoría > Subcategoría > Producto) (fuente: descripción del componente en Figma).
+### Ruta corta sin desbordamiento
 
-### Ejemplo 2
+Configuración: `Color=Default`, `showOverflow=false`, `showLevel3=false`, `showLevel4=false`, `showLevel5=false`
 
-Configuración:
+Descripción: Dos niveles anteriores (`Level 2`, `Level 1`) seguidos de la ubicación actual.
 
-```text
-Color=Default, Show Overflow=true, Show Level 1=true, Show Level 2=true, Show Level 3=true, Show Level 4=true, Show Level 5=true
-```
+Evidencia / Clasificación: Configuración admitida por las propiedades booleanas del componente.
 
-Descripción:
+### Ruta con color
 
-Documentación: todos los niveles visibles (fuente: descripción del componente en Figma).
+Configuración: `Color=Evergreen`, todas las propiedades booleanas en `true`
 
-### Ejemplo 3
+Descripción: Separadores y etiqueta actual en Evergreen.
 
-Configuración:
+Evidencia / Clasificación: Variante existente en Figma.
 
-```text
-Show Overflow=true, Show Level 1=true, Show Level 2=false, Show Level 3=false, Show Level 4=false, Show Level 5=false
-```
+## Combinaciones inválidas
 
-Descripción:
-
-Compacto: Overflow + Level 1 + Current para jerarquías profundas (fuente: descripción del componente en Figma).
-
----
-
-## Checklist de QA
-
-- Propiedades documentadas.
-- Los nombres de propiedades coinciden exactamente con Figma.
-- Los valores de variantes coinciden exactamente con Figma.
-- Valores por defecto documentados.
-- Combinaciones inválidas documentadas.
-- Tokens verificados.
-- No se añadió comportamiento no documentado.
-- No se añadió comportamiento de accesibilidad no documentado.
-- Conteo de variantes verificado (Breadcrumb 3, .BreadcrumbItem 15).
-- Tokens de icono del chevron vinculados por capa.
-
----
+[No se encontraron combinaciones inválidas documentadas]
 
 ## Aclaraciones pendientes
 
-- El borrador de documentación en la página de Figma llama a Show Level 5 la "página actual", pero el componente tiene un ítem Current aparte. Confirmar qué es Level 5.
-- El mismo borrador dice que el color del chevron coincide con el texto actual. En el componente, el chevron de Overflow es gris en todos los valores de Color. Confirmar.
-- Color: el borrador dice que solo afecta al ítem actual. Los chevrons de Level también cambian. Confirmar.
-- Tokens del chevron: cuál de icon/primary, icon/secondary, icon/evergreen, icon/indigo aplica a cada chevron.
-- El grosor del borde de foco (2px) corresponde a `focus/width` en la exportación Border de Figma.
-- Los estados solo existen en .BreadcrumbItem. ¿Cómo establecen los consumidores el estado de un ítem desde Breadcrumb?
-- Los ítems Current tienen variantes Hovered, Pressed y Focused. ¿La página actual es interactiva?
-- Comportamiento del ítem Overflow al activarse, y comportamiento responsivo/de truncado.
-- Si los ítems son enlaces y el marcado semántico (<nav>, ARIA); el texto de accesibilidad del borrador necesita validación.
-- La documentación visual de la página muestra Show Overflow y Show Level 1–4 en una captura, mientras que el componente tiene Show Level 5. Confirmar.
-- Combinaciones inválidas (no documentadas en Figma).
-- Status, versión y owner (tomados del borrador en la página de Figma).
+Ninguna
 
----
+## Notas / Registro de cambios
 
-## Notas / Changelog
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-Generado a partir del material fuente disponible el 2026-10-19.
+[No hay cambios históricos verificados disponibles]
