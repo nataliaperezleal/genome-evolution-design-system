@@ -2,9 +2,9 @@
 component: "Avatar"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "Ux Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2040-247"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,7 @@ Avatar is a circular visual representation of an entity, available as a generic 
 
 ### What It Is
 
-Evidence-based interpretation: Avatar represents a user or entity visually. This is supported by the component name, the `Type` values `Person` (a photo placeholder), `Print` (a text label showing an initial, "B" in all examples), and `Icon` (a generic person silhouette), and by the fully rounded container (`radius/24`) used across all sizes. The Figma component has no written usage description; its only documentation entry is a link to the repository documentation.
+The Avatar is a visual component used to represent a person, user, or entity within the interface. It can be displayed as a generic icon or a profile image and helps identify participants, owners, assignees, or authors across different product experiences.
 
 ### Key Properties
 
@@ -75,16 +75,19 @@ Specific product contexts are not documented in Figma. The 16–48 px size range
 
 Evidence-based interpretations based on the available variants:
 
-- To represent a person with a photo (`Type=Person`).
-- To represent a person or entity with an initial when no photo exists (`Type=Print`).
-- To show a generic placeholder when no identifying data exists (`Type=Icon`).
-- To show a status indicator on the avatar (`showState=true`); the meaning of the indicator is not documented in Figma.
+- To represent users in lists, tables, or directories.
+- In comments, activity feeds, audit trails, or collaborative experiences.
+- As a visual indicator of task owners, assignees, or responsible users.
+- In profile headers or user profile pages.
+- In user groups or process participant representations.
+- When visual identification should complement a user's name or information.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-The Figma component has no usage description or documented restrictions. The component set does not provide sizes above 48 px or colors other than `Default` for `Icon` and `Person`.
+- To represent actions, features, or system categories. Use icons instead.
+- When user identity does not add value to the context.
+- As the only method for identifying a person when ambiguity may occur.
+- To display statuses, metrics, or information unrelated to a person or entity.
 
 ## Structure (Anatomy)
 
@@ -276,5 +279,3 @@ These combinations are unavailable rather than explicitly documented as invalid.
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
