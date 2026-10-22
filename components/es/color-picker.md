@@ -1,297 +1,247 @@
 ---
 component: "Color Picker"
 system: "Genome Evolution Design System"
-type: "Color Selection / Complex Control"
-status: "Done"
-version: "1.2"
-owner: "UX Design"
+type: "Conjunto de componentes"
+status: "No verificado en Figma"
+version: "No verificado en Figma"
+owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3082-25123"
-last_updated: "2026-10-20"
+last_updated: "2026-10-22"
 tags:
-  - "Color Selection"
-  - "Complex Control"
-  - "Color Picker"
+  - "color-picker"
+  - "input"
+  - "panel"
 ---
 
-# Color Picker — Genome Evolution Design System
+# Color Picker
 
-Panel de selección de color con dos modos: Solid (color plano) y Gradient.
+Sistema: Genome Evolution Design System
 
-## Quick Reference
+## Resumen del componente
 
-### What it is
+Color Picker es un panel de 264 px para elegir un color, con un modo `Solid` (área de color, controles deslizantes de tono y opacidad, campos de valor) y un modo `Gradient` (barra de degradado con paradas y campos por parada); ambos terminan con una biblioteca de colores guardados.
 
-Panel completo de selección de color. Permite elegir un color mediante un canvas 2D de colorspace, un slider Hue, un slider Saturation/Opacity y campos manuales Hex y Opacity. Incluye una paleta de colores guardados ("My colors library") y una acción Add. El modo Gradient reemplaza el colorspace por una barra de degradado y campos de edición por stop.
+## Referencia rápida
 
-### Key Properties
+### Qué es
 
-- Type [Solid | Gradient] — default: Solid
-- Contenido Type=Solid — tabs, colorspace, Hue, Saturation, campos Hex y opacidad, My colors library, 7 swatches
-- Contenido Type=Gradient — barra de degradado con 2 Selector, Stops (2 filas de campos con Icon Button), My colors library, 7 swatches
+Interpretación basada en evidencia: Color Picker permite definir un color sólido o un degradado de dos paradas y elegir entre colores guardados. Esto se sustenta en el nombre del componente, en los valores de `Type` `Solid` y `Gradient`, en las pestañas "Solid" y "Gradient" en la parte superior del panel, en el área de color y los controles deslizantes de `Solid`, en la barra de degradado y los campos "Stops" de `Gradient`, y en la sección "My colors library" con una acción "Add" en ambos. Figma no incluye una descripción de uso escrita para el conjunto de componentes Color Picker.
 
-### Default Configuration
+### Propiedades clave
 
-Type=Solid
+| Propiedad | Valores disponibles | Predeterminado |
+|-----------|---------------------|----------------|
+| Type | Solid, Gradient | Solid |
 
-### Typical Usage
+El valor predeterminado proviene de la definición de propiedades del componente en Figma. El componente no expone otras propiedades; los valores de los campos y las muestras de color son contenido de ejemplo.
 
-- Selección de color sólido: Type=Solid
-- Selección de degradado: Type=Gradient
+### Configuración predeterminada
 
----
+`Type=Solid`: un panel de 264 × 396 px con la pestaña "Solid" seleccionada, un área de color, controles deslizantes de tono y opacidad, una fila de campos de valor (formato "Hex", "#4F46E5", "100%") y la sección "My colors library".
 
-## Purpose / Intent
+### Uso típico
 
-### Problem Solved
+Observación verificada: El conjunto de componentes tiene dos variantes, una por cada `Type`. La fila de pestañas indica qué modo está activo: la pestaña seleccionada tiene un borde inferior de 2 px `border/selected`.
 
-Selección libre de color de todo el espectro, con soporte de degradado, entrada Hex, control de opacidad y swatches guardados.
+Interpretación basada en evidencia:
 
----
+- Use `Type=Solid` para elegir un único color, ajustando el tono, la posición en el área de color y la opacidad, o escribiendo un valor.
+- Use `Type=Gradient` para definir un degradado mediante sus paradas (posición, color y opacidad por parada).
+- Las pestañas "Solid" y "Gradient" corresponden a los dos valores de `Type`.
 
-## When to Use
+## Propósito / Intención
 
-- El usuario necesita selección libre de color de todo el espectro
-- Se requiere soporte de relleno degradado
-- Se necesita un picker completo con entrada Hex, control de opacidad y swatches guardados
+### Problema que resuelve
 
----
+Interpretación basada en evidencia: Ofrece a los usuarios un único panel para crear colores sólidos y degradados y reutilizar colores guardados.
 
-## When NOT to Use
+### Resultado esperado
 
-- El usuario debe elegir solo entre un conjunto fijo de colores de marca (usar Swatch selector o Token Picker)
-- Basta una paleta predefinida simple
+Interpretación basada en evidencia: Los usuarios pueden definir un color o un degradado exacto de forma visual o por valor y reutilizar colores de su biblioteca.
 
----
+### Contexto típico
 
-## Structure (Anatomy)
+Interpretación basada en evidencia: El ancho fijo de 264 px, el panel redondeado y la sombra (`Elevation/MD`) indican un panel flotante que se muestra bajo demanda. El disparador y la ubicación no están documentados en Figma.
 
-### Component Parts
+## Cuándo usar
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Color Options | Obligatorio | Fila con dos instancias de Tab: "Solid" y "Gradient". La tab seleccionada tiene borde inferior |
-| table | Obligatorio (Type=Solid) | Contenedor de 232 × 152 px que aloja Colorspace, Swatch y Cursor |
-| Colorspace | Obligatorio (Type=Solid) | Canvas 2D de color, 232 × 152 px |
-| Swatch (indicador) | Obligatorio (Type=Solid) | Indicador circular de 16 px sobre el colorspace. Descrito como arrastrable |
-| Cursor | Obligatorio (Type=Solid) | Instancia de Cursor (type "Pointer 👆"), 24 × 24 px, superpuesta al colorspace |
-| Hue | Obligatorio (Type=Solid) | Pista de slider de 8 px con thumb elíptico |
-| Saturation | Obligatorio (Type=Solid) | Pista de slider de 8 px con patrón de transparencia en cuadrícula y thumb elíptico en el extremo derecho |
-| Etiqueta "Gradient color" | Obligatorio (Type=Gradient) | Etiqueta de texto sobre la barra de degradado |
-| Barra de degradado | Obligatorio (Type=Gradient) | Barra de 41 px de alto, ancho completo, con 2 handles Selector (14 × 18 px) |
-| Etiqueta "Stops" | Obligatorio (Type=Gradient) | Etiqueta de texto sobre las filas de stops |
-| Fields (stops) | Obligatorio (Type=Gradient) | 2 filas. Cada una tiene 3 instancias de Field Master (posición, valor Hex, opacidad) y un Icon Button |
-| Fields | Obligatorio (Type=Solid) | 3 instancias de Field Master: selector de formato Hex (con ícono chevron), valor Hex, opacidad |
-| Saved Colors | Obligatorio | Etiqueta "My colors library" y una instancia de Clear button con label "Add" |
-| Row (swatches) | Obligatorio | 7 chips circulares de swatch, 24 × 24 px |
+Interpretaciones basadas en evidencia a partir de la estructura del componente:
+
+- Cuando los usuarios necesiten elegir o introducir un color sólido (`Type=Solid`).
+- Cuando los usuarios necesiten definir un degradado mediante paradas (`Type=Gradient`).
+- Cuando los usuarios deban poder elegir de una biblioteca de colores guardados o añadir colores a ella.
+
+## Cuándo NO usar
+
+[No se encontraron restricciones documentadas]
+
+Limitaciones del componente actual:
+
+- El modo `Gradient` muestra dos paradas; Figma no muestra un control para añadir paradas ni para elegir el tipo o el ángulo del degradado.
+- El panel tiene un único tamaño (264 px de ancho).
+
+## Estructura (Anatomía)
+
+### Partes del componente
+
+| Parte | Obligatoria / Opcional | Descripción |
+|-------|------------------------|-------------|
+| Panel | Obligatoria | Contenedor vertical de auto layout con fondo, relleno, radio y sombra. |
+| Pestañas de modo (`Color Options`) | Obligatoria | Dos instancias anidadas de Tab, "Solid" y "Gradient" (`Size=SM`); la activa usa `State=Selected`. |
+| Área de color (`table`) — Solid | Obligatoria en `Solid` | Área de saturación/brillo de 232 × 152 px con un selector circular de 16 px (`Swatch`) y un cursor de puntero mostrado sobre él. |
+| Control de tono — Solid | Obligatoria en `Solid` | Pista arcoíris de 8 px con un control circular. |
+| Control de opacidad — Solid | Obligatoria en `Solid` | Pista de 8 px sobre un patrón de cuadrícula con un control circular (capa llamada `Saturation`). |
+| Campos de valor (`Fields`) — Solid | Obligatoria en `Solid` | Tres campos `Field Master`: selector de formato de color ("Hex" con un ícono selector de 20 px), valor del color ("#4F46E5") y opacidad ("100%"). |
+| Sección de degradado — Gradient | Obligatoria en `Gradient` | Título "Gradient color", una barra de degradado de 41 px sobre un patrón de cuadrícula y dos selectores de parada de 14 × 18 px al inicio y al final. |
+| Paradas — Gradient | Obligatoria en `Gradient` | Título "Stops" y una fila por parada: posición ("0%" / "100%"), color ("#EDF7F7" / "#23748F"), opacidad ("100%") y un Icon Button con un ícono `trash`. |
+| Encabezado de colores guardados | Obligatoria | Título "My colors library" y una instancia de Clear button con la etiqueta "Add" y un ícono de añadir. |
+| Fila de muestras (`Row`) | Obligatoria | Siete muestras circulares de 24 px; la primera aparece seleccionada con un borde de 2 px `icon/inverse` y sombra `Elevation/SM`. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | Type=Solid: 396 px. Type=Gradient: 320 px |
-| Width | 264 px |
-| Padding | 16 px en todos los lados (space/16) |
-| Gap | 16 px entre secciones (gap/lg). 8 px entre chips de swatch (gap/sm) |
-| Radius | 8 px (radius/8) |
+| Propiedad | Valor verificado | Evidencia |
+|-----------|------------------|-----------|
+| Ancho del panel | 264 px | Dimensiones de las variantes |
+| Alto del panel | 396 px (`Solid`), 320 px (`Gradient`) con el contenido de ejemplo | Dimensiones de las variantes |
+| Relleno del panel | `space/16` (16) | Vinculación de variable |
+| Espacio entre secciones | `gap/lg` (16) | Vinculación de variable |
+| Radio del panel | `radius/8` (8) | Vinculación de variable |
+| Sombra del panel | `Elevation/MD` | Estilo de efecto |
+| Relleno de las pestañas | `space/16` horizontal, `space/4` vertical | Vinculaciones de variables |
+| Área de color | 232 × 152 px, `radius/4` | Dimensiones de capa, vinculación de variable |
+| Selector del área de color | Círculo de 16 px, borde de 2 px `icon/inverse` | Contexto de diseño |
+| Controles deslizantes (Solid) | 8 px de alto, ancho completo, `radius/24` | Dimensiones de capa, vinculación de variable |
+| Barra de degradado | 41 px de alto, ancho completo, `radius/2` | Dimensiones de capa, vinculación de variable |
+| Espacio dentro de la sección de degradado | 8 px | Contexto de diseño |
+| Espacio entre campos | `gap/sm` (8) | Vinculación de variable |
+| Relleno de los campos | `space/4` (4), espacio `gap/xxs` (4) | Vinculaciones de variables |
+| Borde y radio de los campos | `width/1` `border/default`, `radius/4` | Vinculaciones de variables |
+| Sombra de los campos | `Elevation/XS` | Estilo de efecto |
+| Botón para quitar parada | Icon Button, relleno `space/4`, radio `semantic/sm`, borde de 1 px `border/default`, ícono de 16 px | Contexto de diseño |
+| Muestras | Círculos de 24 px (`radius/24`), espacio `gap/sm` (8) | Dimensiones de capa, vinculaciones de variables |
 
----
+## Semántica
 
-## Iconography
+Interpretación basada en evidencia:
 
-### Icon Slots
+- Las pestañas alternan entre la edición de color sólido y de degradado.
+- En `Solid`, el área de color define la saturación y el brillo, el control arcoíris define el tono, y el control con cuadrícula y el campo "100%" definen la opacidad. El primer campo selecciona el formato del valor ("Hex"); el segundo contiene el valor del color.
+- En `Gradient`, cada fila de parada define la posición, el color y la opacidad de esa parada, y el botón de ícono la elimina.
+- "My colors library" contiene los colores guardados; "Add" añade un color a ella. La muestra resaltada representa el color guardado seleccionado actualmente.
 
-| Slot | Description |
-|--------|--------|
-| Leading | Glifo de agregar en el Clear button "Add" (la capa se llama arrow-left). El ícono final no se renderiza |
-| Trailing | Ícono chevron de 20 × 20 px dentro del campo selector de formato Hex (capa llamada Icon) |
+No verificado en Figma: elementos HTML, roles ARIA (por ejemplo, de control deslizante o de pestaña), interacción con teclado y anuncios en lectores de pantalla.
 
-### Rules
+## Iconografía
 
-- Type=Solid superpone una instancia de Cursor (type "Pointer 👆", 24 × 24 px) sobre el colorspace.
-- En Type=Gradient, cada fila de stop termina con un Icon Button con un glifo de 16 × 16 px. La capa se llama trash pero se ve como un signo menos; la descripción de Figma lo llama "Icon Button (—)".
-- La barra de degradado tiene dos handles Selector de 14 × 18 px.
+| Ranura | Ícono / descripción verificada | Evidencia |
+|--------|--------------------------------|-----------|
+| Selector de formato | Ícono selector de 20 px (flechas arriba/abajo) en el campo "Hex" | Capa, captura |
+| Acción de añadir | Ícono de añadir (más) en el Clear button "Add" | Instancia anidada |
+| Eliminación de parada | Capa de ícono llamada `trash` en el Icon Button, que se muestra como un glifo de quitar (menos) | Nombre de capa, captura |
+| Cursor | Instancia de cursor de puntero mostrada sobre el selector del área de color | Instancia anidada |
 
----
+## Variantes (Propiedades)
 
-## Variants (Properties)
-
-Los nombres de propiedades y valores deben coincidir exactamente con Figma.
+El inventario siguiente es completo: se inspeccionaron ambas variantes.
 
 ### Type
 
-| Value | Description |
-|--------|--------|
-| Solid | Modo de color plano. La tab "Solid" está seleccionada. Muestra colorspace, slider Hue, slider Saturation, fila de campos, colores guardados y swatches |
-| Gradient | Modo degradado. La tab "Gradient" está seleccionada. Reemplaza colorspace, Hue y Saturation por la barra de degradado y dos filas de stops |
+| Valor | Descripción verificada | Evidencia / Notas |
+|-------|------------------------|-------------------|
+| Solid | Pestaña "Solid" seleccionada; área de color, control de tono, control de opacidad y campos de valor; biblioteca de colores guardados. | Predeterminado |
+| Gradient | Pestaña "Gradient" seleccionada; barra de degradado con dos selectores de parada y dos filas de paradas; biblioteca de colores guardados. | — |
 
----
+## Composición
 
-## States
+El componente se construye con estos componentes anidados, que mantienen su propia documentación:
 
-El componente no tiene una propiedad State.
+| Componente anidado | Uso en Color Picker | Configuración observada |
+|--------------------|---------------------|-------------------------|
+| Tab | Pestañas de modo | `Color=Default`, `Size=SM`; `State=Selected` en el modo activo, `State=Default` en el otro |
+| Field Master | Campos de valor y de paradas | Solo contenido de texto |
+| Clear button | Acción "Add" | Etiqueta "Add", ícono inicial intercambiado por un ícono de añadir, ícono final oculto |
+| Icon Button | Eliminación de parada | Delineado, ícono de 16 px |
+| Cursor | Puntero sobre el área de color | `Type=Pointer 👆` |
 
-| State | Description | Visual Changes |
-|--------|--------|--------|
-| Tab seleccionada | Tab que corresponde al Type actual | Borde inferior de 2 px border/selected, label text/secondary |
-| Tab no seleccionada | La otra tab | Sin borde, label text/tertiary |
+## Estados
 
----
+El conjunto de componentes Color Picker no tiene propiedad de estado. Las apariencias interactivas pertenecen a los componentes anidados (por ejemplo, los estados de Tab y de Clear button).
 
-## Token Mapping
+## Mapeo de tokens
 
-### Background
+| Categoría | Token | Uso verificado | Evidencia |
+|-----------|-------|----------------|-----------|
+| Fondo | `background/canvas` | Fondos del panel y de los campos | Vinculación de variable |
+| Borde | `border/selected` | Borde inferior de la pestaña activa | Vinculación de variable |
+| Borde | `border/default` | Bordes de los campos y del Icon Button | Vinculación de variable |
+| Borde | `icon/inverse` | Borde del selector del área de color; borde de la muestra seleccionada | Vinculación de variable |
+| Ancho de borde | `width/1`, `width/2` | Bordes de los campos; borde de la muestra seleccionada | Vinculación de variable |
+| Texto | `text/secondary`, `text/tertiary` | Etiquetas de pestaña activa e inactiva | Vinculación de variable |
+| Texto | `text/primary` | Títulos de sección, valores de los campos, "Add" | Vinculación de variable |
+| Espaciado | `space/16`, `space/8`, `space/4`, `gap/lg`, `gap/sm`, `gap/xxs` | Rellenos y espacios | Vinculación de variable |
+| Radio | `radius/8`, `radius/4`, `radius/24`, `radius/2`, `semantic/sm` | Panel, área de color y campos, controles deslizantes y muestras, barra de degradado, botón de ícono | Vinculación de variable |
+| Efecto | `Elevation/MD`, `Elevation/SM`, `Elevation/XS` | Panel, muestra seleccionada, campos | Estilos de efecto |
+| Tipografía | `Text/Button/SM` | Etiquetas de las pestañas | Estilo de texto |
+| Tipografía | `Text/Body/XS Strong` | Títulos de sección ("My colors library", "Gradient color", "Stops") | Estilo de texto |
+| Tipografía | `Text/Body/XS` | Valores de los campos | Estilo de texto |
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| background/canvas | Fondo del panel y de Field Master | Verificado |
+Comportamiento actual: Los colores de las muestras, el degradado del área de color, las imágenes de las pistas de tono y opacidad y el relleno del selector del área de color son valores de ejemplo fijos y no están vinculados a variables.
 
-### Text
+## Interacción
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/primary | Etiquetas de sección, texto de campos, label "Add" | Verificado |
-| text/secondary | Label de la tab seleccionada | Verificado |
-| text/tertiary | Label de la tab no seleccionada | Verificado |
+El componente no tiene variantes de estado ni interacciones de prototipo. El cursor de puntero sobre el selector del área de color es una ilustración estática.
 
-### Border
+No verificado en Figma: el comportamiento de arrastre del selector, de los controles deslizantes y de los selectores de parada; cómo se sincronizan los valores entre controles y campos; las opciones del selector de formato; cómo se añaden paradas; qué guarda "Add"; y la interacción con teclado.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/selected | Borde inferior de la tab seleccionada | Verificado. El grosor de 2 px no está asociado a un token |
-| border/default | Borde de Field Master e Icon Button | Verificado. Grosor: width/1 (1) |
-| icon/inverse | Color del borde del indicador del colorspace y del primer chip de swatch | Verificado. Grosor del borde del chip: width/2 (2) |
+## Accesibilidad
 
-### Typography
+Observaciones relacionadas con la accesibilidad:
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Body/XS | Texto de campos | Verificado. family/body (Open Sans), weight/regular, size/12, line-height/16, letter-spacing/normal |
-| Text/Button/SM | Labels de las tabs | Listado en los estilos del diseño; aplicado a Tab según la descripción de Tab |
-| Text/Body/XS Strong | Etiquetas de sección | Listado en los estilos del diseño; asignación a las etiquetas no verificada. weight/semibold |
+- Cada control visual tiene un campo de texto equivalente (formato, valor, opacidad; y posición, color, opacidad por parada), por lo que los valores se pueden leer e introducir como texto.
+- La pestaña del modo activo se marca con un borde inferior de 2 px y un color de etiqueta más oscuro, no solo con el color.
+- La muestra seleccionada se marca con un borde y una sombra.
+- Las etiquetas y los valores usan texto de 12 px.
+- Las relaciones de contraste no se han verificado.
 
-### Spacing
+Información de accesibilidad faltante (no verificado en Figma): nombres accesibles para los controles deslizantes, las muestras y el botón para quitar parada, operación con teclado del área de color y de los controles deslizantes, orden de foco y anuncios en lectores de pantalla.
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/16 | Padding del panel, padding horizontal de Tab | 16 px |
-| space/4 | Padding vertical de Tab, padding de Field Master, padding de Icon Button, padding vertical de Clear button | 4 px |
-| space/8 | Padding horizontal de Clear button | 8 px |
-| gap/lg | Espacio entre secciones del panel | 16 px |
-| gap/sm | Espacio entre campos, chips de swatch y partes del Clear button | 8 px |
-| gap/xxs | Espacio dentro de Field Master | 4 px |
+## Pautas de contenido
 
-### Radius
+Observaciones verificadas:
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| radius/8 | Panel | 8 px |
-| radius/4 | Colorspace, Field Master, Clear button | 4 px |
-| radius/24 | Pistas Hue y Saturation, chips de swatch | 24 px |
-| radius/2 | Barra de degradado | 2 px |
-| semantic/sm | Icon Button | 4 px |
+- Etiquetas de pestaña: "Solid", "Gradient".
+- Títulos de sección: "Gradient color", "Stops", "My colors library".
+- Etiqueta de acción: "Add".
+- Valores de ejemplo: formato "Hex"; colores en hexadecimal en mayúsculas con "#" ("#4F46E5", "#EDF7F7", "#23748F"); opacidad y posición como porcentajes ("100%", "0%").
 
-### Shadow
+## Ejemplos
 
-| Token | Usage | Notes |
-|--------|--------|--------|
-| position/2, position/4, blur/4, palette/alpha/300 | Sombra del panel | Verificado. Coincide con el estilo Elevation/MD, listado en los estilos del diseño |
-| position/1, blur/1, palette/alpha/300 | Sombra de Field Master | Verificado. Coincide con el estilo Elevation/XS |
-| position/2, blur/2, palette/alpha/300 | Sombra del primer chip de swatch | Verificado. Coincide con el estilo Elevation/SM |
+### Color sólido
 
----
+Configuración: `Type=Solid`
 
-## Interaction
+Descripción: Elegir un color en el área de color o introducir un valor hexadecimal, y definir la opacidad.
 
-La descripción de Figma llama "arrastrable" al indicador del colorspace. Todo el demás comportamiento (cambio de tab, edición de campos, acción Add, eliminación de stops):
+Evidencia / Clasificación: Variante existente en Figma.
 
----
+### Degradado de dos paradas
 
-## Accessibility
+Configuración: `Type=Gradient`
 
-| Topic | Information |
-|--------|--------|
-| Notes | Roles ARIA, soporte de teclado.
+Descripción: Degradado de "#EDF7F7" en 0% a "#23748F" en 100%, ambos con 100% de opacidad.
 
----
+Evidencia / Clasificación: Variante existente en Figma (contenido de ejemplo).
 
-## Content Guidelines
+## Combinaciones inválidas
 
-Texto visible en las variantes: "Solid", "Gradient", "Gradient color", "Stops", "My colors library", "Add", "Hex". Los valores de campos mostrados (#4F46E5, 100%, 0%, #EDF7F7, #23748F) son contenido de ejemplo.
+[No se encontraron combinaciones inválidas documentadas]
 
----
+## Aclaraciones pendientes
 
-## Examples
+Ninguna
 
-### Example 1
+## Notas / Registro de cambios
 
-Configuration:
+Generado o revisado con el material de origen disponible el 2026-10-22.
 
-```text
-Type=Solid
-```
-
-Description:
-
-Selección de color sólido.
-
-### Example 2
-
-Configuration:
-
-```text
-Type=Gradient
-```
-
-Description:
-
-Selección de color en degradado.
-
-### Example 3
-
-Configuration:
-
-```text
-[Pending confirmation]
-```
-
-Description:
-
-No hay un tercer ejemplo documentado.
-
----
-
-## QA Checklist
-
-- Propiedades documentadas.
-- Los nombres de propiedades coinciden exactamente con Figma.
-- Los valores de variantes coinciden exactamente con Figma.
-- Defaults documentados.
-- Combinaciones inválidas documentadas.
-- Tokens verificados.
-- No se agregó comportamiento no documentado.
-- No se agregó comportamiento de accesibilidad no documentado.
-- Ambas variantes (Type=Solid, Type=Gradient) contrastadas con la metadata y el contexto de diseño.
-- Componentes anidados identificados: Tab, Field Master, Clear button, Icon Button, Cursor, Selector.
-
----
-
-## Pending Clarification
-
-- Combinaciones inválidas: no hay ninguna documentada. Type es la única propiedad.
-- El Icon Button junto a cada stop se describe como "(—)", pero su capa se llama trash. Su función no está documentada.
-- El slider llamado Saturation se describe como "Saturation/Opacity". No está documentado qué valor controla ni su relación con el campo de opacidad (%).
-- Las opciones del selector de formato Hex no están documentadas.
-- El primer chip de swatch tiene borde y sombra que los demás no tienen. Su significado (seleccionado o activo) no está documentado.
-- Los valores de ejemplo son inconsistentes: el indicador del colorspace es #23748f mientras que el campo Hex muestra #4F46E5. Se tratan como contenido de ejemplo.
-- Valores fijos sin token: colores del degradado del colorspace, rellenos de los chips de swatch, el anillo de 2 px del indicador (rgba(0,0,0,0.25)), el gap de 8 px dentro de la sección de degradado y el grosor de 2 px del borde de la tab seleccionada.
-- Los nombres de tokens se tomaron tal cual de Figma y no se cruzaron con los archivos JSON de tokens. Elevation/XS, Elevation/SM y Elevation/MD se asocian a los tokens de sombra por valor, no por una asignación explícita.
-- Estilo de texto aplicado a las etiquetas de sección (Text/Body/XS Strong vs Text/Button/SM).
-- Las propiedades expuestas por los componentes anidados (Tab, Field Master) no se documentan aquí más allá de lo visible.
-- status, version y owner.
-- Comportamiento del ancho, Semantics, Interaction, Accessibility y Content Guidelines.
-
----
-
-## Notes / Changelog
-
-Generado a partir del material fuente disponible el 2026-10-20.
+[No hay cambios históricos verificados disponibles]
