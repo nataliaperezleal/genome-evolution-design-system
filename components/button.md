@@ -1,391 +1,327 @@
 ---
 component: "Button"
 system: "Genome Evolution Design System"
-type: "Button"
-status: "Production"
-version: "2.0"
-owner: "UX Design"
+type: "Component set"
+status: "Not verified in Figma"
+version: "Not verified in Figma"
+owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=392-861"
-last_updated: "2026-10-19"
+last_updated: "2026-10-22"
 tags:
   - "button"
   - "action"
-  - "call-to-action"
+  - "interactive"
 ---
 
-# Button — Genome Evolution Design System
+# Button
 
-Interactive action button. It communicates an available action and lets the user execute it. It is the main call-to-action element on screens, forms and dialogs.
+System: Genome Evolution Design System
+
+## Component Summary
+
+Button triggers an action. It is available in seven types (Primary, Secondary, Tertiary, Danger, Information, Success, Warning), two brand colors for Primary and Secondary, two sizes, two corner styles, and Default, Hovered, Pressed, Focused and Disabled states, with optional leading and trailing icons.
 
 ## Quick Reference
 
-### What it is
+### What It Is
 
-Interactive action button (source: Figma component description).
+Verified specification: Figma describes the Primary button as the main action button, with a solid background in the brand color, used for the most important action of a screen or section; only one should be used per view. Figma also states that `Color=Evergreen` applies the Genome Plus brand's primary green palette and is the default brand color for Primary and Secondary buttons. (Source: variant descriptions in Figma, written in Spanish.)
+
+Evidence-based interpretation: The other types provide lower emphasis (Secondary, outlined in the brand color; Tertiary, neutral outline) or status-specific emphasis (Danger, Information, Success, Warning), as shown by their fills, borders and the status token families they use.
 
 ### Key Properties
 
-- Type [Primary | Secondary | Tertiary | Danger | Information | Success | Warning] — default: Primary
-- Color [Evergreen | Indigo | Default] — default: Evergreen
-- Size [SM | MD] — default: MD
-- State [Default | Hovered | Pressed | Disabled | Focused] — default: Default
-- Corner [Default | Rounded] — default: Default
-- showLeadingIcon [true | false] — default: false
-- showTrailingIcon [true | false] — default: false
-- label — visible button text (default: "Button")
+| Property | Available Values | Default |
+|----------|------------------|---------|
+| Type | Primary, Secondary, Tertiary, Danger, Information, Success, Warning | Primary |
+| Color | Evergreen, Indigo, Default | Evergreen |
+| State | Default, Hovered, Pressed, Focused, Disabled | Default |
+| Corner | Default, Rounded | Default |
+| Size | MD, SM | MD |
+| label (text) | Free text | Button |
+| showLeadingIcon (boolean) | true, false | false |
+| leadingIcon (instance swap) | Any icon instance | check |
+| showTrailingIcon (boolean) | true, false | false |
+| trailingIcon (instance swap) | Any icon instance | close |
+
+Defaults are taken from the component property definitions in Figma; `Color=Evergreen` as the default brand color is also stated in the Figma description.
 
 ### Default Configuration
 
-Type=Primary, Color=Evergreen, Size=MD, State=Default, Corner=Default, showLeadingIcon=false, showTrailingIcon=false, label=Button
+`Type=Primary`, `Color=Evergreen`, `State=Default`, `Corner=Default`, `Size=MD`, `label="Button"`, both icons hidden: a `surface/evergreen/bold` button with a `text/inverse` label and a 4 px corner radius.
 
-### Invalid Combinations
-
-- Type=Tertiary + Color=Evergreen or Color=Indigo (Tertiary only accepts Color=Default)
-- Type=Danger, Information, Success or Warning + Color=Evergreen or Color=Indigo
-- State=Disabled + Type=Tertiary, Danger, Information, Success or Warning (variant does not exist)
-- Type=Primary or Secondary + Color=Default + State other than Disabled (variant does not exist)
+Current behavior: this default variant is 30 px high (top padding `space/8`, bottom padding `space/6`), while every other MD variant is 32 px high (`space/8` top and bottom). See Pending Clarification.
 
 ### Typical Usage
 
-- Primary action: Type=Primary, Color=Evergreen, Size=MD, Corner=Default
-- Secondary action: Type=Secondary, Color=Evergreen, Size=MD
-- Low-emphasis action: Type=Tertiary, Color=Default, Size=SM
-- Destructive action: Type=Danger, Size=MD
-- Rounded variant: Type=Primary, Color=Indigo, Corner=Rounded, Size=SM
+Verified observation: The component set contains 152 variants. The available `Color` values depend on `Type` and `State`:
 
----
+| Type | Colors | States |
+|------|--------|--------|
+| Primary | Evergreen, Indigo | Default, Hovered, Pressed, Focused |
+| Primary | Default | Disabled |
+| Secondary | Evergreen, Indigo | Default, Hovered, Pressed, Focused |
+| Secondary | Default | Disabled |
+| Tertiary | Default | Default, Hovered, Pressed, Focused |
+| Danger, Information, Success, Warning | Default | Default, Hovered, Pressed, Focused |
+
+Every combination above exists in both `Corner` values and both `Size` values.
+
+Verified guidance (Figma description): Use a single Primary button per view, for the most important action of the screen or section.
+
+Evidence-based interpretation:
+
+- Use Secondary for actions with less emphasis than Primary, in the same brand color.
+- Use Tertiary for neutral, low-emphasis actions.
+- Use Danger, Information, Success or Warning when the action relates to that status.
+- To show a disabled Primary or Secondary button, set `Color=Default` together with `State=Disabled`.
 
 ## Purpose / Intent
 
 ### Problem Solved
 
-Communicates an available action and lets the user execute it (source: Figma component description).
+Verified specification: Primary marks the most important action of a screen or section. Evidence-based interpretation: The full set provides a consistent hierarchy of action emphasis and status-specific actions.
+
+### Expected Outcome
+
+Evidence-based interpretation: Users can identify the main action and distinguish secondary, neutral and status-related actions.
 
 ### Typical Context
 
-Screens, forms and dialogs (source: Figma component description).
-
----
+Primary is documented for the most important action in a screen or section. Other contexts are not documented in Figma.
 
 ## When to Use
 
-- Primary action of a screen
-- Form confirmation
-- Destructive action with Danger context
-- Informational or status contextual action
-
----
+- Primary: the most important action of a screen or section (verified, Figma description).
+- Secondary: an action with lower emphasis than Primary (evidence-based interpretation).
+- Tertiary: a neutral, low-emphasis action (evidence-based interpretation).
+- Danger, Information, Success, Warning: actions associated with those statuses (evidence-based interpretation from the status tokens).
 
 ## When NOT to Use
 
-- For navigation between pages (use Link)
-- For multiple actions of equal hierarchy without clear context
-- More than one Primary per view
+- Do not use more than one Primary button per view (verified, Figma description).
 
----
+Limitations of the current component:
+
+- `Disabled` exists only for Primary and Secondary, with `Color=Default`. Tertiary, Danger, Information, Success and Warning have no disabled variant.
+- `Indigo` is available only for Primary and Secondary.
 
 ## Structure (Anatomy)
 
 ### Component Parts
 
-| Part | Required | Description |
-|--------|--------|--------|
-| Container | Required | Rectangular frame with horizontal auto layout. Fill, border and radius depend on Type, Color, State and Corner. |
-| Leading icon | Optional — showLeadingIcon | 16×16 icon, default "check". Replaceable through the leadingIcon slot. |
-| Label | Required | Button text. Default: "Button". |
-| Trailing icon | Optional — showTrailingIcon | 16×16 icon, default "close". Replaceable through the trailingIcon slot. |
+| Part | Required / Optional | Description |
+|------|---------------------|-------------|
+| Container | Required | Horizontal auto layout frame that carries the fill, border and corner radius. |
+| Leading icon | Optional (`showLeadingIcon`) | 16 px icon before the label; `check` by default, swappable through `leadingIcon`. |
+| Label | Required | Text set through `label`. |
+| Trailing icon | Optional (`showTrailingIcon`) | 16 px icon after the label; `close` by default, swappable through `trailingIcon`. |
 
 ### Layout
 
-| Property | Value |
-|-----------|-----------|
-| Height | Size=SM: 24. Size=MD: 32 (some variants measure 30 or 34, see Pending Clarification). |
-| Width | Hugs content. With the default label: SM 64–66, MD 79–81. |
-| Padding | Size=MD: space/16 horizontal, space/8 vertical (Primary + Evergreen + Default uses 8 top / 6 bottom). Size=SM: space/12 horizontal, space/4 vertical. |
-| Gap | gap/sm between icon and label |
-| Radius | Corner=Default: semantic/sm (4). Corner=Rounded: semantic/pill (32). |
-
----
+| Property | Verified Value | Evidence |
+|----------|----------------|----------|
+| Height — MD | 32 px (30 px in the default variant, see Default Configuration) | Variant dimensions |
+| Height — SM | 24 px | Variant dimensions |
+| Padding — MD | 16 px horizontal, `space/8` (8) vertical | Variable bindings |
+| Padding — SM | `space/12` (12) horizontal, `space/4` (4) vertical | Variable bindings |
+| Gap | `gap/sm` (8) between icons and label | Variable binding |
+| Alignment | Content centered horizontally and vertically | Design context |
+| Width | Adapts to content (79 px MD / 64 px SM with the default label) | Variant dimensions, auto layout |
+| Corner radius — Default | `semantic/sm` (4) | Variable binding |
+| Corner radius — Rounded | `semantic/pill` (32) | Variable binding |
+| Border (outlined types) | `width/1` (1 px) | Variable binding |
+| Focus border | `focus/width` (2 px) | Variable binding |
+| Icon size | 16 × 16 px (both sizes) | Layer dimensions |
+| Label typography — MD | `Text/Button/MD`: `family/body` (Open Sans), weight 600, `size/14`, `line-height/16` | Text style |
+| Label typography — SM | `Text/Button/SM`: `family/body`, weight 600, `size/12`, `line-height/16` | Text style |
+| Label wrapping | Single line (no wrapping) | Design context |
 
 ## Semantics
 
-Per the Figma description, Button communicates an available action. Type conveys hierarchy and context: Primary for the main action, Danger for destructive actions, and Information, Success and Warning for contextual or status actions.
+Verified specification: Primary represents the most important action of a screen or section (Figma description).
 
----
+Evidence-based interpretation:
+
+- Type expresses the level of emphasis (Primary > Secondary > Tertiary) or the status associated with the action (Danger, Information, Success, Warning, bound to the `danger`, `info`, `success` and `warning` token families).
+- `Color` (Evergreen, Indigo) selects the brand palette and does not change the button's meaning; Evergreen is the default brand color (verified, Figma description).
+- `Corner` and `Size` are presentational.
+
+Not verified in Figma: HTML element, ARIA role, and how leading or trailing icons are exposed to assistive technologies.
 
 ## Iconography
 
-### Icon Slots
+| Slot | Verified Icon / Description | Evidence |
+|------|-----------------------------|----------|
+| Leading icon | `check` by default, 16 px; swappable via `leadingIcon`; hidden unless `showLeadingIcon=true` | Instance swap property |
+| Trailing icon | `close` by default, 16 px; swappable via `trailingIcon`; hidden unless `showTrailingIcon=true` | Instance swap property |
 
-| Slot | Description |
-|--------|--------|
-| Leading | 16×16 icon controlled by showLeadingIcon. Default: "check". Replaceable through the leadingIcon slot. |
-| Trailing | 16×16 icon controlled by showTrailingIcon. Default: "close". Replaceable through the trailingIcon slot. |
-
-### Rules
-
-- Icons are visible only when their show property is true.
-- Icon color: [Pending confirmation] (no icon token is bound in the variants reviewed).
-- Allowed icons for the slots: [Pending confirmation]
-
----
+Icon fills are not bound to variables in the inspected variants.
 
 ## Variants (Properties)
 
+The inventory below is complete for property values; all 152 variants were listed, and representative variants of every Type, Color, State, Corner and Size were inspected in detail.
+
 ### Type
 
-| Value | Description |
-|--------|--------|
-| Primary | Solid fill. Main action. Available with Color=Evergreen and Indigo (all States except Disabled) and Color=Default (State=Disabled only). |
-| Secondary | Outline with 1px border. Secondary action. Available with Color=Evergreen and Indigo (all States except Disabled) and Color=Default (State=Disabled only). |
-| Tertiary | Canvas background with 1px border/strong border. Action without emphasis. Only Color=Default. States: Default, Hovered, Pressed, Focused. |
-| Danger | Subtle red fill with border/danger border. Destructive action. Only Color=Default. States: Default, Hovered, Pressed, Focused. |
-| Information | Subtle blue fill with border/info border. Informational contextual action. Only Color=Default. States: Default, Hovered, Pressed, Focused. |
-| Success | Subtle green fill with border/success border. Status contextual action. Only Color=Default. States: Default, Hovered, Pressed, Focused. |
-| Warning | Subtle yellow fill with border/warning border. Status contextual action. Only Color=Default. States: Default, Hovered, Pressed, Focused. |
+| Value | Fill / Border / Label (State=Default) | Available Colors |
+|-------|----------------------------------------|------------------|
+| Primary | Evergreen: `surface/evergreen/bold`, no border, `text/inverse`. Indigo: `surface/indigo/bold`, no border, `text/inverse`. | Evergreen, Indigo; Default (Disabled only) |
+| Secondary | `background/canvas`, 1 px `border/evergreen` or `border/indigo`, `text/evergreen` or `text/indigo` | Evergreen, Indigo; Default (Disabled only) |
+| Tertiary | `background/canvas`, 1 px `border/strong`, `text/primary` | Default |
+| Danger | `surface/danger/subtle`, 1 px `border/danger`, `text/danger` | Default |
+| Information | `surface/info/subtle`, 1 px `border/info`, `text/info` | Default |
+| Success | `surface/success/subtle`, 1 px `border/success`, `text/success` | Default |
+| Warning | `surface/warning/subtle`, 1 px `border/warning`, `text/warning` | Default |
 
 ### Color
 
-| Value | Description |
-|--------|--------|
-| Evergreen | Primary green palette. Default brand color for Primary and Secondary buttons (source: Figma description of the Color property, which names the brand "Genome Plus"). |
-| Indigo | Indigo palette. Available for Primary and Secondary. |
-| Default | Neutral. Used by Tertiary, Danger, Information, Success and Warning, and by the Disabled state of Primary and Secondary. |
-
-### Size
-
-| Value | Description |
-|--------|--------|
-| SM | 24px high. Label: Text/Button/SM (size/12). |
-| MD | 32px high. Label: Text/Button/MD (size/14). |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Evergreen | Genome Plus brand primary green palette; default brand color for Primary and Secondary. | Figma description; Primary and Secondary |
+| Indigo | Indigo brand palette (`surface/indigo/bold`, `border/indigo`, `text/indigo`). | Primary and Secondary |
+| Default | Neutral color used by Tertiary, the status types, and the Disabled variants of Primary and Secondary. | All types |
 
 ### State
 
-| Value | Description |
-|--------|--------|
-| Default | Base appearance. |
-| Hovered | Hover appearance (see States). |
-| Pressed | Pressed appearance (see States). |
-| Disabled | Disabled appearance. Only Primary and Secondary with Color=Default. |
-| Focused | 2px border/focus border. |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Default | Resting appearance (see Type). | All types |
+| Hovered | Primary: `surface/<color>/bold/hovered`. Secondary, Tertiary: `background/interactive/hovered`. Status types: `surface/<status>/subtle/hovered`. | All types |
+| Pressed | Primary: `surface/<color>/bold/pressed`. Secondary, Tertiary: `background/interactive/pressed`. Status types: `surface/<status>/subtle/pressed`. | All types |
+| Focused | 2 px (`focus/width`) `border/focus` border; the fill stays as in Default; in outlined types it replaces the type border. | All types |
+| Disabled | Primary: `background/disabled`, `text/disabled`, no border. Secondary: `background/disabled`, 1 px `border/disabled`, `text/disabled`. | Primary and Secondary with `Color=Default` only |
 
 ### Corner
 
-| Value | Description |
-|--------|--------|
-| Default | Radius semantic/sm (4). |
-| Rounded | Pill radius semantic/pill (32). |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| Default | 4 px radius (`semantic/sm`). | All combinations |
+| Rounded | Pill shape (`semantic/pill`, 32). | All combinations |
 
-### showLeadingIcon
+### Size
 
-| Value | Description |
-|--------|--------|
-| true | Shows the leading icon. |
-| false | Hides the leading icon. |
+| Value | Verified Description | Evidence / Notes |
+|-------|----------------------|------------------|
+| MD | 32 px high; `Text/Button/MD`; 16 px horizontal padding. | All combinations |
+| SM | 24 px high; `Text/Button/SM`; 12 px horizontal padding. | All combinations |
 
-### showTrailingIcon
+### label, leadingIcon, trailingIcon
 
-| Value | Description |
-|--------|--------|
-| true | Shows the trailing icon. |
-| false | Hides the trailing icon. |
-
-### label
-
-Visible button text. Default value: "Button".
-
----
+| Property | Verified Description | Evidence / Notes |
+|----------|----------------------|------------------|
+| label | Button text; "Button" in all variants. | Text property |
+| showLeadingIcon / leadingIcon | Shows a 16 px icon before the label (`check` by default). | Boolean + instance swap |
+| showTrailingIcon / trailingIcon | Shows a 16 px icon after the label (`close` by default). | Boolean + instance swap |
 
 ## States
 
-| State | Description | Visual Changes |
-|--------|--------|--------|
-| Default | Base appearance. | Primary: surface/evergreen/bold or surface/indigo/bold fill, text/inverse text. Secondary: background/canvas fill, border/evergreen or border/indigo 1px border, text/evergreen or text/indigo text. Tertiary: background/canvas fill, border/strong border, text/primary text. Danger, Information, Success, Warning: subtle fill, matching border and text tokens. |
-| Hovered | Hover appearance. | Primary: surface/evergreen/bold/hovered or surface/indigo/bold/hovered fill. Secondary and Tertiary: background/interactive/hovered fill. Danger, Information, Success, Warning: surface/{type}/subtle/hovered fill. |
-| Pressed | Press appearance. | Primary: surface/evergreen/bold/pressed or surface/indigo/bold/pressed fill. Secondary and Tertiary: background/interactive/pressed fill. Danger, Information, Success, Warning: surface/{type}/subtle/pressed fill. |
-| Disabled | Non-interactive appearance. | Primary: background/disabled fill, text/disabled text. Secondary: background/disabled fill, border/disabled border, text/disabled text. |
-| Focused | Focus appearance. | 2px (`focus/width`) `border/focus` border; fill and text as in Default. |
+| State | Verified Description | Visual Changes | Evidence |
+|-------|----------------------|----------------|----------|
+| Default | Resting state. | See Type. | State variants |
+| Hovered | Hover appearance. | Darker bold fill (Primary) or hovered background (other types). | State variants |
+| Pressed | Pressed appearance. | Darkest bold fill (Primary) or pressed background (other types). | State variants |
+| Focused | Focus appearance. | 2 px `border/focus` border. | State variants |
+| Disabled | Unavailable appearance. | `background/disabled`, `text/disabled`; `border/disabled` on Secondary. | State variants (Primary, Secondary) |
 
----
+These are visual variants; transitions are not defined in Figma.
 
 ## Token Mapping
 
-Tokens are confirmed per variant. For Indigo, Information, Success and Warning the pairing follows the variable set of the component and the naming of the Evergreen and Danger variants checked individually. Spacing, size, width and radius tokens were confirmed as Figma variables but not cross-checked against the token files.
+| Category | Token | Verified Usage | Evidence |
+|----------|-------|----------------|----------|
+| Surface | `surface/evergreen/bold`, `/hovered`, `/pressed` | Primary Evergreen fill by state | Variable binding |
+| Surface | `surface/indigo/bold`, `/hovered`, `/pressed` | Primary Indigo fill by state | Variable binding |
+| Surface | `surface/danger/subtle`, `/hovered`, `/pressed` | Danger fill by state | Variable binding |
+| Surface | `surface/info/subtle`, `/hovered`, `/pressed` | Information fill by state | Variable binding |
+| Surface | `surface/success/subtle`, `/hovered`, `/pressed` | Success fill by state | Variable binding |
+| Surface | `surface/warning/subtle`, `/hovered`, `/pressed` | Warning fill by state | Variable binding |
+| Background | `background/canvas` | Secondary and Tertiary fill | Variable binding |
+| Background | `background/interactive/hovered`, `background/interactive/pressed` | Secondary and Tertiary hover and pressed fill | Variable binding |
+| Background | `background/disabled` | Disabled fill | Variable binding |
+| Border | `border/evergreen`, `border/indigo`, `border/strong`, `border/danger`, `border/info`, `border/success`, `border/warning`, `border/disabled` | Type and Disabled borders | Variable binding |
+| Border | `border/focus`, `focus/width` | Focus border | Variable binding |
+| Border width | `width/1` | Outlined types | Variable binding |
+| Text | `text/inverse`, `text/evergreen`, `text/indigo`, `text/primary`, `text/danger`, `text/info`, `text/success`, `text/warning`, `text/disabled` | Label color by Type, Color and State | Variable binding |
+| Spacing | `space/8`, `space/6`, `space/12`, `space/4`, `space/16`, `size/16`, `gap/sm` | Padding and gap | Variable binding |
+| Radius | `semantic/sm`, `semantic/pill` | Corner | Variable binding |
+| Typography | `Text/Button/MD`, `Text/Button/SM` | Label by Size | Text styles |
 
-### Background
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| surface/evergreen/bold | Fill | Type=Primary, Color=Evergreen |
-| surface/evergreen/bold/hovered | Fill | Primary, Evergreen, Hovered |
-| surface/evergreen/bold/pressed | Fill | Primary, Evergreen, Pressed |
-| surface/indigo/bold | Fill | Type=Primary, Color=Indigo |
-| surface/indigo/bold/hovered | Fill | Primary, Indigo, Hovered |
-| surface/indigo/bold/pressed | Fill | Primary, Indigo, Pressed |
-| background/canvas | Fill | Secondary and Tertiary, Default |
-| background/interactive/hovered | Fill | Secondary and Tertiary, Hovered |
-| background/interactive/pressed | Fill | Secondary and Tertiary, Pressed |
-| background/disabled | Fill | State=Disabled |
-| surface/danger/subtle, /hovered, /pressed | Fill | Type=Danger |
-| surface/info/subtle, /hovered, /pressed | Fill | Type=Information |
-| surface/success/subtle, /hovered, /pressed | Fill | Type=Success |
-| surface/warning/subtle, /hovered, /pressed | Fill | Type=Warning |
-
-### Text
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| text/inverse | Label | Type=Primary |
-| text/evergreen | Label | Type=Secondary, Color=Evergreen |
-| text/indigo | Label | Type=Secondary, Color=Indigo |
-| text/primary | Label | Type=Tertiary |
-| text/danger | Label | Type=Danger |
-| text/info | Label | Type=Information |
-| text/success | Label | Type=Success |
-| text/warning | Label | Type=Warning |
-| text/disabled | Label | State=Disabled |
-
-### Border
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| border/evergreen | 1px border | Type=Secondary, Color=Evergreen |
-| border/indigo | 1px border | Type=Secondary, Color=Indigo |
-| border/strong | 1px border | Type=Tertiary |
-| border/danger | 1px border | Type=Danger |
-| border/info | 1px border | Type=Information |
-| border/success | 1px border | Type=Success |
-| border/warning | 1px border | Type=Warning |
-| border/disabled | 1px border | Secondary, State=Disabled |
-| border/focus | Focus border | State=Focused |
-| focus/width | Focus border width (2) | State=Focused |
-| width/1 | Border width (1) | Bordered variants |
-
-### Typography
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| Text/Button/MD | Label | Size=MD: size/14, line-height/16, weight/semibold, family/body |
-| Text/Button/SM | Label | Size=SM: size/12, line-height/16, weight/semibold, family/body |
-
-### Spacing
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| space/16 | Horizontal padding | Size=MD |
-| space/8 | Vertical padding | Size=MD |
-| space/6 | Bottom padding | Primary, Evergreen, MD, Default |
-| space/12 | Horizontal padding | Size=SM |
-| space/4 | Vertical padding | Size=SM |
-| gap/sm | Gap between icon and label | |
-
-### Radius
-
-| Token | Usage | Notes |
-|--------|--------|--------|
-| semantic/sm | Container radius | Corner=Default |
-| semantic/pill | Container radius | Corner=Rounded |
+Current behavior: MD horizontal padding is bound to `space/16` in the default variant and to `size/16` (a typography size token) in the other MD variants; both resolve to 16 px. Icon fills are not bound to variables.
 
 ## Interaction
 
-The component has Hovered, Pressed, Focused and Disabled states as variants. Activation behavior, loading behavior and keyboard behavior are not documented.
+Observed states: Default, Hovered, Pressed and Focused exist for every Type; Disabled exists for Primary and Secondary.
+
+Not verified in Figma: the action triggered, loading behavior, keyboard activation and prototype interactions. No prototype interactions were found.
 
 ## Accessibility
 
-| Topic | Information |
-|--------|--------|
-| Accessibility Requirement | [Pending confirmation] |
-| Visible State Support | State=Focused (2px border/focus border) and State=Disabled variants. |
-| Notes | No roles, keyboard behavior or accessible names are documented. |
+Accessibility-related observations:
 
----
+- `Focused` shows a visible 2 px `border/focus` border on every Type, Color, Corner and Size.
+- Status types pair a subtle fill with a colored border and label, so status is not conveyed by fill color alone, but the label text carries the meaning.
+- SM uses a 12 px label (`size/12`).
+- Contrast ratios have not been verified.
+
+Missing accessibility information (not verified in Figma): accessible name requirements for icon usage, disabled semantics, ARIA attributes and keyboard support.
 
 ## Content Guidelines
 
-- label: visible button text (default: "Button").
-- Length limits, casing and wording rules: [Pending confirmation]
-
----
+Verified observation: All variants use the label "Button". Labels are single-line, and the button width grows with the label.
 
 ## Examples
 
-### Example 1
+### Main action
 
-Configuration:
+Configuration: `Type=Primary`, `Color=Evergreen`, `Size=MD`, `Corner=Default`, `State=Default`
 
-```text
-Type=Primary, Color=Evergreen, Size=MD, Corner=Default
-```
+Description: The single most important action in a view.
 
-Description:
+Evidence / Classification: Existing variant; usage documented in Figma.
 
-Primary action (source: Figma component description).
+### Supporting action
 
-### Example 2
+Configuration: `Type=Secondary`, `Color=Evergreen`, `Size=MD`, `Corner=Default`, `State=Default`
 
-Configuration:
+Description: Outlined brand-colored button.
 
-```text
-Type=Tertiary, Color=Default, Size=SM
-```
+Evidence / Classification: Existing variant in Figma.
 
-Description:
+### Destructive action, pill
 
-Action without emphasis (source: Figma component description).
+Configuration: `Type=Danger`, `Color=Default`, `Size=SM`, `Corner=Rounded`, `State=Default`
 
-### Example 3
+Description: Compact pill-shaped Danger button.
 
-Configuration:
+Evidence / Classification: Existing variant in Figma.
 
-```text
-Type=Primary, Color=Indigo, Corner=Rounded, Size=SM
-```
+### Disabled main action
 
-Description:
+Configuration: `Type=Primary`, `Color=Default`, `State=Disabled`, `Size=MD`
 
-Rounded variant (source: Figma component description).
+Description: Primary button in its disabled appearance.
 
----
+Evidence / Classification: Existing variant in Figma.
 
 ## Invalid Combinations
 
-- Type=Tertiary + Color=Evergreen or Color=Indigo (Tertiary only accepts Color=Default)
-- Type=Danger, Information, Success or Warning + Color=Evergreen or Color=Indigo
-- State=Disabled + Type=Tertiary, Danger, Information, Success or Warning (variant does not exist)
-- Type=Primary or Secondary + Color=Default + State other than Disabled (variant does not exist)
+| Combination / Condition | Verified Reason | Evidence |
+|-------------------------|-----------------|----------|
+| More than one Primary button in a view | Figma states that there should be only one Primary button per view | Figma description |
+| `State=Disabled` with `Color=Evergreen` or `Color=Indigo` | No such variant exists; Disabled uses `Color=Default` | Variant inventory |
+| `State=Disabled` with Tertiary, Danger, Information, Success or Warning | No such variant exists | Variant inventory |
+| `Color=Evergreen` or `Color=Indigo` with Tertiary, Danger, Information, Success or Warning | No such variant exists | Variant inventory |
+| Primary or Secondary with `Color=Default` in states other than Disabled | No such variant exists | Variant inventory |
 
----
-
-## QA Checklist
-
-- Properties documented.
-- Property names match Figma exactly.
-- Variant values match Figma exactly.
-- Defaults documented.
-- Invalid combinations documented.
-- Tokens verified.
-- No undocumented behavior added.
-- No undocumented accessibility behavior added.
-- Height inconsistencies in Size=MD resolved.
-- Icon tokens defined.
-
----
+Only the first row is a documented rule; the others are unavailable combinations.
 
 ## Pending Clarification
 
-- Size=MD height varies across variants (30, 32 and 34). Which value is correct?
-- Primary + Evergreen + Default + MD uses 8 top / 6 bottom padding, unlike the other variants. Is this intentional?
-- Disabled is only available for Primary and Secondary with Color=Default. Should Tertiary, Danger, Information, Success and Warning have a Disabled variant?
-- The Figma description says "State=Disabled does not apply Color change", but Primary and Secondary with Color=Default exist only as Disabled. Confirm the intended rule.
-- Property names showLeadingIcon, showTrailingIcon and label use camelCase unlike other components. Confirm the exact names in Figma.
-- Icon color and the allowed icons for the leading and trailing slots.
-- Interaction and keyboard behavior; accessibility (roles, accessible name, focus order).
-- Loading behavior (no Loading state exists).
-- Secondary + Indigo, Information, Success and Warning token pairing was checked at component-set level, not variant by variant.
-- Status, version and owner.
-
----
+1. Default variant height: `Type=Primary, Color=Evergreen, State=Default, Corner=Default, Size=MD` is 30 px high (top padding 8, bottom padding 6), while all other MD variants, including its Hovered and Focused states, are 32 px. Is 32 px the intended MD height? This affects implementation and causes a 2 px height change between Default and other states of the default button.
 
 ## Notes / Changelog
 
-Generated from available source material on 2026-10-19.
+Generated or reviewed using available source material on 2026-10-22.
+
+[No verified historical changes available]
