@@ -2,9 +2,9 @@
 component: "Group"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2203-2517"
 last_updated: "2026-10-22"
 tags:
@@ -25,7 +25,9 @@ Group is a 648 px wide collapsible container with a titled header, a content slo
 
 ### What It Is
 
-Evidence-based interpretation: Group is a section container that groups related content under a title and can be collapsed to its header. This is supported by the `State` values `Collapsed` (32 px header with `chevron-down`) and `Expanded` (header with `chevron-up`, a content slot and a footer), the title property, the content slot that accepts any content, and the footer with a Paginator and action icons (add, edit, delete, search, save, cancel). Figma does not include a written usage description for the Group component set.
+The Group is a collapsible container component that organizes and groups related information within a single interface section. It toggles between Collapsed and Expanded states, helping reduce visual clutter and improve content discoverability.
+
+The component includes a header with a title and expansion indicator, a configurable content area through slots, and optional elements such as actions, pagination, and a footer section. It can be used to group forms, tables, settings, or related information blocks.
 
 ### Key Properties
 
@@ -75,21 +77,21 @@ Specific product contexts are not documented in Figma. The fixed 648 px width in
 
 ## When to Use
 
-Evidence-based interpretations based on the component structure:
-
-- To group content under a title that can be collapsed.
-- To page through the group's content with a Paginator.
-- To offer actions on the group's content from the footer.
+- To organize large amounts of information into manageable sections.
+- In complex forms containing multiple groups of fields.
+- To group related tables, lists, or configuration settings.
+- When users only need to expand information relevant to their current task.
+- In pages containing multiple content categories.
+- To improve scannability and reduce visual noise.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Limitations of the current component:
-
-- `Collapsed` exists only with `Color=Default`, and `Expanded` only with `Evergreen` or `Indigo`.
-- The width is fixed at 648 px.
-- The footer action icons are fixed (add, pencil, trash, file-search on the left; add, trash, save, cancel on the right); each can be hidden but not swapped.
+- When content is critical and must always remain visible.
+- To hide information required to complete a primary task.
+- When the content volume is minimal and does not require grouping.
+- As a replacement for hierarchical or structural navigation.
+- When users need to compare content across multiple sections simultaneously.
+- To group unrelated information.
 
 ## Composition and Hierarchy Rules
 
@@ -232,14 +234,10 @@ Not verified in Figma: toggling between states, paging behavior, and what the fo
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The expanded state is shown by the chevron direction, the visible content and the stronger title, not by color alone.
-- Footer actions are icon-only.
-- The collapsed title is 10 px (`size/10`).
-- Contrast ratios have not been verified.
-
-Missing accessibility information (not verified in Figma): accessible names for the footer icons and the header toggle, expanded-state announcement, keyboard support and focus appearance.
+- Required: ensure sufficient contrast between headers, content, icons, and backgrounds across all color variants (Default, Evergreen, and Indigo).
+- Required: support keyboard interaction for expanding and collapsing using Enter or Space.
+- Required: provide visible focus indicators for headers and interactive actions.
+- Recommended: communicate Expanded and Collapsed states using appropriate accessibility attributes (for example, aria-expanded).
 
 ## Content Guidelines
 
@@ -287,5 +285,3 @@ None
 ## Notes / Changelog
 
 Generated or reviewed using available source material on 2026-10-22.
-
-[No verified historical changes available]
