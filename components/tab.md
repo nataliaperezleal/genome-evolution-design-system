@@ -2,9 +2,9 @@
 component: "Tab"
 system: "Genome Evolution Design System"
 type: "Navigation item"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2189-5340"
 last_updated: "2026-10-23"
 tags:
@@ -25,9 +25,9 @@ A single tab item with a text label and optional leading and trailing icons, ava
 
 ### What It Is
 
-Evidence-based interpretation: Tab is one selectable item within a set of tabs. The `State` property includes `Selected` alongside `Default`, `Hovered`, `Pressed`, and `Focused`. Selected variants add a 2 px bottom border and stronger text and icon colors, which is the typical pattern for marking the active tab among siblings.
+The Tab is a navigation component that allows users to organise and switch between related sections of content within the same view. Each tab represents a category, page, or context and displays its associated content when selected.
 
-Verified specification: Every variant carries the Figma description "The New type is used for apps". Its meaning is not explained further in Figma (see Pending Clarification).
+Its purpose is to help users navigate between related groups of information without leaving the current page, reducing visual complexity and improving content organisation. A tab can include text, icons, or both, and uses visual indicators to communicate states such as selection, focus, and interaction.
 
 ### Key Properties
 
@@ -78,17 +78,21 @@ Evidence-based interpretation: Application screens that group content into secti
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To switch between peer views or sections within the same screen or app area.
-- When the active section must remain visibly marked.
-- Use `Size=MD` for standard layouts and `Size=SM` for compact layouts.
+- To organice related content into sections within a single screen.
+- When users need to quickly switch between different views or categories.
+- In pages containing multiple content groups that share the same context.
+- To reduce excessive vertical scrolling.
+- In dashboards, complex forms, or settings areas organiced into sections.
+- When content should only be displayed after selecting a specific tab.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For a single action, use a button instead. Tab exposes no action or command semantics.
+- For primary navigation between product modules or independent areas.
+- When there are too many tabs, making scanning and selection difficult.
+- When users need to view all content sections simultaneously.
+- To trigger actions or commands.
+- When options do not represent related content.
+- When the information architecture requires deep hierarchies or multiple navigation levels.
 
 ## Structure (Anatomy)
 
@@ -235,13 +239,15 @@ Not verified in Figma: prototype interactions, transitions, keyboard navigation 
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- A dedicated 2 px `border/focus` focus border exists for both inactive and selected tabs (`Color=Default`).
-- The selected tab is indicated by both a bottom border and a color change, not color alone. In the combined focused and selected state, the bottom border is not shown, and only the text and icon color differ from the unselected `Focused` state.
-- The label can be hidden with the show-text boolean, which can leave an icon-only tab.
-
-Missing accessibility information (not verified in Figma): ARIA roles and selected state, keyboard support, screen-reader behavior, accessible name requirements for icon-only tabs, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, indicators, and backgrounds across all states (Default, Hovered, Pressed, Focused, Selected, and Disabled where applicable).
+- All tabs must be keyboard accessible.
+- Visible focus indicators must be clearly distinguishable from the selected state.
+- The active tab must be properly communicated to assistive technologies.
+Recommendations
+- Use descriptive labels that can be understood without relying on icons.
+- Do not rely solely on colour to communicate selection.
+- Maintain a logical keyboard navigation order.
 
 ## Content Guidelines
 
@@ -288,4 +294,3 @@ Verified observation: The component set contains no variants for these combinati
 
 Generated from Figma evidence (node `2189:5340`) on 2026-10-23.
 
-[No verified historical changes available]
