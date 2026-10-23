@@ -2,9 +2,9 @@
 component: "Segmented button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2194-2674"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Segmented button is a single segment of a segmented control, with an optional ic
 
 ### What It Is
 
-Evidence-based interpretation: one option of a segmented control used to switch between views, sections, or modes. Each variant of the component set (Figma node `2194:2674`) is a fixed-width cell made of a gray outer frame (`surface/subtlest`) and an inner segment containing an icon and a label ("Section name"). Placing several cells side by side forms the full control. No written component description is defined for Segmented button in Figma.
+The Segmented Button is a component that represents a single option within a segmented control. It allows users to choose between related and mutually exclusive alternatives through a compact and highly visible interface.
+
+Each segment can include an icon, a label, or both, and provides visual states that communicate interaction and selection. Its primary purpose is to enable quick switching between views, filters, categories, or modes within the same interface.
 
 ### Key Properties
 
@@ -75,19 +77,21 @@ Evidence-based interpretation: view switchers (for example, list or grid), secti
 
 ## When to Use
 
-Evidence-based interpretations, derived from the states and structure:
-
-- To switch between a small set of mutually exclusive views or sections.
-- When all options should be visible and equally accessible.
+- To switch between related views such as List, Kanban, or Calendar.
+- To filter content by category or status.
+- When all available options should remain visible.
+- To allow users to select a single option from a small set of choices.
+- When a faster and more discoverable alternative to a dropdown is needed.
+- In toolbars, section headers, or secondary navigation areas.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Segmented button in Figma. As recommendations only:
-
-- Avoid using segments for actions that do not change a selection; use Button.
-- Avoid using many segments or long labels; each segment has a fixed width.
+- When multiple selections are required.
+- When there are too many options (more than 4 or 5 visible items).
+- For triggering independent actions; use standard buttons instead.
+- When option labels are long and may affect readability.
+- For primary application navigation.
+- When options require nested navigation or hierarchical structures.
 
 ## Structure (Anatomy)
 
@@ -224,16 +228,14 @@ Not bound to tokens: the fixed 160px and 131px widths, and the 1px and 2px borde
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Unselected labels (`text/tertiary` on `surface/subtlest`) are 3.78:1, below the common 4.5:1 WCAG AA threshold for 12–14px text.
-- Selected labels on white: `text/secondary` 5.45:1, `text/evergreen` 5.33:1, `text/indigo` 9.37:1; hovered, pressed, and focused labels (`text/primary`) are 10.74:1 or higher.
-- The selected segment is distinguished by a white background and, in `Color=Default`, a 1px border (`border/default`, 1.56:1 against the frame), as well as by label color.
-- `Focused` provides a 2px focus border (`border/focus`, 3.41:1 against the frame).
-
-Missing accessibility information: group semantics, selected-state announcement, keyboard navigation, and an accessible name when `showText=false`.
+Mandatory requirements
+- Ensure sufficient contrast between text, icon, and background across all states (Default, Hovered, Focused, Pressed, and Selected).
+- Every segment must be reachable and operable through keyboard navigation.
+- Focus indicators must be clearly visible and distinguishable from the selected state.
+- The selected state must be programmatically exposed to assistive technologies.
+Recommendations
+- Provide adequate touch target sizes for mobile devices.
+- Pair icons with labels whenever the icon meaning is not universally understood.
 
 ## Content Guidelines
 
@@ -283,5 +285,3 @@ Unavailable combinations: `Color=Evergreen` and `Color=Indigo` exist only with `
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2194:2674`) on 2026-10-23.
-
-[No verified historical changes available]
