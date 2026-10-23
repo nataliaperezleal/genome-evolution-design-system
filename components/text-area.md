@@ -2,9 +2,9 @@
 component: "Text area"
 system: "Genome Evolution Design System"
 type: "Form control (multi-line text input)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2258-793"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ A multi-line text field with an optional label, info icon, helper text, characte
 
 ### What It Is
 
-Evidence-based interpretation: Text area is a form control for entering longer, multi-line text. Several pieces of Figma evidence support this: the component name, an input box taller than a single line (76 px in `MD`, 56 px in `SM`), a resize handle (`Line expand`) in the bottom-right corner, an optional vertical scrollbar, a text cursor in focused states, and a character counter. No written component description was found in Figma.
+The Text Area is a form control designed to capture and edit multi-line text content. It allows users to enter comments, descriptions, notes, justifications, or any information that requires more space than a single-line text field.
+
+The component can include a label, information icon, helper text, character counter, and scrollbar, providing guidance and context throughout data entry. It also supports multiple states to communicate availability, validation, and interaction.
 
 ### Key Properties
 
@@ -80,17 +82,21 @@ Evidence-based interpretation: Forms and detail panels. The `Label Left` orienta
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- When users need to enter multi-line or long-form text.
-- When the input has a character limit that should be visible (counter).
-- Use `Read only` to display a value users can see but not edit, and `Disabled` when the field is unavailable.
+- To capture user comments or feedback.
+- When users need to enter descriptions, observations, or detailed notes.
+- For justification or explanation fields within forms.
+- When the expected input exceeds a single line of text.
+- In workflows where users must provide additional context.
+- To enable the creation or editing of long-form text content.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For short, single-line values, consider a single-line input component.
+- When the expected input is a single word or short phrase.
+- For structured data such as names, email addresses, dates, or numbers.
+- When users must select an option from a predefined list.
+- For simple search or filtering inputs.
+- When character limits are very small and a standard text field is sufficient.
+- For actions or commands that do not require text entry.
 
 ## Structure (Anatomy)
 
@@ -251,15 +257,15 @@ Not verified in Figma: resize behavior and limits, scroll behavior, when `Error`
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- A visible label is available above or to the left of the input.
-- Two focus appearances exist: 1 px (`Focused`) and 2 px (`Focused tab`) `border/focus`.
-- `Error` is communicated through border color and helper text color. The helper text can carry an error message, so the error is not shown by color alone when helper text is visible.
-- `Disabled` and `Read only` are visually distinct from each other and from the editable states.
-- Helper text and counter use 10 px text.
-
-Missing accessibility information (not verified in Figma): label and helper-text association, ARIA attributes for error, disabled, and read-only states, keyboard behavior, accessible name when the label is hidden, info icon accessibility, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, borders, status indicators, and backgrounds.
+- The field must be fully operable using a keyboard.
+- Focus states must be clearly visible and distinguishable from other states.
+- The label must be properly associated with the field for assistive technologies.
+Recommendations
+- Provide descriptive helper text when users may need additional guidance.
+- Communicate validation errors and character limits accessibly.
+- Do not rely solely on colour to communicate error or validation states.
 
 ## Content Guidelines
 
@@ -305,4 +311,3 @@ Evidence / Classification: Existing Figma variant (`2258:925`).
 
 Generated from Figma evidence (node `2258:793`) on 2026-10-23.
 
-[No verified historical changes available]
