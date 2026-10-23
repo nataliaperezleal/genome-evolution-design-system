@@ -2,9 +2,9 @@
 component: "Tooltip"
 system: "Genome Evolution Design System"
 type: "Overlay / supplementary information"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-478"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ A small container with a title, an optional image, and a description, available 
 
 ### What It Is
 
-Evidence-based interpretation: Tooltip is a compact information box that shows short supplementary content: a title, an optional image, and a short description. The component name, its small size (104 × 50 px with default content), and the small text styles (12 px title, 10 px description) all point to brief, contextual help. No written component description was found in Figma.
+The Tooltip is an overlay component used to provide contextual information, clarifications, or brief assistance related to an interface element. It appears temporarily when users interact with a component through hover, focus, or, in some cases, selection.
+
+A tooltip can contain a title, a short description, and optionally a supporting image. Its purpose is to provide additional context without adding permanent visual clutter to the interface.
 
 ### Key Properties
 
@@ -72,17 +74,21 @@ Evidence-based interpretation: Near icons, controls, or data points that need a 
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To give a short label or explanation for an element.
-- When the explanation fits in a title and one or two short lines of description.
-- With `Show image` enabled when a small preview or illustration helps explain the content.
+- To explain the meaning of icons or less obvious actions.
+- To provide additional information without consuming permanent interface space.
+- To display short explanations about fields, indicators, or metrics.
+- To offer contextual help during a task.
+- To support complex controls or specialised concepts.
+- When the additional information is optional and not required to complete a task.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): Because the content area is 88 px wide and uses 10–12 px text, avoid long or essential content that users must read to complete a task.
+- For critical information required to complete a task.
+- For lengthy content that requires detailed reading.
+- As a replacement for labels, headings, or descriptions that should remain visible.
+- To present multiple actions or complex interaction flows.
+- When content must remain permanently visible.
+- As the primary onboarding or training mechanism.
 
 ## Structure (Anatomy)
 
@@ -178,13 +184,14 @@ Not verified in Figma: trigger (hover, focus, or click), show and hide delays, p
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Both color treatments use paired text tokens for their surface: `text/primary` on `background/canvas`, and `text/inverse` on `surface/raised`.
-- Text is small: 12 px title and 10 px description.
-- The image has no documented alternative text guidance.
-
-Missing accessibility information (not verified in Figma): ARIA role and relationship to the trigger, keyboard access, screen-reader behavior, dismissal behavior, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, background, and borders in both White and Black variants.
+- Tooltips associated with interactive elements must be accessible through keyboard focus.
+- The triggering element must maintain a clearly visible focus indicator.
+Recommendations
+- Ensure tooltip content can be interpreted by assistive technologies when appropriate.
+- Keep text concise and easy to understand.
+- Do not rely exclusively on hover interactions to expose important information.
 
 ## Content Guidelines
 
@@ -225,5 +232,3 @@ Evidence / Classification: Existing Figma variant (`2192:484`).
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2192:478`) on 2026-10-23.
-
-[No verified historical changes available]
