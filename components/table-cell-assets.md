@@ -2,9 +2,9 @@
 component: ".TableCellAssets"
 system: "Genome Evolution Design System"
 type: "Subcomponent (table body cell)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-1922"
 last_updated: "2026-10-23"
 tags:
@@ -25,9 +25,14 @@ A table body cell building block, available as a text cell (up to two lines of t
 
 ### What It Is
 
-Verified specification: `.TableCellAssets` is a component set on the Figma `Table` page. Instances of it make up the body rows of the `Table` component (node `2192:2382`), placed below `.TableHeaderAssets` instances in each column.
+TableCellAssets is a subcomponent used to build table body cells. Its purpose is to display information within a table row through textual and visual content while maintaining a consistent structure aligned with table headers.
+The component includes two variants:
 
-Evidence-based interpretation: It is the single cell unit of the table body. The leading dot in its name follows a common Figma convention for building blocks that are meant to be used inside other components rather than placed directly in designs. No written component description was found in Figma.
+- Cell: content cell supporting one or two lines of text and optional elements.
+- Icon Cell: compact cell designed to display information through an icon only.
+- It also supports multiple sizes (Small, Medium, and Large) and optional configuration for icons, primary text, secondary content, and related actions.
+
+This component is intended exclusively for use within a Table.
 
 ### Key Properties
 
@@ -75,18 +80,21 @@ Verified specification: The body rows of the `Table` component.
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To build or extend table body rows, either inside `Table` or in custom table layouts.
-- `Type=Cell` with `Title` only, for single values.
-- `Type=Cell` with `Title` and `Content`, for a value plus supporting detail.
-- `Type=Icon Cell`, for columns that hold only an icon.
+- To display structured information inside a table.
+- When a cell requires one or two lines of content.
+- To reinforce information through iconography.
+- When consistent alignment across rows and columns is required.
+- To present information that can be scanned quickly.
+- In administrative, operational, analytical, or management tables.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For table headers, use `.TableHeaderAssets`, which is the dedicated header building block used by `Table`.
+- For long-form content or detailed descriptions.
+- As a generic container outside table contexts.
+- For layouts that require highly customised presentation.
+- When content requires advanced interactions or complex visualisations.
+- As a replacement for card-based interfaces or detailed lists.
+- For information that requires more than two levels of hierarchy.
 
 ## Structure (Anatomy)
 
@@ -186,13 +194,14 @@ Not verified in Figma: row hover, row selection, sorting, cell editing, truncati
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The title (`text/primary`) and content (`text/secondary`) lines use distinct text tokens to set their hierarchy.
-- All text is 10 px (`Text/Body/XXS`).
-- The `Icon Cell` has no text, so its meaning depends on the icon alone.
-
-Missing accessibility information (not verified in Figma): table semantics, header-to-cell association, accessible names for icon-only cells, keyboard navigation, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, and background.
+- Interactive elements within cells must be keyboard accessible.
+- Focus indicators must be clearly visible whenever interactive actions are present.
+- Information hierarchy must remain understandable for assistive technologies.
+Recommendations
+- Pair icons with text when additional context is necessary.
+- Keep content concise and easy to interpret.
 
 ## Content Guidelines
 
@@ -234,5 +243,3 @@ Verified observation: The `Icon`, `Title`, and `Content` booleans affect only `T
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2192:1922` and its use in `Table`, node `2192:2382`) on 2026-10-23.
-
-[No verified historical changes available]
