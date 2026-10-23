@@ -2,9 +2,9 @@
 component: "Input"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2171-2467"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Input is a single-line form field with an optional label, info icon, leading and
 
 ### What It Is
 
-Evidence-based interpretation: a form control for entering or displaying a single value. The component set (Figma node `2171:2467`) is built from a label row, a bordered field containing a text line, and helper text below the field, with `State` values that cover the entry lifecycle (`Default`, `Hovered`, `On focus`, `Focused`, `Filled`, `Error`, `Disabled`, `Read only`). No written component description is defined for Input in Figma.
+The Input component allows users to enter, view, or display information within forms and transactional interfaces. It can include supporting elements such as labels, placeholders, helper text, leading icons, trailing icons, and multiple visual states that communicate interaction, validation, and availability.
+
+The component supports several configuration variants, including different sizes, label orientations, border styles, optional icons, and interaction states.
 
 ### Key Properties
 
@@ -86,22 +88,20 @@ Evidence-based interpretation: forms, settings pages, filters, and data-entry pa
 
 ## When to Use
 
-Evidence-based interpretations, derived from the properties, states, and structure:
-
-- To collect a single-line value from the user.
-- To show a value that can be reviewed but not edited (`State=Read only`).
-- To show a field that is currently unavailable (`State=Disabled`).
-- To report a validation problem on a field (`State=Error` with helper text).
-- To add a leading or trailing icon that clarifies the value type or provides an affordance (`leftIcon`, `rightIcon`).
+- To collect user-entered information.
+- When information needs to be edited within a form.
+- To display existing values in read-only mode.
+- When guidance is needed through labels, placeholders, or helper text.
+- For fields that require visual validation feedback such as errors or success.
+- In simple or complex forms where visual consistency is important.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Input in Figma. As recommendations only:
-
-- Avoid using Input for long or multi-line text; the field shows a single text line in all inspected variants.
-- Avoid hiding the label (`showLabel=false`) unless another visible label identifies the field.
+- To select an option from a predefined list (use Select, Dropdown, or Combobox instead).
+- To trigger actions (use Button).
+- To enable or disable binary options (use Checkbox, Switch, or Radio Button).
+- When entering long multi-line content (use Textarea).
+- To display static information that does not require interaction or editing.
 
 ## Structure (Anatomy)
 
@@ -273,17 +273,17 @@ All tokens below are verified as Figma variables or text styles used by this com
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
+Mandatory requirements
+- Every input must have an accessible label programmatically associated with the field.
+- The component must be fully operable using a keyboard.
+- The focus state must be clearly visible and distinguishable from the hover state.
+- Text, borders, labels, and messages must meet WCAG AA contrast requirements.
+- Error messages must be detectable by assistive technologies and must not rely solely on color.
 
-Accessibility-related observations:
-
-- A visible label is available in all variants (`showLabel`).
-- `Error` is indicated by both a red border and red helper text; the error is also communicated in text only if the helper text explains it.
-- `Focused` provides a 2px focus border; `On focus` provides a 1px focus border.
-- Contrast ratios calculated from variable values (on a white surface): placeholder `text/secondary` 5.45:1; entered text `text/primary` 12.78:1; helper text `text/tertiary` 4.02:1; error text `text/danger` 6.46:1; default field border `border/default` 1.66:1; focus border `border/focus` 3.63:1. Helper text (10px) falls below the common 4.5:1 WCAG AA threshold for normal text, and the default border falls below the 3:1 threshold for non-text UI boundaries. See Pending Clarification.
-- `SM` field text and all helper text are 10px.
-
-Missing accessibility information: input type, ARIA attributes, how helper and error text are associated with the field, keyboard behavior, focus order, and an accessible name for the info icon and trailing icon.
+Recommendations
+- Associate helper text and validation messages with the input through descriptive accessibility attributes.
+- Maintain a logical keyboard navigation order.
+- Accompany meaningful icons with textual alternatives when appropriate.
 
 ## Content Guidelines
 
@@ -342,5 +342,3 @@ Evidence / Classification: existing Figma configuration (variant `2172:544`).
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2171:2467`) on 2026-10-23.
-
-[No verified historical changes available]
