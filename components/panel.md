@@ -2,9 +2,9 @@
 component: "Panel"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3147-381"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Panel provides the rows of a side panel: a header row with an action button, col
 
 ### What It Is
 
-Evidence-based interpretation: a set of 240px-wide rows used to build a panel, such as a navigation or explorer sidebar. The component set (Figma node `3147:381`) contains three row types: `Header` (panel title with an action button), `Item` (a top-level row with a chevron and a second-level sub-row), and `Tree` (hierarchical rows indented by `Level`). No written component description is defined for Panel in Figma.
+The Panel component is a structured navigation element used to build side navigation menus, navigation trees, and hierarchical option panels. It helps organize content across multiple levels, represent parent-child relationships, and provide access to sections, features, or categories within an application.
+
+The component can behave as an individual item, a grouping header, or an expandable node within a tree structure. It also supports icons, numeric indicators, secondary actions, and expandable elements for deeper navigation levels.
 
 ### Key Properties
 
@@ -81,20 +83,22 @@ Evidence-based interpretation: navigation sidebars, explorer or outline panels, 
 
 ## When to Use
 
-Evidence-based interpretations, derived from the types, levels, and structure:
-
-- To title a side panel and provide a primary panel action (`Type=Header`, `showAction`).
-- To present collapsible sections and their entries (`Type=Item`, `Level=L1` and `L2`).
-- To present a hierarchy of up to four levels (`Type=Tree`).
+- To build side navigation menus.
+- To represent hierarchical structures or content trees.
+- To organize modules, processes, or features across multiple levels.
+- In administration panels that require multi-level navigation.
+- To display categories that can be expanded and collapsed.
+- When numeric indicators need to be associated with navigation options.
+- To group related options within the same navigation section.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Panel in Figma. As recommendations only:
-
-- Avoid hierarchies deeper than four levels; `Tree` provides `L1` to `L4`.
-- For general lists outside a panel, consider the List component.
+- For primary actions or calls to action (use Button).
+- For simple flat lists without hierarchy or navigation (use List).
+- For horizontal navigation containing a small number of options (use Tabs or Navigation Bar).
+- To display informational content without navigation behaviour.
+- When no hierarchy or grouping is required.
+- To select options within forms (use Select, Radio Button, or Checkbox as appropriate).
 
 ## Structure (Anatomy)
 
@@ -230,16 +234,15 @@ Panel uses a different typography set (`Body/...`, `Buttom/...` styles and `font
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Row text (`text/primary`) is 12.0:1 on `surface/subtlest` and 12.78:1 on white.
-- Hierarchy in `Tree` is communicated through indentation only (8px per level).
-- The header action button shows only an icon; no visible label is provided.
-- There are no hover, focus, selected, or expanded state variants.
-
-Missing accessibility information: navigation and tree semantics, expanded and collapsed announcements, level announcements, keyboard navigation, focus indication, and an accessible name for the header action button.
+Mandatory requirements
+- All interactive elements must be keyboard accessible.
+- Focus states must be visible and distinct from active or selected states.
+- Text, icon, and background contrast must meet WCAG AA requirements.
+- Expand/collapse controls must communicate their state to assistive technologies.
+Recommendations
+- Use appropriate semantic structures to represent navigation hierarchies.
+- Provide clear accessible names for icons and secondary actions.
+- Maintain a logical navigation sequence across levels.
 
 ## Content Guidelines
 
