@@ -2,9 +2,9 @@
 component: "Link"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2185-571"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,8 @@ Link is an underlined text element in three color themes and two sizes, with vis
 
 ### What It Is
 
-Evidence-based interpretation: a text link for navigation or lightweight actions. The component set (Figma node `2185:571`) consists of a single underlined text layer, with a `Visited` state (a state specific to links that point to destinations) and a 2px focus outline in `Focused`. No written component description is defined for Link in Figma.
+The Link component is a textual navigation element that directs users to another page, view, resource, or related action. It is displayed as underlined semibold text and supports multiple brand colours and visual states to communicate availability, interaction, and previously visited destinations.
+The component is intended to integrate naturally within content, forms, tables, messages, or text blocks, allowing access to related information or continuation of a navigation flow.
 
 ### Key Properties
 
@@ -70,22 +71,22 @@ Evidence-based interpretation: within content, forms, helper text, tables, and s
 
 ## When to Use
 
-Evidence-based interpretations, derived from the states and structure:
-
-- To navigate to another page, section, or external resource.
-- For secondary or inline actions that do not need button emphasis.
-- Where tracking previously visited destinations is useful (`State=Visited`).
+- To navigate to another page or section within the application.
+- To direct users to documentation, resources, or related content.
+- Within paragraphs or descriptive text where navigation is part of the content.
+- To provide access to additional details without interrupting the main workflow.
+- In tables, lists, or cards where an item needs to be opened or reviewed.
+- When the primary purpose of the interaction is navigation rather than executing a system action.
 
 The Button component's Figma description recommends a link over a button for simple page-to-page navigation.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Link in Figma. As recommendations only:
-
-- Do not use Link for primary actions that need visual emphasis; use Button.
-- Do not use Link for non-interactive text; the underline signals interactivity.
+- To perform critical actions such as save, delete, approve, or submit.
+- When a primary call-to-action is required (use a Button instead).
+- To open selection menus (use Dropdown or Menu).
+- As a replacement for descriptive text when no navigation exists.
+- When the element modifies data or triggers background processes.
 
 ## Structure (Anatomy)
 
@@ -199,16 +200,17 @@ Not bound to a token: the 2px focus border width. Both text styles use `weight/s
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
+Mandatory requirements
+- Links must be keyboard accessible using Tab navigation and activated using the Enter key.
+- A visible focus indicator must be present and clearly distinguishable from Hover and Default states.
+- Link-to-background contrast must meet WCAG AA requirements.
+- Link purpose should be understandable, ideally even when read out of context.
 
-Accessibility-related observations:
-
-- The underline is present in every state, so links are not identified by color alone.
-- `Focused` provides a visible 2px focus outline (`border/focus`, 3.63:1 against white).
-- Contrast ratios calculated against a white background (the component has no background of its own): `link/default` 9.37:1, `link/indigo/default` 9.37:1, `link/evergreen/default` 5.33:1, `link/hovered` 13.14:1, `link/pressed` 15.19:1, `link/visited` 4.49:1, `link/indigo/visited` 4.46:1, `link/evergreen/visited` 2.56:1. The three visited colors fall below the common 4.5:1 WCAG AA threshold for normal text; `link/evergreen/visited` falls well below. See Pending Clarification.
-- The `SM` size has a 24px-tall area.
-
-Missing accessibility information: link vs button semantics, how disabled links are exposed to assistive technology, keyboard behavior, and guidance for links that open in a new tab or external site.
+Recommendations
+- Keep underlines as the primary visual indicator of navigation.
+- Inform users when links open a new window, download a file, or navigate to an external site.
+- Ensure appropriate touch target sizes on mobile devices.
+- Missing accessibility information: link vs button semantics, how disabled links are exposed to assistive technology, keyboard behavior, and guidance for links that open in a new tab or external site.
 
 ## Content Guidelines
 
@@ -257,5 +259,3 @@ Unavailable combinations: the variant set has no `Color=Indigo, State=Disable` o
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2185:571`) on 2026-10-23.
-
-[No verified historical changes available]
