@@ -2,9 +2,9 @@
 component: "Switch"
 system: "Genome Evolution Design System"
 type: "Form control (binary toggle)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-3286"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ A two-position toggle control, with an optional text label, that represents an O
 
 ### What It Is
 
-Evidence-based interpretation: Switch is a binary toggle control. The `Behavior` property exposes only `On` and `Off`, the thumb sits on the left in `Off` variants and on the right in `On` variants, and the component set includes `Hover`, `Pressed`, `Focused`, and `Disabled` states, all of which indicate an interactive control that turns a setting on or off. No written component description was found in Figma.
+The Switch is a binary form control that allows users to turn a setting, preference, or feature on or off. It represents two mutually exclusive states, typically On and Off, through a visual toggle that changes position.
+
+Its purpose is to provide a quick and intuitive way to modify settings that have an immediate effect on the interface or system behaviour. An optional label can be displayed to help users understand what setting is being controlled.
 
 ### Key Properties
 
@@ -77,17 +79,21 @@ Evidence-based interpretation: Settings, preferences, and forms where an option 
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To enable or disable a single binary option, such as a setting or feature, represented by `Behavior=On` / `Behavior=Off`.
-- When the current on/off status must be visible at all times.
-- In compact layouts, use `Size=SM`; in standard layouts, use `Size=MD`.
+- To enable or disable features.
+- In user settings and preference panels.
+- When the change takes effect immediately and does not require confirmation.
+- To turn options on or off within forms or configuration interfaces.
+- For privacy, notification, permission, or personalization controls.
+- When only two possible states exist.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): Because the component exposes only two values for `Behavior`, consider a different control when an option has more than two states.
+- When more than two options are available.
+- To select one option from a group of alternatives; use radio buttons instead.
+- When the user must confirm the action before it takes effect.
+- For one-time actions that do not represent a persistent state.
+- When the meaning of the states is not clearly "enabled" versus "disabled".
+- For options that require multiple levels of configuration.
 
 ## Structure (Anatomy)
 
@@ -217,14 +223,15 @@ Not verified in Figma: prototype interactions, transitions, animation timing, wh
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- A dedicated `Focused` state shows a 2 px `border/focus` ring outside the track, separated from the track.
-- Status is communicated through both thumb position and color, not color alone.
-- A visible text label is available through the `Label` and `Text` properties.
-- `Disabled` uses dedicated disabled tokens for track, thumb, and label.
-
-Missing accessibility information (not verified in Figma): ARIA role and state, keyboard support, screen-reader announcements, accessible name requirements when `Label` is hidden, minimum target size, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between the control, indicator, label, and background across all states (Default, Hover, Pressed, Focused, and Disabled).
+- The switch must be fully operable using a keyboard.
+- Focus indicators must be clearly visible and distinguishable from the selected state.
+- The on/off state must be properly communicated to assistive technologies.
+Recommendations
+- Always associate the control with a descriptive label.
+- Do not rely solely on colour to communicate state.
+- Maintain adequate touch target sizes for touch interfaces.
 
 ## Content Guidelines
 
@@ -271,5 +278,3 @@ Verified observation: The component set contains variants only for these combina
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2184:3286`) on 2026-10-23.
-
-[No verified historical changes available]
