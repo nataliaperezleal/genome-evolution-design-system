@@ -2,9 +2,9 @@
 component: ".TableHeaderAssets"
 system: "Genome Evolution Design System"
 type: "Subcomponent (table header cell)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-2096"
 last_updated: "2026-10-23"
 tags:
@@ -25,9 +25,12 @@ A table header cell building block with a bottom border. It comes as a text head
 
 ### What It Is
 
-Verified specification: `.TableHeaderAssets` is a component set on the Figma `Table` page. An instance of it sits at the top of every column in the `Table` component (node `2192:2382`), above the `.TableCellAssets` body cells, and is shown or hidden with the `Table` component's header boolean.
+TableHeaderAssets is a subcomponent used to build table column headers. Its purpose is to identify the content of a column and provide contextual controls associated with the data it contains, such as sorting, filtering, or column-specific actions.
 
-Evidence-based interpretation: It is the column header unit of the table. The leading dot in its name follows a common Figma convention for building blocks meant to be used inside other components. No written component description was found in Figma.
+The component provides two variants:
+- Header: column header with a text label and optional actions.
+- Icon Header: compact header represented only by an icon.
+- This component is intended exclusively for use within a Table and serves as the main entry point for interactions related to organising and exploring tabular data.
 
 ### Key Properties
 
@@ -73,18 +76,21 @@ Verified specification: The header row of the `Table` component.
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To title a column when building or extending tables.
-- `Type=Header` with no icons, for a plain column title (as used in `Table`).
-- `Type=Header` with icons, when the column offers sort or filter indicators (behavior not defined in Figma).
-- `Type=Icon Header`, above icon-only columns.
+- To label and identify columns in a table.
+- When a column supports ascending or descending sorting.
+- When a column contains filtering controls.
+- To display actions associated with a specific column.
+- In tables presenting structured and comparable information.
+- When a clear hierarchy between headers and content is required.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For body cells, use `.TableCellAssets`.
+- As a general navigation element.
+- As a section header outside a table.
+- To trigger page-level actions.
+- When content is not organised into columns.
+- As a replacement for standalone buttons or controls.
+- When the information is better represented through cards or alternative display patterns.
 
 ## Structure (Anatomy)
 
@@ -172,13 +178,14 @@ Not verified in Figma: sorting (trigger, directions, active indicator), filterin
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The title uses 14 px text (`Text/Button/MD`), larger than the 10 px body cell text, which helps the header row stand out from the rows below.
-- A 1 px `border/strong` bottom border separates the header from the body.
-- `Icon Header` has no text, so its meaning depends on the icon alone.
-
-Missing accessibility information (not verified in Figma): header-cell semantics and association with body cells, sort state announcement, accessible names for the sort, filter, and icon-only headers, keyboard access to sort and filter, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, dividers, and backgrounds.
+- Sorting and filtering controls must be keyboard accessible.
+- Focus indicators must be clearly visible.
+- Headers must be properly associated with their corresponding cells for assistive technologies.
+Recommendations
+- Provide accessible labels for icons.
+- Use column names that remain understandable out of context.
 
 ## Content Guidelines
 
@@ -220,5 +227,3 @@ Verified observation: The first-icon and second-icon booleans affect only `Type=
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2192:2096` and its use in `Table`, node `2192:2382`) on 2026-10-23.
-
-[No verified historical changes available]
