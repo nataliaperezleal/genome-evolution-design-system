@@ -2,9 +2,9 @@
 component: "Snackbar"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2255-980"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,8 @@ Snackbar is a tinted message bar with a status icon, a message, an optional acti
 
 ### What It Is
 
-Evidence-based interpretation: a short feedback message, often called a toast, that reports the result or status of an action. The component set (Figma node `2255:980`) combines a status-colored surface, a status icon, a status-colored message, a nested Button, a close icon, and an 8px bar along the bottom edge. The default message "Single-line toast bar" refers to a toast. No written component description is defined for Snackbar in Figma.
+The Snackbar is a temporary feedback component used to communicate the outcome of a user action or a system status change. It presents a brief contextual message accompanied by a status icon, an optional action button, and a close control.
+Snackbars appear in a non-intrusive manner and help communicate events such as successful operations, warnings, errors, or informational messages without interrupting the user's workflow. Depending on the configuration, they may include a progress indicator that visually represents the remaining time before automatic dismissal.
 
 ### Key Properties
 
@@ -71,22 +72,21 @@ Evidence-based interpretation: feedback after saving, deleting, sending, or othe
 
 ## When to Use
 
-Evidence-based interpretations, derived from the `Type` values and structure:
-
-- `Success` — to confirm that an action completed.
-- `Danger` — to report that an action failed.
-- `Warning` — to warn about a condition that may need attention.
-- `Information` — to give brief, neutral information.
-- When the message should be short and temporary.
+- To confirm that an action was completed successfully.
+- To communicate recoverable errors without blocking user interaction.
+- To display short informational messages.
+- To warn users about situations that require attention but not immediate action.
+- When users should be able to continue working without dismissing a dialog.
+- To provide a quick related action such as "Undo", "Retry", or "View details".
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Snackbar in Figma. As recommendations only:
-
-- For messages that must stay visible next to related content, consider Inline Alert.
-- Avoid long messages; Snackbar shows a single message without a title.
+- When the message requires mandatory user action.
+- For critical information that must not be missed.
+- When the content is lengthy or requires detailed explanation.
+- To request confirmations or important decisions.
+- When multiple simultaneous messages would compete for user attention.
+- For blocking errors that prevent task completion.
 
 ## Structure (Anatomy)
 
@@ -209,16 +209,15 @@ Not bound to tokens: the 16px gap between icon, message, and button; the 80px em
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Status is not communicated by color alone: each type has a distinct icon.
-- Message contrast on the type background: Danger 5.55:1, Warning 3.97:1, Information 4.26:1, Success 4.27:1. Warning, Information, and Success are below the common 4.5:1 WCAG AA threshold for 16px text.
-- The bar fill is 5.68:1 or higher against its track.
-- The close icon is 16px with no button wrapper or states.
-
-Missing accessibility information: announcement behavior, display duration and the ability to extend it, focus handling for the action button, and an accessible name for the close icon.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, buttons, and backgrounds across all status variants.
+- Interactive controls (action button and close button) must be keyboard accessible.
+- Visible focus indicators must be clearly distinguishable on interactive elements.
+- Messages should be announced to assistive technologies using appropriate live regions.
+Recommendations
+- Provide sufficient time for users to read and interact with the message.
+- Do not rely solely on colour to communicate status.
+- Combine colour, icons, and descriptive text to reinforce meaning.
 
 ## Content Guidelines
 
