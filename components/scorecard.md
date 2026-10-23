@@ -2,9 +2,9 @@
 component: "Scorecard"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2191-2125"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Scorecard displays a single prominent value with a short description, in two siz
 
 ### What It Is
 
-Evidence-based interpretation: a compact card for highlighting one key number or metric. The component set (Figma node `2191:2125`) consists of a white rounded container with a large "Value" text and a small "Description" text. No written component description is defined for Scorecard in Figma.
+The Scorecard component is a compact card used to highlight a key metric, indicator, or important value together with a short description. It enables quick visual consumption of quantitative or qualitative information and supports easy comparison of key indicators across dashboards, reports, monitoring panels, and executive views.
+
+The component provides variants in which the value can be displayed either above or below the description, depending on the desired visual hierarchy.
 
 ### Key Properties
 
@@ -71,19 +73,22 @@ Evidence-based interpretation: dashboards, report summaries, and overview pages.
 
 ## When to Use
 
-Evidence-based interpretations, derived from the structure and properties:
-
-- To highlight a single key number or metric.
-- To show several metrics side by side in a summary.
+- To display Key Performance Indicators (KPIs).
+- In executive and analytical dashboards.
+- To highlight business, process, or compliance metrics.
+- When information needs to be quickly scanned and understood.
+- To compare results across categories, teams, or periods.
+- In summary pages where users need a high-level overview of performance.
+- To display counts, percentages, monetary amounts, statuses, or aggregated results.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Scorecard in Figma. As recommendations only:
-
-- Avoid using Scorecard for long text or multiple values; it holds one value and one short description.
-- Avoid placing it directly on a white background without separation; the card is white with no border or shadow.
+- To present large amounts of detailed information.
+- When the content requires extensive explanation or multiple attributes.
+- To display complex trends without additional visual support.
+- When advanced interaction or data editing is required.
+- As a replacement for detailed tables or reports.
+- When values lack sufficient context for interpretation.
 
 ## Structure (Anatomy)
 
@@ -166,15 +171,14 @@ All tokens below are verified as Figma variables or text styles used by this com
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Value text (`text/primary`) is 12.78:1 on white; description text (`text/secondary`) is 5.45:1.
-- The description is 10px.
-- The card has no border or shadow, so on a white surface its boundary is not visible.
-
-Missing accessibility information: how the value and its description are read together by assistive technology, and number and unit formatting.
+Mandatory requirements
+- Contrast between the value, description, and background must meet WCAG AA requirements.
+- Critical information must not rely solely on size, colour, or font weight.
+- Any associated interactive element must be keyboard accessible and provide a visible focus state.
+Recommendations
+- Supplement important metrics with clear descriptive labels.
+- Maintain a consistent structure to support assistive technologies.
+- Provide additional context when values may be ambiguous on their own.
 
 ## Content Guidelines
 
