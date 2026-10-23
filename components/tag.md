@@ -2,9 +2,9 @@
 component: "Tag"
 system: "Genome Evolution Design System"
 type: "Label / status indicator"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-1314"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ A compact, 20 px high label with optional leading and trailing icons. It comes i
 
 ### What It Is
 
-Evidence-based interpretation: Tag is a short label used to categorize or mark items. Its `Type` values `Information`, `Warning`, `Error`, and `Sucess` map to the corresponding semantic color tokens (info, warning, danger, success), so it can also communicate status. The outline default tag also has `Hover`, `Focused`, `Selected`, `Unselected`, and `Disable` states, which suggests it can act as a selectable tag. No written component description was found in Figma.
+The Tag is a compact labelling and status component used to categorise, classify, or communicate contextual information in a quick and visible way. It represents attributes, statuses, content types, or groupings through a combination of text, colour, and optional iconography.
+
+The component supports different visual styles (Filled and Outline), semantic colour variants, and optional icons on either side of the label. Its design prioritises fast scanning within tables, lists, cards, forms, and detail views.
 
 ### Key Properties
 
@@ -84,20 +86,21 @@ Evidence-based interpretation: Lists, tables, cards, and filters where items nee
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To label an item with a short category or status.
-- To show a semantic status using the `Information`, `Warning`, `Error`, or `Sucess` types.
-- To let users select or deselect tags, using the outline `Default` tag with `Selected` / `Unselected`.
+- To categorice items within lists or tables.
+- To display the status of a process, record, or entity.
+- To identify content types, priorities, or attributes.
+- To highlight contextual information within an interface.
+- As a visual indicator inside tables, cards, or dashboards.
+- To communicate semantic states such as success, error, warning, or information.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendations (not established design-system rules):
-
-- Use an `Inverse` type only on dark backgrounds. The outline `Inverse` tag is barely visible on light surfaces.
-- Avoid relying on color alone to communicate status. Use clear text in the label.
+- For primary user actions.
+- As a replacement for buttons when complex interactions are required.
+- To display long text or descriptive content.
+- When information requires detailed explanations.
+- As the sole mechanism for communicating critical information.
+- When too many categories exist and colour loses meaning.
 
 ## Structure (Anatomy)
 
@@ -257,14 +260,14 @@ Not verified in Figma: what selecting a tag does, whether tags can be removed (f
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Status types use both color and a text label.
-- A 2 px `border/focus` border is available in the `Focused` state.
-- `Selected` adds a green fill and border. `Unselected` removes the border and uses secondary text, so selected and unselected tags differ by more than color alone.
-- The `SM` label uses 10 px text.
-
-Missing accessibility information (not verified in Figma): ARIA role and selected state, keyboard support, accessible names for icon content, screen-reader behavior, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, borders, and backgrounds across all visual variants.
+- If interactive, the component must be fully keyboard accessible.
+- Focus indicators must be clearly visible and distinguishable from Hover, Selected, and Disabled states.
+Recommendations
+- Do not rely solely on colour to communicate meaning.
+- Reinforce important states with descriptive text and iconography.
+- Use labels that remain understandable out of context.
 
 ## Content Guidelines
 
@@ -310,5 +313,3 @@ Verified observation: The component set contains no variants for these combinati
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2192:1314`) on 2026-10-23.
-
-[No verified historical changes available]
