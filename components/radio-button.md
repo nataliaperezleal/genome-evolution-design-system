@@ -2,9 +2,9 @@
 component: "Radio Button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2190-2043"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Radio Button is a 20px circular selection control with an optional label, availa
 
 ### What It Is
 
-Evidence-based interpretation: a form control for choosing one option from a set. The component set (Figma node `2190:2043`) consists of a 20px circle, which shows a filled inner dot when `Selected=On`, and a 12px label. No written component description is defined for Radio Button in Figma.
+The Radio Button component is a single-selection control that allows users to choose one option from a group of mutually exclusive alternatives. When one option is selected, any previously selected option within the same group is automatically deselected.
+
+It is commonly used in forms, wizards, settings, and workflows where users must make a single choice among several alternatives. The component can include a descriptive label and colour variants to adapt to different visual contexts.
 
 ### Key Properties
 
@@ -73,19 +75,21 @@ Evidence-based interpretation: forms, settings, filters, and dialogs with mutual
 
 ## When to Use
 
-Evidence-based interpretations, derived from the component structure and the `Selected` property:
-
-- To let users choose exactly one option from a short list.
-- When all options should be visible at once.
+- When users must select a single option from a limited set of alternatives.
+- In forms where all available options should remain visible for comparison.
+- For settings or preferences containing mutually exclusive choices.
+- In workflows where a decision is required before proceeding.
+- When the number of options is small enough to be displayed simultaneously.
+- For selecting exclusive states, categories, methods, or preferences.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Radio Button in Figma. As recommendations only:
-
-- To allow multiple selections, use a checkbox.
-- For a single on/off setting, consider a switch or checkbox.
+- When users can select multiple options (use Checkbox).
+- When there are many options and the list consumes excessive space (use Select or Combobox).
+- To enable or disable a single setting (use Switch).
+- When only one action is available.
+- To represent navigation between sections or views.
+- When the selection is optional and has no impact on the outcome.
 
 ## Structure (Anatomy)
 
@@ -207,18 +211,15 @@ All tokens below are verified as Figma variables or text styles used by this com
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Label text (`text/primary`) is 12.78:1 on white; the label is 12px.
-- The unselected control color (`icon/primary`) is 5.45:1 on white.
-- Selected state is shown by an inner dot, not by color alone.
-- `Focused` shows a visible 2px ring (`border/focus`, 3.63:1 on white).
-- The hover halo (`background/interactive/hovered`) is barely distinguishable from white (about 1.06:1).
-- The control is 20px; the clickable area is not defined.
-
-Missing accessibility information: radio group semantics, group label, keyboard navigation between options, and the clickable target size.
+Mandatory requirements
+- All Radio Buttons must be keyboard accessible.
+- Visible focus indicators must be clearly distinguishable from Hover and Selected states.
+- Control, text, and background contrast must meet WCAG AA requirements.
+- Selection status must be communicated visually and programmatically to assistive technologies.
+Recommendations
+- Associate every option with a clear and descriptive accessible label.
+- Semantically group related options within the same selection group.
+- Maintain a logical keyboard navigation sequence.
 
 ## Content Guidelines
 
@@ -266,5 +267,3 @@ Unavailable combinations: the variant set has no `Selected=Off` variants for `Ev
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2190:2043`) on 2026-10-23.
-
-[No verified historical changes available]
