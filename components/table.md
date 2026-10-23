@@ -2,9 +2,9 @@
 component: "Table"
 system: "Genome Evolution Design System"
 type: "Data display (composite)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-2382"
 last_updated: "2026-10-23"
 tags:
@@ -25,9 +25,10 @@ A configurable grid of up to 10 columns and 10 body rows, built from `.TableHead
 
 ### What It Is
 
-Verified specification: `Table` (node `2192:2382`) is a single component, not a variant set. It contains ten column containers. Each column stacks one `.TableHeaderAssets` instance above ten `.TableCellAssets` instances. Boolean properties show or hide columns 2–10, rows 2–10, and the header.
+The Table is a data display component that organises information into rows and columns to support comparison, review, and analysis of multiple records. It is composed of column headers (TableHeaderAssets) and content cells (TableCellAssets), allowing structured information to be presented in a clear and scalable way.
 
-Evidence-based interpretation: Table is a template for tabular data. Designers turn on the number of columns and rows they need, then override the header and cell text. No written component description was found in Figma.
+Headers may include sorting indicators, filters, and other contextual controls associated with a column. Cells can contain single-line or multi-line content, icons, and additional supporting elements depending on the data being displayed.
+Its purpose is to help users efficiently browse, compare, and manage large amounts of information.
 
 ### Key Properties
 
@@ -71,17 +72,21 @@ Evidence-based interpretation: Screens that list records, settings, or compariso
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To display structured data with up to 10 columns and 10 rows.
-- When each column needs a title (header on).
-- For simple data lists where no sorting, selection, or row actions are needed. These are not built into Table.
+- To display structured datasets in rows and columns.
+- When users need to compare information across multiple records.
+- In administrative, operational, analytical, or tracking interfaces.
+- To present search results, inventories, cases, processes, or reports.
+- When data needs to be sorted, filtered, or scanned quickly.
+- In experiences where data alignment and comparison are important.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For data sets larger than 10 × 10, or when interactions such as row selection, sorting, or inline editing are required, extend the table with `.TableHeaderAssets` and `.TableCellAssets` or define a dedicated pattern.
+- When displaying a single piece of information or very small datasets.
+- For narrative content or long-form reading experiences.
+- When information requires a highly customised or free-form layout.
+- In mobile experiences where the number of columns compromises readability and no responsive strategy exists.
+- When the content consists primarily of actions rather than data.
+- To represent complex relationships that are better communicated through charts or diagrams.
 
 ## Structure (Anatomy)
 
@@ -189,13 +194,15 @@ Not verified in Figma: text truncation, wrapping, horizontal scrolling for many 
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The header row is visually distinct (14 px semibold text and a strong bottom border) from body rows (10 px regular text).
-- Body rows have no dividers or alternating fills, so rows are separated only by spacing.
-- Body text is 10 px.
-
-Missing accessibility information (not verified in Figma): table semantics, header association, keyboard navigation, screen-reader announcements, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, dividers, and backgrounds.
+- Provide keyboard access to interactive elements such as sorting, filtering, row selection, or actions.
+- Display clear focus indicators on headers and interactive controls.
+- Correctly associate column headers and cells for assistive technologies.
+Recommendations
+- Use descriptive column labels that remain understandable out of context.
+- Maintain a semantic table structure for screen reader compatibility.
+- Provide accessible names for sorting and filtering controls.
 
 ## Content Guidelines
 
@@ -241,5 +248,3 @@ Verified observation: Columns cannot be added after column 10, and rows cannot b
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2192:2382`, its child components `.TableHeaderAssets` `2192:2096` and `.TableCellAssets` `2192:1922`) on 2026-10-23.
-
-[No verified historical changes available]
