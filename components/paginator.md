@@ -2,9 +2,9 @@
 component: "Paginator"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2185-1106"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,14 @@ Paginator provides pagination controls in three types: a page-size selector with
 
 ### What It Is
 
-Evidence-based interpretation: a navigation control for moving through paged content, such as table rows. The component set (Figma node `2185:1106`) includes first-page, previous, next, and last-page icons in every type, a "Show items:" page-size selector with an item range ("1 - 15 of 100"), and two ways to show the current page: a "0 / 0" page input and numbered page buttons with a highlighted current page. No written component description is defined for Paginator in Figma.
+The Paginator component enables navigation through large datasets divided into multiple pages, allowing users to browse information efficiently without overwhelming the interface. It provides mechanisms to navigate between pages, jump directly to a specific page, or control the number of items displayed per page.
+
+The component offers three main variants:
+- Page Size + Range: displays the current result range, total item count, and a selector to define the number of items displayed per page.
+- Input: allows navigation through paging controls combined with an input field where users can directly enter a page number.
+- Numbers: displays visible page numbers for direct navigation, complemented by first, previous, next, and last page controls.
+
+Within the design system, the Numbers variant (Type 2) is most commonly used in business applications because it provides a clear visual indication of the user's current position within the result set.
 
 ### Key Properties
 
@@ -72,20 +79,22 @@ Evidence-based interpretation: below or above tables, lists, and search results.
 
 ## When to Use
 
-Evidence-based interpretations, derived from the types and structure:
-
-- To navigate content split into pages.
-- To let users choose how many items appear per page and see the visible range (`Type=Page size + Range`).
-- To let users go directly to a page (`Type=Input`) or choose among a few page numbers (`Type=Numbers`).
+- To navigate large data tables.
+- In lists of cases, processes, users, documents, or reports.
+- When a large amount of information must be divided into pages.
+- To improve perceived performance by loading subsets of data.
+- In enterprise applications where users need awareness of their location within the dataset.
+- When users need quick access to specific pages.
+- In grids, tables, galleries, or search results.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Paginator in Figma. As recommendations only:
-
-- Avoid pagination when all content fits on one page.
-- Avoid `Type=Numbers` for many pages; it shows a fixed set of three page buttons.
+- When the number of items is small enough to fit in a single view.
+- For short lists that do not require content segmentation.
+- When infinite scrolling or progressive loading is the primary interaction pattern.
+- For navigation between process steps (use a Stepper or Wizard).
+- When content updates continuously and pagination may create inconsistencies.
+- For filtering or sorting content (use filtering and sorting controls instead).
 
 ## Structure (Anatomy)
 
@@ -221,17 +230,15 @@ Not bound to tokens: the 1px borders, the 23px page cell size and 4px cell paddi
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- All Paginator text is 10px, except the current page in `Numbers` (12px semibold).
-- Text contrast on white: `text/primary` 12.78:1; `text/secondary` (page-size value) 5.45:1.
-- The current page in `Numbers` is indicated by a border (`border/selected`, 5.33:1 on white), a tint, and bold text, not by color alone.
-- The page box border (`border/default`) is 1.66:1 on white.
-- The navigation icons are 12px with no button wrapper, hit area, or individual states.
-
-Missing accessibility information: navigation landmark, accessible names for the navigation icons, `aria-current` for the current page, disabled states at the first and last page, and keyboard behavior.
+Mandatory requirements
+- All navigation controls must be keyboard accessible.
+- Visible focus indicators must clearly identify the active control.
+- Disabled states must be communicated visually and programmatically.
+- Contrast between controls, text, and backgrounds must meet WCAG AA requirements.
+Recommendations
+- Expose the current page and total page count through accessible attributes when possible.
+- Provide descriptive labels for actions such as "First page", "Previous page", "Next page", and "Last page".
+- Maintain a logical keyboard navigation order.
 
 ## Content Guidelines
 
@@ -288,5 +295,3 @@ Unavailable combinations: `Type=Page size + Range` exists only with `State=Defau
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2185:1106`) on 2026-10-23.
-
-[No verified historical changes available]
