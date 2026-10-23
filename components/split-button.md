@@ -2,9 +2,9 @@
 component: "Split button"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2339-3772"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Split button combines a main action button with an attached chevron segment, in 
 
 ### What It Is
 
-Evidence-based interpretation: a button with two parts: a main action labeled "Button" and a separate chevron-down segment that suggests access to related actions. The component set (Figma node `2339:3772`) separates the two parts with a 1px divider. No written component description is defined for Split button in Figma.
+The Split Button is a compound component consisting of two related interactive areas: a primary button that executes a default action and a secondary segment, typically identified by a chevron icon, that opens a menu containing alternative or related actions.
+
+Its purpose is to provide quick access to a frequently used action while keeping additional options available within the same context, reducing interaction effort and improving efficiency.
 
 ### Key Properties
 
@@ -72,19 +74,21 @@ Evidence-based interpretation: toolbars, form footers, and page headers where a 
 
 ## When to Use
 
-Evidence-based interpretations, derived from the structure and states:
-
-- When one action is clearly the most common and related actions should remain available.
-- To group a main action with its variations in limited space.
+- When there is a primary action that users perform frequently alongside related secondary actions.
+- For creation workflows that offer multiple variants, such as "Create", "Create from template", or "Import".
+- In editing tools where users need quick access to a default or recent action.
+- When grouping related actions helps save interface space.
+- To highlight a recommended default action while still exposing alternative options.
+- In toolbars and productivity-focused interfaces with contextual actions.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Split button in Figma. As recommendations only:
-
-- Do not use it when there is only one action; use Button.
-- Do not use it when the chevron options are unrelated to the main action.
+- When only a single action is available.
+- When all available actions have equal importance and none should be highlighted as default.
+- When secondary actions are unrelated to the primary action.
+- For navigation between pages or sections.
+- When the dropdown contains too many options or complex structures.
+- When users need to compare all available options before making a decision.
 
 ## Structure (Anatomy)
 
@@ -219,16 +223,15 @@ Not bound to tokens: chevron segment padding (10px, 8px × 4px, 6px), the 1px di
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Label contrast: `text/inverse` on `surface/evergreen/bold` 5.01:1 and on `surface/indigo/bold` 8.8:1; `text/evergreen` 5.33:1 and `text/indigo` 9.37:1 on white.
-- The focus border (`border/focus`) is 1.47:1 against the Evergreen `Primary` fill and 2.58:1 against the Indigo `Primary` fill, so the focus indicator is hard to see on filled split buttons.
-- Only the chevron segment has a focus visual; the main action has none.
-- The chevron segment shows only an icon, with no visible label.
-
-Missing accessibility information: separate focus targets for the two parts, accessible name for the chevron segment, menu semantics, and keyboard behavior.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, borders, and backgrounds across all states (Default, Hovered, Pressed, Focused, and Disabled).
+- Both the primary button and the menu segment must be independently reachable and operable via keyboard.
+- Focus indicators must be clearly visible for each interactive area.
+- The dropdown menu must expose its expanded and collapsed states to assistive technologies.
+Recommendations
+- Provide accessible labels that differentiate the primary action from secondary actions.
+- Maintain adequate touch target sizes for touch devices.
+- Ensure the menu can be fully opened and navigated using keyboard controls.
 
 ## Content Guidelines
 
