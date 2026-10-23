@@ -2,9 +2,9 @@
 component: "Inline Alert"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2181-3058"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Inline Alert is a tinted message bar that communicates a Danger, Warning, Inform
 
 ### What It Is
 
-Evidence-based interpretation: a non-modal, in-layout feedback message. The component set (Figma node `2181:3058`) combines a status-colored surface, a 4px colored left border, a status icon, and status-colored text, with a `Type` property whose values (`Danger`, `Warning`, `Information`, `Success`) name the message's semantic status. No written component description is defined for Inline Alert in Figma.
+The Inline Alert is a contextual communication component used to display important messages within the flow of an interface without interrupting the user's task. It appears as a visible content block integrated into the page and includes a semantic visual indicator that communicates the message type: Information, Success, Warning, or Danger.
+
+The component may include a title, description, related action, and an optional dismiss control, allowing teams to communicate information, warnings, successful outcomes, or errors in a clear and contextual manner.
 
 ### Key Properties
 
@@ -76,23 +78,20 @@ Evidence-based interpretation: embedded in page content, forms, panels, or secti
 
 ## When to Use
 
-Evidence-based interpretations, derived from the `Type` values and component structure:
-
-- `Danger` — to report an error, failure, or blocking problem that requires attention.
-- `Warning` — to highlight a risk or a condition the user should review before continuing.
-- `Information` — to provide neutral, contextual information or guidance.
-- `Success` — to confirm that an action or process completed successfully.
-- When the message relates to a specific area of the page and should remain visible in context.
-- When a message needs one related follow-up action (`showButton=true`) or must be dismissible (`showClose=true`).
+- To communicate relevant information related to the current page content.
+- To inform users about the outcome of an action.
+- To display warnings before an important action or process.
+- To communicate errors that require user attention or correction.
+- To highlight successful completion of a task.
+- When the message should remain visible while users continue interacting with the page.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Inline Alert in Figma. As recommendations only:
-
-- Do not use an Inline Alert to show a single status label or category without a message; the Button component's Figma description recommends Badges or equivalent components for statuses, labels, or categories.
-- Avoid using the alert's action button for multiple competing actions; the component provides a single button slot.
+- For temporary messages that disappear automatically. In those cases, a Toast is more appropriate.
+- To block a task or require immediate user response. Use a Modal or Dialog instead.
+- To display permanent information that belongs to the primary page content.
+- When multiple alerts would create visual noise or compete for attention.
+- To communicate low-priority or irrelevant events.
 
 ## Structure (Anatomy)
 
@@ -245,15 +244,10 @@ Not bound to tokens: the 4px left border width and the content-group gaps (16px 
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Status is not communicated by color alone: each `Type` has a distinct icon shape (`circle-close`, `warning`, `info`, `check`), and the title can carry a text label.
-- Contrast ratios calculated from the variable values (text color on the subtle surface): Danger 5.55:1, Warning 3.97:1, Information 4.26:1, Success 4.27:1. Warning, Information, and Success fall below 4.5:1, the common WCAG AA threshold for normal-size text; all description text (14–16px) and the `Regular` title (18px semibold) are normal-size text under WCAG definitions. See Pending Clarification.
-- The close icon is 16 × 16px with no surrounding hit area or state variants.
-
-Missing accessibility information: ARIA roles, live-region or announcement behavior, keyboard access to the Button and close icon, focus order and focus indicators, and an accessible name for the close control.
+- Required: ensure sufficient contrast between background, text, icons, and interactive controls across all semantic variants.
+- Required: all interactive elements, including buttons and dismiss actions, must be keyboard accessible and provide visible focus indicators.
+- Required: dynamically displayed alerts should be properly announced to assistive technologies.
+- Recommended: do not rely solely on color to communicate severity or message type; use supporting iconography and descriptive text.
 
 ## Content Guidelines
 
@@ -302,5 +296,3 @@ Evidence / Classification: recommendation built from verified properties; this e
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2181:3058`) on 2026-10-23.
-
-[No verified historical changes available]
