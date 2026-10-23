@@ -2,9 +2,9 @@
 component: "List"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-2403"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ List is a single list row with a text label and optional leading and trailing sl
 
 ### What It Is
 
-Evidence-based interpretation: although named "List", each variant of the component set (Figma node `2184:2403`) is one row: a padded, tinted container with one text label. Rows are combined to build lists. `Type=Header` adds a bottom divider and bold text, which suggests a heading row for a group of items. No written component description is defined for List in Figma.
+The List component represents an item within a list of options or a section header used in navigation menus, configuration panels, selectable lists, and hierarchical content structures. It can display text together with optional icons, checkboxes, switches, or supporting elements positioned on either the left or right side.
+
+The component supports multiple interaction states to communicate navigation, active selection, and focus, enabling consistent experiences across menus and option panels.
 
 ### Key Properties
 
@@ -83,21 +85,22 @@ Evidence-based interpretation: menus, dropdown option lists, settings lists, sel
 
 ## When to Use
 
-Evidence-based interpretations, derived from the properties, states, and structure:
-
-- To present a vertical list of items, one row per item.
-- To let users select one or more items (`State=Selected`, optional checkbox).
-- To present settings that can be toggled per row (optional switch).
-- To group items under a heading (`Type=Header`).
+- To build vertical navigation menus.
+- To display selectable sets of options.
+- In settings panels where each item represents a preference or action.
+- To organize content through section headers.
+- In lists that need to display selection states.
+- When combining text with icons, switches, or checkboxes.
+- To represent items within sidebars, contextual menus, or dropdown panels.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for List in Figma. As recommendations only:
-
-- Avoid showing a checkbox and a switch in the same row; both are visible by default when a side is turned on.
-- Avoid long text; the text is a single line and does not wrap.
+- To perform primary interface actions (use a Button).
+- To collect user-entered information (use an Input or Textarea).
+- To present mutually exclusive options (use Radio Button).
+- When the content requires a tabular structure (use a Table).
+- To represent inline navigation links (use a Link).
+- When there is no meaningful relationship between the items in the list.
 
 ## Structure (Anatomy)
 
@@ -238,18 +241,16 @@ Minor token inconsistencies: `Pressed, MD` binds its vertical padding to `gap/sm
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
+Mandatory requirements
+- All interactive list items must be keyboard accessible.
+- Focus states must be visible and distinguishable from Hover, Pressed, and Selected states.
+- Selection states must not rely solely on colour to communicate meaning.
+- Text, icon, state, and background contrast must meet WCAG AA requirements.
 
-Accessibility-related observations:
-
-- Row text (`text/primary`) has high contrast on every state background (10.74:1 or higher).
-- `Selected` is indicated by both a background tint and bold text, but the tint alone is nearly indistinguishable from the default background (about 1.0:1); the bold text carries most of the difference.
-- `Hover` (1.02:1) and `Pressed` (1.12:1) backgrounds differ only slightly from `Default`.
-- `Focused` provides a 2px focus border (`border/focus`, 3.41:1 against the row background).
-- The Header divider (`border/default`) is 1.56:1 against the row background.
-- The nested Switch label is 10px.
-
-Missing accessibility information: list and option roles, selected-state announcement, keyboard navigation between rows, and how the nested checkbox and switch are labeled for assistive technology.
+Recommendations
+- Provide clear accessible names for items, icons, and associated controls.
+- Maintain a predictable and consistent navigation order.
+- Use appropriate semantic roles when lists represent menus, navigation trees, or selectable groups.
 
 ## Content Guidelines
 
@@ -305,5 +306,3 @@ Evidence / Classification: recommendation built from verified properties; this e
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2184:2403`) on 2026-10-23.
-
-[No verified historical changes available]
