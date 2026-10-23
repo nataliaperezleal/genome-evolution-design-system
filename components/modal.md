@@ -2,9 +2,9 @@
 component: "Modal"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-2533"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Modal is a dialog container with an optional header (title, title icon, expand a
 
 ### What It Is
 
-Evidence-based interpretation: a dialog window that presents focused content and actions above the main interface. The component set (Figma node `2184:2533`) is a bordered, rounded container with a header, a content placeholder, and a footer containing a nested Duo button (secondary and primary actions). The name "Modal" and the close icon in the header support this reading. No written component description is defined for Modal in Figma.
+The Modal component is an overlay container displayed above the interface to present information, request actions, or collect data without requiring users to leave their current context. It partially or completely blocks interaction with the underlying content until the user completes an action, confirms a decision, or closes the modal.
+
+The component can include a header, title, icons, custom content, primary and secondary actions, progress indicators, helper text, and multiple size variants to support different content needs.
 
 ### Key Properties
 
@@ -80,23 +82,23 @@ Evidence-based interpretation: confirmation dialogs, forms, wizards (with step h
 
 ## When to Use
 
-Evidence-based interpretations, derived from the properties, sizes, and structure:
-
-- To ask the user to confirm or complete a focused task before continuing.
-- To present a short form or detail view without leaving the page.
-- To guide users through a multi-step flow (`helperText`, Duo button actions).
-- To present large, complex content in a focused view (`Bigger`, `90%`, `Full`).
-
-The nested Duo button's Figma description recommends it for flows with one primary and one related secondary action, such as "Cancel" and "Save" or "Back" and "Next".
+- To request confirmation before executing an important action.
+- To display forms without navigating away from the current page.
+- To present critical information that requires immediate attention.
+- To complete contextual tasks within an existing workflow.
+- To display wizards, step-by-step flows, or guided processes.
+- To show additional details without losing navigation context.
+- To present success, warning, or error messages that require explicit user action.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Modal in Figma. As recommendations only:
-
-- Avoid using a modal for information that does not require interrupting the user; consider an inline component instead.
-- Avoid offering more than three footer actions; the footer provides one optional tertiary button and a two-button Duo button.
+- For content that can be displayed directly on the page.
+- For low-priority information that does not require immediate attention.
+- When multiple modals could be opened simultaneously.
+- For lengthy content that requires complex navigation.
+- As a replacement for a full page when the task is substantial or primary to the workflow.
+- For passive notifications that do not require user interaction.
+- When alternatives such as Drawers, Popovers, or Tooltips are more appropriate.
 
 ## Structure (Anatomy)
 
@@ -230,16 +232,16 @@ Not bound to tokens: header, content, and footer padding; header and footer gaps
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Title text (`text/primary`) is 12.78:1 against white; helper text (`text/secondary`) is 5.45:1.
-- The primary button label (`text/inverse` on `surface/evergreen/bold`) is 5.01:1.
-- Long titles are truncated with an ellipsis, which can hide part of the title.
-- The expand and close icons are 16px with no surrounding button, hit area, or state variants.
-
-Missing accessibility information: dialog semantics, accessible name, focus management (initial focus, focus trap, focus return), keyboard dismissal, and accessible names for the expand and close icons.
+Mandatory requirements
+- Focus must automatically move to the modal when it opens.
+- Keyboard navigation must remain trapped within the modal while it is active.
+- A visible focus indicator must be available for all interactive elements.
+- Text, controls, and background colours must meet WCAG AA contrast requirements.
+- The modal should be dismissible using the keyboard whenever appropriate.
+Recommendations
+- Apply appropriate dialog roles and accessibility attributes.
+- Set initial focus on the primary action or most relevant content.
+- Return focus to the triggering element when the modal is closed.
 
 ## Content Guidelines
 
@@ -298,5 +300,3 @@ Evidence / Classification: existing Figma configuration (variant `2184:2716`).
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2184:2533`) on 2026-10-23.
-
-[No verified historical changes available]
