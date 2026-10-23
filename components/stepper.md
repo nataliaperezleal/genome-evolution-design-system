@@ -2,9 +2,9 @@
 component: "Stepper"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2339-4361"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Stepper is a single step of a step indicator: a pill with a step number or check
 
 ### What It Is
 
-Evidence-based interpretation: one step in a multi-step process indicator. Each variant of the component set (Figma node `2339:4361`) is a pill-shaped step with a nested Badge showing the step number ("0") or, when completed, a check mark, plus a label ("Step label"). Short connector lines on the left and right let steps be placed in a row to form the full indicator. No written component description is defined for Stepper in Figma.
+The Stepper is a progress component that represents a sequence of steps within a workflow, process, or form. Each step communicates the status of a specific stage through a visual indicator (number or checkmark icon) accompanied by a descriptive label.
+
+Its purpose is to help users understand where they are in a process, which steps have been completed, and which ones are still pending. It can include connectors before and after each step to visually reinforce the continuity of the workflo
 
 ### Key Properties
 
@@ -72,19 +74,23 @@ Evidence-based interpretation: wizards, checkout flows, onboarding, and multi-st
 
 ## When to Use
 
-Evidence-based interpretations, derived from the states and structure:
-
-- To show progress through a sequence of steps.
-- To show which step is current (`Selected`), completed (`Checked`), upcoming (`Default`), or unavailable (`Disabled`).
+- For multi-step sequential processes.
+- In long forms that are organised into stages.
+- During onboarding, setup, or guided creation experiences.
+- To display progress in requests, approvals, or business workflows.
+- Then users need visibility into their progress within a task.
+- In experiences where there is a clear order between stages.
 
 ## When NOT to Use
 
 [No documented restrictions found]
 
-No usage restrictions are defined for Stepper in Figma. As recommendations only:
-
-- Avoid it for processes with a single step.
-- Use Progress bar when only overall completion matters and individual steps do not need labels.
+- For primary navigation between pages or modules.
+- When options do not follow a defined sequence.
+- For single-step processes.
+- When the number of steps is so large that comprehension is reduced.
+- To represent independent states that are not part of a workflow.
+- When progress cannot be clearly determined.
 
 ## Structure (Anatomy)
 
@@ -207,16 +213,15 @@ Not bound to tokens: the 1px borders and the 8 × 1px connector lines. The conne
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Completed steps are shown with a check mark, and the current step with a bold label and colored border, not by color alone.
-- Text contrast: label `text/primary` 12.78:1 on white; `text/evergreen` 5.01:1 on its checked background; `text/indigo` 8.78:1 on its checked background; Badge number `text/secondary` 5.12:1.
-- The Badge number is 10px; the label is 12px.
-- The default pill border (`border/default`) is 1.66:1 on white; connector lines (`icon/secondary`) are 3.16:1.
-
-Missing accessibility information: step list semantics, current-step announcement, completed-state announcement, and whether steps are focusable.
+Mandatory requirements
+- Ensure sufficient contrast between text, indicators, borders, and background across all states (Default, Selected, Checked, and Disabled).
+- If steps are interactive, they must be keyboard accessible.
+- Focus indicators must be clearly visible and distinguishable from selected or completed states.
+- Current and completed states must be properly exposed to assistive technologies.
+Recommendations
+- Use descriptive labels so each stage is understandable without relying solely on numbers.
+- Do not rely exclusively on colour to communicate state.
+- Reinforce status through text, numbering, or iconography.
 
 ## Content Guidelines
 
@@ -256,5 +261,3 @@ Unavailable combinations: `Evergreen` and `Indigo` have no `Default` or `Disable
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2339:4361`) on 2026-10-23.
-
-[No verified historical changes available]
