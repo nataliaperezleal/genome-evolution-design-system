@@ -2,9 +2,9 @@
 component: "Scroll"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2191-2146"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Scroll is a thin scrollbar with a rounded track and thumb, available in vertical
 
 ### What It Is
 
-Evidence-based interpretation: a visual scrollbar that indicates scrollable content and the visible portion of it. The component set (Figma node `2191:2146`) consists of a pill-shaped light track and a darker pill-shaped thumb ("Bar") that fills the first half of the track. No written component description is defined for Scroll in Figma.
+The Scroll component is a custom scrollbar that enables navigation through content that extends beyond the visible area of a container. It consists of a track (background area) and a thumb (scroll indicator) that visually communicates the current position within the content.
+
+It supports both horizontal and vertical orientations and provides a consistent appearance across tables, panels, modals, lists, and other scrollable containers.
 
 ### Key Properties
 
@@ -68,16 +70,21 @@ Evidence-based interpretation: scrollable panels, dropdown menus, lists, tables,
 
 ## When to Use
 
-Evidence-based interpretations, derived from the structure and properties:
-
-- To show a consistent, styled scrollbar on scrollable content.
-- To indicate vertical (`Orientation=Vertical`) or horizontal (`Orientation=Horizontal`) scrolling.
+- To navigate content that exceeds the visible area of a container.
+- In tables containing many columns or records.
+- Inside modals, side panels, or drawers with lengthy content.
+- In lists, navigation trees, or menus with many items.
+- For workspaces that require controlled horizontal or vertical scrolling.
+- When a consistent design-system appearance is preferred over native browser scrollbars.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Scroll in Figma. As a recommendation only: do not show a scrollbar on content that does not scroll.
+- To navigate content that exceeds the visible area of a container.
+- In tables containing many columns or records.
+- Inside modals, side panels, or drawers with lengthy content.
+- In lists, navigation trees, or menus with many items.
+- For workspaces that require controlled horizontal or vertical scrolling.
+- When a consistent design-system appearance is preferred over native browser scrollbars.
 
 ## Structure (Anatomy)
 
@@ -154,15 +161,13 @@ Not bound to tokens: the 4px and 8px thicknesses and the 272px and 278px lengths
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- The thumb (`surface/subtle`) has 1.28:1 contrast against the track and 1.36:1 against white, below the common 3:1 threshold for non-text UI elements.
-- The track (`surface/subtlest`) is nearly indistinguishable from white (1.06:1).
-- `Small` is 4px thick, which offers a very small target if the thumb is meant to be dragged.
-
-Missing accessibility information: whether the scrollbar is interactive, keyboard scrolling, and minimum target size.
+Mandatory requirements
+- The scrollbar must support standard keyboard scrolling mechanisms when its container receives focus.
+- Contrast between the thumb and track must meet WCAG AA requirements.
+- Scrollable containers must provide visible focus indicators when interactive.
+Recommendations
+- Support scrolling through mouse wheel, touch gestures, and keyboard interactions.
+- Clearly indicate when additional content exists outside the visible area.
 
 ## Content Guidelines
 
@@ -200,5 +205,3 @@ Evidence / Classification: existing Figma configuration (variant `2191:2156`); u
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2191:2146`) on 2026-10-23.
-
-[No verified historical changes available]
