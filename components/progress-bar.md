@@ -2,9 +2,9 @@
 component: "Progress bar"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2190-1888"
 last_updated: "2026-10-23"
 tags:
@@ -25,7 +25,9 @@ Progress bar is a thin horizontal bar that shows a fixed level of completion (10
 
 ### What It Is
 
-Evidence-based interpretation: a visual indicator of how much of a task or process is complete. The component set (Figma node `2190:1888`) consists of an 8px-tall rounded track and a 6px colored fill whose length depends on the `Progress` value. No written component description is defined for Progress bar in Figma.
+The Progress Bar component is a horizontal progress indicator that visually communicates the completion status of a task, process, or workflow. It represents progress through a filled portion of the bar, allowing users to quickly understand how much work has been completed and how much remains.
+
+The component is available in multiple brand colours and supports different progress values, from initial states to full completion.
 
 ### Key Properties
 
@@ -68,19 +70,21 @@ Evidence-based interpretation: file uploads, multi-step forms, onboarding flows,
 
 ## When to Use
 
-Evidence-based interpretations, derived from the structure and properties:
-
-- To show the completion level of a task or process.
-- To show progress through a sequence of steps.
+- To indicate the progress of a loading, processing, or synchronization task.
+- In multi-step workflows where overall progress needs to be communicated.
+- During data generation, export, or import processes.
+- To display the completion percentage of a long-running task.
+- In dashboards that present completion or achievement indicators.
+- When the system knows the actual progress of the ongoing process.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-No usage restrictions are defined for Progress bar in Figma. As recommendations only:
-
-- Do not rely on Progress bar alone when the exact value matters; it has no label or percentage text.
-- Do not use it when progress cannot be measured; there is no indeterminate variant.
+- When no reliable progress information is available.
+- To represent binary states such as active/inactive or completed/not completed.
+- To display navigation between workflow steps (use a Stepper when sequential navigation is required).
+- For instant processes where the indicator would only appear briefly.
+- When the objective is to present comparative metrics rather than progress.
+- As a replacement for status messages or success confirmations.
 
 ## Structure (Anatomy)
 
@@ -165,15 +169,13 @@ The fill uses `icon/...` color variables rather than surface or fill variables. 
 
 ## Accessibility
 
-Verified accessibility requirements: none are documented in Figma.
-
-Accessibility-related observations:
-
-- Fill contrast against the white track: `icon/evergreen` 5.33:1; `icon/indigo` 9.37:1.
-- The track is white with no border, so on a white surface only the fill is visible and the total length of the bar is not shown.
-- There is no visible label or percentage text, so the value is communicated only by length.
-
-Missing accessibility information: progressbar semantics, value attributes, accessible label, and how progress updates are announced.
+- Mandatory requirements
+- Contrast between the track, progress indicator, and background must meet WCAG AA requirements.
+- When progress is task-critical, it must be communicated through accessible information for assistive technologies.
+- Progress states and updates must not rely solely on colour.
+Recommendations
+- Supplement the progress bar with percentages or descriptive status text when relevant.
+- Ensure progress updates are understandable for screen reader users.
 
 ## Content Guidelines
 
@@ -212,5 +214,3 @@ Evidence / Classification: existing Figma configuration (variant `2190:1929`).
 ## Notes / Changelog
 
 Generated from Figma evidence (component set `2190:1888`) on 2026-10-23.
-
-[No verified historical changes available]
