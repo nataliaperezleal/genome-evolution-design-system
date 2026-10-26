@@ -1636,7 +1636,7 @@ body {
   color: var(--ge-color-role-text-secondary);
 }
 
-.ge-scoreboard {
+.ge-scorecard {
   border-radius: var(--ge-radius-semantic-md);
   border: var(--ge-border-width-1) solid var(--ge-color-role-border-default);
   background: var(--ge-color-role-surface-subtlest);
@@ -1646,38 +1646,38 @@ body {
   min-width: 160px;
 }
 
-.ge-scoreboard__label {
+.ge-scorecard__label {
   font-size: 11px;
   color: var(--ge-color-role-text-tertiary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
 }
 
-.ge-scoreboard__value {
+.ge-scorecard__value {
   font-size: 26px;
   letter-spacing: -0.02em;
   font-weight: 500;
   color: var(--ge-color-role-text-primary);
 }
 
-.ge-scoreboard__change {
+.ge-scorecard__change {
   font-size: 11px;
   color: var(--ge-color-role-text-secondary);
 }
 
-.ge-scoreboard--success .ge-scoreboard__change {
+.ge-scorecard--success .ge-scorecard__change {
   color: var(--ge-color-role-text-success);
 }
 
-.ge-scoreboard--warning .ge-scoreboard__change {
+.ge-scorecard--warning .ge-scorecard__change {
   color: var(--ge-color-role-text-warning);
 }
 
-.ge-scoreboard--danger .ge-scoreboard__change {
+.ge-scorecard--danger .ge-scorecard__change {
   color: var(--ge-color-role-text-danger);
 }
 
-.ge-scoreboard--info .ge-scoreboard__change {
+.ge-scorecard--info .ge-scorecard__change {
   color: var(--ge-color-role-text-info);
 }
 

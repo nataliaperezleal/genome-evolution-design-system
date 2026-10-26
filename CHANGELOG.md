@@ -25,7 +25,7 @@ Documentación completa extraída directamente de Figma para 16 componentes:
 
 ### Pending (20 componentes con stub)
 Color Picker, Cursor, Datepicker, Dropdown, Duo Button, Group, Link, List,
-Paginator, Progress Bar, Radio Button, Scoreboard, Scroll, Segmented Button,
+Paginator, Progress Bar, Radio Button, Scorecard, Scroll, Segmented Button,
 Snackbar, Split Button, Stepper, Switch, Tab, Table
 
 ## [2.0.0] — 2026-04-27 (Completo)
@@ -34,7 +34,7 @@ Snackbar, Split Button, Stepper, Switch, Tab, Table
 Documentación completa extraída de Figma para los 20 componentes restantes:
 - List, Radio Button, Switch, Tab, Table, Snackbar
 - Paginator, Progress Bar, Dropdown, Link
-- Stepper, Scoreboard, Scroll, Color Picker
+- Stepper, Scorecard, Scroll, Color Picker
 - Segmented Button, Duo Button, Cursor
 
 ### Total: 36/36 componentes documentados

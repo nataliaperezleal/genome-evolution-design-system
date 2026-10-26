@@ -2,7 +2,7 @@
 component: "Switch"
 system: "Genome Evolution Design System"
 type: "Control de formulario (interruptor binario)"
-status: "No verificado en Figma"
+status: "Design"
 version: "No verificado en Figma"
 owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2184-3286"

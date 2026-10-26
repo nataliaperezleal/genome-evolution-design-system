@@ -540,7 +540,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
           body: [
             l(
               "Icon Button is the compact action control for dense interfaces. It is already documented as production and clearly separates filled and outline styles.",
-              "Icon Button es el control compacto de acción para interfaces densas. Ya está documentado como Production y separa claramente estilos filled y outline."
+              "Icon Button es el control compacto de acción para interfaces densas. Ya está documentado como Design y separa claramente estilos filled y outline."
             ),
             l(
               "Its main design constraint is semantic clarity: the icon must be understandable on its own, and an accessible label is always required in implementation.",
@@ -1780,10 +1780,10 @@ export const componentSpecs: Record<string, ComponentSpec> = {
     ],
     tokenCards: [{ label: "Selected surface", token: "color.role.surface.evergreen.bold", value: "var(--ge-color-role-surface-evergreen-bold)" }]
   },
-  Scoreboard: {
+  Scorecard: {
     subtitle: "Compact metric card for quick KPIs and system status summaries.",
     tabs: {
-      overview: [{ body: ["Scoreboard displays a label, a value, and an optional change indicator."] }],
+      overview: [{ body: ["Scorecard displays a label, a value, and an optional change indicator."] }],
       "when-to-use": [{ bullets: ["Use for dashboards and overview panels.", "Use for high-level metrics at a glance."] }],
       "when-not-to-use": [{ bullets: ["Avoid for dense analytics tables.", "Avoid when users need precise comparisons (use charts/tables)."] }],
       anatomy: [{ bullets: ["Label (eyebrow).", "Value.", "Change line (optional)."] }],
@@ -1802,9 +1802,9 @@ export const componentSpecs: Record<string, ComponentSpec> = {
     code: [
       {
         title: "KPI tile",
-        code: `import { Scoreboard } from "@genome-evolution/react";
+        code: `import { Scorecard } from "@genome-evolution/react";
 
-<Scoreboard label=\"Usuarios\" value=\"4,821\" change=\"↑ 12.4%\" tone=\"success\" />;\n`
+<Scorecard label=\"Usuarios\" value=\"4,821\" change=\"↑ 12.4%\" tone=\"success\" />;\n`
       }
     ],
     tokenCards: [{ label: "Surface", token: "color.role.surface.subtlest", value: "var(--ge-color-role-surface-subtlest)" }]

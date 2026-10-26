@@ -2,7 +2,7 @@
 component: "Chat-suggestion-ia"
 system: "Genome Evolution Design System"
 type: "Sugerencias de IA en forma de chips (compuesto)"
-status: "No verificado en Figma"
+status: "Design"
 version: "No verificado en Figma"
 owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3855-6697"

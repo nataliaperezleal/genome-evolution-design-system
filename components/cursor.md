@@ -2,7 +2,7 @@
 component: "Cursor"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "Not verified in Figma"
+status: "Design"
 version: "Not verified in Figma"
 owner: "Not verified in Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2204-2358"

@@ -1,107 +1,111 @@
 # Genome Evolution Design System
 
-Sistema de diseño de Bizagi / Genome Plus. Documentación pública de componentes, fundamentos y patrones de UI.
+Sistema de diseño de Bizagi / Genome Plus. Este repositorio reúne la documentación de componentes, fundamentos y patrones de UI.
 
 > Este repositorio es la fuente de verdad para implementaciones, revisiones de código y consultas por agentes de IA.
 
----
+## Sitio oficial — GitHub Pages
 
-## Ejecutar localmente
+El único sitio vigente de documentación se publica desde `apps/docs` mediante GitHub Pages.
+
+1. En GitHub, abre **Settings → Pages** y selecciona **GitHub Actions** como fuente de publicación.
+2. El workflow [docs-gh-pages.yml](.github/workflows/docs-gh-pages.yml) publica automáticamente cada push a `main`.
+3. El sitio estará disponible en `https://<tu-usuario>.github.io/<nombre-del-repositorio>/`.
+
+Para probar el sitio localmente antes de publicar:
+
+```bash
+npm ci
+npm run docs
+```
+
+## Validaciones
 
 Requisitos: Node.js 20+ y npm.
 
 ```bash
-npm ci
+npm run build
+npm run typecheck
+npm run smoke
 ```
 
-- Storybook (UI components): `npm run storybook` (http://localhost:6006)
-- Docs (sitio Vite): `npm run docs` (http://127.0.0.1:6011)
-- Build: `npm run build`
-- Typecheck: `npm run typecheck`
-- Smoke check (tokens + docs + storybook): `npm run smoke`
+- `npm run validate:css-vars` comprueba las variables CSS referenciadas por componentes y documentación.
+- `npm run smoke` valida tokens, variables CSS, la documentación del sitio y Storybook.
+- `npm run storybook` inicia el catálogo de componentes en `http://localhost:6006`.
 
----
+## Estructura
 
-## Verlo “en cualquier lugar” (GitHub Pages)
-
-Este repo incluye workflow para publicar `apps/docs` en GitHub Pages cuando haces push a `main` (requiere `BASE_PATH` para servir bajo `/<repo>/`).
-
-- Workflow: `.github/workflows/docs-gh-pages.yml`
-
-1) En GitHub: Settings → Pages → Build and deployment → Source: **GitHub Actions**  
-2) Luego de un push a `main`, tu sitio queda en:
-
-`https://<tu-usuario>.github.io/<nombre-del-repo>/`
-
----
-
-## Validaciones rápidas
-
-Para evitar errores silenciosos (por ejemplo variables CSS faltantes o valores numéricos sin unidad que rompen `padding`, `border-radius`, `z-index`, etc.):
-
-- Validador de CSS vars: `npm run validate:css-vars` (script: `scripts/validate-css-vars.mjs`)
-- Recomendado antes de publicar: `npm run smoke`
-
-## Estructura del repositorio
-
-```
+```text
 genome-design-system/
-├── README.md
-├── manifest.json               ← Índice completo para IA
-├── CHANGELOG.md
-│
-├── foundations/                ← Tokens, tipografía, color, layout
-├── components/                 ← 36 componentes documentados
-├── patterns/                   ← Patrones de uso y combinaciones
-├── ai/                         ← Reglas y guías para agentes IA
-├── examples/                   ← Ejemplos completos
-└── templates/                  ← Plantillas para nuevos componentes
+├── manifest.json       # Índice completo de componentes, fundamentos y reglas de IA
+├── foundations/        # Tokens, tipografía, color, layout y otros fundamentos
+├── components/         # Componentes documentados en inglés y español
+├── patterns/           # Patrones de uso y combinaciones
+├── ai/                 # Reglas y guías para agentes IA
+├── examples/           # Ejemplos completos
+└── templates/          # Plantillas para nuevos componentes
 ```
 
----
+## Componentes (44)
 
-## Componentes disponibles (36)
+Todos los componentes están identificados con estado `Design`. El inventario completo y sus metadatos están en [manifest.json](manifest.json).
 
-| Componente | Archivo | Estado |
+| Componente | Documentación | Estado |
 |---|---|---|
-| Accordion | [accordion.md](components/accordion.md) | Production |
-| Avatar | [avatar.md](components/avatar.md) | Production |
-| Backdrop | [backdrop.md](components/backdrop.md) | Production |
-| Badge | [badge.md](components/badge.md) | Production |
-| Breadcrumb | [breadcrumb.md](components/breadcrumb.md) | Production |
-| Button | [button.md](components/button.md) | Draft |
-| Clear Button | [clear-button.md](components/clear-button.md) | Production |
-| Checkbox | [checkbox.md](components/checkbox.md) | Production |
-| Color Picker | [color-picker.md](components/color-picker.md) | Production |
-| Cursor | [cursor.md](components/cursor.md) | Production |
-| Datepicker | [datepicker.md](components/datepicker.md) | Production |
-| Duo Button | [duo-button.md](components/duo-button.md) | Production |
-| Dropdown | [dropdown.md](components/dropdown.md) | Production |
-| Group | [group.md](components/group.md) | Production |
-| Header | [header.md](components/header.md) | Production |
-| Icon Button | [icon-button.md](components/icon-button.md) | Production |
-| Inline Alert | [inline-alert.md](components/inline-alert.md) | Production |
-| Input | [input.md](components/input.md) | Production |
-| Link | [link.md](components/link.md) | Production |
-| List | [list.md](components/list.md) | Production |
-| Modal | [modal.md](components/modal.md) | Production |
-| Paginator | [paginator.md](components/paginator.md) | Production |
-| Progress Bar | [progress-bar.md](components/progress-bar.md) | Production |
-| Radio Button | [radio-button.md](components/radio-button.md) | Production |
-| Scoreboard | [scoreboard.md](components/scoreboard.md) | Production |
-| Scroll | [scroll.md](components/scroll.md) | Production |
-| Segmented Button | [segmented-button.md](components/segmented-button.md) | Production |
-| Split Button | [split-button.md](components/split-button.md) | Production |
-| Snackbar | [snackbar.md](components/snackbar.md) | Production |
-| Stepper | [stepper.md](components/stepper.md) | Production |
-| Switch | [switch.md](components/switch.md) | Production |
-| Tab | [tab.md](components/tab.md) | Production |
-| Table | [table.md](components/table.md) | Production |
-| Tag | [tag.md](components/tag.md) | Production |
-| Text Area | [text-area.md](components/text-area.md) | Production |
-| Tooltip | [tooltip.md](components/tooltip.md) | Production |
+| Accordion | [accordion.md](components/accordion.md) | Design |
+| Avatar | [avatar.md](components/avatar.md) | Design |
+| Backdrop | [backdrop.md](components/backdrop.md) | Design |
+| Badge | [badge.md](components/badge.md) | Design |
+| Breadcrumb | [breadcrumb.md](components/breadcrumb.md) | Design |
+| Breadcrumb Item | [breadcrumb-item.md](components/breadcrumb-item.md) | Design |
+| Button | [button.md](components/button.md) | Design |
+| Calendar Month | [calendar-month.md](components/calendar-month.md) | Design |
+| Calendar Number | [calendar-number.md](components/calendar-number.md) | Design |
+| Checkbox | [checkbox.md](components/checkbox.md) | Design |
+| Clear Button | [clear-button.md](components/clear-button.md) | Design |
+| Color Picker | [color-picker.md](components/color-picker.md) | Design |
+| Cursor | [cursor.md](components/cursor.md) | Design |
+| Datepicker | [datepicker.md](components/datepicker.md) | Design |
+| Duo Button | [duo-button.md](components/duo-button.md) | Design |
+| Dropdown | [dropdown.md](components/dropdown.md) | Design |
+| Dropdown Empty Content | [dropdown-empty-content.md](components/dropdown-empty-content.md) | Design |
+| Dropdown Icon Text | [dropdown-icon-text.md](components/dropdown-icon-text.md) | Design |
+| Group | [group.md](components/group.md) | Design |
+| Header | [header.md](components/header.md) | Design |
+| Icon Button | [icon-button.md](components/icon-button.md) | Design |
+| Inline Alert | [inline-alert.md](components/inline-alert.md) | Design |
+| Input | [input.md](components/input.md) | Design |
+| Link | [link.md](components/link.md) | Design |
+| List | [list.md](components/list.md) | Design |
+| Modal | [modal.md](components/modal.md) | Design |
+| Paginator | [paginator.md](components/paginator.md) | Design |
+| Panel | [panel.md](components/panel.md) | Design |
+| Progress Bar | [progress-bar.md](components/progress-bar.md) | Design |
+| Radio Button | [radio-button.md](components/radio-button.md) | Design |
+| Scorecard | [scorecard.md](components/scorecard.md) | Design |
+| Scroll | [scroll.md](components/scroll.md) | Design |
+| Segmented Button | [segmented-button.md](components/segmented-button.md) | Design |
+| Snackbar | [snackbar.md](components/snackbar.md) | Design |
+| Split Button | [split-button.md](components/split-button.md) | Design |
+| Stepper | [stepper.md](components/stepper.md) | Design |
+| Switch | [switch.md](components/switch.md) | Design |
+| Tab | [tab.md](components/tab.md) | Design |
+| Table | [table.md](components/table.md) | Design |
+| Table Cell Assets | [table-cell-assets.md](components/table-cell-assets.md) | Design |
+| Table Header Assets | [table-header-assets.md](components/table-header-assets.md) | Design |
+| Tag | [tag.md](components/tag.md) | Design |
+| Text Area | [text-area.md](components/text-area.md) | Design |
+| Tooltip | [tooltip.md](components/tooltip.md) | Design |
 
----
+## Componentes IA (5)
+
+| Componente | Documentación | Estado |
+|---|---|---|
+| Chat IA | [chat-ia.md](components/chat-ia.md) | Design |
+| Chat Suggestion IA | [chat-suggestion-ia.md](components/chat-suggestion-ia.md) | Design |
+| Input IA | [input-ia.md](components/input-ia.md) | Design |
+| Suggestion IA | [suggestion-ia.md](components/suggestion-ia.md) | Design |
+| Thinking IA | [thinking-ia.md](components/thinking-ia.md) | Design |
 
 ## Fundamentos
 
@@ -109,26 +113,24 @@ genome-design-system/
 - [Color](foundations/color.md)
 - [Spacing](foundations/spacing.md)
 - [Layout](foundations/layout.md)
+- [Opacidad](foundations/opacity.md)
 - [Elevation](foundations/elevation.md)
 - [Border](foundations/border.md)
 
----
-
 ## Para agentes IA
 
-Lee primero [`manifest.json`](manifest.json) para obtener el índice completo del sistema.  
-Lee [`ai/component-selection-rules.md`](ai/component-selection-rules.md) para entender cuándo usar cada componente.  
-Lee [`ai/invalid-combinations.md`](ai/invalid-combinations.md) para evitar errores comunes.
+Lee primero [manifest.json](manifest.json) para obtener el índice completo del sistema.
 
----
+- [Reglas de selección de componentes](ai/component-selection-rules.md)
+- [Combinaciones inválidas](ai/invalid-combinations.md)
+- [Uso de tokens](ai/token-usage-rules.md)
+- [Plantilla de prompt](ai/prompt-template.md)
+- [Checklist de evaluación](ai/evaluation-checklist.md)
 
 ## Fuente de verdad en Figma
 
 [Ver archivo en Figma](https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution)
 
----
-
 ## Contribución
 
-Cada componente tiene su documentación generada desde el frame **"Texto para el md"** en Figma.  
-Para actualizar: editar el frame en Figma → extraer contenido → actualizar el `.md` correspondiente.
+Cada componente tiene documentación generada desde el frame **"Texto para el md"** en Figma. Para actualizarla, edita el frame en Figma, extrae su contenido y actualiza el archivo Markdown correspondiente.

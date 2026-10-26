@@ -28,7 +28,7 @@ import {
   Paginator,
   ProgressBar,
   RadioButtonGroup,
-  Scoreboard,
+  Scorecard,
   Scroll,
   SegmentedButton,
   SplitButton,
@@ -1119,13 +1119,13 @@ function ComponentPreview({
     );
   }
 
-  if (componentName === "Scoreboard") {
+  if (componentName === "Scorecard") {
     return (
       <div className="preview-stack">
         <div className="preview-row">
-          <Scoreboard label="Usuarios activos" value="4,821" change="↑ 12.4% vs mes anterior" tone="success" />
-          <Scoreboard label="Ingresos MRR" value="$38.2K" change="↑ 7.1% vs mes anterior" tone="success" />
-          <Scoreboard label="Errores" value="14" change="↓ 3.2% vs semana anterior" tone="warning" />
+          <Scorecard label="Usuarios activos" value="4,821" change="↑ 12.4% vs mes anterior" tone="success" />
+          <Scorecard label="Ingresos MRR" value="$38.2K" change="↑ 7.1% vs mes anterior" tone="success" />
+          <Scorecard label="Errores" value="14" change="↓ 3.2% vs semana anterior" tone="warning" />
         </div>
       </div>
     );

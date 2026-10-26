@@ -56,7 +56,7 @@ Guía para agentes IA sobre cuándo usar cada componente del sistema.
 | Datos tabulares | Table | |
 | Lista de ítems | List | |
 | Etiqueta/categoría | Tag | |
-| Datos numéricos destacados | Scoreboard | |
+| Datos numéricos destacados | Scorecard | |
 | Identidad de usuario | Avatar | |
 
 ## Reglas de prioridad

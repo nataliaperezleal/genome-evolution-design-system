@@ -216,7 +216,7 @@ Evidence / Classification: existing Figma configuration (variant `2191:2129`).
 
 ## Pending Clarification
 
-1. Component name. Figma names the component "Scorecard", while the repository and `manifest.json` list this Figma node as "Scoreboard" (`components/scoreboard.md`). Confirm the correct name.
+1. Component name: Scorecard, matching the name used in Figma.
 2. Fixed text. "Value" and "Description" are not exposed as text properties and cannot be hidden. Confirm whether text properties (and optionally visibility toggles, units, or trend indicators) should be added.
 3. Value weight. The value is regular in `SM` and semibold in `MD`. Confirm whether this weight difference is intended.
 4. Alignment. `Top value` is centered, while `Bottom value` is aligned to the start. Confirm the intended alignment for each style.

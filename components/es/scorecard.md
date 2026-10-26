@@ -2,7 +2,7 @@
 component: "Scorecard"
 system: "Genome Evolution Design System"
 type: "Component set"
-status: "No verificado en Figma"
+status: "Design"
 version: "No verificado en Figma"
 owner: "No verificado en Figma"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2191-2125"
@@ -212,7 +212,7 @@ Evidencia / clasificación: configuración existente en Figma (variante `2191:21
 
 ## Aclaraciones pendientes
 
-1. Nombre del componente. Figma nombra el componente "Scorecard", mientras que el repositorio y `manifest.json` listan este nodo de Figma como "Scoreboard" (`components/scoreboard.md`). Confirmar el nombre correcto.
+1. Nombre del componente: Scorecard, de acuerdo con el nombre utilizado en Figma.
 2. Texto fijo. "Value" y "Description" no se exponen como propiedades de texto y no se pueden ocultar. Confirmar si deben agregarse propiedades de texto (y opcionalmente toggles de visibilidad, unidades o indicadores de tendencia).
 3. Peso del valor. El valor es regular en `SM` y semibold en `MD`. Confirmar si esta diferencia de peso es intencional.
 4. Alineación. `Top value` está centrado, mientras que `Bottom value` está alineado al inicio. Confirmar la alineación prevista para cada estilo.
