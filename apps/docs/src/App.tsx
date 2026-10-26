@@ -52,6 +52,10 @@ import { OpacityFoundation } from "./foundations/OpacityFoundation";
 import { ElevationFoundation } from "./foundations/ElevationFoundation";
 import { detectInitialLanguage, t, type Language } from "./i18n";
 
+function publicAsset(path: string) {
+  return new URL(path.replace(/^\/+/, ""), document.baseURI).toString();
+}
+
 function BrandLogo() {
   return (
     <svg
@@ -2226,18 +2230,15 @@ function ComponentDocumentation({
                     return cardsToRender.map((card, idx) => {
                       const index = idx;
                     const title = card.title ?? "";
-                    const lower = title.toLowerCase();
                     let imageName: string | null = null;
-                    if (componentName === "Color Picker") {
-                      if (/compartida|shared/i.test(title)) imageName = "anatomy.png";
-                      else if (/gradient/i.test(lower)) imageName = "gradient.png";
-                      else if (/solid/i.test(lower) || /solo modo solid/i.test(lower)) imageName = "solid.png";
+                    if (componentName === "Color Picker" && /compartida|shared/i.test(title)) {
+                      imageName = "anatomy.png";
                     }
 
                       return (
                         <div key={`pair-${index}`} className="anatomy-paired-row">
                           <div className="anatomy-image-placeholder" aria-hidden={card.title ? undefined : "true"}>
-                            {imageName ? <img src={`/dist/images/color-picker/${imageName}`} alt={title} /> : null}
+                            {imageName ? <img src={publicAsset(`images/color-picker/${imageName}`)} alt={title} /> : null}
                           </div>
                           <article className="doc-section-card">
                             {card.title ? <h4>{card.title}</h4> : null}
@@ -2388,7 +2389,7 @@ function ComponentDocumentation({
 	                <h4>{language === "es" ? "Accesibilidad (ejemplo)" : "Accessibility (example)"}</h4>
 	                <figure className="doc-image">
 	                  <img
-	                    src="/images/backdrop/accessibility.png"
+	                    src={publicAsset("images/backdrop/accessibility.png")}
 	                    alt={language === "es" ? "Ejemplo de accesibilidad para Backdrop" : "Backdrop accessibility example"}
 	                    loading="lazy"
 	                  />
@@ -2446,7 +2447,7 @@ function ComponentDocumentation({
                     <h4>{language === "es" ? "Ejemplo (imagen)" : "Example (image)"}</h4>
                     <figure className="doc-image">
                       <img
-                        src="/images/backdrop/example.png"
+                        src={publicAsset("images/backdrop/example.png")}
                         alt={language === "es" ? "Ejemplo de Backdrop detrás de un modal" : "Backdrop usage example behind a modal"}
                         loading="lazy"
                       />

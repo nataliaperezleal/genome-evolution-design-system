@@ -9,7 +9,7 @@ Sistema de diseño de Bizagi / Genome Plus. Este repositorio reúne la documenta
 El único sitio vigente de documentación se publica desde `apps/docs` mediante GitHub Pages.
 
 1. En GitHub, abre **Settings → Pages** y selecciona **GitHub Actions** como fuente de publicación.
-2. El workflow [docs-gh-pages.yml](.github/workflows/docs-gh-pages.yml) publica automáticamente cada push a `main`.
+2. El workflow [docs-gh-pages.yml](.github/workflows/docs-gh-pages.yml) publica automáticamente cada push a `main`. También puedes ejecutarlo manualmente desde **Actions → Deploy docs to GitHub Pages → Run workflow**.
 3. El sitio estará disponible en `https://<tu-usuario>.github.io/<nombre-del-repositorio>/`.
 
 Para probar el sitio localmente antes de publicar:
