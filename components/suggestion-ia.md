@@ -2,9 +2,9 @@
 component: "Suggestion-ia"
 system: "Genome Evolution Design System"
 type: "AI suggestion item"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3859-6817"
 last_updated: "2026-10-23"
 tags:
@@ -25,13 +25,13 @@ A single AI suggestion item, available as a compact one-line suggestion (`Simple
 
 ### What It Is
 
-Evidence-based interpretation: Suggestion-ia presents one item that an AI proposes to the user. The evidence:
+The Suggestion component is a contextual recommendation element used to present potential actions, queries, or exploration paths within AI-powered experiences. Its purpose is to help users start a conversation, discover assistant capabilities, or continue an interaction based on an AI-generated response.
 
-- The component name.
-- The `Simple` sample, which combines a context tag ("Vistas: Ventas", "Views: Sales") with an instruction ("como gráfica de barras", "as a bar chart").
-- The `Complete` sample, which describes a suggested result ("1. Sales dashboard", "1,248 records matching schema") with a chart icon.
+Unlike Chat Suggestion, which focuses on quick refinements within the conversational flow, Suggestion represents broader contextual recommendations and can be used both at the beginning of an experience and within AI responses to suggest next steps, related queries, or available resources.
 
-No written component description was found in Figma.
+The component supports two variants:
+- Simple: a lightweight recommendation based on text and optionally associated with a category or context.
+- Complete: an enriched recommendation that includes iconography, title, description, and supporting metadata that help users understand what they will obtain when selecting it.
 
 ### Key Properties
 
@@ -79,16 +79,22 @@ Evidence-based interpretation: AI assistant and builder flows, alongside `Chat-i
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- `Simple`, to suggest a short instruction tied to a context (view, entity, or data set).
-- `Complete`, to suggest a result that needs a title and a short description.
+- As a starting point when an AI chat has no existing messages.
+- To help users discover assistant capabilities.
+- Within AI-generated responses to suggest relevant next steps.
+- To recommend common queries or actions.
+- When guiding users toward specific platform capabilities.
+- To surface available resources, views, reports, data, or automations.
+- As part of assisted exploration experiences in enterprise AI solutions.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For quick follow-up chips in a single row, use `Chat-suggestion-ia`.
+- As a replacement for the primary text input.
+- For critical actions that require explicit confirmation.
+- When recommendations are unrelated to the current context.
+- For primary application navigation.
+- When only a single relevant action exists.
+- To display long lists of records or search results.
 
 ## Structure (Anatomy)
 
@@ -204,12 +210,15 @@ Not verified in Figma: truncation (for example, ellipsis), wrapping in `Complete
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- The `Complete` description uses 10 px `text/tertiary` text.
-- The `Simple` context is conveyed by both the tag color and its text.
-
-Missing accessibility information (not verified in Figma): button or option semantics, focus states, keyboard selection, accessible names, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, borders, and backgrounds.
+- Suggestions must be fully keyboard accessible.
+- Visible focus indicators must be clearly identifiable on every interactive suggestion.
+- Titles, descriptions, and category information must be available to assistive technologies.
+Recommendations
+- Use descriptive and action-oriented titles.
+- Ensure the primary meaning can be understood without relying only on icons.
+- Maintain a logical navigation order between recommendations.
 
 ## Content Guidelines
 
@@ -258,5 +267,3 @@ Verified observation: Text applies only to `Simple`; Title, Description, and Ico
 ## Notes / Changelog
 
 Generated from Figma evidence (node `3859:6817`) on 2026-10-23. The nested `Tag` instance was identified as a child component; its own Figma description was not used as evidence for this component.
-
-[No verified historical changes available]
