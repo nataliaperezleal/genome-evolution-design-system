@@ -2,9 +2,9 @@
 component: "Chat-suggestion-ia"
 system: "Genome Evolution Design System"
 type: "AI suggestion chips (composite)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3855-6697"
 last_updated: "2026-10-23"
 tags:
@@ -25,14 +25,11 @@ A horizontal row of three AI suggestion chips, with optional back and next arrow
 
 ### What It Is
 
-Evidence-based interpretation: Chat-suggestion-ia shows quick suggestions that users can pick in an AI conversation. The evidence:
+The Chat Suggestion component is a contextual recommendation element designed for AI-powered conversational experiences. It presents follow-up, refinement, or expansion suggestions based on an AI-generated response, allowing users to continue the conversation through one-click actions.
 
-- The component name ("chat", "suggestion", "ia").
-- Each chip uses an `ai-assistant` (sparkle) icon.
-- The sample labels are short follow-up instructions, such as "Como gráfica" ("As a chart") and "Agrega un título" ("Add a title").
-- The back and forward arrows suggest more suggestions can be browsed.
+Suggestions typically represent new instructions, transformations of the current result, or alternative exploration paths, reducing typing effort and helping users discover additional assistant capabilities.
 
-No written component description was found in Figma.
+The component can be displayed as a horizontally navigable collection of suggestions and supports visual variants to indicate relevance or emphasis.
 
 ### Key Properties
 
@@ -78,17 +75,22 @@ Evidence-based interpretation: AI chat experiences, together with `Chat-ia` mess
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- To offer short follow-up instructions after an AI response.
-- To suggest alternative output formats or refinements for a generated result.
-- When there are more suggestions than fit in one row (with arrows).
+- After an AI-generated response.
+- To suggest next steps related to the current result.
+- When supporting iterative content refinement.
+- To help less experienced users create more effective prompts.
+- In experiences where multiple exploration paths are available.
+- To surface transformations such as summarising, visualising, structuring, or expanding content.
+- In copilots, virtual assistants, and conversational agents.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): Avoid long suggestions. Chips are single-line, 10 px text.
+- As a replacement for the primary input field.
+- When suggestions are not related to the current context.
+- For critical actions that require explicit confirmation.
+- When there is only one obvious next action.
+- For primary application navigation.
+- When the number of suggestions creates cognitive overload.
 
 ## Structure (Anatomy)
 
@@ -184,13 +186,13 @@ Not verified in Figma: what selecting a chip does (send, insert into the input, 
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Chip labels are visible text, and the icon is decorative support.
-- The arrows are 12 px icons without a button container, which suggests a small interaction target.
-- Labels use 10 px text.
-
-Missing accessibility information (not verified in Figma): button semantics for chips and arrows, accessible names for the arrows, keyboard navigation, focus states, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, borders, indicators, and backgrounds.
+- All suggestions must be accessible through keyboard navigation.
+- Focus indicators must be clearly visible and distinguishable from normal and selected states.
+Recommendations
+- Use descriptive, action-oriented labels.
+- Maintain a logical keyboard navigation order for suggestions and scrolling controls.
 
 ## Content Guidelines
 
@@ -236,5 +238,3 @@ Evidence / Classification: Existing Figma variant (`3855:6695`).
 ## Notes / Changelog
 
 Generated from Figma evidence (node `3855:6697`) on 2026-10-23. The nested `Tag` instances were identified as child components; their own Figma description was not used as evidence for this component.
-
-[No verified historical changes available]
