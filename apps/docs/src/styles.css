@@ -2148,7 +2148,7 @@ input {
   display: grid;
   place-items: center;
   overflow: hidden;
-  padding: 16px;
+  padding: 48px;
   border: 1px solid color-mix(in srgb, var(--ge-color-role-border-default) 68%, transparent);
   border-radius: 16px;
   background: color-mix(in srgb, var(--ge-color-role-surface-subtlest) 78%, var(--ge-color-role-background-canvas));
