@@ -14,6 +14,7 @@ export const dict: Dict = {
   "nav.foundation.spacing": { en: "Spacing", es: "Espaciado" },
   "nav.foundation.typography": { en: "Typography", es: "Tipografía" },
   "nav.components": { en: "Components", es: "Componentes" },
+  "nav.aiComponents": { en: "AI Components", es: "Componentes IA" },
 
   "search.placeholder": { en: "Search components, tokens or foundations", es: "Busca componentes, tokens o fundamentos" },
 

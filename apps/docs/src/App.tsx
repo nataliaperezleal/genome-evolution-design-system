@@ -542,9 +542,11 @@ function slugify(value: string) {
     .replace(/^-+|-+$/g, "");
 }
 
-function mapComponentTypeToCategory(type: string | undefined, language: Language) {
+function mapComponentTypeToCategory(type: string | undefined, language: Language, category?: string) {
   const normalized = (type ?? "").toLowerCase();
   const cat = (en: string, es: string) => ({ id: slugify(en), label: language === "es" ? es : en });
+
+  if (category === "AI") return { id: "ai-components", label: t("nav.aiComponents", language) };
 
   // Matches the reference categories (Material/Polaris-like).
   if (normalized.includes("content") || normalized.includes("display") || normalized.includes("data display"))
@@ -2637,10 +2639,13 @@ export function App() {
 
     for (const entry of manifest.components) {
       const componentId = entry.file.replace(/\.md$/, "").replace(/\//g, "-");
-      const visible = !filterValue || entry.name.toLowerCase().includes(filterValue);
+      const category = mapComponentTypeToCategory(entry.type, language, entry.category);
+      const visible =
+        !filterValue ||
+        entry.name.toLowerCase().includes(filterValue) ||
+        category.label.toLowerCase().includes(filterValue);
       if (!visible) continue;
 
-      const category = mapComponentTypeToCategory(entry.type, language);
       if (!grouped.has(category.id)) grouped.set(category.id, { ...category, items: [] });
       grouped.get(category.id)!.items.push({ id: componentId, label: entry.name, status: entry.status });
     }
@@ -2653,7 +2658,7 @@ export function App() {
   const activeComponentCategoryId = useMemo(() => {
     const entry = manifest.components.find((item) => item.file.replace(/\.md$/, "").replace(/\//g, "-") === activeId);
     if (!entry) return null;
-    return mapComponentTypeToCategory(entry.type, language).id;
+    return mapComponentTypeToCategory(entry.type, language, entry.category).id;
   }, [activeId, language]);
 
   useEffect(() => {

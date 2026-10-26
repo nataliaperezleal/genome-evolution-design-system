@@ -3,6 +3,7 @@ export interface ManifestEntry {
   file: string;
   type?: string;
   status?: string;
+  category?: string;
 }
 
 export interface ManifestData {
