@@ -2,9 +2,9 @@
 component: "Input-ia"
 system: "Genome Evolution Design System"
 type: "AI prompt composer (composite input)"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3847-4964"
 last_updated: "2026-10-23"
 tags:
@@ -25,15 +25,11 @@ A prompt input for AI interactions. It combines a text field, removable referenc
 
 ### What It Is
 
-Evidence-based interpretation: Input-ia is the message composer for an AI assistant. Several pieces of Figma evidence support this:
+The AI Input is a specialised prompt input component designed for AI-powered experiences. It enables users to enter requests, instructions, or questions to generate content, perform tasks, or interact with AI assistants.
 
-- The component name ("ia").
-- The placeholder "¿Qué quieres construir? Usa @ o Ctrl + Space para referenciar tus datos" ("What do you want to build? Use @ or Ctrl + Space to reference your data").
-- The disclaimer "AI can make mistakes. Consider checking important information."
-- A `send` button that becomes active (filled) when the field contains text.
-- Reference tags that look like attached files.
+Unlike a traditional input field, this component includes capabilities specific to AI workflows, such as contextual references through mentions (@), embedded sources, attached resources, prompt enhancement actions, and submission controls. It may also display contextual guidance to help users understand the scope and limitations of AI-generated responses.
 
-No written component description was found in Figma for Input-ia itself.
+The component can support both simple requests and complex instructions enriched with multiple context sources.
 
 ### Key Properties
 
@@ -79,18 +75,22 @@ Evidence-based interpretation: AI assistant and builder experiences where users 
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- As the prompt entry point of an AI assistant or builder.
-- When users need to reference data or files in a prompt (reference tags, `@` / Ctrl + Space hint).
-- `Normal`, for detailed prompts with visible attach and data actions.
-- `Multiactions`, for compact layouts.
+- For AI-powered conversational experiences.
+- For AI-assisted content generation workflows.
+- When users need to provide complex or contextualised instructions.
+- For assistants that allow users to reference documents, data, people, or resources through mentions.
+- In automation experiences where AI requires additional context.
+- When prompt-enrichment actions are needed before submission.
+- For copilots, agents, virtual assistants, and AI-driven builders.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For regular form fields, use `Input` or `Text area`. Input-ia includes AI-specific content (disclaimer, send button, references).
+- For traditional data-entry forms.
+- When the input only requires short text without AI processing.
+- For simple application search fields.
+- When no intelligent assistance, generation, or reasoning capabilities exist.
+- As a replacement for standard text inputs in administrative workflows.
+- When the interaction does not involve AI-generated or AI-interpreted content.
 
 ## Structure (Anatomy)
 
@@ -257,15 +257,15 @@ Not verified in Figma: what each action picker opens, what `+` opens in `Multiac
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- A dedicated `Focused` state shows a 2 px `border/focus` border.
-- `Error` uses a red border and a text message, so it is not shown by color alone.
-- The send button's enabled state is shown by fill color and icon color.
-- Action pickers and the send button are icon-only.
-- Disclaimer, reference labels, and error message use 10 px text.
-
-Missing accessibility information (not verified in Figma): accessible names for icon-only actions and the send button, label for the prompt field, keyboard support (including Ctrl + Space and `@`), announcement of references and errors, and contrast compliance (including the gradient border).
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, references, status indicators, and backgrounds.
+- All associated controls (actions, attachments, mentions, and submission controls) must be keyboard accessible.
+- Visible focus indicators must remain clearly identifiable within the input area and across all interactive controls.
+- References, embedded elements, and error states must be properly communicated to assistive technologies.
+Recommendations
+- Provide accessible labels for quick actions and iconography.
+- Communicate warnings, limits, and errors through text in addition to colour.
+- Clearly inform users when additional content will be shared as context with the AI system.
 
 ## Content Guidelines
 
@@ -315,5 +315,3 @@ Verified observation: Show action 1–3 affect only `Type=Normal`.
 ## Notes / Changelog
 
 Generated from Figma evidence (node `3847:4964`) on 2026-10-23. The nested `Tag`, `Input`, and `Icon Button` instances were identified as child components; their own Figma descriptions were not used as evidence for this component.
-
-[No verified historical changes available]
