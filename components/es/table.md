@@ -3,8 +3,8 @@ component: "Table"
 system: "Genome Evolution Design System"
 type: "Visualización de datos (compuesto)"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-2382"
 last_updated: "2026-10-23"
 tags:
@@ -241,5 +241,3 @@ Observación verificada: No se pueden agregar columnas después de la 10 ni fila
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `2192:2382` y sus componentes hijos `.TableHeaderAssets` `2192:2096` y `.TableCellAssets` `2192:1922`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

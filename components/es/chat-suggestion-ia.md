@@ -3,8 +3,8 @@ component: "Chat-suggestion-ia"
 system: "Genome Evolution Design System"
 type: "Sugerencias de IA en forma de chips (compuesto)"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3855-6697"
 last_updated: "2026-10-23"
 tags:
@@ -25,14 +25,11 @@ Fila horizontal de tres sugerencias de IA en forma de chips, con flechas opciona
 
 ### Qué es
 
-Interpretación basada en evidencia: Chat-suggestion-ia muestra sugerencias rápidas que el usuario puede elegir en una conversación con IA. La evidencia:
+Chat Suggestion es un elemento de recomendación contextual para experiencias conversacionales con IA. Presenta sugerencias de seguimiento, refinamiento o ampliación basadas en una respuesta generada por IA, para que el usuario pueda continuar la conversación con una sola acción.
 
-- El nombre del componente ("chat", "suggestion", "ia").
-- Cada chip usa un icono `ai-assistant` (destellos).
-- Los textos de ejemplo son instrucciones breves de seguimiento, como "Como gráfica" y "Agrega un título".
-- Las flechas de anterior y siguiente sugieren que se pueden recorrer más sugerencias.
+Las sugerencias suelen proponer nuevas instrucciones, transformaciones del resultado actual o rutas alternativas de exploración. Así reducen la necesidad de escribir y ayudan a descubrir otras capacidades del asistente.
 
-No se encontró una descripción escrita del componente en Figma.
+El componente puede mostrarse como una colección de sugerencias navegable horizontalmente y admite variantes visuales para indicar relevancia o énfasis.
 
 ### Propiedades clave
 
@@ -78,17 +75,22 @@ Interpretación basada en evidencia: Experiencias de chat con IA, junto con los 
 
 ## Cuándo usar
 
-Interpretación basada en evidencia (no documentada como guía oficial en Figma):
-
-- Para ofrecer instrucciones breves de seguimiento después de una respuesta de la IA.
-- Para sugerir formatos de salida alternativos o ajustes de un resultado generado.
-- Cuando hay más sugerencias de las que caben en una fila (con flechas).
+- Después de una respuesta generada por IA.
+- Para sugerir próximos pasos relacionados con el resultado actual.
+- En procesos de refinamiento iterativo de contenido.
+- Para ayudar a usuarios con menos experiencia a redactar instrucciones más eficaces.
+- En experiencias con varias rutas de exploración posibles.
+- Para proponer transformaciones, como resumir, visualizar, estructurar o ampliar contenido.
+- En copilotos, asistentes virtuales y agentes conversacionales.
 
 ## Cuándo NO usar
 
-[No se encontraron restricciones documentadas]
-
-Recomendación (no es una regla establecida del sistema de diseño): Evita sugerencias largas. Los chips son de una sola línea, con texto de 10 px.
+- Como sustituto del campo de entrada principal.
+- Cuando las sugerencias no estén relacionadas con el contexto actual.
+- Para acciones críticas que requieran confirmación explícita.
+- Cuando solo haya un siguiente paso evidente.
+- Para la navegación principal de la aplicación.
+- Cuando la cantidad de sugerencias genere una carga cognitiva excesiva.
 
 ## Estructura (Anatomía)
 
@@ -184,13 +186,16 @@ No verificado en Figma: qué ocurre al seleccionar un chip (enviar, insertar en 
 
 ## Accesibilidad
 
-Observaciones relacionadas con la accesibilidad:
+Requisitos obligatorios:
 
-- Los textos de los chips son visibles, y el icono funciona como apoyo decorativo.
-- Las flechas son iconos de 12 px sin contenedor de botón, lo que sugiere un área de interacción pequeña.
-- Los textos usan tamaño de 10 px.
+- Asegura un contraste suficiente entre el texto, los bordes, los indicadores y los fondos.
+- Todas las sugerencias deben ser accesibles mediante navegación con teclado.
+- Los indicadores de foco deben ser claramente visibles y distinguirse de los estados normal y seleccionado.
 
-Información de accesibilidad faltante (no verificada en Figma): semántica de botón para chips y flechas, nombres accesibles para las flechas, navegación con teclado, estados de foco y cumplimiento de contraste.
+Recomendaciones:
+
+- Usa etiquetas descriptivas y orientadas a la acción.
+- Mantén un orden lógico de navegación con teclado para las sugerencias y los controles de desplazamiento.
 
 ## Guía de contenido
 
@@ -236,5 +241,3 @@ Evidencia / Clasificación: Variante existente en Figma (`3855:6695`).
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `3855:6697`) el 2026-10-23. Las instancias de `Tag` anidadas se identificaron como componentes hijos; su propia descripción de Figma no se usó como evidencia para este componente.
-
-[No hay cambios históricos verificados disponibles]

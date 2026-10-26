@@ -3,8 +3,8 @@ component: "Tooltip"
 system: "Genome Evolution Design System"
 type: "Superposición / información complementaria"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-478"
 last_updated: "2026-10-23"
 tags:
@@ -225,5 +225,3 @@ Evidencia / Clasificación: Variante existente en Figma (`2192:484`).
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `2192:478`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

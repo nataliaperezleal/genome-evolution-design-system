@@ -3,8 +3,8 @@ component: "Tag"
 system: "Genome Evolution Design System"
 type: "Etiqueta / indicador de estado"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-1314"
 last_updated: "2026-10-23"
 tags:
@@ -310,5 +310,3 @@ Observación verificada: El conjunto no contiene variantes para estas combinacio
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `2192:1314`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

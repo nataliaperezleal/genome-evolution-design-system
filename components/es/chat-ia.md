@@ -3,8 +3,8 @@ component: "Chat-ia"
 system: "Genome Evolution Design System"
 type: "Mensaje de conversación con IA"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.0"
+owner: "UX Design"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3853-5941"
 last_updated: "2026-10-23"
 tags:
@@ -25,15 +25,9 @@ Mensaje de conversación para experiencias de chat con IA. Muestra un mensaje de
 
 ### Qué es
 
-Interpretación basada en evidencia: Chat-ia es una fila de mensaje dentro de una conversación entre una persona y un asistente de IA. La evidencia:
+Chat es una interfaz conversacional para mostrar intercambios de mensajes entre una persona y un sistema de inteligencia artificial. Permite presentar solicitudes, respuestas generadas por IA, estados de procesamiento, advertencias, errores y acciones relacionadas con el contenido generado.
 
-- La propiedad `User` distingue los mensajes `Person` e `IA`.
-- Cada lado tiene su propio avatar: un icono `user` a la derecha para `Person` y un icono `ai-worker` a la izquierda para `IA`.
-- La forma de las burbujas cambia: cada una tiene una esquina recta del lado del avatar.
-- El contenido de ejemplo: una instrucción del usuario y una respuesta de la IA con una pregunta de seguimiento.
-- Los estados propios de la IA: una advertencia de cuota de tokens, un error de generación con `Retry` y "Procesando tu solicitud...".
-
-No se encontró una descripción escrita del componente en Figma.
+El componente está diseñado específicamente para experiencias conversacionales con IA, en las que las respuestas pueden incluir información generada dinámicamente, recomendaciones, referencias contextuales, evidencia, controles para valorar la calidad y acciones de seguimiento. Admite distintos participantes (`Person` e `IA`), así como estados de generación, validación y error que ayudan a entender el ciclo de una interacción con inteligencia artificial.
 
 ### Propiedades clave
 
@@ -81,19 +75,22 @@ Interpretación basada en evidencia: Chats de asistentes o constructores con IA,
 
 ## Cuándo usar
 
-Interpretación basada en evidencia (no documentada como guía oficial en Figma):
-
-- `Person`, para mostrar una instrucción enviada por el usuario, opcionalmente con documentos adjuntos (Mostrar etiquetas) y una etiqueta de contexto (Mostrar recomendación).
-- `IA` + `Default`, para mostrar una respuesta de la IA.
-- `IA` + `Charging`, mientras la IA procesa una solicitud.
-- `IA` + `Warning`, cuando un límite de uso impide responder (por ejemplo, cuota de tokens superada).
-- `IA` + `Error`, cuando una respuesta falla y se puede reintentar.
+- Para conversaciones entre usuarios y asistentes de IA.
+- En copilotos, agentes inteligentes y asistentes virtuales.
+- Para mostrar solicitudes y respuestas dentro de una experiencia conversacional.
+- Cuando sea necesario conservar el historial y el contexto de la conversación.
+- Para presentar contenido generado progresivamente por un modelo de IA.
+- Cuando las respuestas generadas requieran valoración, evaluación o acciones de seguimiento.
+- En experiencias de automatización basadas en lenguaje natural.
 
 ## Cuándo NO usar
 
-[No se encontraron restricciones documentadas]
-
-Recomendación (no es una regla establecida del sistema de diseño): Para notificaciones del sistema fuera de una conversación, usa componentes de alerta o snackbar.
+- Para mensajería tradicional entre usuarios sin capacidades de IA.
+- Cuando la interacción consista únicamente en formularios estructurados.
+- Para mostrar información estática que no requiera conversación.
+- Como sustituto de listas, tablas o dashboards.
+- Cuando los usuarios no necesiten conservar el contexto histórico de la interacción.
+- Para tareas simples que puedan completarse de forma más eficiente con acciones directas.
 
 ## Estructura (Anatomía)
 
@@ -242,14 +239,18 @@ No verificado en Figma: qué hacen me gusta, no me gusta y guardar; qué hace `S
 
 ## Accesibilidad
 
-Observaciones relacionadas con la accesibilidad:
+Requisitos obligatorios:
 
-- Los mensajes de la persona y de la IA se diferencian por el icono del avatar, el lado, el color de la burbuja y la forma de las esquinas, no solo por el color.
-- `Warning` y `Error` combinan un icono, un borde de color y un mensaje de texto.
-- Las acciones de valoración son solo de icono.
-- Los metadatos usan texto de 10 px.
+- Asegura un contraste suficiente entre el texto, los iconos, los bordes, los indicadores de estado y los fondos.
+- Todos los controles interactivos asociados a los mensajes deben poder usarse con teclado.
+- Los indicadores de foco deben ser claramente visibles en las acciones, los botones y los elementos interactivos.
+- Los mensajes nuevos, los estados de carga y los errores deben comunicarse correctamente a las tecnologías de asistencia.
 
-Información de accesibilidad faltante (no verificada en Figma): nombres accesibles para los avatares y las acciones de valoración, anuncio de mensajes nuevos y del estado de procesamiento (por ejemplo, regiones live), acceso con teclado a las acciones y cumplimiento de contraste.
+Recomendaciones:
+
+- Identifica semánticamente el origen de cada mensaje (usuario o IA).
+- Comunica los estados de procesamiento también con texto, no solo con indicadores visuales.
+- Mantén una jerarquía clara para títulos, referencias, acciones y contenido generado.
 
 ## Guía de contenido
 
@@ -298,5 +299,3 @@ Observación verificada: El conjunto no contiene variantes de `Person` para `War
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `3853:5941`) el 2026-10-23. Las instancias anidadas de `Tag`, `Icon Button` y `Button` se identificaron como componentes hijos; sus propias descripciones de Figma no se usaron como evidencia para este componente.
-
-[No hay cambios históricos verificados disponibles]

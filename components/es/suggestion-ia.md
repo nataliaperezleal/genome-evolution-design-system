@@ -3,8 +3,8 @@ component: "Suggestion-ia"
 system: "Genome Evolution Design System"
 type: "Elemento de sugerencia de IA"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3859-6817"
 last_updated: "2026-10-23"
 tags:
@@ -25,13 +25,13 @@ Elemento individual de sugerencia de IA, disponible como sugerencia compacta de 
 
 ### Qué es
 
-Interpretación basada en evidencia: Suggestion-ia presenta un elemento que la IA propone al usuario. La evidencia:
+Suggestion es un elemento de recomendación contextual para presentar posibles acciones, consultas o rutas de exploración dentro de experiencias con IA. Ayuda a iniciar una conversación, descubrir las capacidades del asistente o continuar una interacción a partir de una respuesta generada por IA.
 
-- El nombre del componente.
-- El ejemplo `Simple`, que combina una etiqueta de contexto ("Vistas: Ventas") con una instrucción ("como gráfica de barras").
-- El ejemplo `Complete`, que describe un resultado sugerido ("1. Sales dashboard", "1,248 records matching schema") con un icono de gráfica.
+A diferencia de Chat Suggestion, que se centra en refinamientos rápidos durante la conversación, Suggestion ofrece recomendaciones contextuales más amplias. Puede usarse al inicio de una experiencia y dentro de las respuestas de IA para proponer próximos pasos, consultas relacionadas o recursos disponibles.
 
-No se encontró una descripción escrita del componente en Figma.
+El componente admite dos variantes:
+- `Simple`: recomendación ligera basada en texto, asociada opcionalmente a una categoría o contexto.
+- `Complete`: recomendación ampliada con iconografía, título, descripción y metadatos de apoyo que ayudan a entender el resultado de seleccionarla.
 
 ### Propiedades clave
 
@@ -79,16 +79,22 @@ Interpretación basada en evidencia: Flujos de asistentes y constructores con IA
 
 ## Cuándo usar
 
-Interpretación basada en evidencia (no documentada como guía oficial en Figma):
-
-- `Simple`, para sugerir una instrucción breve ligada a un contexto (vista, entidad o conjunto de datos).
-- `Complete`, para sugerir un resultado que necesita un título y una descripción breve.
+- Como punto de partida cuando un chat con IA aún no tiene mensajes.
+- Para ayudar a descubrir las capacidades del asistente.
+- Dentro de respuestas generadas por IA para proponer próximos pasos relevantes.
+- Para recomendar consultas o acciones habituales.
+- Para guiar hacia capacidades específicas de la plataforma.
+- Para mostrar recursos disponibles, vistas, informes, datos o automatizaciones.
+- Como parte de experiencias de exploración asistida en soluciones de IA empresariales.
 
 ## Cuándo NO usar
 
-[No se encontraron restricciones documentadas]
-
-Recomendación (no es una regla establecida del sistema de diseño): Para chips de seguimiento rápido en una sola fila, usa `Chat-suggestion-ia`.
+- Como sustituto del campo de texto principal.
+- Para acciones críticas que requieran confirmación explícita.
+- Cuando las recomendaciones no estén relacionadas con el contexto actual.
+- Para la navegación principal de la aplicación.
+- Cuando solo exista una acción relevante.
+- Para mostrar listas largas de registros o resultados de búsqueda.
 
 ## Estructura (Anatomía)
 
@@ -204,12 +210,18 @@ No verificado en Figma: truncado (por ejemplo, con puntos suspensivos), ajuste d
 
 ## Accesibilidad
 
-Observaciones relacionadas con la accesibilidad:
+Requisitos obligatorios:
 
-- La descripción de `Complete` usa texto de 10 px en `text/tertiary`.
-- El contexto de `Simple` se comunica tanto con el color de la etiqueta como con su texto.
+- Asegura un contraste suficiente entre el texto, los iconos, los bordes y los fondos.
+- Las sugerencias deben poder usarse completamente con teclado.
+- Los indicadores de foco deben ser claramente visibles en cada sugerencia interactiva.
+- Los títulos, las descripciones y la información de categoría deben estar disponibles para las tecnologías de asistencia.
 
-Información de accesibilidad faltante (no verificada en Figma): semántica de botón u opción, estados de foco, selección con teclado, nombres accesibles y cumplimiento de contraste.
+Recomendaciones:
+
+- Usa títulos descriptivos y orientados a la acción.
+- Asegúrate de que el significado principal se entienda sin depender únicamente de los iconos.
+- Mantén un orden lógico de navegación entre las recomendaciones.
 
 ## Guía de contenido
 
@@ -258,5 +270,3 @@ Observación verificada: Text solo aplica a `Simple`; Title, Description e Icono
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `3859:6817`) el 2026-10-23. La instancia de `Tag` anidada se identificó como componente hijo; su propia descripción de Figma no se usó como evidencia para este componente.
-
-[No hay cambios históricos verificados disponibles]

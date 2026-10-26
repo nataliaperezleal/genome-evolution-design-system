@@ -3,8 +3,8 @@ component: "Tab"
 system: "Genome Evolution Design System"
 type: "Elemento de navegación"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2189-5340"
 last_updated: "2026-10-23"
 tags:
@@ -287,5 +287,3 @@ Observación verificada: El conjunto no contiene variantes para estas combinacio
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `2189:5340`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

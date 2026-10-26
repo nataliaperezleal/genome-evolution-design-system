@@ -3,8 +3,8 @@ component: "Input-ia"
 system: "Genome Evolution Design System"
 type: "Compositor de instrucciones para IA (entrada compuesta)"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.0"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3847-4964"
 last_updated: "2026-10-23"
 tags:
@@ -25,15 +25,11 @@ Campo de entrada de instrucciones para interacciones con IA. Combina un campo de
 
 ### Qué es
 
-Interpretación basada en evidencia: Input-ia es el compositor de mensajes de un asistente de IA. Varias evidencias de Figma lo respaldan:
+Input IA es un componente especializado para introducir instrucciones en experiencias con inteligencia artificial. Permite escribir solicitudes, instrucciones o preguntas para generar contenido, realizar tareas o interactuar con asistentes de IA.
 
-- El nombre del componente ("ia").
-- El texto de ejemplo "¿Qué quieres construir? Usa @ o Ctrl + Space para referenciar tus datos".
-- El aviso "AI can make mistakes. Consider checking important information." ("La IA puede cometer errores. Considera verificar la información importante.").
-- Un botón `send` que se activa (relleno) cuando el campo contiene texto.
-- Etiquetas de referencia que representan archivos adjuntos.
+A diferencia de un campo de entrada tradicional, incluye capacidades propias de los flujos de IA, como referencias contextuales mediante menciones (`@`), fuentes integradas, recursos adjuntos, acciones para mejorar instrucciones y controles de envío. También puede mostrar orientación contextual para ayudar a comprender el alcance y las limitaciones de las respuestas generadas por IA.
 
-No se encontró una descripción escrita en Figma para el propio Input-ia.
+Admite tanto solicitudes simples como instrucciones complejas enriquecidas con varias fuentes de contexto.
 
 ### Propiedades clave
 
@@ -79,18 +75,22 @@ Interpretación basada en evidencia: Experiencias de asistentes y constructores 
 
 ## Cuándo usar
 
-Interpretación basada en evidencia (no documentada como guía oficial en Figma):
-
-- Como punto de entrada de instrucciones de un asistente o constructor con IA.
-- Cuando el usuario necesita referenciar datos o archivos en una instrucción (etiquetas de referencia, indicación de `@` / Ctrl + Space).
-- `Normal`, para instrucciones detalladas con acciones visibles de adjuntos y datos.
-- `Multiactions`, para disposiciones compactas.
+- En experiencias conversacionales con IA.
+- En flujos de generación de contenido asistida por IA.
+- Cuando los usuarios necesiten proporcionar instrucciones complejas o contextuales.
+- En asistentes que permitan referenciar documentos, datos, personas o recursos mediante menciones.
+- En experiencias de automatización que requieran contexto adicional para la IA.
+- Cuando se necesiten acciones para enriquecer la instrucción antes de enviarla.
+- En copilotos, agentes, asistentes virtuales y constructores basados en IA.
 
 ## Cuándo NO usar
 
-[No se encontraron restricciones documentadas]
-
-Recomendación (no es una regla establecida del sistema de diseño): Para campos de formulario comunes, usa `Input` o `Text area`. Input-ia incluye contenido específico de IA (aviso, botón de envío, referencias).
+- En formularios tradicionales de ingreso de datos.
+- Cuando el campo solo requiera texto breve sin procesamiento de IA.
+- En campos de búsqueda simples de la aplicación.
+- Cuando no haya asistencia inteligente, generación ni razonamiento.
+- Como sustituto de campos de texto estándar en flujos administrativos.
+- Cuando la interacción no incluya contenido generado o interpretado por IA.
 
 ## Estructura (Anatomía)
 
@@ -257,15 +257,18 @@ No verificado en Figma: qué abre cada selector de acción, qué abre `+` en `Mu
 
 ## Accesibilidad
 
-Observaciones relacionadas con la accesibilidad:
+Requisitos obligatorios:
 
-- Existe un estado `Focused` dedicado, con un borde `border/focus` de 2 px.
-- `Error` usa un borde rojo y un mensaje de texto, por lo que no se indica solo con color.
-- El estado habilitado del botón de envío se indica con el color del relleno y del icono.
-- Los selectores de acción y el botón de envío son solo de icono.
-- El aviso, los textos de referencia y el mensaje de error usan texto de 10 px.
+- Asegura un contraste suficiente entre el texto, los iconos, las referencias, los indicadores de estado y los fondos.
+- Todos los controles asociados (acciones, adjuntos, menciones y controles de envío) deben poder usarse con teclado.
+- Los indicadores de foco deben seguir siendo claramente visibles dentro del campo y en todos los controles interactivos.
+- Las referencias, los elementos integrados y los estados de error deben comunicarse correctamente a las tecnologías de asistencia.
 
-Información de accesibilidad faltante (no verificada en Figma): nombres accesibles para las acciones solo de icono y el botón de envío, etiqueta del campo de instrucción, soporte de teclado (incluidos Ctrl + Space y `@`), anuncio de referencias y errores, y cumplimiento de contraste (incluido el borde degradado).
+Recomendaciones:
+
+- Proporciona etiquetas accesibles para las acciones rápidas y los iconos.
+- Comunica las advertencias, los límites y los errores también con texto, no solo con color.
+- Informa claramente cuando se vaya a compartir contenido adicional como contexto con el sistema de IA.
 
 ## Guía de contenido
 
@@ -315,5 +318,3 @@ Observación verificada: Mostrar acción 1–3 solo afectan a `Type=Normal`.
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `3847:4964`) el 2026-10-23. Las instancias anidadas de `Tag`, `Input` e `Icon Button` se identificaron como componentes hijos; sus propias descripciones de Figma no se usaron como evidencia para este componente.
-
-[No hay cambios históricos verificados disponibles]

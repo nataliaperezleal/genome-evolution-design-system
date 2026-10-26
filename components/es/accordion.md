@@ -3,8 +3,8 @@ component: "Accordion"
 system: "Genome Evolution Design System"
 type: "Conjunto de componentes"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2016-2350"
 last_updated: "2026-10-22"
 tags:
@@ -307,5 +307,3 @@ Estas combinaciones no están disponibles, pero no están documentadas explícit
 ## Notas / Registro de cambios
 
 Generado o revisado con el material de origen disponible el 2026-10-22.
-
-[No hay cambios históricos verificados disponibles]

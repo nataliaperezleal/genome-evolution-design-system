@@ -3,8 +3,8 @@ component: "Segmented button"
 system: "Genome Evolution Design System"
 type: "Component set"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2194-2674"
 last_updated: "2026-10-23"
 tags:
@@ -283,5 +283,3 @@ Combinaciones no disponibles: `Color=Evergreen` y `Color=Indigo` existen solo co
 ## Notas / registro de cambios
 
 Generado a partir de evidencia de Figma (component set `2194:2674`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

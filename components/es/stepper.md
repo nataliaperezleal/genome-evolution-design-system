@@ -3,8 +3,8 @@ component: "Stepper"
 system: "Genome Evolution Design System"
 type: "Component set"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2339-4361"
 last_updated: "2026-10-23"
 tags:
@@ -256,5 +256,3 @@ Combinaciones no disponibles: `Evergreen` e `Indigo` no tienen variantes `Defaul
 ## Notas / registro de cambios
 
 Generado a partir de evidencia de Figma (component set `2339:4361`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

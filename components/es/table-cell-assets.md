@@ -3,8 +3,8 @@ component: ".TableCellAssets"
 system: "Genome Evolution Design System"
 type: "Subcomponente (celda del cuerpo de tabla)"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2192-1922"
 last_updated: "2026-10-23"
 tags:
@@ -234,5 +234,3 @@ Observación verificada: Las propiedades booleanas `Icon`, `Title` y `Content` s
 ## Notas / Registro de cambios
 
 Generado a partir de evidencia de Figma (nodo `2192:1922` y su uso en `Table`, nodo `2192:2382`) el 2026-10-23.
-
-[No hay cambios históricos verificados disponibles]

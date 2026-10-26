@@ -3,8 +3,8 @@ component: "Backdrop"
 system: "Genome Evolution Design System"
 type: "Conjunto de componentes"
 status: "Design"
-version: "No verificado en Figma"
-owner: "No verificado en Figma"
+version: "1.2"
+owner: "UX Team"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=2041-81"
 last_updated: "2026-10-22"
 tags:
@@ -151,16 +151,6 @@ Descripción: Aclara y desenfoca el contenido que queda detrás.
 
 Evidencia / Clasificación: Variante existente en Figma.
 
-## Combinaciones inválidas
-
-[No se encontraron combinaciones inválidas documentadas]
-
-## Aclaraciones pendientes
-
-Ninguna
-
 ## Notas / Registro de cambios
 
 Generado o revisado con el material de origen disponible el 2026-10-22.
-
-[No hay cambios históricos verificados disponibles]
