@@ -198,7 +198,14 @@ function headingToTabId(heading: string): ComponentTabId | null {
   const normalized = normalizeHeading(heading);
 
   if (normalized === "overview" || normalized === "resumen" || normalized === "vision general") return "overview";
-  if (normalized === "purpose" || normalized === "proposito" || normalized === "objetivo") return "overview";
+  if (
+    normalized === "purpose" ||
+    normalized === "purpose intent" ||
+    normalized === "proposito" ||
+    normalized === "proposito intencion" ||
+    normalized === "objetivo"
+  )
+    return "overview";
 
   if (normalized.includes("when to use") || normalized.includes("cuando usar")) return "when-to-use";
   if (
@@ -278,7 +285,13 @@ function extractPurposeFromMarkdown(markdown: string) {
   const { sections } = splitMarkdownByH2(markdown);
   const purposeSection = sections.find((section) => {
     const normalized = normalizeHeading(section.heading);
-    return normalized === "purpose" || normalized === "purpose intent" || normalized === "proposito" || normalized === "objetivo";
+    return (
+      normalized === "purpose" ||
+      normalized === "purpose intent" ||
+      normalized === "proposito" ||
+      normalized === "proposito intencion" ||
+      normalized === "objetivo"
+    );
   });
   const content = purposeSection?.content ?? [];
 
