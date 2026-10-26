@@ -2,9 +2,9 @@
 component: "Chat-ia"
 system: "Genome Evolution Design System"
 type: "AI conversation message"
-status: "Not verified in Figma"
-version: "Not verified in Figma"
-owner: "Not verified in Figma"
+status: "Design"
+version: "1.0"
+owner: "UX Design"
 figma_node: "https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution?node-id=3853-5941"
 last_updated: "2026-10-23"
 tags:
@@ -25,15 +25,10 @@ A conversation message for AI chat experiences. It shows a user (`Person`) messa
 
 ### What It Is
 
-Evidence-based interpretation: Chat-ia is a single message row in a conversation between a person and an AI assistant. The evidence:
+The Chat component is a conversational interface used to display message exchanges between a user and an artificial intelligence system. It enables the presentation of user requests, AI-generated responses, processing states, warnings, errors, and actions associated with generated content.
 
-- The `User` property separates `Person` and `IA` messages.
-- Each side has its own avatar: a `user` icon on the right for `Person`, and an `ai-worker` icon on the left for `IA`.
-- The bubble shapes differ: each has a square corner on the avatar side.
-- The sample content: a user prompt and an AI reply asking a follow-up question.
-- The AI-specific states: a token-quota warning, a generation error with `Retry`, and "Procesando tu solicitud..." ("Processing your request...").
-
-No written component description was found in Figma.
+The component is specifically designed for AI-powered conversational experiences where responses may include dynamically generated information, recommendations, contextual references, evidence, quality feedback controls, and follow-up actions.
+It supports different participant types (Person and AI), as well as generation, validation, and error states that help users understand the lifecycle of an interaction with artificial intelligence.
 
 ### Key Properties
 
@@ -81,19 +76,22 @@ Evidence-based interpretation: AI assistant or builder chats, likely together wi
 
 ## When to Use
 
-Evidence-based interpretation (not documented as official guidance in Figma):
-
-- `Person`, to display a prompt sent by the user, optionally with attached documents (Show tags) and a context tag (Show recommendation).
-- `IA` + `Default`, to display an AI response.
-- `IA` + `Charging`, while the AI is processing a request.
-- `IA` + `Warning`, when a usage limit prevents a response (for example, token quota exceeded).
-- `IA` + `Error`, when a response fails and can be retried.
+- For conversations between users and AI assistants.
+- In copilots, intelligent agents, and virtual assistants.
+- To display prompts and responses within a conversational experience.
+- When conversation history and context must be preserved.
+- To present content generated progressively by an AI model.
+- When generated responses require feedback, evaluation, or follow-up actions.
+- For natural-language-driven automation experiences.
 
 ## When NOT to Use
 
-[No documented restrictions found]
-
-Recommendation (not an established design-system rule): For system notifications outside a conversation, use alert or snackbar components instead.
+- For traditional user-to-user messaging without AI capabilities.
+- When the interaction consists solely of structured forms.
+- To display static information that does not require conversation.
+- As a replacement for lists, tables, or dashboards.
+- When users do not need historical interaction context.
+- For simple tasks that can be completed more efficiently through direct actions.
 
 ## Structure (Anatomy)
 
@@ -242,14 +240,15 @@ Not verified in Figma: what like, dislike, and bookmark do; what `Select` does; 
 
 ## Accessibility
 
-Accessibility-related observations:
-
-- Person and AI messages differ by avatar icon, side, bubble color, and corner shape, not by color alone.
-- `Warning` and `Error` combine an icon, a colored border, and a text message.
-- Feedback actions are icon-only.
-- Metadata uses 10 px text.
-
-Missing accessibility information (not verified in Figma): accessible names for avatars and feedback actions, announcement of new messages and processing status (for example, live regions), keyboard access to actions, and contrast compliance.
+Mandatory requirements
+- Ensure sufficient contrast between text, icons, borders, status indicators, and backgrounds.
+- All interactive controls associated with messages must be keyboard accessible.
+- Focus indicators must be clearly visible on actions, buttons, and interactive elements.
+- New messages, loading states, and errors must be properly communicated to assistive technologies.
+Recommendations
+- Semantically identify the source of each message (user or AI).
+- Communicate processing states through text in addition to visual indicators.
+- Maintain a clear hierarchy for titles, references, actions, and generated content.
 
 ## Content Guidelines
 
@@ -298,5 +297,3 @@ Verified observation: The component set contains no `Person` variants for `Warni
 ## Notes / Changelog
 
 Generated from Figma evidence (node `3853:5941`) on 2026-10-23. The nested `Tag`, `Icon Button`, and `Button` instances were identified as child components; their own Figma descriptions were not used as evidence for this component.
-
-[No verified historical changes available]
