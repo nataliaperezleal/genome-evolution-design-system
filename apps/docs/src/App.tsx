@@ -42,7 +42,7 @@ import ColorPickerDemo from "./ColorPickerDemo";
 
 import { componentDocsBySlug, componentDocsBySlugEs, foundationDocsBySlug, foundationDocsBySlugEs, manifest, tokenStats } from "./data";
 import { componentSpecs, componentTabLabels, tr, type ComponentTabId, type SpecSection } from "./component-specs";
-import { renderMarkdown } from "./markdown";
+import { renderInline, renderMarkdown } from "./markdown";
 import type { DocRecord, NavItem } from "./types";
 import { BorderFoundation } from "./foundations/BorderFoundation";
 import { ColorsFoundation } from "./foundations/ColorsFoundation";
@@ -215,7 +215,13 @@ function headingToTabId(heading: string): ComponentTabId | null {
   )
     return "when-not-to-use";
 
-  if (normalized === "anatomy" || normalized === "anatomia") return "anatomy";
+  if (
+    normalized === "anatomy" ||
+    normalized === "anatomia" ||
+    normalized === "structure anatomy" ||
+    normalized === "estructura anatomia"
+  )
+    return "anatomy";
   if (normalized === "states" || normalized === "estados") return "states";
   if (normalized === "rules" || normalized === "reglas") return "rules";
   if (normalized.includes("do") && normalized.includes("dont")) return "do-dont";
@@ -279,6 +285,47 @@ function splitMarkdownByH2(markdown: string) {
   if (current) sections.push(current);
 
   return { intro: intro.join("\n").trim(), sections };
+}
+
+function parseMarkdownTableRow(line: string) {
+  return line
+    .trim()
+    .replace(/^\|/, "")
+    .replace(/\|$/, "")
+    .split("|")
+    .map((cell) => cell.trim());
+}
+
+function extractAnatomyParts(markdown: string) {
+  const { sections } = splitMarkdownByH2(markdown);
+  const anatomy = sections.find((section) => {
+    const heading = normalizeHeading(section.heading);
+    return heading === "structure anatomy" || heading === "estructura anatomia";
+  });
+  if (!anatomy) return [];
+
+  const lines = anatomy.content;
+  const partsHeading = lines.findIndex((line) => {
+    const match = line.match(/^###\s+(.+)\s*$/);
+    if (!match) return false;
+    const heading = normalizeHeading(match[1]);
+    return heading === "component parts" || heading === "partes del componente";
+  });
+  if (partsHeading < 0) return [];
+
+  const tableRows: string[][] = [];
+  for (let index = partsHeading + 1; index < lines.length; index += 1) {
+    if (/^#{1,3}\s+/.test(lines[index])) break;
+    if (!lines[index].trim().startsWith("|")) continue;
+    if (/^\|\s*:?-{3,}/.test(lines[index])) continue;
+    tableRows.push(parseMarkdownTableRow(lines[index]));
+  }
+
+  return tableRows.slice(1).flatMap((cells) => {
+    const [name, requirement, description] = cells;
+    if (!name) return [];
+    return [{ name, requirement: requirement ?? "", description: description ?? "" }];
+  });
 }
 
 function extractPurposeFromMarkdown(markdown: string) {
@@ -2084,6 +2131,38 @@ function ComponentStatesShowcase({
   );
 }
 
+function AnatomyReferenceImage({
+  componentName,
+  docPath,
+  language
+}: {
+  componentName: string;
+  docPath: string;
+  language: Language;
+}) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const filename = docPath.split("/").pop()?.replace(/\.md$/, "") ?? componentName.toLowerCase().replace(/\s+/g, "-");
+
+  return (
+    <figure className="anatomy-reference">
+      <div className="anatomy-reference__frame">
+        {imageFailed ? (
+          <div className="anatomy-reference__fallback">
+            <span>{language === "es" ? "Imagen de anatomía pendiente" : "Anatomy image pending"}</span>
+            <code>{filename}.png</code>
+          </div>
+        ) : (
+          <img
+            src={publicAsset(`images/${filename}-anatomy.png`)}
+            alt={language === "es" ? `Anatomía de ${componentName}` : `${componentName} anatomy`}
+            onError={() => setImageFailed(true)}
+          />
+        )}
+      </div>
+    </figure>
+  );
+}
+
 function ComponentDocumentation({
   componentName,
   language,
@@ -2132,6 +2211,7 @@ function ComponentDocumentation({
   }, [defaultTab, componentName]);
 
   const sections = spec?.tabs?.[activeTab] ?? [];
+  const anatomyParts = useMemo(() => extractAnatomyParts(doc.body), [doc.body]);
   const mdForCards = useMemo(() => {
     const md = mdTabs[activeTab] ?? "";
     if (activeTab === "overview") {
@@ -2140,6 +2220,28 @@ function ComponentDocumentation({
     return md;
   }, [mdTabs, activeTab]);
   const mdCards = useMemo(() => markdownToDocCards(mdForCards, language), [mdForCards, language]);
+  const anatomyCards = useMemo(
+    () =>
+      mdCards.flatMap((card) => {
+        const heading = normalizeHeading(card.title ?? "");
+        if (heading === "structure anatomy" || heading === "estructura anatomia") return [];
+        if (anatomyParts.length && (heading === "component parts" || heading === "partes del componente")) return [];
+        const bodyHeading = card.body.match(/^##\s+(.+)\s*$/m);
+        if (!card.title && bodyHeading) {
+          const normalizedBodyHeading = normalizeHeading(bodyHeading[1]);
+          if (normalizedBodyHeading === "structure anatomy" || normalizedBodyHeading === "estructura anatomia") {
+            const body = card.body.replace(bodyHeading[0], "").trim();
+            return body ? [{ ...card, body }] : [];
+          }
+        }
+        if (heading === "composition" || heading === "composicion") {
+          const body = card.body.replace(/```[^\n]*\n[\s\S]*?```/g, "").trim();
+          return body ? [{ ...card, body }] : [];
+        }
+        return [card];
+      }),
+    [anatomyParts.length, mdCards]
+  );
   const isBackdropAccessibility = componentName === "Backdrop" && activeTab === "accessibility";
   const isBackdropOverview = componentName === "Backdrop" && activeTab === "overview";
   const downloadFileName = useMemo(() => doc.path.split("/").pop() ?? `${componentName}.md`, [doc.path, componentName]);
@@ -2237,78 +2339,48 @@ function ComponentDocumentation({
           ) : null}
 
           {activeTab === "anatomy" ? (
-            <div className={`anatomy-two-column ${mdCards.length ? "anatomy--paired" : ""}`}>
-              {mdCards.length ? (
-                <div className="anatomy-paired-rows">
-                  {(() => {
-                    const cardsToRender = componentName === "Color Picker" ? mdCards.slice(1) : mdCards;
-                    return cardsToRender.map((card, idx) => {
-                      const index = idx;
-                    const title = card.title ?? "";
-                    let imageName: string | null = null;
-                    if (componentName === "Color Picker" && /compartida|shared/i.test(title)) {
-                      imageName = "anatomy.png";
-                    }
-
-                      return (
-                        <div key={`pair-${index}`} className="anatomy-paired-row">
-                          <div className="anatomy-image-placeholder" aria-hidden={card.title ? undefined : "true"}>
-                            {imageName ? <img src={publicAsset(`images/color-picker/${imageName}`)} alt={title} /> : null}
-                          </div>
-                          <article className="doc-section-card">
-                            {card.title ? <h4>{card.title}</h4> : null}
-                            <div className="markdown-body">{renderMarkdown(card.body)}</div>
-                          </article>
-                        </div>
-                      );
-                    });
-                  })()}
-                </div>
-              ) : (
-                <>
-                  <div className="anatomy-two-column__media">
-                    <div className="anatomy-image-list">
-                      <div className="anatomy-image-item">
-                        <div className="anatomy-image-placeholder" aria-hidden="true" />
-                      </div>
-                      <div className="anatomy-image-item">
-                        <div className="anatomy-image-placeholder" aria-hidden="true" />
-                      </div>
-                      <div className="anatomy-image-item">
-                        <div className="anatomy-image-placeholder" aria-hidden="true" />
-                      </div>
+            <div className="anatomy-view">
+              {anatomyParts.length ? (
+                <div className="anatomy-primary">
+                  <AnatomyReferenceImage componentName={componentName} docPath={doc.path} language={language} />
+                  <section className="anatomy-hierarchy" aria-label={language === "es" ? "Anatomía del componente" : "Component anatomy"}>
+                    <div className="anatomy-row anatomy-row--root">
+                      <span className="anatomy-row__number">1</span>
+                      <strong className="anatomy-row__name">{componentName}</strong>
                     </div>
-                  </div>
-                  <div className="anatomy-two-column__content">
-                    {sections.length ? (
-                      <div className="section-stack">
-                        {sections.map((section, index) => (
-                          <article key={`${activeTab}-${index}`} className="doc-section-card">
-                            <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
-                              {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
-                              <div>
-                                {section.title ? <h4>{tr(section.title, language)}</h4> : null}
-                                {section.body?.map((paragraph) => (
-                                  <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
-                                ))}
-                                {section.bullets ? (
-                                  <ul>
-                                    {section.bullets.map((bullet) => (
-                                      <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
-                                    ))}
-                                  </ul>
-                                ) : null}
-                              </div>
-                            </div>
-                          </article>
-                        ))}
+                    {anatomyParts.map((part, index) => (
+                      <div className="anatomy-row anatomy-row--part" key={`${part.name}-${index}`}>
+                        <span className="anatomy-row__number">{`1.${index + 1}`}</span>
+                        <div className="anatomy-row__content">
+                          <strong className="anatomy-row__name">{part.name}</strong>
+                          {part.requirement || part.description ? (
+                            <span className="anatomy-row__detail">
+                              {part.requirement ? renderInline(part.requirement) : null}
+                              {part.requirement && part.description ? " · " : null}
+                              {part.description ? renderInline(part.description) : null}
+                            </span>
+                          ) : null}
+                        </div>
                       </div>
-                    ) : (
-                      <div className="markdown-body">{renderMarkdown(mdTabs[activeTab] ?? doc.body)}</div>
-                    )}
-                  </div>
-                </>
-              )}
+                    ))}
+                  </section>
+                </div>
+              ) : null}
+
+              {anatomyCards.length ? (
+                <div className="section-stack">
+                  {anatomyCards.map((card, index) => (
+                    <article key={`anatomy-${index}`} className="doc-section-card">
+                      {card.title ? <h4>{card.title}</h4> : null}
+                      <div className="markdown-body">{renderMarkdown(card.body)}</div>
+                    </article>
+                  ))}
+                </div>
+              ) : null}
+
+              {!anatomyParts.length && !anatomyCards.length ? (
+                <div className="markdown-body">{renderMarkdown(mdTabs[activeTab] ?? doc.body)}</div>
+              ) : null}
             </div>
           ) : activeTab === "tokens" && mdCards.length ? (
             <div className="section-stack">
