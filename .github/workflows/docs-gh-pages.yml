@@ -30,6 +30,13 @@ jobs:
       - run: npm run build:docs
         env:
           BASE_PATH: "${{ steps.pages.outputs.base_path }}/"
+      - name: Publicar CSS del design system para AI Design OS
+        run: |
+          mkdir -p apps/docs/dist/ds
+          cp packages/tokens/dist/variables.css apps/docs/dist/ds/variables.css
+          cp packages/tokens/dist/color-role-contexts.json apps/docs/dist/ds/color-role-contexts.json
+          cp packages/react/src/styles.css apps/docs/dist/ds/styles.css
+          echo "$GITHUB_SHA" > apps/docs/dist/ds/VERSION
       - uses: actions/upload-pages-artifact@v3
         with:
           path: apps/docs/dist
