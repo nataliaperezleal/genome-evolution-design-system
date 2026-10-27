@@ -53,7 +53,7 @@ export function Snackbar({
   type,
   tone,
   actionLabel,
-  showButton = Boolean(actionLabel),
+  showButton = true,
   showBar = true,
   onAction,
   onClose,

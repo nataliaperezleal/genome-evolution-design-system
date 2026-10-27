@@ -10,21 +10,26 @@ import {
   Card,
   Checkbox,
   ClearButton,
+  ColorPicker,
   Cursor,
   Datepicker,
+  type DatepickerSize,
+  type DatepickerTone,
+  type   DatepickerType,
   IconButton,
   InlineAlert,
   Input,
-  ColorPicker,
   Dropdown,
   Link,
   Group,
   Header,
   Switch,
+  type InputState,
   Table,
   Tag,
   List,
   Modal,
+  type ModalSize,
   Paginator,
   ProgressBar,
   RadioButtonGroup,
@@ -33,6 +38,7 @@ import {
   SegmentedButton,
   SplitButton,
   Snackbar,
+  type SnackbarType,
   Stepper,
   TabList,
   Tooltip,
@@ -1248,9 +1254,9 @@ function ComponentPreview({
   if (componentName === "Checkbox") {
     return (
       <div className="preview-stack" style={{ flexDirection: "column" }}>
-        <Checkbox label="Enviar notificaciones" defaultChecked />
-        <Checkbox label="Modo silencioso" />
-        <Checkbox label="Requiere confirmación" error="Debes aceptar para continuar." />
+        <Checkbox label="Enviar notificaciones" defaultChecked disabled={false} />
+        <Checkbox label="Modo silencioso" disabled={false} />
+        <Checkbox label="Requiere confirmación" error="Debes aceptar para continuar." disabled={false} />
       </div>
     );
   }
@@ -1307,27 +1313,10 @@ function ComponentPreview({
 
   if (componentName === "Dropdown") {
     return (
-      <div className="preview-stack" style={{ flexDirection: "column" }}>
-        <Dropdown
-          label="Role"
-          defaultValue="editor"
-          options={[
-            { value: "admin", label: "Admin" },
-            { value: "editor", label: "Editor" },
-            { value: "viewer", label: "Viewer" }
-          ]}
-          helperText="Permissions update immediately."
-        />
-        <Dropdown
-          label="Plan"
-          options={[
-            { value: "free", label: "Free" },
-            { value: "pro", label: "Pro" },
-            { value: "enterprise", label: "Enterprise" }
-          ]}
-          error="Plan selection required."
-        />
-      </div>
+      <article className="preview-dropdown-card">
+        <strong>Items default</strong>
+        <Dropdown presentation="panel" content="items" />
+      </article>
     );
   }
 
@@ -1992,6 +1981,825 @@ function ClearButtonStatesPreview({ language }: { language: Language }) {
   );
 }
 
+function FormControlStatesPreview({
+  componentName,
+  language
+}: {
+  componentName: string;
+  language: Language;
+}) {
+  const isSpanish = language === "es";
+  const heading = isSpanish ? "Referencia visual de estados" : "Visual state reference";
+  const noteLabel = isSpanish ? "Comportamiento de React" : "React implementation";
+
+  if (componentName === "Input") {
+    const states: Array<{ id: InputState; label: string }> = [
+      { id: "default", label: isSpanish ? "Predeterminado" : "Default" },
+      { id: "filled", label: isSpanish ? "Con valor" : "Filled" },
+      { id: "hovered", label: isSpanish ? "Al pasar" : "Hovered" },
+      { id: "on-focus", label: isSpanish ? "Al enfocar" : "On focus" },
+      { id: "focused", label: isSpanish ? "Enfocado" : "Focused" },
+      { id: "error", label: isSpanish ? "Error" : "Error" },
+      { id: "disabled", label: isSpanish ? "Deshabilitado" : "Disabled" },
+      { id: "read-only", label: isSpanish ? "Solo lectura" : "Read only" }
+    ];
+
+    return (
+      <section className="form-states" aria-label={`${componentName} ${heading}`}>
+        <header className="form-states__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Cada muestra usa los estados, tamaños y tokens descritos en el Markdown del componente."
+              : "Each specimen uses the states, sizes, and tokens described in the component Markdown."}
+          </p>
+        </header>
+        <div className="form-states__grid">
+          {states.map(({ id, label }) => (
+            <article className="form-states__item" key={id}>
+              <strong>{label}</strong>
+              <Input
+                label={label}
+                state={id}
+                defaultValue={id === "default" || id === "disabled" ? undefined : "Genome Evolution"}
+                error={id === "error" ? (isSpanish ? "Revisa este valor." : "Check this value.") : undefined}
+                disabled={id === "disabled"}
+                readOnly={id === "read-only"}
+              />
+            </article>
+          ))}
+        </div>
+        <p className="form-states__note">
+          <strong>{isSpanish ? "Tamaños adicionales:" : "Additional sizes:"}</strong>{" "}
+          <Input size="sm" label={isSpanish ? "Pequeño" : "Small"} showInfo={false} showLeftIcon={false} showRightIcon={false} />
+          <span>
+            {isSpanish
+              ? "La especificación también contempla SM, orientación Label Left y esquinas Rounded."
+              : "The spec also defines SM, Label Left orientation, and Rounded corners."}
+          </span>
+        </p>
+      </section>
+    );
+  }
+
+  if (componentName === "Checkbox") {
+    const examples = [
+      {
+        label: isSpanish ? "Predeterminado · deshabilitado" : "Default · disabled",
+        props: { disabled: true }
+      },
+      {
+        label: isSpanish ? "Check · Default" : "Check · Default",
+        props: { disabled: false, defaultChecked: true }
+      },
+      {
+        label: isSpanish ? "Mixed · Default" : "Mixed · Default",
+        props: { disabled: false, indeterminate: true }
+      },
+      {
+        label: isSpanish ? "Check · Evergreen" : "Check · Evergreen",
+        props: { disabled: false, defaultChecked: true, color: "evergreen" as const }
+      },
+      {
+        label: isSpanish ? "Check · Indigo" : "Check · Indigo",
+        props: { disabled: false, defaultChecked: true, color: "indigo" as const }
+      }
+    ];
+
+    return (
+      <section className="form-states" aria-label={`${componentName} ${heading}`}>
+        <header className="form-states__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Las muestras habilitadas se pueden marcar. Usa Tab para comprobar el foco y pasa el cursor para ver Hovered."
+              : "Enabled specimens are interactive. Use Tab to check focus and hover to see Hovered."}
+          </p>
+        </header>
+        <div className="form-states__grid form-states__grid--compact">
+          {examples.map(({ label, props }) => (
+            <article className="form-states__item" key={label}>
+              <strong>{label}</strong>
+              <Checkbox label={isSpanish ? "Opción" : "Option"} {...props} />
+            </article>
+          ))}
+        </div>
+        <p className="form-states__note">
+          <strong>{noteLabel}:</strong>{" "}
+          {isSpanish
+            ? "La variante Plus está descrita en Markdown, pero aún no está implementada en React."
+            : "The Plus variant is documented in Markdown but is not implemented in React yet."}
+        </p>
+      </section>
+    );
+  }
+
+  const switchExamples = [
+    { label: isSpanish ? "Off · SM" : "Off · SM", size: "sm" as const, tone: "default" as const, checked: false },
+    { label: isSpanish ? "On · Evergreen · SM" : "On · Evergreen · SM", size: "sm" as const, tone: "evergreen" as const, checked: true },
+    { label: isSpanish ? "On · Indigo · SM" : "On · Indigo · SM", size: "sm" as const, tone: "indigo" as const, checked: true },
+    { label: isSpanish ? "Off · MD" : "Off · MD", size: "md" as const, tone: "default" as const, checked: false },
+    { label: isSpanish ? "On · Evergreen · MD" : "On · Evergreen · MD", size: "md" as const, tone: "evergreen" as const, checked: true },
+    { label: isSpanish ? "On · Indigo · MD" : "On · Indigo · MD", size: "md" as const, tone: "indigo" as const, checked: true },
+    { label: isSpanish ? "Disabled · SM" : "Disabled · SM", size: "sm" as const, tone: "default" as const, checked: false, disabled: true },
+    { label: isSpanish ? "Disabled · MD" : "Disabled · MD", size: "md" as const, tone: "default" as const, checked: false, disabled: true }
+  ];
+
+  return (
+    <section className="form-states" aria-label={`${componentName} ${heading}`}>
+      <header className="form-states__header">
+        <p className="eyebrow">{heading}</p>
+        <p>
+          {isSpanish
+            ? "La documentación no confirma un estado predeterminado; estas son combinaciones visuales documentadas."
+            : "The documentation does not confirm a default state; these are documented visual combinations."}
+        </p>
+      </header>
+      <div className="form-states__grid form-states__grid--compact">
+        {switchExamples.map(({ label, size, tone, checked, disabled }) => (
+          <article className="form-states__item" key={label}>
+            <strong>{label}</strong>
+            <Switch
+              defaultChecked={checked}
+              size={size}
+              tone={tone}
+              disabled={disabled}
+              label={isSpanish ? "Opción" : "Option"}
+            />
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function InteractiveStatesPreview({
+  componentName,
+  language
+}: {
+  componentName: string;
+  language: Language;
+}) {
+  const isSpanish = language === "es";
+  const heading = isSpanish ? "Referencia visual" : "Visual reference";
+  const [datepickerType, setDatepickerType] = useState<DatepickerType>("numbers");
+  const [datepickerSize, setDatepickerSize] = useState<DatepickerSize>("sm");
+  const [datepickerTone, setDatepickerTone] = useState<DatepickerTone>("evergreen");
+  const [showDatepickerButtons, setShowDatepickerButtons] = useState(true);
+  const [showConventions, setShowConventions] = useState(true);
+  const [appliedDate, setAppliedDate] = useState("");
+  const [modalSize, setModalSize] = useState<ModalSize>("small");
+  const [modalOpen, setModalOpen] = useState(false);
+  const [showSnackbarButton, setShowSnackbarButton] = useState(true);
+  const [showSnackbarBar, setShowSnackbarBar] = useState(true);
+  const [snackbarOpen, setSnackbarOpen] = useState<Record<SnackbarType, boolean>>({
+    danger: true,
+    warning: true,
+    information: true,
+    success: true
+  });
+  const [accordionSize, setAccordionSize] = useState<"md" | "sm">("md");
+  const [accordionTone, setAccordionTone] = useState<"default" | "evergreen" | "indigo">("default");
+  const [radioTone, setRadioTone] = useState<"default" | "evergreen" | "indigo">("default");
+  const [radioSelection, setRadioSelection] = useState("standard");
+  const [tabSize, setTabSize] = useState<"md" | "sm">("md");
+  const [tabColor, setTabColor] = useState<"default" | "indigo" | "evergreen">("default");
+  const [referenceTab, setReferenceTab] = useState("overview");
+  const [segmentedSize, setSegmentedSize] = useState<"md" | "sm">("md");
+  const [segmentedColor, setSegmentedColor] = useState<"default" | "evergreen" | "indigo">("default");
+  const [segmentedRounded, setSegmentedRounded] = useState(false);
+  const [segmentedSelection, setSegmentedSelection] = useState("list");
+  const [colorPickerType, setColorPickerType] = useState<"Solid" | "Gradient">("Solid");
+  const [pageSize, setPageSize] = useState(15);
+  const [rangePage, setRangePage] = useState(1);
+  const [inputPage, setInputPage] = useState(3);
+  const [numbersPage, setNumbersPage] = useState(3);
+  const [splitColor, setSplitColor] = useState<"evergreen" | "indigo">("evergreen");
+  const [splitType, setSplitType] = useState<"primary" | "secondary">("primary");
+  const [splitSize, setSplitSize] = useState<"regular" | "small">("regular");
+  const [splitAction, setSplitAction] = useState("");
+
+  if (componentName === "Color Picker") {
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Cambia entre los modos Solid y Gradient; prueba el área de color, los valores y la biblioteca."
+              : "Switch between Solid and Gradient; try the color area, values, and saved color library."}
+          </p>
+        </header>
+        <article className="interaction-reference__card interaction-reference__card--color-picker">
+          <ColorPicker
+            label={isSpanish ? "Color de marca" : "Brand color"}
+            defaultValue="#4F46E5"
+            type={colorPickerType}
+            onTypeChange={setColorPickerType}
+          />
+        </article>
+        <p className="interaction-reference__note">
+          {isSpanish
+            ? "El modo Gradiente muestra las paradas de ejemplo documentadas; la edición del color sólido está conectada."
+            : "Gradient mode shows the documented sample stops; solid color editing is connected."}
+        </p>
+      </section>
+    );
+  }
+
+  if (componentName === "Paginator") {
+    const totalItems = 100;
+    const pageCountBySize = Math.ceil(totalItems / pageSize);
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Prueba los tres tipos documentados: tamaño y rango, entrada directa y botones numerados."
+              : "Try the three documented types: page size and range, direct input, and numbered buttons."}
+          </p>
+        </header>
+        <div className="interaction-reference__grid interaction-reference__grid--paginator">
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Tamaño y rango" : "Page size + range"}</strong>
+            <Paginator
+              type="page-size-range"
+              page={rangePage}
+              pageCount={pageCountBySize}
+              pageSize={pageSize}
+              totalItems={totalItems}
+              onPageChange={setRangePage}
+              onPageSizeChange={(nextPageSize) => {
+                setPageSize(nextPageSize);
+                setRangePage(1);
+              }}
+            />
+            <span className="interaction-reference__caption">
+              {isSpanish ? `Página ${rangePage} · ${pageSize} por página` : `Page ${rangePage} · ${pageSize} per page`}
+            </span>
+          </article>
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Entrada directa" : "Input"}</strong>
+            <Paginator type="input" page={inputPage} pageCount={8} onPageChange={setInputPage} />
+            <span className="interaction-reference__caption">
+              {isSpanish ? `Página ${inputPage} de 8` : `Page ${inputPage} of 8`}
+            </span>
+          </article>
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Páginas numeradas" : "Numbers"}</strong>
+            <Paginator type="numbers" page={numbersPage} pageCount={8} onPageChange={setNumbersPage} />
+            <span className="interaction-reference__caption">
+              {isSpanish ? `Página ${numbersPage} de 8` : `Page ${numbersPage} of 8`}
+            </span>
+          </article>
+        </div>
+        <p className="interaction-reference__note">
+          {isSpanish
+            ? "La especificación limita los estados no predeterminados a Input y Numbers; el tipo Tamaño y rango solo documenta Default."
+            : "The spec limits non-default states to Input and Numbers; Page size + range documents Default only."}
+        </p>
+      </section>
+    );
+  }
+
+  if (componentName === "Split Button") {
+    const colors = ["evergreen", "indigo"] as const;
+    const types = ["primary", "secondary"] as const;
+    const sizes = ["regular", "small"] as const;
+    const actions = [
+      { label: isSpanish ? "Publicar ahora" : "Publish now", onSelect: () => setSplitAction(isSpanish ? "Publicado ahora" : "Published now") },
+      { label: isSpanish ? "Programar…" : "Schedule…", onSelect: () => setSplitAction(isSpanish ? "Programación seleccionada" : "Schedule selected") },
+      { label: isSpanish ? "Guardar borrador" : "Save draft", onSelect: () => setSplitAction(isSpanish ? "Borrador guardado" : "Draft saved") }
+    ];
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Compara Primary y Secondary, sus colores y tamaños; usa la flecha para abrir las acciones relacionadas."
+              : "Compare Primary and Secondary, their colors and sizes; use the chevron to open related actions."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tipo" : "Type"}>
+          {types.map((type) => (
+            <button key={type} type="button" aria-pressed={splitType === type} onClick={() => setSplitType(type)}>
+              {type === "primary" ? "Primary" : "Secondary"}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Color" : "Color"}>
+          {colors.map((color) => (
+            <button key={color} type="button" aria-pressed={splitColor === color} onClick={() => setSplitColor(color)}>
+              {color === "evergreen" ? "Evergreen" : "Indigo"}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tamaño" : "Size"}>
+          {sizes.map((size) => (
+            <button key={size} type="button" aria-pressed={splitSize === size} onClick={() => setSplitSize(size)}>
+              {size === "regular" ? (isSpanish ? "Regular" : "Regular") : (isSpanish ? "Pequeño" : "Small")}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__split-row">
+          <article className="interaction-reference__card">
+            <strong>{splitType === "primary" ? "Primary" : "Secondary"} · {splitColor} · {splitSize}</strong>
+            <SplitButton
+              label={isSpanish ? "Publicar" : "Publish"}
+              onClick={() => setSplitAction(isSpanish ? "Acción principal ejecutada" : "Primary action triggered")}
+              items={actions}
+              color={splitColor}
+              type={splitType}
+              size={splitSize}
+            />
+          </article>
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Deshabilitado (solo Primary)" : "Disabled (Primary only)"}</strong>
+            <SplitButton
+              label={isSpanish ? "Publicar" : "Publish"}
+              onClick={() => {}}
+              items={actions}
+              color="default"
+              type="primary"
+              size={splitSize}
+              disabled
+            />
+          </article>
+        </div>
+        {splitAction ? <p className="interaction-reference__caption" role="status">{splitAction}</p> : null}
+      </section>
+    );
+  }
+
+  if (componentName === "Accordion") {
+    const sizes = ["md", "sm"] as const;
+    const tones = ["default", "evergreen", "indigo"] as const;
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Compara tamaños, colores, comportamiento expandido y los estados Disabled y Loading."
+              : "Compare sizes, colors, expanded behavior, and the Disabled and Loading states."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tamaño del acordeón" : "Accordion size"}>
+          {sizes.map((size) => (
+            <button key={size} type="button" aria-pressed={accordionSize === size} onClick={() => setAccordionSize(size)}>
+              {size.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Color del acordeón expandido" : "Expanded accordion color"}>
+          {tones.map((tone) => (
+            <button key={tone} type="button" aria-pressed={accordionTone === tone} onClick={() => setAccordionTone(tone)}>
+              {tone === "default" ? (isSpanish ? "Predeterminado" : "Default") : tone === "evergreen" ? "Evergreen" : "Indigo"}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__grid">
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Colapsado · interactivo" : "Collapsed · interactive"}</strong>
+            <Accordion title={isSpanish ? "Detalles de la sección" : "Section details"} size={accordionSize}>
+              {isSpanish ? "Contenido que aparece al expandir." : "Content shown when expanded."}
+            </Accordion>
+          </article>
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Expandido" : "Expanded"}</strong>
+            <Accordion title={isSpanish ? "Detalles de la sección" : "Section details"} size={accordionSize} tone={accordionTone} defaultOpen>
+              {isSpanish ? "Contenido de ejemplo del panel expandido." : "Example content in the expanded panel."}
+            </Accordion>
+          </article>
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Disabled" : "Disabled"}</strong>
+            <Accordion title={isSpanish ? "Sección no disponible" : "Unavailable section"} size={accordionSize} disabled>
+              {isSpanish ? "Este contenido no está disponible." : "This content is unavailable."}
+            </Accordion>
+          </article>
+          <article className="interaction-reference__card">
+            <strong>Loading</strong>
+            <Accordion title="Loading" size={accordionSize} state="loading">
+              Loading
+            </Accordion>
+          </article>
+        </div>
+      </section>
+    );
+  }
+
+  if (componentName === "Radio Button") {
+    const tones = ["default", "evergreen", "indigo"] as const;
+    const options = [
+      { label: isSpanish ? "Estándar" : "Standard", value: "standard" },
+      { label: isSpanish ? "Compacto" : "Compact", value: "compact" },
+      { label: isSpanish ? "Personalizado" : "Custom", value: "custom" }
+    ];
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Selecciona una opción; cada grupo permite una sola selección. Evergreen e Indigo se muestran para la opción seleccionada."
+              : "Choose an option; each group allows one selection. Evergreen and Indigo are shown for the selected option."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Color de selección" : "Selected color"}>
+          {tones.map((tone) => (
+            <button key={tone} type="button" aria-pressed={radioTone === tone} onClick={() => setRadioTone(tone)}>
+              {tone === "default" ? (isSpanish ? "Predeterminado" : "Default") : tone === "evergreen" ? "Evergreen" : "Indigo"}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__grid">
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Habilitado" : "Enabled"}</strong>
+            <RadioButtonGroup
+              label={isSpanish ? "Elige una opción" : "Choose an option"}
+              options={options}
+              value={radioSelection}
+              onChange={setRadioSelection}
+              tone={radioTone}
+            />
+          </article>
+          <article className="interaction-reference__card">
+            <strong>{isSpanish ? "Deshabilitado · predeterminado" : "Disabled · default"}</strong>
+            <RadioButtonGroup
+              label={isSpanish ? "Opción no disponible" : "Unavailable option"}
+              options={[{ label: isSpanish ? "No disponible" : "Unavailable", value: "unavailable" }]}
+              defaultValue="unavailable"
+              disabled
+            />
+          </article>
+        </div>
+      </section>
+    );
+  }
+
+  if (componentName === "Tab") {
+    const sizes = ["md", "sm"] as const;
+    const colors = ["default", "indigo", "evergreen"] as const;
+    const options = [
+      { label: isSpanish ? "Resumen" : "Overview", value: "overview" },
+      { label: isSpanish ? "Actividad" : "Activity", value: "activity" },
+      { label: isSpanish ? "Ajustes" : "Settings", value: "settings" }
+    ];
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Cambia de pestaña y compara tamaños y colores de la pestaña seleccionada."
+              : "Switch tabs and compare sizes and colors for the selected tab."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tamaño de pestaña" : "Tab size"}>
+          {sizes.map((size) => (
+            <button key={size} type="button" aria-pressed={tabSize === size} onClick={() => setTabSize(size)}>
+              {size.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Color de selección" : "Selected color"}>
+          {colors.map((color) => (
+            <button key={color} type="button" aria-pressed={tabColor === color} onClick={() => setTabColor(color)}>
+              {color === "default" ? (isSpanish ? "Predeterminado" : "Default") : color === "evergreen" ? "Evergreen" : "Indigo"}
+            </button>
+          ))}
+        </div>
+        <TabList options={options} value={referenceTab} onChange={setReferenceTab} color={tabColor} size={tabSize} />
+        <div className="interaction-reference__tab-panel" role="tabpanel">
+          {isSpanish ? `Contenido: ${options.find((option) => option.value === referenceTab)?.label}` : `Content: ${options.find((option) => option.value === referenceTab)?.label}`}
+        </div>
+      </section>
+    );
+  }
+
+  if (componentName === "Segmented Button") {
+    const sizes = ["md", "sm"] as const;
+    const colors = ["default", "evergreen", "indigo"] as const;
+    const options = [
+      { label: isSpanish ? "Lista" : "List", value: "list" },
+      { label: isSpanish ? "Tablero" : "Board", value: "board" },
+      { label: isSpanish ? "Calendario" : "Calendar", value: "calendar" }
+    ];
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Selecciona una sección y compara el tamaño, el color seleccionado y las esquinas."
+              : "Select a section and compare size, selected color, and corner style."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tamaño" : "Size"}>
+          {sizes.map((size) => (
+            <button key={size} type="button" aria-pressed={segmentedSize === size} onClick={() => setSegmentedSize(size)}>
+              {size.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Color seleccionado" : "Selected color"}>
+          {colors.map((color) => (
+            <button key={color} type="button" aria-pressed={segmentedColor === color} onClick={() => setSegmentedColor(color)}>
+              {color === "default" ? (isSpanish ? "Predeterminado" : "Default") : color === "evergreen" ? "Evergreen" : "Indigo"}
+            </button>
+          ))}
+          <button type="button" aria-pressed={segmentedRounded} onClick={() => setSegmentedRounded((rounded) => !rounded)}>
+            {isSpanish ? "Redondeado" : "Rounded"}
+          </button>
+        </div>
+        <SegmentedButton
+          options={options}
+          value={segmentedSelection}
+          onChange={setSegmentedSelection}
+          color={segmentedColor}
+          size={segmentedSize}
+          rounded={segmentedRounded}
+          aria-label={isSpanish ? "Vista" : "View"}
+        />
+        <p className="interaction-reference__caption">
+          {isSpanish ? `Seleccionado: ${options.find((option) => option.value === segmentedSelection)?.label}` : `Selected: ${options.find((option) => option.value === segmentedSelection)?.label}`}
+        </p>
+      </section>
+    );
+  }
+
+  if (componentName === "Dropdown") {
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Referencia visual del panel de opciones documentado, con filas de icono y texto y una acción en el pie."
+              : "Visual reference for the documented options panel, with icon-and-text rows and a footer action."}
+          </p>
+        </header>
+        <div className="interaction-reference__grid interaction-reference__grid--dropdown">
+          <article className="interaction-reference__card">
+            <strong>Items default</strong>
+            <Dropdown presentation="panel" content="items" />
+          </article>
+        </div>
+        <p className="interaction-reference__note">
+          {isSpanish
+            ? "La referencia muestra diez filas y un botón en el pie."
+            : "The reference shows ten rows and a footer button."}
+        </p>
+      </section>
+    );
+  }
+
+  if (componentName === "Datepicker") {
+    const dateTypes: Array<{ value: DatepickerType; label: string }> = [
+      { value: "numbers", label: isSpanish ? "Días" : "Numbers" },
+      { value: "month", label: isSpanish ? "Meses" : "Month" },
+      { value: "year", label: isSpanish ? "Años" : "Year" }
+    ];
+    const sizes: DatepickerSize[] = ["sm", "md"];
+    const tones: DatepickerTone[] = ["evergreen", "indigo"];
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Prueba los tres tipos de calendario, ambos tamaños y colores, y las opciones de botones y convenciones."
+              : "Try the three calendar types, both sizes and colors, and the optional buttons and conventions."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tipo de calendario" : "Calendar type"}>
+          {dateTypes.map(({ value, label }) => (
+            <button
+              key={value}
+              type="button"
+              aria-pressed={datepickerType === value}
+              className={datepickerType === value ? "is-selected" : undefined}
+              onClick={() => setDatepickerType(value)}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tamaño del calendario" : "Calendar size"}>
+          {sizes.map((size) => (
+            <button
+              key={size}
+              type="button"
+              aria-pressed={datepickerSize === size}
+              className={datepickerSize === size ? "is-selected" : undefined}
+              onClick={() => setDatepickerSize(size)}
+            >
+              {size.toUpperCase()}
+            </button>
+          ))}
+        </div>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Color del calendario" : "Calendar color"}>
+          {tones.map((tone) => (
+            <button
+              key={tone}
+              type="button"
+              aria-pressed={datepickerTone === tone}
+              className={datepickerTone === tone ? "is-selected" : undefined}
+              onClick={() => setDatepickerTone(tone)}
+            >
+              {tone === "evergreen" ? "Evergreen" : "Indigo"}
+            </button>
+          ))}
+          <button
+            type="button"
+            aria-pressed={showDatepickerButtons}
+            className={showDatepickerButtons ? "is-selected" : undefined}
+            onClick={() => setShowDatepickerButtons((visible) => !visible)}
+          >
+            {isSpanish ? "Botones" : "Buttons"}
+          </button>
+          {datepickerType === "numbers" ? (
+            <button
+              type="button"
+              aria-pressed={showConventions}
+              className={showConventions ? "is-selected" : undefined}
+              onClick={() => setShowConventions((visible) => !visible)}
+            >
+              {isSpanish ? "Convenciones" : "Conventions"}
+            </button>
+          ) : null}
+        </div>
+        <div className="interaction-reference__calendar">
+          <Datepicker
+            presentation="panel"
+            type={datepickerType}
+            size={datepickerSize}
+            tone={datepickerTone}
+            defaultValue="2021-03-05"
+            showButtons={showDatepickerButtons}
+            showConventions={showConventions}
+            onDateChange={setAppliedDate}
+          />
+          {appliedDate ? (
+            <span className="interaction-reference__caption">
+              {isSpanish ? `Fecha aplicada: ${appliedDate}` : `Applied date: ${appliedDate}`}
+            </span>
+          ) : null}
+        </div>
+        <p className="interaction-reference__note">
+          {isSpanish
+            ? "La documentación describe convenciones en el tipo Días, pero React solo muestra una leyenda genérica, no los tres marcadores específicos."
+            : "The spec describes day-specific conventions, but React currently shows a generic legend rather than the three specific markers."}
+        </p>
+      </section>
+    );
+  }
+
+  if (componentName === "Modal") {
+    const sizes: ModalSize[] = ["small", "medium", "large", "bigger", "90%", "full"];
+
+    return (
+      <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+        <header className="interaction-reference__header">
+          <p className="eyebrow">{heading}</p>
+          <p>
+            {isSpanish
+              ? "Elige un tamaño documentado y abre el diálogo. Usa Escape, el botón de cerrar o las acciones del pie para cerrarlo."
+              : "Choose a documented size and open the dialog. Use Escape, the close control, or footer actions to dismiss it."}
+          </p>
+        </header>
+        <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Tamaño del modal" : "Modal size"}>
+          {sizes.map((size) => (
+            <button
+              key={size}
+              type="button"
+              aria-pressed={modalSize === size}
+              className={modalSize === size ? "is-selected" : undefined}
+              onClick={() => setModalSize(size)}
+            >
+              {size === "90%" ? size : size[0].toUpperCase() + size.slice(1)}
+            </button>
+          ))}
+          <button type="button" className="interaction-reference__primary" onClick={() => setModalOpen(true)}>
+            {isSpanish ? "Abrir modal" : "Open modal"}
+          </button>
+        </div>
+        <p className="interaction-reference__note">
+          {isSpanish
+            ? "Los controles de expandir y el contenido intercambiable por tamaño descritos en el Markdown aún no están completamente implementados en React."
+            : "The expand control and size-specific swappable content described in Markdown are not fully implemented in React yet."}
+        </p>
+        <Modal
+          open={modalOpen}
+          size={modalSize}
+          title={isSpanish ? "Vista previa del modal" : "Modal preview"}
+          description={isSpanish ? "Contenido de ejemplo para validar el tamaño seleccionado." : "Sample content to review the selected size."}
+          showTitleIcon
+          expand
+          helperText
+          tertiaryButton
+          onClose={() => setModalOpen(false)}
+          onCancel={() => setModalOpen(false)}
+          onConfirm={() => setModalOpen(false)}
+          onTertiary={() => setModalOpen(false)}
+        >
+          <p>
+            {isSpanish
+              ? `Tamaño seleccionado: ${modalSize}. El contenido del diálogo puede adaptarse al contexto.`
+              : `Selected size: ${modalSize}. Dialog content can adapt to its context.`}
+          </p>
+        </Modal>
+      </section>
+    );
+  }
+
+  const snackbarTypes: Array<{ type: SnackbarType; label: string }> = [
+    { type: "danger", label: isSpanish ? "Peligro" : "Danger" },
+    { type: "warning", label: isSpanish ? "Advertencia" : "Warning" },
+    { type: "information", label: isSpanish ? "Información" : "Information" },
+    { type: "success", label: isSpanish ? "Éxito" : "Success" }
+  ];
+
+  return (
+    <section className="interaction-reference" aria-label={`${componentName} ${heading}`}>
+      <header className="interaction-reference__header">
+        <p className="eyebrow">{heading}</p>
+        <p>
+          {isSpanish
+            ? "Compara los cuatro tipos y alterna el botón de acción y la barra inferior documentados."
+            : "Compare all four types and toggle the documented action button and bottom bar."}
+        </p>
+      </header>
+      <div className="interaction-reference__controls" role="group" aria-label={isSpanish ? "Partes opcionales" : "Optional parts"}>
+        <button
+          type="button"
+          aria-pressed={showSnackbarButton}
+          className={showSnackbarButton ? "is-selected" : undefined}
+          onClick={() => setShowSnackbarButton((visible) => !visible)}
+        >
+          {isSpanish ? "Botón de acción" : "Action button"}
+        </button>
+        <button
+          type="button"
+          aria-pressed={showSnackbarBar}
+          className={showSnackbarBar ? "is-selected" : undefined}
+          onClick={() => setShowSnackbarBar((visible) => !visible)}
+        >
+          {isSpanish ? "Barra inferior" : "Bottom bar"}
+        </button>
+        <button
+          type="button"
+          onClick={() => setSnackbarOpen({ danger: true, warning: true, information: true, success: true })}
+        >
+          {isSpanish ? "Mostrar todos" : "Show all"}
+        </button>
+      </div>
+      <div className="interaction-reference__grid interaction-reference__grid--snackbar">
+        {snackbarTypes.map(({ type, label }) => (
+          <article className="interaction-reference__card" key={type}>
+            <strong>{label}</strong>
+            {snackbarOpen[type] ? (
+              <Snackbar
+                open
+                type={type}
+                message={isSpanish ? `Mensaje de ${label.toLowerCase()}.` : `${label} message.`}
+                actionLabel={isSpanish ? "Deshacer" : "Undo"}
+                showButton={showSnackbarButton}
+                showBar={showSnackbarBar}
+                autoHideDurationMs={0}
+                onAction={() => setSnackbarOpen((current) => ({ ...current, [type]: false }))}
+                onClose={() => setSnackbarOpen((current) => ({ ...current, [type]: false }))}
+              />
+            ) : (
+              <button
+                type="button"
+                className="interaction-reference__primary"
+                onClick={() => setSnackbarOpen((current) => ({ ...current, [type]: true }))}
+              >
+                {isSpanish ? "Mostrar mensaje" : "Show message"}
+              </button>
+            )}
+          </article>
+        ))}
+      </div>
+      <p className="interaction-reference__note">
+        {isSpanish
+          ? "Las muestras permanecen abiertas para comparar tipos; el componente React mantiene su temporizador en uso normal."
+          : "Specimens stay visible for comparison; the React component keeps its timer during normal use."}
+      </p>
+    </section>
+  );
+}
+
 const stateTitlesEs: Record<string, string> = {
   default: "Predeterminado",
   interactive: "Interactivo",
@@ -2334,7 +3142,16 @@ function ComponentDocumentation({
           {componentName === "Clear Button" && activeTab === "states" ? (
             <ClearButtonStatesPreview language={language} />
           ) : null}
-          {activeTab === "states" && componentName !== "Button" && componentName !== "Clear Button" ? (
+          {activeTab === "states" &&
+          ["Input", "Checkbox", "Switch"].includes(componentName) ? (
+            <FormControlStatesPreview componentName={componentName} language={language} />
+          ) : null}
+          {activeTab === "states" &&
+          ["Accordion", "Radio Button", "Tab", "Segmented Button", "Color Picker", "Paginator", "Split Button", "Dropdown", "Datepicker", "Modal", "Snackbar"].includes(componentName) ? (
+            <InteractiveStatesPreview componentName={componentName} language={language} />
+          ) : null}
+          {activeTab === "states" &&
+          !["Button", "Clear Button", "Input", "Checkbox", "Switch", "Accordion", "Radio Button", "Tab", "Segmented Button", "Color Picker", "Paginator", "Split Button", "Dropdown", "Datepicker", "Modal", "Snackbar"].includes(componentName) ? (
             <ComponentStatesShowcase componentName={componentName} doc={doc} language={language} sections={sections} />
           ) : null}
 

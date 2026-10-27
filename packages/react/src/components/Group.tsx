@@ -36,7 +36,7 @@ const gapToVar: Record<GroupGap, string> = {
 };
 
 export function Group({
-  title,
+  title = "Title",
   state,
   defaultState = "collapsed",
   onStateChange,

@@ -1412,7 +1412,7 @@ export const componentSpecs: Record<string, ComponentSpec> = {
         title: "Basic checkbox",
         code: `import { Checkbox } from "@genome-evolution/react";
 
-<Checkbox label="Send notifications" defaultChecked />;
+<Checkbox label="Send notifications" defaultChecked disabled={false} />;
 `
       }
     ],

@@ -22,7 +22,7 @@ export function Button({
   leadingIcon,
   trailingIcon,
   className,
-  children,
+  children = "Button",
   ...props
 }: ButtonProps) {
   const classes = [

@@ -5,7 +5,7 @@ export type StepperState = "default" | "selected" | "checked" | "disabled";
 export type StepperTone = "default" | "evergreen" | "indigo";
 
 export interface StepperStep {
-  label: ReactNode;
+  label?: ReactNode;
   description?: ReactNode;
   state?: StepperState;
   tone?: StepperTone;
@@ -36,7 +36,7 @@ export function Stepper({ steps, currentStep, orientation = "horizontal", classN
                 {state === "checked" ? "✓" : step.number ?? index}
               </span>
               <span className="ge-step__copy">
-                <span className="ge-step__label">{step.label}</span>
+                <span className="ge-step__label">{step.label ?? "Step label"}</span>
                 {step.description ? <span className="ge-step__desc">{step.description}</span> : null}
               </span>
             </div>

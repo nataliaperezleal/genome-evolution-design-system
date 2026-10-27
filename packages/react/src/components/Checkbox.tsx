@@ -12,12 +12,13 @@ export interface CheckboxProps extends Omit<InputHTMLAttributes<HTMLInputElement
 }
 
 export function Checkbox({
-  label,
+  label = "Label",
   helperText,
   error,
   color = "default",
   indeterminate = false,
   icon,
+  disabled = true,
   className,
   id,
   ...props
@@ -40,6 +41,7 @@ export function Checkbox({
           id={checkboxId}
           className="ge-check__input"
           type="checkbox"
+          disabled={disabled}
           aria-checked={indeterminate ? "mixed" : undefined}
           aria-invalid={error ? true : undefined}
           aria-describedby={message ? `${checkboxId}-message` : undefined}

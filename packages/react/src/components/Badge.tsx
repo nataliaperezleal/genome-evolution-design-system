@@ -9,7 +9,7 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   icon?: ReactNode;
 }
 
-export function Badge({ tone = "default", variant = "line", icon, className, children, ...props }: BadgeProps) {
+export function Badge({ tone = "default", variant = "line", icon, className, children = "0", ...props }: BadgeProps) {
   const resolvedTone = tone === "neutral" || tone === "primary" ? "default" : tone === "information" ? "info" : tone === "error" ? "danger" : tone;
   const resolvedVariant = variant === "outline" ? "line" : variant;
   const classes = ["ge-badge", `ge-badge--${resolvedTone}`, `ge-badge--${resolvedVariant}`, className].filter(Boolean).join(" ");

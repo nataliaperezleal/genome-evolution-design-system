@@ -46,6 +46,12 @@ genome-design-system/
 └── templates/          # Plantillas para nuevos componentes
 ```
 
+## Fuente de verdad de componentes
+
+Los archivos `components/*.md` definen el contrato visual y de comportamiento de cada componente; sus versiones en `components/es/` son la documentación localizada. Los valores visuales deben venir de los tokens existentes del repositorio, no de valores nuevos definidos por separado en React.
+
+`packages/react` es una implementación de ese contrato, no una fuente alternativa ni una generación automática desde Markdown. Al cambiar una implementación, se deben respetar las variantes, estados y valores documentados, y usar los tokens correspondientes. Si falta una definición o hay una contradicción en los Markdown, hay que resolverla en la documentación antes de elegir un comportamiento nuevo.
+
 ## Componentes (44)
 
 Todos los componentes están identificados con estado `Design`. El inventario completo y sus metadatos están en [manifest.json](manifest.json).

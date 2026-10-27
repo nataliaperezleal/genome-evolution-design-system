@@ -42,7 +42,7 @@ function BrandIcon() {
 }
 
 export function Header({
-  theme,
+  theme = "apps-designer",
   showUserName = true,
   showMail = true,
   showAvatar = true,

@@ -19,7 +19,7 @@ export function Link({
   leadingIcon,
   trailingIcon,
   className,
-  children,
+  children = "Link",
   ...props
 }: LinkProps) {
   const disabled = ariaDisabled === true;

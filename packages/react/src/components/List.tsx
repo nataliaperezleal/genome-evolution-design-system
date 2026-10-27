@@ -36,7 +36,7 @@ export interface ListProps extends Omit<HTMLAttributes<HTMLElement>, "children">
 }
 
 export function List({
-  text,
+  text = "List item",
   type = "list",
   state = "default",
   variant = "unordered",
@@ -71,7 +71,7 @@ export function List({
 
     return (
       <span className={`ge-list__side ge-list__side--${side}`}>
-        {showCheckBox ? <Checkbox aria-label={`${side} list checkbox`} /> : null}
+        {showCheckBox ? <Checkbox disabled={false} aria-label={`${side} list checkbox`} /> : null}
         {showSwitch ? <Switch size="sm" aria-label={`${side} list switch`} /> : null}
         {showIcon ? <span className="ge-list__icon" aria-hidden="true">{icon}</span> : null}
       </span>
