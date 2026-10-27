@@ -9,15 +9,19 @@ const meta = {
   tags: ["autodocs"],
   args: {
     open: true,
-    message: "Project settings saved.",
-    tone: "success",
+    label: "Single-line toast bar",
+    type: "danger",
+    showButton: true,
+    showBar: true,
     actionLabel: "Undo",
     autoHideDurationMs: 0
   },
   argTypes: {
     open: { control: "boolean" },
-    message: { control: "text" },
-    tone: { control: "inline-radio", options: ["neutral", "success", "warning", "danger", "info"] },
+    label: { control: "text" },
+    type: { control: "inline-radio", options: ["danger", "warning", "information", "success"] },
+    showButton: { control: "boolean" },
+    showBar: { control: "boolean" },
     actionLabel: { control: "text" },
     autoHideDurationMs: { control: { type: "number", min: 0 } },
     onAction: { action: "action clicked" },
@@ -29,8 +33,9 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Success: Story = {};
-export const Warning: Story = { args: { tone: "warning", message: "Some settings have not been published.", actionLabel: undefined } };
+export const Success: Story = { args: { type: "success", label: "Project settings saved." } };
+export const Warning: Story = { args: { type: "warning", label: "Some settings have not been published.", showButton: false } };
+export const Information: Story = { args: { type: "information", label: "New updates are available." } };
 export const Interactive: Story = {
   render: (args) => {
     const [open, setOpen] = useState(false);

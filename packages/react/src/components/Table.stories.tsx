@@ -7,21 +7,32 @@ const meta = {
   component: Table,
   tags: ["autodocs"],
   parameters: { layout: "padded" },
-  render: (args) => (
-    <Table {...args}>
-      <thead>
-        <tr><th>Project</th><th>Status</th><th>Owner</th><th>Updated</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Genome Evolution</td><td>Active</td><td>Natalia</td><td>Today</td></tr>
-        <tr><td>Design system</td><td>In review</td><td>Alex</td><td>Yesterday</td></tr>
-        <tr><td>Token migration</td><td>Planned</td><td>Sam</td><td>Oct 24</td></tr>
-      </tbody>
-    </Table>
-  )
+  args: { showHeader: true },
+  argTypes: {
+    showHeader: { control: "boolean" },
+    ...Object.fromEntries(Array.from({ length: 9 }, (_, index) => [`column${index + 2}`, { control: "boolean" }])),
+    ...Object.fromEntries(Array.from({ length: 9 }, (_, index) => [`row${index + 2}`, { control: "boolean" }])),
+    headers: { control: "object" },
+    rows: { control: "object" },
+    children: { control: false }
+  },
+  decorators: [(Story) => <div style={{ overflowX: "auto" }}><Story /></div>]
 } satisfies Meta<typeof Table>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+export const MultipleRowsAndColumns: Story = {
+  args: {
+    column2: true,
+    column3: true,
+    row2: true,
+    headers: ["Name", "Status", "Owner"],
+    rows: [
+      ["Genome Evolution", "Active", "Natalia"],
+      ["Design system", "In review", "Alex"]
+    ]
+  }
+};
+export const WithoutHeader: Story = { args: { showHeader: false } };

@@ -13,12 +13,14 @@ const meta = {
   title: "Components/RadioButtonGroup",
   component: RadioButtonGroup,
   tags: ["autodocs"],
-  args: { label: "Choose a plan", options, defaultValue: "professional" },
+  args: { label: "Choose a plan", options, defaultValue: "professional", tone: "default" },
   argTypes: {
     label: { control: "text" },
     options: { control: "object" },
     defaultValue: { control: "text" },
     value: { control: "text" },
+    tone: { control: "inline-radio", options: ["default", "evergreen", "indigo"] },
+    disabled: { control: "boolean" },
     onChange: { action: "selection changed" }
   },
   decorators: [(Story) => <div style={{ maxWidth: 380 }}><Story /></div>]

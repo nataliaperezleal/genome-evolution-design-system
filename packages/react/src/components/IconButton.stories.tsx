@@ -12,14 +12,16 @@ const meta = {
     icon: <SearchIcon />,
     tone: "evergreen",
     variant: "filled",
-    size: "md"
+    size: "lg",
+    corner: "square"
   },
   argTypes: {
     label: { control: "text" },
     icon: { control: false },
-    tone: { control: "inline-radio", options: ["evergreen", "indigo", "neutral"] },
+    tone: { control: "inline-radio", options: ["evergreen", "indigo", "inverse", "default"] },
     variant: { control: "inline-radio", options: ["filled", "outline"] },
-    size: { control: "inline-radio", options: ["sm", "md", "lg"] }
+    size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    corner: { control: "inline-radio", options: ["square", "rounded"] }
   }
 } satisfies Meta<typeof IconButton>;
 
@@ -32,7 +34,7 @@ export const Filled: Story = {};
 export const Outline: Story = {
   args: {
     variant: "outline",
-    tone: "neutral"
+    tone: "default"
   }
 };
 
@@ -41,7 +43,7 @@ export const Tones: Story = {
     <div style={{ alignItems: "center", display: "flex", gap: 12 }}>
       <IconButton label="Search evergreen" icon={<SearchIcon />} tone="evergreen" />
       <IconButton label="Search indigo" icon={<SearchIcon />} tone="indigo" />
-      <IconButton label="Search neutral" icon={<SearchIcon />} tone="neutral" />
+      <IconButton label="Search inverse" icon={<SearchIcon />} tone="inverse" />
     </div>
   )
 };
@@ -58,6 +60,9 @@ export const Sizes: Story = {
 
 export const Disabled: Story = {
   args: {
-    disabled: true
+    disabled: true,
+    tone: "default"
   }
 };
+
+export const Rounded: Story = { args: { corner: "rounded" } };

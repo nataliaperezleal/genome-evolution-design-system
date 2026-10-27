@@ -1,4 +1,7 @@
+import { useId, useState } from "react";
 import type { HTMLAttributes } from "react";
+
+export type RadioButtonTone = "default" | "evergreen" | "indigo";
 
 export interface RadioOption {
   label: string;
@@ -13,6 +16,8 @@ export interface RadioButtonGroupProps extends Omit<HTMLAttributes<HTMLDivElemen
   defaultValue?: string;
   onChange?: (value: string) => void;
   name?: string;
+  tone?: RadioButtonTone;
+  disabled?: boolean;
 }
 
 export function RadioButtonGroup({
@@ -21,26 +26,35 @@ export function RadioButtonGroup({
   value,
   defaultValue,
   onChange,
-  name = `ge-radio-${Math.random().toString(16).slice(2)}`,
+  tone = "default",
+  disabled = false,
+  name,
   className,
   ...props
 }: RadioButtonGroupProps) {
+  const generatedName = useId();
+  const resolvedName = name ?? `ge-radio-${generatedName}`;
   const isControlled = typeof value === "string";
-  const resolved = isControlled ? value : defaultValue ?? options[0]?.value ?? "";
+  const [internalValue, setInternalValue] = useState(defaultValue ?? "");
+  const resolved = isControlled ? value : internalValue;
 
   return (
     <div className={["ge-radio-group", className].filter(Boolean).join(" ")} {...props}>
       {label ? <div className="ge-radio-group__label">{label}</div> : null}
       <div className="ge-radio-group__options">
         {options.map((option) => (
-          <label key={option.value} className="ge-radio">
+          <label key={option.value} className={["ge-radio", `ge-radio--${tone}`, disabled ? "is-disabled" : ""].filter(Boolean).join(" ")}>
             <input
               className="ge-radio__input"
               type="radio"
-              name={name}
+              name={resolvedName}
               value={option.value}
               checked={resolved === option.value}
-              onChange={(event) => onChange?.(event.target.value)}
+              disabled={disabled}
+              onChange={(event) => {
+                if (!isControlled) setInternalValue(event.target.value);
+                onChange?.(event.target.value);
+              }}
               readOnly={!onChange && isControlled}
             />
             <span className="ge-radio__dot" aria-hidden="true" />
@@ -54,4 +68,3 @@ export function RadioButtonGroup({
     </div>
   );
 }
-

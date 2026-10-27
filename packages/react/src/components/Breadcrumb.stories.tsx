@@ -15,7 +15,13 @@ const meta = {
   },
   argTypes: {
     items: { control: "object" },
-    tone: { control: "inline-radio", options: ["default", "evergreen", "indigo"] }
+    tone: { control: "inline-radio", options: ["default", "evergreen", "indigo"] },
+    showOverflow: { control: "boolean" },
+    showLevel1: { control: "boolean" },
+    showLevel2: { control: "boolean" },
+    showLevel3: { control: "boolean" },
+    showLevel4: { control: "boolean" },
+    showLevel5: { control: "boolean" }
   }
 } satisfies Meta<typeof Breadcrumb>;
 
@@ -29,9 +35,9 @@ export const ShortPath: Story = {
 export const LongPath: Story = {
   args: {
     items: [
-      { label: "Workspace", href: "#workspace" },
+      { label: "Organization", href: "#organization" },
       { label: "Business unit", href: "#business-unit" },
-      { label: "Team", href: "#team" },
+      { label: "Workspace", href: "#workspace" },
       { label: "Projects", href: "#projects" },
       { label: "Genome Evolution" }
     ]

@@ -1,8 +1,9 @@
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type IconButtonTone = "evergreen" | "indigo" | "neutral";
+type IconButtonTone = "default" | "evergreen" | "indigo" | "inverse" | "neutral";
 type IconButtonVariant = "filled" | "outline";
 type IconButtonSize = "sm" | "md" | "lg";
+type IconButtonCorner = "square" | "rounded";
 
 export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon: ReactNode;
@@ -10,6 +11,7 @@ export interface IconButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>
   tone?: IconButtonTone;
   variant?: IconButtonVariant;
   size?: IconButtonSize;
+  corner?: IconButtonCorner;
 }
 
 export function IconButton({
@@ -17,7 +19,8 @@ export function IconButton({
   label,
   tone = "evergreen",
   variant = "filled",
-  size = "md",
+  size = "lg",
+  corner = "square",
   className,
   ...props
 }: IconButtonProps) {
@@ -26,6 +29,7 @@ export function IconButton({
     `ge-icon-button--${variant}`,
     `ge-icon-button--${tone}`,
     `ge-icon-button--${size}`,
+    `ge-icon-button--corner-${corner}`,
     className
   ]
     .filter(Boolean)

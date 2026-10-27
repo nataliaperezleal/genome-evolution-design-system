@@ -3,10 +3,10 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Stepper } from "./Stepper";
 
 const steps = [
-  { label: "Account", description: "Create your account" },
-  { label: "Workspace", description: "Set up your workspace" },
-  { label: "Invite team", description: "Add collaborators" },
-  { label: "Complete", description: "Review and finish" }
+  { label: "Account", number: 0, backLine: false },
+  { label: "Workspace", number: 1, state: "selected" as const, tone: "evergreen" as const },
+  { label: "Invite team", number: 2 },
+  { label: "Complete", number: 3, nextLine: false }
 ];
 
 const meta = {
@@ -16,7 +16,7 @@ const meta = {
   args: { steps, currentStep: 1, orientation: "horizontal" },
   argTypes: {
     steps: { control: "object" },
-    currentStep: { control: { type: "number", min: 0, max: steps.length - 1, step: 1 } },
+    currentStep: { table: { disable: true } },
     orientation: { control: "inline-radio", options: ["horizontal", "vertical"] }
   }
 } satisfies Meta<typeof Stepper>;
@@ -26,5 +26,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Horizontal: Story = {};
 export const Vertical: Story = { args: { orientation: "vertical" } };
-export const FirstStep: Story = { args: { currentStep: 0 } };
-export const Completed: Story = { args: { currentStep: 3 } };
+export const FirstStep: Story = {
+  args: { steps: [{ label: "Step label", number: 0, backLine: false, nextLine: false }] }
+};
+export const Checked: Story = {
+  args: { steps: [{ label: "Step label", state: "checked", tone: "indigo", number: 0, backLine: false, nextLine: false }] }
+};

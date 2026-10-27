@@ -9,6 +9,9 @@ const meta = {
   args: {
     label: "Save",
     onClick: () => undefined,
+    color: "evergreen",
+    type: "primary",
+    size: "regular",
     items: [
       { label: "Save as draft", onSelect: () => undefined },
       { label: "Save and publish", onSelect: () => undefined }
@@ -17,6 +20,10 @@ const meta = {
   argTypes: {
     label: { control: "text" },
     onClick: { action: "primary action clicked" },
+    color: { control: "inline-radio", options: ["evergreen", "indigo", "default"] },
+    type: { control: "inline-radio", options: ["primary", "secondary"] },
+    size: { control: "inline-radio", options: ["regular", "small"] },
+    disabled: { control: "boolean" },
     items: { control: "object" }
   }
 } satisfies Meta<typeof SplitButton>;

@@ -9,7 +9,17 @@ const meta = {
   args: {
     label: "Project name",
     placeholder: "Genome Evolution",
-    helperText: "Use a short, descriptive label."
+    helperText: "Use a short, descriptive label.",
+    size: "md",
+    orientation: "default",
+    corner: "square",
+    state: "default",
+    showLabel: true,
+    showInfo: true,
+    showLeftIcon: true,
+    showPlaceholder: true,
+    showRightIcon: true,
+    showHelperText: true
   },
   argTypes: {
     type: {
@@ -20,6 +30,19 @@ const meta = {
     placeholder: { control: "text" },
     helperText: { control: "text" },
     error: { control: "text" },
+    size: { control: "inline-radio", options: ["md", "sm"] },
+    orientation: { control: "inline-radio", options: ["default", "label-left"] },
+    corner: { control: "inline-radio", options: ["square", "rounded"] },
+    state: { control: "inline-radio", options: ["default", "filled", "hovered", "on-focus", "focused", "error", "disabled", "read-only"] },
+    showLabel: { control: "boolean" },
+    showInfo: { control: "boolean" },
+    infoIcon: { control: false },
+    showLeftIcon: { control: "boolean" },
+    leftIcon: { control: false },
+    showPlaceholder: { control: "boolean" },
+    showRightIcon: { control: "boolean" },
+    rightIcon: { control: false },
+    showHelperText: { control: "boolean" },
     disabled: { control: "boolean" },
     required: { control: "boolean" },
     readOnly: { control: "boolean" }

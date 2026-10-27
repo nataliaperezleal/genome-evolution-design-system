@@ -7,26 +7,29 @@ const meta = {
   component: Group,
   tags: ["autodocs"],
   args: {
-    direction: "row",
-    gap: "md",
-    align: "center",
-    justify: "start",
-    wrap: false,
-    children: "Grouped actions"
+    title: "Title",
+    state: "collapsed",
+    tone: "default",
+    showFooter: true,
+    showPaginator: true,
+    pageCount: 5
   },
   argTypes: {
-    direction: { control: "inline-radio", options: ["row", "column"] },
-    gap: { control: "inline-radio", options: ["xs", "sm", "md", "lg"] },
-    align: { control: "inline-radio", options: ["start", "center", "end", "stretch"] },
-    justify: { control: "select", options: ["start", "center", "end", "between"] },
-    wrap: { control: "boolean" },
+    title: { control: "text" },
+    state: { control: "inline-radio", options: ["collapsed", "expanded"] },
+    defaultState: { table: { disable: true } },
+    tone: { control: "inline-radio", options: ["default", "evergreen", "indigo"] },
+    showFooter: { control: "boolean" },
+    showPaginator: { control: "boolean" },
+    pageCount: { control: { type: "number", min: 1 } },
+    onStateChange: { action: "state changed" },
+    leftActions: { control: false },
+    rightActions: { control: false },
     children: { control: false }
   },
   render: (args) => (
-    <Group {...args}>
-      <button type="button">Save</button>
-      <button type="button">Cancel</button>
-      <button type="button">More options</button>
+    <Group key={args.state} {...args} state={undefined} defaultState={args.state}>
+      <div style={{ minHeight: 184 }}>Group content</div>
     </Group>
   )
 } satisfies Meta<typeof Group>;
@@ -34,6 +37,6 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Horizontal: Story = {};
-export const Vertical: Story = { args: { direction: "column", align: "stretch" } };
-export const Wrapped: Story = { args: { wrap: true, justify: "between" } };
+export const Collapsed: Story = {};
+export const ExpandedEvergreen: Story = { args: { state: "expanded", tone: "evergreen" } };
+export const ExpandedIndigo: Story = { args: { state: "expanded", tone: "indigo" } };

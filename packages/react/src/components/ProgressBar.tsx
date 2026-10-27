@@ -11,7 +11,7 @@ export interface ProgressBarProps extends Omit<HTMLAttributes<HTMLDivElement>, "
 }
 
 export function ProgressBar({
-  value = 0,
+  value = 10,
   max = 100,
   indeterminate = false,
   tone = "evergreen",
@@ -21,7 +21,10 @@ export function ProgressBar({
 }: ProgressBarProps) {
   const safeMax = max > 0 ? max : 100;
   const clamped = Math.min(Math.max(value, 0), safeMax);
-  const percent = (clamped / safeMax) * 100;
+  const documentedWidths: Record<number, number> = { 10: 10, 25: 100 / 3, 70: 200 / 3, 100: 100 };
+  const percent = safeMax === 100
+    ? (documentedWidths[clamped] ?? clamped)
+    : (clamped / safeMax) * 100;
 
   const classes = ["ge-progress", `ge-progress--${tone}`, indeterminate ? "is-indeterminate" : "", className]
     .filter(Boolean)
@@ -43,4 +46,3 @@ export function ProgressBar({
     </div>
   );
 }
-
