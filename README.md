@@ -36,7 +36,7 @@ npm run smoke
 ## Estructura
 
 ```text
-genome-design-system/
+genome-evolution-design-system/
 ├── manifest.json       # Índice completo de componentes, fundamentos y reglas de IA
 ├── foundations/        # Tokens, tipografía, color, layout y otros fundamentos
 ├── components/         # Componentes documentados en inglés y español
@@ -47,71 +47,68 @@ genome-design-system/
 ```
 
 ## Fuente de verdad de componentes
+Los archivos `components/*.md` describen el contrato visual y de comportamiento de cada componente. `packages/react` define qué está implementado y disponible en código. Si la documentación y la implementación no coinciden, se reporta la diferencia antes de elegir un comportamiento.
 
-Los archivos `components/*.md` definen el contrato visual y de comportamiento de cada componente; sus versiones en `components/es/` son la documentación localizada. Los valores visuales deben venir de los tokens existentes del repositorio, no de valores nuevos definidos por separado en React.
+## Componentes
 
-`packages/react` es una implementación de ese contrato, no una fuente alternativa ni una generación automática desde Markdown. Al cambiar una implementación, se deben respetar las variantes, estados y valores documentados, y usar los tokens correspondientes. Si falta una definición o hay una contradicción en los Markdown, hay que resolverla en la documentación antes de elegir un comportamiento nuevo.
+- Documentados: 49. El inventario completo y sus metadatos están en [manifest.json](manifest.json).
+- Exportados desde `packages/react/src/index.ts`: 35 exports.
+- Planeados para código, pendientes de implementación: Duo Button y los componentes IA (Chat IA, Chat Suggestion IA, Input IA, Suggestion IA y Thinking IA).
+- Partes de otros componentes, con documentación propia pero sin export independiente:
+  - `Datepicker`: Calendar Month, Calendar Number.
+  - `Table`: Table Cell Assets, Table Header Assets.
+  - `Dropdown`: Dropdown Empty Content, Dropdown Icon Text.
 
-## Componentes (49)
-
-Todos los componentes están identificados con estado `Design`. El inventario completo y sus metadatos están en [manifest.json](manifest.json).
-
-| Componente | Documentación | Estado |
+| Componente | Documentación | Export en React |
 |---|---|---|
-| Accordion | [accordion.md](components/accordion.md) | Design |
-| Avatar | [avatar.md](components/avatar.md) | Design |
-| Backdrop | [backdrop.md](components/backdrop.md) | Design |
-| Badge | [badge.md](components/badge.md) | Design |
-| Breadcrumb | [breadcrumb.md](components/breadcrumb.md) | Design |
-| Breadcrumb Item | [breadcrumb-item.md](components/breadcrumb-item.md) | Design |
-| Button | [button.md](components/button.md) | Design |
-| Calendar Month | [calendar-month.md](components/calendar-month.md) | Design |
-| Calendar Number | [calendar-number.md](components/calendar-number.md) | Design |
-| Checkbox | [checkbox.md](components/checkbox.md) | Design |
-| Clear Button | [clear-button.md](components/clear-button.md) | Design |
-| Color Picker | [color-picker.md](components/color-picker.md) | Design |
-| Cursor | [cursor.md](components/cursor.md) | Design |
-| Datepicker | [datepicker.md](components/datepicker.md) | Design |
-| Duo Button | [duo-button.md](components/duo-button.md) | Design |
-| Dropdown | [dropdown.md](components/dropdown.md) | Design |
-| Dropdown Empty Content | [dropdown-empty-content.md](components/dropdown-empty-content.md) | Design |
-| Dropdown Icon Text | [dropdown-icon-text.md](components/dropdown-icon-text.md) | Design |
-| Group | [group.md](components/group.md) | Design |
-| Header | [header.md](components/header.md) | Design |
-| Icon Button | [icon-button.md](components/icon-button.md) | Design |
-| Inline Alert | [inline-alert.md](components/inline-alert.md) | Design |
-| Input | [input.md](components/input.md) | Design |
-| Link | [link.md](components/link.md) | Design |
-| List | [list.md](components/list.md) | Design |
-| Modal | [modal.md](components/modal.md) | Design |
-| Paginator | [paginator.md](components/paginator.md) | Design |
-| Panel | [panel.md](components/panel.md) | Design |
-| Progress Bar | [progress-bar.md](components/progress-bar.md) | Design |
-| Radio Button | [radio-button.md](components/radio-button.md) | Design |
-| Scorecard | [scorecard.md](components/scorecard.md) | Design |
-| Scroll | [scroll.md](components/scroll.md) | Design |
-| Segmented Button | [segmented-button.md](components/segmented-button.md) | Design |
-| Snackbar | [snackbar.md](components/snackbar.md) | Design |
-| Split Button | [split-button.md](components/split-button.md) | Design |
-| Stepper | [stepper.md](components/stepper.md) | Design |
-| Switch | [switch.md](components/switch.md) | Design |
-| Tab | [tab.md](components/tab.md) | Design |
-| Table | [table.md](components/table.md) | Design |
-| Table Cell Assets | [table-cell-assets.md](components/table-cell-assets.md) | Design |
-| Table Header Assets | [table-header-assets.md](components/table-header-assets.md) | Design |
-| Tag | [tag.md](components/tag.md) | Design |
-| Text Area | [text-area.md](components/text-area.md) | Design |
-| Tooltip | [tooltip.md](components/tooltip.md) | Design |
-
-## Componentes IA (5)
-
-| Componente | Documentación | Estado |
-|---|---|---|
-| Chat IA | [chat-ia.md](components/chat-ia.md) | Design |
-| Chat Suggestion IA | [chat-suggestion-ia.md](components/chat-suggestion-ia.md) | Design |
-| Input IA | [input-ia.md](components/input-ia.md) | Design |
-| Suggestion IA | [suggestion-ia.md](components/suggestion-ia.md) | Design |
-| Thinking IA | [thinking-ia.md](components/thinking-ia.md) | Design |
+| Accordion | [accordion.md](components/accordion.md) | Sí |
+| Avatar | [avatar.md](components/avatar.md) | Sí |
+| Backdrop | [backdrop.md](components/backdrop.md) | Sí |
+| Badge | [badge.md](components/badge.md) | Sí |
+| Breadcrumb | [breadcrumb.md](components/breadcrumb.md) | Sí |
+| Breadcrumb Item | [breadcrumb-item.md](components/breadcrumb-item.md) | Tipo `BreadcrumbItem` dentro de Breadcrumb |
+| Button | [button.md](components/button.md) | Sí |
+| Calendar Month | [calendar-month.md](components/calendar-month.md) | Parte de Datepicker |
+| Calendar Number | [calendar-number.md](components/calendar-number.md) | Parte de Datepicker |
+| Checkbox | [checkbox.md](components/checkbox.md) | Sí |
+| Chat IA | [chat-ia.md](components/chat-ia.md) | Planeado |
+| Chat Suggestion IA | [chat-suggestion-ia.md](components/chat-suggestion-ia.md) | Planeado |
+| Clear Button | [clear-button.md](components/clear-button.md) | Sí |
+| Color Picker | [color-picker.md](components/color-picker.md) | Sí |
+| Cursor | [cursor.md](components/cursor.md) | Sí |
+| Datepicker | [datepicker.md](components/datepicker.md) | Sí |
+| Duo Button | [duo-button.md](components/duo-button.md) | Planeado |
+| Dropdown | [dropdown.md](components/dropdown.md) | Sí |
+| Dropdown Empty Content | [dropdown-empty-content.md](components/dropdown-empty-content.md) | Parte de Dropdown |
+| Dropdown Icon Text | [dropdown-icon-text.md](components/dropdown-icon-text.md) | Parte de Dropdown |
+| Group | [group.md](components/group.md) | Sí |
+| Header | [header.md](components/header.md) | Sí |
+| Icon Button | [icon-button.md](components/icon-button.md) | Sí |
+| Inline Alert | [inline-alert.md](components/inline-alert.md) | Sí |
+| Input | [input.md](components/input.md) | Sí |
+| Input IA | [input-ia.md](components/input-ia.md) | Planeado |
+| Link | [link.md](components/link.md) | Sí |
+| List | [list.md](components/list.md) | Sí |
+| Modal | [modal.md](components/modal.md) | Sí |
+| Paginator | [paginator.md](components/paginator.md) | Sí |
+| Progress Bar | [progress-bar.md](components/progress-bar.md) | Sí |
+| Radio Button | [radio-button.md](components/radio-button.md) | Sí (`RadioButtonGroup`) |
+| Scorecard | [scorecard.md](components/scorecard.md) | Sí |
+| Scroll | [scroll.md](components/scroll.md) | Sí |
+| Segmented Button | [segmented-button.md](components/segmented-button.md) | Sí |
+| Snackbar | [snackbar.md](components/snackbar.md) | Sí |
+| Split Button | [split-button.md](components/split-button.md) | Sí |
+| Stepper | [stepper.md](components/stepper.md) | Sí |
+| Suggestion IA | [suggestion-ia.md](components/suggestion-ia.md) | Planeado |
+| Switch | [switch.md](components/switch.md) | Sí |
+| Tab | [tab.md](components/tab.md) | Sí |
+| Table | [table.md](components/table.md) | Sí |
+| Table Cell Assets | [table-cell-assets.md](components/table-cell-assets.md) | Parte de Table |
+| Table Header Assets | [table-header-assets.md](components/table-header-assets.md) | Parte de Table |
+| Tag | [tag.md](components/tag.md) | Sí |
+| Text Area | [text-area.md](components/text-area.md) | Sí |
+| Thinking IA | [thinking-ia.md](components/thinking-ia.md) | Planeado |
+| Tooltip | [tooltip.md](components/tooltip.md) | Sí |
 
 ## Fundamentos
 
@@ -132,11 +129,8 @@ Lee primero [manifest.json](manifest.json) para obtener el índice completo del 
 - [Uso de tokens](ai/token-usage-rules.md)
 - [Plantilla de prompt](ai/prompt-template.md)
 - [Checklist de evaluación](ai/evaluation-checklist.md)
+- [Figma MCP](ai/figma-mcp.md)
 
 ## Fuente de verdad en Figma
 
 [Ver archivo en Figma](https://www.figma.com/design/qo8ZYDn63qhp3R3b4xd9Ra/-DS--Genome-Evolution)
-
-## Contribución
-
-Cada componente tiene documentación generada desde el frame **"Texto para el md"** en Figma. Para actualizarla, edita el frame en Figma, extrae su contenido y actualiza el archivo Markdown correspondiente.
