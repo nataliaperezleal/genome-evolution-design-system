@@ -29,7 +29,7 @@ npm run typecheck
 npm run smoke
 ```
 
-- `npm run validate:css-vars` comprueba las variables CSS referenciadas por componentes y documentación.
+- `npm run validate:css-vars` comprueba que las variables CSS usadas en `packages/react/src` y `apps/docs/src` existan en los tokens generados.
 - `npm run smoke` valida tokens, variables CSS, la documentación del sitio y Storybook.
 - `npm run storybook` inicia el catálogo de componentes en `http://localhost:6006`.
 
