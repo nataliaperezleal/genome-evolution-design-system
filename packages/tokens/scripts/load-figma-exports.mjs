@@ -63,6 +63,57 @@ function normalizeTypographyValue(value) {
   return value;
 }
 
+const FONT_WEIGHTS = {
+  thin: 100,
+  extralight: 200,
+  light: 300,
+  regular: 400,
+  normal: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+  extrabold: 800,
+  black: 900,
+};
+
+function normalizeFontWeight(value, tokenPath) {
+  if (typeof value === "number") return value;
+  if (typeof value !== "string") {
+    throw new Error(`Font weight at ${tokenPath} must be a string or number, got ${JSON.stringify(value)}`);
+  }
+
+  const raw = value.trim();
+  if (/^\d+$/.test(raw)) return Number(raw);
+
+  const key = raw.toLowerCase().replace(/[\s_-]/g, "");
+  if (!(key in FONT_WEIGHTS)) {
+    throw new Error(`Unknown font weight "${value}" at ${tokenPath}`);
+  }
+  return FONT_WEIGHTS[key];
+}
+
+function isWeightToken(trail, node) {
+  if (node.$type === "fontWeight") return true;
+  return trail.at(-1) === "weight";
+}
+
+function convertTypography(node, convertText = (value) => value, trail = []) {
+  if (!node || typeof node !== "object") return node;
+
+  if ("$value" in node) {
+    const value = isWeightToken(trail, node)
+      ? normalizeFontWeight(node.$value, trail.join("."))
+      : convertText(node.$value);
+    return { ...node, $value: value };
+  }
+
+  return Object.fromEntries(
+    Object.entries(node)
+      .filter(([key]) => !key.startsWith("$"))
+      .map(([key, value]) => [key, convertTypography(value, convertText, [...trail, key])])
+  );
+}
+
 function flattenRoleEntries(node, trail = [], result = []) {
   if (!node || typeof node !== "object") return result;
 
@@ -214,12 +265,9 @@ export async function loadFigmaExports() {
   source["Spacing/Base"] = withoutSetMetadata(spacing);
   source["Color / Primitive/Light"] = colorLightTokens;
   source["Color / Primitive/Dark"] = colorDarkTokens;
-  source["Typography / Primitive/Base"] = withoutSetMetadata(typographyBase);
-  source["Typography / Primitive/Brand"] = withoutSetMetadata(typographyBrand);
-  source["Typography / Role/Base"] = withoutSetMetadata(
-    typographyRoles,
-    normalizeTypographyValue
-  );
+  source["Typography / Primitive/Base"] = convertTypography(typographyBase);
+  source["Typography / Primitive/Brand"] = convertTypography(typographyBrand);
+  source["Typography / Role/Base"] = convertTypography(typographyRoles, normalizeTypographyValue);
 
   const convertedRoles = {};
   for (const role of flattenRoleEntries(colorRoleProduct)) {
