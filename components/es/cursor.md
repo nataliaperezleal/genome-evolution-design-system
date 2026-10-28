@@ -211,6 +211,27 @@ Evidencia / Clasificación: Variante existente en Figma.
 
 [No se encontraron combinaciones inválidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `variant` | `"pointer" \| "text" \| "grab"` | `"pointer"` | Estilo del glifo del cursor. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Énfasis tonal opcional. |
+| `label` | `string` | `undefined` | Etiqueta opcional que aparece junto al glifo. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Cursor label
+
+```tsx
+import { Cursor } from "@genome-evolution/react";
+
+<Cursor variant="grab" tone="indigo" label="Drag" />;
+```
+
 ## Aclaraciones pendientes
 
 Ninguna

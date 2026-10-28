@@ -266,6 +266,32 @@ Evidencia / Clasificación: Variante existente en Figma.
 
 [No se encontraron combinaciones inválidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `items` | `BreadcrumbItem[]` | `required` | Elementos ordenados de la ruta de navegación. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configura la propiedad `tone` del componente. |
+| `showOverflow` | `boolean` | `true` | Configura la propiedad `showOverflow` del componente. |
+| `showLevel1` | `boolean` | `true` | Configura la propiedad `showLevel1` del componente. |
+| `showLevel2` | `boolean` | `true` | Configura la propiedad `showLevel2` del componente. |
+| `showLevel3` | `boolean` | `true` | Configura la propiedad `showLevel3` del componente. |
+| `showLevel4` | `boolean` | `true` | Configura la propiedad `showLevel4` del componente. |
+| `showLevel5` | `boolean` | `true` | Configura la propiedad `showLevel5` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Three levels
+
+```tsx
+import { Breadcrumb } from "@genome-evolution/react";
+
+<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Billing" }]} />;
+```
+
 ## Aclaraciones pendientes
 
 Ninguna

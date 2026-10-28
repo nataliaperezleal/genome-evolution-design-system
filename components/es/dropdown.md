@@ -215,6 +215,37 @@ Evidencia / Clasificación: Variante existente en Figma; el contenido de los slo
 
 [No se encontraron combinaciones inválidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `options` | `DropdownOption[]` | `defaultOptions` | Opciones disponibles. |
+| `label` | `string` | `undefined` | Etiqueta visible. |
+| `helperText` | `string` | `undefined` | Mensaje de apoyo. |
+| `error` | `string` | `undefined` | Mensaje de error (reemplaza `helperText`). |
+| `content` | `"items" \| "slots"` | `"items"` | Configura la propiedad `content` del componente. |
+| `presentation` | `"field" \| "panel"` | `undefined` | Configura la propiedad `presentation` del componente. |
+| `buttonLabel` | `string` | `"Button"` | Configura la propiedad `buttonLabel` del componente. |
+| `onValueChange` | `(value: string) => void` | `undefined` | Configura la propiedad `onValueChange` del componente. |
+| `onApply` | `() => void` | `undefined` | Configura la propiedad `onApply` del componente. |
+| `children` | `ReactNode` | `undefined` | Configura la propiedad `children` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (SelectHTMLAttributes).
+### Ejemplos
+
+#### Select field
+
+```tsx
+import { Dropdown } from "@genome-evolution/react";
+
+<Dropdown
+  label="Role"
+  options={[{ value: "admin", label: "Admin" }, { value: "editor", label: "Editor" }]}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 Ninguna

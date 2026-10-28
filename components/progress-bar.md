@@ -203,6 +203,29 @@ Evidence / Classification: existing Figma configuration (variant `2190:1929`).
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `value` | `number` | `10` | Current progress value (determinate). |
+| `max` | `number` | `100` | Maximum progress value. |
+| `indeterminate` | `boolean` | `false` | Unknown duration loading state. |
+| `tone` | `"evergreen" \| "indigo" \| "neutral"` | `"evergreen"` | Fill color tone. |
+| `label` | `string` | `"Progress"` | Configures the `label` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Indeterminate loading
+
+```tsx
+import { ProgressBar } from "@genome-evolution/react";
+
+<ProgressBar indeterminate label="Loading" />;
+```
+
 ## Pending Clarification
 
 1. Fill length does not match the value. `Progress=25%` renders at about 33% (116px) and `Progress=70%` at about 67% (232px) of the 348px inner track. Confirm the intended lengths (87px and about 244px).

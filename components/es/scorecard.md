@@ -210,6 +210,30 @@ Evidencia / clasificación: configuración existente en Figma (variante `2191:21
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `label` | `ReactNode` | `required` | Etiqueta de la métrica. |
+| `value` | `ReactNode` | `required` | Valor principal. |
+| `change` | `ReactNode` | `undefined` | Indicador complementario de cambio. |
+| `tone` | `"neutral" \| "success" \| "warning" \| "danger" \| "info"` | `"neutral"` | Cambia el tono de la línea. |
+| `size` | `"sm" \| "md"` | `"sm"` | Configura la propiedad `size` del componente. |
+| `valuePosition` | `"top" \| "bottom"` | `"top"` | Configura la propiedad `valuePosition` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### KPI tile
+
+```tsx
+import { Scorecard } from "@genome-evolution/react";
+
+<Scorecard label="Usuarios" value="4,821" change="↑ 12.4%" tone="success" />;
+```
+
 ## Aclaraciones pendientes
 
 1. Nombre del componente: Scorecard, de acuerdo con el nombre utilizado en Figma.

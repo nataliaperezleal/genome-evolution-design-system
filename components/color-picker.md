@@ -233,6 +233,28 @@ Evidence / Classification: Existing variant in Figma (sample content).
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `"Color"` | Visible label. |
+| `defaultValue` | `string` | `"#297A39"` | Initial value (uncontrolled). |
+| `value` | `string` | `undefined` | Controlled value. |
+| `onChange` | `(value: string) => void` | `undefined` | Change handler. |
+| `type` | `"Solid" \| "Gradient"` | `undefined` | Configures the `type` component property. |
+| `onTypeChange` | `(type: ColorPickerType) => void` | `undefined` | Configures the `onTypeChange` component property. |
+### Examples
+
+#### Controlled color picker
+
+```tsx
+import { ColorPicker } from "@genome-evolution/react";
+
+<ColorPicker label="Brand" defaultValue="#297A39" />;
+```
+
 ## Pending Clarification
 
 None

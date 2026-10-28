@@ -195,6 +195,29 @@ Evidence / Classification: existing Figma configuration (variant `2191:2156`); u
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `maxHeight` | `number \| string` | `220` | Maximum height before scrolling. |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Configures the `orientation` component property. |
+| `size` | `"small" \| "regular"` | `"small"` | Configures the `size` component property. |
+| `indicatorOnly` | `boolean` | `false` | Configures the `indicatorOnly` component property. |
+| `children` | `ReactNode` | `undefined` | Configures the `children` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Scrollable list
+
+```tsx
+import { Scroll } from "@genome-evolution/react";
+
+<Scroll maxHeight={180}>…</Scroll>;
+```
+
 ## Pending Clarification
 
 1. Thumb size and position. The thumb is always half of the track and at the start; neither its length nor its position can be set through properties. Confirm how designers should represent different scroll positions and content lengths.

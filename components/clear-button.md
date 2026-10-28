@@ -274,6 +274,31 @@ Evidence / Classification: Existing variant in Figma.
 
 These combinations are unavailable rather than explicitly documented as invalid.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"indigo"` | Brand tone for text/icon. |
+| `typeTone` | `"default" \| "information" \| "success" \| "danger" \| "warning"` | `"default"` | Semantic override for text/icon. |
+| `corner` | `"default" \| "rounded"` | `"default"` | Controls corner radius. |
+| `leadingIcon` | `ReactNode` | `undefined` | Optional icon before label. |
+| `trailingIcon` | `ReactNode` | `undefined` | Optional icon after label. |
+
+It also accepts React's native attributes for the underlying HTML element (ButtonHTMLAttributes).
+### Examples
+
+#### Navigation action
+
+```tsx
+import { ClearButton } from "@genome-evolution/react";
+
+<ClearButton tone="default" leadingIcon={<ArrowIcon />}>
+  Back
+</ClearButton>;
+```
+
 ## Pending Clarification
 
 None

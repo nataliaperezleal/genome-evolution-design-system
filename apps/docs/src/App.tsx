@@ -7,7 +7,6 @@ import {
   Badge,
   Breadcrumb,
   Button,
-  Card,
   Checkbox,
   ClearButton,
   ColorPicker,
@@ -47,7 +46,6 @@ import {
 import ColorPickerDemo from "./ColorPickerDemo";
 
 import { componentDocsBySlug, componentDocsBySlugEs, foundationDocsBySlug, foundationDocsBySlugEs, manifest, tokenStats } from "./data";
-import { componentSpecs, componentTabLabels, tr, type ComponentTabId, type SpecSection } from "./component-specs";
 import { renderInline, renderMarkdown } from "./markdown";
 import type { DocRecord, NavItem } from "./types";
 import { BorderFoundation } from "./foundations/BorderFoundation";
@@ -56,7 +54,32 @@ import { TypographyFoundation } from "./foundations/TypographyFoundation";
 import { LayoutFoundation } from "./foundations/LayoutFoundation";
 import { OpacityFoundation } from "./foundations/OpacityFoundation";
 import { ElevationFoundation } from "./foundations/ElevationFoundation";
-import { detectInitialLanguage, t, type Language } from "./i18n";
+import { detectInitialLanguage, dict, t, type Language } from "./i18n";
+
+type ComponentTabId =
+  | "overview"
+  | "when-to-use"
+  | "when-not-to-use"
+  | "anatomy"
+  | "states"
+  | "rules"
+  | "do-dont"
+  | "tokens"
+  | "accessibility"
+  | "implementation";
+
+const componentTabTranslationKeys: Record<ComponentTabId, keyof typeof dict> = {
+  overview: "docs.tab.overview",
+  "when-to-use": "docs.tab.whenToUse",
+  "when-not-to-use": "docs.tab.whenNotToUse",
+  anatomy: "docs.tab.anatomy",
+  states: "docs.tab.states",
+  rules: "docs.tab.rules",
+  "do-dont": "docs.tab.doDont",
+  tokens: "docs.tab.tokens",
+  accessibility: "docs.tab.accessibility",
+  implementation: "docs.tab.implementation"
+};
 
 function publicAsset(path: string) {
   return new URL(path.replace(/^\/+/, ""), document.baseURI).toString();
@@ -233,7 +256,13 @@ function headingToTabId(heading: string): ComponentTabId | null {
   if (normalized.includes("do") && normalized.includes("dont")) return "do-dont";
   if (normalized === "accessibility" || normalized === "accesibilidad") return "accessibility";
   if (normalized === "implementation" || normalized === "implementacion") return "implementation";
-  if (normalized === "tokens" || normalized === "token") return "tokens";
+  if (
+    normalized === "tokens" ||
+    normalized === "token" ||
+    normalized.includes("token mapping") ||
+    normalized.includes("mapeo de tokens")
+  )
+    return "tokens";
 
   return null;
 }
@@ -294,12 +323,23 @@ function splitMarkdownByH2(markdown: string) {
 }
 
 function parseMarkdownTableRow(line: string) {
-  return line
-    .trim()
-    .replace(/^\|/, "")
-    .replace(/\|$/, "")
-    .split("|")
-    .map((cell) => cell.trim());
+  const cells: string[] = [];
+  let cell = "";
+  const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+
+  for (let index = 0; index < trimmed.length; index += 1) {
+    if (trimmed[index] === "\\" && trimmed[index + 1] === "|") {
+      cell += "|";
+      index += 1;
+    } else if (trimmed[index] === "|") {
+      cells.push(cell.trim());
+      cell = "";
+    } else {
+      cell += trimmed[index];
+    }
+  }
+  cells.push(cell.trim());
+  return cells;
 }
 
 function extractAnatomyParts(markdown: string) {
@@ -893,42 +933,6 @@ function ComponentPreview({
     );
   }
 
-  if (componentName === "Card") {
-    return (
-      <div className="preview-stack">
-        <Card
-          style={{ width: 240 }}
-          title="Tarjeta base"
-          footer={
-            <>
-              <Badge tone="neutral">Borrador</Badge>
-              <Button size="sm" variant="tertiary">
-                Ver
-              </Button>
-            </>
-          }
-        >
-          Ideal para agrupar información relacionada con un contenedor de bajo contraste.
-        </Card>
-        <Card
-          style={{ width: 240 }}
-          variant="elevated"
-          title="Tarjeta elevada"
-          footer={
-            <>
-              <Badge tone="primary">Destacado</Badge>
-              <Button size="sm" tone="indigo">
-                Abrir
-              </Button>
-            </>
-          }
-        >
-          Para contenido destacado o seleccionado que necesita separarse del fondo.
-        </Card>
-      </div>
-    );
-  }
-
   if (componentName === "Avatar") {
     return (
       <div className="preview-stack">
@@ -1209,9 +1213,9 @@ function ComponentPreview({
         <Scroll maxHeight={180}>
           <p className="table-muted">Scrollable content</p>
           {Array.from({ length: 18 }, (_, i) => (
-            <Card key={i} variant="elevated" title={`Item ${i + 1}`}>
-              Secondary content lives inside a scrollable surface.
-            </Card>
+            <p key={i} className="table-muted">
+              Item {i + 1}: secondary content inside a scrollable surface.
+            </p>
           ))}
         </Scroll>
       </div>
@@ -1476,19 +1480,15 @@ function ComponentPreview({
   }
 
   return (
-    <Card
-      variant="elevated"
-      title={
-        <div className="preview-placeholder__title">
-          <span>Live preview pending</span>
-          <Badge tone="neutral" variant="outline">
-            React TBD
-          </Badge>
-        </div>
-      }
-    >
-      This component page has guidance and tokens, but the React package output is still pending.
-    </Card>
+    <div className="preview-placeholder">
+      <div className="preview-placeholder__title">
+        <span>Live preview pending</span>
+        <Badge tone="neutral" variant="outline">
+          React TBD
+        </Badge>
+      </div>
+      <p>This component page has guidance and tokens, but the React package output is still pending.</p>
+    </div>
   );
 }
 
@@ -2657,8 +2657,8 @@ function InteractiveStatesPreview({
         </div>
         <p className="interaction-reference__note">
           {isSpanish
-            ? "La documentación describe convenciones en el tipo Días, pero React solo muestra una leyenda genérica, no los tres marcadores específicos."
-            : "The spec describes day-specific conventions, but React currently shows a generic legend rather than the three specific markers."}
+            ? "Los marcadores de ejemplo aparecen en los días 2, 12 y 22; la documentación define su forma y leyenda, pero no asigna fechas concretas."
+            : "Sample markers appear on days 2, 12, and 22; the spec defines their shape and legend but does not assign specific dates."}
         </p>
       </section>
     );
@@ -2695,8 +2695,8 @@ function InteractiveStatesPreview({
         </div>
         <p className="interaction-reference__note">
           {isSpanish
-            ? "Los controles de expandir y el contenido intercambiable por tamaño descritos en el Markdown aún no están completamente implementados en React."
-            : "The expand control and size-specific swappable content described in Markdown are not fully implemented in React yet."}
+            ? "El icono de expandir se muestra como en la referencia; su efecto no está definido en el Markdown. El contenido de ejemplo sí cambia por tamaño."
+            : "The expand icon is shown as in the reference; its effect is not defined in the Markdown. The sample content does change by size."}
         </p>
         <Modal
           open={modalOpen}
@@ -2711,13 +2711,15 @@ function InteractiveStatesPreview({
           onCancel={() => setModalOpen(false)}
           onConfirm={() => setModalOpen(false)}
           onTertiary={() => setModalOpen(false)}
-        >
-          <p>
-            {isSpanish
-              ? `Tamaño seleccionado: ${modalSize}. El contenido del diálogo puede adaptarse al contexto.`
-              : `Selected size: ${modalSize}. Dialog content can adapt to its context.`}
-          </p>
-        </Modal>
+          sizeContent={{
+            small: <p>{isSpanish ? "Contenido breve para una confirmación." : "Short content for a confirmation."}</p>,
+            medium: <p>{isSpanish ? "Contenido de formulario o detalle para el tamaño Medium." : "Form or detail content for Medium size."}</p>,
+            large: <p>{isSpanish ? "Contenido ampliado para revisar más información." : "Expanded content for reviewing more information."}</p>,
+            bigger: <p>{isSpanish ? "Área amplia para tareas de edición complejas." : "A large area for complex editing tasks."}</p>,
+            "90%": <p>{isSpanish ? "Contenido de trabajo que ocupa casi toda la ventana." : "Workspace content that uses most of the viewport."}</p>,
+            full: <p>{isSpanish ? "Contenido de pantalla completa para edición." : "Full-screen content for editing."}</p>
+          }}
+        />
       </section>
     );
   }
@@ -2800,81 +2802,16 @@ function InteractiveStatesPreview({
   );
 }
 
-const stateTitlesEs: Record<string, string> = {
-  default: "Predeterminado",
-  interactive: "Interactivo",
-  visible: "Visible",
-  hidden: "Oculto",
-  hover: "Al pasar el cursor",
-  hovered: "Al pasar el cursor",
-  "focus visible": "Foco visible",
-  focused: "Con foco",
-  pressed: "Presionado",
-  disabled: "Deshabilitado",
-  unchecked: "Desmarcado",
-  checked: "Marcado",
-  selected: "Seleccionado",
-  unselected: "No seleccionado",
-  open: "Abierto",
-  closed: "Cerrado",
-  determinate: "Determinado",
-  indeterminate: "Indeterminado",
-  active: "Activo",
-  "active page": "Página activa",
-  "disabled prev/next at edges": "Anterior/siguiente deshabilitado en los extremos",
-  off: "Desactivado",
-  on: "Activado",
-  todo: "Pendiente",
-  current: "Actual",
-  done: "Completado",
-  error: "Error",
-  filled: "Con valor",
-  loading: "Cargando",
-  visited: "Visitado",
-  "auto-hide": "Ocultamiento automático",
-  "read only": "Solo lectura",
-  "focused tab": "Foco de teclado"
-};
-
-function localizeStateTitle(title: string, language: Language) {
-  if (language === "en") return title;
-  const optional = title.endsWith(" (optional)");
-  const baseTitle = optional ? title.slice(0, -" (optional)".length) : title;
-  const translated = stateTitlesEs[baseTitle.toLowerCase()] ?? baseTitle;
-  return optional ? `${translated} (opcional)` : translated;
-}
-
 function ComponentStatesShowcase({
   componentName,
   doc,
-  language,
-  sections
+  language
 }: {
   componentName: string;
   doc: DocRecord;
   language: Language;
-  sections: SpecSection[];
 }) {
-  const previewSections = sections.filter((section) => section.preview);
-  const documentedStates = sections.flatMap((section) =>
-    (section.bullets ?? []).map((bullet) => {
-      const text = tr(bullet, language);
-      const divider = text.indexOf(":");
-      const title = divider > 0 ? text.slice(0, divider).trim() : text;
-      return {
-        title: localizeStateTitle(title, language)
-      };
-    })
-  );
-  const states = sections.flatMap((section) =>
-    section.bullets?.length
-      ? []
-      : section.title
-        ? [{ title: localizeStateTitle(tr(section.title, language), language) }]
-        : []
-  );
-  const stateLabels = documentedStates.length ? documentedStates : states;
-
+  const statesMarkdown = buildComponentMarkdownTabs(doc.body).states ?? "";
   return (
     <section className="component-states-showcase">
       <header className="component-states-showcase__header">
@@ -2882,58 +2819,22 @@ function ComponentStatesShowcase({
         <h4>{language === "es" ? "Variantes y estados" : "Variants and states"}</h4>
         <p>
           {language === "es"
-            ? "Explora el ejemplo del componente y consulta aquí los estados documentados."
-            : "Explore the component example and review its documented states here."}
+            ? "Compara el ejemplo del componente con los estados descritos en su Markdown."
+            : "Compare the component example with the states described in its Markdown."}
         </p>
       </header>
 
-      <div className={`component-states-showcase__body ${previewSections.length ? "component-states-showcase__body--specimens" : ""}`}>
+      <div className="component-states-showcase__body">
         <div className="component-states-showcase__preview">
           <p className="component-states-showcase__label">
-            {language === "es"
-              ? previewSections.length ? "Estados visuales documentados" : "Ejemplo visual"
-              : previewSections.length ? "Documented visual states" : "Visual example"}
+            {language === "es" ? "Ejemplo visual" : "Visual example"}
           </p>
-          {previewSections.length ? (
-            <div className="component-states-showcase__specimens">
-              {previewSections.map((section, index) => (
-                <article className="component-states-showcase__specimen" key={`${section.title ?? "state"}-${index}`}>
-                  <div className="component-states-showcase__specimen-preview">{section.preview}</div>
-                  {section.title ? (
-                    <strong>{localizeStateTitle(tr(section.title, language), language)}</strong>
-                  ) : null}
-                  {section.body?.map((paragraph, paragraphIndex) => (
-                    <p key={`${index}-${paragraphIndex}`}>{tr(paragraph, language)}</p>
-                  ))}
-                </article>
-              ))}
-            </div>
-          ) : (
-            <ComponentPreview componentName={componentName} docBody={doc.body} language={language} />
-          )}
+          <ComponentPreview componentName={componentName} docBody={doc.body} language={language} />
         </div>
-
-        {!previewSections.length && stateLabels.length ? (
-          <div className="component-states-showcase__states">
-            <p className="component-states-showcase__label">{language === "es" ? "Estados documentados" : "Documented states"}</p>
-            <ul>
-              {stateLabels.map((state, index) => (
-                <li key={`${state.title}-${index}`}>
-                  <strong>{state.title}</strong>
-                </li>
-              ))}
-            </ul>
+        <div className="component-states-showcase__states">
+          <p className="component-states-showcase__label">{language === "es" ? "Estados documentados" : "Documented states"}</p>
+          <div className="markdown-body">{renderMarkdown(statesMarkdown)}</div>
           </div>
-        ) : !previewSections.length ? (
-          <div className="component-states-showcase__states component-states-showcase__states--empty">
-            <p className="component-states-showcase__label">{language === "es" ? "Estados documentados" : "Documented states"}</p>
-            <p>
-              {language === "es"
-                ? "Consulta la especificación del componente para conocer las variantes disponibles."
-                : "See the component specification for its available variants."}
-            </p>
-          </div>
-        ) : null}
       </div>
     </section>
   );
@@ -2980,7 +2881,6 @@ function ComponentDocumentation({
   language: Language;
   doc: DocRecord;
 }) {
-  const spec = componentSpecs[componentName];
   const mdTabs = useMemo(() => buildComponentMarkdownTabs(doc.body), [doc.body]);
   const frontmatter = useMemo(() => parseFrontmatter(doc.body), [doc.body]);
   const purpose = useMemo(() => extractPurposeFromMarkdown(doc.body), [doc.body]);
@@ -2998,18 +2898,8 @@ function ComponentDocumentation({
   ];
 
   const availableTabs = useMemo(() => {
-    return tabOrder.filter((tab) => {
-      const hasMarkdown = Boolean(mdTabs[tab]?.trim());
-      // Prefer Markdown: if the heading exists in the MD, show the tab.
-      if (hasMarkdown) return true;
-      // If there's no Markdown for this tab, allow a fallback from the spec
-      // for documented states, tokens, and implementation (props/code/tokenCards).
-      if (tab === "states") return Boolean(spec?.tabs.states?.length);
-      if (tab === "tokens") return Boolean(spec?.tokenCards?.length);
-      if (tab === "implementation") return Boolean(spec?.props?.length || spec?.code?.length);
-      return false;
-    });
-  }, [mdTabs, spec]);
+    return tabOrder.filter((tab) => Boolean(mdTabs[tab]?.trim()));
+  }, [mdTabs]);
 
   const defaultTab = availableTabs[0] ?? "overview";
   const [activeTab, setActiveTab] = useState<ComponentTabId>(defaultTab);
@@ -3018,7 +2908,6 @@ function ComponentDocumentation({
     setActiveTab(defaultTab);
   }, [defaultTab, componentName]);
 
-  const sections = spec?.tabs?.[activeTab] ?? [];
   const anatomyParts = useMemo(() => extractAnatomyParts(doc.body), [doc.body]);
   const mdForCards = useMemo(() => {
     const md = mdTabs[activeTab] ?? "";
@@ -3058,11 +2947,9 @@ function ComponentDocumentation({
     <div className="component-docs">
       <section className="component-hero">
         <div>
-          <p className="eyebrow">{tr("Component guidance", language)}</p>
+          <p className="eyebrow">{t("docs.componentGuidance", language)}</p>
           <h3>{componentName}</h3>
-          {purpose ? <p className="component-subtitle">{purpose}</p> : spec?.subtitle ? (
-            <p className="component-subtitle">{tr(spec.subtitle, language)}</p>
-          ) : null}
+          {purpose ? <p className="component-subtitle">{purpose}</p> : null}
 
           {frontmatter ? (
             <div className="meta-pills" aria-label={language === "es" ? "Metadatos del componente" : "Component metadata"}>
@@ -3131,7 +3018,7 @@ function ComponentDocumentation({
             className={tab === activeTab ? "is-active" : undefined}
             onClick={() => setActiveTab(tab)}
           >
-            {componentTabLabels[tab][language]}
+            {t(componentTabTranslationKeys[tab], language)}
           </button>
         ))}
       </div>
@@ -3152,7 +3039,7 @@ function ComponentDocumentation({
           ) : null}
           {activeTab === "states" &&
           !["Button", "Clear Button", "Input", "Checkbox", "Switch", "Accordion", "Radio Button", "Tab", "Segmented Button", "Color Picker", "Paginator", "Split Button", "Dropdown", "Datepicker", "Modal", "Snackbar"].includes(componentName) ? (
-            <ComponentStatesShowcase componentName={componentName} doc={doc} language={language} sections={sections} />
+            <ComponentStatesShowcase componentName={componentName} doc={doc} language={language} />
           ) : null}
 
           {activeTab === "anatomy" ? (
@@ -3208,19 +3095,6 @@ function ComponentDocumentation({
                 </article>
               ))}
             </div>
-          ) : activeTab === "tokens" && spec?.tokenCards?.length ? (
-            <div className="token-grid">
-              {spec.tokenCards.map((card) => (
-                <article key={card.token} className="token-card">
-                  {card.swatch ? <div className="token-swatch" style={{ background: card.swatch }} /> : null}
-                  <p className="eyebrow">{tr("Token", language)}</p>
-                  <h4>{tr(card.label, language)}</h4>
-                  <code>{card.token}</code>
-                  {card.value ? <p className="token-value">{card.value}</p> : null}
-                  {card.note ? <p>{tr(card.note, language)}</p> : null}
-                </article>
-              ))}
-            </div>
           ) : activeTab === "implementation" && mdCards.length ? (
             <div className="section-stack">
               {mdCards.map((card, index) => (
@@ -3230,64 +3104,7 @@ function ComponentDocumentation({
                 </article>
               ))}
             </div>
-          ) : activeTab === "implementation" && (spec?.props?.length || spec?.code?.length) ? (
-            <div className="implementation-grid">
-              {spec?.props?.length ? (
-                <section className="props-table-wrap">
-                  <div className="section-head">
-                    <p className="eyebrow">{tr("Props", language)}</p>
-                    <h4>{tr("Implementation contract", language)}</h4>
-                  </div>
-                  <table className="props-table">
-                    <thead>
-                      <tr>
-                        <th>Prop</th>
-                        <th>Type</th>
-                        <th>Default</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {spec.props.map((prop) => (
-                        <tr key={prop.name}>
-                          <td>
-                            <code>{prop.name}</code>
-                          </td>
-                          <td>
-                            <code>{prop.type}</code>
-                          </td>
-                          <td>
-                            <code>{prop.defaultValue}</code>
-                          </td>
-                          <td>{tr(prop.description, language)}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </section>
-              ) : null}
-
-              {spec?.code?.length ? (
-                <section className="snippet-list">
-                  <div className="section-head">
-                    <p className="eyebrow">{tr("Code", language)}</p>
-                    <h4>{tr("Snippets", language)}</h4>
-                  </div>
-                  {spec.code.map((snippet) => (
-                    <article
-                      key={typeof snippet.title === "string" ? snippet.title : snippet.title.en}
-                      className="snippet-card"
-                    >
-                      <h5>{tr(snippet.title, language)}</h5>
-                      <pre>
-                        <code>{snippet.code}</code>
-                      </pre>
-                    </article>
-                  ))}
-                </section>
-	              ) : null}
-	            </div>
-	          ) : isBackdropAccessibility ? (
+          ) : isBackdropAccessibility ? (
 	            <div className="accessibility-split">
 	              <article className="doc-section-card accessibility-split__media">
 	                <h4>{language === "es" ? "Accesibilidad (ejemplo)" : "Accessibility (example)"}</h4>
@@ -3315,29 +3132,6 @@ function ComponentDocumentation({
 	                      </article>
 	                    ))}
 	                  </div>
-	                ) : sections.length ? (
-	                  <div className="section-stack">
-	                    {sections.map((section, index) => (
-	                      <article key={`${activeTab}-${index}`} className="doc-section-card">
-	                        <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
-	                          {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
-	                          <div>
-	                            {section.title ? <h4>{tr(section.title, language)}</h4> : null}
-	                            {section.body?.map((paragraph) => (
-	                              <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
-	                            ))}
-	                            {section.bullets ? (
-	                              <ul>
-	                                {section.bullets.map((bullet) => (
-	                                  <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
-	                                ))}
-	                              </ul>
-	                            ) : null}
-	                          </div>
-	                        </div>
-	                      </article>
-	                    ))}
-	                  </div>
 	                ) : (
 	                  <div className="markdown-body">{renderMarkdown(mdTabs[activeTab] ?? doc.body)}</div>
 	                )}
@@ -3347,7 +3141,7 @@ function ComponentDocumentation({
             <div className="section-stack">
               {(() => {
                 const exampleCard = (
-                  <article className="doc-section-card" id="backdrop-example-image">
+                  <article key="backdrop-example-image" className="doc-section-card" id="backdrop-example-image">
                     <h4>{language === "es" ? "Ejemplo (imagen)" : "Example (image)"}</h4>
                     <figure className="doc-image">
                       <img
@@ -3372,33 +3166,6 @@ function ComponentDocumentation({
                 ));
 
                 if (renderedMdCards.length) return [...renderedMdCards, exampleCard];
-
-                if (sections.length) {
-                  return [
-                    ...sections.map((section, index) => (
-                      <article key={`${activeTab}-${index}`} className="doc-section-card">
-                        <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
-                          {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
-                          <div>
-                            {section.title ? <h4>{tr(section.title, language)}</h4> : null}
-                            {section.body?.map((paragraph) => (
-                              <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
-                            ))}
-                            {section.bullets ? (
-                              <ul>
-                                {section.bullets.map((bullet) => (
-                                  <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
-                                ))}
-                              </ul>
-                            ) : null}
-                          </div>
-                        </div>
-                      </article>
-                    )),
-                    exampleCard
-                  ];
-                }
-
                 return [
                   <div key="overview-fallback" className="markdown-body">
                     {renderMarkdown(mdTabs[activeTab] ?? doc.body)}
@@ -3413,29 +3180,6 @@ function ComponentDocumentation({
 	                <article key={`${activeTab}-md-${index}`} className="doc-section-card">
 	                  {card.title ? <h4>{card.title}</h4> : null}
 	                  <div className="markdown-body">{renderMarkdown(card.body)}</div>
-	                </article>
-	              ))}
-	            </div>
-	          ) : sections.length ? (
-	            <div className="section-stack">
-	              {sections.map((section, index) => (
-	                <article key={`${activeTab}-${index}`} className="doc-section-card">
-	                  <div className={section.preview && section.layout === "split" ? "spec-split" : undefined}>
-	                    {section.preview ? <div className="spec-preview">{section.preview}</div> : null}
-	                    <div>
-	                      {section.title ? <h4>{tr(section.title, language)}</h4> : null}
-	                      {section.body?.map((paragraph) => (
-	                        <p key={typeof paragraph === "string" ? paragraph : paragraph.en}>{tr(paragraph, language)}</p>
-	                      ))}
-	                      {section.bullets ? (
-	                        <ul>
-	                          {section.bullets.map((bullet) => (
-	                            <li key={typeof bullet === "string" ? bullet : bullet.en}>{tr(bullet, language)}</li>
-	                          ))}
-	                        </ul>
-	                      ) : null}
-	                    </div>
-	                  </div>
 	                </article>
 	              ))}
 	            </div>
@@ -3590,8 +3334,9 @@ export function App() {
       .map((id) => {
         const label = navItems.find((item) => item.id === id)?.label;
         if (!label) return null;
-        const spec = componentSpecs[label];
-        return { id, label, subtitle: spec ? tr(spec.subtitle, language) : "" };
+        const slug = id.replace(/^components-/, "");
+        const doc = language === "es" ? componentDocsBySlugEs[slug] : componentDocsBySlug[slug];
+        return { id, label, subtitle: doc ? extractPurposeFromMarkdown(doc.body) ?? "" : "" };
       })
       .filter((entry): entry is NonNullable<typeof entry> => Boolean(entry));
   }, [language]);

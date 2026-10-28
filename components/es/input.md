@@ -330,6 +330,58 @@ Evidencia / clasificación: configuración existente en Figma (variante `2172:54
 
 `State=Read only` no incluye el ícono final, por lo que `showRightIcon` y `rightIcon` no tienen efecto en ese estado.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `label` | `string` | `"Label"` | Label visible del campo. |
+| `helperText` | `string` | `"Helper text"` | Mensaje de apoyo debajo del campo. |
+| `error` | `string` | `undefined` | Muestra el error y marca semántica inválida. |
+| `id` | `string` | `auto-generated` | Conecta label y mensaje. |
+| `placeholder` | `string` | `undefined` | Texto placeholder dentro del input. |
+| `size` | `"sm" \| "md"` | `"md"` | Configura la propiedad `size` del componente. |
+| `orientation` | `"default" \| "label-left"` | `"default"` | Configura la propiedad `orientation` del componente. |
+| `corner` | `"square" \| "rounded"` | `"square"` | Configura la propiedad `corner` del componente. |
+| `state` | `"default" \| "filled" \| "hovered" \| "on-focus" \| "focused" \| "error" \| "disabled" \| "read-only"` | `undefined` | Configura la propiedad `state` del componente. |
+| `showLabel` | `boolean` | `true` | Configura la propiedad `showLabel` del componente. |
+| `showInfo` | `boolean` | `true` | Configura la propiedad `showInfo` del componente. |
+| `infoIcon` | `ReactNode` | `"i"` | Configura la propiedad `infoIcon` del componente. |
+| `showLeftIcon` | `boolean` | `true` | Configura la propiedad `showLeftIcon` del componente. |
+| `leftIcon` | `ReactNode` | `"▦"` | Configura la propiedad `leftIcon` del componente. |
+| `showPlaceholder` | `boolean` | `true` | Configura la propiedad `showPlaceholder` del componente. |
+| `showRightIcon` | `boolean` | `true` | Configura la propiedad `showRightIcon` del componente. |
+| `rightIcon` | `ReactNode` | `"⌄"` | Configura la propiedad `rightIcon` del componente. |
+| `showHelperText` | `boolean` | `true` | Configura la propiedad `showHelperText` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (InputHTMLAttributes).
+### Ejemplos
+
+#### Campo por defecto
+
+```tsx
+import { Input } from "@genome-evolution/react";
+
+<Input
+  label="Workspace name"
+  placeholder="Genome Evolution"
+  helperText="Use the name your team recognizes."
+/>;
+```
+
+#### Campo con validación
+
+```tsx
+import { Input } from "@genome-evolution/react";
+
+<Input
+  label="Project slug"
+  defaultValue="genome-evolution"
+  error="Slug already in use."
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. `On focus` frente a `Focused`. Ambos muestran un borde de foco y un cursor de texto; `On focus` usa un borde de 1px y `Focused` uno de 2px. Confirmar qué representa cada estado (por ejemplo, escritura frente a foco por teclado) y cuál usar.

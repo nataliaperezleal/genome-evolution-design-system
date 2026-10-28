@@ -290,6 +290,29 @@ Evidencia / clasificación: recomendación construida a partir de propiedades ve
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `tone` | `"info" \| "success" \| "warning" \| "danger"` | `"info"` | Estilo semántico. |
+| `icon` | `ReactNode` | `undefined` | Ícono inicial opcional. |
+| `children` | `ReactNode` | `undefined` | Contenido de la alerta. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Success message
+
+```tsx
+import { InlineAlert } from "@genome-evolution/react";
+
+<InlineAlert tone="success" icon="✓">
+  Cambios guardados correctamente.
+</InlineAlert>;
+```
+
 ## Aclaraciones pendientes
 
 1. `Type` por defecto. Figma expone `Type=Danger, Size=Regular` como valor por defecto porque es la primera variante del conjunto. Confirmar si Danger es el valor por defecto previsto o si las variantes deberían reordenarse (por ejemplo, para que `Information` sea el valor por defecto).

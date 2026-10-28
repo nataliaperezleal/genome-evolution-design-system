@@ -276,6 +276,37 @@ Evidence / Classification: Existing variant in Figma.
 |-------------------------|-----------------|----------|
 | `userName`, `mail` or `avatar` with `Theme=Apps Tools` or `Theme=Workportal` | The properties have no effect in these themes | Property bindings |
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `title` | `ReactNode` | `"Title"` | Primary header title. |
+| `eyebrow` | `ReactNode` | `undefined` | Small context label above title. |
+| `subtitle` | `ReactNode` | `undefined` | Supporting description under title. |
+| `leading` | `ReactNode` | `undefined` | Leading slot, often an icon/avatar. |
+| `actions` | `ReactNode` | `undefined` | Right-aligned actions. |
+| `theme` | `"apps-designer" \| "apps-tools" \| "workportal"` | `"apps-designer"` | Configures the `theme` component property. |
+| `showUserName` | `boolean` | `true` | Configures the `showUserName` component property. |
+| `showMail` | `boolean` | `true` | Configures the `showMail` component property. |
+| `showAvatar` | `boolean` | `true` | Configures the `showAvatar` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Header with actions
+
+```tsx
+import { Header, Button } from "@genome-evolution/react";
+
+<Header
+  eyebrow="Workspace"
+  title="Genome Evolution"
+  actions={<Button size="sm">New</Button>}
+/>;
+```
+
 ## Pending Clarification
 
 None

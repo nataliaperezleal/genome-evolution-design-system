@@ -1,31 +1,44 @@
-# Prompt Template — Genome Plus DS
+# Prompt Template — Genome Evolution
 
-Plantilla para consultar este sistema de diseño desde un agente IA.
+A template for asking an AI agent to generate UI with the Genome Evolution design system.
 
-## Prompt base para generación de UI
+Paths are relative to the repository root. `AGENTS.md` is the primary reference for workflow and source-of-truth rules.
 
-```
-Usando el Genome Plus Design System documentado en este repositorio:
-
-1. Lee manifest.json para conocer todos los componentes disponibles.
-2. Lee ai/component-selection-rules.md para elegir el componente correcto.
-3. Lee ai/invalid-combinations.md para evitar combinaciones incorrectas.
-4. Lee el .md del componente específico en components/ para obtener propiedades exactas.
-
-Tarea: [describir la UI a generar]
-
-Restricciones:
-- Usar solo componentes listados en manifest.json.
-- No usar valores hardcoded; usar siempre tokens del sistema.
-- Respetar combinaciones inválidas de ai/invalid-combinations.md.
-- Especificar todas las propiedades del componente (Color, Size, State, etc.).
-```
-
-## Ejemplo de consulta específica
+## Base Prompt for UI Generation
 
 ```
-¿Qué componente uso para una selección donde solo una opción puede estar activa a la vez?
+Using the Genome Evolution design system documented in this repository:
 
-Respuesta esperada: Radio Button (no Checkbox, no Switch).
-Ver: ai/component-selection-rules.md → sección "Selección y formularios".
+1. Read AGENTS.md for the workflow and source-of-truth rules.
+2. Read manifest.json to identify the documented components.
+3. If they exist, read ai/component-selection-rules.md and ai/invalid-combinations.md.
+4. Read the documentation for each relevant component in components/ to confirm its documented properties and states.
+5. If the output is code, verify component exports and props in packages/react/src/index.ts before using them.
+
+Task: [describe the UI to generate]
+
+Target environment: [React, HTML, Figma, or other. If unspecified, ask before generating code.]
+
+Constraints:
+- Use only components that are documented in manifest.json.
+- Use official design tokens. Do not hardcode color, spacing, or typography values.
+- Do not invent component names, properties, variants, or token names.
+- Specify the required properties of each component with documented values.
+- Do not use invalid property combinations.
+- If Figma is available and the task requires visual fidelity, inspect the relevant frame. Do not claim to have inspected Figma otherwise.
+
+Report at the end:
+- Components and tokens used.
+- Assumptions made.
+- Discrepancies between sources.
+- Checks performed and limitations.
+```
+
+## Example Query
+
+```
+Which component should I use for a selection where only one option can be active at a time?
+
+Expected answer: Radio Button (not Checkbox or Switch). In React, the component is RadioButtonGroup.
+See: ai/component-selection-rules.md, "Selection and Forms", if the file exists.
 ```

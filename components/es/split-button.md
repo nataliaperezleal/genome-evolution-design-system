@@ -266,6 +266,33 @@ Evidencia / clasificación: configuración existente en Figma (variante `2345:67
 
 Combinaciones no disponibles: `Color=Default` existe solo con `Type=Primary` y `State=Disable`; `Disable` no existe para `Type=Secondary` ni para `Evergreen` e `Indigo`. Estas combinaciones no se pueden seleccionar en Figma.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `label` | `ReactNode` | `required` | Etiqueta principal. |
+| `onClick` | `() => void` | `required` | Función de la acción principal. |
+| `items` | `SplitButtonItem[]` | `required` | Elementos del menú. |
+| `color` | `"evergreen" \| "indigo" \| "default"` | `"evergreen"` | Configura la propiedad `color` del componente. |
+| `type` | `"primary" \| "secondary"` | `"primary"` | Configura la propiedad `type` del componente. |
+| `size` | `"regular" \| "small"` | `"regular"` | Configura la propiedad `size` del componente. |
+| `disabled` | `boolean` | `false` | Configura la propiedad `disabled` del componente. |
+### Ejemplos
+
+#### Publish split button
+
+```tsx
+import { SplitButton } from "@genome-evolution/react";
+
+<SplitButton
+  label="Publish"
+  onClick={() => {}}
+  items={[{ label: "Publish now", onSelect: () => {} }]}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. Estados por parte. `Hovered`, `Pressed` y `Focused` afectan solo al segmento del chevron; la acción principal no tiene visuales de hover, presionado ni foco. Confirmar cómo deben mostrarse los estados de cada parte.

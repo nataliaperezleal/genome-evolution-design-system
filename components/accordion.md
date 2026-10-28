@@ -302,6 +302,42 @@ Evidence / Classification: Existing variant in Figma.
 
 These combinations are unavailable rather than explicitly documented as invalid.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `title` | `string` | `undefined` | Accordion trigger label. |
+| `children` | `ReactNode` | `undefined` | Panel content. |
+| `size` | `"sm" \| "md"` | `"md"` | Controls padding and density. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Optional subtle emphasis tone. |
+| `disabled` | `boolean` | `false` | Disables the trigger interaction. |
+| `defaultOpen` | `boolean` | `false` | Initial state (uncontrolled). |
+| `open` | `boolean` | `undefined` | Controlled open state. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Controlled state handler. |
+| `text` | `string` | `undefined` | Configures the `text` component property. |
+| `state` | `"default" \| "hovered" \| "pressed" \| "focused" \| "disabled" \| "loading"` | `"default"` | Configures the `state` component property. |
+| `showLeftIcon` | `boolean` | `false` | Configures the `showLeftIcon` component property. |
+| `icon` | `ReactNode` | `undefined` | Configures the `icon` component property. |
+| `showCheckbox` | `boolean` | `false` | Configures the `showCheckbox` component property. |
+| `checked` | `boolean` | `undefined` | Configures the `checked` component property. |
+| `defaultChecked` | `boolean` | `false` | Configures the `defaultChecked` component property. |
+| `onCheckedChange` | `(checked: boolean) => void` | `undefined` | Configures the `onCheckedChange` component property. |
+| `showBadge` | `boolean` | `false` | Configures the `showBadge` component property. |
+| `badge` | `ReactNode` | `"0"` | Configures the `badge` component property. |
+### Examples
+
+#### Uncontrolled accordion
+
+```tsx
+import { Accordion } from "@genome-evolution/react";
+
+<Accordion title="Details" defaultOpen>
+  Extra information lives here.
+</Accordion>;
+```
+
 ## Pending Clarification
 
 1. Collapsed colored accordions: `Evergreen` and `Indigo` exist only as `Expanded`. When a colored accordion is collapsed, should it switch to `Color=Default`, or are collapsed Evergreen/Indigo variants missing? This determines how designers represent the collapsed state of a colored accordion.

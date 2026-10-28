@@ -1,57 +1,47 @@
-# Token Usage Rules — Genome Plus DS
+# Token Usage Rules — Genome Evolution
 
-Reglas para aplicar tokens correctamente en el sistema.
+Rules for applying design tokens consistently in Genome Evolution.
 
-## Regla fundamental
+Token names and values are defined in `packages/tokens/` and the relevant documentation in `foundations/`. This file describes how to apply them. If this file and the token source disagree, the token source governs. Verify the exact names in `packages/tokens/` before using them in code.
 
-**Nunca usar valores hardcoded.** Siempre usar tokens del sistema.
+## Core Rule
 
-❌ `color: #339947`
-✅ `color: var(--border/focus)`
+**Do not use hardcoded visual values when an official token applies.** Use the token that represents the design decision.
 
-## Colores de marca
+Avoid:
 
-| Token | Valor | Uso |
-|---|---|---|
-| `background/canvas` | #ffffff | Fondo base de componentes |
-| `text/primary` | #2d342f | Texto principal |
-| `text/secondary` | #5f6d62 | Texto secundario |
-| `text/disabled` | #849588 | Texto deshabilitado |
-| `text/inverse` | blanco | Texto sobre fondos oscuros |
-| `border/default` | #c3cbc5 | Bordes en reposo |
-| `border/strong` | #5f6d62 | Bordes enfatizados |
-| `border/focus` | #339947 | Anillo de foco (2px) |
-| `border/evergreen` | #297a39 | Bordes en variante Evergreen |
-| `border/indigo` | #6b1b99 | Bordes en variante Indigo |
-| `background/interactive/hovered` | #f7f8f7 | Hover de elementos interactivos |
-| `background/interactive/pressed` | #e9ecea | Pressed de elementos interactivos |
-| `background/disabled` | #f4f6f4 | Fondo deshabilitado |
+```css
+color: #339947;
+```
 
-## Espaciado
+Use the token exposed by the token package. The exact CSS variable or export name depends on the generated output. Verify it before using it, for example:
 
-| Token | Valor |
-|---|---|
-| `space/2` | 2px |
-| `space/4` | 4px |
-| `space/8` | 8px |
-| `space/16` | 16px |
-| `gap/sm` | 8px |
+```css
+color: var(--<verified-token-name>);
+```
 
-## Tipografía
+Do not assume that a token name follows a particular pattern (such as `border/focus` mapped to `--border-focus`) unless the generated output confirms it.
 
-| Token | Valor |
-|---|---|
-| `family/body` | Open Sans |
-| `family/display` | display font |
-| `family/mono` | monospace |
-| `size/12` | 12px |
-| `size/14` | 14px |
-| `weight/regular` | 400 |
-| `weight/medium` | 500 |
-| `weight/semibold` | 600 |
-| `weight/bold` | 700 |
+## Token Categories
 
-## Warning es especial
+Use these categories to find the relevant token family in the token source:
 
-El color `Warning` en Badge (y en componentes que lo usen) siempre usa `text/primary` para el texto,
-NO `text/warning`, porque el amarillo sobre fondo claro no tiene contraste suficiente.
+- **Background:** canvas, interactive states (hovered, pressed), disabled.
+- **Text:** primary, secondary, disabled, inverse.
+- **Border:** default, strong, focus, and variant-specific borders (for example, Evergreen and Indigo).
+- **Spacing and gap:** the spacing scale.
+- **Typography:** font families, sizes, and weights.
+
+Do not infer that a token exists because a similar name exists. Confirm it in the token source.
+
+## Focus
+
+Focus indicators use the focus border token. The documented focus indicator is 2 px. Verify the token name and its contrast against the background before using it.
+
+## Spacing
+
+Use only the spacing tokens defined in the token source. If the scale is closed, do not create intermediate values. If a required spacing value is missing, report the gap.
+
+## Typography
+
+Use the font family, size,

@@ -128,7 +128,6 @@ export default function Home() {
               <ul className="space-y-2 text-neutral-700">
                 <li>✓ Table</li>
                 <li>✓ List</li>
-                <li>✓ Card</li>
                 <li>✓ Badge</li>
                 <li>✓ Tag</li>
                 <li>✓ Avatar</li>

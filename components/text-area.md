@@ -298,6 +298,27 @@ Evidence / Classification: Existing Figma variant (`2258:925`).
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `undefined` | Visible label. |
+| `helperText` | `string` | `undefined` | Supportive message. |
+| `error` | `string` | `undefined` | Error message (overrides helperText). |
+
+It also accepts React's native attributes for the underlying HTML element (TextareaHTMLAttributes).
+### Examples
+
+#### Notes field
+
+```tsx
+import { TextArea } from "@genome-evolution/react";
+
+<TextArea label="Notes" placeholder="Write…" />;
+```
+
 ## Pending Clarification
 
 1. **Counter text is not editable.** The counter is fixed text ("00/999") and not a property, so instances cannot show a real count or limit without detaching. Confirm whether a counter text property should be added, and what the character limit is.

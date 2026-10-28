@@ -316,6 +316,40 @@ Evidencia / Clasificación: Variante existente en Figma.
 
 Solo la primera fila es una regla documentada; las demás son combinaciones no disponibles.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `variant` | `"primary" \| "secondary" \| "tertiary"` | `"primary"` | Controla la prioridad visual. |
+| `tone` | `"evergreen" \| "indigo" \| "danger" \| "information" \| "success" \| "warning" \| "neutral"` | `"evergreen"` | Aplica un tono de marca o semántico. |
+| `size` | `"sm" \| "md"` | `"md"` | Controla altura y espaciado interno. |
+| `corner` | `"default" \| "rounded"` | `"default"` | Cambia entre radio 4px y pill. |
+| `leadingIcon` | `ReactNode` | `undefined` | Ícono opcional antes del label. |
+| `trailingIcon` | `ReactNode` | `undefined` | Ícono opcional después del label. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (ButtonHTMLAttributes).
+### Ejemplos
+
+#### Acción primaria
+
+```tsx
+import { Button } from "@genome-evolution/react";
+
+<Button>Continue</Button>;
+```
+
+#### Acción secundaria redondeada
+
+```tsx
+import { Button } from "@genome-evolution/react";
+
+<Button variant="secondary" tone="indigo" corner="rounded">
+  Review
+</Button>;
+```
+
 ## Aclaraciones pendientes
 
 1. Alto de la variante predeterminada: `Type=Primary, Color=Evergreen, State=Default, Corner=Default, Size=MD` mide 30 px de alto (relleno superior 8, inferior 6), mientras que todas las demás variantes MD, incluidos sus estados Hovered y Focused, miden 32 px. ¿Es 32 px el alto previsto para MD? Esto afecta la implementación y provoca un cambio de alto de 2 px entre Default y los demás estados del botón predeterminado.

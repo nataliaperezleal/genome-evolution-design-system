@@ -149,6 +149,11 @@ Propiedad booleana que muestra u oculta la descripción. Valor por defecto repor
 
 Propiedad de texto para la descripción. Valor por defecto reportado: "Tooltip description".
 
+## Estados
+
+- Oculto.
+- Visible.
+
 ## Mapeo de tokens
 
 Todos los tokens siguientes se verificaron mediante vinculaciones de variables de Figma.
@@ -213,6 +218,36 @@ Evidencia / Clasificación: Variante existente en Figma (`2192:484`).
 ## Combinaciones no válidas
 
 [No se encontraron combinaciones no válidas documentadas]
+
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `content` | `ReactNode` | `undefined` | Texto o contenido del tooltip. |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Ubicación. |
+| `title` | `ReactNode` | `undefined` | Configura la propiedad `title` del componente. |
+| `description` | `ReactNode` | `undefined` | Configura la propiedad `description` del componente. |
+| `image` | `ReactNode` | `undefined` | Configura la propiedad `image` del componente. |
+| `color` | `"white" \| "black"` | `"white"` | Configura la propiedad `color` del componente. |
+| `showTitle` | `boolean` | `true` | Configura la propiedad `showTitle` del componente. |
+| `showDescription` | `boolean` | `true` | Configura la propiedad `showDescription` del componente. |
+| `showImage` | `boolean` | `false` | Configura la propiedad `showImage` del componente. |
+| `children` | `ReactNode` | `required` | Configura la propiedad `children` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Icon hint
+
+```tsx
+import { Tooltip, IconButton } from "@genome-evolution/react";
+
+<Tooltip content="Search">
+  <IconButton label="Search" icon={<SearchIcon />} />
+</Tooltip>;
+```
 
 ## Aclaraciones pendientes
 

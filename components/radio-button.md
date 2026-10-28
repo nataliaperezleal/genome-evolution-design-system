@@ -257,6 +257,36 @@ Evidence / Classification: existing Figma configuration (variant `2190:2055`).
 
 Unavailable combinations: the variant set has no `Selected=Off` variants for `Evergreen` or `Indigo`, and no `Disabled` variants for `Evergreen` or `Indigo`, so these combinations cannot be selected in Figma. Whether they are intentionally excluded is not documented.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `undefined` | Group label. |
+| `options` | `RadioOption[]` | `required` | Selectable options. |
+| `value` | `string` | `undefined` | Controlled selected value. |
+| `defaultValue` | `string` | `undefined` | Uncontrolled initial value. |
+| `onChange` | `(value: string) => void` | `undefined` | Selection handler. |
+| `name` | `string` | `undefined` | Configures the `name` component property. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configures the `tone` component property. |
+| `disabled` | `boolean` | `false` | Configures the `disabled` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Radio group
+
+```tsx
+import { RadioButtonGroup } from "@genome-evolution/react";
+
+<RadioButtonGroup
+  label="Plan"
+  options={[{ value: "free", label: "Free" }]}
+  onChange={() => {}}
+/>;
+```
+
 ## Pending Clarification
 
 1. Disabled default. The default variant is `State=Disabled`, so every new instance starts disabled. Confirm whether `State=Enabled` should be the default (moving its variant to the top-left of the component set).

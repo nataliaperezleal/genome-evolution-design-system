@@ -276,6 +276,50 @@ Observación verificada: El conjunto no contiene variantes para estas combinacio
 - `Color=Indigo` o `Color=Evergreen` con cualquier estado distinto de `Selected`.
 - `State=Selected Focused` con `Size=SM`, y `State=Focused Selected` con `Size=MD`.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `options` | `TabOption[]` | `required` | Definiciones de las pestañas. |
+| `value` | `string` | `required` | Valor de la pestaña seleccionada. |
+| `onChange` | `(value: string) => void` | `required` | Función que se ejecuta cuando cambia el valor. |
+| `color` | `"default" \| "indigo" \| "evergreen"` | `"default"` | Configura la propiedad `color` del componente. |
+| `size` | `"md" \| "sm"` | `"md"` | Configura la propiedad `size` del componente. |
+
+`TabList` también acepta los atributos nativos de React para un `div`. El componente `Tab` independiente expone su propia API:
+
+### API de pestaña individual
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `color` | `"default" \| "indigo" \| "evergreen"` | `"default"` | Selecciona el color de la pestaña. |
+| `size` | `"md" \| "sm"` | `"md"` | Establece el tamaño de la pestaña. |
+| `selected` | `boolean` | `false` | Indica si la pestaña está seleccionada. |
+| `state` | `"default" \| "hovered" \| "pressed" \| "selected" \| "focused" \| "selected-focused" \| "focused-selected"` | `undefined` | Establece el estado de interacción de la pestaña. |
+| `showLeftIcon` | `boolean` | `true` | Indica si se muestra el ícono inicial. |
+| `leftIcon` | `ReactNode` | `<TabArrow direction="left" />` | Contenido del ícono inicial. |
+| `showText` | `boolean` | `true` | Indica si se muestra la etiqueta de la pestaña. |
+| `text` | `string` | `"Tab name"` | Texto de la etiqueta. |
+| `showRightIcon` | `boolean` | `true` | Indica si se muestra el ícono final. |
+| `rightIcon` | `ReactNode` | `<TabArrow direction="right" />` | Contenido del ícono final. |
+
+`Tab` también acepta los atributos nativos de React para un `button`.
+### Ejemplos
+
+#### Two tabs
+
+```tsx
+import { TabList } from "@genome-evolution/react";
+
+<TabList
+  value="solid"
+  onChange={() => {}}
+  options={[{ value: "solid", label: "Solid" }, { value: "gradient", label: "Gradient" }]}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. **Nombres inconsistentes en State.** El estado de foco y selección se llama `Selected Focused` en `MD` y `Focused Selected` en `SM`. Al cambiar `Size` en una instancia con foco y seleccionada no se conserva el estado, y el mapeo en código necesita dos nombres para un mismo estado. Confirma el nombre único previsto.

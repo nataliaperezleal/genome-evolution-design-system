@@ -292,6 +292,27 @@ Evidencia / Clasificación: Variante existente en Figma (`2258:925`).
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `label` | `string` | `undefined` | Etiqueta visible. |
+| `helperText` | `string` | `undefined` | Mensaje de apoyo. |
+| `error` | `string` | `undefined` | Mensaje de error (reemplaza `helperText`). |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (TextareaHTMLAttributes).
+### Ejemplos
+
+#### Notes field
+
+```tsx
+import { TextArea } from "@genome-evolution/react";
+
+<TextArea label="Notes" placeholder="Write…" />;
+```
+
 ## Aclaraciones pendientes
 
 1. **El texto del contador no es editable.** El contador es un texto fijo ("00/999") y no una propiedad, por lo que las instancias no pueden mostrar un conteo o límite real sin desvincularse. Confirma si debe agregarse una propiedad de texto para el contador y cuál es el límite de caracteres.

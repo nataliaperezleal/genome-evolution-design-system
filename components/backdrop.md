@@ -116,6 +116,11 @@ The inventory below is complete: both variants were inspected.
 | Black | Fill `overlay/black` (#4C574E, 60% opacity); 8 px background blur. | Default |
 | White | Fill `overlay/white` (#F7F8F7, 60% opacity); 8 px background blur. | — |
 
+## States
+
+- Visible (`open=true`).
+- Hidden (`open=false`).
+
 ## Token Mapping
 
 | Category | Token | Verified Usage | Evidence |
@@ -156,6 +161,26 @@ Configuration: `Color=White`
 Description: Lightens and blurs the content behind it.
 
 Evidence / Classification: Existing variant in Figma.
+
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `true` | Whether the backdrop is rendered. |
+| `tone` | `"black" \| "white"` | `"black"` | Overlay color tone. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Backdrop behind modal
+
+```tsx
+import { Backdrop } from "@genome-evolution/react";
+
+<Backdrop tone="black" />;
+```
 
 ## Notes / Changelog
 

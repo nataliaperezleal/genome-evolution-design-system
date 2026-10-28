@@ -154,6 +154,12 @@ Current behavior: `Line / Success` uses `surface/evergreen/subtle` as its fill, 
 |-------|----------------------|------------------|
 | Text | Value shown in the badge. "0" in all variants. | Text property |
 
+## States
+
+- **Default:** resting state.
+- **Interactive (optional):** badges can be rendered as buttons/tags when used as filters.
+- **Disabled (optional):** only when the badge is interactive.
+
 ## Token Mapping
 
 | Category | Token | Verified Usage | Evidence |
@@ -221,6 +227,29 @@ Evidence / Classification: Existing variant in Figma.
 ## Invalid Combinations
 
 [No documented invalid combinations found]
+
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `tone` | `"default" \| "neutral" \| "primary" \| "info" \| "information" \| "success" \| "warning" \| "danger" \| "error" \| "inverse" \| "evergreen" \| "indigo"` | `"default"` | Semantic styling for the badge. |
+| `variant` | `"filled" \| "line" \| "outline"` | `"line"` | Controls the surface style. |
+| `icon` | `ReactNode` | `undefined` | Optional leading icon. |
+| `children` | `ReactNode` | `"0"` | Badge label. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Semantic tones
+
+```tsx
+import { Badge } from "@genome-evolution/react";
+
+<Badge tone="neutral">Borrador</Badge>
+<Badge tone="success">Activo</Badge>;
+```
 
 ## Pending Clarification
 

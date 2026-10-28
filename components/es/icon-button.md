@@ -267,6 +267,46 @@ Evidencia / Clasificación: Variante existente en Figma.
 
 Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `icon` | `ReactNode` | `required` | Ícono visible dentro del control. |
+| `label` | `string` | `required` | Etiqueta accesible usada como `aria-label`. |
+| `variant` | `"filled" \| "outline"` | `"filled"` | Controla el estilo del contenedor. |
+| `tone` | `"default" \| "evergreen" \| "indigo" \| "inverse" \| "neutral"` | `"evergreen"` | Aplica un tono de color compatible con el paquete React actual. |
+| `size` | `"sm" \| "md" \| "lg"` | `"lg"` | Controla el marco del botón y la escala prevista del ícono. |
+| `corner` | `"square" \| "rounded"` | `"square"` | Configura la propiedad `corner` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (ButtonHTMLAttributes).
+### Ejemplos
+
+#### Filled icon action
+
+```tsx
+import { IconButton } from "@genome-evolution/react";
+
+<IconButton
+  label="Search"
+  icon={<SearchIcon />}
+/>;
+```
+
+#### Outline contextual action
+
+```tsx
+import { IconButton } from "@genome-evolution/react";
+
+<IconButton
+  label="Go forward"
+  icon={<ArrowIcon />}
+  variant="outline"
+  tone="neutral"
+/>;
+```
+
 ## Aclaraciones pendientes
 
 Ninguna

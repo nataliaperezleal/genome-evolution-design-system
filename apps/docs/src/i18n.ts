@@ -23,6 +23,17 @@ export const dict: Dict = {
   "theme.dark": { en: "Dark", es: "Oscuro" },
   "lang.es": { en: "ES", es: "ES" },
   "lang.en": { en: "EN", es: "EN" },
+  "docs.componentGuidance": { en: "Component guidance", es: "Guía del componente" },
+  "docs.tab.overview": { en: "Overview", es: "Overview" },
+  "docs.tab.whenToUse": { en: "When to use", es: "Cuándo usar" },
+  "docs.tab.whenNotToUse": { en: "When NOT to use", es: "Cuándo NO usar" },
+  "docs.tab.anatomy": { en: "Anatomy", es: "Anatomía" },
+  "docs.tab.states": { en: "States", es: "Estados" },
+  "docs.tab.rules": { en: "Rules", es: "Reglas" },
+  "docs.tab.doDont": { en: "Do / Don't", es: "Haz / No hagas" },
+  "docs.tab.tokens": { en: "Tokens", es: "Tokens" },
+  "docs.tab.accessibility": { en: "Accessibility", es: "Accesibilidad" },
+  "docs.tab.implementation": { en: "Implementation", es: "Implementación" },
 
   "overview.hero.eyebrow": { en: "Genome Evolution Design System", es: "Genome Evolution Design System" },
   "overview.hero.title": {

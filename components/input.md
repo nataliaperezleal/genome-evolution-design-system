@@ -330,6 +330,58 @@ Evidence / Classification: existing Figma configuration (variant `2172:544`).
 
 `State=Read only` does not include the trailing icon, so `showRightIcon` and `rightIcon` have no effect in that state.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `"Label"` | Visible field label. |
+| `helperText` | `string` | `"Helper text"` | Supporting message below the field. |
+| `error` | `string` | `undefined` | Shows the error message and sets invalid semantics. |
+| `id` | `string` | `auto-generated` | Used to connect the label and the message. |
+| `placeholder` | `string` | `undefined` | Placeholder text inside the input. |
+| `size` | `"sm" \| "md"` | `"md"` | Configures the `size` component property. |
+| `orientation` | `"default" \| "label-left"` | `"default"` | Configures the `orientation` component property. |
+| `corner` | `"square" \| "rounded"` | `"square"` | Configures the `corner` component property. |
+| `state` | `"default" \| "filled" \| "hovered" \| "on-focus" \| "focused" \| "error" \| "disabled" \| "read-only"` | `undefined` | Configures the `state` component property. |
+| `showLabel` | `boolean` | `true` | Configures the `showLabel` component property. |
+| `showInfo` | `boolean` | `true` | Configures the `showInfo` component property. |
+| `infoIcon` | `ReactNode` | `"i"` | Configures the `infoIcon` component property. |
+| `showLeftIcon` | `boolean` | `true` | Configures the `showLeftIcon` component property. |
+| `leftIcon` | `ReactNode` | `"▦"` | Configures the `leftIcon` component property. |
+| `showPlaceholder` | `boolean` | `true` | Configures the `showPlaceholder` component property. |
+| `showRightIcon` | `boolean` | `true` | Configures the `showRightIcon` component property. |
+| `rightIcon` | `ReactNode` | `"⌄"` | Configures the `rightIcon` component property. |
+| `showHelperText` | `boolean` | `true` | Configures the `showHelperText` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (InputHTMLAttributes).
+### Examples
+
+#### Default field
+
+```tsx
+import { Input } from "@genome-evolution/react";
+
+<Input
+  label="Workspace name"
+  placeholder="Genome Evolution"
+  helperText="Use the name your team recognizes."
+/>;
+```
+
+#### Field with validation
+
+```tsx
+import { Input } from "@genome-evolution/react";
+
+<Input
+  label="Project slug"
+  defaultValue="genome-evolution"
+  error="Slug already in use."
+/>;
+```
+
 ## Pending Clarification
 
 1. `On focus` vs `Focused`. Both show a focus border and a text cursor; `On focus` uses a 1px border and `Focused` a 2px border. Confirm what each state represents (for example, typing vs keyboard focus) and which to use.

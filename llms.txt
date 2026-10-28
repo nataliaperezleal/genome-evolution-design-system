@@ -1,0 +1,44 @@
+# Genome Evolution Design System
+
+> Genome Evolution is the design system for Bizagi / Genome Plus. This repository provides component documentation, design foundations, design tokens, composition patterns, AI usage guidance, and a React implementation to support consistent interface generation.
+
+Use Figma as the source of truth for intended visual design. Use repository documentation and implementation resources to understand component usage, design-system conventions, available tokens, and technical constraints. See [AGENTS.md](AGENTS.md) for the complete source-of-truth and workflow rules.
+
+## Start Here
+
+- [Agent Instructions](AGENTS.md): Workflow, source-of-truth rules, and verification guidance for AI agents.
+- [README](README.md): General overview and repository structure.
+- [Component Manifest](manifest.json): Structured component inventory, metadata, variants, and documentation paths.
+
+## Component Documentation
+
+- [Component Catalog](components/): Component purpose, anatomy, properties, variants, states, and usage guidance.
+- [Spanish Component Documentation](components/es/): Spanish versions of component documentation.
+
+## Design Foundations
+
+- [Foundations](foundations/): Color, typography, spacing, borders, opacity, elevation, and layout.
+
+## Design Tokens
+
+- [Token Package](packages/tokens/): Design token source and package resources.
+- [Token Usage Rules](ai/token-usage-rules.md): Guidance for applying design tokens consistently.
+
+## Composition Patterns
+
+- [Patterns](patterns/): Documented patterns for combining components.
+
+## AI Guidance
+
+- [AI Directory](ai/): AI usage rules, including token usage rules and the evaluation checklist.
+- [Evaluation Checklist](ai/evaluation-checklist.md): Criteria for reviewing interface quality and design-system consistency.
+
+## Documentation Templates
+
+- [Documentation Templates](templates/): Templates for creating and organizing component documentation. Assess their suitability before reuse; they are not guaranteed to be fully verified or current.
+
+## React Implementation
+
+- [React Package](packages/react/): Implementation resources for understanding available components, properties, and technical constraints. Verify exports in `packages/react/src/index.ts` before using them.
+
+This file is an entry point to repository resources. It does not replace `AGENTS.md` or the detailed sources it references.

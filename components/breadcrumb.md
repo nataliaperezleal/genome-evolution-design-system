@@ -268,6 +268,32 @@ Evidence / Classification: Existing variant in Figma.
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `items` | `BreadcrumbItem[]` | `required` | Ordered breadcrumb items. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configures the `tone` component property. |
+| `showOverflow` | `boolean` | `true` | Configures the `showOverflow` component property. |
+| `showLevel1` | `boolean` | `true` | Configures the `showLevel1` component property. |
+| `showLevel2` | `boolean` | `true` | Configures the `showLevel2` component property. |
+| `showLevel3` | `boolean` | `true` | Configures the `showLevel3` component property. |
+| `showLevel4` | `boolean` | `true` | Configures the `showLevel4` component property. |
+| `showLevel5` | `boolean` | `true` | Configures the `showLevel5` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Three levels
+
+```tsx
+import { Breadcrumb } from "@genome-evolution/react";
+
+<Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Settings", href: "/settings" }, { label: "Billing" }]} />;
+```
+
 ## Pending Clarification
 
 None

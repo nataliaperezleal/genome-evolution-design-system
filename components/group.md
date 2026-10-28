@@ -278,6 +278,43 @@ Evidence / Classification: Configuration supported by the footer properties.
 
 These combinations are unavailable rather than explicitly documented as invalid.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `direction` | `"row" \| "column"` | `"row"` | Primary axis direction. |
+| `gap` | `"xs" \| "sm" \| "md" \| "lg"` | `"sm"` | Token-based spacing between children. |
+| `align` | `"start" \| "center" \| "end" \| "stretch"` | `"center"` | Cross-axis alignment. |
+| `justify` | `"start" \| "center" \| "end" \| "between"` | `"start"` | Main-axis distribution. |
+| `wrap` | `boolean` | `false` | Whether children wrap onto new lines. |
+| `title` | `string` | `"Title"` | Configures the `title` component property. |
+| `state` | `"collapsed" \| "expanded"` | `undefined` | Configures the `state` component property. |
+| `defaultState` | `"collapsed" \| "expanded"` | `"collapsed"` | Configures the `defaultState` component property. |
+| `onStateChange` | `(state: GroupState) => void` | `undefined` | Configures the `onStateChange` component property. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configures the `tone` component property. |
+| `showFooter` | `boolean` | `true` | Configures the `showFooter` component property. |
+| `showPaginator` | `boolean` | `true` | Configures the `showPaginator` component property. |
+| `leftActions` | `ReactNode` | `undefined` | Configures the `leftActions` component property. |
+| `rightActions` | `ReactNode` | `undefined` | Configures the `rightActions` component property. |
+| `pageCount` | `number` | `3` | Configures the `pageCount` component property. |
+| `children` | `ReactNode` | `undefined` | Configures the `children` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Button group
+
+```tsx
+import { Group, Button } from "@genome-evolution/react";
+
+<Group gap="sm" wrap>
+  <Button>Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+</Group>;
+```
+
 ## Pending Clarification
 
 None

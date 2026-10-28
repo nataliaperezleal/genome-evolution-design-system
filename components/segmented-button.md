@@ -274,6 +274,41 @@ Evidence / Classification: existing Figma configuration (variant `2247:1269`).
 
 Unavailable combinations: `Color=Evergreen` and `Color=Indigo` exist only with `State=Selected`, so they cannot be combined with `Default`, `Hovered`, `Pressed`, or `Focused` in Figma. Whether these are intentionally excluded is not documented.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | `SegmentedOption[]` | `undefined` | Segments. |
+| `value` | `string` | `undefined` | Selected value. |
+| `onChange` | `(value: string) => void` | `undefined` | Selection handler. |
+| `text` | `string` | `"Section name"` | Configures the `text` component property. |
+| `showText` | `boolean` | `true` | Configures the `showText` component property. |
+| `icon` | `ReactNode` | `"≡"` | Configures the `icon` component property. |
+| `showIcon` | `boolean` | `true` | Configures the `showIcon` component property. |
+| `selected` | `boolean` | `false` | Configures the `selected` component property. |
+| `state` | `"default" \| "selected" \| "hovered" \| "pressed" \| "focused"` | `undefined` | Configures the `state` component property. |
+| `color` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configures the `color` component property. |
+| `size` | `"md" \| "sm"` | `"md"` | Configures the `size` component property. |
+| `rounded` | `boolean` | `false` | Configures the `rounded` component property. |
+| `containerProps` | `HTMLAttributes<HTMLDivElement>` | `undefined` | Configures the `containerProps` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (ButtonHTMLAttributes).
+### Examples
+
+#### Theme mode
+
+```tsx
+import { SegmentedButton } from "@genome-evolution/react";
+
+<SegmentedButton
+  value="light"
+  onChange={() => {}}
+  options={[{ value: "light", label: "Light" }]}
+/>;
+```
+
 ## Pending Clarification
 
 1. Group component. Segmented button is a single segment; there is no group component that controls how many segments appear or which one is selected. Confirm whether a group component is needed and how segments should be combined (for example, how `Corner=Rounded` frames join).

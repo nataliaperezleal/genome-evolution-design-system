@@ -147,6 +147,12 @@ Comportamiento actual: `Line / Success` usa `surface/evergreen/subtle` como rell
 |-------|------------------------|-------------------|
 | Texto | Valor que se muestra en el badge. "0" en todas las variantes. | Propiedad de texto |
 
+## Estados
+
+- **Predeterminado:** estado en reposo.
+- **Interactivo (opcional):** los badges pueden representarse como botones/tags cuando se usan como filtros.
+- **Deshabilitado (opcional):** solo cuando el badge es interactivo.
+
 ## Mapeo de tokens
 
 | Categoría | Token | Uso verificado | Evidencia |
@@ -214,6 +220,29 @@ Evidencia / Clasificación: Variante existente en Figma.
 ## Combinaciones inválidas
 
 [No se encontraron combinaciones inválidas documentadas]
+
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `tone` | `"default" \| "neutral" \| "primary" \| "info" \| "information" \| "success" \| "warning" \| "danger" \| "error" \| "inverse" \| "evergreen" \| "indigo"` | `"default"` | Estilo semántico del badge. |
+| `variant` | `"filled" \| "line" \| "outline"` | `"line"` | Controla el estilo de la superficie. |
+| `icon` | `ReactNode` | `undefined` | Ícono inicial opcional. |
+| `children` | `ReactNode` | `"0"` | Etiqueta del badge. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Semantic tones
+
+```tsx
+import { Badge } from "@genome-evolution/react";
+
+<Badge tone="neutral">Borrador</Badge>
+<Badge tone="success">Activo</Badge>;
+```
 
 ## Aclaraciones pendientes
 

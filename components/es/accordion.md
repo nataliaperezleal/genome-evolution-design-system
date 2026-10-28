@@ -300,6 +300,42 @@ Evidencia / Clasificación: Variante existente en Figma.
 
 Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `title` | `string` | `undefined` | Etiqueta del control que expande el acordeón. |
+| `children` | `ReactNode` | `undefined` | Contenido del panel. |
+| `size` | `"sm" \| "md"` | `"md"` | Controla el relleno y la densidad. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Tono opcional de énfasis sutil. |
+| `disabled` | `boolean` | `false` | Deshabilita la interacción del trigger. |
+| `defaultOpen` | `boolean` | `false` | Estado inicial (no controlado). |
+| `open` | `boolean` | `undefined` | Estado abierto controlado. |
+| `onOpenChange` | `(open: boolean) => void` | `undefined` | Función que actualiza el estado controlado. |
+| `text` | `string` | `undefined` | Configura la propiedad `text` del componente. |
+| `state` | `"default" \| "hovered" \| "pressed" \| "focused" \| "disabled" \| "loading"` | `"default"` | Configura la propiedad `state` del componente. |
+| `showLeftIcon` | `boolean` | `false` | Configura la propiedad `showLeftIcon` del componente. |
+| `icon` | `ReactNode` | `undefined` | Configura la propiedad `icon` del componente. |
+| `showCheckbox` | `boolean` | `false` | Configura la propiedad `showCheckbox` del componente. |
+| `checked` | `boolean` | `undefined` | Configura la propiedad `checked` del componente. |
+| `defaultChecked` | `boolean` | `false` | Configura la propiedad `defaultChecked` del componente. |
+| `onCheckedChange` | `(checked: boolean) => void` | `undefined` | Configura la propiedad `onCheckedChange` del componente. |
+| `showBadge` | `boolean` | `false` | Configura la propiedad `showBadge` del componente. |
+| `badge` | `ReactNode` | `"0"` | Configura la propiedad `badge` del componente. |
+### Ejemplos
+
+#### Uncontrolled accordion
+
+```tsx
+import { Accordion } from "@genome-evolution/react";
+
+<Accordion title="Details" defaultOpen>
+  Extra information lives here.
+</Accordion>;
+```
+
 ## Aclaraciones pendientes
 
 1. Accordions con color contraídos: `Evergreen` e `Indigo` existen solo como `Expanded`. Cuando un accordion con color se contrae, ¿debe cambiar a `Color=Default`, o faltan variantes Evergreen/Indigo contraídas? Esto determina cómo los diseñadores representan el estado contraído de un accordion con color.

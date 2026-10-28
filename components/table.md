@@ -237,6 +237,49 @@ Evidence / Classification: Recommendation based on the component's boolean prope
 
 Verified observation: Columns cannot be added after column 10, and rows cannot be added after row 10, without detaching or extending the component.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | `undefined` | Thead/tbody markup. |
+| `showHeader` | `boolean` | `true` | Configures the `showHeader` component property. |
+| `column2` | `boolean` | `false` | Configures the `column2` component property. |
+| `column3` | `boolean` | `false` | Configures the `column3` component property. |
+| `column4` | `boolean` | `false` | Configures the `column4` component property. |
+| `column5` | `boolean` | `false` | Configures the `column5` component property. |
+| `column6` | `boolean` | `false` | Configures the `column6` component property. |
+| `column7` | `boolean` | `false` | Configures the `column7` component property. |
+| `column8` | `boolean` | `false` | Configures the `column8` component property. |
+| `column9` | `boolean` | `false` | Configures the `column9` component property. |
+| `column10` | `boolean` | `false` | Configures the `column10` component property. |
+| `row2` | `boolean` | `false` | Configures the `row2` component property. |
+| `row3` | `boolean` | `false` | Configures the `row3` component property. |
+| `row4` | `boolean` | `false` | Configures the `row4` component property. |
+| `row5` | `boolean` | `false` | Configures the `row5` component property. |
+| `row6` | `boolean` | `false` | Configures the `row6` component property. |
+| `row7` | `boolean` | `false` | Configures the `row7` component property. |
+| `row8` | `boolean` | `false` | Configures the `row8` component property. |
+| `row9` | `boolean` | `false` | Configures the `row9` component property. |
+| `row10` | `boolean` | `false` | Configures the `row10` component property. |
+| `headers` | `ReactNode[]` | `undefined` | Configures the `headers` component property. |
+| `rows` | `ReactNode[][]` | `undefined` | Configures the `rows` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (TableHTMLAttributes).
+### Examples
+
+#### Styled table
+
+```tsx
+import { Table } from "@genome-evolution/react";
+
+<Table>
+  <thead>...</thead>
+  <tbody>...</tbody>
+</Table>;
+```
+
 ## Pending Clarification
 
 1. **Row 6 in columns 2–10 uses a different, unstyled cell.** In columns 2–10, the row 6 cell is an instance of a different main component than `.TableCellAssets`, with unbound values: white 12 px text (18 px line height) on a white background. When `Row 6` is turned on, the text in those columns is invisible, and token changes will not reach them. Confirm that these instances should be replaced with `.TableCellAssets`.

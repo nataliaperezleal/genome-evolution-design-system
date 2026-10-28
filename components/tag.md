@@ -302,6 +302,26 @@ Verified observation: The component set contains no variants for these combinati
 - `Style=Filled` with `Type=Evergreen` or `Type=Indigo`.
 - Any `State` other than `Default` with `Style=Filled`, or with a `Type` other than `Default`.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `tone` | `"neutral" \| "evergreen" \| "indigo"` | `"neutral"` | Tone styling. |
+| `icon` | `ReactNode` | `undefined` | Optional leading icon. |
+
+It also accepts React's native attributes for the underlying HTML element (ButtonHTMLAttributes).
+### Examples
+
+#### Filter chip
+
+```tsx
+import { Tag } from "@genome-evolution/react";
+
+<Tag tone="indigo">Filter</Tag>;
+```
+
 ## Pending Clarification
 
 1. **Property naming.** `Type=Sucess` is misspelled, `State=Disable` differs from the `Disabled` naming used in other components, and the left-icon boolean is exposed as `showLeftIcons` while the right one is `showRightIcon`. These names carry into code mappings. Confirm whether they should be corrected before implementation.

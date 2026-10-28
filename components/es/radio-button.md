@@ -256,6 +256,36 @@ Evidencia / clasificación: configuración existente en Figma (variante `2190:20
 
 Combinaciones no disponibles: el conjunto de variantes no tiene variantes `Selected=Off` para `Evergreen` ni `Indigo`, ni variantes `Disabled` para `Evergreen` ni `Indigo`, por lo que estas combinaciones no se pueden seleccionar en Figma. No está documentado si se excluyen de forma intencional.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `label` | `string` | `undefined` | Etiqueta del grupo. |
+| `options` | `RadioOption[]` | `required` | Opciones seleccionables. |
+| `value` | `string` | `undefined` | Valor seleccionado controlado. |
+| `defaultValue` | `string` | `undefined` | Valor inicial no controlado. |
+| `onChange` | `(value: string) => void` | `undefined` | Función que se ejecuta al cambiar la selección. |
+| `name` | `string` | `undefined` | Configura la propiedad `name` del componente. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configura la propiedad `tone` del componente. |
+| `disabled` | `boolean` | `false` | Configura la propiedad `disabled` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Radio group
+
+```tsx
+import { RadioButtonGroup } from "@genome-evolution/react";
+
+<RadioButtonGroup
+  label="Plan"
+  options={[{ value: "free", label: "Free" }]}
+  onChange={() => {}}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. Valor por defecto deshabilitado. La variante por defecto es `State=Disabled`, por lo que cada instancia nueva comienza deshabilitada. Confirmar si `State=Enabled` debería ser el valor por defecto (moviendo su variante a la esquina superior izquierda del component set).

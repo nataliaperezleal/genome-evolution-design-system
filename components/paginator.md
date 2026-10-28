@@ -284,6 +284,32 @@ Evidence / Classification: existing Figma configuration (variant `2185:1125`).
 
 Unavailable combinations: `Type=Page size + Range` exists only with `State=Default`, so its other states cannot be selected in Figma. `showPages` affects only `Page size + Range`.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `page` | `number` | `required` | Current page (1-based). |
+| `pageCount` | `number` | `required` | Total pages. |
+| `onPageChange` | `(page: number) => void` | `required` | Change handler. |
+| `type` | `"page-size-range" \| "input" \| "numbers"` | `"numbers"` | Configures the `type` component property. |
+| `showPages` | `boolean` | `true` | Configures the `showPages` component property. |
+| `pageSize` | `number` | `15` | Configures the `pageSize` component property. |
+| `totalItems` | `number` | `100` | Configures the `totalItems` component property. |
+| `onPageSizeChange` | `(pageSize: number) => void` | `undefined` | Configures the `onPageSizeChange` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Pagination nav
+
+```tsx
+import { Paginator } from "@genome-evolution/react";
+
+<Paginator page={1} pageCount={16} onPageChange={() => {}} />;
+```
+
 ## Pending Clarification
 
 1. Fixed content. The page-size value, range text, current page, total pages, and page numbers are fixed text and are not exposed as properties. The page-size value also uses the placeholder color (`text/secondary`). Confirm whether these should be text properties and whether the page-size value should appear as a selected value.

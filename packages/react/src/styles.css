@@ -705,36 +705,6 @@ body {
   border-color: var(--ge-color-role-border-danger);
 }
 
-.ge-card {
-  border-radius: var(--ge-radius-semantic-sm);
-  border: var(--ge-border-width-1) solid var(--ge-color-role-border-default);
-  background: var(--ge-color-role-background-canvas);
-  padding: 16px 16px 14px;
-}
-
-.ge-card--elevated {
-  background: var(--ge-color-role-surface-subtlest);
-}
-
-.ge-card__title {
-  font-weight: 500;
-  margin-bottom: 8px;
-}
-
-.ge-card__body {
-  color: var(--ge-color-role-text-secondary);
-  font-size: 13px;
-  line-height: 1.55;
-}
-
-.ge-card__footer {
-  margin-top: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
 .ge-avatar {
   position: relative;
   overflow: hidden;
@@ -2465,10 +2435,7 @@ body {
 }
 
 .ge-modal__expand {
-  border: 0;
-  background: transparent;
   color: var(--ge-color-role-icon-secondary);
-  cursor: pointer;
 }
 
 .ge-modal__title {
@@ -2993,6 +2960,28 @@ body {
 .ge-datepicker__day {
   border-radius: var(--ge-radius-semantic-md);
   cursor: pointer;
+  position: relative;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+}
+
+.ge-datepicker__day-number {
+  line-height: 14px;
+}
+
+.ge-datepicker__day-markers {
+  position: absolute;
+  bottom: 2px;
+  display: inline-flex;
+  gap: 2px;
+}
+
+.ge-datepicker__day-markers i {
+  width: 3px;
+  height: 3px;
+  border-radius: var(--ge-radius-semantic-full);
+  background: currentColor;
 }
 
 .ge-datepicker__day:hover:not(:disabled) {
@@ -3068,7 +3057,7 @@ body {
   padding-top: var(--ge-spacing-space-8);
 }
 
-.ge-datepicker__conventions span {
+.ge-datepicker__conventions .ge-datepicker__convention {
   display: inline-flex;
   align-items: center;
   gap: var(--ge-spacing-gap-xxs);
@@ -3077,8 +3066,8 @@ body {
 }
 
 .ge-datepicker__conventions i {
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: var(--ge-radius-semantic-full);
   background: var(--ge-color-role-icon-secondary);
 }

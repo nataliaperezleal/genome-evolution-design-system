@@ -260,6 +260,31 @@ Observación verificada: El conjunto solo contiene variantes para estas combinac
 - `Behavior=On` con `Color=Default`, excepto cuando `State=Disabled`.
 - `State=Disabled` con `Color=Evergreen` o `Color=Indigo`.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `checked` | `boolean` | `undefined` | Estado marcado controlado. |
+| `defaultChecked` | `boolean` | `false` | Estado inicial no controlado. |
+| `onCheckedChange` | `(checked: boolean) => void` | `undefined` | Función que se ejecuta cuando cambia el valor. |
+| `disabled` | `boolean` | `false` | Desactiva la interacción. |
+| `label` | `string` | `undefined` | Configura la propiedad `label` del componente. |
+| `size` | `"sm" \| "md"` | `"md"` | Configura la propiedad `size` del componente. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"evergreen"` | Configura la propiedad `tone` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (ButtonHTMLAttributes).
+### Ejemplos
+
+#### Controlled switch
+
+```tsx
+import { Switch } from "@genome-evolution/react";
+
+<Switch checked onCheckedChange={() => {}} aria-label="Notifications" />;
+```
+
 ## Aclaraciones pendientes
 
 1. **Evergreen vs. Indigo.** Figma ofrece dos colores `On` sin guía sobre cuándo usar cada uno. Esto afecta cómo diseñadores y desarrolladores eligen el valor de `Color`.

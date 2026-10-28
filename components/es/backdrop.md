@@ -110,6 +110,11 @@ El inventario siguiente es completo: se inspeccionaron ambas variantes.
 | Black | Relleno `overlay/black` (#4C574E, 60 % de opacidad); desenfoque de fondo de 8 px. | Predeterminado |
 | White | Relleno `overlay/white` (#F7F8F7, 60 % de opacidad); desenfoque de fondo de 8 px. | — |
 
+## Estados
+
+- Visible (`open=true`).
+- Oculto (`open=false`).
+
 ## Mapeo de tokens
 
 | Categoría | Token | Uso verificado | Evidencia |
@@ -150,6 +155,26 @@ Configuración: `Color=White`
 Descripción: Aclara y desenfoca el contenido que queda detrás.
 
 Evidencia / Clasificación: Variante existente en Figma.
+
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `true` | Indica si se muestra el backdrop. |
+| `tone` | `"black" \| "white"` | `"black"` | Tono del color de superposición. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Backdrop behind modal
+
+```tsx
+import { Backdrop } from "@genome-evolution/react";
+
+<Backdrop tone="black" />;
+```
 
 ## Notas / Registro de cambios
 

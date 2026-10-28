@@ -280,6 +280,43 @@ Evidencia / Clasificación: Configuración admitida por las propiedades del pie.
 
 Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `direction` | `"row" \| "column"` | `"row"` | Dirección del eje principal. |
+| `gap` | `"xs" \| "sm" \| "md" \| "lg"` | `"sm"` | Espaciado basado en tokens entre elementos. |
+| `align` | `"start" \| "center" \| "end" \| "stretch"` | `"center"` | Alineación en el eje transversal. |
+| `justify` | `"start" \| "center" \| "end" \| "between"` | `"start"` | Distribución en el eje principal. |
+| `wrap` | `boolean` | `false` | Indica si los elementos pasan a nuevas líneas. |
+| `title` | `string` | `"Title"` | Configura la propiedad `title` del componente. |
+| `state` | `"collapsed" \| "expanded"` | `undefined` | Configura la propiedad `state` del componente. |
+| `defaultState` | `"collapsed" \| "expanded"` | `"collapsed"` | Configura la propiedad `defaultState` del componente. |
+| `onStateChange` | `(state: GroupState) => void` | `undefined` | Configura la propiedad `onStateChange` del componente. |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configura la propiedad `tone` del componente. |
+| `showFooter` | `boolean` | `true` | Configura la propiedad `showFooter` del componente. |
+| `showPaginator` | `boolean` | `true` | Configura la propiedad `showPaginator` del componente. |
+| `leftActions` | `ReactNode` | `undefined` | Configura la propiedad `leftActions` del componente. |
+| `rightActions` | `ReactNode` | `undefined` | Configura la propiedad `rightActions` del componente. |
+| `pageCount` | `number` | `3` | Configura la propiedad `pageCount` del componente. |
+| `children` | `ReactNode` | `undefined` | Configura la propiedad `children` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Button group
+
+```tsx
+import { Group, Button } from "@genome-evolution/react";
+
+<Group gap="sm" wrap>
+  <Button>Primary</Button>
+  <Button variant="secondary">Secondary</Button>
+</Group>;
+```
+
 ## Aclaraciones pendientes
 
 Ninguna

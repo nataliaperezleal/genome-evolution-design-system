@@ -254,6 +254,33 @@ Evidencia / clasificación: recomendación construida a partir de propiedades ve
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `required` | Indica si se muestra el snackbar. |
+| `message` | `string` | `undefined` | Texto del snackbar. |
+| `tone` | `"neutral" \| "success" \| "warning" \| "danger" \| "info"` | `undefined` | Tono semántico. |
+| `actionLabel` | `string` | `undefined` | Etiqueta opcional de la acción. |
+| `onAction` | `() => void` | `undefined` | Función que se ejecuta al activar la acción. |
+| `onClose` | `() => void` | `undefined` | Función que se ejecuta al cerrar. |
+| `label` | `string` | `undefined` | Configura la propiedad `label` del componente. |
+| `type` | `"danger" \| "warning" \| "information" \| "success"` | `undefined` | Configura la propiedad `type` del componente. |
+| `showButton` | `boolean` | `true` | Configura la propiedad `showButton` del componente. |
+| `showBar` | `boolean` | `true` | Configura la propiedad `showBar` del componente. |
+| `autoHideDurationMs` | `number` | `4000` | Configura la propiedad `autoHideDurationMs` del componente. |
+### Ejemplos
+
+#### Success snackbar
+
+```tsx
+import { Snackbar } from "@genome-evolution/react";
+
+<Snackbar open message="Saved" tone="success" onClose={() => {}} />;
+```
+
 ## Aclaraciones pendientes
 
 1. Significado y comportamiento de la barra. La barra inferior siempre se muestra con el mismo relleno (termina 80px antes del borde), sin una propiedad para definir su avance. Confirmar si es un temporizador para el descarte automático y cómo debe comportarse.

@@ -190,6 +190,29 @@ Evidencia / clasificación: configuración existente en Figma (variante `2191:21
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `maxHeight` | `number \| string` | `220` | Altura máxima antes de habilitar el desplazamiento. |
+| `orientation` | `"vertical" \| "horizontal"` | `"vertical"` | Configura la propiedad `orientation` del componente. |
+| `size` | `"small" \| "regular"` | `"small"` | Configura la propiedad `size` del componente. |
+| `indicatorOnly` | `boolean` | `false` | Configura la propiedad `indicatorOnly` del componente. |
+| `children` | `ReactNode` | `undefined` | Configura la propiedad `children` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Scrollable list
+
+```tsx
+import { Scroll } from "@genome-evolution/react";
+
+<Scroll maxHeight={180}>…</Scroll>;
+```
+
 ## Aclaraciones pendientes
 
 1. Tamaño y posición del thumb. El thumb siempre ocupa la mitad de la pista y está al inicio; ni su longitud ni su posición se pueden definir mediante propiedades. Confirmar cómo deben representar los diseñadores distintas posiciones de desplazamiento y longitudes de contenido.

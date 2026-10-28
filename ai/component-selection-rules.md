@@ -1,67 +1,83 @@
-# Component Selection Rules — Genome Plus DS
+# Component Selection Rules — Genome Evolution
 
-Guía para agentes IA sobre cuándo usar cada componente del sistema.
+Guidance for AI agents on when to use each component in the system.
 
-## Decisiones de selección por caso de uso
+Component names below follow the documentation. Before using a component in code, verify its export and props in `packages/react/src/index.ts` and the relevant component documentation. Do not assume that a documented name, variant, or property exists in React.
 
-### Acciones del usuario
-| Caso | Componente | Notas |
+## Selection by Use Case
+
+### User Actions
+
+| Use case | Component | Notes |
 |---|---|---|
-| Acción principal de la pantalla | Button (Type=Primary) | Color=Evergreen o Indigo |
-| Acción secundaria | Button (Type=Secondary) | |
-| Acción discreta/contextual | Button (Type=Tertiary) | |
-| Acción destructiva | Button (Type=Danger) | |
-| Acción solo con ícono | Icon Button | No usar Button sin label |
-| Dos acciones relacionadas | Duo Button | |
-| Acción principal + menú | Split Button | |
-| Limpiar un campo | Clear Button | |
+| Primary action on the screen | Button (primary type) | Verify the exact color and type props in the component documentation |
+| Secondary action | Button (secondary type) | |
+| Discrete or contextual action | Button (tertiary type) | |
+| Destructive action | Button (danger type) | |
+| Icon-only action | IconButton | Requires an accessible name (`aria-label`) |
+| Two related actions | Verify in documentation | Do not assume a Duo Button export exists |
+| Primary action with a secondary menu | SplitButton | |
+| Clear a field | ClearButton | |
 
-### Selección y formularios
-| Caso | Componente | Notas |
+### Selection and Forms
+
+| Use case | Component | Notes |
 |---|---|---|
-| Selección múltiple independiente | Checkbox | |
-| Solo una opción del grupo | Radio Button | |
-| Activar/desactivar función en tiempo real | Switch | |
-| Seleccionar de lista larga | Dropdown | |
-| Seleccionar fecha | Datepicker | |
-| Elegir color | Color Picker | |
-| Texto de una línea | Input | |
-| Texto de múltiples líneas | Text Area | |
-| Selección exclusiva visible | Segmented Button | Máx. 4-5 opciones |
+| Multiple independent selections | Checkbox | |
+| Exactly one option from a group | RadioButtonGroup | |
+| Toggle a feature in real time | Switch | |
+| Select from a long list | Dropdown | |
+| Select a date | Datepicker | |
+| Choose a color | ColorPicker | |
+| Single-line text | Input | |
+| Multi-line text | TextArea | |
+| Visible exclusive selection | SegmentedButton | Check the documented option limit before applying a number |
 
-### Navegación
-| Caso | Componente | Notas |
+### Navigation
+
+| Use case | Component | Notes |
 |---|---|---|
-| Navegación principal app | Header | |
-| Contexto de ubicación | Breadcrumb | |
-| Secciones de contenido | Tab | |
-| Navegar entre páginas de datos | Paginator | |
-| Enlace en texto corrido | Link | |
-| Secciones colapsables | Accordion | |
+| Main application navigation | Header | |
+| Location context | Breadcrumb | |
+| Content sections | Tab / TabList | |
+| Navigate between data pages | Paginator | |
+| Inline link in text | Link | |
+| Collapsible sections | Accordion | |
 
-### Feedback y estado
-| Caso | Componente | Notas |
+### Feedback and Status
+
+| Use case | Component | Notes |
 |---|---|---|
-| Mensaje breve temporal | Snackbar | |
-| Alerta dentro del contenido | Inline Alert | |
-| Ventana de confirmación | Modal | |
-| Progreso de operación | Progress Bar | |
-| Contador sobre elemento | Badge | |
-| Info contextual hover | Tooltip | |
-| Bloquear UI durante modal | Backdrop | Siempre con Modal/Drawer |
+| Brief temporary message | Snackbar | |
+| Alert inside content | InlineAlert | |
+| Confirmation dialog | Modal | |
+| Operation progress | ProgressBar | |
+| Count on an element | Badge | |
+| Contextual hover information | Tooltip | |
+| Block UI behind a modal | Backdrop | Use with Modal or the documented overlay pattern |
 
-### Datos y contenido
-| Caso | Componente | Notas |
+### Data and Content
+
+| Use case | Component | Notes |
 |---|---|---|
-| Datos tabulares | Table | |
-| Lista de ítems | List | |
-| Etiqueta/categoría | Tag | |
-| Datos numéricos destacados | Scorecard | |
-| Identidad de usuario | Avatar | |
+| Tabular data | Table | |
+| List of items | List | |
+| Label or category | Tag | |
+| Highlighted numeric data | Scorecard | |
+| User identity | Avatar | |
 
-## Reglas de prioridad
+## Priority Rules
 
-1. Siempre preferir el componente más específico al genérico.
-2. Un Button no reemplaza a un Link para navegación.
-3. Un Switch no reemplaza a un Checkbox para selección múltiple.
-4. Badge es solo numérico; para texto usar Tag.
+1. Prefer the more specific component over a generic one when it fully meets the requirement. For example, use `ClearButton` to clear a field instead of building a custom button.
+2. A Button does not replace a Link for navigation.
+3. A Switch does not replace a Checkbox for multiple selection.
+4. Badge is intended for numeric or count values; use Tag for text labels. Verify this against the Badge documentation before applying it in code.
+
+## Unverified Items
+
+The following points need verification before being treated as rules:
+
+- The exact name and props of Duo Button, which does not appear in the React index.
+- The `Drawer` component, which is not in the React index.
+- The specific color values and button type names in the documentation.
+- The option limit for SegmentedButton.

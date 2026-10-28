@@ -251,6 +251,27 @@ Evidence / Classification: recommendation built from existing Figma variants (`2
 
 Unavailable combinations: `Evergreen` and `Indigo` have no `Default` or `Disabled` variants, so these combinations cannot be selected in Figma. Whether they are intentionally excluded is not documented.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `steps` | `StepperStep[]` | `required` | Step definitions. |
+| `currentStep` | `number` | `required` | 0-based current index. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Layout direction. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Three steps
+
+```tsx
+import { Stepper } from "@genome-evolution/react";
+
+<Stepper currentStep={1} steps={[{ label: "Details" }, { label: "Billing" }, { label: "Confirm" }]} />;
+```
+
 ## Pending Clarification
 
 1. Connector toggles in `Disabled`. In the `Disabled` variant, `nextLine` controls the line before the step and `backLine` controls the line after it, the opposite of the other variants. Confirm and correct the bindings.

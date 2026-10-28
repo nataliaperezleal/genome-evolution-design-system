@@ -282,6 +282,50 @@ Verified observation: The component set contains no variants for these combinati
 - `Color=Indigo` or `Color=Evergreen` with any state other than `Selected`.
 - `State=Selected Focused` with `Size=SM`, and `State=Focused Selected` with `Size=MD`.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | `TabOption[]` | `required` | Tab definitions. |
+| `value` | `string` | `required` | Selected tab value. |
+| `onChange` | `(value: string) => void` | `required` | Change handler. |
+| `color` | `"default" \| "indigo" \| "evergreen"` | `"default"` | Configures the `color` component property. |
+| `size` | `"md" \| "sm"` | `"md"` | Configures the `size` component property. |
+
+`TabList` also accepts native React attributes for a `div`. The standalone `Tab` component exposes its own API:
+
+### Individual Tab API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `color` | `"default" \| "indigo" \| "evergreen"` | `"default"` | Selects the tab color. |
+| `size` | `"md" \| "sm"` | `"md"` | Sets the tab size. |
+| `selected` | `boolean` | `false` | Whether the tab is selected. |
+| `state` | `"default" \| "hovered" \| "pressed" \| "selected" \| "focused" \| "selected-focused" \| "focused-selected"` | `undefined` | Sets the tab interaction state. |
+| `showLeftIcon` | `boolean` | `true` | Whether to show the leading icon. |
+| `leftIcon` | `ReactNode` | `<TabArrow direction="left" />` | Content for the leading icon. |
+| `showText` | `boolean` | `true` | Whether to show the tab label. |
+| `text` | `string` | `"Tab name"` | Tab label text. |
+| `showRightIcon` | `boolean` | `true` | Whether to show the trailing icon. |
+| `rightIcon` | `ReactNode` | `<TabArrow direction="right" />` | Content for the trailing icon. |
+
+`Tab` also accepts native React attributes for a `button`.
+### Examples
+
+#### Two tabs
+
+```tsx
+import { TabList } from "@genome-evolution/react";
+
+<TabList
+  value="solid"
+  onChange={() => {}}
+  options={[{ value: "solid", label: "Solid" }, { value: "gradient", label: "Gradient" }]}
+/>;
+```
+
 ## Pending Clarification
 
 1. **Inconsistent State value names.** The focused and selected state is named `Selected Focused` in `MD` and `Focused Selected` in `SM`. Switching `Size` on a focused, selected instance cannot keep the state, and code mappings need two names for one state. Confirm the intended single name.
@@ -293,4 +337,3 @@ Verified observation: The component set contains no variants for these combinati
 ## Notes / Changelog
 
 Generated from Figma evidence (node `2189:5340`) on 2026-10-23.
-

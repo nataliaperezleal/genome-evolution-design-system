@@ -21,7 +21,7 @@ export interface DatepickerProps extends Omit<InputHTMLAttributes<HTMLInputEleme
 }
 
 const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-const weekdayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const weekdayNames = ["S", "M", "T", "W", "T", "F", "S"];
 const monthOptions = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 function dateToString(date: Date) {
@@ -129,7 +129,7 @@ export function Datepicker({
   const displayedYear = visibleDate.getFullYear();
   const displayedMonth = visibleDate.getMonth();
   const monthLabel = `${monthNames[displayedMonth]} ${displayedYear}`.toUpperCase();
-  const monthStartOffset = (new Date(displayedYear, displayedMonth, 1).getDay() + 6) % 7;
+  const monthStartOffset = new Date(displayedYear, displayedMonth, 1).getDay();
   const visibleDayCount = Math.ceil((monthStartOffset + new Date(displayedYear, displayedMonth + 1, 0).getDate()) / 7) * 7;
   const firstVisibleDate = new Date(displayedYear, displayedMonth, 1 - monthStartOffset);
   const yearsStart = Math.floor(displayedYear / 24) * 24;
@@ -164,12 +164,13 @@ export function Datepicker({
       </header>
       {view === "numbers" ? (
         <div className="ge-datepicker__days" role="grid" aria-label={monthLabel}>
-          {weekdayNames.map((day) => <span key={day} className="ge-datepicker__weekday">{day}</span>)}
+          {weekdayNames.map((day, index) => <span key={index} className="ge-datepicker__weekday">{day}</span>)}
           {Array.from({ length: visibleDayCount }, (_, index) => {
             const date = new Date(firstVisibleDate.getFullYear(), firstVisibleDate.getMonth(), firstVisibleDate.getDate() + index);
             const dateString = dateToString(date);
             const opaque = date.getMonth() !== displayedMonth;
             const selected = dateString === pendingDate;
+            const hasConvention = showConventions && !opaque && [2, 12, 22].includes(date.getDate());
             const unavailable = !dateWithinBounds(date, min, max);
             return (
               <button
@@ -177,12 +178,24 @@ export function Datepicker({
                 type="button"
                 role="gridcell"
                 aria-selected={selected}
-                aria-label={date.toLocaleDateString()}
-                className={["ge-datepicker__day", opaque ? "is-opaque" : "", selected ? "is-selected" : ""].filter(Boolean).join(" ")}
+                aria-label={`${date.toLocaleDateString()}${hasConvention ? ", Convention" : ""}`}
+                className={[
+                  "ge-datepicker__day",
+                  opaque ? "is-opaque" : "",
+                  selected ? "is-selected" : "",
+                  hasConvention ? "is-convention" : ""
+                ].filter(Boolean).join(" ")}
                 disabled={disabled || unavailable}
                 onClick={() => selectDate(dateString)}
               >
-                {date.getDate()}
+                <span className="ge-datepicker__day-number">{date.getDate()}</span>
+                {hasConvention ? (
+                  <span className="ge-datepicker__day-markers" aria-hidden="true">
+                    <i />
+                    <i />
+                    <i />
+                  </span>
+                ) : null}
               </button>
             );
           })}
@@ -228,8 +241,11 @@ export function Datepicker({
       ) : null}
       {showConventions && view === "numbers" ? (
         <div className="ge-datepicker__conventions" aria-label="Conventions">
-          {["Convention", "Convention", "Convention"].map((item, index) => (
-            <span key={index}><i aria-hidden="true" />{item}</span>
+          {["first", "second", "third"].map((item) => (
+            <span key={item} className="ge-datepicker__convention">
+              <i aria-hidden="true" />
+              Convention
+            </span>
           ))}
         </div>
       ) : null}

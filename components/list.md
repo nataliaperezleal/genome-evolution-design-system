@@ -295,6 +295,42 @@ Evidence / Classification: recommendation built from verified properties; this e
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `items` | `ListItem[]` | `undefined` | Array of list items. |
+| `variant` | `"unordered" \| "ordered"` | `"unordered"` | List semantics. |
+| `size` | `"sm" \| "md"` | `"md"` | Row density. |
+| `text` | `ReactNode` | `"List item"` | Configures the `text` component property. |
+| `type` | `"list" \| "header"` | `"list"` | Configures the `type` component property. |
+| `state` | `"default" \| "hover" \| "pressed" \| "selected" \| "focused"` | `"default"` | Configures the `state` component property. |
+| `leftSide` | `boolean` | `false` | Configures the `leftSide` component property. |
+| `showLeftCheckBox` | `boolean` | `true` | Configures the `showLeftCheckBox` component property. |
+| `showLeftSwitch` | `boolean` | `true` | Configures the `showLeftSwitch` component property. |
+| `showLeftIcon` | `boolean` | `true` | Configures the `showLeftIcon` component property. |
+| `leftIcon` | `ReactNode` | `"≡"` | Configures the `leftIcon` component property. |
+| `rightSide` | `boolean` | `false` | Configures the `rightSide` component property. |
+| `showRightCheckBox` | `boolean` | `true` | Configures the `showRightCheckBox` component property. |
+| `showRightSwitch` | `boolean` | `true` | Configures the `showRightSwitch` component property. |
+| `showRightIcon` | `boolean` | `true` | Configures the `showRightIcon` component property. |
+| `rightIcon` | `ReactNode` | `"≡"` | Configures the `rightIcon` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### User list
+
+```tsx
+import { List, Badge } from "@genome-evolution/react";
+
+<List
+  items={[{ title: "Julia", meta: <Badge tone="success">Active</Badge> }]}
+/>;
+```
+
 ## Pending Clarification
 
 1. Side slot defaults. When `leftSide` or `rightSide` is turned on, the checkbox, switch, and icon all appear at once, and the nested Checkbox shows its own icon. Confirm whether each side is meant to hold one control at a time and whether the sub-toggles should default to `false`.

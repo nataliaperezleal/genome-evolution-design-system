@@ -155,6 +155,11 @@ Boolean that shows or hides the description. Reported default: `true`.
 
 Text property for the description. Reported default: "Tooltip description".
 
+## States
+
+- Hidden.
+- Visible.
+
 ## Token Mapping
 
 All tokens below were verified through Figma variable bindings.
@@ -220,6 +225,36 @@ Evidence / Classification: Existing Figma variant (`2192:484`).
 ## Invalid Combinations
 
 [No documented invalid combinations found]
+
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `content` | `ReactNode` | `undefined` | Tooltip text/content. |
+| `side` | `"top" \| "bottom" \| "left" \| "right"` | `"top"` | Placement. |
+| `title` | `ReactNode` | `undefined` | Configures the `title` component property. |
+| `description` | `ReactNode` | `undefined` | Configures the `description` component property. |
+| `image` | `ReactNode` | `undefined` | Configures the `image` component property. |
+| `color` | `"white" \| "black"` | `"white"` | Configures the `color` component property. |
+| `showTitle` | `boolean` | `true` | Configures the `showTitle` component property. |
+| `showDescription` | `boolean` | `true` | Configures the `showDescription` component property. |
+| `showImage` | `boolean` | `false` | Configures the `showImage` component property. |
+| `children` | `ReactNode` | `required` | Configures the `children` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Icon hint
+
+```tsx
+import { Tooltip, IconButton } from "@genome-evolution/react";
+
+<Tooltip content="Search">
+  <IconButton label="Search" icon={<SearchIcon />} />
+</Tooltip>;
+```
 
 ## Pending Clarification
 

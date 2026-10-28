@@ -8,8 +8,6 @@ export { Badge } from "./components/Badge";
 export type { BadgeProps, BadgeTone, BadgeVariant } from "./components/Badge";
 export { InlineAlert } from "./components/InlineAlert";
 export type { InlineAlertProps, InlineAlertTone } from "./components/InlineAlert";
-export { Card } from "./components/Card";
-export type { CardProps, CardVariant } from "./components/Card";
 export { Avatar } from "./components/Avatar";
 export type { AvatarProps, AvatarSize, AvatarTone, AvatarType } from "./components/Avatar";
 export { Table } from "./components/Table";

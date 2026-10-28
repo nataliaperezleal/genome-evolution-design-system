@@ -284,6 +284,29 @@ Evidence / Classification: recommendation built from verified properties; this e
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `tone` | `"info" \| "success" \| "warning" \| "danger"` | `"info"` | Semantic styling. |
+| `icon` | `ReactNode` | `undefined` | Optional leading icon. |
+| `children` | `ReactNode` | `undefined` | Alert content. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Success message
+
+```tsx
+import { InlineAlert } from "@genome-evolution/react";
+
+<InlineAlert tone="success" icon="✓">
+  Cambios guardados correctamente.
+</InlineAlert>;
+```
+
 ## Pending Clarification
 
 1. Default `Type`. Figma exposes `Type=Danger, Size=Regular` as the default because it is the first variant in the set. Confirm whether Danger is the intended default or whether the variants should be reordered (for example, to make `Information` the default).

@@ -265,6 +265,34 @@ Evidencia / Clasificación: Configuración propuesta; la variante `Icon` existe,
 
 Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `initials` | `string` | `undefined` | Texto que se muestra en el avatar. |
+| `size` | `16 \| 24 \| 32 \| 40 \| 48 \| "sm" \| "md" \| "lg"` | `16` | Controla el tamaño del marco. |
+| `tone` | `"default" \| "evergreen" \| "indigo" \| "blue" \| "green" \| "amber" \| "pink" \| "neutral"` | `"default"` | Tono de la categoría. |
+| `label` | `string` | `undefined` | Configura la propiedad `label` del componente. |
+| `type` | `"icon" \| "person" \| "print"` | `initials \|\| label ? "print" : "icon"` | Configura la propiedad `type` del componente. |
+| `src` | `string` | `undefined` | Configura la propiedad `src` del componente. |
+| `alt` | `string` | `""` | Configura la propiedad `alt` del componente. |
+| `showState` | `boolean` | `false` | Configura la propiedad `showState` del componente. |
+| `focused` | `boolean` | `false` | Configura la propiedad `focused` del componente. |
+| `icon` | `ReactNode` | `undefined` | Configura la propiedad `icon` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Category avatar
+
+```tsx
+import { Avatar } from "@genome-evolution/react";
+
+<Avatar initials="JS" size="sm" tone="blue" />;
+```
+
 ## Aclaraciones pendientes
 
 1. `Type` predeterminado: Las definiciones de propiedades reportadas por Figma MCP indican `Icon` como predeterminado, pero el orden de variantes del conjunto de componentes lista `Print` primero. Confirme el `Type` predeterminado previsto.

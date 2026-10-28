@@ -289,6 +289,30 @@ Evidencia / Clasificación: Configuración admitida por la propiedad `showIcon`.
 
 Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `label` | `string` | `"Label"` | Etiqueta visible de la casilla de verificación. |
+| `helperText` | `string` | `undefined` | Mensaje de apoyo debajo del control. |
+| `error` | `string` | `undefined` | Mensaje de error (reemplaza `helperText`). |
+| `color` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configura la propiedad `color` del componente. |
+| `indeterminate` | `boolean` | `false` | Configura la propiedad `indeterminate` del componente. |
+| `icon` | `ReactNode` | `undefined` | Configura la propiedad `icon` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (InputHTMLAttributes).
+### Ejemplos
+
+#### Basic checkbox
+
+```tsx
+import { Checkbox } from "@genome-evolution/react";
+
+<Checkbox label="Send notifications" defaultChecked disabled={false} />;
+```
+
 ## Aclaraciones pendientes
 
 1. Significado de `Type=Plus`: Figma ofrece un tipo `Plus` (un signo más en una casilla rellena) junto a `Check` y `Mixed`, pero no documenta qué representa ni cuándo usarlo en lugar de `Check`. Confirme su significado previsto para poder documentar las pautas de uso.

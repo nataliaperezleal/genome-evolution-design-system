@@ -75,12 +75,23 @@ export function renderInline(text: string) {
 }
 
 function parseTableRow(line: string) {
-  return line
-    .trim()
-    .replace(/^\|/, "")
-    .replace(/\|$/, "")
-    .split("|")
-    .map((cell) => cell.trim());
+  const cells: string[] = [];
+  let cell = "";
+  const trimmed = line.trim().replace(/^\|/, "").replace(/\|$/, "");
+
+  for (let index = 0; index < trimmed.length; index += 1) {
+    if (trimmed[index] === "\\" && trimmed[index + 1] === "|") {
+      cell += "|";
+      index += 1;
+    } else if (trimmed[index] === "|") {
+      cells.push(cell.trim());
+      cell = "";
+    } else {
+      cell += trimmed[index];
+    }
+  }
+  cells.push(cell.trim());
+  return cells;
 }
 
 function isTableSeparator(line: string) {

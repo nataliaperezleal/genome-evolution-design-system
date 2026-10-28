@@ -285,6 +285,30 @@ Evidence / Classification: Configuration supported by the `showIcon` property.
 
 These combinations are unavailable rather than explicitly documented as invalid.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `"Label"` | Visible label for the checkbox. |
+| `helperText` | `string` | `undefined` | Supportive message under the control. |
+| `error` | `string` | `undefined` | Error message (overrides helperText). |
+| `color` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configures the `color` component property. |
+| `indeterminate` | `boolean` | `false` | Configures the `indeterminate` component property. |
+| `icon` | `ReactNode` | `undefined` | Configures the `icon` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (InputHTMLAttributes).
+### Examples
+
+#### Basic checkbox
+
+```tsx
+import { Checkbox } from "@genome-evolution/react";
+
+<Checkbox label="Send notifications" defaultChecked disabled={false} />;
+```
+
 ## Pending Clarification
 
 1. Meaning of `Type=Plus`: Figma provides a `Plus` type (a plus sign in a filled box) alongside `Check` and `Mixed`, but does not document what it represents or when to use it instead of `Check`. Confirm its intended meaning so usage guidance can be documented.

@@ -246,6 +246,27 @@ Evidencia / clasificación: recomendación construida a partir de variantes exis
 
 Combinaciones no disponibles: `Evergreen` e `Indigo` no tienen variantes `Default` ni `Disabled`, por lo que estas combinaciones no se pueden seleccionar en Figma. No está documentado si se excluyen de forma intencional.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `steps` | `StepperStep[]` | `required` | Definiciones de los pasos. |
+| `currentStep` | `number` | `required` | 0-based current index. |
+| `orientation` | `"horizontal" \| "vertical"` | `"horizontal"` | Dirección del layout. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Three steps
+
+```tsx
+import { Stepper } from "@genome-evolution/react";
+
+<Stepper currentStep={1} steps={[{ label: "Details" }, { label: "Billing" }, { label: "Confirm" }]} />;
+```
+
 ## Aclaraciones pendientes
 
 1. Toggles de conexión en `Disabled`. En la variante `Disabled`, `nextLine` controla la línea anterior al paso y `backLine` la línea posterior, al revés que en las demás variantes. Confirmar y corregir los vínculos.

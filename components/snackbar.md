@@ -253,6 +253,33 @@ Evidence / Classification: recommendation built from verified properties.
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `required` | Whether the snackbar is visible. |
+| `message` | `string` | `undefined` | Snackbar text. |
+| `tone` | `"neutral" \| "success" \| "warning" \| "danger" \| "info"` | `undefined` | Semantic tone. |
+| `actionLabel` | `string` | `undefined` | Optional action label. |
+| `onAction` | `() => void` | `undefined` | Action handler. |
+| `onClose` | `() => void` | `undefined` | Dismiss handler. |
+| `label` | `string` | `undefined` | Configures the `label` component property. |
+| `type` | `"danger" \| "warning" \| "information" \| "success"` | `undefined` | Configures the `type` component property. |
+| `showButton` | `boolean` | `true` | Configures the `showButton` component property. |
+| `showBar` | `boolean` | `true` | Configures the `showBar` component property. |
+| `autoHideDurationMs` | `number` | `4000` | Configures the `autoHideDurationMs` component property. |
+### Examples
+
+#### Success snackbar
+
+```tsx
+import { Snackbar } from "@genome-evolution/react";
+
+<Snackbar open message="Saved" tone="success" onClose={() => {}} />;
+```
+
 ## Pending Clarification
 
 1. Bar meaning and behavior. The bottom bar is always shown at the same fill (ending 80px before the edge), with no property to set its progress. Confirm whether it is a timer for automatic dismissal and how it should behave.

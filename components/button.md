@@ -313,6 +313,40 @@ Evidence / Classification: Existing variant in Figma.
 
 Only the first row is a documented rule; the others are unavailable combinations.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `variant` | `"primary" \| "secondary" \| "tertiary"` | `"primary"` | Controls visual priority. |
+| `tone` | `"evergreen" \| "indigo" \| "danger" \| "information" \| "success" \| "warning" \| "neutral"` | `"evergreen"` | Applies brand or semantic tone. |
+| `size` | `"sm" \| "md"` | `"md"` | Controls height and internal spacing. |
+| `corner` | `"default" \| "rounded"` | `"default"` | Switches between 4px and pill radius. |
+| `leadingIcon` | `ReactNode` | `undefined` | Optional icon before the label. |
+| `trailingIcon` | `ReactNode` | `undefined` | Optional icon after the label. |
+
+It also accepts React's native attributes for the underlying HTML element (ButtonHTMLAttributes).
+### Examples
+
+#### Primary action
+
+```tsx
+import { Button } from "@genome-evolution/react";
+
+<Button>Continue</Button>;
+```
+
+#### Secondary rounded action
+
+```tsx
+import { Button } from "@genome-evolution/react";
+
+<Button variant="secondary" tone="indigo" corner="rounded">
+  Review
+</Button>;
+```
+
 ## Pending Clarification
 
 1. Default variant height: `Type=Primary, Color=Evergreen, State=Default, Corner=Default, Size=MD` is 30 px high (top padding 8, bottom padding 6), while all other MD variants, including its Hovered and Focused states, are 32 px. Is 32 px the intended MD height? This affects implementation and causes a 2 px height change between Default and other states of the default button.

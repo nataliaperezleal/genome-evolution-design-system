@@ -277,6 +277,31 @@ Evidencia / Clasificación: Variante existente en Figma.
 
 Estas combinaciones no están disponibles, pero no están documentadas explícitamente como inválidas.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"indigo"` | Tono de marca para el texto o el ícono. |
+| `typeTone` | `"default" \| "information" \| "success" \| "danger" \| "warning"` | `"default"` | Sobrescribe el tono semántico del texto o ícono. |
+| `corner` | `"default" \| "rounded"` | `"default"` | Controla el radio de las esquinas. |
+| `leadingIcon` | `ReactNode` | `undefined` | Ícono opcional antes de la etiqueta. |
+| `trailingIcon` | `ReactNode` | `undefined` | Ícono opcional después de la etiqueta. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (ButtonHTMLAttributes).
+### Ejemplos
+
+#### Navigation action
+
+```tsx
+import { ClearButton } from "@genome-evolution/react";
+
+<ClearButton tone="default" leadingIcon={<ArrowIcon />}>
+  Back
+</ClearButton>;
+```
+
 ## Aclaraciones pendientes
 
 Ninguna

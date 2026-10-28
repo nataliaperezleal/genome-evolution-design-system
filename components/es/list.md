@@ -294,6 +294,42 @@ Evidencia / clasificación: recomendación construida a partir de propiedades ve
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `items` | `ListItem[]` | `undefined` | Arreglo de elementos de la lista. |
+| `variant` | `"unordered" \| "ordered"` | `"unordered"` | Semántica de la lista. |
+| `size` | `"sm" \| "md"` | `"md"` | Densidad de las filas. |
+| `text` | `ReactNode` | `"List item"` | Configura la propiedad `text` del componente. |
+| `type` | `"list" \| "header"` | `"list"` | Configura la propiedad `type` del componente. |
+| `state` | `"default" \| "hover" \| "pressed" \| "selected" \| "focused"` | `"default"` | Configura la propiedad `state` del componente. |
+| `leftSide` | `boolean` | `false` | Configura la propiedad `leftSide` del componente. |
+| `showLeftCheckBox` | `boolean` | `true` | Configura la propiedad `showLeftCheckBox` del componente. |
+| `showLeftSwitch` | `boolean` | `true` | Configura la propiedad `showLeftSwitch` del componente. |
+| `showLeftIcon` | `boolean` | `true` | Configura la propiedad `showLeftIcon` del componente. |
+| `leftIcon` | `ReactNode` | `"≡"` | Configura la propiedad `leftIcon` del componente. |
+| `rightSide` | `boolean` | `false` | Configura la propiedad `rightSide` del componente. |
+| `showRightCheckBox` | `boolean` | `true` | Configura la propiedad `showRightCheckBox` del componente. |
+| `showRightSwitch` | `boolean` | `true` | Configura la propiedad `showRightSwitch` del componente. |
+| `showRightIcon` | `boolean` | `true` | Configura la propiedad `showRightIcon` del componente. |
+| `rightIcon` | `ReactNode` | `"≡"` | Configura la propiedad `rightIcon` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### User list
+
+```tsx
+import { List, Badge } from "@genome-evolution/react";
+
+<List
+  items={[{ title: "Julia", meta: <Badge tone="success">Active</Badge> }]}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. Valores por defecto de los espacios laterales. Al activar `leftSide` o `rightSide`, la casilla, el switch y el ícono aparecen a la vez, y el Checkbox anidado muestra su propio ícono. Confirmar si cada lado debe contener un solo control a la vez y si los toggles internos deberían tener `false` por defecto.

@@ -129,7 +129,7 @@ Evidence-based interpretation: The three types form a hierarchy of day → month
 
 ### Overflow and grid size
 
-- `Numbers` shows five week rows in all variants; a sixth row is not provided.
+- The inspected Figma `Numbers` variants show five week rows. React adds a sixth row when a month needs it so every date remains available.
 - `Month` always shows 12 cells and `Year` 24 cells.
 - Cells have fixed sizes; the panel has a fixed width.
 
@@ -309,6 +309,39 @@ Evidence / Classification: Configuration supported by the `showButtons` property
 | Combination / Condition | Verified Reason | Evidence |
 |-------------------------|-----------------|----------|
 | `showConventions` with `Type=Month` or `Type=Year` | The property has no visible effect; these types contain no conventions legend | Component structure |
+
+## Implementation
+
+The React panel implementation uses the documented `numbers`, `month` and `year` types and defaults to `panel` presentation unless a label, helper text or error is supplied. `presentation="field"` is a React convenience that renders a native date input; it is not a separate visual variant in Figma. Use `presentation="panel"` to render the documented calendar panel explicitly.
+
+The panel's convention markers use sample dates only; Figma defines the marker appearance and placeholder legend, but does not assign dates to conventions.
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `string` | `undefined` | Visible label. |
+| `helperText` | `string` | `undefined` | Supportive message. |
+| `error` | `string` | `undefined` | Error message (overrides helperText). |
+| `type` | `"numbers" \| "month" \| "year"` | `"numbers"` | Configures the `type` component property. |
+| `size` | `"sm" \| "md"` | `"sm"` | Configures the `size` component property. |
+| `tone` | `"evergreen" \| "indigo"` | `"evergreen"` | Configures the `tone` component property. |
+| `showButtons` | `boolean` | `true` | Configures the `showButtons` component property. |
+| `showConventions` | `boolean` | `true` | Configures the `showConventions` component property. |
+| `presentation` | `"field" \| "panel"` | `undefined` | Configures the `presentation` component property. |
+| `onChange` | `ChangeEventHandler<HTMLInputElement>` | `undefined` | Configures the `onChange` component property. |
+| `onDateChange` | `(date: string) => void` | `undefined` | Configures the `onDateChange` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (InputHTMLAttributes).
+### Examples
+
+#### Date field
+
+```tsx
+import { Datepicker } from "@genome-evolution/react";
+
+<Datepicker label="Start date" defaultValue="2026-05-04" />;
+```
 
 ## Pending Clarification
 

@@ -272,6 +272,41 @@ Evidencia / clasificación: configuración existente en Figma (variante `2247:12
 
 Combinaciones no disponibles: `Color=Evergreen` y `Color=Indigo` existen solo con `State=Selected`, por lo que no se pueden combinar con `Default`, `Hovered`, `Pressed` ni `Focused` en Figma. No está documentado si se excluyen de forma intencional.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `options` | `SegmentedOption[]` | `undefined` | Segmentos. |
+| `value` | `string` | `undefined` | Valor seleccionado. |
+| `onChange` | `(value: string) => void` | `undefined` | Función que se ejecuta al cambiar la selección. |
+| `text` | `string` | `"Section name"` | Configura la propiedad `text` del componente. |
+| `showText` | `boolean` | `true` | Configura la propiedad `showText` del componente. |
+| `icon` | `ReactNode` | `"≡"` | Configura la propiedad `icon` del componente. |
+| `showIcon` | `boolean` | `true` | Configura la propiedad `showIcon` del componente. |
+| `selected` | `boolean` | `false` | Configura la propiedad `selected` del componente. |
+| `state` | `"default" \| "selected" \| "hovered" \| "pressed" \| "focused"` | `undefined` | Configura la propiedad `state` del componente. |
+| `color` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Configura la propiedad `color` del componente. |
+| `size` | `"md" \| "sm"` | `"md"` | Configura la propiedad `size` del componente. |
+| `rounded` | `boolean` | `false` | Configura la propiedad `rounded` del componente. |
+| `containerProps` | `HTMLAttributes<HTMLDivElement>` | `undefined` | Configura la propiedad `containerProps` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (ButtonHTMLAttributes).
+### Ejemplos
+
+#### Theme mode
+
+```tsx
+import { SegmentedButton } from "@genome-evolution/react";
+
+<SegmentedButton
+  value="light"
+  onChange={() => {}}
+  options={[{ value: "light", label: "Light" }]}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. Componente de grupo. Segmented button es un único segmento; no hay un componente de grupo que controle cuántos segmentos aparecen ni cuál está seleccionado. Confirmar si se necesita un componente de grupo y cómo deben combinarse los segmentos (por ejemplo, cómo se unen los marcos de `Corner=Rounded`).

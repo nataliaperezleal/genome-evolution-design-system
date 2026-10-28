@@ -288,6 +288,63 @@ Evidence / Classification: existing Figma configuration (variant `2184:2716`).
 
 `tertiaryButton` has no effect in `Size=Small`, because the Small footer does not include a tertiary button.
 
+## Implementation
+
+The React implementation exposes Figma's separate size-specific content properties through one `sizeContent` prop:
+
+```tsx
+<Modal
+  open
+  size="medium"
+  sizeContent={{
+    small: <SmallContent />,
+    medium: <MediumContent />
+  }}
+/>
+```
+
+`sizeContent` is a partial map keyed by `ModalSize`. When the current size has no entry, the implementation uses `children` as a shared content fallback. The `expand` property only displays the documented icon; its effect remains undefined.
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `required` | Whether the modal is visible. |
+| `title` | `string` | `"Modal 16x title"` | Modal title. |
+| `description` | `string` | `undefined` | Supporting description. |
+| `footer` | `ReactNode` | `undefined` | Footer actions area. |
+| `onClose` | `() => void` | `undefined` | Dismiss handler (Escape/backdrop/close button). |
+| `size` | `"small" \| "medium" \| "large" \| "bigger" \| "90%" \| "full"` | `"small"` | Configures the `size` component property. |
+| `sizeContent` | `Partial<Record<ModalSize, ReactNode>>` | `undefined` | Configures the `sizeContent` component property. |
+| `showHeader` | `boolean` | `true` | Configures the `showHeader` component property. |
+| `showTitleIcon` | `boolean` | `false` | Configures the `showTitleIcon` component property. |
+| `titleIcon` | `ReactNode` | `"i"` | Configures the `titleIcon` component property. |
+| `expand` | `boolean` | `false` | Configures the `expand` component property. |
+| `close` | `boolean` | `true` | Configures the `close` component property. |
+| `showButtons` | `boolean` | `true` | Configures the `showButtons` component property. |
+| `helperText` | `boolean` | `false` | Configures the `helperText` component property. |
+| `valueHelperText` | `string` | `"1 of 5"` | Configures the `valueHelperText` component property. |
+| `tertiaryButton` | `boolean` | `false` | Configures the `tertiaryButton` component property. |
+| `children` | `ReactNode` | `undefined` | Configures the `children` component property. |
+| `onConfirm` | `() => void` | `undefined` | Configures the `onConfirm` component property. |
+| `onCancel` | `() => void` | `undefined` | Configures the `onCancel` component property. |
+| `onTertiary` | `() => void` | `undefined` | Configures the `onTertiary` component property. |
+| `className` | `string` | `undefined` | Configures the `className` component property. |
+### Examples
+
+#### Confirmation modal
+
+```tsx
+import { Modal, Button } from "@genome-evolution/react";
+
+<Modal
+  open
+  title="Confirm changes"
+  onClose={() => {}}
+  footer={<Button>Confirm</Button>}
+/>;
+```
+
 ## Pending Clarification
 
 1. Responsive sizing. `90%` and `Full` are fixed pixel sizes (1296px and 1440 × 900px) based on a 1440px frame. Confirm whether they should scale with the viewport (for example, 90% of the viewport width) and how the other sizes behave on smaller screens.

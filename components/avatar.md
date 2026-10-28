@@ -268,6 +268,34 @@ Evidence / Classification: Proposed configuration; the `Icon` variant exists, bu
 
 These combinations are unavailable rather than explicitly documented as invalid.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `initials` | `string` | `undefined` | Text shown in the avatar. |
+| `size` | `16 \| 24 \| 32 \| 40 \| 48 \| "sm" \| "md" \| "lg"` | `16` | Controls frame size. |
+| `tone` | `"default" \| "evergreen" \| "indigo" \| "blue" \| "green" \| "amber" \| "pink" \| "neutral"` | `"default"` | Tinted category tone. |
+| `label` | `string` | `undefined` | Configures the `label` component property. |
+| `type` | `"icon" \| "person" \| "print"` | `initials \|\| label ? "print" : "icon"` | Configures the `type` component property. |
+| `src` | `string` | `undefined` | Configures the `src` component property. |
+| `alt` | `string` | `""` | Configures the `alt` component property. |
+| `showState` | `boolean` | `false` | Configures the `showState` component property. |
+| `focused` | `boolean` | `false` | Configures the `focused` component property. |
+| `icon` | `ReactNode` | `undefined` | Configures the `icon` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (HTMLAttributes).
+### Examples
+
+#### Category avatar
+
+```tsx
+import { Avatar } from "@genome-evolution/react";
+
+<Avatar initials="JS" size="sm" tone="blue" />;
+```
+
 ## Pending Clarification
 
 1. Default `Type`: The Figma MCP property definitions report `Icon` as the default, but the variant order in the component set lists `Print` first. Confirm the intended default `Type`.

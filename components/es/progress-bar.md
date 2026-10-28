@@ -201,6 +201,29 @@ Evidencia / clasificación: configuración existente en Figma (variante `2190:19
 
 [No se encontraron combinaciones no válidas documentadas]
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `value` | `number` | `10` | Valor actual del progreso (modo determinado). |
+| `max` | `number` | `100` | Valor máximo del progreso. |
+| `indeterminate` | `boolean` | `false` | Estado de carga de duración desconocida. |
+| `tone` | `"evergreen" \| "indigo" \| "neutral"` | `"evergreen"` | Tono del color de relleno. |
+| `label` | `string` | `"Progress"` | Configura la propiedad `label` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (HTMLAttributes).
+### Ejemplos
+
+#### Indeterminate loading
+
+```tsx
+import { ProgressBar } from "@genome-evolution/react";
+
+<ProgressBar indeterminate label="Loading" />;
+```
+
 ## Aclaraciones pendientes
 
 1. La longitud del relleno no coincide con el valor. `Progress=25%` se muestra en cerca del 33% (116px) y `Progress=70%` en cerca del 67% (232px) de la pista interior de 348px. Confirmar las longitudes previstas (87px y cerca de 244px).

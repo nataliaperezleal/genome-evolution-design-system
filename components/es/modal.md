@@ -286,6 +286,63 @@ Evidencia / clasificación: configuración existente en Figma (variante `2184:27
 
 `tertiaryButton` no tiene efecto en `Size=Small`, porque el pie de Small no incluye un botón terciario.
 
+## Implementación
+
+La implementación de React expone las propiedades de contenido específicas por tamaño de Figma mediante una sola propiedad `sizeContent`:
+
+```tsx
+<Modal
+  open
+  size="medium"
+  sizeContent={{
+    small: <SmallContent />,
+    medium: <MediumContent />
+  }}
+/>
+```
+
+`sizeContent` es un mapa parcial con claves de tipo `ModalSize`. Si no hay una entrada para el tamaño actual, la implementación usa `children` como contenido compartido alternativo. La propiedad `expand` solo muestra el ícono documentado; su efecto sigue sin definirse.
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `open` | `boolean` | `required` | Indica si el modal está visible. |
+| `title` | `string` | `"Modal 16x title"` | Título del modal. |
+| `description` | `string` | `undefined` | Descripción complementaria. |
+| `footer` | `ReactNode` | `undefined` | Área de acciones del pie. |
+| `onClose` | `() => void` | `undefined` | Función de cierre (Escape, backdrop o botón de cierre). |
+| `size` | `"small" \| "medium" \| "large" \| "bigger" \| "90%" \| "full"` | `"small"` | Configura la propiedad `size` del componente. |
+| `sizeContent` | `Partial<Record<ModalSize, ReactNode>>` | `undefined` | Configura la propiedad `sizeContent` del componente. |
+| `showHeader` | `boolean` | `true` | Configura la propiedad `showHeader` del componente. |
+| `showTitleIcon` | `boolean` | `false` | Configura la propiedad `showTitleIcon` del componente. |
+| `titleIcon` | `ReactNode` | `"i"` | Configura la propiedad `titleIcon` del componente. |
+| `expand` | `boolean` | `false` | Configura la propiedad `expand` del componente. |
+| `close` | `boolean` | `true` | Configura la propiedad `close` del componente. |
+| `showButtons` | `boolean` | `true` | Configura la propiedad `showButtons` del componente. |
+| `helperText` | `boolean` | `false` | Configura la propiedad `helperText` del componente. |
+| `valueHelperText` | `string` | `"1 of 5"` | Configura la propiedad `valueHelperText` del componente. |
+| `tertiaryButton` | `boolean` | `false` | Configura la propiedad `tertiaryButton` del componente. |
+| `children` | `ReactNode` | `undefined` | Configura la propiedad `children` del componente. |
+| `onConfirm` | `() => void` | `undefined` | Configura la propiedad `onConfirm` del componente. |
+| `onCancel` | `() => void` | `undefined` | Configura la propiedad `onCancel` del componente. |
+| `onTertiary` | `() => void` | `undefined` | Configura la propiedad `onTertiary` del componente. |
+| `className` | `string` | `undefined` | Configura la propiedad `className` del componente. |
+### Ejemplos
+
+#### Confirmation modal
+
+```tsx
+import { Modal, Button } from "@genome-evolution/react";
+
+<Modal
+  open
+  title="Confirm changes"
+  onClose={() => {}}
+  footer={<Button>Confirm</Button>}
+/>;
+```
+
 ## Aclaraciones pendientes
 
 1. Tamaños responsive. `90%` y `Full` son tamaños fijos en píxeles (1296px y 1440 × 900px) basados en un frame de 1440px. Confirmar si deben escalar con el viewport (por ejemplo, 90% del ancho del viewport) y cómo se comportan los demás tamaños en pantallas más pequeñas.

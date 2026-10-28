@@ -230,6 +230,49 @@ Evidencia / Clasificación: Recomendación basada en las propiedades booleanas d
 
 Observación verificada: No se pueden agregar columnas después de la 10 ni filas después de la 10 sin desvincular o ampliar el componente.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `children` | `ReactNode` | `undefined` | Marcado de `thead` y `tbody`. |
+| `showHeader` | `boolean` | `true` | Configura la propiedad `showHeader` del componente. |
+| `column2` | `boolean` | `false` | Configura la propiedad `column2` del componente. |
+| `column3` | `boolean` | `false` | Configura la propiedad `column3` del componente. |
+| `column4` | `boolean` | `false` | Configura la propiedad `column4` del componente. |
+| `column5` | `boolean` | `false` | Configura la propiedad `column5` del componente. |
+| `column6` | `boolean` | `false` | Configura la propiedad `column6` del componente. |
+| `column7` | `boolean` | `false` | Configura la propiedad `column7` del componente. |
+| `column8` | `boolean` | `false` | Configura la propiedad `column8` del componente. |
+| `column9` | `boolean` | `false` | Configura la propiedad `column9` del componente. |
+| `column10` | `boolean` | `false` | Configura la propiedad `column10` del componente. |
+| `row2` | `boolean` | `false` | Configura la propiedad `row2` del componente. |
+| `row3` | `boolean` | `false` | Configura la propiedad `row3` del componente. |
+| `row4` | `boolean` | `false` | Configura la propiedad `row4` del componente. |
+| `row5` | `boolean` | `false` | Configura la propiedad `row5` del componente. |
+| `row6` | `boolean` | `false` | Configura la propiedad `row6` del componente. |
+| `row7` | `boolean` | `false` | Configura la propiedad `row7` del componente. |
+| `row8` | `boolean` | `false` | Configura la propiedad `row8` del componente. |
+| `row9` | `boolean` | `false` | Configura la propiedad `row9` del componente. |
+| `row10` | `boolean` | `false` | Configura la propiedad `row10` del componente. |
+| `headers` | `ReactNode[]` | `undefined` | Configura la propiedad `headers` del componente. |
+| `rows` | `ReactNode[][]` | `undefined` | Configura la propiedad `rows` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (TableHTMLAttributes).
+### Ejemplos
+
+#### Styled table
+
+```tsx
+import { Table } from "@genome-evolution/react";
+
+<Table>
+  <thead>...</thead>
+  <tbody>...</tbody>
+</Table>;
+```
+
 ## Aclaraciones pendientes
 
 1. **La fila 6 de las columnas 2–10 usa una celda distinta y sin estilo.** En las columnas 2–10, la celda de la fila 6 es una instancia de un componente principal distinto de `.TableCellAssets`, con valores sin vincular: texto blanco de 12 px (interlineado de 18 px) sobre fondo blanco. Al activar `Fila 6`, el texto de esas columnas es invisible, y los cambios de tokens no les llegan. Confirma que estas instancias deben reemplazarse por `.TableCellAssets`.

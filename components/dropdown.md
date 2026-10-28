@@ -219,6 +219,37 @@ Evidence / Classification: Existing variant in Figma; slot content is a usage ex
 
 [No documented invalid combinations found]
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `options` | `DropdownOption[]` | `defaultOptions` | Available options. |
+| `label` | `string` | `undefined` | Visible label. |
+| `helperText` | `string` | `undefined` | Supportive message. |
+| `error` | `string` | `undefined` | Error message (overrides helperText). |
+| `content` | `"items" \| "slots"` | `"items"` | Configures the `content` component property. |
+| `presentation` | `"field" \| "panel"` | `undefined` | Configures the `presentation` component property. |
+| `buttonLabel` | `string` | `"Button"` | Configures the `buttonLabel` component property. |
+| `onValueChange` | `(value: string) => void` | `undefined` | Configures the `onValueChange` component property. |
+| `onApply` | `() => void` | `undefined` | Configures the `onApply` component property. |
+| `children` | `ReactNode` | `undefined` | Configures the `children` component property. |
+
+It also accepts React's native attributes for the underlying HTML element (SelectHTMLAttributes).
+### Examples
+
+#### Select field
+
+```tsx
+import { Dropdown } from "@genome-evolution/react";
+
+<Dropdown
+  label="Role"
+  options={[{ value: "admin", label: "Admin" }, { value: "editor", label: "Editor" }]}
+/>;
+```
+
 ## Pending Clarification
 
 None

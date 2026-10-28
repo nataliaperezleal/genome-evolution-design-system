@@ -246,6 +246,29 @@ Evidencia / clasificación: configuración existente en Figma (variante `2255:18
 
 Combinaciones no disponibles: el conjunto de variantes no tiene variantes `Color=Indigo, State=Disable` ni `Color=Evergreen, State=Disable`, por lo que estas combinaciones no se pueden seleccionar en Figma. No está documentado si se excluyen de forma intencional; ver Aclaraciones pendientes.
 
+## Implementación
+
+### API de React
+
+| Propiedad | Tipo | Predeterminado | Descripción |
+| --- | --- | --- | --- |
+| `tone` | `"default" \| "evergreen" \| "indigo"` | `"default"` | Aplica un tono de marca al enlace. |
+| `leadingIcon` | `ReactNode` | `undefined` | Ícono inicial opcional. |
+| `trailingIcon` | `ReactNode` | `undefined` | Ícono final opcional. |
+| `size` | `"sm" \| "md"` | `"md"` | Configura la propiedad `size` del componente. |
+| `visited` | `boolean` | `false` | Configura la propiedad `visited` del componente. |
+
+También acepta los atributos nativos de React para el elemento HTML subyacente (AnchorHTMLAttributes).
+### Ejemplos
+
+#### Inline link
+
+```tsx
+import { Link } from "@genome-evolution/react";
+
+<Link href="#foundations-typography">Typography</Link>;
+```
+
 ## Aclaraciones pendientes
 
 1. Enlaces con tema deshabilitados. `State=Disable` existe solo para `Color=Default`. Confirmar si los enlaces Indigo y Evergreen pueden deshabilitarse y, en ese caso, si deben cambiar a `Color=Default, State=Disable`.

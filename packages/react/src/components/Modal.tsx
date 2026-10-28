@@ -9,6 +9,7 @@ export interface ModalProps {
   open: boolean;
   title?: string;
   size?: ModalSize;
+  sizeContent?: Partial<Record<ModalSize, ReactNode>>;
   showHeader?: boolean;
   showTitleIcon?: boolean;
   titleIcon?: ReactNode;
@@ -32,6 +33,7 @@ export function Modal({
   open,
   title = "Modal 16x title",
   size = "small",
+  sizeContent,
   showHeader = true,
   showTitleIcon = false,
   titleIcon = "i",
@@ -64,6 +66,8 @@ export function Modal({
 
   if (!open) return null;
 
+  const content = sizeContent?.[size] ?? children;
+
   return (
     <div className="ge-modal-root">
       <Backdrop open tone="black" className="ge-modal-backdrop" onClick={() => onClose?.()} />
@@ -79,7 +83,7 @@ export function Modal({
                 ) : null}
               </div>
             </div>
-            {expand ? <button type="button" className="ge-modal__expand" aria-label="Expand modal">⛶</button> : null}
+            {expand ? <span className="ge-modal__expand" aria-hidden="true">⛶</span> : null}
             {close ? (
               <button type="button" className="ge-modal__close" aria-label="Close modal" onClick={() => onClose?.()}>
                 ×
@@ -87,7 +91,7 @@ export function Modal({
             ) : null}
           </div>
         ) : null}
-        {children ? <div className="ge-modal__body">{children}</div> : null}
+        {content ? <div className="ge-modal__body">{content}</div> : null}
         {footer ? <div className="ge-modal__footer">{footer}</div> : showButtons ? (
           <div className="ge-modal__footer">
             <div className="ge-modal__footer-meta">

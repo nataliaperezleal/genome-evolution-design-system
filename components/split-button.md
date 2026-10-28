@@ -269,6 +269,33 @@ Evidence / Classification: existing Figma configuration (variant `2345:677`).
 
 Unavailable combinations: `Color=Default` exists only with `Type=Primary` and `State=Disable`; `Disable` does not exist for `Type=Secondary` or for `Evergreen` and `Indigo`. These combinations cannot be selected in Figma.
 
+## Implementation
+
+### React API
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `label` | `ReactNode` | `required` | Primary label. |
+| `onClick` | `() => void` | `required` | Primary action handler. |
+| `items` | `SplitButtonItem[]` | `required` | Menu items. |
+| `color` | `"evergreen" \| "indigo" \| "default"` | `"evergreen"` | Configures the `color` component property. |
+| `type` | `"primary" \| "secondary"` | `"primary"` | Configures the `type` component property. |
+| `size` | `"regular" \| "small"` | `"regular"` | Configures the `size` component property. |
+| `disabled` | `boolean` | `false` | Configures the `disabled` component property. |
+### Examples
+
+#### Publish split button
+
+```tsx
+import { SplitButton } from "@genome-evolution/react";
+
+<SplitButton
+  label="Publish"
+  onClick={() => {}}
+  items={[{ label: "Publish now", onSelect: () => {} }]}
+/>;
+```
+
 ## Pending Clarification
 
 1. States per part. `Hovered`, `Pressed`, and `Focused` affect only the chevron segment; the main action has no hover, pressed, or focus visuals. Confirm how states should be shown for each part.
