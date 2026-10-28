@@ -25,7 +25,7 @@ Button desencadena una acción. Está disponible en siete tipos (Primary, Second
 
 ### Qué es
 
-Especificación verificada: Figma describe el botón Primary como el botón de acción principal, con fondo sólido en el color de la marca, usado para la acción más importante de una pantalla o sección; solo debe haber uno por vista. Figma también indica que `Color=Evergreen` aplica la paleta de verde primario de la marca Genome Plus y es el color de marca por defecto para los botones Primary y Secondary. (Fuente: descripciones de variantes en Figma, escritas en español.)
+Especificación verificada: Figma describe el botón Primary como el botón de acción principal, con fondo sólido en el color de la marca, usado para la acción más importante de una pantalla o sección; solo debe haber uno por vista. Figma también indica que `Color=Evergreen` aplica la paleta de verde primario de la marca Genome Evolution y es el color de marca por defecto para los botones Primary y Secondary. (Fuente: descripciones de variantes en Figma, escritas en español.)
 
 Interpretación basada en evidencia: Los demás tipos ofrecen menor énfasis (Secondary, delineado en el color de marca; Tertiary, delineado neutro) o un énfasis asociado a un estado (Danger, Information, Success, Warning), según muestran sus rellenos, bordes y las familias de tokens de estado que usan.
 
@@ -178,7 +178,7 @@ El inventario siguiente es completo en cuanto a valores de propiedades; se lista
 
 | Valor | Descripción verificada | Evidencia / Notas |
 |-------|------------------------|-------------------|
-| Evergreen | Paleta de verde primario de la marca Genome Plus; color de marca por defecto para Primary y Secondary. | Descripción en Figma; Primary y Secondary |
+| Evergreen | Paleta de verde primario de la marca Genome Evolution; color de marca por defecto para Primary y Secondary. | Descripción en Figma; Primary y Secondary |
 | Indigo | Paleta de marca índigo (`surface/indigo/bold`, `border/indigo`, `text/indigo`). | Primary y Secondary |
 | Default | Color neutro usado por Tertiary, los tipos de estado y las variantes Disabled de Primary y Secondary. | Todos los tipos |
 

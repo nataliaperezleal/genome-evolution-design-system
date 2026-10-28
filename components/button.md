@@ -179,7 +179,7 @@ The inventory below is complete for property values; all 152 variants were liste
 
 | Value | Verified Description | Evidence / Notes |
 |-------|----------------------|------------------|
-| Evergreen | Genome Plus brand primary green palette; default brand color for Primary and Secondary. | Figma description; Primary and Secondary |
+| Evergreen | Genome Evolution brand primary green palette; default brand color for Primary and Secondary. | Figma description; Primary and Secondary |
 | Indigo | Indigo brand palette (`surface/indigo/bold`, `border/indigo`, `text/indigo`). | Primary and Secondary |
 | Default | Neutral color used by Tertiary, the status types, and the Disabled variants of Primary and Secondary. | All types |
 

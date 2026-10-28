@@ -1,4 +1,4 @@
-# Changelog — Genome Plus Design System
+# Changelog — Genome Evolution Design System
 
 ## [1.0.0] — 2026-04-27
 
