@@ -68,21 +68,21 @@ Mostrar un mensaje amigable cuando no hay datos para mostrar.
 
 ## Token Mapping
 
-```
-Background: background/canvas (#ffffff)
-Icon: icon/secondary (#728376)
-Title: text/primary (#2d342f)
-Description: text/secondary (#5f6d62)
-Button: surface/evergreen/bold (#297a39)
-Button text: text/inverse (#f7f8f7)
-Link: link/default (#004a76)
+```text
+Background:          var(--ge-color-role-background-canvas)
+Icon:                var(--ge-color-role-icon-secondary)
+Title:               var(--ge-color-role-text-primary)
+Description:         var(--ge-color-role-text-secondary)
+Button background:   var(--ge-color-role-surface-evergreen-bold)
+Button text:         var(--ge-color-role-text-inverse)
+Link:                var(--ge-color-role-link-default)
 
 Spacing:
-  Container padding: space/32
-  Icon margin-bottom: space/24
-  Title margin-bottom: space/12
-  Description margin-bottom: space/24
-  Button margin-bottom: space/16
+  Container padding:         var(--ge-spacing-space-32)
+  Icon margin-bottom:        var(--ge-spacing-space-24)
+  Title margin-bottom:       var(--ge-spacing-space-12)
+  Description margin-bottom: var(--ge-spacing-space-24)
+  Button margin-bottom:      var(--ge-spacing-space-16)
 ```
 
 ---
@@ -90,18 +90,16 @@ Spacing:
 ## Interaction & Motion
 
 ### Initial Load
-- Fade in: 300ms, easing/enter
+- Fade in: 300ms, curva de entrada estándar
 - Icons scale up: 0.8 → 1.0, 300ms
 
 ### Button Hover
-- Background: surface/evergreen/bold/hovered (#1f5c2b), 200ms
-
----
+- Background: `var(--ge-color-role-surface-evergreen-bold-hovered)`, 200ms
 
 ## Accessibility
 
 ### Semantic
-- Container: `<div role="region" aria-label="No data">`
+- Container: `<div role="region" aria-label="Empty state">`
 - Heading: `<h2>` with clear message
 - Icon: `aria-hidden="true"` (decorative)
 - Button: meaningful text, not "Click here"
@@ -148,8 +146,8 @@ Spacing:
 
 ## Related Patterns
 
-- [Loading State](./loading-state.md) — Before empty
-- [Error Recovery](./error-recovery.md) — When something failed
+- Loading State — Before empty (próximamente)
+- Error Recovery — When something failed (próximamente)
 
 ## Component References
 
