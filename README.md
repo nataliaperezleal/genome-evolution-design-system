@@ -1,6 +1,6 @@
 # Genome Evolution Design System
 
-Sistema de diseño de Bizagi / Genome Plus. Este repositorio reúne la documentación de componentes, fundamentos y patrones de UI.
+Este repositorio reúne la documentación de componentes, fundamentos y patrones de UI.
 
 > Este repositorio es la fuente de verdad para implementaciones, revisiones de código y consultas por agentes de IA.
 

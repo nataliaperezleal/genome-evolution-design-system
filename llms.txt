@@ -1,6 +1,6 @@
 # Genome Evolution Design System
 
-> Genome Evolution is the design system for Bizagi / Genome Plus. This repository provides component documentation, design foundations, design tokens, composition patterns, AI usage guidance, and a React implementation to support consistent interface generation.
+> This repository provides component documentation, design foundations, design tokens, composition patterns, AI usage guidance, and a React implementation to support consistent interface generation.
 
 Use Figma as the source of truth for intended visual design. Use repository documentation and implementation resources to understand component usage, design-system conventions, available tokens, and technical constraints.
 

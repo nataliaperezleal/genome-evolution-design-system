@@ -1,9 +1,6 @@
 # Genome Evolution — Agent Instructions
 
 ## 1. Purpose
-
-Genome Evolution is the design system for Bizagi / Genome Plus.
-
 This repository provides the design-system knowledge AI agents need to understand, select, and compose interface components consistently. It includes component documentation, design foundations, design tokens, composition patterns, AI usage rules, documentation templates to support the creation and organization of component documentation, and a React implementation.
 
 The primary goal is to generate interfaces that follow Genome Evolution and remain faithful to its intended visual language, component behavior, and composition rules.
