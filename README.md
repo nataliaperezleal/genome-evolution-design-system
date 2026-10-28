@@ -52,7 +52,7 @@ Los archivos `components/*.md` definen el contrato visual y de comportamiento de
 
 `packages/react` es una implementación de ese contrato, no una fuente alternativa ni una generación automática desde Markdown. Al cambiar una implementación, se deben respetar las variantes, estados y valores documentados, y usar los tokens correspondientes. Si falta una definición o hay una contradicción en los Markdown, hay que resolverla en la documentación antes de elegir un comportamiento nuevo.
 
-## Componentes (44)
+## Componentes (49)
 
 Todos los componentes están identificados con estado `Design`. El inventario completo y sus metadatos están en [manifest.json](manifest.json).
 
