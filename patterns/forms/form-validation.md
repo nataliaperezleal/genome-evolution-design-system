@@ -107,29 +107,29 @@ User fixes and resubmits
 **Valid** ✓
 ```
 [john@example.com_______________] ✓
-Border: border/default (no change)
+Border: var(--ge-color-role-border-default) (no change)
 Icon: checkmark (optional)
 ```
 
 **Invalid** ❌
 ```
 [john@exam__________________] ❌
-Border: border/danger (#ba1a1a) 2px
+Border: var(--ge-color-role-border-danger), 2px
 Text below: "Invalid email address"
-Color: text/danger (#ba1a1a)
+Color: var(--ge-color-role-text-danger)
 ```
 
 **Loading (checking server)** ⟳
 ```
 [john@example.com_______________] ⟳
-Border: border/default
+Border: var(--ge-color-role-border-default)
 Spinner appears while checking
 ```
 
 **Disabled** (form submitting)
 ```
 [____________________] (grayed out)
-Border: border/disabled
+Border: var(--ge-color-role-border-disabled)
 Cursor: not-allowed
 ```
 
@@ -137,31 +137,31 @@ Cursor: not-allowed
 
 ## Token Mapping
 
-```
+```text
 Valid state:
-  Border: border/default (#c3cbc5)
-  Text: text/primary (#2d342f)
+  Border: var(--ge-color-role-border-default)
+  Text: var(--ge-color-role-text-primary)
 
 Invalid state:
-  Border: border/danger (#ba1a1a)
-  Background: can stay background/canvas
-  Error text: text/danger (#ba1a1a)
-  Error icon: icon/danger
+  Border: var(--ge-color-role-border-danger)
+  Background: var(--ge-color-role-background-canvas)
+  Error text: var(--ge-color-role-text-danger)
+  Error icon: var(--ge-color-role-icon-danger)
 
 Loading state:
-  Border: border/default (#c3cbc5)
-  Spinner: icon/secondary (#728376)
+  Border: var(--ge-color-role-border-default)
+  Spinner: var(--ge-color-role-icon-secondary)
 
 Error banner (Inline Alert):
-  Background: surface/danger/subtle (#ffe9e5)
-  Border: border/danger (#ba1a1a)
-  Text: text/danger (#ba1a1a)
-  Icon: icon/danger
+  Background: var(--ge-color-role-surface-danger-subtle)
+  Border: var(--ge-color-role-border-danger)
+  Text: var(--ge-color-role-text-danger)
+  Icon: var(--ge-color-role-icon-danger)
 
 Spacing:
-  Error text below input: gap/xs (4px)
-  Error text size: body/xs (12px)
-  Error banner margin-bottom: space/16 (16px)
+  Error text below input: var(--ge-spacing-gap-xxs)
+  Error text size: var(--ge-typography-role-body-xs-size)
+  Error banner margin-bottom: var(--ge-spacing-space-16)
 ```
 
 ---
@@ -169,16 +169,16 @@ Spacing:
 ## Interaction & Motion
 
 ### Error Appears
-- Border changes to red: instant
-- Error text fades in: 200ms, easing/standard
-- focus moves to first error (keyboard nav)
+- Border changes to the danger border color: instant
+- Error text fades in: 200ms, curva estándar
+- Focus moves to first error (keyboard nav)
 
 ### Banner Error on Submit
-- Banner slides down from top: 320ms, easing/enter
+- Banner slides down from top: 320ms, curva de entrada
 - Focus moves to banner (aria-live announces)
 
 ### Error Dismissed (user fixes)
-- Error text fades out: 200ms, easing/exit
+- Error text fades out: 200ms, curva de salida
 - Border returns to default: 200ms
 - Checkmark may appear: instant
 
@@ -189,7 +189,7 @@ Spacing:
 ### ARIA
 ```html
 <!-- Invalid input with error message -->
-<input 
+<input
   id="email"
   type="email"
   aria-invalid="true"
@@ -301,8 +301,8 @@ Rate limit:
 **Real-time Validation**
 - [ ] Error appears after blur (not on keystroke)
 - [ ] Error message is clear and helpful
-- [ ] Error text is red (text/danger)
-- [ ] Input border is red (border/danger)
+- [ ] Error text uses the danger text color and is also marked by text and icon
+- [ ] Input border uses the danger border color
 - [ ] Error disappears when user fixes field
 - [ ] Screen reader announces error
 
@@ -380,7 +380,7 @@ Banner: "Please fix 3 errors below"
 ## Related Patterns
 
 - [Login Form](./login.md) — Uses real-time + submit validation
-- [Form Layout](./form-layout.md) — Helper/error text positioning
+- Form Layout — Helper/error text positioning (próximamente)
 
 ## Component References
 
