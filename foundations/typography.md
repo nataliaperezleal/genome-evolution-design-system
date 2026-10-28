@@ -17,10 +17,12 @@ Typography roles are published under `typography.role.base.<role>.<size>.<proper
 |---|---:|---|---:|
 | `typography.role.base.body.sm` | 14px | regular | 20px |
 | `typography.role.base.label.xs` | 12px | medium | 16px |
-| `typography.role.base.button.md` | 14px | semibold | 16px |
+| `typography.role.base.button.md` | 14px | medium | 16px |
 | `typography.role.base.heading.xl` | 36px | bold | 56px |
 | `typography.role.base.display.md` | 48px | bold | 56px |
 | `typography.role.base.code.md` | 14px | regular | 20px |
+
+Weights are shown by name. In CSS, `regular` is 400, `medium` is 500, `semibold` is 600, and `bold` is 700.
 
 Other published roles include `body`, `label`, `title`, `heading`, `display`, `button`, `code`, and `overline`, with the sizes and properties available in the token package.
 
