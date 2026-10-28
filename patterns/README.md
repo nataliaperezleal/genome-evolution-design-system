@@ -15,22 +15,22 @@ Un **patrón** es una solución documentada a un problema de UX recurrente. Comb
 ### 📋 Formularios
 - [Login Form](./forms/login.md) — Autenticación con email + password
 - [Form Validation](./forms/form-validation.md) — Manejo de errores inline y globales
-- [Multi-step Form](./forms/multi-step-form.md) — Wizard/stepper form (Próximamente)
+- Multi-step Form — Wizard/stepper form (Próximamente)
 
 ### 🗂️ Navegación
 - [Sidebar Navigation](./navigation/sidebar-navigation.md) — Menu principal collapsible
-- [Breadcrumbs](./navigation/breadcrumbs.md) — Navegación de jerarquía (Próximamente)
-- [Tabs Navigation](./navigation/tabs-navigation.md) — Content switching (Próximamente)
+- Breadcrumbs — Navegación de jerarquía (Próximamente)
+- Tabs Navigation — Content switching (Próximamente)
 
 ### 📊 Datos
 - [CRUD Table](./data-display/crud-table.md) — Tabla con acciones: crear, editar, eliminar
-- [Card Grid](./data-display/card-grid.md) — Grid de cards (Próximamente)
-- [Filterable List](./data-display/filterable-list.md) — Lista con filtros (Próximamente)
+- Card Grid — Grid de cards (Próximamente)
+- Filterable List — Lista con filtros (Próximamente)
 
 ### 💬 Feedback & Estados
 - [Empty State](./feedback/empty-state.md) — Cuando no hay datos
-- [Loading State](./feedback/loading-state.md) — Skeleton loaders y spinners
-- [Error Recovery](./feedback/error-recovery.md) — Manejo de errores y retry (Próximamente)
+- Loading State — Skeleton loaders y spinners
+- Error Recovery — Manejo de errores y retry (Próximamente)
 
 ---
 
@@ -45,13 +45,10 @@ Un **patrón** es una solución documentada a un problema de UX recurrente. Comb
 
 ## Contribuir Patrones Nuevos
 
-1. Copia `templates/pattern-template.md`.
-2. Nombres en kebab-case: `./patterns/[category]/[pattern-name].md`.
-3. Llena todos los sections: Problem, Anatomy, Composition, States, Tokens, Accessibility.
-4. Añade entry en este README.
-5. Submit PR.
-
-Ver [CONTRIBUTING.md](../CONTRIBUTING.md) para detalles.
+1. Crea el archivo en `./patterns/[category]/[pattern-name].md`, con nombre en kebab-case.
+2. Describe el problema de UX, la composición de componentes, los estados, los tokens usados y las notas de accesibilidad. Revisa un patrón existente, como `forms/login.md`, como referencia de estructura.
+3. Añade una entrada en este README.
+4. Abre un PR.
 
 ---
 
@@ -61,7 +58,7 @@ Ver [CONTRIBUTING.md](../CONTRIBUTING.md) para detalles.
 - Usar componentes del DS (nunca custom HTML).
 - Documentar todos los estados (default, loading, error, success).
 - Incluir notas de accesibilidad.
-- Mantener patrones agnósticos (funciona en React, Vue, vanilla, etc.).
+- Describir la composición sin depender de un framework concreto; la implementación de referencia es React.
 
 ❌ **Don't**
 - No crear componentes nuevos dentro de patrones.
