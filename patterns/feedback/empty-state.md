@@ -1,160 +1,49 @@
 ---
 pattern: "Empty State"
-system: "Genome Evolution DS"
+system: "Genome Evolution Design System"
 type: "Pattern"
-category: "feedback"
-status: "Production"
-created: "2026-05-05"
+status: "draft"
 tags: [empty-state, no-data, feedback, onboarding]
 ---
 
-# Pattern: Empty State — Genome Evolution DS
+# Pattern: Empty State
 
-Mostrar un mensaje amigable cuando no hay datos para mostrar.
+## Cuándo usarlo
 
----
+- Muestra un estado vacío cuando no hay contenido que presentar.
+- Distingue entre una colección que aún no tiene elementos y una búsqueda o filtro sin coincidencias; explica el motivo concreto en cada caso.
 
-## Anatomy
+## Composición
 
-```
-┌─────────────────────────────────┐
-│                                 │
-│            [📦 Illustration]     │
-│                                 │
-│    No projects yet              │ (heading/sm)
-│    Create your first project    │ (body/sm)
-│    to get started.              │
-│                                 │
-│         [+ New Project]         │ (Button Primary)
-│                                 │
-│    Need help? [Read the guide] →│ (Link)
-│                                 │
-└─────────────────────────────────┘
-```
+- Incluye un título breve, una explicación útil y, si existe un siguiente paso pertinente, una acción.
+- Usa `Button` para una acción como crear el primer elemento o limpiar filtros. No muestres una acción que no esté disponible para el usuario.
+- Mantén el estado vacío en el contexto de la colección para que el usuario entienda qué contenido falta.
+- No dependas de una ilustración o icono no verificado para transmitir el significado.
 
----
+## Tipografía, color y espacio
 
-## Component Composition
+- Título: `var(--ge-typography-role-title-md-family)`, `var(--ge-typography-role-title-md-size)`, `var(--ge-typography-role-title-md-weight)` y `var(--ge-typography-role-title-md-line-height)`.
+- Descripción: `var(--ge-typography-role-body-sm-family)`, `var(--ge-typography-role-body-sm-size)`, `var(--ge-typography-role-body-sm-weight)` y `var(--ge-typography-role-body-sm-line-height)`.
+- Separa título, descripción y acción con `var(--ge-spacing-gap-md)` y `var(--ge-spacing-gap-lg)`, según la jerarquía.
+- Usa `var(--ge-color-role-text-primary)` para el título, `var(--ge-color-role-text-secondary)` para la explicación y `var(--ge-color-role-background-canvas)` para la superficie. Verifica el contraste de texto y controles con sus fondos.
 
-| Componente | Rol |
-|-----------|------|
-| **Illustration** | Visual (can be SVG or icon) |
-| **Heading** | Title (heading/sm) |
-| **Body Text** | Description (body/sm) |
-| **Button** | Primary action (+ Create) |
-| **Link** | Secondary action (Help) |
+## Accesibilidad
 
----
+- Mantén el título en la jerarquía de encabezados de la página.
+- La explicación debe indicar por qué no hay contenido y qué puede hacer el usuario después.
+- La acción debe tener un nombre accesible claro y ser operable con teclado.
 
-## States & Behavior
+## Pendientes de verificar
 
-### Default
-- Icon/illustration centered
-- Clear title + description
-- CTA button visible
-- Secondary help link
+- La documentación de `Button` no confirma cómo su implementación React expone semántica HTML ni el nombre accesible.
 
-### With Different Actions
-- Crear: "+ New Item"
-- Upload: "🔼 Upload file"
-- Search: "No results. Try different search."
+## Fuentes consultadas
 
-### Loading State (before empty)
-- Show skeleton loaders
-- Spinners in content area
-- Not empty state yet (data might load)
-
----
-
-## Token Mapping
-
-```text
-Background:          var(--ge-color-role-background-canvas)
-Icon:                var(--ge-color-role-icon-secondary)
-Title:               var(--ge-color-role-text-primary)
-Description:         var(--ge-color-role-text-secondary)
-Button background:   var(--ge-color-role-surface-evergreen-bold)
-Button text:         var(--ge-color-role-text-inverse)
-Link:                var(--ge-color-role-link-default)
-
-Spacing:
-  Container padding:         var(--ge-spacing-space-32)
-  Icon margin-bottom:        var(--ge-spacing-space-24)
-  Title margin-bottom:       var(--ge-spacing-space-12)
-  Description margin-bottom: var(--ge-spacing-space-24)
-  Button margin-bottom:      var(--ge-spacing-space-16)
-```
-
----
-
-## Interaction & Motion
-
-### Initial Load
-- Fade in: 300ms, curva de entrada estándar
-- Icons scale up: 0.8 → 1.0, 300ms
-
-### Button Hover
-- Background: `var(--ge-color-role-surface-evergreen-bold-hovered)`, 200ms
-
-## Accessibility
-
-### Semantic
-- Container: `<div role="region" aria-label="Empty state">`
-- Heading: `<h2>` with clear message
-- Icon: `aria-hidden="true"` (decorative)
-- Button: meaningful text, not "Click here"
-
-### ARIA
-```html
-<div role="region" aria-label="Empty state">
-  <h2>No projects yet</h2>
-  <p>Create your first project to get started.</p>
-  <button>+ New Project</button>
-</div>
-```
-
-### Do's & Don'ts
-
-✅ Do:
-- Be encouraging, not sad 😊
-- Clear action: "+ New Item", not "Create"
-- Help link to docs
-- Icon/illustration for visual break
-
-❌ Don't:
-- Sad faces (depressing UX)
-- Generic "No data" (not helpful)
-- No action buttons (what to do?)
-- Jargon/technical language
-
----
-
-## QA Checklist
-
-- [ ] Empty state displays when no data
-- [ ] Icon/illustration visible
-- [ ] Title clearly states situation
-- [ ] Description explains what to do
-- [ ] CTA button is prominent and actionable
-- [ ] Help link visible
-- [ ] Button click creates new item
-- [ ] Focus ring visible on button
-- [ ] Works at 360px, 1024px, 1440px
-- [ ] Screen reader announces situation
-
----
-
-## Related Patterns
-
-- Loading State — Before empty (próximamente)
-- Error Recovery — When something failed (próximamente)
-
-## Component References
-
-- [Button](../../components/button.md)
-- [Link](../../components/link.md)
-- [Inline Alert](../../components/inline-alert.md)
-
----
-
-*Pattern: Empty State para Genome Evolution DS v2.0.0+*
+- [manifest.json](../../manifest.json)
+- [button.md](../../components/button.md)
+- [index.ts](../../packages/react/src/index.ts)
+- [variables.css](../../packages/tokens/dist/variables.css)
+- [token-usage-rules.md](../../ai/token-usage-rules.md)
+- [typography.md](../../foundations/typography.md)
+- [evaluation-checklist.md](../../ai/evaluation-checklist.md)
+- [AGENTS.md](../../AGENTS.md)
