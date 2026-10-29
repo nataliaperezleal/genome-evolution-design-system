@@ -2,7 +2,8 @@
 pattern: "CRUD Table"
 system: "Genome Evolution Design System"
 type: "Pattern"
-status: "Production"
+status: "draft"
+created: "2026-10-28"
 tags: [table, crud, data-display, edit, delete, actions]
 ---
 

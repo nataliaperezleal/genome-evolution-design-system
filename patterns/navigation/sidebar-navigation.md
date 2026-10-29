@@ -3,6 +3,7 @@ pattern: "Sidebar Navigation"
 system: "Genome Evolution Design System"
 type: "Pattern"
 status: "draft"
+created: "2026-10-28"
 tags: [navigation, sidebar, menu, layout]
 ---
 
